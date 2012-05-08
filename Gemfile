@@ -7,6 +7,7 @@ gem 'simple_form'
 gem 'dynamic_form'
 gem 'resque'
 gem 'decent_exposure'
+gem 'squeel'
 
 group :production do
   gem 'pg'
