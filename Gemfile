@@ -25,6 +25,7 @@ gem 'jquery-rails'
 group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'launchy'
 end
 
 # To use ActiveModel has_secure_password
