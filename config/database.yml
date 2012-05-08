@@ -2,7 +2,7 @@ development:
   adapter: postgresql
   encoding: unicode
   database: hungryfeeder_development
-  username: postgres
+  username: hungry_feed
   password: postgres
   pool: 5
   timeout: 5000
@@ -11,7 +11,7 @@ test:
   adapter: postgresql
   encoding: unicode
   database: hungryfeeder_test
-  username: postgres
+  username: hungry_feed
   password: postgres
   pool: 5
   timeout: 5000
