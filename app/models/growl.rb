@@ -1,5 +1,5 @@
 class Growl < ActiveRecord::Base
-  attr_accessible :comment
+  attr_accessible :comment, :link
 end
 
 # == Schema Information

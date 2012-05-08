@@ -1,4 +1,4 @@
-class Text < Growl
+class Message < Growl
   # attr_accessible :title, :body
 end
 # == Schema Information
