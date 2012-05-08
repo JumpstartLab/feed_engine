@@ -1,0 +1,4 @@
+h1 Enter a Post
+= simple_form_for @post, html: {name: "text-message"} do |f|
+  = f.input :text
+  = f.submit
