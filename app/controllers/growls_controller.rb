@@ -1,0 +1,2 @@
+class GrowlsController < ApplicationController
+end
