@@ -4,13 +4,6 @@ class Link < Growl
   validates_format_of :link, :with => /^(https?):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/ix
   validates_length_of :comment, :maximum => 256
 
-  def check_link
-    unless link.match(LINK_VALIDATOR_REGEX)
-      errors.add(:link, "Given URL does not meet a valid image format.")
-    end
-  end
-
-
 end
 # == Schema Information
 #
