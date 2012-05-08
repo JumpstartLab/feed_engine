@@ -1,5 +1,7 @@
 class Message < Growl
-  # attr_accessible :title, :body
+  validates_presence_of :comment
+  validates_length_of :comment, :maximum => 512
+
 end
 # == Schema Information
 #
