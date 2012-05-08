@@ -13,6 +13,8 @@ group :test, :development do
   gem "rspec-rails", "~> 2.0"
   gem "capybara"
   gem 'guard'
+  gem 'fabrication'
+  gem 'faker'
 end
 
 group :assets do
