@@ -13,19 +13,6 @@
 
 ActiveRecord::Schema.define(:version => 20120508201201) do
 
-  create_table "bytes", :force => true do |t|
-    t.string   "type"
-    t.string   "content"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "posts", :force => true do |t|
-    t.string   "service"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "users", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false
     t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
