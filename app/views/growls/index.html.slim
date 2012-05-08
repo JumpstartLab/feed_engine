@@ -6,11 +6,12 @@ div id="user_nav"
 
     p
       | Not you?
-      = link_to "Sign out", destroy_user_session_path, :method => "delete"
+      = link_to "Sign out", destroy_user_session_path, method: "delete", class: "small blue button radius"
   - else
-    = link_to "Sign up", new_user_session_path
+    = link_to "Sign up", new_user_registration_path, class: "small green button radius"
+    = link_to "Sign in", new_user_session_path, class: "small blue button radius"
     or
-    = link_to "Sign in", new_user_registration_path
+
 
 - @growls.each do |growl|
   = growl.inspect
