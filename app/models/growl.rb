@@ -1,6 +1,7 @@
 class Growl < ActiveRecord::Base
   attr_accessible :comment, :link
   validates_presence_of :type
+
 end
 
 # == Schema Information
