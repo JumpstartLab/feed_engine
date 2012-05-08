@@ -9,7 +9,7 @@ class ImagesController < ApplicationController
     if @image.save
       redirect_to dashboard_path, :notice => "Image posted succesfully."
     else
-      flash[:alert] = "There was an error"
+      flash[:alert] = "There was an error."
       render 'new'
     end
   end

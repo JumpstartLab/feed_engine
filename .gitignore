@@ -13,3 +13,15 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ignore all coverage files.
+/coverage
+
+# Ignore exec
+/exec
+
+# MAC OSX
+.DS_Store
+
+# Redis
+dump.rdb

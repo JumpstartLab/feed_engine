@@ -10,6 +10,8 @@ group :development do
   gem 'sqlite3'
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'factory_girl_rails', '~> 3.1.0'
+  gem 'simplecov'
 end
 
 group :production do
