@@ -39,7 +39,6 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'simplecov'
   gem 'redis-store', '~>1.0.0'
-  gem 'ruby-debug19', :require => 'ruby_debug'
   gem 'rack-perftools_profiler', :require => 'rack/perftools_profiler'
 end
 
