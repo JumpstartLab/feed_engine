@@ -28,7 +28,6 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        UserMailer.welcome_email(@user).deliver
         format.html { sign_in_and_redirect @user, notice: 'User was successfully created.' }
         format.json { render json: @user, status: :created, location: @user }
       else
@@ -64,4 +63,5 @@ class UsersController < ApplicationController
 
   def dashboard
   end
+
 end
