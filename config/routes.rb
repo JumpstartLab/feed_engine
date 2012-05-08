@@ -4,6 +4,5 @@ Hungrlr::Application.routes.draw do
   resource :dashboard
   devise_for :users
 
->>>>>>> Added basic Devise
   root :to => 'growls#index'
 end

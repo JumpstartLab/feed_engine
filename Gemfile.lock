@@ -177,11 +177,8 @@ DEPENDENCIES
   annotate
   capybara
   coffee-rails (~> 3.2.1)
-<<<<<<< HEAD
-  factory_girl_rails (~> 3.1.0)
-=======
   devise
->>>>>>> Added basic Devise
+  factory_girl_rails (~> 3.1.0)
   jquery-rails
   kaminari
   pg
