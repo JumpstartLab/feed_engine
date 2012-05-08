@@ -1,4 +1,11 @@
 FeedEngine::Application.routes.draw do
+  root :to => 'users#dashboard'
+
+  devise_for :users
+  resources :users
+  match '/signup' => 'users#new'
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
