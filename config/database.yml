@@ -1,0 +1,23 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: hungryfeeder_development
+  username: hungry_feed
+  password: postgres
+  pool: 5
+  timeout: 5000
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: hungryfeeder_test
+  username: hungry_feed
+  password: postgres
+  pool: 5
+  timeout: 5000
+
+production:
+  adapter: postgresql
+  database: hungryfeeder_production
+  pool: 5
+  timeout: 5000
