@@ -1,5 +1,5 @@
 class Link < Growl
-  # attr_accessible :title, :body
+  #attr_accessible :title, :body
 end
 # == Schema Information
 #
