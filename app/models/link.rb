@@ -1,9 +1,8 @@
 class Link < Growl
   validates_presence_of :link, message: "You must provide a link to an image."
-  validate :check_image_link
+  validates_length_of :link, :maximum => 2048
+  validates_format_of :link, :with => /^(https?):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/ix
   validates_length_of :comment, :maximum => 256
-  IMAGE_VALIDATOR_REGEX = "^https?:\/\/(?:[a-z\-]+\.)+[a-z]{2,6}(?:\/[^\/#?]+)+\.(?:jpg|gif|png)$"
-
 
 end
 # == Schema Information
