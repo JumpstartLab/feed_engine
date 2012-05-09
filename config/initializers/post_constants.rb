@@ -1,4 +1,4 @@
-TYPES[Text, Image, Link]
+TYPES = [Text, Image, Link]
 MAX_TEXT_LENGTH = 512
 MAX_LINK_LENGTH = 2048
 MAX_IMAGE_LENGTH = 2048
