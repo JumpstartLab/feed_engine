@@ -71,7 +71,7 @@ describe "User pages" do
         page.should have_content('has already been taken')
       end
 
-      it "saves previously entered information when rejecting a duplicate email addresses" do
+      it "saves previously entered information when using duplicate email addresses" do
         fill_in 'user_email', with: 'foo@bar.com'
         fill_in 'user_password', with: 'hungry'
         fill_in 'user_password_confirmation', with: 'hungry'
