@@ -1,1 +1,10 @@
-h3 header goes here
+div.navbar.navbar-fixed-top
+  div.navbar-inner
+    div.container
+      a.btn.btn-navbar
+      = link_to "SuperHotFeedEngine", nil, :class => "brand"
+      div.nav-collapse
+        - if logged_in?
+          = render :partial => "layouts/logged_in"
+        - else
+          = render :partial => "layouts/logged_out"

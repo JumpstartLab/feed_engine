@@ -1,0 +1,20 @@
+div.span4.offset4
+  h1 Matt Yoho
+  br
+  - if logged_in?
+    = link_to "Subscribe", nil
+  br
+  br
+  br
+  p
+    = link_to "Third post", nil
+    |&nbsp;&nbsp;&nbsp;
+    = link_to "Matt Yoho", user_path
+  p
+    = link_to "Second post", nil
+    |&nbsp;&nbsp;&nbsp;
+    = link_to "Matt Yoho", user_path
+  p
+    = link_to "First post", nil
+    |&nbsp;&nbsp;&nbsp;
+    = link_to "Matt Yoho", user_path
