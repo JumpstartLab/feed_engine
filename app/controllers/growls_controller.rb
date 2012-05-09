@@ -4,8 +4,6 @@ class GrowlsController < ApplicationController
   end
 
   def show
-    subdomain = request.subdomain
-    @user = User.where{username.matches subdomain}.first
-    @growls = Growl.for_user(subdomain)
+    @growls = Growl.find_by_subdomain!(request.subdomain)
   end
 end

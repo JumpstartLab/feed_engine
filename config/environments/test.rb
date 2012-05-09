@@ -34,6 +34,4 @@ Hungrlr::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
-
-  SUBDOMAIN_NUMBER = 1
 end
