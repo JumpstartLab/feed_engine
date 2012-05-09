@@ -11,6 +11,7 @@ notifications:
     - mary.cutrali@hungrymachine.com
     - horace.williams@hungrymachine.com
     - austen.ito@hungrymachine.com
+    - chris.anderson@hungrymachine.com
 
 branches:
   only:
