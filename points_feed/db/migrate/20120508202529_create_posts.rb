@@ -3,7 +3,7 @@ class CreatePosts < ActiveRecord::Migration
     create_table :posts do |t|
       t.string :title
       t.integer :user_id
-      t.text :comment, :limit => 256
+      t.text :comment
       t.string :type
       t.text :content
 

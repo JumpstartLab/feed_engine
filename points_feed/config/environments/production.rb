@@ -75,4 +75,6 @@ PointsFeed::Application.configure do
     :password  => ENV['EMAIL_PASSWORD'],
     :authentication  => :login
   }
+
+  config.SUBDOMAIN_INDEX = 2
 end

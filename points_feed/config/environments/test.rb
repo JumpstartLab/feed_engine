@@ -34,4 +34,6 @@ PointsFeed::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  config.SUBDOMAIN_INDEX = 1
 end
