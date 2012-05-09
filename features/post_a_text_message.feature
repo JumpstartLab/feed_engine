@@ -10,15 +10,13 @@ Feature: Posting A Message
     Then I should see an error message requiring text contents
     And I should see the form to create a text message
 
-  @wip
   Scenario: Submitting a message with length greater than 512 character
-    When I fill in the message text with 512 'a's
+    When I fill in the message text with 513 'a's
     And I click create
     Then I should see an error message requiring text to be less than or equal to 512 characters
     And I should see the form to create a text message
     And the data I have entered is present
 
-  @wip
   Scenario: Submitting a message successfully
     When I fill in the message text with "A witty joke"
     And I click create

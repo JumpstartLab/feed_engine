@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(params[:post])
     if @post.save
+      flash[:notice] = "Your message was saved!"
       redirect_to dashboard_path
     else
       flash.now[:notice] = "There were errors saving your post!"
