@@ -1,4 +1,4 @@
 FeedEngine::Application.routes.draw do
-  resources "posts"
+  resources "text_posts"
   resource "dashboard"
 end

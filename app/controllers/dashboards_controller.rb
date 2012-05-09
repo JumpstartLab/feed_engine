@@ -1,5 +1,5 @@
 class DashboardsController < ApplicationController
   def show
-    @post = Post.new
+    @post = TextPost.new
   end
 end

@@ -29,7 +29,7 @@ Then /^I should see an error message requiring text to be less than or equal to 
 end
 
 Then /^the data I have entered is present$/ do
-  find('input[name="post[text]"]').value.should include @message
+  find('input[name="text_post[text]"]').value.should include @message
 end
 
 When /^I fill in the message text with "(.*?)"$/ do |text|

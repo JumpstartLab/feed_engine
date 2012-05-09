@@ -1,6 +1,6 @@
-class PostsController < ApplicationController
+class TextPostsController < ApplicationController
   def create
-    @post = Post.new(params[:post])
+    @post = TextPost.new(params[:text_post])
     if @post.save
       flash[:notice] = "Your message was saved!"
       redirect_to dashboard_path
