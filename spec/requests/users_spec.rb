@@ -43,7 +43,14 @@ describe "User pages" do
       end
 
       it "sends a confirmation email" do
-        # pending "Set up emails"
+        pending "Set up emails"
+        fill_in 'user_username', with: 'displayname'
+        fill_in 'user_email', with: 'foo@bar.com'
+        fill_in 'user_password', with: 'hungry'
+        fill_in 'user_password_confirmation', with: 'hungry'
+        within(".actions") do
+          click_link_or_button 'Sign up'
+        end
         last_email = ActionMailer::Base.deliveries.last
         last_email.subject.should == "Welcome to Hungrlr!"
       end
@@ -53,7 +60,7 @@ describe "User pages" do
         fill_in 'user_username', with: 'displayname5'
         fill_in 'user_password', with: 'hungry'
         fill_in 'user_password_confirmation', with: 'hungry'
-        click_link_or_button 'Sign up'
+        within(".actions") { click_link_or_button 'Sign up' }
         current_path.should == dashboard_path
       end
 
