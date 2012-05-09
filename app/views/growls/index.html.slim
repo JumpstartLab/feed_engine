@@ -1,3 +1,17 @@
+div id="user_nav"
+  - if user_signed_in?
+    p
+      | Currently logged in as:
+      = current_user.username
+    p
+      | Not you?
+      = link_to "Sign out", destroy_user_session_path, method: "delete", class: "small blue button radius"
+  - else
+    p
+      = link_to "Sign up", new_user_registration_path, class: "small green button radius"
+      = link_to "Sign in", new_user_session_path, class: "small blue button radius"
+
+
 - @growls.each do |growl|
   = growl.inspect
 
