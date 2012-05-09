@@ -1,9 +1,13 @@
 FeedEngine::Application.routes.draw do
-  root to: 'home#index'
+  get "signup", to: "users#new", as: "signup"
+  get "login", to: "sessions#new", as: "login"
+  delete "logout", to: "sessions#destroy", as: "logout"
 
-  resource :dashboard, :controller => "dashboard", :only => "show"
+  resources :users
+  resources :sessions
+
+  root to: "home#index"
 
   resources :posts
-  resources :users, :only => :show
-
+  resource :dashboard, :controller => "dashboard", :only => "show"
 end

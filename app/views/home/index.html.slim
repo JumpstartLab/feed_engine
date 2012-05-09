@@ -1,5 +1,8 @@
 h1 Intro text
-= link_to 'Log in', nil
-br
-br
-= link_to 'Sign up', nil
+- if current_user
+  = "Logged in as #{current_user.email} | "
+  = link_to 'sign out', logout_path
+- else
+  = link_to 'sign up', signup_path
+  = " | "
+  = link_to 'log in', login_path
