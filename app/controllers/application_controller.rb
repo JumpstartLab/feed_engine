@@ -4,6 +4,17 @@ class ApplicationController < ActionController::Base
   def logged_in?
     current_user
   end
+  helper_method :logged_in?
+
+  def public?
+    true
+  end
+  helper_method :public?
+
+  def dashboard_posts_private?
+    true
+  end
+  helper_method :dashboard_posts_private?
 
   private
 

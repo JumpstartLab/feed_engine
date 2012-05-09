@@ -1,8 +1,134 @@
+- content_for :head do
+  javascript:
+    $(function() {
+      $("#posts").show();
+      $("#privacy").hide();
+      $("#services").hide();
+      $("#subscriptions").hide();
+      $("#account").hide();
+    });
+    $("#posts_id").live('click', function() {
+      $("#posts").show();
+      $("#account").hide();
+      $("#privacy").hide();
+      $("#services").hide();
+      $("#subscriptions").hide();
+    });
+    $("#privacy_id").live('click', function() {
+      $("#privacy").show();
+      $("#posts").hide();
+      $("#services").hide();
+      $("#subscriptions").hide();
+      $("#account").hide();
+    });
+    $("#services_id").live('click', function() {
+      $("#services").show();
+      $("#posts").hide();
+      $("#privacy").hide();
+      $("#subscriptions").hide();
+      $("#account").hide();
+    });
+    $("#subscriptions_id").live('click', function() {
+      $("#subscriptions").show();
+      $("#posts").hide();
+      $("#privacy").hide();
+      $("#services").hide();
+      $("#account").hide();
+    });
+    $("#account_id").live('click', function() {
+      $("#account").show();
+      $("#posts").hide();
+      $("#privacy").hide();
+      $("#services").hide();
+      $("#subscriptions").hide();
+    });
+
+    $(function(){
+      var sidebar=$('#sidebar');
+      sidebar.delegate('a', 'click',function(){
+        sidebar.find('.active').toggleClass('active inactive');
+        $(this).toggleClass('active inactive');
+      });
+    });
+
 h1 This is your dashboard
-= link_to 'Add text message', new_post_path
 br
 br
-= link_to 'Add link message', nil
-br
-br
-= link_to 'Add image message', nil
+div.span3
+  div#sidebar
+    ul
+      li= link_to "Posts", "#", :id => "posts_id", :class => "active"
+      li= link_to "Privacy", "#", :id => "privacy_id", :class => "inactive"
+      li= link_to "Services", "#", :id => "services_id", :class => "inactive"
+      li= link_to "Subscriptions", "#", :id => "subscriptions_id", :class => "inactive"
+      li= link_to "Account", "#", :id => "account_id", :class => "inactive"
+div.span7
+  div#posts
+    div
+      h2 Posts
+      br
+      = link_to 'Add text message', new_post_path, :class => "btn btn-medium"
+      |&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+      = link_to 'Add link message', nil, :class => "btn btn-medium"
+      |&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+      = link_to 'Add image message', nil, :class => "btn btn-medium"
+  div#privacy
+    div
+      h2 Privacy
+      br
+      - if dashboard_posts_private?
+        = render :partial => "dashboard/posts_private"
+      - else
+        = link_to "Make my posts private", nil, :class => "btn btn-primary btn-large"
+  div#services
+    div
+      h2 Services
+      br
+      table.table.table-striped
+        tbody
+          tr
+            td Github
+            td
+              = link_to "Add", nil, :class => "btn btn-small btn-info"
+          tr
+            td Twitter
+            td
+              = link_to "Add", nil, :class => "btn btn-small btn-info"
+          tr
+            td Instagram
+            td
+              = link_to "Remove", nil, :class => "btn btn-small btn-info"
+  div#subscriptions
+    div
+      h2 Subscriptions
+      br
+      table.table.table-striped
+        tbody
+          tr
+            td Elise Worthy
+            td
+              = link_to "Remove", nil, :class => "btn btn-small btn-info"
+          tr
+            td Jonan Scheffler
+            td
+              = link_to "Remove", nil, :class => "btn btn-small btn-info"
+          tr
+            td Andrew Thal
+            td
+              = link_to "Remove", nil, :class => "btn btn-small btn-info"
+          tr
+            td Travis Valentine
+            td
+              = link_to "Remove", nil, :class => "btn btn-small btn-info"
+
+  div#account
+    div
+      h2 Account Settings
+      br
+      h4 Change Password
+      p New Password
+      p Confirm Password
+      br
+      h4 Change Email
+      p New Email
+      = link_to "Disable Account", nil, :class => "btn btn-medium"
