@@ -124,7 +124,6 @@ describe "User pages" do
         fill_in 'user_password_confirmation', with: 'hungry'
         page.should have_content('Sign up')
       end
-
     end
   end
 

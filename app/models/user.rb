@@ -16,4 +16,8 @@ class User < ActiveRecord::Base
   has_many :messages
   has_many :links
 
+  def send_welcome_message
+    UserMailer.welcome_message(self).deliver
+  end
+
 end

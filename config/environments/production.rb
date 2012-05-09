@@ -65,5 +65,14 @@ Hungrlr::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-    SUBDOMAIN_NUMBER = 2
+  ActionMailer::Base.smtp_settings = {
+    :address  => "smtp.mailgun.org",
+    :port  => 25,
+    :user_name  => "postmaster@app4559451.mailgun.org",
+    :password  => "3cc04tvdycf8",
+    :authentication  => :login
+  }
+
+  SUBDOMAIN_NUMBER = 2
+
 end
