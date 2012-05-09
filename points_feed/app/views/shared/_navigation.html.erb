@@ -1,0 +1,25 @@
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+      <div class="container">
+      <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="#">Points Feed</a>
+      <div class="container nav-collapse">
+        <ul class="nav">
+          <!-- <li><%= link_to "Link1", "/path1"  %></li> -->
+        </ul>
+        <ul class='nav pull-right'>
+          <% if current_user %>
+            <li><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %></li>
+          <% else %>
+            <li><%= link_to 'Sign Up', new_user_registration_path %></li>
+            <li><%= link_to 'Sign In', new_user_session_path %></li>
+          <% end %>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+</div>
