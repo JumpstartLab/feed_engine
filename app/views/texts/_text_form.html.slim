@@ -1,7 +1,8 @@
 h1 TXTMSG
 
-= form_for @new_text do |f|
+= form_for @new_text, url: "#", id: "text_form" do |f|
+  = hidden_field_tag :type, "text"
   = f.label :content
   = f.text_area :content
   br
-  = f.submit
+button*{id: "text-submit"} "DERP"

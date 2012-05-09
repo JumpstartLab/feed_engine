@@ -1,9 +1,9 @@
 h1 Picturezzz
 
-= form_for @new_image do |f|
+= form_for @new_image, remote: true, url: posts_path do |f|
+  = hidden_field_tag :type, "image"
   / = f.label :url
   / = f.text_field :url
-  br
   = f.label :comment
   = f.text_area :content
   br
