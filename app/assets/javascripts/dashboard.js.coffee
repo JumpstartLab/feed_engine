@@ -10,16 +10,37 @@ jQuery ->
     $("##{tabId}").show()
 
 
-  $('#text-submit').click ->
-    form = $('#new_text')
-    formData = form.serialize()
-    $.ajax({
-      type: "POST",
-      url: "/posts",
-      data: formData,
-      success: ->
-        $('#flash').text('Posted successfully')
-        form.clearForm()
-      error: (response, status)->
-        $('#flash'). "#{response.responseText}"
-      })
+  # $('#text-submit').click ->
+  #   form = $('#new_text')
+  #   formData = form.serialize()
+  #   $.ajax({
+  #     type: "POST",
+  #     url: "/posts",
+  #     data: formData,
+  #     success: ->
+  #       $('#flash').text('Posted successfully')
+  #       form.clearForm()
+  #     error: (response, status)->
+  #       $('#flash'). "#{response.responseText}"
+  #     })
+
+
+  addSubmitHandler = (klass) ->
+    $("##{klass}-submit").click ->
+      alert ("#{klass}")
+      form = $("#new_#{klass}")
+      formData = form.serialize()
+      $.ajax({
+        type: "POST",
+        url: "/posts",
+        data: formData,
+        success: ->
+          $('#flash').text('Posted successfully')
+          form.clearForm()
+        error: (response, status)->
+          $('#flash').text "#{response.responseText}"
+        })
+
+  addSubmitHandler("text")
+  addSubmitHandler("image")
+  addSubmitHandler("link")
