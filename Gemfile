@@ -40,7 +40,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'simplecov'
   gem 'redis-store', '~>1.0.0'
-  gem 'rack-perftools_profiler', :require => 'rack/perftools_profiler'
+  #gem 'rack-perftools_profiler', :require => 'rack/perftools_profiler'
 end
 
 # To use ActiveModel has_secure_password
