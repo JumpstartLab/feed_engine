@@ -11,4 +11,9 @@ class ApplicationController < ActionController::Base
   end
   helper_method :public?
 
+  def dashboard_posts_private?
+    true
+  end
+  helper_method :dashboard_posts_private?
+
 end
