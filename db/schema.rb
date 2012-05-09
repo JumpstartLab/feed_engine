@@ -17,9 +17,11 @@ ActiveRecord::Schema.define(:version => 20120509175329) do
     t.text     "content"
     t.string   "comment"
     t.string   "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.text     "url"
     t.string   "picture"
+    t.string   "remote_picture_url"
   end
 
   add_index "images", ["user_id"], :name => "index_images_on_user_id"
