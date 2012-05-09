@@ -36,5 +36,11 @@ describe "Dashboard" do
         page.should have_content valid_post
       end
     end
+
+    describe "of link type" do
+      it "has a link to make a new link" do
+        click_on "Fiddl a link"
+      end
+    end
   end
 end
