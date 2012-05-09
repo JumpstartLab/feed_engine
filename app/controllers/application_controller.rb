@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
   include UrlHelper
+  # include SessionsHelper
+
   protect_from_forgery
 
   def after_sign_in_path_for(user)
