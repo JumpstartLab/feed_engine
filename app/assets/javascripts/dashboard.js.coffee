@@ -9,22 +9,6 @@ jQuery ->
     $('.tab-body ul').children().hide()
     $("##{tabId}").show()
 
-
-  # $('#text-submit').click ->
-  #   form = $('#new_text')
-  #   formData = form.serialize()
-  #   $.ajax({
-  #     type: "POST",
-  #     url: "/posts",
-  #     data: formData,
-  #     success: ->
-  #       $('#flash').text('Posted successfully')
-  #       form.clearForm()
-  #     error: (response, status)->
-  #       $('#flash'). "#{response.responseText}"
-  #     })
-
-
   addSubmitHandler = (klass) ->
     $("##{klass}-submit").click ->
       alert ("#{klass}")
