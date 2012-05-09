@@ -1,26 +1,25 @@
 Hungrlr::Application.routes.draw do
 
-  devise_for :users
+  #constraints(NoSubdomain) do
+    devise_for :users
 
-  devise_scope :user do
-    get '/signup' => 'devise/registrations#new'
-    get '/login' => 'devise/sessions#new'
-  end
+    devise_scope :user do
+      get '/signup' => 'devise/registrations#new'
+      get '/login' => 'devise/sessions#new'
+    end
 
-  resources :growls, :images, :links, :messages
-  resource :dashboard
+    resources :growls, :images, :links, :messages
+    resource :dashboard
 
-  root :to => 'growls#index'
-
-  namespace :api do
-      namespace :v1 do
-        resources :images
-      end
-  end
+    namespace :api do
+        namespace :v1 do
+          resources :images
+        end
+    end
+    root :to => 'dashboards#show'
+  #end
 
   constraints(Subdomain) do
     match '/' => 'growls#show'
   end
-
-  root :to => 'growls#index'
 end
