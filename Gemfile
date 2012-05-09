@@ -22,7 +22,7 @@ end
 
 gem 'jquery-rails'
 
-group :test, :development do
+group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl'
 end
