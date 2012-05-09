@@ -44,10 +44,10 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       if @message.save
-        format.html { redirect_to @message, notice: 'Message was successfully created.' }
-        format.json { render json: @message, status: :created, location: @message }
+        format.html { redirect_to dashboard_path, notice: 'Message was successfully created.' }
+        format.json { render json: dashboard_path, status: :created, location: @message }
       else
-        format.html { render action: "new" }
+        format.html { render template: "dashboard/show", notice: "There was a problem with your message." }
         format.json { render json: @message.errors, status: :unprocessable_entity }
       end
     end

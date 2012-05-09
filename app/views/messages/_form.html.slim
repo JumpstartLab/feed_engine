@@ -10,6 +10,5 @@
     = f.label :body
     = f.text_area :body
   .field
-    = f.label :poster_id
-    = f.number_field :poster_id
+    = f.hidden_field :poster_id, value: "1"
   .actions = f.submit 'Save'

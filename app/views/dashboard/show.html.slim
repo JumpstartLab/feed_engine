@@ -67,6 +67,7 @@ div.span7
     div
       h2 Posts
       br
+      = render :partial => "messages/form"
       = link_to 'Add text message', new_post_path, :class => "btn btn-medium"
       |&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
       = link_to 'Add link message', nil, :class => "btn btn-medium"
