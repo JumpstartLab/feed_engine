@@ -369,6 +369,12 @@
       "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/app/models/image.rb": [
         1,
         1,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null,
         null
       ],
       "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/app/controllers/links_controller.rb": [
@@ -644,6 +650,6 @@
         null
       ]
     },
-    "timestamp": 1336587554
+    "timestamp": 1336590234
   }
 }
