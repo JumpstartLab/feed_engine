@@ -2,7 +2,7 @@ div id="user_nav"
   - if user_signed_in?
     p
       | Currently logged in as:
-      = current_user.email
+      = current_user.display_name
     p
       | Not you?
       = link_to "Sign out", destroy_user_session_path, method: "delete", class: "small blue button radius"

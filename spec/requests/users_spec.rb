@@ -22,6 +22,7 @@ describe "User pages" do
 
       it "lets me create an account with new info" do
         fill_in 'user_email', with: 'foo@bar.com'
+        fill_in 'user_display_name', with: 'displayname'
         fill_in 'user_password', with: 'hungry'
         fill_in 'user_password_confirmation', with: 'hungry'
         click_link_or_button 'Sign up'
@@ -52,7 +53,6 @@ describe "User pages" do
         current_path.should == '*/dashboard'
       end
 
-
       # Unsuccessful Signup
 
       it "does not accept duplicate email addresses" do
@@ -71,7 +71,7 @@ describe "User pages" do
         page.should have_content('has already been taken')
       end
 
-      it "saves previously entered information when using duplicate email addresses" do
+      it "saves previously entered information when rejecting a duplicate email addresses" do
         fill_in 'user_email', with: 'foo@bar.com'
         fill_in 'user_password', with: 'hungry'
         fill_in 'user_password_confirmation', with: 'hungry'
@@ -103,6 +103,18 @@ describe "User pages" do
         page.should have_content('Sign up')
       end
       
+      it "rejects a malformed email address" do
+        pending "This is handled by devise. If we switch we'll need to test"
+        fill_in 'user_email', with: "foo#bar.com"
+        fill_in 'user_password', with: 'hungry'
+        fill_in 'user_password_confirmation', with: 'hungry'
+        click_link_or_button 'Sign up'
+        page.should have_content('Address incorrect. Please enter an email address')
+      end
+
+      it "rejects an empty email address" do
+        pending "This is handled by devise. If we swtich we'll need to test"
+      end
     end
   end
 end
