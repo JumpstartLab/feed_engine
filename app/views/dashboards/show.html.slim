@@ -8,3 +8,14 @@ h1 Enter a Post
 br
 
 = link_to "link", new_link_post_path
+
+h1 Your Stream Playa
+- ImagePost.order_stream.each do |post|
+  - if post.class == ImagePost
+    = post.url
+  - elsif post.class == LinkPost
+    = post.url
+  - elsif post.class == TextPost 
+    = post.text
+  br
+

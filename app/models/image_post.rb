@@ -21,4 +21,17 @@ class ImagePost < ActiveRecord::Base
     with: /.(jpg|png|gif|jpeg|bmp)/,
     message: "Photo url must end in .jpeg, .jpg, .gif, .bmp, or .png"
   validates_length_of :description, maximum: 256
+
+  def self.stream
+    stream = []
+    link_posts = LinkPost.all
+    image_posts = ImagePost.all
+    text_posts = TextPost.all
+    stream << [link_posts, image_posts, text_posts]
+    stream.flatten
+  end
+
+  def self.order_stream
+    stream.sort_by {|content| content.created_at}.reverse
+  end
 end
