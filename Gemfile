@@ -13,6 +13,7 @@ group :development, :test do
   gem 'capybara'
   gem 'factory_girl_rails', '~> 3.1.0'
   gem 'simplecov'
+  gem 'launchy'
 end
 
 group :production do

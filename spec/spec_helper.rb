@@ -21,7 +21,7 @@ RSpec.configure do |config|
   # config.mock_with :mocha
   # config.mock_with :flexmock
   # config.mock_with :rr
-
+   config.include Devise::TestHelpers, :type => :controller
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.include Rails.application.routes.url_helpers
@@ -33,5 +33,6 @@ RSpec.configure do |config|
   # If true, the base class of anonymous controllers will be inferred
   # automatically. This will be the default behavior in future versions of
   # rspec-rails.
+  config.include UserSupport::Login
   config.infer_base_class_for_anonymous_controllers = false
 end

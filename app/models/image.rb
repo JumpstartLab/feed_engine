@@ -4,7 +4,7 @@ class Image < Growl
   validates_format_of :link, :with => IMAGE_VALIDATOR_REGEX, message: "URL must start with http and be a .jpg, .gif, or .png"
   validates_length_of :link, :within => 3..2048, message: "Given URL needs to be less then 2048 characters"
   validates_length_of :comment, :within => 3..256, :allow_blank => true
-
+  belongs_to :user
 end
 # == Schema Information
 #

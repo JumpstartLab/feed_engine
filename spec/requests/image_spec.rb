@@ -2,7 +2,9 @@ require 'spec_helper'
 
 describe Image do
   describe "Creating an image" do
+    let(:user) { FactoryGirl.create(:user)}
     before(:each) do
+      login(user)
       visit new_image_path
     end
     it "fails" do
