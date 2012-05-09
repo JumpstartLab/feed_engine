@@ -33,7 +33,7 @@ describe "Dashboard" do
         valid_post = "I'm a valid post. Huzzah!"
         fill_in "text_item[body]", :with => valid_post
         click_on "Textify"
-        page.should have_content valid_post
+        page.should have_content "Post was successfully created."
       end
     end
 
@@ -63,7 +63,7 @@ describe "Dashboard" do
           good_url = "http://google.com"
           fill_in "link_item[url]", :with => good_url
           click_on "Linkify"
-          page.should have_content good_url
+          page.should have_content "Link was successfully created."
           current_path.should == dashboard_path
         end
 
@@ -78,7 +78,6 @@ describe "Dashboard" do
           it "successfully adds valid comments" do
             fill_in "link_item[comment]", :with => "my awesome comment"
             click_on "Linkify"
-            page.should have_content "my awesome comment"
             current_path.should == dashboard_path
           end
         end

@@ -3,17 +3,8 @@
 <h2>Create Text Post</h2>
 <%= render 'text_items/form' %>
 
-<h2>Text Posts</h2>
-<ul>
-  <% @text_items.each do |i| %>
-  <li><%= i.body %></li>
-<% end %>
-</ul>
+<h2>Create Link</h2>
+<%= render 'link_items/form' %>
 
 <%= link_to "Fiddl a link", new_link_item_path  %>
-<h2>Links</h2>
-<ul>
-  <% @link_items.each do |i| %>
-  <li><%= i.url %> | <%= i.comment %></li>
-<% end %>
 </ul>
