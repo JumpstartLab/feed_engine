@@ -5,8 +5,9 @@ h1 Your dashboard!
     - TYPES.each do |type|
       li.tab-item*{id: "#{type}"}
         a = type.to_s
-  - TYPES.each_with_index do |type, index|
-    - type_name = type.to_s.downcase
-    .tab*{id: "#{type_name}-tab", "z-index" => "#{index}"}
-      p = type_name
-    // = render "#{type_name}/#{type_name}_form", locals:{ "new_#{type_name}" => type.new }
+  ul.tab-body
+    - TYPES.each_with_index do |type, index|
+      - type_name = type.to_s.downcase
+      li.tab*{id: "#{type_name}-tab", "z-index" => "#{index}"}
+        p = type_name
+      // = render "#{type_name}/#{type_name}_form", locals:{ "new_#{type_name}" => type.new }

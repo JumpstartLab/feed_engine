@@ -15,11 +15,10 @@
 
  h1 {
   font-size: 2.5em;
-  display:block;
-  padding: 1em, 1em;
+  padding: 3em, 3em;
 }
 
 body {
-  padding: 0px 2em;
+  margin: 0px 2.5em;
 
 }

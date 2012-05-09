@@ -24,7 +24,7 @@ $white: #FFFFFF;
 
 .tabs {
   margin: auto;
-  width: 90%;
+  width: 100%;
   .tab-bar {
     @include borders(solid);
     background-color: $dolphin;
@@ -42,11 +42,14 @@ $white: #FFFFFF;
     }
   }
 
-  .tab {
-    @include borders(dashed);
-    height: 25em;
-    display: block;
-    width: 85%;
-    position:absolute;
+  .tab-body {
+    width: 90%;
+    .tab {
+      @include borders(dashed);
+      margin: auto;
+      height: 25em;
+      position:absolute;
+      width: 90%;
+    }
   }
 }
