@@ -1,10 +1,17 @@
 <h1>Dashboard</h1>
+<ul class="nav nav-tabs">
+  <li><a href="#text" data-toggle="tab">Text</a></li>
+  <li><a href="#link" data-toggle="tab">Link</a></li>
+  <li><a href="#image" data-toggle="tab">Image</a></li>
+</ul>
 
-<h2>Create Text Post</h2>
-<%= render 'text_items/form' %>
-
-<h2>Create Link</h2>
-<%= render 'link_items/form' %>
-
-<%= link_to "Fiddl a link", new_link_item_path  %>
+<div class="tab-content">
+  <div class="tab-pane active" id="text">
+    <%= render 'text_items/form' %>
+  </div>
+  <div class="tab-pane" id="link">
+    <%= render 'link_items/form' %>
+  </div>
+  <div class="tab-pane" id="image">Post an Image - Coming Soon</div>
+</div>
 </ul>
