@@ -12,10 +12,18 @@ class User < ActiveRecord::Base
   has_many :link_posts
   has_many :image_posts
 
-  validates :display_name, :presence => true
+  validates :display_name, :presence => true, 
+                           :format => { 
+                             :message => "Spaces are not allowed", 
+                             :with => /^\S*$/ 
+                           },
+                           :uniqueness => true
 
   def relation_for(type)
     self.send(type.underscore.pluralize.to_sym).scoped rescue text_posts.scoped
   end
-
+  
+  def send_welcome_message
+    UserMailer.welcome_message(self).deliver
+  end
 end

@@ -2,13 +2,13 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.3'
 gem 'devise'
-gem 'sqlite3'
 
 gem 'jquery-rails'
 gem "twitter-bootstrap-rails"
 gem 'simple_form'
 
 group :test, :development do
+  gem 'sqlite3'
   gem 'ruby_gntp'
   gem "rspec-rails", "~> 2.0"
   gem "capybara"
@@ -17,6 +17,10 @@ group :test, :development do
   gem 'faker'
   gem 'launchy'
   gem 'simplecov'
+end
+
+group :production do
+  gem 'pg'
 end
 
 group :assets do
