@@ -6,6 +6,7 @@ gem 'rails', '3.2.3'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
+gem 'simple_form'
 
 
 # Gems used only for assets and not required
@@ -20,7 +21,14 @@ gem 'jquery-rails'
 
 group :development, :test do
   gem 'rspec-rails'
-  gem 'factory_girl'
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'guard-rspec'
+end
+
+group :test do
+  gem 'guard-spork'
+  gem 'spork'
 end
 
 # To use ActiveModel has_secure_password
