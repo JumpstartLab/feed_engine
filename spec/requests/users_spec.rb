@@ -7,7 +7,6 @@ describe "User pages" do
 
     it "sends me to a signup form" do
       click_link_or_button "Sign up"
-
       page.should have_content("Sign up")
     end
 
