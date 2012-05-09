@@ -6,5 +6,7 @@ PointsFeed::Application.routes.draw do
     get "signup", :to => "devise/registrations#new"
   end
 
+  resource :dashboard
+
   root :to => "home#index"
 end
