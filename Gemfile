@@ -5,7 +5,10 @@ gem 'twitter-bootstrap-rails'
 gem 'kaminari'
 gem 'jquery-rails'
 gem 'bcrypt-ruby', '~> 3.0.0'
-gem 'pg'
+
+group :production do
+  gem 'pg'
+end
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
