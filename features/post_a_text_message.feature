@@ -6,7 +6,7 @@ Feature: Posting A Message
     Then I should see a form to create a text message
 
   Scenario: Submitting an empty message
-    When I click create
+    When I click create within the text post form
     Then I should see an error message requiring text contents
     And I should see the form to create a text message
 
