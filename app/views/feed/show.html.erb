@@ -1,0 +1,8 @@
+<h1>Your Feed</h1>
+
+
+<% @text_items.each do |text_item| %>
+   <div id="text_item_<%=text_item.id%>">
+     <p><%=text_item.body%></p>
+   </div>
+<% end %>
