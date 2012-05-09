@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe "User pages" do
-  
+
   context "when not logged in" do
     before(:each) { visit root_path }
-    
+
     it "sends me to a signup form" do
       click_link_or_button "Sign up"
       page.should have_content("Sign up")
@@ -22,7 +22,6 @@ describe "User pages" do
 
       it "lets me create an account with new info" do
         fill_in 'user_email', with: 'foo@bar.com'
-        fill_in 'user_username', with: 'displayname'
         fill_in 'user_password', with: 'hungry'
         fill_in 'user_password_confirmation', with: 'hungry'
         click_link_or_button 'Sign up'
@@ -57,7 +56,6 @@ describe "User pages" do
       # Unsuccessful Signup
 
       it "does not accept duplicate email addresses" do
-        fill_in 'user_username', with: 'displayname'
         fill_in 'user_email', with: 'foo@bar.com'
         fill_in 'user_password', with: 'hungry'
         fill_in 'user_password_confirmation', with: 'hungry'
