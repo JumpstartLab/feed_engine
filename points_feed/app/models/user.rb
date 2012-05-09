@@ -8,7 +8,12 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me,
                   :display_name
 
-  validates :display_name, :presence => true, :format => { :message => "Spaces are not allowed", :with => /^\S*$/ }
+  validates :display_name, :presence => true, 
+                           :format => { 
+                             :message => "Spaces are not allowed", 
+                             :with => /^\S*$/ 
+                           },
+                           :uniqueness => true
 
   # attr_accessible :title, :body
   

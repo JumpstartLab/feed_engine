@@ -8,5 +8,8 @@ PointsFeed::Application.routes.draw do
 
   resource :dashboard
 
+  scope '', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' } do
+  end
+
   root :to => "home#index"
 end
