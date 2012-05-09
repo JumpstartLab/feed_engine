@@ -6,5 +6,6 @@ head
   = javascript_include_tag "application"
   = csrf_meta_tags
 body
-  = render :partial => 'layouts/header'
-  == yield
+  = render :partial => "layouts/header"
+  div.container
+    == yield
