@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/ctran/annotate_models.git
+  revision: ff1131daee8c03dbcc4966b7914b77a7e3a62f02
+  specs:
+    annotate (2.4.1.beta1)
+
+GIT
   remote: git://github.com/mvz/reek.git
   revision: c21b666e8249627f78024065d99c5f4329355e99
   branch: ripper_ruby_parser-2
@@ -46,6 +52,7 @@ GEM
       multi_json (~> 1.0)
     addressable (2.2.8)
     arel (3.0.2)
+    bcrypt-ruby (3.0.1)
     builder (3.0.0)
     capybara (1.1.2)
       mime-types (>= 1.16)
@@ -204,6 +211,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  annotate!
+  bcrypt-ruby (~> 3.0.0)
   cane!
   capybara
   coffee-rails (~> 3.2.1)
