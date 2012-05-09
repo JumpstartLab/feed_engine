@@ -21,5 +21,5 @@ jQuery ->
         $('#flash').text('Posted successfully')
         form.clearForm()
       error: (response, status)->
-        $('#flash'). "#{response.responseText}"
+        $('#flash').text("#{response.responseText}")
       })
