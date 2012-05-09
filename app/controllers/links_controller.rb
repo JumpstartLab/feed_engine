@@ -1,11 +1,12 @@
 class LinksController < ApplicationController
+  before_filter :authenticate_user!
 
   def new
     @link = Link.new
   end
 
   def create
-    @link = Link.new(params[:link])
+    @link = current_user.images.new(params[:link])
     if @link.save
       redirect_to dashboard_path, :notice => "Link posted succesfully."
     else
