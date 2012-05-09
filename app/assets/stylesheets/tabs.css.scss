@@ -1,4 +1,5 @@
 $whale: #262626;
+$dolphin: #404040;
 
 $honeycomb: #e9ba26;
 $clementine: #f0812b;
@@ -16,23 +17,29 @@ $white: #FFFFFF;
 
 .tabs {
   margin: auto;
-  width: 80%;
-  padding: 1em;
+  width: 100%;
   .tab-bar {
+    background-color: $dolphin;
+    border-color: $slushie;
+    border-style: solid;
+    border-width: .25em;
     .tab-item {
-      border-color: $slushie;
-      border-style: solid;
-      border-width: .25em;
-      background-color: $honeycomb;
-      height: 5em;
+      display:inline-block;
       a {
         padding: 1em;
         color: $white;
         font-weight: bold;
         font-family: Helvetica;
         float: left;
-        &:hover{ color: $slushie;}
+        &:hover{ color: $honeycomb;}
       }
     }
   }
+
+  .tab {
+    width: 80%;
+    height: 25em;
+    display: block;
+  }
+
 }

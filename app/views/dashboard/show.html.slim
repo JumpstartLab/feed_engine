@@ -1,7 +1,11 @@
-p Your dashboard!
+h1 Your dashboard!
 
 .tabs
   ul.tab-bar
     - TYPES.each do |type|
-      li.tab-item
+      li.tab-item*{id: "#{type}"}
         a = type.to_s
+  - TYPES.each do |type|
+    - type_name = type.to_s.downcase
+    .tab*{id: "#{type_name}-tab"}
+    // = render "#{type_name}/#{type_name}_form", locals:{ "new_#{type_name}" => type.new }
