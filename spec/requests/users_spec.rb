@@ -22,7 +22,7 @@ describe "User pages" do
 
       it "lets me create an account with new info" do
         fill_in 'user_email', with: 'foo@bar.com'
-        fill_in 'user_display_name', with: 'displayname'
+        fill_in 'user_username', with: 'displayname'
         fill_in 'user_password', with: 'hungry'
         fill_in 'user_password_confirmation', with: 'hungry'
         click_link_or_button 'Sign up'
@@ -53,9 +53,14 @@ describe "User pages" do
         current_path.should == '*/dashboard'
       end
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> Testing
       # Unsuccessful Signup
 
       it "does not accept duplicate email addresses" do
+        fill_in 'user_username', with: 'displayname'
         fill_in 'user_email', with: 'foo@bar.com'
         fill_in 'user_password', with: 'hungry'
         fill_in 'user_password_confirmation', with: 'hungry'
@@ -89,6 +94,7 @@ describe "User pages" do
         pending "TODO: Validate display name"
         fill_in 'user_username', with: 'display name'
         fill_in 'user_email', with: 'foo@bar.com'
+<<<<<<< HEAD
         fill_in 'user_password', with: 'hungry'
         fill_in 'user_password_confirmation', with: 'hungry'
         page.should have_content('Display name must only be letters, numbers, dashes, or underscores')
@@ -106,14 +112,20 @@ describe "User pages" do
       it "rejects a malformed email address" do
         pending "This is handled by devise. If we switch we'll need to test"
         fill_in 'user_email', with: "foo#bar.com"
+=======
+>>>>>>> Testing
         fill_in 'user_password', with: 'hungry'
         fill_in 'user_password_confirmation', with: 'hungry'
-        click_link_or_button 'Sign up'
-        page.should have_content('Address incorrect. Please enter an email address')
+        page.should have_content('Display name must only be letters, numbers, dashes, or underscores')
       end
 
-      it "rejects an empty email address" do
-        pending "This is handled by devise. If we swtich we'll need to test"
+      it "keeps you on the signup for when submitted display name is bad" do
+        pending "Need validation on display name"
+        fill_in 'user_username', with: 'display name'
+        fill_in 'user_email', with: 'foo@bar.com'
+        fill_in 'user_password', with: 'hungry'
+        fill_in 'user_password_confirmation', with: 'hungry'
+        page.should have_content('Sign up')
       end
     end
   end
