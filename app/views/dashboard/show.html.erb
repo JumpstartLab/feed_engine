@@ -11,3 +11,9 @@
 </ul>
 
 <%= link_to "Fiddl a link", new_link_item_path  %>
+<h2>Links</h2>
+<ul>
+  <% @link_items.each do |i| %>
+  <li><%= i.url %> | <%= i.comment %></li>
+<% end %>
+</ul>

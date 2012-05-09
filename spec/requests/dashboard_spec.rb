@@ -40,7 +40,51 @@ describe "Dashboard" do
     describe "of link type" do
       it "has a link to make a new link" do
         click_on "Fiddl a link"
+        page.should have_content "Post a link"
       end
+
+      describe "creating a link" do
+        before(:each) { click_on "Fiddl a link"}
+
+        it "prevents posting an invalid url" do
+          fill_in "link_item[url]", :with => "adbc"
+          click_on "Linkify"
+          page.should have_content "is invalid"
+        end
+
+        it "prevents posting of a super long url" do
+          bad_url = "http://google.com/#{'a' * 2049}"
+          fill_in "link_item[url]", :with => bad_url
+          click_on "Linkify"
+          page.should have_content "is too long"
+        end
+
+        it "successfully adds valid links" do
+          good_url = "http://google.com"
+          fill_in "link_item[url]", :with => good_url
+          click_on "Linkify"
+          page.should have_content good_url
+          current_path.should == dashboard_path
+        end
+
+        describe "comments" do
+          before(:each) { fill_in "link_item[url]", :with => "http://google.com" }
+          it "prevents comments longer than 256 characters" do
+            fill_in "link_item[comment]", :with => "#{'a' * 257}"
+            click_on "Linkify"
+            page.should have_content "is too long"
+          end
+
+          it "successfully adds valid comments" do
+            fill_in "link_item[comment]", :with => "my awesome comment"
+            click_on "Linkify"
+            page.should have_content "my awesome comment"
+            current_path.should == dashboard_path
+          end
+        end
+      end
+
+      
     end
   end
 end
