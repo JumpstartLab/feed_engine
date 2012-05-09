@@ -19,7 +19,14 @@ describe "Dashboard" do
         bad_body = "a" * 513
         fill_in "text_item[body]", :with => bad_body
         click_on "Textify"
-        page.should have_content "Post is invalid"
+        page.should have_content "is too long"
+      end
+
+      it "prevents creation of empty posts" do
+        bad_body = ""
+        fill_in "text_item[body]", :with => bad_body
+        click_on "Textify"
+        page.should have_content "can't be blank"
       end
 
       it "successfully adds a valid post" do

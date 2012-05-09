@@ -11,4 +11,10 @@ describe TextItem do
     test_item = TextItem.new(body:bad_body)
     test_item.should_not be_valid
   end
+
+  it "creates a valid text item" do
+    good_body = "a" * 512
+    test_item = TextItem.new(body:good_body)
+    test_item.should be_valid
+  end
 end
