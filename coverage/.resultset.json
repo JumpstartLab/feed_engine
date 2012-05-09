@@ -1,14 +1,14 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/config/environment.rb": [
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/config/environment.rb": [
         null,
         1,
         null,
         null,
         1
       ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/config/application.rb": [
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/config/application.rb": [
         1,
         null,
         null,
@@ -75,7 +75,7 @@
         null,
         null
       ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/config/boot.rb": [
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/config/boot.rb": [
         1,
         null,
         null,
@@ -83,7 +83,7 @@
         null,
         1
       ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/config/environments/test.rb": [
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/config/environments/test.rb": [
         1,
         null,
         null,
@@ -122,7 +122,7 @@
         1,
         null
       ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/config/initializers/backtrace_silencers.rb": [
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/config/initializers/backtrace_silencers.rb": [
         null,
         null,
         null,
@@ -131,7 +131,7 @@
         null,
         null
       ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/config/initializers/inflections.rb": [
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/config/initializers/inflections.rb": [
         null,
         null,
         null,
@@ -148,7 +148,7 @@
         null,
         null
       ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/config/initializers/kaminari_config.rb": [
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/config/initializers/kaminari_config.rb": [
         1,
         1,
         null,
@@ -159,14 +159,14 @@
         null,
         null
       ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/config/initializers/mime_types.rb": [
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/config/initializers/mime_types.rb": [
         null,
         null,
         null,
         null,
         null
       ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/config/initializers/secret_token.rb": [
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/config/initializers/secret_token.rb": [
         null,
         null,
         null,
@@ -175,7 +175,7 @@
         null,
         1
       ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/config/initializers/session_store.rb": [
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/config/initializers/session_store.rb": [
         null,
         null,
         1,
@@ -185,7 +185,7 @@
         null,
         null
       ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/config/initializers/wrap_parameters.rb": [
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/config/initializers/wrap_parameters.rb": [
         null,
         null,
         null,
@@ -201,7 +201,7 @@
         1,
         null
       ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/app/controllers/application_controller.rb": [
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/app/controllers/application_controller.rb": [
         1,
         1,
         null,
@@ -232,145 +232,133 @@
         null,
         null
       ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/app/helpers/application_helper.rb": [
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/app/helpers/application_helper.rb": [
         1,
         null
       ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/app/helpers/dashboard_helper.rb": [
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/app/helpers/dashboard_helper.rb": [
         1,
         null
       ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/app/helpers/home_helper.rb": [
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/app/helpers/home_helper.rb": [
         1,
         null
       ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/app/helpers/posts_helper.rb": [
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/app/helpers/images_helper.rb": [
         1,
         null
       ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/app/helpers/sessions_helper.rb": [
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/app/helpers/links_helper.rb": [
         1,
         null
       ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/app/helpers/users_helper.rb": [
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/app/helpers/posts_helper.rb": [
         1,
         null
       ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/app/controllers/dashboard_controller.rb": [
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/app/helpers/sessions_helper.rb": [
         1,
-        null,
-        1,
-        null,
-        null,
         null
       ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/app/controllers/home_controller.rb": [
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/app/helpers/users_helper.rb": [
         1,
-        1,
-        null,
-        null,
-        null,
-        null,
         null
       ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/app/controllers/posts_controller.rb": [
-        1,
-        1,
-        null,
-        1,
-        0,
-        null,
-        null,
-        1,
-        0,
-        0,
-        0,
-        null,
-        0,
-        null,
-        null,
-        null,
-        1,
-        0,
-        null,
-        null,
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/app/controllers/dashboard_controller.rb": [
         1,
         null,
-        null,
         1,
-        null,
-        null
-      ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/app/controllers/sessions_controller.rb": [
-        1,
-        1,
-        null,
-        null,
-        1,
-        0,
-        0,
-        0,
-        0,
-        null,
-        0,
-        0,
-        null,
-        null,
-        null,
-        1,
-        0,
-        0,
-        null,
-        null
-      ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/app/controllers/users_controller.rb": [
-        1,
-        1,
-        0,
-        null,
-        null,
-        1,
-        null,
-        null,
-        1,
-        0,
-        0,
-        0,
-        0,
-        null,
-        0,
         null,
         null,
         null
       ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/app/models/user.rb": [
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/app/controllers/home_controller.rb": [
         1,
         1,
         null,
-        1,
         null,
-        1,
+        null,
+        null,
         null
       ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/config/routes.rb": [
-        1,
-        1,
-        1,
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/app/controllers/images_controller.rb": [
         1,
         null,
-        1,
-        1,
         null,
         1,
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null,
         null,
         1,
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null,
         1,
-        null
-      ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/spec/support/request_helpers/login.rb": [
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null,
         1,
+        0,
+        null,
+        null,
+        null,
+        null,
         1,
+        0,
+        null,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
         1,
+        0,
+        null,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        0,
+        0,
+        null,
         0,
         0,
         0,
@@ -378,7 +366,212 @@
         null,
         null
       ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/spec/support/request_helpers/signup.rb": [
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/app/models/image.rb": [
+        1,
+        1,
+        null
+      ],
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/app/controllers/links_controller.rb": [
+        1,
+        null,
+        null,
+        1,
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        null,
+        null,
+        1,
+        0,
+        null,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        0,
+        null,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null
+      ],
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/app/models/link.rb": [
+        1,
+        1,
+        null
+      ],
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/app/controllers/posts_controller.rb": [
+        1,
+        1,
+        null,
+        1,
+        0,
+        null,
+        null,
+        1,
+        0,
+        0,
+        0,
+        null,
+        0,
+        null,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        1,
+        null,
+        null,
+        1,
+        null,
+        null
+      ],
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/app/controllers/sessions_controller.rb": [
+        1,
+        1,
+        null,
+        null,
+        1,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        0,
+        null,
+        null,
+        null,
+        1,
+        0,
+        0,
+        null,
+        null
+      ],
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/app/controllers/users_controller.rb": [
+        1,
+        1,
+        0,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        1,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        null,
+        null,
+        null
+      ],
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/app/models/user.rb": [
+        1,
+        1,
+        null,
+        1,
+        null,
+        1,
+        null
+      ],
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/config/routes.rb": [
+        1,
+        1,
+        null,
+        1,
+        null,
+        1,
+        1,
+        1,
+        null,
+        1,
+        1,
+        null,
+        1,
+        null,
+        1,
+        1,
+        null
+      ],
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/spec/support/request_helpers/login.rb": [
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null
+      ],
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/spec/support/request_helpers/signup.rb": [
         1,
         1,
         1,
@@ -391,88 +584,21 @@
         null,
         null
       ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/spec/controllers/posts_controller_spec.rb": [
-        1,
-        null,
-        1,
-        null,
-        null
-      ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/spec/controllers/sessions_controller_spec.rb": [
-        1,
-        null,
-        1,
-        null,
-        1,
-        1,
-        1,
-        1,
-        null,
-        null,
-        null,
-        null
-      ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/spec/controllers/users_controller_spec.rb": [
-        1,
-        null,
-        1,
-        null,
-        null
-      ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/spec/helpers/dashboard_helper_spec.rb": [
-        1,
-        null,
-        1,
-        null
-      ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/spec/helpers/posts_helper_spec.rb": [
-        1,
-        null,
-        1,
-        null
-      ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/spec/helpers/sessions_helper_spec.rb": [
-        1,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        1,
-        1,
-        null
-      ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/spec/helpers/users_helper_spec.rb": [
-        1,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        1,
-        1,
-        null
-      ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/spec/models/user_spec.rb": [
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/spec/models/link_spec.rb": [
         1,
         null,
         1,
         1,
         null
       ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/spec/requests/authentication_requests_spec.rb": [
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/spec/models/user_spec.rb": [
+        1,
+        null,
+        1,
+        1,
+        null
+      ],
+      "/Users/eliseworthy/Dropbox/hungry_academy/feed_engine/spec/requests/authentication_requests_spec.rb": [
         1,
         null,
         1,
@@ -516,15 +642,8 @@
         null,
         1,
         null
-      ],
-      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/spec/views/sessions/new.html.slim_spec.rb": [
-        1,
-        null,
-        1,
-        1,
-        null
       ]
     },
-    "timestamp": 1336534575
+    "timestamp": 1336587554
   }
 }
