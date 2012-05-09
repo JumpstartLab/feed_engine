@@ -31,6 +31,7 @@ $white: #FFFFFF;
         color: $white;
         font-weight: bold;
         font-family: Helvetica;
+        letter-spacing: .1em;
         float: left;
         &:hover{ color: $honeycomb;}
       }
