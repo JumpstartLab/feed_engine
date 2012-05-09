@@ -12,3 +12,6 @@
  *= require foundation
  *= require_tree .
 */
+textarea {
+  height:100px !important;
+}
