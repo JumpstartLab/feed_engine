@@ -6,6 +6,7 @@ describe User do
 
   context "who is unauthenticated" do
     let(:new_user) { Fabricate.build(:user) }
+    let(:user) { Fabricate(:user) }
 
     it "can sign up from the home page" do
       visit root_path
@@ -37,17 +38,44 @@ describe User do
       it "cannot sign up with an empty email address" do
         fill_in "Email", :with => ""
         expect { click_button "Sign Up" }.to change { User.count }.by(0)
-        save_and_open_page
-        current_path.should == new_user_path
         page.should have_content "Email can't be blank"
       end
-      it "cannot sign up with an already-used email address"
-      it "cannot sign up with an invalid email address"
-      it "cannot sign up with an invalid display name"
-      it "cannot sign up with an empty password"
-      it "cannot sign up with an inconsistent password and confirmation"
-      it "cannot sign up with too short of a password"
-      it "receives an email after a successful sign-up"
+      it "cannot sign up with an already-used email address" do
+        fill_signup_form_as(user)
+        expect { click_button "Sign Up" }.to change { User.count }.by(0)
+        page.should have_content "Email has already been taken"
+      end
+      it "cannot sign up with an invalid email address" do
+        fill_in "Email", :with => "test"
+        expect { click_button "Sign Up" }.to change { User.count }.by(0)
+        page.should have_content "Email is invalid"
+      end
+      it "cannot sign up with an invalid display name" do
+        fill_in "Display name", :with => "test test"
+        expect { click_button "Sign Up" }.to change { User.count }.by(0)
+        page.should have_content "Display name must be only letters, numbers, dashes, or underscores"
+      end
+      it "cannot sign up with an empty password" do
+        fill_in "Password", :with => ""
+        fill_in "Password confirmation", :with => ""
+        expect { click_button "Sign Up" }.to change { User.count }.by(0)
+        page.should have_content "Password can't be blank"
+      end
+      it "cannot sign up with an inconsistent password and confirmation" do
+        fill_in "Password", :with => "testering"
+        fill_in "Password confirmation", :with => "tester"
+        expect { click_button "Sign Up" }.to change { User.count }.by(0)
+        page.should have_content "Password doesn't match confirmation"
+      end
+      it "cannot sign up with too short of a password" do
+        fill_in "Password", :with => "testr"
+        fill_in "Password confirmation", :with => "testr"
+        expect { click_button "Sign Up" }.to change { User.count }.by(0)
+        page.should have_content "Password is too short"
+      end
+      it "receives an email after a successful sign-up" do
+        expect { click_button "Sign Up" }.to change { ActionMailer::Base.deliveries.length }.by(1)
+      end
     end
   end
 end
