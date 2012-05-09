@@ -9,7 +9,6 @@ Hungrlr::Application.routes.draw do
   resources :growls, :images, :links, :messages
   resource :dashboard
 
-<<<<<<< HEAD
   root :to => 'growls#index'
 
   namespace :api do
@@ -18,12 +17,9 @@ Hungrlr::Application.routes.draw do
       end
   end
 
-end
-=======
   constraints(Subdomain) do
     match '/' => 'growls#show'
   end
 
   root :to => 'growls#index'
 end
->>>>>>> a1491f2329a12a138ce80730db0f3fff9e32fe7c
