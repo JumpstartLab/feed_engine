@@ -1,7 +1,6 @@
 class Message < Growl
-  validates_presence_of :comment
+  validates_presence_of :comment, message: "You must provide a message."
   validates_length_of :comment, :maximum => 512
-
 end
 # == Schema Information
 #

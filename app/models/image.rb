@@ -1,14 +1,9 @@
 class Image < Growl
-  # attr_accessible :title, :body
+  IMAGE_VALIDATOR_REGEX = /^https?:\/\/(?:[a-z\-]+\.)+[a-z]{2,6}(?:\/[^\/#?]+)+\.(?:jpg|gif|png)$/ix
   validates_presence_of :link, message: "You must provide a link to an image."
-  validate :check_image_link
-  IMAGE_VALIDATOR_REGEX = "^https?:\/\/(?:[a-z\-]+\.)+[a-z]{2,6}(?:\/[^\/#?]+)+\.(?:jpg|gif|png)$"
-
-  def check_image_link
-    unless link.match(IMAGE_VALIDATOR_REGEX)
-      errors.add(:link, "Given URL does not meet a valid image format.")
-    end
-  end
+  validates_format_of :link, :with => IMAGE_VALIDATOR_REGEX, message: "URL must start with http and be a .jpg, .gif, or .png"
+  validates_length_of :link, :within => 3..2048, message: "Given URL needs to be less then 2048 characters"
+  validates_length_of :comment, :within => 3..256, :allow_blank => true
 
 end
 # == Schema Information
