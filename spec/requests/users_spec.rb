@@ -131,21 +131,15 @@ describe "User pages" do
   context "when logged in and viewing the dashboard" do
 
     # Switch for FactoryGirl user login once Mike's api branch is pulled in
+    let!(:user) do
+      FactoryGirl.create(:user)
+    end
     before(:each) do
-      visit root_path
-      click_link_or_button "Sign up"
-      fill_in 'user_email', with: 'foo@bar.com'
-      fill_in 'user_username', with: 'displayname'
-      fill_in 'user_password', with: 'hungry'
-      fill_in 'user_password_confirmation', with: 'hungry'
-      within(".actions") do
-        click_link_or_button 'Sign up'
-      end
-      visit dashboard_path
+      login(user)
     end
 
     context "the account tab" do
-
+      let(:previous_password) { user.encrypted_password }
       before(:each) do
         click_link_or_button("Account")
       end
@@ -159,7 +153,7 @@ describe "User pages" do
         fill_in 'user_password_confirmation', with: 'hungry2'
         fill_in 'user_current_password', with: 'hungry'
         click_link_or_button 'Update'
-        page.should have_content("You updated your account successfully")
+        User.last.encrypted_password.should_not == previous_password
       end
 
       it "does not change the password when fields don't match" do
@@ -167,8 +161,7 @@ describe "User pages" do
         fill_in 'user_password_confirmation', with: 'foobar'
         fill_in 'user_current_password', with: 'hungry'
         click_link_or_button 'Update'
-        page.should_not have_content("You updated your account successfully")
-        page.should have_selector("#edit_user")
+        User.last.encrypted_password.should == previous_password
       end
 
       it "does not change the password when the current password is incorrect" do
@@ -176,8 +169,7 @@ describe "User pages" do
         fill_in 'user_password_confirmation', with: 'hungry2'
         fill_in 'user_current_password', with: 'foobar'
         click_link_or_button 'Update'
-        page.should_not have_content("You updated your account successfully")
-        page.should have_selector("#edit_user")
+        User.last.encrypted_password.should == previous_password
       end
 
     end

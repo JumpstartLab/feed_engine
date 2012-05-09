@@ -18,14 +18,14 @@ describe "Subdomains" do
       context "www" do
         it "redirects to the user's dashboard" do
           page.should have_content "Dashboard"
-          # check current_url
+          current_path.should == dashboard_path
         end
       end
     end
     context "not logged in" do
       it "shows a link to sign up" do
         visit root_path
-        page.should have_link "Sign Up"
+        page.should have_link "Sign up"
       end
     end
   end

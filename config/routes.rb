@@ -1,6 +1,8 @@
 Hungrlr::Application.routes.draw do
 
   #constraints(NoSubdomain) do
+    match "/home" => "pages#home"
+
     devise_for :users
 
     devise_scope :user do
@@ -16,7 +18,7 @@ Hungrlr::Application.routes.draw do
           resources :images
         end
     end
-    root :to => 'dashboards#show'
+    root :to => 'pages#home'
   #end
 
   constraints(Subdomain) do
