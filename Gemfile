@@ -4,6 +4,7 @@ gem 'rails', '3.2.3'
 gem 'slim'
 gem 'simple_form'
 gem 'devise'
+gem 'squeel'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

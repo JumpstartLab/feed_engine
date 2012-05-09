@@ -15,4 +15,5 @@ class User < ActiveRecord::Base
   has_many :images
   has_many :messages
   has_many :links
+
 end

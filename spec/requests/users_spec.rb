@@ -7,6 +7,7 @@ describe "User pages" do
 
     it "sends me to a signup form" do
       click_link_or_button "Sign up"
+
       page.should have_content("Sign up")
     end
 
@@ -20,6 +21,7 @@ describe "User pages" do
       # Successful Signup
 
       it "lets me create an account with new info" do
+        save_and_open_page
         fill_in 'user_email', with: 'foo@bar.com'
         fill_in 'user_username', with: 'displayname'
         fill_in 'user_password', with: 'hungry'
