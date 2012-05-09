@@ -14,8 +14,8 @@ class User < ActiveRecord::Base
   after_create :send_welcome_mail
 
   private 
-  
+
   def send_welcome_mail
-     UserMailer.welcome_email(self).deliver
+    Resque.enqueue(WelcomeMailJob, self)
   end
 end
