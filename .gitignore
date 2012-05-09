@@ -13,3 +13,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ignore our secret files
+/config/intializers/fog.rb
+/config/intializers/secret_token.rb
