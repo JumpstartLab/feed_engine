@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120509181157) do
+ActiveRecord::Schema.define(:version => 20120509200823) do
 
   create_table "images", :force => true do |t|
     t.text     "description"
@@ -32,6 +32,13 @@ ActiveRecord::Schema.define(:version => 20120509181157) do
   end
 
   add_index "links", ["poster_id"], :name => "index_links_on_poster_id"
+
+  create_table "messages", :force => true do |t|
+    t.text     "body"
+    t.integer  "poster_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email"

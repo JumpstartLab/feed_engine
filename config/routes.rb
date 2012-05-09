@@ -1,4 +1,6 @@
 FeedEngine::Application.routes.draw do
+  resources :messages
+
   resources :images
 
   resources :links
