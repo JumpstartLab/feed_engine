@@ -1,1 +1,7 @@
 p Your dashboard!
+
+.tabs
+  ul.tab-bar
+    - TYPES.each do |type|
+      li.tab-item
+        a = type.to_s
