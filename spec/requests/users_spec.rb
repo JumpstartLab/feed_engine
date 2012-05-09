@@ -43,7 +43,8 @@ describe "User pages" do
       end
 
       it "sends a confirmation email" do
-        pending "Set up emails"
+        email = ActionMailer::Base.deliveries.last
+        email.subject.should be "Welcome to Hungrlr!"
       end
 
       it "sends you to the dashboard" do
@@ -116,7 +117,6 @@ describe "User pages" do
         fill_in 'user_password_confirmation', with: 'hungry'
         page.should have_content('Sign up')
       end
-
     end
   end
 end
