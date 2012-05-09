@@ -1,13 +1,15 @@
 h1 Your dashboard!
 
 .tabs
-  ul.tab-bar
-    - TYPES.each do |type|
-      li.tab-item*{id: "#{type}"}
-        a = type.to_s
-  ul.tab-body
-    - TYPES.each_with_index do |type, index|
-      - type_name = type.to_s.downcase
-      li.tab*{id: "#{type_name}-tab", "z-index" => "#{index}"}
-        p = type_name
-      // = render "#{type_name}/#{type_name}_form", locals:{ "new_#{type_name}" => type.new }
+  .tab-bar
+    ul
+      - TYPES.each do |type|
+        li.tab-item*{id: "#{type}"}
+          a = type.to_s
+  .tab-body
+    ul
+      - TYPES.each_with_index do |type, index|
+        - type_name = type.to_s.downcase
+        li.tab*{id: "#{type_name}-tab"}
+          - instance_variable_set("@new_#{type_name}", type.new)
+          = render "#{type_name.pluralize}/#{type_name}_form"

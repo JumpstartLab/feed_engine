@@ -1,5 +1,5 @@
 $whale: #262626;
-$dolphin: #404040;
+$dolphin: #424242;
 
 $honeycomb: #e9ba26;
 $clementine: #f0812b;
@@ -43,13 +43,14 @@ $white: #FFFFFF;
   }
 
   .tab-body {
-    width: 90%;
     .tab {
       @include borders(dashed);
       margin: auto;
-      height: 25em;
-      position:absolute;
-      width: 90%;
+      position:relative;
+
+      p {
+        color: $wasabi;
+      }
     }
   }
 }
