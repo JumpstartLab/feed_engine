@@ -8,7 +8,11 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me,
                   :display_name
 
-  validates :display_name, :presence => true
+  validates :display_name, :presence => true, :format => { :message => "Spaces are not allowed", :with => /^\S*$/ }
 
   # attr_accessible :title, :body
+  
+  def send_welcome_message
+    UserMailer.welcome_message(self).deliver
+  end
 end

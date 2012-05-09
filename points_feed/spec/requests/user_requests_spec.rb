@@ -21,9 +21,16 @@ describe User do
           page.should have_content("Welcome! You have signed up successfully.")
         end
 
-        it "should redirect me to dashboard"
+        it "should redirect me to dashboard" do
+          click_button "Sign Up"
+          page.should have_content("Dashboard")
+        end
 
-        it "should send welcome email to user"
+        it "should send welcome email to user" do
+          click_button "Sign Up"
+          invite_email = ActionMailer::Base.deliveries.last
+          invite_email.subject.should == "Welcome to PointsFeed!"
+        end
       end
 
       context "and when I fill out the information improperly" do
@@ -40,10 +47,9 @@ describe User do
         end
 
         it "should show an error message for improper display name" do
-          pending
           fill_in "Display name", :with => "display name"
           click_button "Sign Up"
-          page.should have_content("can't be blank")
+          page.should have_content("Spaces are not allowed")
         end   
 
         it "should show an error message for a blank display name" do
