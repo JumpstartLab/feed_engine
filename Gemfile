@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.3'
+gem 'twitter-bootstrap-rails'
+gem 'kaminari'
 gem 'jquery-rails'
 
 group :assets do
@@ -18,7 +20,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'guard-rspec'
-  gem 'simplecov'#, :group => :test
+  gem 'simplecov', :require => false
   gem 'reek', :git => "git://github.com/mvz/reek.git", :branch => "ripper_ruby_parser-2"
   gem 'cane', :git => "git://github.com/square/cane.git"
 end
