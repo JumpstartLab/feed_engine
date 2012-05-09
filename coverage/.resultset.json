@@ -1,0 +1,81 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/app/controllers/application_controller.rb": [
+        1,
+        1,
+        null,
+        1,
+        0,
+        null,
+        null,
+        null
+      ],
+      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/app/helpers/application_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/app/helpers/dashboard_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/app/helpers/home_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/app/helpers/posts_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/app/controllers/dashboard_controller.rb": [
+        1,
+        null,
+        1,
+        null,
+        null,
+        null
+      ],
+      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/app/controllers/home_controller.rb": [
+        1,
+        1,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/app/controllers/posts_controller.rb": [
+        1,
+        null,
+        1,
+        0,
+        null,
+        null,
+        1,
+        0,
+        0,
+        0,
+        null,
+        0,
+        null,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        null
+      ],
+      "/Users/andrewthal/Dropbox/HungryAcademy/Code/feed_engine/app/controllers/users_controller.rb": [
+        1,
+        null,
+        1,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "timestamp": 1336521737
+  }
+}
