@@ -3,5 +3,4 @@ rvm:
   - 1.9.3
 
 script:
-  bundle exec rake db:migrate
-  bundle exec rspec
+  bundle exec rake db:migrate && bundle exec rspec
