@@ -10,6 +10,10 @@ describe Image do
       image.should be_valid 
     end
 
+    it "uses ExternalContent" do
+      Image.ancestors.should include(ExternalContent)
+    end
+
     context "for description" do
       it "must be non-empty" do
         image.description = ""
