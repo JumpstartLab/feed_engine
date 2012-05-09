@@ -10,4 +10,12 @@ class User < ActiveRecord::Base
   validates :display_name, :presence => true
   validates :display_name, :format => { :with => /\A[a-zA-Z0-9_-]+\z/, 
             :message => "may only contain letters, numbers, dashes, and underscores." }  
+
+  after_create :send_welcome_mail
+
+  private 
+  
+  def send_welcome_mail
+     UserMailer.welcome_email(self).deliver
+  end
 end
