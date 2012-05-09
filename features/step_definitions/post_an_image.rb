@@ -19,7 +19,18 @@ Then /^I should see the form to create an image message$/ do
 end
 
 When /^I fill in the image link field with a link of (\d+) characters$/ do |arg1|
-  fill_in :url, with: ("b" * 2049)
+  @url = ("a" * 2049)
+  fill_in :url, with: @url
+end
+
+Then /^the image url I have entered is present$/ do
+  find('input[name="image_post[url]"]').value.should include @url
+  #find('input[name="image_post[description]"]').value.should include @description
+end
+
+Then /^the image comment I have entered is present$/ do
+  # find('input[name="image_post[url]"]').value.should include @url
+  find('input[name="image_post[description]"]').value.should include @description
 end
 
 Then /^I should see an error message requiring the image link to be less than or equal to (\d+) characters$/ do |arg1|
@@ -27,7 +38,8 @@ Then /^I should see an error message requiring the image link to be less than or
 end
 
 When /^I fill in the link field with "(.*?)"$/ do |url|
-  fill_in :url, with: url
+  @url = url
+  fill_in :url, with: @url
 end
 
 Then /^I should see an error message requiring the link format to look like an http\/https link$/ do
@@ -39,7 +51,8 @@ Then /^I should see an error message requiring the link format to end in an imag
 end
 
 When /^I fill in the comment field with (\d+) 'a's$/ do |arg1|
-  fill_in "Description", with: ("a"*arg1.to_i)
+  @description = ("a"*arg1.to_i)
+  fill_in "Description", with: @description
 end
 
 Then /^I should see an error message requiring the comment to be less than or equal to (\d+) characters$/ do |arg1|
@@ -47,5 +60,6 @@ Then /^I should see an error message requiring the comment to be less than or eq
 end
 
 When /^I fill in the comment field with "(.*?)"$/ do |arg1|
-  fill_in :description, with: arg1
+  @description = arg1
+  fill_in "Description", with: @description
 end

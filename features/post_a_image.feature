@@ -16,21 +16,21 @@ Feature: Posting An Image
     And I click post
     Then I should see an error message requiring the image link to be less than or equal to 2048 characters
     And I should see the form to create an image message
-    And the data I have entered is present
+    And the image url I have entered is present
 
 Scenario: Submitting a link with length of an improper format
     When I fill in the link field with "abc123"
     And I click post
     Then I should see an error message requiring the link format to look like an http/https link
     And I should see the form to create an image message
-    And the data I have entered is present
+    And the image url I have entered is present
 
 Scenario: Submitting a link with length of an improper extension
-    When I fill in the link field with "http://foo.com/bar.html";
+    When I fill in the link field with "http://foo.com/bar.html"
     And I click post
     Then I should see an error message requiring the link format to end in an image extension (car-insensitive: jpg, jpeg, gif, bmp, png)
     And I should see the form to create an image message
-    And the data I have entered is present
+    And the image url I have entered is present
 
   Scenario: Submitting a message successfully
     When I fill in the link field with "http://hungryacademy.com/monster.png"
@@ -44,7 +44,8 @@ Scenario: Submitting a link with length of an improper extension
     And I click post
     Then I should see an error message requiring the comment to be less than or equal to 256 characters
     And I should see the form to create an image message
-    And the data I have entered is present
+    And the image url I have entered is present
+    And the image comment I have entered is present
 
   Scenario: Submitting a message successfully
     When I fill in the link field with "http://hungryacademy.com/monster.png"

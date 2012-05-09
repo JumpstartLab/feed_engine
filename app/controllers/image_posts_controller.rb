@@ -6,6 +6,7 @@ class ImagePostsController < ApplicationController
   def create
     @image_post = ImagePost.new(params[:image_post])
     if @image_post.save
+      flash[:notice] = "Your message was saved!"
       redirect_to dashboard_path
     else
       flash.now[:notice] = "There were errors posting your image!"

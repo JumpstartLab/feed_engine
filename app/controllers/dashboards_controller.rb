@@ -1,6 +1,6 @@
 class DashboardsController < ApplicationController
   def show
-    @post = Post.new
     @image_post = ImagePost.new
+    @post = TextPost.new
   end
 end
