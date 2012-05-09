@@ -16,3 +16,6 @@
 
 # OSX
 .DS_Store
+
+#covergae
+/coverage
