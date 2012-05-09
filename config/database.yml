@@ -19,9 +19,7 @@ test:
   timeout: 5000
 
 production:
-  adapter: postgresql
-  encoding: utf8
-  database: feedengine_production
+  adapter: sqlite3
+  database: db/production.sqlite3
   pool: 5
-  username: <%= ENV['FEEDENGINE_DB_USERNAME'] %>
-  password: <%= ENV['FEEDENGINE_DB_PASSWORD'] %>
+  timeout: 5000
