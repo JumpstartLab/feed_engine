@@ -14,6 +14,13 @@ describe "Dashboard" do
       it "displays the form" do
         page.should have_content "Create Text Post"
       end
+
+      it "prevents creation of posts longer than 512 characters" do
+        bad_body = "a" * 513
+        fill_in "text_item[body]", :with => bad_body
+        click_on "Textify"
+        page.should have_content "Post is invalid"
+      end
     end
   end
 end

@@ -1,3 +1,8 @@
 <h1>Dashboard</h1>
 
 <h2>Create Text Post</h2>
+<%= simple_form_for @text_item do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :body %>
+  <%= f.button :submit, "Textify" %>
+<% end %>
