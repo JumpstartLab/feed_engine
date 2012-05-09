@@ -43,17 +43,18 @@ describe "User pages" do
       end
 
       it "sends a confirmation email" do
-        pending "Set up emails"
+        # pending "Set up emails"
+        last_email = ActionMailer::Base.deliveries.last
+        last_email.subject.should == "Welcome to Hungrlr!"
       end
 
       it "sends you to the dashboard" do
-        pending "Setup of dashboard"
-        fill_in 'user_email', with: 'foo@bar.com'
-        fill_in 'user_username', with: 'displayname'
+        fill_in 'user_email', with: 'foomeh@bar.com'
+        fill_in 'user_username', with: 'displayname5'
         fill_in 'user_password', with: 'hungry'
         fill_in 'user_password_confirmation', with: 'hungry'
         click_link_or_button 'Sign up'
-        current_path.should == '/dashboard'
+        current_path.should == dashboard_path
       end
 
       # Unsuccessful Signup
