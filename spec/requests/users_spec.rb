@@ -53,10 +53,6 @@ describe "User pages" do
         current_path.should == '*/dashboard'
       end
 
-<<<<<<< HEAD
-=======
-
->>>>>>> Testing
       # Unsuccessful Signup
 
       it "does not accept duplicate email addresses" do
@@ -94,7 +90,6 @@ describe "User pages" do
         pending "TODO: Validate display name"
         fill_in 'user_username', with: 'display name'
         fill_in 'user_email', with: 'foo@bar.com'
-<<<<<<< HEAD
         fill_in 'user_password', with: 'hungry'
         fill_in 'user_password_confirmation', with: 'hungry'
         page.should have_content('Display name must only be letters, numbers, dashes, or underscores')
@@ -107,16 +102,6 @@ describe "User pages" do
         fill_in 'user_password', with: 'hungry'
         fill_in 'user_password_confirmation', with: 'hungry'
         page.should have_content('Sign up')
-      end
-      
-      it "rejects a malformed email address" do
-        pending "This is handled by devise. If we switch we'll need to test"
-        fill_in 'user_email', with: "foo#bar.com"
-=======
->>>>>>> Testing
-        fill_in 'user_password', with: 'hungry'
-        fill_in 'user_password_confirmation', with: 'hungry'
-        page.should have_content('Display name must only be letters, numbers, dashes, or underscores')
       end
 
       it "keeps you on the signup for when submitted display name is bad" do
