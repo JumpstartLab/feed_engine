@@ -1,3 +1,4 @@
-= simple_form_for @message do |f|
-  = f.input :comment
-  = f.submit
+= simple_form_for @image do |f|
+  = f.input :link, :as => :string, :input_html => { :class => 'oversize input-text' }
+  = f.input :comment, :input_html => { :class => 'niceTextarea' }
+  = f.submit :class => 'blue nice button radius'
