@@ -8,3 +8,27 @@ jQuery ->
     tabId = "#{this['id']}-tab".toLowerCase()
     $('.tab-body ul').children().hide()
     $("##{tabId}").show()
+
+  addSubmitHandler = (klass) ->
+    $("##{klass}-submit").click ->
+      form = $("#new_#{klass}")
+      formData = form.serialize()
+      $.ajax({
+        type: "POST",
+        url: "/posts",
+        data: formData,
+        success: ->
+          $('#flash').text('Posted successfully')
+          form.clearForm()
+        error: (response, status)->
+          resp = $.parseJSON(response.responseText)
+          $('#errors').html Mustache.to_html($('#errors_list_template').html())
+          for error in resp.errors
+            $('#errors_list').html "<li>#{error}</li>"
+        })
+
+
+  addSubmitHandler("text")
+  addSubmitHandler("image")
+  addSubmitHandler("link")
+

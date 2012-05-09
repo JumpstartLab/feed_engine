@@ -1,7 +1,9 @@
 h1 LOS LIIIIIIIIINKS
-
-= form_for @new_link do |f|
+#errors
+br
+= form_for @new_link, remote: true, url: posts_path do |f|
+  = hidden_field_tag :type, "link"
   = f.label :content
   = f.text_area :content
   br
-  = f.submit
+button*{id: "link-submit"} "DERP"
