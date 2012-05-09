@@ -12,4 +12,6 @@ PointsFeed::Application.routes.draw do
   end
 
   root :to => "home#index"
+
+  resources :posts
 end
