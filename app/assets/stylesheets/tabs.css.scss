@@ -15,15 +15,19 @@ $wine: #832e2f;
 
 $white: #FFFFFF;
 
+@mixin borders($style){
+  border-color: $slushie;
+  border-radius: .25em;
+  border-style: $style;
+  border-width: .25em;
+}
+
 .tabs {
   margin: auto;
-  width: 100%;
+  width: 90%;
   .tab-bar {
+    @include borders(solid);
     background-color: $dolphin;
-    border-color: $slushie;
-    border-style: solid;
-    border-width: .25em;
-    border-radius: .25em;
     .tab-item {
       display:inline-block;
       a {
@@ -39,9 +43,10 @@ $white: #FFFFFF;
   }
 
   .tab {
-    width: 80%;
+    @include borders(dashed);
     height: 25em;
     display: block;
+    width: 85%;
+    position:absolute;
   }
-
 }
