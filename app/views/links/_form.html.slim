@@ -7,12 +7,11 @@
           li = message
 
   .field
+    = f.label :url
+    = f.text_area :url
+  .field
     = f.label :description
     = f.text_area :description
   .field
-    = f.label :url
-    = f.text_field :url
-  .field
-    = f.label :poster_id
-    = f.number_field :poster_id
+    = f.hidden_field :poster_id, value: "1"
   .actions = f.submit 'Save'

@@ -42,6 +42,22 @@
       $("#services").hide();
       $("#subscriptions").hide();
     });
+    $("#add_message").click(function(){
+      $("#message_form").css('display', 'block');
+      $("#link_form").css('display', 'none');
+      $("#image_form").css('display', 'none');
+    });
+    $("#add_link").live('click', function() {
+      $("#link_form").css('display', 'block');
+      $("#message_form").css('display', 'none');
+      $("#image_form").css('display', 'none');
+    });
+    $("#add_image").live('click', function() {
+      $("#image_form").css('display', 'block');
+      $("#message_form").css('display', 'none');
+      $("#link_form").css('display', 'none');
+    });
+
 
     $(function(){
       var sidebar=$('#sidebar');
@@ -66,13 +82,18 @@ div.span7
   div#posts
     div
       h2 Posts
+      = link_to 'Add text message', new_post_path, :class => "btn btn-medium", :id => "add_message"
+      = link_to 'Add link message', nil, :class => "btn btn-medium", :id => "add_link"
+      = link_to 'Add image message', nil, :class => "btn btn-medium", :id => "add_image"
       br
-      = render :partial => "messages/form"
-      = link_to 'Add text message', new_post_path, :class => "btn btn-medium"
-      |&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-      = link_to 'Add link message', nil, :class => "btn btn-medium"
-      |&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-      = link_to 'Add image message', nil, :class => "btn btn-medium"
+      div#message_form
+        /= render :partial => "messages/form"
+      br
+      div#link_form
+        /= render :partial => "links/form"
+      br
+      div#image_form
+        = render :partial => "images/form"
   div#privacy
     div
       h2 Privacy
