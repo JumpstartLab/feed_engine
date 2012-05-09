@@ -1,5 +1,5 @@
 Given /^I click the "(.*?)" tab$/ do |path|
-  click_link_or_button "image"
+  click_link_or_button "#{path}"
 end
 
 Then /^I should see a form to create an image message$/ do
@@ -20,16 +20,14 @@ end
 
 When /^I fill in the image link field with a link of (\d+) characters$/ do |arg1|
   @url = ("a" * 2049)
-  fill_in :url, with: @url
+  fill_in "Url", with: @url
 end
 
 Then /^the image url I have entered is present$/ do
   find('input[name="image_post[url]"]').value.should include @url
-  #find('input[name="image_post[description]"]').value.should include @description
 end
 
 Then /^the image comment I have entered is present$/ do
-  # find('input[name="image_post[url]"]').value.should include @url
   find('input[name="image_post[description]"]').value.should include @description
 end
 
@@ -39,7 +37,7 @@ end
 
 When /^I fill in the link field with "(.*?)"$/ do |url|
   @url = url
-  fill_in :url, with: @url
+  fill_in "Url", with: @url
 end
 
 Then /^I should see an error message requiring the link format to look like an http\/https link$/ do
