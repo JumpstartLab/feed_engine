@@ -33,5 +33,6 @@ RSpec.configure do |config|
   # If true, the base class of anonymous controllers will be inferred
   # automatically. This will be the default behavior in future versions of
   # rspec-rails.
+  config.include UserSupport::Login
   config.infer_base_class_for_anonymous_controllers = false
 end

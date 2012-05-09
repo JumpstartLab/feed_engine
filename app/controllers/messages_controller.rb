@@ -5,7 +5,7 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @message = current_user.images.new(params[:message])
+    @message = current_user.messages.new(params[:message])
     if @message.save
       redirect_to dashboard_path, :notice => "Message posted succesfully."
     else

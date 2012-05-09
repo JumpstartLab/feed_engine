@@ -6,7 +6,7 @@ class LinksController < ApplicationController
   end
 
   def create
-    @link = current_user.images.new(params[:link])
+    @link = current_user.links.new(params[:link])
     if @link.save
       redirect_to dashboard_path, :notice => "Link posted succesfully."
     else

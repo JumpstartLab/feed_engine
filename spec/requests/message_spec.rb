@@ -1,8 +1,10 @@
 require 'spec_helper'
 
 describe Message do
+  let(:user) { FactoryGirl.create(:user)}
   describe "Creating a message" do
     before(:each) do
+      login(user)
       visit new_message_path
     end
 

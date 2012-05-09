@@ -4,6 +4,7 @@ Hungrlr::Application.routes.draw do
 
   devise_scope :user do
     get '/signup' => 'devise/registrations#new'
+    get '/login' => 'devise/sessions#new'
   end
 
   resources :growls, :images, :links, :messages
