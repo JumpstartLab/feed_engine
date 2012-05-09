@@ -21,6 +21,13 @@ describe "Dashboard" do
         click_on "Textify"
         page.should have_content "Post is invalid"
       end
+
+      it "successfully adds a valid post" do
+        valid_post = "I'm a valid post. Huzzah!"
+        fill_in "text_item[body]", :with => valid_post
+        click_on "Textify"
+        page.should have_content valid_post
+      end
     end
   end
 end
