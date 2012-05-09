@@ -1,5 +1,6 @@
 h1 TXTMSG
-
+#errors
+br
 = form_for @new_text, url: "#", id: "text_form" do |f|
   = hidden_field_tag :type, "text"
   = f.label :content

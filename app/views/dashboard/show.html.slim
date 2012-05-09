@@ -13,3 +13,6 @@ h1 Your dashboard!
         li.tab*{id: "#{type_name}-tab"}
           - instance_variable_set("@new_#{type_name}", type.new)
           = render "#{type_name.pluralize}/#{type_name}_form"
+    script*{type: "text/html", id: "errors_list_template"}
+      = render 'shared/errors_list'
+          

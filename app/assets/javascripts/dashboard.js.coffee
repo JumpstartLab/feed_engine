@@ -11,7 +11,6 @@ jQuery ->
 
   addSubmitHandler = (klass) ->
     $("##{klass}-submit").click ->
-      alert ("#{klass}")
       form = $("#new_#{klass}")
       formData = form.serialize()
       $.ajax({
@@ -22,9 +21,14 @@ jQuery ->
           $('#flash').text('Posted successfully')
           form.clearForm()
         error: (response, status)->
-          $('#flash').text "#{response.responseText}"
+          resp = $.parseJSON(response.responseText)
+          $('#errors').html Mustache.to_html($('#errors_list_template').html())
+          for error in resp.errors
+            $('#errors_list').html "<li>#{error}</li>"
         })
+
 
   addSubmitHandler("text")
   addSubmitHandler("image")
   addSubmitHandler("link")
+
