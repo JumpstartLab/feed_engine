@@ -11,6 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20120508222252) do
 
   create_table "images", :force => true do |t|
@@ -40,6 +41,9 @@ ActiveRecord::Schema.define(:version => 20120508222252) do
   end
 
   add_index "texts", ["user_id"], :name => "index_texts_on_user_id"
+=======
+ActiveRecord::Schema.define(:version => 20120508200206) do
+>>>>>>> 229140dc0e3cf939a617d1520dda3f35918094a2
 
   create_table "users", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false
