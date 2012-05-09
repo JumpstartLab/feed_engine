@@ -9,4 +9,8 @@ head
 body
   = render :partial => "layouts/header"
   div.container
+    - flash.each do |type, message|
+      div class="alert alert-#{message}"
+        = message
+
     == yield

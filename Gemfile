@@ -21,6 +21,7 @@ group :development, :test do
   gem 'faker'
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'launchy'
   gem 'guard-rspec'
   gem 'simplecov', :require => false
   gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'

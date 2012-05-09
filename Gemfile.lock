@@ -96,6 +96,8 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
       railties (>= 3.0.0)
+    launchy (2.1.0)
+      addressable (~> 2.2.6)
     less (2.2.1)
       commonjs (~> 0.2.6)
     less-rails (2.2.2)
@@ -222,6 +224,7 @@ DEPENDENCIES
   guard-rspec
   jquery-rails
   kaminari
+  launchy
   less-rails
   rails (= 3.2.3)
   reek!

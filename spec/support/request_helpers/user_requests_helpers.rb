@@ -1,36 +1,36 @@
 module UserRequestHelpers
   def login_as(user)
-    fill_in DOM::LoginEmail, :with => user.email
-    fill_in DOM::LoginPassword, :with =>
+    fill_in "Email", :with => user.email
+    fill_in "Password", :with =>
       Fabricate.attributes_for(:user)[:password]
-    click_link_or_button DOM::LoginSubmit
+    click_link_or_button "Sign In"
   end
 
   def signup_as(user)
-    fill_in DOM::SignupDisplayName, :with => user.display_name
-    fill_in DOM::SignupEmail, :with => user.email
-    fill_in DOM::SignupPassword, :with =>
+    fill_in "Display name", :with => user.display_name
+    fill_in "Email", :with => user.email
+    fill_in "Password", :with =>
       Fabricate.attributes_for(:user)[:password]
-    fill_in DOM::SignupPasswordConfirmation, :with =>
+    fill_in "Password confirmation", :with =>
       Fabricate.attributes_for(:user)[:password]
-    click_link_or_button DOM::SignupSubmit
+    click_link_or_button "Sign Up"
   end
 
   def fill_login_form_as(user)
-    fill_in DOM::SignupDisplayName, :with => user.display_name
-    fill_in DOM::SignupEmail, :with => user.email
-    fill_in DOM::SignupPassword, :with =>
+    fill_in "Display name", :with => user.display_name
+    fill_in "Email", :with => user.email
+    fill_in "Password", :with =>
       Fabricate.attributes_for(:user)[:password]
-    fill_in DOM::SignupPasswordConfirmation, :with =>
+    fill_in "Password confirmation", :with =>
       Fabricate.attributes_for(:user)[:password]
   end
 
   def fill_signup_form_as(user)
-    fill_in DOM::SignupDisplayName, :with => user.display_name
-    fill_in DOM::SignupEmail, :with => user.email
-    fill_in DOM::SignupPassword, :with =>
+    fill_in "Display name", :with => user.display_name
+    fill_in "Email", :with => user.email
+    fill_in "Password", :with =>
       Fabricate.attributes_for(:user)[:password]
-    fill_in DOM::SignupPasswordConfirmation, :with =>
+    fill_in "Password confirmation", :with =>
       Fabricate.attributes_for(:user)[:password]
   end
 end
