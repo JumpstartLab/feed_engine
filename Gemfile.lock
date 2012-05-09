@@ -222,6 +222,7 @@ DEPENDENCIES
   guard-rspec
   jquery-rails
   kaminari
+  less-rails
   rails (= 3.2.3)
   reek!
   rspec-rails

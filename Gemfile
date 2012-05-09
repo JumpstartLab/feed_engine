@@ -11,6 +11,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'slim-rails'
   gem 'uglifier', '>= 1.0.3'
+  gem 'less-rails'
 end
 
 group :development, :test do
