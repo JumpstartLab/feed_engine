@@ -233,6 +233,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 3.2.3)
   simplecov
+  slim
   slim-rails
   sqlite3
   twitter-bootstrap-rails
