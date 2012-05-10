@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 
   validates :email, :format => {
       :message => "must be in the form a@b.com",
-      :with => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/
+      :with => /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/
 
     }
 
