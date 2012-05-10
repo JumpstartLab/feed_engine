@@ -21,4 +21,8 @@ class LinkPost < ActiveRecord::Base
 
   has_one :post, :as => :postable
   has_one :user, :through => :post
+
+  def self.user
+    post.user
+  end
 end
