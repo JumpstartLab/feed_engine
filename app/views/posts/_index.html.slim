@@ -1,4 +1,4 @@
-- if @posts.any?
+- if @posts && @posts.any?
   - @posts.reverse.each do |post|
     .post
       - class_name = post.class.to_s.downcase
