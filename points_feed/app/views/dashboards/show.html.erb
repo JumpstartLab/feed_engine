@@ -1,7 +1,8 @@
 <h1> Dashboard </h1>
-<br>
+<br />
 <h3>Last 5 posts</h3>
-<table>
+<br />
+<table class='table table-bordered'>
   <tr>
     <th>Post Title</th>
     <th>Post Type</th>
@@ -10,4 +11,4 @@
 <%= render partial: "shared/mini_post", collection: @posts %>
 </table>
 
-<%= link_to "Create a New Post", new_post_path %>
+<%= link_to "Create a New Post", new_post_path, :class => 'btn btn-info' %>
