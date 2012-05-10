@@ -49,7 +49,7 @@ describe User do
         it "should show an error message for improper display name" do
           fill_in "Display name", :with => "display name"
           click_button "Sign Up"
-          page.should have_content("Spaces are not allowed")
+          page.should have_content("Must only be letters, numbers, underscore or dashes")
         end   
 
         it "should show an error message for a blank display name" do

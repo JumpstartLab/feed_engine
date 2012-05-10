@@ -13,11 +13,11 @@ class User < ActiveRecord::Base
   has_many :image_posts
 
   validates :display_name, :presence => true, 
-                           :format => { 
-                             :message => "Spaces are not allowed", 
-                             :with => /^\S*$/ 
-                           },
-                           :uniqueness => true
+                         :format => { 
+                           :message => "Must only be letters, numbers, underscore or dashes", 
+                           :with => /^[a-zA-Z0-9_-]+$/ 
+                         },
+                         :uniqueness => true
 
   def relation_for(type)
     self.send(type.underscore.pluralize.to_sym).scoped rescue text_posts.scoped
