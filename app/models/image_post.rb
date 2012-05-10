@@ -10,7 +10,7 @@
 #
 
 class ImagePost < ActiveRecord::Base
-  attr_accessible :description, :url
+  attr_accessible :description, :url, :user_id
 
   validates_presence_of :url
   validates_length_of :url, maximum: 2048
@@ -21,4 +21,7 @@ class ImagePost < ActiveRecord::Base
     with: /.(jpg|png|gif|jpeg|bmp)/,
     message: "Photo url must end in .jpeg, .jpg, .gif, .bmp, or .png"
   validates_length_of :description, maximum: 256
+
+  has_many :posts, :as => :feed
+  has_many :users, :through => :posts
 end

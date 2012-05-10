@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120509214605) do
+ActiveRecord::Schema.define(:version => 20120510213905) do
 
   create_table "image_posts", :force => true do |t|
     t.string   "url"
@@ -25,6 +25,12 @@ ActiveRecord::Schema.define(:version => 20120509214605) do
     t.string   "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "posts", :force => true do |t|
+    t.integer "user_id"
+    t.integer "postable_id"
+    t.string  "postable_type"
   end
 
   create_table "text_posts", :force => true do |t|

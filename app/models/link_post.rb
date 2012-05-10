@@ -10,7 +10,7 @@
 #
 
 class LinkPost < ActiveRecord::Base
-  attr_accessible :description, :url
+  attr_accessible :description, :url, :user_id
 
   validates_presence_of :url
   validates_length_of :url, maximum: 2048
@@ -18,4 +18,7 @@ class LinkPost < ActiveRecord::Base
     with: /http(s?):/,
     message: "Url must begin with http or https"
   validates_length_of :description, maximum: 256
+
+  has_one :post, :as => :postable
+  has_one :user, :through => :post
 end
