@@ -67,7 +67,7 @@ describe User do
       it "cannot sign up with an empty email address" do
         fill_in "Email", :with => ""
         expect { click_button "Sign Up" }.to change { User.count }.by(0)
-        page.should have_content "Email can't be blank"
+        page.should have_content "Email is required"
       end
       it "cannot sign up with an already-used email address" do
         fill_signup_form_as(user)

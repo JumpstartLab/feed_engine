@@ -27,10 +27,6 @@ describe Link do
     end
 
     context "for description" do
-      it "must be non-empty" do
-        link.description = ""
-        link.should_not be_valid
-      end
       it "must be under 257 characters" do
         link.description = ("X"*257)
         link.should_not be_valid
