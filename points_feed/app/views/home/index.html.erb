@@ -1,15 +1,41 @@
-<h1>POINTS FEED</h1>
-<h2>Take a Point, Give a Point, Get the Point?</h2>
-<br />
-<h3>Posts</h3>
-<br />
-<table class='table table-bordered'>
-  <tr>
-    <th>Post Title</th>
-    <th>Post Type</th>
-    <th>Posted</th>
-  </tr>
-    <%= render partial: "shared/mini_post", collection: @posts %>
-</table>
+<div class="home-image">
+  <img src="/assets/welcome.jpg">
+</div>
+<div class="root">
+  <div class="row">
+    <div class="span12">
+      <div class="row">
+        <% if current_user %>
+          <div class="span12">
+        <% else %>
+          <div class="span4">
+            <h1>Welcome to Points Feed</h1>
+            <h3>Take a Point, Give a Point, Get the Point?</h3>
+            </br>
+            <p>Nostrud quis tattooed, next level squid nulla eu put a bird on it est pinterest fap bespoke synth art party cred. Williamsburg put a bird on it wayfarers, next level DIY quinoa post-ironic thundercats leggings banksy. Messenger bag pour-over sapiente sartorial officia mumblecore. Vice polaroid hoodie readymade id.</p>
+            <br>
+            <h3>Not a member yet? Sign up for free!</h3>
+            <%= link_to "Register", signup_path, :class => 'btn btn-info' %><br>
+            <br>
+            <h3>Already a member?</h3>
+            <%= render partial: "devise/sessions/signin_form" %>
+          </div>
+          <div class="span8">
+        <% end %>
+          <h3>Most Recent Posts</h3>
+          <br />
+          <table class='table table-bordered'>
+            <tr>
+              <th>Post Title</th>
+              <th>Post Type</th>
+              <th>Posted</th>
+            </tr>
+              <%= render partial: "shared/mini_post", collection: @posts %>
+          </table>
 
-<%= paginate @posts %>
+          <%= paginate @posts %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
