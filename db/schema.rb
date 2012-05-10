@@ -26,9 +26,13 @@ ActiveRecord::Schema.define(:version => 20120510024719) do
     t.string   "type"
     t.text     "comment"
     t.text     "link"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.integer  "user_id"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   create_table "meta_data", :force => true do |t|

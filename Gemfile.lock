@@ -31,6 +31,15 @@ GEM
     addressable (2.2.7)
     annotate (2.4.1.beta1)
     arel (3.0.2)
+    aws-s3 (0.6.2)
+      builder
+      mime-types
+      xml-simple
+    aws-sdk (1.5.1)
+      httparty (~> 0.7)
+      json (~> 1.4)
+      nokogiri (>= 1.4.4)
+      uuidtools (~> 2.1)
     bcrypt-ruby (3.0.1)
     builder (3.0.0)
     capybara (1.1.2)
@@ -42,6 +51,7 @@ GEM
       xpath (~> 0.1.4)
     childprocess (0.3.2)
       ffi (~> 1.0.6)
+    cocaine (0.2.1)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -77,6 +87,9 @@ GEM
       rest-client (~> 1.6.1)
       rubyzip
     hike (1.2.1)
+    httparty (0.8.3)
+      multi_json (~> 1.0)
+      multi_xml
     i18n (0.6.0)
     journey (1.0.3)
     jquery-rails (2.0.2)
@@ -98,6 +111,7 @@ GEM
     mime-types (1.18)
     multi_json (1.3.4)
     multipart-post (1.1.5)
+    multi_xml (0.5.1)
     netrc (0.7.1)
     nokogiri (1.5.2)
     oauth (0.4.6)
@@ -111,6 +125,12 @@ GEM
       multi_json (~> 1.3)
       omniauth-oauth (~> 1.0)
     orm_adapter (0.0.7)
+    paperclip (3.0.3)
+      activemodel (>= 3.0.0)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (>= 0.0.2)
+      mime-types
     pg (0.13.2)
     polyglot (0.3.3)
     querystring (0.1.0)
@@ -199,8 +219,10 @@ GEM
     uglifier (1.2.4)
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
+    uuidtools (2.1.2)
     warden (1.1.1)
       rack (>= 1.0)
+    xml-simple (1.1.1)
     xpath (0.1.4)
       nokogiri (~> 1.3)
     zurb-foundation (2.2.1.1)
@@ -212,6 +234,8 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  aws-s3
+  aws-sdk
   capybara
   coffee-rails (~> 3.2.1)
   devise
@@ -222,6 +246,7 @@ DEPENDENCIES
   kaminari
   launchy
   omniauth-twitter
+  paperclip
   pg
   rails (= 3.2.3)
   rspec-rails
