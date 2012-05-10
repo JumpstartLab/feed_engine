@@ -10,8 +10,8 @@ br
 = link_to "link", new_link_post_path
 
 h1 Your Stream Playa
-div id="posts"
-  - ImagePost.order_stream.each do |post|
+div id="posts" data-json-url="#{dashboard_url(format: :json)}"
+  - @posts.each do |post|
     div class="post"
       - if post.class == ImagePost
         = image_tag(post.url)
@@ -20,4 +20,7 @@ div id="posts"
       - elsif post.class == TextPost 
         = post.text
       br
+
+script type="text/html" id="post_template"
+    = render "/dashboards/post"
 
