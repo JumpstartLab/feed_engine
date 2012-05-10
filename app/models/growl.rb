@@ -7,23 +7,14 @@ class Growl < ActiveRecord::Base
   belongs_to :user
   has_one :meta_data
   has_attached_file :photo,
-<<<<<<< HEAD
                     :storage => :s3,
                     :s3_credentials => "#{Rails.root}/config/s3.yml",
                     :styles => {
                                   :medium => "300x300>",
                                   :thumb => "100x100>"
                                }
-=======
-      :storage => :s3,
-      :s3_credentials => "#{Rails.root}/config/s3.yml",
-      :styles => {
-                    :medium => "300x300>",
-                    :thumb => "100x100>"
-                 }
   scope :by_date, order("created_at DESC")
 
->>>>>>> 5f285f246675bb48b8b3449c213823ede9e69db7
   def self.for_user(display_name)
     user = User.where{username.matches display_name}.first
     user ? user.growls : nil
