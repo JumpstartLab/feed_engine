@@ -12,9 +12,11 @@ class Growl < ActiveRecord::Base
                     :medium => "300x300>",
                     :thumb => "100x100>"
                  }
+  scope :by_date, order("created_at DESC")
+
   def self.for_user(display_name)
     user = User.where{username.matches display_name}.first
-    user.any? ? user.growls : nil
+    user ? user.growls : nil
   end
 
   def title

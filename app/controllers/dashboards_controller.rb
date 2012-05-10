@@ -1,5 +1,5 @@
 class DashboardsController < ApplicationController
   def show
-    @growls = Growl.all
+    @growls = Growl.by_date.page(params[:page])
   end
 end
