@@ -2,8 +2,9 @@ Hungrlr::Application.routes.draw do
 
   #constraints(NoSubdomain) do
     match "/home" => "pages#home"
+    match '/auth/:provider/callback' => 'authentications#create'
 
-    devise_for :users
+    devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
     devise_scope :user do
       get '/signup' => 'devise/registrations#new'

@@ -5,3 +5,5 @@ p= link_to "Create Link", new_link_path
 p= link_to "Account", edit_user_registration_path
 
 = render :partial => "shared/growl", :collection => @growls
+
+p= link_to "Link your Twitter account", user_omniauth_authorize_path(:twitter)

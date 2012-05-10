@@ -5,6 +5,9 @@ gem 'slim'
 gem 'simple_form'
 gem 'devise'
 gem 'embedly'
+gem 'twitter'
+gem 'omniauth-twitter'
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 group :development, :test do
