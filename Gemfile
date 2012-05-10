@@ -8,6 +8,9 @@ gem 'dynamic_form'
 gem 'resque'
 gem 'decent_exposure'
 gem 'squeel'
+gem 'carrierwave'
+gem 'rmagick'
+gem 'fog'
 
 group :production do
   gem 'pg'

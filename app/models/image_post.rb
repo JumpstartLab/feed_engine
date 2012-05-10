@@ -2,23 +2,27 @@
 #
 # Table name: image_posts
 #
-#  id          :integer         not null, primary key
-#  url         :string(255)
-#  description :string(255)
-#  created_at  :datetime        not null
-#  updated_at  :datetime        not null
+#  id               :integer         not null, primary key
+#  remote_image_url :string(255)
+#  description      :string(255)
+#  created_at       :datetime        not null
+#  updated_at       :datetime        not null
+#  image            :string(255)
 #
 
 class ImagePost < ActiveRecord::Base
-  attr_accessible :description, :url
+  attr_accessible :description, :remote_image_url, :image
+  mount_uploader :image, ImageUploader
 
-  validates_presence_of :url
-  validates_length_of :url, maximum: 2048
-  validates_format_of :url,
+  # validates_presence_of :remote_image_url
+  validates_length_of :remote_image_url, maximum: 2048
+  validates_format_of :remote_image_url,
     with: /http(s?):/,
-    message: "Photo url must begin with http or https"
-  validates_format_of :url,
+    message: "Photo url must begin with http or https",
+    allow_nil: true, unless: Proc.new { |img| img.remote_image_url.blank? }
+  validates_format_of :remote_image_url,
     with: /.(jpg|png|gif|jpeg|bmp)/,
-    message: "Photo url must end in .jpeg, .jpg, .gif, .bmp, or .png"
+    message: "Photo url must end in .jpeg, .jpg, .gif, .bmp, or .png",
+    allow_nil: true, unless: Proc.new { |img| img.remote_image_url.blank? }
   validates_length_of :description, maximum: 256
 end

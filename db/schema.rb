@@ -11,13 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120509214605) do
+ActiveRecord::Schema.define(:version => 20120510013221) do
 
   create_table "image_posts", :force => true do |t|
-    t.string   "url"
+    t.string   "remote_image_url"
     t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.string   "image"
   end
 
   create_table "link_posts", :force => true do |t|

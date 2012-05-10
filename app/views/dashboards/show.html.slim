@@ -8,3 +8,8 @@ h1 Enter a Post
 br
 
 = link_to "link", new_link_post_path
+
+h1 Images
+- @image_posts.each do |image|
+  = image_tag image.image_url(:thumb).to_s if image
+  br
