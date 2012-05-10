@@ -1,0 +1,12 @@
+development:
+  bucket: hungrlr
+  access_key_id: AKIAJTVTAXB4H3NTYECA
+  secret_access_key: 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
+test:
+  bucket: hungrlr
+  access_key_id: AKIAJTVTAXB4H3NTYECA
+  secret_access_key: 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
+production:
+  bucket: hungrlr
+  access_key_id: AKIAJTVTAXB4H3NTYECA
+  secret_access_key: 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

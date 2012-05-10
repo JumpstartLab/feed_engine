@@ -16,6 +16,7 @@ Hungrlr::Application.routes.draw do
     namespace :api do
         namespace :v1 do
           resources :images
+          resources :meta_data
         end
     end
     root :to => 'pages#home'

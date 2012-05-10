@@ -11,15 +11,28 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120509193816) do
+ActiveRecord::Schema.define(:version => 20120510023115) do
 
   create_table "growls", :force => true do |t|
     t.string   "type"
     t.text     "comment"
     t.text     "link"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.integer  "user_id"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+  end
+
+  create_table "meta_data", :force => true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.string   "thumbnail_url"
+    t.integer  "growl_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "users", :force => true do |t|

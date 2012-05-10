@@ -4,7 +4,25 @@ class Image < Growl
   validates_format_of :link, :with => IMAGE_VALIDATOR_REGEX, message: "URL must start with http and be a .jpg, .gif, or .png"
   validates_length_of :link, :within => 3..2048, message: "Given URL needs to be less then 2048 characters"
   validates_length_of :comment, :within => 3..256, :allow_blank => true
+  after_validation :send_photo_to_amazon
   belongs_to :user
+
+  def self.new_image(input)
+    image = Image.new(
+                      comment: input[:comment],
+                      link: input[:link],
+                      )
+    image
+  end
+
+  def send_photo_to_amazon
+    begin
+      self.photo = open(link)
+    rescue
+      errors.add(:link, "Photo does not exist")
+    end
+  end
+
 end
 # == Schema Information
 #
