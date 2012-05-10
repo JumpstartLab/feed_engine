@@ -11,9 +11,15 @@ div.span4.offset4
       - if post.is_a?(Message)
         = post.body
       - if post.is_a?(Link)
+        h3= link_to post.url, post.url
+        br/
         = post.description
       - if post.is_a?(Image)
+        = image_tag post.url
+        br/
         = post.description
-      p = post.created_at
-      p = link_to @user.display_name, user_path(@user)
+      br/
+      = post.created_at
+      br/
+      = link_to @user.display_name, user_path(@user)
   = paginate @posts
