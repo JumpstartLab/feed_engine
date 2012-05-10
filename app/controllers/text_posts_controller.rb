@@ -5,7 +5,7 @@ class TextPostsController < ApplicationController
       flash[:notice] = "Your message was saved!"
       redirect_to dashboard_path
     else
-      flash.now[:notice] = "There were errors saving your post!"
+      flash.now[:error] = "There were errors saving your post!"
       render "dashboards/show"
     end
   end
