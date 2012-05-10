@@ -1,0 +1,20 @@
+<h1>Your Feed</h1>
+
+<% if current_user %>
+  <% @items.each do |item| %>
+    <div class="item_container"> 
+      <div class="row">
+        <%= item.user.display_name %>
+      </div>
+      <% if item.class == TextItem %>
+        text item: <p><%=item.body%></p>
+      <% elsif item.class == ImageItem %>
+        image item: <p><%= item.url %></p>  
+      <% elsif item.class == LinkItem %>
+        link item: <p><%= item.url %></p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= paginate @stream_items %>
+<% end %>

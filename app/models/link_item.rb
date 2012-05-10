@@ -3,6 +3,10 @@ class LinkItem < ActiveRecord::Base
 
   validates_presence_of :url
   validates_length_of :url, :maximum => 2048
-  validates_format_of :url, :with => URI::regexp(%w(http https))
+  validates_format_of :url, :with => URI::regexp(%w(http https)), :message => "URL needs to start with http/https"
   validates_length_of :comment, :maximum => 256
+
+  has_many :stream_items, :as => :streamable
+  has_many :users, :through => :stream_items
+  belongs_to :user
 end
