@@ -8,6 +8,7 @@ gem 'dynamic_form'
 gem 'resque'
 gem 'decent_exposure'
 gem 'squeel'
+gem 'devise'
 
 group :production do
   gem 'pg'
@@ -26,6 +27,11 @@ group :assets do
 end
 
 group :development, :test do
+  # Just for erb->slim
+  gem 'haml'
+  gem 'haml2slim'
+  gem 'hpricot'
+
   gem 'rake'
   gem 'faker'
   gem 'sqlite3'
