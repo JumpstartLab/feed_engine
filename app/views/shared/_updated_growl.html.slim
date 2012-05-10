@@ -1,0 +1,10 @@
+p
+  = growl.id
+  p Your URL
+  p= link_to growl.link
+  p
+    b Your Comment:
+    = growl.comment
+  h4= growl.title
+  p= growl.description
+  p= image_tag growl.photo(:medium)

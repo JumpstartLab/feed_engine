@@ -8,6 +8,7 @@ div.row
     dd= link_to "Add a Message", "#messageForm"
 
   ul.nice.tabs-content.contained
+<<<<<<< HEAD
     li.active#imageFormTab= simple_form_for @image, :html => { :class => 'green_light' } do |f|
       = f.input :link, :as => :string
       = f.input :comment
@@ -20,3 +21,8 @@ div.row
       = f.input :link, :as => :string
       = f.input :comment
       = f.button :submit
+=======
+    li.active#imageFormTab= render :partial => "/images/form"
+    li#linkFormTab= render :partial => "/links/form"
+    li#messageFormTab= render :partial => "messages/form"
+>>>>>>> 990c2e8acfda63d5485a9878233a9a02d9bbfc81

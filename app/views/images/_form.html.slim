@@ -1,11 +1,21 @@
-= simple_form_for @image do |f|
-  = f.input :link, :as => :string, label: "Image URL"
+= simple_form_for @image, :html => { :id => 'image_form' } do |f|
+  = f.label :link,  "URL to Link"
+  = f.url_field :link, :class => "medium input-text required"
   = f.input :comment
   p
     | You have&nbsp;
-    span#charsLeft
+    span#charsLeftImage
     |  chars left.
   = f.button :submit
 
 coffee:
+<<<<<<< HEAD
   $("#image_comment").limit "256", "#charsLeft"
+=======
+  jQuery ->
+    $("#image_form").validate()
+    $("#image_comment").limit "256", "#charsLeftImage"
+    $("#image_link").blur ->
+      if $(".error").length > 0
+        $(".error").html("URL must start with http and be a .jpg, .gif, or .png")
+>>>>>>> 990c2e8acfda63d5485a9878233a9a02d9bbfc81

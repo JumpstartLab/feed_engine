@@ -8,9 +8,14 @@ gem 'embedly'
 gem 'paperclip'
 gem 'aws-s3', :require => 'aws/s3'
 gem 'aws-sdk'
+<<<<<<< HEAD
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
+=======
+gem 'squeel'
+
+>>>>>>> 990c2e8acfda63d5485a9878233a9a02d9bbfc81
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
@@ -18,6 +23,7 @@ group :development, :test do
   gem 'factory_girl_rails', '~> 3.1.0'
   gem 'simplecov'
   gem 'launchy'
+  gem 'faker'
 end
 
 group :production do

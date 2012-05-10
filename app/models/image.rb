@@ -8,11 +8,10 @@ class Image < Growl
   belongs_to :user
 
   def self.new_image(input)
-    image = Image.new(
-                      comment: input[:comment],
-                      link: input[:link],
-                      )
-    image
+    Image.new(
+              comment: input[:comment],
+              link: input[:link],
+              )
   end
 
   def send_photo_to_amazon
@@ -34,4 +33,20 @@ end
 #  link       :text
 #  created_at :datetime        not null
 #  updated_at :datetime        not null
+## == Schema Information
 #
+# Table name: growls
+#
+#  id                 :integer         not null, primary key
+#  type               :string(255)
+#  comment            :text
+#  link               :text
+#  created_at         :datetime        not null
+#  updated_at         :datetime        not null
+#  user_id            :integer
+#  photo_file_name    :string(255)
+#  photo_content_type :string(255)
+#  photo_file_size    :integer
+#  photo_updated_at   :datetime
+#
+

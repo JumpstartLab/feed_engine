@@ -12,3 +12,16 @@ class MetaData < ActiveRecord::Base
                     )
   end
 end
+# == Schema Information
+#
+# Table name: meta_data
+#
+#  id            :integer         not null, primary key
+#  title         :string(255)
+#  description   :string(255)
+#  thumbnail_url :string(255)
+#  growl_id      :integer
+#  created_at    :datetime        not null
+#  updated_at    :datetime        not null
+#
+

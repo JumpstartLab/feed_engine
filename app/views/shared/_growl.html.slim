@@ -1,10 +1,32 @@
-p
-  = growl.id
-  p Your URL
-  p= link_to growl.link
-  p
-    b Your Comment:
-    = growl.comment
-  h4= growl.title
-  p= growl.description
-  p= image_tag growl.photo(:medium)
+table
+  -if growl.type == "Message"
+    tr
+      td
+        b Growl ID:
+        = growl.id
+      td
+        b Comment:
+        = growl.comment
+  -if growl.type == "Link"
+    tr
+      td
+        b Growl ID:
+        = growl.id
+      td
+        b Link:
+        = link_to growl.link
+      -if growl.comment != ""
+        td
+          b Comment:
+          = growl.comment
+  -if growl.type == "Image"
+    tr
+      td
+        b Growl ID:
+        = growl.id
+      td
+        = image_tag growl.photo(:medium)
+      -if growl.comment != ""
+        td
+          b Comment:
+          = growl.comment

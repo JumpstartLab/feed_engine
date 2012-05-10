@@ -5,21 +5,13 @@ html
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
+
   body
-    div id="user_nav"
-      - if user_signed_in?
-        p
-          | Currently logged in as:
-          = current_user.username
-        p
-          | Not you?
-          = link_to "Sign out", destroy_user_session_path, method: "delete", class: "small blue button radius"
-      - else
-        p
-          = link_to "Sign up", signup_path, class: "small green button radius"
-          = link_to "Sign in", new_user_session_path, class: "small blue button radius"
+    =render partial: 'shared/nav_bar'
+    =render partial: 'shared/warning_zone'
 
-    p.flash= flash[:notice]
-    p.flash= flash[:alert]
+    div class="container" id="main_content"
+      div class="row"
+        = yield
 
-    = yield
+    =render partial: 'shared/footer'
