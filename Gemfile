@@ -9,8 +9,7 @@ gem 'paperclip'
 gem 'aws-s3', :require => 'aws/s3'
 gem 'aws-sdk'
 gem 'squeel'
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
