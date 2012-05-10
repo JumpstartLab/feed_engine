@@ -1,4 +1,5 @@
 class DashboardController < ApplicationController
+  before_filter :authorize
 
   def show
     @message = Message.new

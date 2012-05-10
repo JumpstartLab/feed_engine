@@ -16,6 +16,7 @@ class Image < ActiveRecord::Base
   include ExternalContent
 
   validates_format_of( :url, 
-                       with: /.*\.(jpg|jpeg|png|bmp|gif)$/, 
-                       message: "Invalid image url or type")
+                       with: /.*\.(jpg|jpeg|png|bmp|gif)$/,
+                       message: "for image must end with jpg, jpeg, gif, bmp, or png",
+                       allow_blank: true)
 end
