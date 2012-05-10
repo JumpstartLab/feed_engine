@@ -11,3 +11,12 @@
  *= require_self
  *= require_tree .
 */
+
+#new_image{
+  display:none;
+}
+
+#new_link{
+  display:none;
+}
+

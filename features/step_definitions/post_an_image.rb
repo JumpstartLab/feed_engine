@@ -19,8 +19,8 @@ Then /^I should see the form to create an image message$/ do
 end
 
 When /^I fill in the image link field with a link of (\d+) characters$/ do |arg1|
-  @url = ("a" * 2049)
-  fill_in "Url", with: @url
+  @remote_image_url = ("a" * 2049)
+  fill_in "Remote Image Url", with: @remote_image_url
 end
 
 Then /^the image url I have entered is present$/ do
@@ -35,9 +35,9 @@ Then /^I should see an error message requiring the image link to be less than or
   should have_content "too long (maximum is 2048 characters)"
 end
 
-When /^I fill in the link field with "(.*?)"$/ do |url|
-  @url = url
-  fill_in "Url", with: @url
+When /^I fill in the link field with "(.*?)"$/ do |remote_image_url|
+  @remote_image_url = remote_image_url
+  fill_in "Remote Image Url", with: @remote_image_url
 end
 
 Then /^I should see an error message requiring the link format to look like an http\/https link$/ do

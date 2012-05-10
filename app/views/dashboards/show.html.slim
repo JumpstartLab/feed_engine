@@ -1,15 +1,22 @@
-h1 Enter a Post
-= simple_form_for @post, html: {name: "text-message"} do |f|
-  = f.input :text
-  = f.submit
+div#add_new_text_post
+ = link_to "text", new_text_post_path
+div#new_text
+  = render 'text_posts/form'
 
-= link_to "image", new_image_post_path
+div#add_new_image_post
+  = link_to "image", new_image_post_path
+div#new_image
+  = render 'image_posts/form'
 
 br
+div#add_new_link_post
+  = link_to "link", new_link_post_path
+div#new_link
+  = render 'link_posts/form'
 
-= link_to "link", new_link_post_path
-
-h1 Images
-- @image_posts.each do |image|
-  = image_tag image.image_url(:thumb).to_s if image
-  br
+/ h1 Last Image
+/ = image_tag @image_post.image_url(:thumb).to_s if @image_post
+/ h1 Last Link
+/ = @link_post.url
+/ h1 Last Text
+/ = @text_post.text
