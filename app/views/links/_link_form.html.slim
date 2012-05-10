@@ -7,6 +7,10 @@
   br
   = form_for @new_link, url: "#", id: "link_form" do |f|
     = hidden_field_tag :type, "link"
+    = f.label :comment
+    br
+    = f.text_field :comment
+    br
     = f.label :content
     br
     br
