@@ -15,4 +15,5 @@ h1 Your dashboard!
           = render "#{type_name.pluralize}/#{type_name}_form"
     script*{type: "text/html", id: "errors_list_template"}
       = render 'shared/errors_list'
-          
+
+= render 'posts/index'

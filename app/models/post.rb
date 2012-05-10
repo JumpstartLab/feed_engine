@@ -1,5 +1,9 @@
 module Post
 
+  def self.all
+    posts = Image.all + Text.all + Link.all 
+  end
+
   def self.included(base)
     base.class_eval do
       attr_accessible :content, :type, :user_id

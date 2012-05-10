@@ -1,7 +1,9 @@
 FeedEngine::Application.routes.draw do
   root :to => 'dashboard#show'
+  match '/dashboard' => 'dashboard#show'
+
   devise_for :users
-  resources :posts, only: [:create]
+  resources :posts, only: [:create, :index]
   resources :users
   resources :texts
   resources :images

@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   def create
-    klass = Module.const_get(params[:type].capitalize)
-    klass_name = klass.to_s.downcase
+    klass_name = params[:type]
+    klass = Module.const_get(klass_name.capitalize)
     @post = klass.create(params[klass_name])
     unless @post.errors.any?
       render "create",
@@ -12,5 +12,9 @@ class PostsController < ApplicationController
               :status => :unprocessable_entity,
               :handlers => [:jbuilder]
     end
+  end
+
+  def index
+    @posts = Post.all
   end
 end
