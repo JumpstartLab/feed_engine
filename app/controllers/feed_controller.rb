@@ -1,7 +1,6 @@
 class FeedController < ApplicationController
   def show
-    @text_items = TextItem.order("created_at DESC").page(params[:page]).per(12)
-    @link_items = LinkItem.order("created_at DESC").all
-
+    @stream_items = current_user.stream_items.order("created_at DESC").page(params[:page]).per(12)
+    @items = StreamItem.translate_batch(@stream_items)
   end
 end

@@ -12,9 +12,10 @@ class User < ActiveRecord::Base
             :message => "may only contain letters, numbers, dashes, and underscores." }  
 
   after_create :send_welcome_mail
-  has_many :link_items
-  has_many :image_items
-  has_many :text_items
+  has_many :text_items, :through => :stream_items, :source => :streamable, :source_type => 'TextItem'
+  has_many :image_items, :through => :stream_items, :source => :streamable, :source_type => 'ImageItem'
+  has_many :link_items, :through => :stream_items, :source => :streamable, :source_type => 'LinkItem'
+  has_many :stream_items
 
   private 
 

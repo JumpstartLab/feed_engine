@@ -1,9 +1,13 @@
 <h1>Your Feed</h1>
 
 
-<% @text_items.each do |text_item| %>
-   <div id="text_item_<%=text_item.id%>">
-     <p><%=text_item.body%></p>
-   </div>
+<% @items.each do |item| %>
+  <% if item.class == TextItem %>
+     text item: <p><%=item.body%></p>
+  <% elsif item.class == ImageItem %>
+    image item: <p><%= item.url %></p>  
+  <% elsif item.class == LinkItem %>
+    link item: <p><%= item.url %></p>
+  <% end %>
 <% end %>
-<%= paginate @text_items %>
+<%= paginate @stream_items %>

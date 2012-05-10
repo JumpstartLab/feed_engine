@@ -7,12 +7,12 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
+user = FactoryGirl.create(:user)
 50.times do
-  FactoryGirl.create(:text_item)
+  user.text_items << FactoryGirl.create(:text_item)
 end
 
 50.times do
-  FactoryGirl.create(:link_item)
+  user.link_items << FactoryGirl.create(:link_item)
 end
 
-FactoryGirl.create(:user)
