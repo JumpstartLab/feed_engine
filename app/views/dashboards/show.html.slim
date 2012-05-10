@@ -11,3 +11,5 @@ div.row
     li.active#imageFormTab= render :partial => "/images/form"
     li#linkFormTab= render :partial => "/links/form"
     li#messageFormTab= render :partial => "messages/form"
+
+  p= link_to "Link your Twitter account", user_omniauth_authorize_path(:twitter)

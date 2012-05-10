@@ -8,6 +8,8 @@ Hungrlr::Application.routes.draw do
     get '/login' => 'devise/sessions#new'
   end
 
+  match '/auth/:provider/callback' => 'authentications#create'
+
   resources :growls, :images, :links, :messages
   resource :dashboard
 

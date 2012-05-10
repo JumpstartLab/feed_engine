@@ -9,6 +9,8 @@ gem 'paperclip'
 gem 'aws-s3', :require => 'aws/s3'
 gem 'aws-sdk'
 gem 'squeel'
+gem 'twitter'
+gem 'omniauth-twitter'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
