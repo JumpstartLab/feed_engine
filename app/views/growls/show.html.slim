@@ -1,4 +1,7 @@
-- @growls.each do |growl|
-  = growl.inspect
-
-= @user.inspect
+-if @growls.empty?
+  p 
+    | You currently have no growls. Add some in your 
+    =link_to "dashboard", dashboard_path
+    | .
+-else
+  = render :partial => "shared/growl", :collection => @growls
