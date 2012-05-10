@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :token_authenticatable
+         :token_authenticatable, :omniauthable
 
   before_save :ensure_authentication_token
   validates_uniqueness_of :username
@@ -12,15 +12,27 @@ class User < ActiveRecord::Base
 
   attr_accessible :email, :password, :password_confirmation,
                   :remember_me, :username
+  
+  has_many :authentications, :dependent => :destroy
   has_many :growls
   has_many :images
   has_many :messages
   has_many :links
 
-  def send_welcome_message
-    UserMailer.welcome_message(self).deliver
+  def twitter_client
+    return nil unless twitter_oauth = authentications.where(provider: "twitter").first
+
+    # XXX what if they have multiple twitters?
+    Twitter::Client.new(:consumer_key => TWITTER_KEY,
+                        :consumer_secret => TWITTER_SECRET,
+                        :oauth_token => twitter_oauth.token,
+                        :oauth_token_secret => twitter_oauth.secret)
   end
 
+  def send_welcome_message
+    mail = UserMailer.welcome_message(self)
+    mail.deliver
+  end
 end
 # == Schema Information
 #
