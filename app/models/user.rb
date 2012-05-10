@@ -29,4 +29,8 @@ class User < ActiveRecord::Base
     UserMailer.signup_notification(self).deliver
   end
 
+  def posts
+    Post.find_by_poster_id(self.id)
+  end
+
 end

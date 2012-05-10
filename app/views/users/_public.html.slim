@@ -6,15 +6,7 @@ div.span4.offset4
   br
   br
   br
-  p
-    = link_to "Third post", nil
-    |&nbsp;&nbsp;&nbsp;
-    = link_to @user.display_name, user_path(@user)
-  p
-    = link_to "Second post", nil
-    |&nbsp;&nbsp;&nbsp;
-    = link_to @user.display_name, user_path(@user)
-  p
-    = link_to "First post", nil
-    |&nbsp;&nbsp;&nbsp;
-    = link_to @user.display_name, user_path(@user)
+  = @posts.each do |post|
+    p
+      = post.body
+      = link_to @user.display_name, user_path(@user)
