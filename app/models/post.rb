@@ -1,5 +1,7 @@
 module Post
 
+  VALID_URL = Regexp.new("\b(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/)))")
+
   def self.all
     posts = Image.all + Text.all + Link.all 
     posts.sort_by do |post|
@@ -19,16 +21,10 @@ module Post
     base.class_eval do
       attr_accessible :content, :type, :user_id
       belongs_to :user
-      validate :check_content_length
-      validates :content, allow_blank: false
-      define_method("check_content_length") do
-        class_str = self.class.to_s.capitalize
-        max = Module.const_get("MAX_#{class_str}_LENGTH".upcase.to_sym)
-        unless self.content.length <= max
-          errors.add(:content, "#{class_str} posts must be shorter than #{max} characters")
-        end
-      end
-      private :check_content_length
+
+      class_name = base.to_s
+      max = Module.const_get("MAX_#{class_name}_LENGTH".upcase.to_sym)
+      validates :content, length: {maximum: max}, presence: true
     end
   end
 end
