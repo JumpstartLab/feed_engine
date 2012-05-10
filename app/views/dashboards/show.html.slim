@@ -1,7 +1,22 @@
-h1 Dashboard
-p= link_to "Create Message", new_message_path
-p= link_to "Create Image", new_image_path
-p= link_to "Create Link", new_link_path
-p= link_to "Account", edit_user_registration_path
+div.row
+  h1 Dashboard
+  p= link_to "Account", edit_user_registration_path
 
-= render :partial => "shared/growl", :collection => @growls
+  dl.nice.contained.tabs
+    dd= link_to "Add an Image", "#imageForm", class: "active"
+    dd= link_to "Add a Link", "#linkForm"
+    dd= link_to "Add a Message", "#messageForm"
+
+  ul.nice.tabs-content.contained
+    li.active#imageFormTab= simple_form_for @image, :validate => true do |f|
+      = f.input :link, :as => :string
+      = f.input :comment
+      = f.button :submit
+    li#linkFormTab= simple_form_for @link, :validate => true do |f|
+      = f.input :link, :as => :string
+      = f.input :comment
+      = f.button :submit
+    li#messageFormTab= simple_form_for @message, :validate => true do |f|
+      = f.input :link, :as => :string
+      = f.input :comment
+      = f.button :submit
