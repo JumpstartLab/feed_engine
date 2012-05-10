@@ -3,8 +3,10 @@ require 'spec_helper'
 describe "User pages" do
 
   context "when not logged in" do
-    before(:each) { visit root_path }
-
+    before(:each) do
+      Capybara.app_host = "http://feed.test"
+      visit root_path
+    end
     it "sends me to a signup form" do
       click_link_or_button "Sign up"
       page.should have_content("Sign up")
