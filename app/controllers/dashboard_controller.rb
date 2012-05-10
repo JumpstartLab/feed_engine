@@ -1,3 +1,4 @@
+# The controller for the dashboard that is used for posting and settings
 class DashboardController < ApplicationController
 
   def show

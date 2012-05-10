@@ -1,3 +1,4 @@
+# The controller for a user - creating and editing accounts and showing posts
 class UsersController < ApplicationController
   def new
     @user = User.new

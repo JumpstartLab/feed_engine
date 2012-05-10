@@ -1,3 +1,4 @@
+# The controller for logging in and out
 class SessionsController < ApplicationController
   def new
   end

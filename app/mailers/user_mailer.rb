@@ -1,3 +1,4 @@
+# This is where methods to email users are stored
 class UserMailer < ActionMailer::Base
   default from: "notifications@feedengine.heroku.com"
 

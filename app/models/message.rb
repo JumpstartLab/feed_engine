@@ -9,6 +9,7 @@
 #  updated_at :datetime        not null
 #
 
+# Posts that only have text
 class Message < ActiveRecord::Base
   attr_accessible :body, :poster_id
 

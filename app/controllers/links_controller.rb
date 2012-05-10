@@ -1,3 +1,4 @@
+# The controller for posts that have links
 class LinksController < ApplicationController
   # GET /links
   # GET /links.json
@@ -40,16 +41,16 @@ class LinksController < ApplicationController
   # POST /links
   # POST /links.json
   def create
-    @message = Message.new
-    @image = Image.new
-    @link = Link.new(params[:link])
-
+    initialize_post_types
     respond_to do |format|
       if @link.save
-        format.html { redirect_to dashboard_path, notice: 'Link was successfully created.' }
-        format.json { render json: dashboard_path, status: :created, location: @link }
+        format.html { redirect_to dashboard_path,
+                      notice: 'Link was successfully created.' }
+        format.json { render json: dashboard_path,
+                      status: :created, location: @link }
       else
-        format.html { render template: "dashboard/show", notice: "Something went wrong." }
+        format.html { render template: "dashboard/show",
+                      notice: "Something went wrong." }
         format.json { render json: @link.errors, status: :unprocessable_entity }
       end
     end
@@ -62,7 +63,8 @@ class LinksController < ApplicationController
 
     respond_to do |format|
       if @link.update_attributes(params[:link])
-        format.html { redirect_to @link, notice: 'Link was successfully updated.' }
+        format.html { redirect_to @link,
+                      notice: 'Link was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -81,5 +83,13 @@ class LinksController < ApplicationController
       format.html { redirect_to links_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def initialize_post_types
+    @link = Link.new
+    @image = Image.new
+    @message = Message.new(params[:message])
   end
 end

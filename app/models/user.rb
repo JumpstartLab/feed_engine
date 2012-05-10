@@ -10,6 +10,7 @@
 #  display_name    :string(255)
 #
 
+# Users of the site
 class User < ActiveRecord::Base
   has_secure_password
 
@@ -20,7 +21,7 @@ class User < ActiveRecord::Base
   validates :display_name, :presence => true,
                            :format => { :with => /^[a-zA-Z\d\-_]*$/,
     :message => "must be only letters, numbers, dashes, or underscores"
-                           } 
+                           }
 
   def send_welcome_email
     UserMailer.signup_notification(self).deliver

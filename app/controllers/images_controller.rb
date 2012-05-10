@@ -1,3 +1,4 @@
+# The controller for posts that have images
 class ImagesController < ApplicationController
   # GET /images
   # GET /images.json
@@ -40,17 +41,18 @@ class ImagesController < ApplicationController
   # POST /images
   # POST /images.json
   def create
-    @message = Message.new
-    @link = Link.new
-    @image = Image.new(params[:image])
-
+    initialize_post_types
     respond_to do |format|
       if @image.save
-        format.html { redirect_to dashboard_path, notice: 'Image was successfully created.' }
-        format.json { render json: dashboard_path, status: :created, location: @image }
+        format.html { redirect_to dashboard_path,
+                      notice: 'Image was successfully created.' }
+        format.json { render json: dashboard_path, status: :created,
+                      location: @image }
       else
-        format.html { render template: "dashboard/show", notice: "Something went wrong." }
-        format.json { render json: @image.errors, status: :unprocessable_entity }
+        format.html { render template: "dashboard/show",
+                      notice: "Something went wrong." }
+        format.json { render json: @image.errors,
+                      status: :unprocessable_entity }
       end
     end
   end
@@ -62,11 +64,13 @@ class ImagesController < ApplicationController
 
     respond_to do |format|
       if @image.update_attributes(params[:image])
-        format.html { redirect_to @image, notice: 'Image was successfully updated.' }
+        format.html { redirect_to @image,
+                      notice: 'Image was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { render json: @image.errors, status: :unprocessable_entity }
+        format.json { render json: @image.errors,
+                      status: :unprocessable_entity }
       end
     end
   end
@@ -81,5 +85,13 @@ class ImagesController < ApplicationController
       format.html { redirect_to images_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def initialize_post_types
+    @link = Link.new
+    @image = Image.new
+    @message = Message.new(params[:message])
   end
 end

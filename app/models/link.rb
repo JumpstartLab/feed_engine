@@ -10,6 +10,7 @@
 #  updated_at  :datetime        not null
 #
 
+# Posts with links
 class Link < ActiveRecord::Base
   attr_accessible :description, :poster_id, :url
 
