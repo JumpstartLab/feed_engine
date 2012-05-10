@@ -6,6 +6,27 @@ html
     = javascript_include_tag "application"
     = csrf_meta_tags
   body
+    / Navigation
+  .container
+    .navbar
+      .navbar-inner
+        .container
+          a.btn.btn-navbar data-toggle="collapse" data-target=".nav-collapse"
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.brand href="#"
+            | Mother Effing Feeds
+          .nav-collapse
+            ul.nav
+              / Nav Links
+
+    / Flashes
     #flash
-      = flash[:notice]
+      - if flash[:notice].present?
+        .alert= flash[:notice]
+      - if flash[:error].present?
+        .alert.alert-error= flash[:error]
+
+    / Main Content
     = yield

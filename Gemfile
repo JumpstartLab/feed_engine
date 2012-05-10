@@ -8,6 +8,7 @@ gem 'dynamic_form'
 gem 'resque'
 gem 'decent_exposure'
 gem 'squeel'
+gem 'bootstrap-sass', '~> 2.0.2'
 
 group :production do
   gem 'pg'

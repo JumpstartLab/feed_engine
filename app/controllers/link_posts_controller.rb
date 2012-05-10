@@ -9,7 +9,7 @@ class LinkPostsController < ApplicationController
       flash[:notice] = "Your message was saved!"
       redirect_to dashboard_path
     else
-      flash.now[:notice] = "There were errors posting your link!"
+      flash.now[:error] = "There were errors posting your link!"
       render :new
     end
   end

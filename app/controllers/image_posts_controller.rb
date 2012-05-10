@@ -9,7 +9,7 @@ class ImagePostsController < ApplicationController
       flash[:notice] = "Your message was saved!"
       redirect_to dashboard_path
     else
-      flash.now[:notice] = "There were errors posting your image!"
+      flash.now[:error] = "There were errors posting your image!"
       render :new
     end
   end
