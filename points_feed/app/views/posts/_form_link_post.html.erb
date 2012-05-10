@@ -1,5 +1,4 @@
 <%= simple_form_for post, url: posts_path, method: :post do |f| %>
-  <%= f.input :title %>
   <%= f.input :content, :label => "Link Url", :input_html => { :rows => 3 } %>
   <%= f.input :comment, :as => :text, :input_html => { :rows => 5 } %>
   <%= f.input :type, :as => :hidden, :input_html => { :value => "LinkPost" } %>

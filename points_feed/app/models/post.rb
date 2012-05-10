@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
-  attr_accessible :comment, :title, :content, :type, :file
+  attr_accessible :comment, :content, :type, :file
   belongs_to :user
   mount_uploader :file, FileUploader
   
