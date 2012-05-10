@@ -24,9 +24,7 @@
 
     <div class="container">
 
-      <% unless flash[:alert].blank? and flash[:notice].blank? %>
-        <div class='alert'><%= flash[:alert] || flash[:notice] %></div>
-      <% end %>
+      <%= flashes_helper %>
 
       <div class="content">
         <div class="row">

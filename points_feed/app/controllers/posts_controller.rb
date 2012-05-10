@@ -11,7 +11,13 @@ class PostsController < ApplicationController
       flash[:notice] = "Your post has been created."
       redirect_to dashboard_path
     else
-      render :new, :error => "Error saving post."
+      #TODO: There must be a way to redirect or render to multiple pages
+      #      without having to redefine variables that are set in the 
+      #      controller *and* without losing the ones that are set in this
+      #      one. 
+      flash[:error] = @post.errors.full_messages.join(', ')
+      @posts = current_user.posts.last(5).reverse
+      render "dashboards/show"
     end
   end
 

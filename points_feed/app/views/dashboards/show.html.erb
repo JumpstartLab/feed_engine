@@ -11,4 +11,8 @@
 <%= render partial: "shared/mini_post", collection: @posts %>
 </table>
 
+<br><br>
+
+<%= render partial: "posts/form" %>
+
 <%= link_to "Create a New Post", new_post_path, :class => 'btn btn-info' %>
