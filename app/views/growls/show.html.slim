@@ -10,4 +10,5 @@ br
     =link_to "dashboard", dashboard_path
     | .
 -else
+  = paginate @growls
   = render :partial => "shared/growl", :collection => @growls
