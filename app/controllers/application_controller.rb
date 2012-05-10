@@ -10,4 +10,10 @@ class ApplicationController < ActionController::Base
     end
     dashboard_path
   end
+
+  def after_sign_out_path_for(user)
+    (request.protocol +
+      request.domain +
+      (request.port.nil? ? '' : ":#{request.port}") )
+  end
 end

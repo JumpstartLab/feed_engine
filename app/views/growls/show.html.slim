@@ -1,4 +1,14 @@
-- @growls.each do |growl|
-  = growl.inspect
+h1
+  = @user.username
+  | 's Feed
 
-= @user.inspect
+br
+
+-if @growls.empty?
+  p
+    | You currently have no growls. Add some in your
+    =link_to "dashboard", "http://hungrlr.com/dashboard"
+    | .
+-else
+  = paginate @growls
+  = render :partial => "shared/growl", :collection => @growls

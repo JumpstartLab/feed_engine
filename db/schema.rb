@@ -37,11 +37,11 @@ ActiveRecord::Schema.define(:version => 20120510024719) do
 
   create_table "meta_data", :force => true do |t|
     t.string   "title"
-    t.string   "description"
+    t.text     "description",   :limit => 255
     t.string   "thumbnail_url"
     t.integer  "growl_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
   create_table "users", :force => true do |t|
