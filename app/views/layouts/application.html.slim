@@ -5,21 +5,34 @@ html
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
+
   body
-    div id="user_nav"
-      - if user_signed_in?
-        p
-          | Currently logged in as:
-          = current_user.username
-        p
-          | Not you?
-          = link_to "Sign out", destroy_user_session_path, method: "delete", class: "small blue button radius"
-      - else
-        p
-          = link_to "Sign up", signup_path, class: "small green button radius"
-          = link_to "Sign in", new_user_session_path, class: "small blue button radius"
+    div class="container" style="background-color:#738492; border-bottom: 1px solid #000000; color: #000000;"
+      div class="row"
+        div class="four columns"
+        div class="four columns"
+        div class="four columns" id="user_nav"
+          - if user_signed_in?
+            p
+              | Welcome,
+              = current_user.username
+              | . Not you?
+              = link_to "Sign out", destroy_user_session_path, method: "delete", class: "nice small radius white button"
+          - else
+            p
+              = link_to "Sign up", signup_path, class: "small green button radius"
+              = link_to "Sign in", new_user_session_path, class: "small blue button radius"
 
-    p.flash= flash[:notice]
-    p.flash= flash[:alert]
+    div class="container" id="warning_zone"
+      div class="row"
+        div class="twelve columns"
+          p.flash= flash[:notice]
+          p.flash= flash[:alert]
 
-    = yield
+    div class="container" id="main_content"
+      div class="row"
+        = yield
+
+    div class="container" id="footer"
+      div class="row"
+        p Footer goes here
