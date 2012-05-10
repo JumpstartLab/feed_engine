@@ -1,7 +1,9 @@
 Hungrlr::Application.routes.draw do
   match "/home" => "pages#home"
 
-  devise_for :users
+  match '/auth/:provider/callback' => 'authentications#create'
+
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   devise_scope :user do
     get '/signup' => 'devise/registrations#new'

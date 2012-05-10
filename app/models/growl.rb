@@ -1,17 +1,18 @@
 require "open-uri"
 
 class Growl < ActiveRecord::Base
-  attr_accessible :comment, :link
+  attr_accessible :comment, :link, :user
+
   validates_presence_of :type
   belongs_to :user
   has_one :meta_data
   has_attached_file :photo,
-      :storage => :s3,
-      :s3_credentials => "#{Rails.root}/config/s3.yml",
-      :styles => {
-                    :medium => "300x300>",
-                    :thumb => "100x100>"
-                 }
+                    :storage => :s3,
+                    :s3_credentials => "#{Rails.root}/config/s3.yml",
+                    :styles => {
+                                  :medium => "300x300>",
+                                  :thumb => "100x100>"
+                               }
   scope :by_date, order("created_at DESC")
 
   def self.for_user(display_name)

@@ -1,6 +1,8 @@
 div.row
   h1 Dashboard
 
+  p= link_to "Link your Twitter account", user_omniauth_authorize_path(:twitter)
+  
   dl.nice.contained.tabs
     dd= link_to "Add an Image", "#imageForm", class: "active"
     dd= link_to "Add a Link", "#linkForm"
