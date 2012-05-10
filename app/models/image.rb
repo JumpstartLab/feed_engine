@@ -1,4 +1,5 @@
 class Image < ActiveRecord::Base
+  include Post
   attr_accessible :comment, :picture, :remote_picture_url
   before_create :set_content
   #mount_uploader :picture, PictureUploader
