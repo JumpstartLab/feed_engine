@@ -1,9 +1,13 @@
-h1 LOS LIIIIIIIIINKS
-#errors
-br
-= form_for @new_link, remote: true, url: posts_path do |f|
-  = hidden_field_tag :type, "link"
-  = f.label :content
-  = f.text_area :content
+.post-form
+  h1 LOS LIIIIIIIIINKS
+  #errors
   br
-button*{id: "link-submit"} "DERP"
+  = form_for @new_link, remote: true, url: posts_path do |f|
+    = hidden_field_tag :type, "link"
+    = f.label :content
+    br
+    br
+    = f.text_area :content
+    br
+    br
+  button*{id: "link-submit"} "DERP"

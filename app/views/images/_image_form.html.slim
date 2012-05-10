@@ -1,11 +1,14 @@
-h1 Picturezzz
-
-= form_for @new_image, url: "#", id: "image_form" do |f|
-  br
-  = hidden_field_tag :type, "image"
-  = f.label :comment
-  = f.text_field :comment
-  = f.label :remote_picture_url, "Image URL"
-  = f.text_field :remote_picture_url
-
-button*{id: "image-submit"} "DERP"
+.post-form
+  h1 Picturezzz
+  = form_for @new_image, url: "#", id: "image_form" do |f|
+    br
+    = hidden_field_tag :type, "image"
+    = f.label :comment
+    br
+    = f.text_field :comment
+    br
+    = f.label :remote_picture_url, "Image URL"
+    br
+    = f.text_field :remote_picture_url
+    br
+  button*{id: "image-submit"} "DERP"

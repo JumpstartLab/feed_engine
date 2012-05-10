@@ -19,6 +19,10 @@ $wine: #832e2f;
 
 $white: #FFFFFF;
 
+p {
+  color: $white;
+}
+
 body {
   background-color: $whale;
   h1 {
