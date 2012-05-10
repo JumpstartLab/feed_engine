@@ -1,16 +1,11 @@
-div class="container" style="background-color:#738492; border-bottom: 1px solid #000000; color: #000000;"
-      div class="row"
-        div class="four columns"
-          h1= link_to "Hungrlr", "http://hungrlr.com"
-        div class="four columns"
-        div class="four columns" id="user_nav"
-          - if current_user
-            p
-              | Welcome,
-              = current_user.username
-              | . Not you?
-              = link_to "Sign out", destroy_user_session_path, method: "delete", class: "nice small radius white button"
-          - else
-            p
-              = link_to "Sign up", signup_path, class: "small green button radius"
-              = link_to "Sign in", new_user_session_path, class: "small blue button radius"
+.container.top-bar.home-border
+  .attached
+    .name
+    ul.right
+      li.download
+        - if user_signed_in?
+          = link_to "Sign out", destroy_user_session_path, class: "small blue nice button", method: "delete"
+        - else
+          p
+            = link_to "Sign up", signup_path, class: "small green button radius"
+            = link_to "Sign in", new_user_session_path, class: "small blue button radius"

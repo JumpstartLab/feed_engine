@@ -1,11 +1,11 @@
 div.row
   h1 Dashboard
-  p= link_to "Account", edit_user_registration_path
 
   dl.nice.contained.tabs
     dd= link_to "Add an Image", "#imageForm", class: "active"
     dd= link_to "Add a Link", "#linkForm"
     dd= link_to "Add a Message", "#messageForm"
+    dd= link_to "Account", edit_user_registration_path
 
   ul.nice.tabs-content.contained
     li.active#imageFormTab= render :partial => "/images/form"

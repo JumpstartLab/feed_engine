@@ -22,3 +22,6 @@ coffee:
   jQuery ->
     $("#link_form").validate()
     $("#link_comment").limit "256", "#charsLeftLink"
+    $("#link_link").blur ->
+      if $(".error").length > 0
+        $(".error").html("URL is invalid. It must start with http")
