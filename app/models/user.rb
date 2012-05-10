@@ -15,11 +15,11 @@ class User < ActiveRecord::Base
 
   attr_accessible :email, :password, :password_confirmation, :display_name
   validates :email, :uniqueness => true
-  validates_presence_of :email, :message => "Email is required."
+  validates_presence_of :email, :message => "is required."
   validates :password, :length => { :minimum => 6 }
   validates_format_of :email,
                       :with => /^([^\s]+)((?:[-a-z0-9]\.)[a-z]{2,})$/i,
-                      :allow_nil => true
+                      :allow_blank => true
   validates :display_name, :presence => true,
                            :format => { :with => /^[a-zA-Z\d\-_]*$/,
     :message => "must be only letters, numbers, dashes, or underscores"
