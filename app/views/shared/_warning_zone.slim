@@ -1,5 +1,14 @@
-div class="container" id="warning_zone"
-  div class="row"
-    div class="twelve columns"
-      p.flash= flash[:notice]
-      p.flash= flash[:alert]
+div.container#warning_zone
+  div.row
+    div.five.columns
+      - if flash[:notice]
+        div.alert-box.success
+          p.flash
+            = flash[:notice]
+            = link_to '&times;'.html_safe, "", class: "close"
+
+      - if flash[:alert]
+        div.alert-box.warning
+          p.flash
+            = flash[:alert]
+            = link_to '&times;'.html_safe, "", class: "close"
