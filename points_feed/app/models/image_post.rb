@@ -1,10 +1,21 @@
 class ImagePost < Post
   validates :content, :length => { :maximum => 2048 }
-  validates_format_of :content, 
-  :message => "for Image posts must contain a valid link",
-  :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix
+  validate :has_valid_image
 
-  validates_format_of :content, 
-  :message => "for Image posts must contain a valid image",
-  :with => /\.(png|jpg|jpeg|gif|bmp)$/
+  def validate_presence_of_content?
+    false
+  end
+
+
+  def has_valid_image
+    return true if file.present?
+    unless content.match(/\.(png|jpg|jpeg|gif|bmp)$/) && content.match(/^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix)
+      self.errors.add(:content, "Image posts must contain a valid image link")
+    end
+  end
+
+  def image_url
+    file_url || content
+  end
+
 end
