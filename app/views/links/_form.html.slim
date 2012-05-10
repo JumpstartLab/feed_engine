@@ -1,15 +1,22 @@
-= simple_form_for @link, :html => { :id => 'link_form' } do |f|
-  = f.label :link,  "URL to Link"
-  = f.url_field :link, :class => "medium input-text required"
-  = f.input :comment
-  p
-    | You have&nbsp;
-    span#charsLeftLink
-    |  chars left.
-  = f.input :title, as: :hidden
-  = f.input :description, as: :hidden
-  = f.input :thumbnail_url, as: :hidden
-  = f.button :submit
+.row
+  .six.columns
+    = simple_form_for @link, :html => { :id => 'link_form' } do |f|
+      = f.label :link,  "URL to Link"
+      = f.url_field :link, :class => "medium input-text required"
+      = f.input :comment
+      p
+        | You have&nbsp;
+        span#charsLeftLink
+        |  chars left.
+      = f.input :title, as: :hidden
+      = f.input :description, as: :hidden
+      = f.input :thumbnail_url, as: :hidden
+      = f.button :submit
+  .six.columns
+    #loading(style="display:none;")= image_tag "loading_big.gif"
+    h4#title(style="display:none;")
+    #description(style="display:none;")
+    img#thumbnail(style="display:none;" src="")
 
 coffee:
   jQuery ->
