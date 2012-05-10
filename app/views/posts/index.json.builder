@@ -1,0 +1,1 @@
+json.(@post, :id, :type, :content)

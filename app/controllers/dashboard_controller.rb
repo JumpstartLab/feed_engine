@@ -1,7 +1,7 @@
 class DashboardController < ApplicationController
   before_filter :authenticate_user!
   def show
-    @posts = Post.for_user(current_user)
+    @posts = current_user.posts
   end
 
   def new_post
