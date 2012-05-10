@@ -23,4 +23,9 @@
 
 body {
   margin: 0px 2.5em;
+  color: white;
+}
+
+a {
+  color: white;
 }
