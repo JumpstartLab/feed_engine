@@ -4,7 +4,9 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find_by_display_name(request.subdomain)
+    # The notice does not presently appear on the homepage after redirect, remove this when it does.
+    redirect_to(root_url(:host => request.domain), :notice => "User #{request.subdomain} not found.") unless @user
   end
 
   def create
