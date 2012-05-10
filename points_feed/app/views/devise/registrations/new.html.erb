@@ -1,11 +1,16 @@
-<h2>Sign up</h2>
+<div class="home-image">
+  <img src="/assets/welcome.jpg">
+</div>
+<div class="root">
+  <h2>Sign up</h2>
 
-<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-  <%= f.input :email %>
-  <%= f.input :display_name %>
-  <%= f.input :password %>
-  <%= f.input :password_confirmation %>
-  <%= f.button :submit, "Sign Up" %>
-<% end %>
+  <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+    <%= f.text_field :email, :placeholder => "E-mail Address" %><br>
+    <%= f.text_field :display_name, :placeholder => "Display Name" %><br>
+    <%= f.password_field :password, :placeholder => "Password" %><br>
+    <%= f.password_field :password_confirmation, :placeholder => "Confirm Password" %><br>
+    <%= f.button :submit, "Sign Up" %>
+  <% end %>
 
-<%= render "links" %>
+  <%= render "links" %>
+</div>

@@ -1,18 +1,35 @@
-<h1> Dashboard </h1>
-<br />
-<h3>Last 5 posts</h3>
-<br />
-<table class='table table-bordered'>
-  <tr>
-    <th>Post Title</th>
-    <th>Post Type</th>
-    <th>Posted</th>
-  </tr>
-<%= render partial: "shared/mini_post", collection: @posts %>
-</table>
+<div class="row">
+  <div class="span12">
+    <div class="header">
+      <h1>Dashboard</h1>
+        <%= "Email: #{@current_user.email}" %><br>
+        <%= "Display Name: #{@current_user.display_name}" %><br>
+        <%= link_to "Edit", edit_user_registration_path %><br>
+        <br>
+      </div>
+    <div class="row">
+      <br>
+      <div class="span3">
+        <div class="dashboard-left">
+          <%= render partial: "posts/form" %>
+        </div>
+        <br>
+      </div>
+      <div class="span9">
+        <table class='table table-bordered'>
+          <tr>
+            <th><h3>Last 5 Posts</h3></th>
+          </tr>
+          <tr>
+            <th>Post Title</th>
+            <th>Post Type</th>
+            <th>Posted</th>
+          </tr>
+        <%= render partial: "shared/mini_post", collection: @posts %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
 
 <br><br>
-
-<%= render partial: "posts/form" %>
-
-<%= link_to "Create a New Post", new_post_path, :class => 'btn btn-info' %>
