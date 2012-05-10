@@ -8,7 +8,6 @@ gem 'embedly'
 gem 'paperclip'
 gem 'aws-s3', :require => 'aws/s3'
 gem 'aws-sdk'
-
 gem 'squeel'
 
 group :development, :test do
