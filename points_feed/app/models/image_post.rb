@@ -20,4 +20,8 @@ class ImagePost < Post
   def template
     "image_post"
   end
+
+  def decorate
+    ImagePostDecorator.decorate(self)
+  end
 end

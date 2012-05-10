@@ -7,4 +7,8 @@ class LinkPost < Post
   def template
     "link_post"
   end
+
+  def decorate
+    LinkPostDecorator.decorate(self)
+  end
 end

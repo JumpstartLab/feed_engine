@@ -10,6 +10,7 @@ gem 'kaminari'
 gem 'lazy_susan'
 gem 'carrierwave'
 gem 'fog'
+gem 'draper'
 
 group :test, :development do
   gem 'sqlite3'

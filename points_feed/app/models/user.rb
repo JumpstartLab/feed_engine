@@ -2,7 +2,10 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, 
+         :token_authenticatable
+
+  before_save :ensure_authentication_token
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
@@ -25,5 +28,9 @@ class User < ActiveRecord::Base
   
   def send_welcome_message
     UserMailer.welcome_message(self).deliver
+  end
+
+  def total_pages
+    self.posts.size() / 12 + 1
   end
 end

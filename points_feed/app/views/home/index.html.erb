@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 <div class="home-image">
   <img src="/assets/welcome.jpg">
 </div>
@@ -24,13 +23,15 @@
           <div class="span8">
         <% end %>
         
-        <h3>Most Recent Posts</h3>
-        <br />
-        <% @posts.each do |post| %>
-          <hr />
-          <%= render "posts/show_#{post.template}", :post => post %>
-        <% end %>
-        <%= paginate @posts %>
+        <div class='well span7'>
+          <h3>Most Recent Posts</h3>
+          <br />
+          <% @posts.each do |post| %>
+            <hr />
+            <%= render "posts/show_#{post.template}", :post => post %>
+          <% end %>
+          <%= paginate @posts %>
+          </div>
         </div>
       </div>
     </div>
