@@ -7,7 +7,14 @@
       $("#subscriptions").hide();
       $("#account").hide();
       $("#forms").html("#{j render :partial => "messages/form"}")
+      show_div_for_error();
     });
+    function show_div_for_error() {
+      var error_class = $("#error_explanation h2").attr("class");
+      if (error_class != null) {
+        $("#add_" + error_class).click();
+      }
+    }
     $("#posts_id").live('click', function() {
       $("#posts").show();
       $("#account").hide();
@@ -46,12 +53,15 @@
 
     $("#add_message").live('click', function(){
       $("#forms").html("#{j render :partial => "messages/form"}")
+      make_active(this);
     })
     $("#add_link").live('click', function(){
       $("#forms").html("#{j render :partial => "links/form"}")
+      make_active(this);
     })
     $("#add_image").live('click', function(){
       $("#forms").html("#{j render :partial => "images/form"}")
+      make_active(this);
     })
 
     $(function(){
@@ -62,13 +72,11 @@
       });
     });
 
-    $(function(){
+    function make_active(post) {
       var posts=$('#posts');
-      posts.delegate('a', 'click',function(){
-        posts.find('.active').toggleClass('active inactive');
-        $(this).toggleClass('active inactive');
-      });
-    });
+      posts.find('.active').toggleClass('active inactive');
+      $(post).toggleClass('inactive active');
+    }
 br
 br
 div.span3
@@ -81,12 +89,20 @@ div.span3
       li= link_to "Account", "#", :id => "account_id", :class => "inactive"
 div.span7
   div#posts
-    = link_to 'Text', "#", :class => "btn btn-info btn-medium inactive", :id => "add_message"
+    = link_to 'Text', "#", :class => "btn btn-info btn-medium active", :id => "add_message"
     |&nbsp;&nbsp;&nbsp;&nbsp;
     = link_to 'Link', "#", :class => "btn btn-info btn-medium inactive", :id => "add_link"
     |&nbsp;&nbsp;&nbsp;&nbsp;
     = link_to 'Image', "#", :class => "btn btn-info btn-medium inactive", :id => "add_image"
     br
+    br
+    - [@image, @message, @link].each do |post|
+      - if post.errors.any?
+        #error_explanation
+          h2 class="#{post.class.to_s.downcase}" #{pluralize(post.errors.count, "error")} prohibited this #{post.class.to_s.downcase} from being saved:
+          ul
+            - post.errors.full_messages.each do |message|
+              li = message
     div#forms
     hr
     h2 Posts
