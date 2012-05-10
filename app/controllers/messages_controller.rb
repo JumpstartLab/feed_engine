@@ -8,15 +8,9 @@ class MessagesController < ApplicationController
 
   def create
     @message = current_user.messages.new(params[:message])
-    twitter = current_user.authentications.where(provider: "twitter").first
-
-    client = Twitter::Client.new(:consumer_key => TWITTER_KEY,
-                                 :consumer_secret => TWITTER_SECRET,
-                                 :oauth_token => twitter.token,
-                                 :oauth_token_secret => twitter.secret)
+    @message.send_to_services
 
     if @message.save
-      client.update("Hungrlr.")
       redirect_to dashboard_path, :notice => "Message posted succesfully."
     else
       flash[:alert] = "There was an error."

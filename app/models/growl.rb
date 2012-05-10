@@ -1,5 +1,6 @@
 class Growl < ActiveRecord::Base
-  attr_accessible :comment, :link
+  attr_accessible :comment, :link, :user
+
   validates_presence_of :type
   after_create :get_meta_data
   belongs_to :user
