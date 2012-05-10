@@ -18,6 +18,8 @@ group :test, :development do
   gem 'faker'
   gem 'launchy'
   gem 'simplecov'
+  gem 'cane'
+  gem 'reek'
 end
 
 group :production do
