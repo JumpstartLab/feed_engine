@@ -254,8 +254,8 @@ DEPENDENCIES
   jquery-rails
   kaminari
   launchy
-  paperclip
   omniauth-twitter
+  paperclip
   pg
   rails (= 3.2.3)
   rspec-rails
