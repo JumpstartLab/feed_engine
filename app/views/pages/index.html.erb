@@ -1,5 +1,7 @@
 <h1>Welcome!</h1>
 
-<!-- <% @users.each do |user| %>
-<%= link_to user.name, root_url(:subdomain => user.subdomain) %>
-<% end %> -->
+<% @users.each do |user| %>
+<%= link_to user.display_name, root_url(:subdomain => user.display_name) %>
+<% end %>
+
+<%= link_to 'root', root_url(:subdomain => false) %>

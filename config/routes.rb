@@ -9,15 +9,14 @@ FeedEngine::Application.routes.draw do
     get 'sign_in', :to => 'devise/sessions#new', :as => 'sign_in'
   end
 
-  root :to => 'pages#index'
   resources :posts, only: [:create, :index]
   resources :users
   resources :texts
   resources :images
   resources :links
   match '/sign_up' => 'users#new'
-
-  # constraints(Subdomain) do
-  #   match '/' => 'users#show'
-  # end
+  constraints(Subdomain) do
+    match '/' => 'users#show'
+  end
+  root :to => 'pages#index'
 end
