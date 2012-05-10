@@ -1,4 +1,4 @@
-u1 = User.create!(email: "foo@bar.com", password: "hungry", password_confirmation: "hungry", display_name: "Foo!")
+u1 = User.create!(email: "foo@bar.com", password: "hungry", password_confirmation: "hungry", display_name: "Foo")
 
 p1 = u1.posts.create!(type: "TextPost", content: "Sample Textpost", title: "SomeText")
 p2 = u1.posts.create!(type: "ImagePost", content: "http://www.example.com/example.png", title: "SomeImage")
