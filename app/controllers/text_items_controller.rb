@@ -6,7 +6,6 @@ class TextItemsController < ApplicationController
 
   def create
     @text_item = current_user.text_items.new(params[:text_item])
-
     if current_user.save
       redirect_to dashboard_path, notice: 'Post was successfully created.'
     else

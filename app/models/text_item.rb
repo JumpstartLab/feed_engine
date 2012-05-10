@@ -4,5 +4,5 @@ class TextItem < ActiveRecord::Base
   validates_presence_of :body
   validates_length_of :body, :maximum => 512
   has_many :stream_items, :as => :streamable
-  has_many :users, :through => :stream_items
+  belongs_to :user
 end
