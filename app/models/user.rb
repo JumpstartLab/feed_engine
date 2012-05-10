@@ -6,12 +6,12 @@ class User < ActiveRecord::Base
          :token_authenticatable, :omniauthable
 
   before_save :ensure_authentication_token
-  validates_uniqueness_of :username
-  validates_format_of :username, :with => /^[A-Za-z\d_]+$/, message:
+  validates_uniqueness_of :display_name
+  validates_format_of :display_name, :with => /^[A-Za-z\d_]+$/, message:
             "Required. Display name must only be letters, numbers, dashes, or underscores"
 
   attr_accessible :email, :password, :password_confirmation,
-                  :remember_me, :username
+                  :remember_me, :display_name
 
   has_many :authentications, :dependent => :destroy
   has_many :growls
@@ -29,15 +29,10 @@ class User < ActiveRecord::Base
                         :oauth_token_secret => twitter_oauth.secret)
   end
 
-  def display_name
-    username
-  end
-
   def send_welcome_message
     mail = UserMailer.welcome_message(self)
     mail.deliver
   end
->>>>>>> 646fbeaae05cb4b416f13714f55eff64d2f944c1
 end
 # == Schema Information
 #

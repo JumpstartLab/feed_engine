@@ -32,7 +32,7 @@ describe "Subdomains" do
 
   context "subdomain" do
     before(:each) do
-      Capybara.app_host = "http://#{user.username}.hungry.test"
+      Capybara.app_host = "http://#{user.display_name}.hungry.test"
     end
     it "shows the subdomain user's most recent messages" do
       pending

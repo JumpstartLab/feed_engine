@@ -23,7 +23,7 @@ describe "User pages" do
 
       it "lets me create an account with new info" do
         fill_in 'user_email', with: 'foo@bar.com'
-        fill_in 'user_username', with: 'displayname'
+        fill_in 'user_display_name', with: 'displayname'
         fill_in 'user_password', with: 'hungry'
         fill_in 'user_password_confirmation', with: 'hungry'
         within(".actions") do
@@ -34,7 +34,7 @@ describe "User pages" do
       end
 
       it "throws up a confirmation message on successful creation" do
-        fill_in 'user_username', with: 'displayname'
+        fill_in 'user_display_name', with: 'displayname'
         fill_in 'user_email', with: 'foo@bar.com'
         fill_in 'user_password', with: 'hungry'
         fill_in 'user_password_confirmation', with: 'hungry'
@@ -45,7 +45,7 @@ describe "User pages" do
       end
 
       it "sends a confirmation email" do
-        fill_in 'user_username', with: 'displayname'
+        fill_in 'user_display_name', with: 'displayname'
         fill_in 'user_email', with: 'foo@bar.com'
         fill_in 'user_password', with: 'hungry'
         fill_in 'user_password_confirmation', with: 'hungry'
@@ -58,7 +58,7 @@ describe "User pages" do
 
       it "sends you to the dashboard" do
         fill_in 'user_email', with: 'foomeh@bar.com'
-        fill_in 'user_username', with: 'displayname5'
+        fill_in 'user_display_name', with: 'displayname5'
         fill_in 'user_password', with: 'hungry'
         fill_in 'user_password_confirmation', with: 'hungry'
         within(".actions") { click_link_or_button 'Sign up' }
@@ -68,7 +68,7 @@ describe "User pages" do
       # Unsuccessful Signup
 
       it "does not accept duplicate email addresses" do
-        fill_in 'user_username', with: 'displayname'
+        fill_in 'user_display_name', with: 'displayname'
         fill_in 'user_email', with: 'foo@bar.com'
         fill_in 'user_password', with: 'hungry'
         fill_in 'user_password_confirmation', with: 'hungry'
@@ -78,7 +78,7 @@ describe "User pages" do
         click_link_or_button 'Sign out'
 
         visit new_user_registration_path
-        fill_in 'user_username', with: 'displayname2'
+        fill_in 'user_display_name', with: 'displayname2'
         fill_in 'user_email', with: 'foo@bar.com'
         fill_in 'user_password', with: 'hungry'
         fill_in 'user_password_confirmation', with: 'hungry'
@@ -89,7 +89,7 @@ describe "User pages" do
       end
 
       it "saves previously entered information when rejecting a duplicate email addresses" do
-        fill_in 'user_username', with: "mikeisawesome"
+        fill_in 'user_display_name', with: "mikeisawesome"
         fill_in 'user_email', with: 'foo@bar.com'
         fill_in 'user_password', with: 'hungry'
         fill_in 'user_password_confirmation', with: 'hungry'
@@ -108,7 +108,7 @@ describe "User pages" do
       end
 
       it "rejects a malformed display name" do
-        fill_in 'user_username', with: 'display name'
+        fill_in 'user_display_name', with: 'display name'
         fill_in 'user_email', with: 'foo@bar.com'
         fill_in 'user_password', with: 'hungry'
         fill_in 'user_password_confirmation', with: 'hungry'
@@ -119,7 +119,7 @@ describe "User pages" do
       end
 
       it "keeps you on the signup for when submitted display name is bad" do
-        fill_in 'user_username', with: 'display name'
+        fill_in 'user_display_name', with: 'display name'
         fill_in 'user_email', with: 'foo@bar.com'
         fill_in 'user_password', with: 'hungry'
         fill_in 'user_password_confirmation', with: 'hungry'

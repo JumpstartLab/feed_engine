@@ -15,8 +15,8 @@ class Growl < ActiveRecord::Base
                                }
   scope :by_date, order("created_at DESC")
 
-  def self.for_user(display_name)
-    user = User.where{username.matches display_name}.first
+  def self.for_user(name)
+    user = User.where{display_name.matches name}.first
     user ? user.growls : nil
   end
 
