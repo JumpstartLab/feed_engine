@@ -1,10 +1,12 @@
-= simple_form_for @message do |f|
+= simple_form_for @message, :html => { :id => 'message_form' } do |f|
   = f.input :comment
   p
     | You have&nbsp;
-    span#charsLeft
+    span#charsLeftMessage
     |  chars left.
   = f.button :submit
 
 coffee:
-  $("#message_comment").limit "512", "#charsLeft"
+  jQuery ->
+    $("#message_form").validate()
+    $("#message_comment").limit "512", "#charsLeftMessage"

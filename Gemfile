@@ -2,15 +2,14 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.3'
 gem 'slim'
-gem 'simple_form'
+gem 'simple_form', '~> 2.0'
 gem 'devise'
 gem 'embedly'
 gem 'paperclip'
 gem 'aws-s3', :require => 'aws/s3'
 gem 'aws-sdk'
 gem 'squeel'
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'

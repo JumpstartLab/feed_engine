@@ -240,7 +240,7 @@ DEPENDENCIES
   rails (= 3.2.3)
   rspec-rails
   sass-rails (~> 3.2.3)
-  simple_form
+  simple_form (~> 2.0)
   simplecov
   slim
   sqlite3
