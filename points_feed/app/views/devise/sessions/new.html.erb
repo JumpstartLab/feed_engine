@@ -1,9 +1,11 @@
-<h2>Sign In</h2>
+<div class="home-image">
+  <img src="/assets/welcome.jpg">
+</div>
 
-<%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <%= f.input :email %>
-  <%= f.input :password %>
-  <%= f.button :submit, "Sign in" %>
-<% end %>
+<div class="root">
+  <h2>Sign In</h2>
 
-<%= render "links" %>
+  <%= render partial: "signin_form" %>
+
+  <%= render "links" %>
+</div>
