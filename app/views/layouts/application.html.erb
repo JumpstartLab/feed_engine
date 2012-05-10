@@ -32,7 +32,7 @@
           <div class="container nav-collapse">
             <ul class="nav">
               <li><%= link_to "Sign Up", "/signup"  %></li>
-              <li><%= link_to "Link2", "/path2"  %></li>
+              <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
               <li><%= link_to "Link3", "/path3"  %></li>
             </ul>
           </div><!--/.nav-collapse -->

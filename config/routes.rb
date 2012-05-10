@@ -9,6 +9,7 @@ FeedEngine::Application.routes.draw do
 
   devise_scope :user do 
     get "signup" => "devise/registrations#new", :as => :new_user
+    delete "/logout" => "devise/sessions#destroy"
   end
 
   root :to => 'dashboard#show'
