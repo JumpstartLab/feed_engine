@@ -1,4 +1,4 @@
-
-= link.comment
+- unless link.comment.blank?
+  = link.comment 
 br
 = link_to link.content, link.content, target: "_blank"
