@@ -50,6 +50,11 @@ describe User do
         expect { click_button "Sign Up" }.to change { User.count }.by(0)
         page.should have_content "Email is invalid"
       end
+      it "cannot sign up with a blank display name" do
+        fill_in "Display name", :with => ""
+        expect { click_button "Sign Up" }.to change { User.count }.by(0)
+        page.should have_content "Display name can't be blank"
+      end
       it "cannot sign up with an invalid display name" do
         fill_in "Display name", :with => "test test"
         expect { click_button "Sign Up" }.to change { User.count }.by(0)
