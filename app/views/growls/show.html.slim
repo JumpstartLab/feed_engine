@@ -1,6 +1,4 @@
-h1
-  = @user.username
-  | 's Feed
+h1= "#{@user.username}'s Feed"
 
 br
 
@@ -10,5 +8,18 @@ br
     =link_to "dashboard", "http://hungrlr.com/dashboard"
     | .
 -else
-  = paginate @growls
+  dl.sub-nav
+    dt Filter:
+    dd.active
+      a(href="/") All
+    dd
+      a(href="?type=Image") Images
+    dd
+      a(href="?type=Message") Messages
+    dd
+      a(href="?type=Link") Links
   = render :partial => "shared/growl", :collection => @growls
+  = paginate @growls
+coffee:
+  $(".points").click ->
+    alert Math.floor((Math.random()*100)+1) + " Points achieved!"
