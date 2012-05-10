@@ -20,12 +20,12 @@ module Post
       attr_accessible :content, :type, :user_id
       belongs_to :user
       validate :check_content_length
-
+      validates :content, allow_blank: false
       define_method("check_content_length") do
         class_str = self.class.to_s.capitalize
         max = Module.const_get("MAX_#{class_str}_LENGTH".upcase.to_sym)
         unless self.content.length <= max
-          errors.add(:content, "#{class_str} posts must be shorter than #{max}")
+          errors.add(:content, "#{class_str} posts must be shorter than #{max} characters")
         end
       end
       private :check_content_length

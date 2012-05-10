@@ -1,6 +1,4 @@
 class PostsController < ApplicationController
-  has_scope :page, :default => 1
-  
   def create
     klass_name = params[:type]
     params[klass_name][:user_id] = current_user.id
@@ -18,6 +16,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all.page(params[:page])
+    raise "FUCK"
+    @posts = Post.all
   end
 end
