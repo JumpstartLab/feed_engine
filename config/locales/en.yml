@@ -7,5 +7,9 @@ en:
     attributes:
       user:
         password_digest: "Password"
+      link:
+        url: "Link URL"
       image:
-        url: "URL"
+        url: "Image URL"  
+      message:
+        body: "Message" 
