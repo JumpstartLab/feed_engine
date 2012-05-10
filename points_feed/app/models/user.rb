@@ -12,6 +12,12 @@ class User < ActiveRecord::Base
   has_many :link_posts
   has_many :image_posts
 
+  validates :email, :format => {
+      :message => "must be in the form a@b.com",
+      :with => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/
+
+    }
+
   validates :display_name, :presence => true, 
                          :format => { 
                            :message => "Must only be letters, numbers, underscore or dashes", 
