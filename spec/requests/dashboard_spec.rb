@@ -7,15 +7,9 @@ describe "Dashboard" do
     login_factory_user
   end
 
-  describe "GET /dashboard" do
-    it "has a dashboard page" do
-      visit "/dashboard"
-      page.should have_content "Dashboard"
-    end
-  end
 
   context "creating new posts" do
-    before(:each) { visit "/dashboard" }
+    before(:each) { visit dashboard_path }
     describe "of text type" do
 
       it "prevents creation of posts longer than 512 characters" do
@@ -38,6 +32,15 @@ describe "Dashboard" do
         click_on "Textify"
         page.should have_content "Post was successfully created."
       end
+
+      it "adds the new post to my feed" do
+        valid_post = "New post for feed test!"
+        fill_in "text_item[body]", :with => valid_post
+        click_on "Textify"
+        visit root_path
+        page.should have_content valid_post
+      end
+
     end
 
     describe "of link type" do
@@ -65,6 +68,15 @@ describe "Dashboard" do
           current_path.should == dashboard_path
         end
 
+        it "adds the new link to my feed" do
+          good_url = "http://google.com/test_link_for_feed"
+          fill_in "link_item[url]", :with => good_url
+          click_on "Linkify"
+
+          visit root_path
+          page.should have_content good_url
+        end
+
         describe "comments" do
           before(:each) { fill_in "link_item[url]", :with => "http://google.com" }
           it "prevents comments longer than 256 characters" do
@@ -78,9 +90,12 @@ describe "Dashboard" do
             click_on "Linkify"
             current_path.should == dashboard_path
           end
+
         end
       end
     end
+
+
     describe "of image type" do
       describe "creating a image" do
         before(:each) { click_on "Image"}
@@ -110,6 +125,15 @@ describe "Dashboard" do
           click_on "Imagify"
           page.should have_content "Image was successfully created."
           current_path.should == dashboard_path
+        end
+
+        it "adds the image to my feed" do
+          good_url = "http://google.com/foo.jpg"
+          fill_in "image_item[url]", :with => good_url
+          click_on "Imagify"
+
+          visit root_path
+          page.should have_content good_url 
         end
 
         describe "comments" do

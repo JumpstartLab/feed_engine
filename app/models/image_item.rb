@@ -8,4 +8,5 @@ class ImageItem < ActiveRecord::Base
   validates_length_of :comment, :maximum => 256
   has_many :stream_items, :as => :streamable
   has_many :users, :through => :stream_items
+  belongs_to :user
 end

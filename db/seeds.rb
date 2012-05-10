@@ -9,7 +9,9 @@
 
 user = FactoryGirl.create(:user)
 50.times do
-  user.text_items << FactoryGirl.create(:text_item)
+  item = FactoryGirl.create(:text_item)
+  user.text_items << item 
+  user.add_stream_item(item)
 end
 
 50.times do

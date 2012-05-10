@@ -6,7 +6,8 @@ class LinkItemsController < ApplicationController
   def create
     @link_item = current_user.link_items.new(params[:link_item])
 
-    if current_user.save
+    if @link_item.save
+      current_user.add_stream_item(@link_item)
       redirect_to dashboard_path, notice: 'Link was successfully created.'
     else
       @text_item = TextItem.new
