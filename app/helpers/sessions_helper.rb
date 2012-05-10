@@ -7,7 +7,6 @@ module SessionsHelper
   end
 
   def after_sign_out_path_for(user)
-    raise "BOOM!"
     redirect_to(request.protocol +
       request.domain +
       (request.port.nil? ? '' : ":#{request.port}") )
