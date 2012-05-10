@@ -2,12 +2,11 @@ h1 Sign Up
 
 = form_for @user do |f|
   - if @user.errors.any?
-    .error_messages
-      h2 Form is invalid
+    #error_explanation
+      h2 = "#{pluralize(@user.errors.count, "error")} prohibited this link from being saved:"
       ul
-        - for message in @user.errors.full_messages
+        - @user.errors.full_messages.each do |message|
           li = message
-
   .field
     = f.label :email
     = f.email_field :email
