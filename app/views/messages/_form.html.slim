@@ -1,14 +1,14 @@
 = form_for @message, :validate => true do |f|
-  - if @message.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@message.errors.count, "error")} prohibited this message from being saved:"
-      ul
-        - @message.errors.full_messages.each do |message|
-          li = message
+  / - if @message.errors.any?
+  /   #error_explanation
+  /     h2 = "#{pluralize(@message.errors.count, "error")} prohibited this message from being saved:"
+  /     ul
+  /       - @message.errors.full_messages.each do |message|
+  /         li = message
 
-  .field
+  p
     = f.label :body
     = f.text_area :body, :rows => "5"
-  .field
+  p
     = f.hidden_field :poster_id, value: "1"
-  .actions = f.submit
+  p = f.submit

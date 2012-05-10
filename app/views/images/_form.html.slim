@@ -6,12 +6,12 @@
         - @image.errors.full_messages.each do |message|
           li = message
 
-  .field
+  p
     = f.label :url
     = f.text_area :url, :rows => "5"
-  .field
+  p
     = f.label :description
     = f.text_area :description, :rows => "5"
-  .field
+  p
     = f.hidden_field :poster_id, value: "1"
-  .actions = f.submit
+  p = f.submit
