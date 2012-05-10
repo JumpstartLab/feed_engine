@@ -11,10 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120510164109) do
+ActiveRecord::Schema.define(:version => 20120510143705) do
 
   create_table "images", :force => true do |t|
+    t.text     "content"
     t.string   "comment"
+    t.string   "user_id"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
     t.text     "url"
@@ -22,23 +24,25 @@ ActiveRecord::Schema.define(:version => 20120510164109) do
     t.text     "remote_picture_url"
   end
 
+  add_index "images", ["user_id"], :name => "index_images_on_user_id"
+
   create_table "links", :force => true do |t|
+    t.text     "content"
+    t.string   "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  create_table "posts", :force => true do |t|
-    t.string   "type"
-    t.string   "content"
-    t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
+  add_index "links", ["user_id"], :name => "index_links_on_user_id"
 
   create_table "texts", :force => true do |t|
+    t.text     "content"
+    t.string   "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "texts", ["user_id"], :name => "index_texts_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false

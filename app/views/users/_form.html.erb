@@ -1,4 +1,4 @@
-<%= form_for(@user) do |f| %>
+<%= form_for(@user, :html => { :class => "post-form container_12" }) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -11,28 +11,30 @@
     </div>
   <% end %>
 
+  <h1>New User</h1>
+
   <div class="field">
-    <%= f.label :email %>
+    <%= f.label :email %><br />
     <%= f.email_field :email %>
   </div>
 
   <div class="field">
-    <%= f.label :display_name %>
+    <%= f.label :display_name %><br />
     <%= f.text_field :display_name %>
   </div> 
   
   <div class="field">
-    <%= f.label :password %>
+    <%= f.label :password %><br />
     <%= f.password_field :password %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %>
+    <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation %>
   </div>
 
 
-  <div class="actions">
+  <div class="actions"><br />
     <%= f.submit %>
   </div>
 <% end %>
