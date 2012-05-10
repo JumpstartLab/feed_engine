@@ -31,3 +31,12 @@ end
 Then /^the link comment I have entered is present$/ do
   find('input[name="link_post[description]"]').value.should include @description
 end
+
+Given /^I click the "link" tab$/ do
+  click_on "link"
+end
+
+When /^I fill in the link field with "(.*?)"$/ do |url|
+  @url = url
+  fill_in " Url", with: @url
+end

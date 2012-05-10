@@ -1,5 +1,5 @@
-Given /^I click the "(.*?)" tab$/ do |path|
-  click_link_or_button "#{path}"
+Given /^I click the "image" tab$/ do
+  click_on "image"
 end
 
 Then /^I should see a form to create an image message$/ do
@@ -19,12 +19,12 @@ Then /^I should see the form to create an image message$/ do
 end
 
 When /^I fill in the image link field with a link of (\d+) characters$/ do |arg1|
-  @remote_image_url = ("a" * 2049)
-  fill_in "Remote Image Url", with: @remote_image_url
+  @url = ("a" * 2049)
+  fill_in "Remote image url", with: @url
 end
 
 Then /^the image url I have entered is present$/ do
-  find('input[name="image_post[url]"]').value.should include @url
+  find_field("Remote image url").value.should include @url
 end
 
 Then /^the image comment I have entered is present$/ do
@@ -33,11 +33,6 @@ end
 
 Then /^I should see an error message requiring the image link to be less than or equal to (\d+) characters$/ do |arg1|
   should have_content "too long (maximum is 2048 characters)"
-end
-
-When /^I fill in the link field with "(.*?)"$/ do |remote_image_url|
-  @remote_image_url = remote_image_url
-  fill_in "Remote Image Url", with: @remote_image_url
 end
 
 Then /^I should see an error message requiring the link format to look like an http\/https link$/ do
@@ -60,4 +55,9 @@ end
 When /^I fill in the comment field with "(.*?)"$/ do |arg1|
   @description = arg1
   fill_in "Description", with: @description
+end
+
+When /^I fill in the image link field with "(.*?)"$/ do |url|
+  @url = url
+  fill_in "Remote image url", with: url
 end

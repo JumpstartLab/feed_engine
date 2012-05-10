@@ -18,10 +18,10 @@ div id="posts" data-json-url="#{dashboard_url(format: :json)}"
   - @posts.each do |post|
     div class="post"
       - if post.class == ImagePost
-        = image_tag(post.url)
+        = image_tag(post.image_url(:thumb).to_s)
       - elsif post.class == LinkPost
         = post.url
-      - elsif post.class == TextPost 
+      - elsif post.class == TextPost
         = post.text
       br
 
