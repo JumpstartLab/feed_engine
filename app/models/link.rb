@@ -3,6 +3,7 @@ class Link < Growl
   validates_length_of :link, :maximum => 2048
   validates_format_of :link, :with => /^(https?):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/ix
   validates_length_of :comment, :within => 3..256, :allow_blank => true
+  after_validation :send_photo_to_amazon
 
   def self.new_link(input)
     link = Link.new(
@@ -14,10 +15,14 @@ class Link < Growl
                            title: input[:title],
                            thumbnail_url: input[:thumbnail_url]
                            )
-    unless input[:thumbnail_url].empty?
-      link.photo = open(input[:thumbnail_url])
-    end
     link
+  end
+  def send_photo_to_amazon
+    begin
+      self.photo = open(link)
+    rescue
+      errors.add(:link, "Photo does not exist")
+    end
   end
 
 end

@@ -1,9 +1,10 @@
-= simple_form_for @link do |f|
-  = f.input :link, :as => :string
+= simple_form_for @link, :html => { :id => 'link_form' } do |f|
+  = f.label :link,  "URL to Link"
+  = f.url_field :link, :class => "medium input-text required"
   = f.input :comment
   p
     | You have&nbsp;
-    span#charsLeft
+    span#charsLeftLink
     |  chars left.
   = f.input :title, as: :hidden
   = f.input :description, as: :hidden
@@ -11,4 +12,6 @@
   = f.button :submit
 
 coffee:
-  $("#link_comment").limit "256", "#charsLeft"
+  jQuery ->
+    $("#link_form").validate()
+    $("#link_comment").limit "256", "#charsLeftLink"

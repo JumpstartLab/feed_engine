@@ -20,7 +20,7 @@ describe Link do
         fill_in "link[link]", :with => ""
         fill_in "link[comment]", :with => "I love this site!"
         click_on "Create Link"
-        page.should have_content "You must provide a link."
+        page.should have_content "There was an error."
       end
     end
   end
