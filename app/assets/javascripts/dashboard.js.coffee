@@ -31,3 +31,5 @@ jQuery ->
   addSubmitHandler("text")
   addSubmitHandler("image")
   addSubmitHandler("link")
+
+  

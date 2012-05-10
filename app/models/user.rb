@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 
   def posts
     TYPES.inject([]) do |posts, klass|
-      posts << klass.find_all_by_user_id(id.to_s)
-    end.uniq!.compact!
+      posts += klass.scoped.where("user_id = ?", self.id)
+    end.uniq.compact.sort_by { |post| post.created_at }
   end
 end
