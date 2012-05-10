@@ -19,9 +19,14 @@ describe Image do
           image = Image.create(link: link)
           image.should_not be_valid
         end
+        it "must be a valid image" do
+          link = "http://poop.com/poop.png"
+          image = Image.create(link: link)
+          image.should_not be_valid
+        end
       end
       context "allows creation without comment" do
-        let(:link) { "http://abc.com/test.png"}
+        let(:link) { "http://www.justanimal.org/images/gorilla-10.jpg" }
         it "works with comment" do
           comment = "abc123"
           image = Image.create(link: link, comment: comment)

@@ -6,7 +6,7 @@ class ImagesController < ApplicationController
   end
 
   def create
-    @image = current_user.images.new(params[:image])
+    @image = current_user.images.new_image(params[:image])
     if @image.save
       redirect_to dashboard_path, :notice => "Image posted succesfully."
     else

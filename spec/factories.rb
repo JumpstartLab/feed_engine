@@ -1,7 +1,7 @@
 FactoryGirl.define do
 
   factory :image do
-    link "http://mikesawesome.com/image.png"
+    link "http://www.justanimal.org/images/gorilla-10.jpg"
   end
   factory :user do
     sequence(:username) { |n| "username#{n}"}

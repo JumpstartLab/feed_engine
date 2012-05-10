@@ -1,4 +1,14 @@
 = simple_form_for @link do |f|
   = f.input :link, :as => :string
   = f.input :comment
+  p
+    | You have&nbsp;
+    span#charsLeft
+    |  chars left.
+  = f.input :title, as: :hidden
+  = f.input :description, as: :hidden
+  = f.input :thumbnail_url, as: :hidden
   = f.button :submit
+
+coffee:
+  $("#link_comment").limit "256", "#charsLeft"
