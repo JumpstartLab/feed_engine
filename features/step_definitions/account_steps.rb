@@ -23,6 +23,7 @@ When /^I fill in email address with  "(.*?)"$/ do |email|
 end
 
 When /^I fill in display name with "(.*?)"$/ do |display_name|
+  @display_name = display_name
   fill_in "Display name", with: display_name
 end
 
@@ -59,12 +60,6 @@ end
 
 When /^I fill in email address with "(.*?)"$/ do |foobarcom|
   fill_in "Email", with: foobarcom
-  fill_in "Display name", with: "honkey"
-  fill_in "Password", with: "abc123"
-  fill_in "Password confirmation", with: "abc123"
-  within("form") do
-    click_on "Sign up"
-  end
 end
 
 Then /^I should see an error message that the email is taken$/ do
@@ -76,38 +71,41 @@ Then /^I should be viewing the signup form$/ do
 end
 
 Then /^the data I have entered is still present$/ do
-  save_and_open_page
-  find_field("Display name").value.should include "displayname"
+  find_field("Display name").value.should include @display_name.to_s
 end
 
 Given /^I have never signed up before$/ do
-  pending # express the regexp above with the code you wish you had
 end
 
+
 Then /^I should see an error message that the email is not of the right format$/ do
-  pending # express the regexp above with the code you wish you had
+  find("form").text.should include "is invalid"
 end
 
 Then /^I should see an error message that email is required$/ do
-  pending # express the regexp above with the code you wish you had
+  find("form").text.should include "can't be blank"
 end
 
 Then /^I should see an error message that the display name must be only letters, numbers, dashes, or underscores$/ do
-  pending # express the regexp above with the code you wish you had
+  find("form").text.should include "is invalid"
 end
 
 Then /^I should see an error message that the display name is required$/ do
-  pending # express the regexp above with the code you wish you had
+  find("form").text.should include "can't be blank"
 end
 
-Then /^I should see an error message that the password must be (\\d+) or more characters$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
+Then /^I should see an error message that the password cannot be blank$/ do
+  find("form").text.should include "can't be blank"
 end
 
-When /^I fill in password with "(.*?)"$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
+When /^I fill in password with "(.*?)"$/ do |password1|
+  fill_in "Password", with: password1
 end
 
-When /^I fill in password confirmation with "(.*?)"$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
+When /^I fill in password confirmation with "(.*?)"$/ do |password2|
+  fill_in "Password", with: password2
+end
+
+Then /^I should see an error message that the passwords must match$/ do
+  find("form").text.should include "doesn't match confirmation"
 end

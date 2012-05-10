@@ -40,6 +40,7 @@ class User < ActiveRecord::Base
 
   validates_presence_of :display_name
   validates_uniqueness_of :display_name
+  validates_format_of :display_name, :with => /^[^ ]+$/
 
   before_save :ensure_authentication_token
 
