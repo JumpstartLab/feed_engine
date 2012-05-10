@@ -4,6 +4,6 @@ class ImageItem < ActiveRecord::Base
 
   validates_presence_of :url
   validates_length_of :url, :maximum => 2048
-  validates_format_of :url, :with => IMAGE_REGEX
+  validates_format_of :url, :with => IMAGE_REGEX, :message => 'must be jpg, png, or gif'
   validates_length_of :comment, :maximum => 256
 end

@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :image_item do
-    url "MyString"
+    url "http://hungryacademy.com/images/beast.png"
     comment "MyString"
     user_id 1
   end

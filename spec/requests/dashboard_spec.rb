@@ -85,13 +85,13 @@ describe "Dashboard" do
         it "prevents posting an invalid url" do
           fill_in "image_item[url]", :with => "adbc"
           click_on "Imagify"
-          page.should have_content "is invalid"
+          page.should have_content "must be jpg"
         end
 
         it "prevents posting an invalid image url" do
           fill_in "image_item[url]", :with => "http://google.com"
           click_on "Imagify"
-          page.should have_content "is invalid"
+          page.should have_content "must be jpg"
         end
 
         it "prevents posting of a super long url" do
