@@ -5,13 +5,13 @@ describe Growl do
       context "user has growls" do
         let!(:user) { FactoryGirl.create(:user_with_growls) }
         it "returns an array of the user's growls" do
-          Growl.for_user(user.username).should == user.growls
+          Growl.for_user(user.display_name).should == user.growls
         end
       end
       context "user does not have growls" do
         let!(:user) { FactoryGirl.create(:user) }
         it "returns an empty array" do
-          Growl.for_user(user.username).should == []
+          Growl.for_user(user.display_name).should == []
         end
       end
     end

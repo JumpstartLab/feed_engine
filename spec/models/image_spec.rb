@@ -29,16 +29,16 @@ describe Image do
         let(:link) { "http://www.justanimal.org/images/gorilla-10.jpg" }
         it "works with comment" do
           comment = "abc123"
-          image = Image.create(link: link, comment: comment)
+          image = Image.new(link: link, comment: comment)
           image.should be_valid
         end
         it "works without comment" do
-          image = Image.create(link: link)
+          image = Image.new(link: link)
           image.should be_valid
         end
         it "fails if comment is too long" do
           comment = "a" * 258
-          image = Image.create(link: link, comment: comment)
+          image = Image.new(link: link, comment: comment)
           image.should_not be_valid
         end
       end
