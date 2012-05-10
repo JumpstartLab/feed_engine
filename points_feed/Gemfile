@@ -8,6 +8,7 @@ gem "twitter-bootstrap-rails"
 gem 'simple_form'
 gem 'kaminari'
 gem 'lazy_susan'
+gem 'carrierwave'
 
 group :test, :development do
   gem 'sqlite3'
