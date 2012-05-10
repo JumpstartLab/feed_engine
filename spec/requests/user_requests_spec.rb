@@ -2,6 +2,35 @@ require 'spec_helper'
 
 describe User do
   context "who is authenticated" do
+    let!(:user) { Fabricate(:user) }
+    context "and has made posts" do
+      before(:each) do
+        @messages = []
+        @links = []
+        @images = []
+        20.times do
+          @messages << Fabricate(:message)
+          @images << Fabricate(:image)
+          @links << Fabricate(:link)
+        end
+      end
+      context "views their posts" do
+        before(:each) do
+          visit user_path(user)
+        end
+        it "sees all of their posts" do
+          @messages.each do |message|
+            page.should have_content message.body
+          end
+          @images.each do |image|
+            page.should have_content image.description
+          end
+          @links.each do |link|
+            page.should have_content link.description
+          end
+        end
+      end
+    end
   end
 
   context "who is unauthenticated" do

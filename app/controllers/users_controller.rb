@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @posts = Kaminari.paginate_array(@user.sorted_posts).page(params[:page]).per(12)
   end
 
   def create

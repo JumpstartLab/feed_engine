@@ -1,7 +1,7 @@
-h1 Intro text
 - if current_user
   = "Logged in as #{current_user.email} | "
   = link_to 'sign out', logout_path
+  = render :partial => "users/public"
 - else
   = link_to 'Sign Up', signup_path
   = " | "

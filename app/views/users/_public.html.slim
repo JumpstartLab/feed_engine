@@ -6,15 +6,20 @@ div.span4.offset4
   br
   br
   br
-  p
-    = link_to "Third post", nil
-    |&nbsp;&nbsp;&nbsp;
-    = link_to @user.display_name, user_path(@user)
-  p
-    = link_to "Second post", nil
-    |&nbsp;&nbsp;&nbsp;
-    = link_to @user.display_name, user_path(@user)
-  p
-    = link_to "First post", nil
-    |&nbsp;&nbsp;&nbsp;
-    = link_to @user.display_name, user_path(@user)
+  - @posts.each do |post|
+    p
+      - if post.is_a?(Message)
+        = post.body
+      - if post.is_a?(Link)
+        h3= link_to post.url, post.url
+        br/
+        = post.description
+      - if post.is_a?(Image)
+        = image_tag post.url
+        br/
+        = post.description
+      br/
+      = post.created_at
+      br/
+      = link_to @user.display_name, user_path(@user)
+  = paginate @posts
