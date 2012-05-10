@@ -1,0 +1,6 @@
+div class="container" id="warning_zone"
+  div class="row"
+    div class="twelve columns"
+      - flash.each do |key, value|
+        .alert-box(class="#{key}")
+          strong= value

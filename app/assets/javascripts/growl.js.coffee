@@ -6,9 +6,9 @@ jQuery ->
        $("#link_description").val(data.description)
        $("#link_thumbnail_url").val(data.thumbnail_url)
 
-       $("#title").html(data.title).toggle()
-       $("#description").html(data.description).toggle()
-       $("#thumbnail").attr(src:data.thumbnail_url).toggle()
+       $("#title").html(data.title).show()
+       $("#description").html(data.description).show()
+       $("#thumbnail").attr(src:data.thumbnail_url).show()
        $("#loading").toggle()
     ), "json"
   )

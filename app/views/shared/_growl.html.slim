@@ -2,16 +2,12 @@ table
   -if growl.type == "Message"
     tr
       td
-        b Growl ID:
-        = growl.id
-      td
         b Comment:
         = growl.comment
+      td
+        b= growl.created_at.strftime("%m/%d/%Y")
   -if growl.type == "Link"
     tr
-      td
-        b Growl ID:
-        = growl.id
       td
         b Link:
         = link_to growl.link
@@ -19,14 +15,16 @@ table
         td
           b Comment:
           = growl.comment
+      td
+        b= growl.created_at.strftime("%m/%d/%Y")
+
   -if growl.type == "Image"
     tr
-      td
-        b Growl ID:
-        = growl.id
       td
         = image_tag growl.photo(:medium)
       -if growl.comment != ""
         td
           b Comment:
           = growl.comment
+      td
+        b= growl.created_at.strftime("%m/%d/%Y")
