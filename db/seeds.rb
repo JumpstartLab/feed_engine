@@ -10,3 +10,7 @@
 50.times do
   FactoryGirl.create(:text_item)
 end
+
+50.times do
+  FactoryGirl.create(:link_item)
+end

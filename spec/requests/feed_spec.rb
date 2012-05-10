@@ -26,17 +26,16 @@ describe "Feed" do
     end
 
     context "and there are more than 12 posts" do
-      15.times do
+      15.times do |i|
         item = FactoryGirl.create(:text_item)
         messages << item
       end
 
       it "pages the posts when there are more than 12" do
-        messages[0..11].each do |message|
-          page.should have_content(message.body)
-        end
-        messages[12..-1].each do |message|
-          page.should_not have_content(message.body)
+        within(".pagination") do
+          page.should have_content("2")
+          page.should have_content("Next")
+          page.should have_content("Last")
         end
       end
     end
