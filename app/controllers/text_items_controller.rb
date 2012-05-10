@@ -10,6 +10,7 @@ class TextItemsController < ApplicationController
       redirect_to dashboard_path, notice: 'Post was successfully created.'
     else
       @link_item = LinkItem.new
+      @image_item = ImageItem.new
       render :template => "dashboard/show"
     end
   end

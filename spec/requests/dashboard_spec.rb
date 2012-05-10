@@ -12,7 +12,7 @@ describe "Dashboard" do
     before(:each) { visit "/dashboard" }
     describe "of text type" do
       it "displays the form" do
-        page.should have_content "Create Text Post"
+        page.should have_content "Create text post"
       end
 
       it "prevents creation of posts longer than 512 characters" do
@@ -38,13 +38,8 @@ describe "Dashboard" do
     end
 
     describe "of link type" do
-      it "has a link to make a new link" do
-        click_on "Fiddl a link"
-        page.should have_content "Post a link"
-      end
-
       describe "creating a link" do
-        before(:each) { click_on "Fiddl a link"}
+        before(:each) { click_on "Link"}
 
         it "prevents posting an invalid url" do
           fill_in "link_item[url]", :with => "adbc"
@@ -82,8 +77,53 @@ describe "Dashboard" do
           end
         end
       end
+    end
+    describe "of image type" do
+      describe "creating a image" do
+        before(:each) { click_on "Image"}
 
-      
+        it "prevents posting an invalid url" do
+          fill_in "image_item[url]", :with => "adbc"
+          click_on "Imagify"
+          page.should have_content "is invalid"
+        end
+
+        it "prevents posting an invalid image url" do
+          fill_in "image_item[url]", :with => "http://google.com"
+          click_on "Imagify"
+          page.should have_content "is invalid"
+        end
+
+        it "prevents posting of a super long url" do
+          bad_url = "http://google.com/#{'a' * 2049}"
+          fill_in "image_item[url]", :with => bad_url
+          click_on "Imagify"
+          page.should have_content "is too long"
+        end
+
+        it "successfully adds valid links" do
+          good_url = "http://hungryacademy.com/images/beast.png"
+          fill_in "image_item[url]", :with => good_url
+          click_on "Imagify"
+          page.should have_content "Image was successfully created."
+          current_path.should == dashboard_path
+        end
+
+        describe "comments" do
+          before(:each) { fill_in "image_item[url]", :with => "http://hungryacademy.com/images/beast.png" }
+          it "prevents comments longer than 256 characters" do
+            fill_in "image_item[comment]", :with => "#{'a' * 257}"
+            click_on "Imagify"
+            page.should have_content "is too long"
+          end
+
+          it "successfully adds valid comments" do
+            fill_in "image_item[comment]", :with => "my awesome comment"
+            click_on "Imagify"
+            current_path.should == dashboard_path
+          end
+        end
+      end
     end
   end
 end
