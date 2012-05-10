@@ -47,7 +47,7 @@ describe "Dashboard" do
         it "prevents posting an invalid url" do
           fill_in "link_item[url]", :with => "adbc"
           click_on "Linkify"
-          page.should have_content "is invalid"
+          page.should have_content "http/https"
         end
 
         it "prevents posting of a super long url" do
