@@ -1,3 +1,6 @@
-- @posts.each do |post|
-  .post
-    = render "#{post.class.downcase}/show", locals: { post: post }
+- if @posts.any?
+  - @posts.each do |post|
+    .post
+      = render "#{post.class.downcase}/show", locals: { post: post }
+- else
+  .post No posts yet!
