@@ -3,7 +3,7 @@ class CreateImages < ActiveRecord::Migration
     create_table :images do |t|
       t.text :content
       t.string :comment
-      t.string :user_id
+      t.integer :user_id
       t.timestamps
     end
     add_index :images, :user_id

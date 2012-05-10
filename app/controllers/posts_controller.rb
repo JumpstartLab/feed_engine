@@ -3,7 +3,7 @@ class PostsController < ApplicationController
     klass_name = params[:type]
     params[klass_name][:user_id] = current_user.id
     klass = Module.const_get(klass_name.capitalize)
-    @post = klass.create(params[klass_name])
+    @post = klass.create!(params[klass_name.downcase])
     unless @post.errors.any?
       render "create",
               :status => :ok,

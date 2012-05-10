@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(:version => 20120510143705) do
   create_table "images", :force => true do |t|
     t.text     "content"
     t.string   "comment"
-    t.string   "user_id"
+    t.integer  "user_id"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
     t.text     "url"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(:version => 20120510143705) do
 
   create_table "links", :force => true do |t|
     t.text     "content"
-    t.string   "user_id"
+    t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(:version => 20120510143705) do
 
   create_table "texts", :force => true do |t|
     t.text     "content"
-    t.string   "user_id"
+    t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

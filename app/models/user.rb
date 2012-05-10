@@ -8,4 +8,8 @@ class User < ActiveRecord::Base
   def send_welcome_email
     UserMailer.welcome_email(self).deliver
   end
+
+  def all_posts(page = 1)
+    Post.all_by_user(self.id)
+  end
 end

@@ -7,7 +7,7 @@
   br
   = form_for @new_link, url: "#", id: "link_form" do |f|
     = hidden_field_tag :type, "link"
-    = f.label :content
+    = f.label :content, "URL"
     br
     br
     = f.text_field :content
