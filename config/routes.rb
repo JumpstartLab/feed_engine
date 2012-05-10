@@ -16,4 +16,6 @@ FeedEngine::Application.routes.draw do
 
   resources :posts
   resource :dashboard, :controller => "dashboard", :only => "show"
+
+  resources :subscriptions
 end

@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save
       login_and_notify_user
-      redirect_to dashboard_path, notice: "Thank you for signing up!"
+      redirect_to new_subscription_path
     else
       retain_password
       render "new"

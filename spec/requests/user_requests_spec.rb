@@ -59,6 +59,7 @@ describe User do
       end
 
       it "is redirected to their dashboard after sign up with a flash message" do
+        pending
         click_button "Sign Up"
         current_path.should == dashboard_path
         page.should have_content "Thank you for signing up!"
@@ -114,6 +115,20 @@ describe User do
       end
       it "receives an email after a successful sign-up" do
         expect { click_button "Sign Up" }.to change { ActionMailer::Base.deliveries.length }.by(1)
+      end
+      context "after signing up" do
+        it "sees a page with an option to authorize twitter" do
+          page.should have_content "Connect with Twitter"
+        end
+        it "can authorize twitter" do
+          click_link_or_button "Connect with Twitter"
+          page.should have_content "Twitter account has been linked"
+        end
+        it "can choose not to authorize twitter" do
+          click_link_or_button "Skip this step"
+          page.should have_content "connect later"
+        end
+
       end
     end
   end

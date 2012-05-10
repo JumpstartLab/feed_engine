@@ -11,6 +11,8 @@ gem 'slim-rails'
 gem 'slim'
 gem 'sass-rails',   '~> 3.2.3'
 gem 'coffee-rails', '~> 3.2.1'
+gem 'twitter'
+gem 'omniauth'
 
 group :production do
   gem 'pg'
