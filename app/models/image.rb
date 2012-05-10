@@ -18,6 +18,6 @@ class Image < ActiveRecord::Base
 
   validates_format_of( :url, 
                        with: /.*\.(jpg|jpeg|png|bmp|gif)$/,
-                       message: "for image must end with jpg, jpeg, gif, bmp, or png",
+                       message: "must be a valid image (.jpg, .jpeg, .png, .bmp, .gif)",
                        allow_blank: true)
 end
