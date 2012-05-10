@@ -1,5 +1,8 @@
 class TextPostsController < ApplicationController
+  respond_to :html, :json
+
   def create
+    @posts = User.order_stream[0..4]
     @post = TextPost.new(params[:text_post])
     if @post.save
       flash[:notice] = "Your message was saved!"

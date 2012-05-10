@@ -59,4 +59,17 @@ class User < ActiveRecord::Base
     UserMailer.welcome_email(self).deliver
   end
 
+  def self.stream
+    stream = []
+    link_posts = LinkPost.all
+    image_posts = ImagePost.all
+    text_posts = TextPost.all
+    stream << [link_posts, image_posts, text_posts]
+    stream.flatten
+  end
+
+  def self.order_stream
+    stream.sort_by {|content| content.created_at}.reverse
+  end
+
 end
