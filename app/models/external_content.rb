@@ -6,7 +6,7 @@ module ExternalContent
       validates_length_of :description, in: 1..256
       validates_format_of( :url,
                    with: /^((http|https?):\/\/((?:[-a-z0-9]+\.)+[a-z]{2,}))/,
-                   message: "Invalid link format")
+                   message: "Invalid link format",
                    allow_blank: true)
     end
   end
