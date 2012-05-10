@@ -9,6 +9,7 @@ gem 'simple_form'
 gem 'kaminari'
 gem 'lazy_susan'
 gem 'carrierwave'
+gem 'fog'
 
 group :test, :development do
   gem 'sqlite3'
