@@ -32,6 +32,4 @@ jQuery ->
   addSubmitHandler("image")
   addSubmitHandler("link")
 
-  $(window).scroll ->
-    if $(window).scrollTop() > $(document).height() - $(window).height() - 50
          
