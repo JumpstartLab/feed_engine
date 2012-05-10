@@ -12,4 +12,8 @@ class TextPostsController < ApplicationController
       render "dashboards/show"
     end
   end
+
+  def new
+    @text_post = TextPost.new
+  end
 end

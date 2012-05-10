@@ -1,5 +1,2 @@
 h1 Add an Image
-= simple_form_for @image_post, html: {name: "image-post"} do |f|
-  = f.input :url
-  = f.input :description
-  = f.submit "Post Image", class: "btn"
+= render "form"

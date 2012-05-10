@@ -1,15 +1,19 @@
-h1 Enter a Post
-= simple_form_for @post, html: {name: "text-message"} do |f|
-  = f.input :text
-  = f.submit class: "btn"
+div#add_new_text_post
+ = link_to "text", new_text_post_path
+div#new_text
+  = render 'text_posts/form'
 
-= link_to "image", new_image_post_path
+div#add_new_image_post
+  = link_to "image", new_image_post_path
+div#new_image
+  = render 'image_posts/form'
 
-br
+div#add_new_link_post
+  = link_to "link", new_link_post_path
+div#new_link
+  = render 'link_posts/form'
 
-= link_to "link", new_link_post_path
-
-h1 Your Stream Playa
+h1 Your Stream
 div id="posts" data-json-url="#{dashboard_url(format: :json)}"
   - @posts.each do |post|
     div class="post"
