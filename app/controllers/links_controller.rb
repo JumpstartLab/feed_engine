@@ -40,6 +40,8 @@ class LinksController < ApplicationController
   # POST /links
   # POST /links.json
   def create
+    @message = Message.new
+    @image = Image.new
     @link = Link.new(params[:link])
 
     respond_to do |format|

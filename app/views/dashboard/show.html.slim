@@ -6,6 +6,7 @@
       $("#services").hide();
       $("#subscriptions").hide();
       $("#account").hide();
+      $("#forms").html("#{j render :partial => "messages/form"}")
     });
     $("#posts_id").live('click', function() {
       $("#posts").show();
@@ -42,27 +43,29 @@
       $("#services").hide();
       $("#subscriptions").hide();
     });
-    $("#add_message").click(function(){
-      $("#message_form").css('display', 'block');
-      $("#link_form").css('display', 'none');
-      $("#image_form").css('display', 'none');
-    });
-    $("#add_link").live('click', function() {
-      $("#link_form").css('display', 'block');
-      $("#message_form").css('display', 'none');
-      $("#image_form").css('display', 'none');
-    });
-    $("#add_image").live('click', function() {
-      $("#image_form").css('display', 'block');
-      $("#message_form").css('display', 'none');
-      $("#link_form").css('display', 'none');
-    });
 
+    $("#add_message").live('click', function(){
+      $("#forms").html("#{j render :partial => "messages/form"}")
+    })
+    $("#add_link").live('click', function(){
+      $("#forms").html("#{j render :partial => "links/form"}")
+    })
+    $("#add_image").live('click', function(){
+      $("#forms").html("#{j render :partial => "images/form"}")
+    })
 
     $(function(){
       var sidebar=$('#sidebar');
       sidebar.delegate('a', 'click',function(){
         sidebar.find('.active').toggleClass('active inactive');
+        $(this).toggleClass('active inactive');
+      });
+    });
+
+    $(function(){
+      var posts=$('#posts');
+      posts.delegate('a', 'click',function(){
+        posts.find('.active').toggleClass('active inactive');
         $(this).toggleClass('active inactive');
       });
     });
@@ -80,20 +83,13 @@ div.span3
       li= link_to "Account", "#", :id => "account_id", :class => "inactive"
 div.span7
   div#posts
-    div
-      h2 Posts
-      = link_to 'Add text message', new_post_path, :class => "btn btn-medium", :id => "add_message"
-      = link_to 'Add link message', nil, :class => "btn btn-medium", :id => "add_link"
-      = link_to 'Add image message', nil, :class => "btn btn-medium", :id => "add_image"
-      br
-      div#message_form
-        /= render :partial => "messages/form"
-      br
-      div#link_form
-        /= render :partial => "links/form"
-      br
-      div#image_form
-        = render :partial => "images/form"
+    = link_to 'Text', "#", :class => "btn btn-info btn-medium inactive", :id => "add_message"
+    |&nbsp;&nbsp;&nbsp;&nbsp;
+    = link_to 'Link', "#", :class => "btn btn-info btn-medium inactive", :id => "add_link"
+    |&nbsp;&nbsp;&nbsp;&nbsp;
+    = link_to 'Image', "#", :class => "btn btn-info btn-medium inactive", :id => "add_image"
+    br
+    div#forms
   div#privacy
     div
       h2 Privacy

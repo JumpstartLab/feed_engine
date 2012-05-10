@@ -1,4 +1,4 @@
-= form_for @image do |f|
+= form_for @image, :validate => true do |f|
   - if @image.errors.any?
     #error_explanation
       h2 = "#{pluralize(@image.errors.count, "error")} prohibited this image from being saved:"
@@ -8,10 +8,10 @@
 
   .field
     = f.label :url
-    = f.text_area :url
+    = f.text_area :url, :rows => "5"
   .field
     = f.label :description
-    = f.text_area :description
+    = f.text_area :description, :rows => "5"
   .field
     = f.hidden_field :poster_id, value: "1"
-  .actions = f.submit 'Save'
+  .actions = f.submit
