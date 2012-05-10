@@ -6,6 +6,8 @@ class Post < ActiveRecord::Base
   validates :comment, :length => { :maximum => 256 }
   validates_presence_of :content
 
+  default_scope :order => 'created_at DESC'
+
   # def self.class_for(type)
   #   type.to_s.constantize rescue TextPost
   # end
