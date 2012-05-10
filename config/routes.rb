@@ -16,4 +16,8 @@ FeedEngine::Application.routes.draw do
   resources :images
   resources :links
   match '/sign_up' => 'users#new'
+
+  # constraints(Subdomain) do
+  #   match '/' => 'users#show'
+  # end
 end
