@@ -1,4 +1,10 @@
 = simple_form_for @message do |f|
-  = f.input :link, :as => :string
   = f.input :comment
+  p
+    | You have&nbsp;
+    span#charsLeft
+    |  chars left.
   = f.button :submit
+
+coffee:
+  $("#message_comment").limit "512", "#charsLeft"

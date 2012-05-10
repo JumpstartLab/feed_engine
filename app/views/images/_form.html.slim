@@ -1,4 +1,11 @@
 = simple_form_for @image do |f|
   = f.input :link, :as => :string, label: "Image URL"
   = f.input :comment
+  p
+    | You have&nbsp;
+    span#charsLeft
+    |  chars left.
   = f.button :submit
+
+coffee:
+  $("#image_comment").limit "256", "#charsLeft"
