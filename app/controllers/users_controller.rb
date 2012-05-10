@@ -14,6 +14,7 @@ class UsersController < ApplicationController
       @user.send_welcome_email
       redirect_to dashboard_path, notice: "Thank you for signing up!"
     else
+      @password, @password_confirmation = params[:user][:password], params[:user][:password_confirmation]
       render "new"
     end
   end

@@ -78,6 +78,11 @@ describe User do
         expect { click_button "Sign Up" }.to change { User.count }.by(0)
         page.should have_content "Password is too short"
       end
+      it "doesn't need to re-enter their password if validations fail" do
+        fill_in "Display name", :with => 'ABC 123'
+        click_button "Sign Up"
+        find_field("Password").value.should_not be_blank
+      end
       it "receives an email after a successful sign-up" do
         expect { click_button "Sign Up" }.to change { ActionMailer::Base.deliveries.length }.by(1)
       end
