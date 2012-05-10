@@ -17,11 +17,11 @@ h1 Sign Up
 
   .field
     = f.label :password
-    = f.password_field :password
+    = f.password_field :password, :value => @password
 
   .field
     = f.label :password_confirmation
-    = f.password_field :password_confirmation
+    = f.password_field :password_confirmation, :value => @password_confirmation
 
   .actions
     = f.submit "Sign Up"

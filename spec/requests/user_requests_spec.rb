@@ -2,6 +2,35 @@ require 'spec_helper'
 
 describe User do
   context "who is authenticated" do
+    let!(:user) { Fabricate(:user) }
+    context "and has made posts" do
+      before(:each) do
+        @messages = []
+        @links = []
+        @images = []
+        20.times do
+          @messages << Fabricate(:message)
+          @images << Fabricate(:image)
+          @links << Fabricate(:link)
+        end
+      end
+      context "views their posts" do
+        before(:each) do
+          visit user_path(user)
+        end
+        it "sees all of their posts" do
+          @messages.each do |message|
+            page.should have_content message.body
+          end
+          @images.each do |image|
+            page.should have_content image.description
+          end
+          @links.each do |link|
+            page.should have_content link.description
+          end
+        end
+      end
+    end
   end
 
   context "who is unauthenticated" do
@@ -38,7 +67,7 @@ describe User do
       it "cannot sign up with an empty email address" do
         fill_in "Email", :with => ""
         expect { click_button "Sign Up" }.to change { User.count }.by(0)
-        page.should have_content "Email can't be blank"
+        page.should have_content "Email is required"
       end
       it "cannot sign up with an already-used email address" do
         fill_signup_form_as(user)
@@ -77,6 +106,11 @@ describe User do
         fill_in "Password confirmation", :with => "testr"
         expect { click_button "Sign Up" }.to change { User.count }.by(0)
         page.should have_content "Password is too short"
+      end
+      it "doesn't need to re-enter their password if validations fail" do
+        fill_in "Display name", :with => 'ABC 123'
+        click_button "Sign Up"
+        find_field("Password").value.should_not be_blank
       end
       it "receives an email after a successful sign-up" do
         expect { click_button "Sign Up" }.to change { ActionMailer::Base.deliveries.length }.by(1)

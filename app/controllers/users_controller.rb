@@ -6,6 +6,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @posts = Kaminari.paginate_array(@user.sorted_posts).page(params[:page]).per(12)
   end
 
   def create
@@ -15,6 +16,7 @@ class UsersController < ApplicationController
       @user.send_welcome_email
       redirect_to dashboard_path, notice: "Thank you for signing up!"
     else
+      @password, @password_confirmation = params[:user][:password], params[:user][:password_confirmation]
       render "new"
     end
   end

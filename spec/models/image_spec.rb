@@ -27,10 +27,6 @@ describe Image do
     end
 
     context "for description" do
-      it "must be non-empty" do
-        image.description = ""
-        image.should_not be_valid
-      end
       it "must be under 257 characters" do
         image.description = ("X"*257)
         image.should_not be_valid
