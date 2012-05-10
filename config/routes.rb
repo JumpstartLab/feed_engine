@@ -10,5 +10,7 @@ FeedEngine::Application.routes.draw do
   devise_scope :user do 
     get "signup" => "devise/registrations#new", :as => :new_user
   end
+
+  root :to => 'dashboard#show'
 end
 
