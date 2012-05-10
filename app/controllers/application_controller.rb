@@ -8,4 +8,14 @@ class ApplicationController < ActionController::Base
       super
     end
   end
+
+  helper_method :resource, :resource_name
+
+  def resource
+    current_user
+  end
+
+  def resource_name
+    "user"
+  end
 end

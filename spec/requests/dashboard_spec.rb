@@ -126,4 +126,12 @@ describe "Dashboard" do
       end
     end
   end
+  context "editing account" do 
+    before(:each) { visit "/dashboard" }
+    describe "edit" do
+      it "displays the form" do
+        page.should have_content "Edit Your Account"
+      end
+    end
+  end
 end
