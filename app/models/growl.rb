@@ -7,12 +7,12 @@ class Growl < ActiveRecord::Base
   belongs_to :user
   has_one :meta_data
   has_attached_file :photo,
-      :storage => :s3,
-      :s3_credentials => "#{Rails.root}/config/s3.yml",
-      :styles => {
-                    :medium => "300x300>",
-                    :thumb => "100x100>"
-                 }
+                    :storage => :s3,
+                    :s3_credentials => "#{Rails.root}/config/s3.yml",
+                    :styles => {
+                                  :medium => "300x300>",
+                                  :thumb => "100x100>"
+                               }
   def self.for_user(display_name)
     user = User.where{username.matches display_name}.first
     user.growls
