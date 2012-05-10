@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :display_name
   validates :email, :uniqueness => true
   validates_presence_of :email, :message => "is required."
-  validates :password, :length => { :minimum => 6 }
+  validates :password, :length => { :minimum => 6 }, :allow_blank => true
   validates_format_of :email,
                       :with => /^([^\s]+)((?:[-a-z0-9]\.)[a-z]{2,})$/i,
                       :allow_blank => true
