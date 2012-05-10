@@ -43,7 +43,6 @@ describe "User pages" do
       end
 
       it "sends a confirmation email" do
-        pending "Set up emails"
         fill_in 'user_username', with: 'displayname'
         fill_in 'user_email', with: 'foo@bar.com'
         fill_in 'user_password', with: 'hungry'
