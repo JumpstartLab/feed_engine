@@ -17,7 +17,6 @@ Scenario: Signing up
   And I should be viewing the dashboard at '/dashboard'
   And I should receive a welcome email at my address
 
-@wip
 Scenario: Signing up with an already-used email address
   Given I have signed up before with "foo@bar.com"
   When I click the sign up link
@@ -99,7 +98,7 @@ Scenario: Signing up with an empty password
   And the data I have entered is still present
 
 @wip
-Scenario: Signing up with a password confirmation that doesn't match
+Scenario: Signing up with a password confirmation that does not match
   Given I have never signed up before
   When I click the sign up link
   Then I should see the sign up form at "/signup"

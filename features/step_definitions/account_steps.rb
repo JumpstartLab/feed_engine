@@ -18,7 +18,8 @@ Then /^I should see the sign up form at "(.*?)"$/ do |path|
 end
 
 When /^I fill in email address with  "(.*?)"$/ do |email|
-  fill_in "Email", with: email
+  @email_address = email
+  fill_in "Email", with: @email_address
 end
 
 When /^I fill in display name with "(.*?)"$/ do |display_name|
@@ -41,31 +42,42 @@ Then /^I should see a confirmation message thanking me for signing up$/ do
 end
 
 Then /^I should be viewing the dashboard at '\/dashboard'$/ do
-  pending # express the regexp above with the code you wish you had
+  current_path.should == "/dashboard"
 end
 
 Then /^I should receive a welcome email at my address$/ do
-  pending # express the regexp above with the code you wish you had
+  @email_address = ActionMailer::Base.deliveries.first
+  @email_address.body.should include("Hope you are hungry")
 end
 
 Given /^I have signed up before with "(.*?)"$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
+  user1 = User.create(:display_name => "charles", 
+                      :email => "foo@bar.com",
+                      :password => "charles",
+                      :password_confirmation => "charles")
 end
 
-When /^I fill in email address with "(.*?)"$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
+When /^I fill in email address with "(.*?)"$/ do |foobarcom|
+  fill_in "Email", with: foobarcom
+  fill_in "Display name", with: "honkey"
+  fill_in "Password", with: "abc123"
+  fill_in "Password confirmation", with: "abc123"
+  within("form") do
+    click_on "Sign up"
+  end
 end
 
 Then /^I should see an error message that the email is taken$/ do
-  pending # express the regexp above with the code you wish you had
+  find("form").text.should include "has already been taken"
 end
 
 Then /^I should be viewing the signup form$/ do
-  pending # express the regexp above with the code you wish you had
+  should have_selector("#new_user")
 end
 
 Then /^the data I have entered is still present$/ do
-  pending # express the regexp above with the code you wish you had
+  save_and_open_page
+  find_field("Display name").value.should include "displayname"
 end
 
 Given /^I have never signed up before$/ do

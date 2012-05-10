@@ -42,4 +42,11 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :display_name
 
   before_save :ensure_authentication_token
+
+  after_create :send_welcome_email
+
+  def send_welcome_email
+    UserMailer.welcome_email(self).deliver
+  end
+
 end
