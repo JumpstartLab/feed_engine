@@ -1,13 +1,1 @@
-<%= form_for :post, url: posts_path, method: :post do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title, value: @post.title %>
-  <%= f.label :content %>
-  <%= f.text_field :content, value: @post.content %>
-  <%= f.label "Text", { for: "post_type_textpost" } %>
-  <%= f.radio_button :type, "TextPost", checked: true%>
-  <%= f.label "Image", { for: "post_type_imagepost" } %>
-  <%= f.radio_button :type, "ImagePost" %>
-  <%= f.label "Link", { for: "post_type_linkpost" } %>
-  <%= f.radio_button :type, "LinkPost" %>
-  <%= f.submit %>
-<% end %>
+<%= render partial: "form" %>
