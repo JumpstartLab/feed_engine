@@ -7,20 +7,12 @@ module Post
     end
   end
 
-  def self.for_user(user)
-    posts = []
-    TYPES.each do |klass|
-      posts += klass.find_all_by_user_id(user.id.to_s)
-    end
-    posts
-  end
-
   def self.included(base)
     base.class_eval do
       attr_accessible :content, :type, :user_id
       belongs_to :user
       validate :check_content_length
-      validates :content, allow_blank: false
+      validates :content, presence: true
       define_method("check_content_length") do
         class_str = self.class.to_s.capitalize
         max = Module.const_get("MAX_#{class_str}_LENGTH".upcase.to_sym)

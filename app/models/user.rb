@@ -8,4 +8,12 @@ class User < ActiveRecord::Base
   def send_welcome_email
     UserMailer.welcome_email(self).deliver
   end
+  
+  def posts
+    posts = []
+    TYPES.each do |klass|
+      posts += klass.find_all_by_user_id(id.to_s)
+    end
+    posts
+  end
 end
