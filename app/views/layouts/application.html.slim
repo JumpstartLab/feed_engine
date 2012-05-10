@@ -7,32 +7,11 @@ html
     = csrf_meta_tags
 
   body
-    div class="container" style="background-color:#738492; border-bottom: 1px solid #000000; color: #000000;"
-      div class="row"
-        div class="four columns"
-        div class="four columns"
-        div class="four columns" id="user_nav"
-          - if user_signed_in?
-            p
-              | Welcome,
-              = current_user.username
-              | . Not you?
-              = link_to "Sign out", destroy_user_session_path, method: "delete", class: "nice small radius white button"
-          - else
-            p
-              = link_to "Sign up", signup_path, class: "small green button radius"
-              = link_to "Sign in", new_user_session_path, class: "small blue button radius"
-
-    div class="container" id="warning_zone"
-      div class="row"
-        div class="twelve columns"
-          p.flash= flash[:notice]
-          p.flash= flash[:alert]
+    =render partial: 'shared/nav_bar'
+    =render partial: 'shared/warning_zone'
 
     div class="container" id="main_content"
       div class="row"
         = yield
 
-    div class="container" id="footer"
-      div class="row"
-        p Footer goes here
+    =render partial: 'shared/footer'
