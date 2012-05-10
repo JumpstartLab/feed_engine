@@ -1,5 +1,5 @@
 PointsFeed::Application.routes.draw do
-  get "home/index"
+  match "home/index" => redirect("/")
 
   devise_for :users do
     get "signin", :to => "devise/sessions#new"
