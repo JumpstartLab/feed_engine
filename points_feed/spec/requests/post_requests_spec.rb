@@ -9,21 +9,19 @@ describe Post do
       fill_in "Email", :with => "foo@bar.com"
       fill_in "Password", :with => "hungry"
       click_button "Sign in"
-      visit new_post_path
+      visit dashboard_path
     end
 
     it "allows me to create a new Text post" do
-      fill_in "Title", with: "TextTitle"
-      fill_in "Content", with: "TextContent"
-      choose "post_type_textpost"
-      click_button "Save Post"
+      fill_in "post[title]", with: "TextTitle"
+      fill_in "post[content]", with: "TextContent"
+      click_button "Post"
       TextPost.count.should == 1
     end
 
     it "disallows me from creating a blank Text post" do
-      fill_in "Title", with: "TextTitle"
-      choose "post_type_textpost"
-      click_button "Save Post"
+      fill_in "post[title]", with: "TextTitle"
+      click_button "Post"
       TextPost.count.should == 0
     end
 

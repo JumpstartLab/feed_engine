@@ -3,6 +3,7 @@ class DashboardsController < ApplicationController
 
   def show
     @posts = current_user.posts.first(5)
+    @post = current_user.posts.new
   end
 
 end
