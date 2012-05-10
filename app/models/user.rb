@@ -22,11 +22,12 @@ class User < ActiveRecord::Base
   validates_format_of :email,
     :with => /^([^\s]+)((?:[-a-z0-9]\.)[a-z]{2,})$/i,
     :allow_blank => true
-  validates :display_name, 
-            :presence => true,
-            :format => { :with => /^[a-zA-Z\d\-_]*$/,
-                         :message => "must be only letters, numbers, dashes, or underscores"
-            }
+  validates :display_name,
+    :presence => true,
+    :format => {
+      :with => /^[a-zA-Z\d\-_]*$/,
+      :message => "must contain only letters, numbers, dashes, or underscores"
+    }
 
   def send_welcome_email
     UserMailer.signup_notification(self).deliver

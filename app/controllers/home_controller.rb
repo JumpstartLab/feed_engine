@@ -6,7 +6,9 @@ class HomeController < ApplicationController
     # end
     if current_user
       @user = current_user
-      @posts = Kaminari.paginate_array(@user.sorted_posts).page(params[:page]).per(12)
+      @posts = Kaminari.paginate_array(
+                          @user.sorted_posts
+                        ).page(params[:page]).per(12)
     end
   end
 end

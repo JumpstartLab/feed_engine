@@ -87,7 +87,8 @@ describe User do
       it "cannot sign up with an invalid display name" do
         fill_in "Display name", :with => "test test"
         expect { click_button "Sign Up" }.to change { User.count }.by(0)
-        page.should have_content "Display name must be only letters, numbers, dashes, or underscores"
+        save_and_open_page
+        page.should have_content "Display name must contain only letters, numbers, dashes, or underscores"
       end
       it "cannot sign up with an empty password" do
         fill_in "Password", :with => ""
