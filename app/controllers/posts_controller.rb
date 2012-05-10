@@ -14,9 +14,4 @@ class PostsController < ApplicationController
               :handlers => [:jbuilder]
     end
   end
-
-  def index
-    raise "FUCK"
-    @posts = Post.all
-  end
 end
