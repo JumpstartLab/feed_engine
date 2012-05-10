@@ -8,15 +8,15 @@ div.row
     dd= link_to "Add a Message", "#messageForm"
 
   ul.nice.tabs-content.contained
-    li.active#imageFormTab= simple_form_for @image, :validate => true do |f|
+    li.active#imageFormTab= simple_form_for @image, :html => { :class => 'green_light' } do |f|
       = f.input :link, :as => :string
       = f.input :comment
       = f.button :submit
-    li#linkFormTab= simple_form_for @link, :validate => true do |f|
+    li#linkFormTab= simple_form_for @link do |f|
       = f.input :link, :as => :string
       = f.input :comment
       = f.button :submit
-    li#messageFormTab= simple_form_for @message, :validate => true do |f|
+    li#messageFormTab= simple_form_for @message do |f|
       = f.input :link, :as => :string
       = f.input :comment
       = f.button :submit
