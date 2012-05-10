@@ -12,10 +12,10 @@
 <div id="nav">
   <% if current_user %>
     <%= current_user.email %>
-    <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+    <%= link_to "Sign out", destroy_user_session_url(subdomain: false), :method => :delete %>
   <% else %>
-    <%= link_to "Sign In", sign_in_path %>
-    <%= link_to "Sign Up", sign_up_path %>
+    <%= link_to "Sign In", sign_in_url(subdomain: false) %>
+    <%= link_to "Sign Up", sign_up_url(subdomain: false) %>
   <% end %>
 </div>
   <%= yield %>
