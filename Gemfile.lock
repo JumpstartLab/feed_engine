@@ -77,6 +77,8 @@ GEM
     factory_girl_rails (3.1.0)
       factory_girl (~> 3.1.0)
       railties (>= 3.0.0)
+    faker (1.0.1)
+      i18n (~> 0.4)
     ffi (1.0.11)
     heroku (2.25.0)
       launchy (>= 0.3.2)
@@ -222,6 +224,7 @@ DEPENDENCIES
   devise
   embedly
   factory_girl_rails (~> 3.1.0)
+  faker
   heroku
   jquery-rails
   kaminari
