@@ -10,8 +10,6 @@ FeedEngine::Application.routes.draw do
   end
 
   root :to => 'pages#index'
-
-
   resources :posts, only: [:create, :index]
   resources :users
   resources :texts
