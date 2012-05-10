@@ -1,4 +1,4 @@
-h1 Sign up
+h1 Sign Up
 
 = form_for @user do |f|
   - if @user.errors.any?
@@ -14,7 +14,7 @@ h1 Sign up
 
   .field
     = f.label :display_name
-    = f.password_field :display_name
+    = f.text_field :display_name
 
   .field
     = f.label :password
@@ -25,4 +25,4 @@ h1 Sign up
     = f.password_field :password_confirmation
 
   .actions
-    = f.submit
+    = f.submit "Sign Up"
