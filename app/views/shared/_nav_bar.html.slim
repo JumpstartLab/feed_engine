@@ -6,6 +6,6 @@
         - if user_signed_in?
           = link_to "Sign out", destroy_user_session_path, class: "small blue nice button", method: "delete"
         - else
-            p
-              = link_to "Sign up", signup_path, class: "small green button radius"
-              = link_to "Sign in", new_user_session_path, class: "small blue button radius"
+          p
+            = link_to "Sign up", signup_path, class: "small green button radius"
+            = link_to "Sign in", new_user_session_path, class: "small blue button radius"

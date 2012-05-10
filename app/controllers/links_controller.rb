@@ -14,5 +14,4 @@ class LinksController < ApplicationController
       render 'new'
     end
   end
-
 end
