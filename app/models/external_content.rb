@@ -6,7 +6,6 @@ module ExternalContent
       validates_length_of :description, maximum: 256, allow_blank: true
       validates_format_of(:url,
                    with: /^((http|https?):\/\/((?:[-a-z0-9]+\.)+[a-z]{2,}))/,
-                   message: "must begin with http or https.",
                    allow_blank: true)
     end
   end
