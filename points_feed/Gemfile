@@ -6,6 +6,7 @@ gem 'devise'
 gem 'jquery-rails'
 gem "twitter-bootstrap-rails"
 gem 'simple_form'
+gem 'kaminari'
 
 group :test, :development do
   gem 'sqlite3'
