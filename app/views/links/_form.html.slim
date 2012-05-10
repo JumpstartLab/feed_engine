@@ -1,4 +1,8 @@
 = simple_form_for @link do |f|
   = f.input :link, :as => :string
   = f.input :comment
+  - f.simple_fields_for :meta_data do |md|
+    = md.input :title, as: :hidden
+    = md.input :description, as: :hidden
+    = md.input :thumbnail_url, as: :hidden
   = f.button :submit

@@ -1,2 +1,8 @@
 h1 New Link
-= render :partial => 'form'
+.row
+  .six.columns
+    = render :partial => 'form'
+  .six.columns
+    h4#title(style="display:none;")
+    #description(style="display:none;")
+    img#thumbnail(style="display:none;" src="")
