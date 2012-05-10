@@ -3,13 +3,13 @@ div class="container" style="background-color:#738492; border-bottom: 1px solid 
         div class="four columns"
         div class="four columns"
         div class="four columns" id="user_nav"
-          - if user_signed_in?
+          - if current_user?
             p
               | Welcome,
               = current_user.username
               | . Not you?
-              = link_to "Sign out", destroy_user_session_path, method: "delete", class: "nice small radius white button"
+              = link_to "Sign out", destroy_user_session_url, method: "delete", class: "nice small radius white button"
           - else
             p
-              = link_to "Sign up", signup_path, class: "small green button radius"
-              = link_to "Sign in", new_user_session_path, class: "small blue button radius"
+              = link_to "Sign up", signup_url, class: "small green button radius"
+              = link_to "Sign in", new_user_session_url, class: "small blue button radius"
