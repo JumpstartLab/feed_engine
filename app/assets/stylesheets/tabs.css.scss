@@ -43,12 +43,22 @@ $white: #FFFFFF;
   }
 
   .tab-body {
+
     .tab {
       @include borders(dashed);
       margin: auto;
       position:relative;
       p {
         color: $wasabi;
+      }
+      .errors{
+        p{
+          color: $spice;
+          font-weight: bold;
+        } 
+        li {
+          color: $white;
+        }
       }
     }
   }

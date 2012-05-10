@@ -1,6 +1,9 @@
 .post-form
   h1 TXTMSG
-  #errors
+  .errors
+    #text_errors
+      p You have done something wrong
+      ul#text_errors_list
   br
     = form_for @new_text, url: "#", id: "text_form" do |f|
       = hidden_field_tag :type, "text"

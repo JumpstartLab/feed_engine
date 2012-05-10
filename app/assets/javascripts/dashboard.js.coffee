@@ -8,9 +8,10 @@ jQuery ->
     tabId = "#{this['id']}-tab".toLowerCase()
     $('.tab-body ul').children().hide()
     $("##{tabId}").show()
-
   addSubmitHandler = (klass) ->
+    $("##{klass}_errors").hide()
     $("##{klass}-submit").click ->
+      $("##{klass}_errors").hide()
       form = $("#new_#{klass}")
       formData = form.serialize()
       $.ajax({
@@ -22,9 +23,9 @@ jQuery ->
           form.clearForm()
         error: (response, status)->
           resp = $.parseJSON(response.responseText)
-          $('#errors').html Mustache.to_html($('#errors_list_template').html())
+          $("##{klass}_errors").show()
           for error in resp.errors
-            $('#errors_list').html "<li>#{error}</li>"
+            $("##{klass}_errors_list").html "<li>#{error}</li>"
         })
 
 

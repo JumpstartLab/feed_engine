@@ -1,3 +1,7 @@
-- @posts.each do |post|
+- @posts.reverse.each do |post|
   .post
-    = render "#{post.class.downcase}/show", locals: { post: post }
+    - class_name = post.class.to_s.downcase
+    = render post
+    p = time_ago_in_words(post.created_at)
+  br
+  hr

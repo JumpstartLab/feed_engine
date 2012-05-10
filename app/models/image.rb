@@ -1,9 +1,13 @@
 class Image < ActiveRecord::Base
-  attr_accessible :comment, :picture, :remote_picture_url, :user_id
-  belongs_to :user
-  mount_uploader :picture, PictureUploader
-
+  attr_accessible :comment, :picture, :remote_picture_url
+  before_create :set_content
+  #mount_uploader :picture, PictureUploader
   validates :comment, length: { maximum: 256 }
   validates :remote_picture_url, length: { maximum: 2048 }
 
+private
+
+  def set_content
+    self.content = remote_picture_url
+  end
 end

@@ -1,8 +1,11 @@
 .post-form
   h1 LOS LIIIIIIIIINKS
-  #errors
+  .errors
+    #link_errors
+      p You have done something wrong
+      ul#link_errors_list
   br
-  = form_for @new_link, remote: true, url: posts_path do |f|
+  = form_for @new_link, url: "#", id: "link_form" do |f|
     = hidden_field_tag :type, "link"
     = f.label :content
     br

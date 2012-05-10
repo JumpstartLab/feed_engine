@@ -1,5 +1,9 @@
 .post-form
   h1 Picturezzz
+  .errors
+    #image_errors
+      p You have done something wrong
+      ul#image_errors_list
   = form_for @new_image, url: "#", id: "image_form" do |f|
     br
     = hidden_field_tag :type, "image"

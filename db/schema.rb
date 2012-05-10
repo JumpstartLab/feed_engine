@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120509175329) do
+ActiveRecord::Schema.define(:version => 20120510143705) do
 
   create_table "images", :force => true do |t|
     t.text     "content"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(:version => 20120509175329) do
     t.datetime "updated_at",         :null => false
     t.text     "url"
     t.string   "picture"
-    t.string   "remote_picture_url"
+    t.text     "remote_picture_url"
   end
 
   add_index "images", ["user_id"], :name => "index_images_on_user_id"
