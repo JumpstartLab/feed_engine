@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe "Dashboard" do
+
+  let!(:user) { FactoryGirl.create(:user) }
+  before(:each) do
+    login_factory_user
+  end
+
   describe "GET /dashboard" do
     it "has a dashboard page" do
       visit "/dashboard"

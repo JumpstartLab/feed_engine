@@ -11,6 +11,7 @@ gem 'client_side_validations'
 gem 'devise'
 gem 'redis-store', "~> 1.0.0"
 gem 'resque'
+gem 'kaminari'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -34,6 +35,7 @@ end
 group :test do
   gem 'guard-spork'
   gem 'spork'
+  gem 'launchy'
 end
 
 group :production do

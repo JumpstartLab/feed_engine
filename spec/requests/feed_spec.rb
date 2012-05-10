@@ -1,34 +1,34 @@
 require 'spec_helper'
 
 describe "Feed" do
-  messages = []
-  5.times do |i|
-     item =  FactoryGirl.create(:text_item)
-     messages << item
-  end
+  let!(:user) { FactoryGirl.create(:user) }
 
-  describe "GET /" do
-    it "has a feed page as root" do
-      visit root_path
-      page.should have_content "Your Feed"
-    end
+  before(:each) do
+    login_factory_user
   end
 
   context "when I view the feed" do
-    before(:each) do
-      visit root_path
-    end
+    context "and there is less than 12 posts" do
+      before(:each) do
+        5.times do 
+          user.text_items << FactoryGirl.create(:text_item)
+        end
+        visit root_path
+      end
 
-    it "shows all the posts before the page max is reached" do
-      messages.each do |message|
-        page.should have_content(message.body)
+      it "shows all the posts before the page max is reached" do
+        user.text_items.each do |item|
+          page.should have_content(item.body)
+        end
       end
     end
 
     context "and there are more than 12 posts" do
-      15.times do |i|
-        item = FactoryGirl.create(:text_item)
-        messages << item
+      before(:each) do
+        15.times do 
+          user.text_items << FactoryGirl.create(:text_item)
+        end
+        visit root_path
       end
 
       it "pages the posts when there are more than 12" do
