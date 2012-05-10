@@ -14,3 +14,5 @@ end
 50.times do
   FactoryGirl.create(:link_item)
 end
+
+FactoryGirl.create(:user)
