@@ -5,9 +5,13 @@ describe User do
     let!(:user) { Fabricate(:user) }
     context "and has made posts" do
       before(:each) do
-        @posts = []
+        @messages = []
+        @links = []
+        @images = []
         20.times do
-          @posts << Fabricate(:message)
+          @messages << Fabricate(:message)
+          @images << Fabricate(:image)
+          @links << Fabricate(:link)
         end
       end
       context "views their posts" do
@@ -15,8 +19,14 @@ describe User do
           visit user_path(user)
         end
         it "sees all of their posts" do
-          @posts.each do |post|
-            page.should have_content post.body
+          @messages.each do |message|
+            page.should have_content message.body
+          end
+          @images.each do |image|
+            page.should have_content image.description
+          end
+          @links.each do |link|
+            page.should have_content link.description
           end
         end
       end

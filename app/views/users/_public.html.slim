@@ -6,7 +6,14 @@ div.span4.offset4
   br
   br
   br
-  = @posts.each do |post|
+  - @posts.each do |post|
     p
-      = post.body
-      = link_to @user.display_name, user_path(@user)
+      - if post.is_a?(Message)
+        = post.body
+      - if post.is_a?(Link)
+        = post.description
+      - if post.is_a?(Image)
+        = post.description
+      p = post.created_at
+      p = link_to @user.display_name, user_path(@user)
+  = paginate @posts
