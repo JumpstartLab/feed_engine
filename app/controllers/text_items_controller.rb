@@ -8,7 +8,7 @@ class TextItemsController < ApplicationController
     @text_item = TextItem.new(params[:text_item])
 
     if @text_item.save
-      redirect_to dashboard_path, notice: 'Link was successfully created.'
+      redirect_to dashboard_path, notice: 'Post was successfully created.'
     else
       @link_item = LinkItem.new
       @image_item = ImageItem.new

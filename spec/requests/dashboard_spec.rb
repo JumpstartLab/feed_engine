@@ -11,9 +11,6 @@ describe "Dashboard" do
   context "creating new posts" do
     before(:each) { visit "/dashboard" }
     describe "of text type" do
-      it "displays the form" do
-        page.should have_content "Create text post"
-      end
 
       it "prevents creation of posts longer than 512 characters" do
         bad_body = "a" * 513
