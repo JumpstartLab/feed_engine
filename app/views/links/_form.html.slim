@@ -2,7 +2,7 @@
   .six.columns
     = simple_form_for @link, :html => { :id => 'link_form' } do |f|
       = f.label :link,  "URL to Link"
-      = f.url_field :link, :class => "medium input-text required"
+      = f.url_field :link, :class => "medium input-text required", :maxlength => "2048"
       = f.input :comment
       p
         | You have&nbsp;
