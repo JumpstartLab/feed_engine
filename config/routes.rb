@@ -5,6 +5,7 @@ FeedEngine::Application.routes.draw do
   resources :text_items
   resources :link_items
   resources :image_items
+  match '', to: 'feed#show', constraints: {subdomain: /.+/}
 
   devise_for :users 
 
