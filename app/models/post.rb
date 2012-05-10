@@ -8,14 +8,6 @@ module Post
     end
   end
 
-  def self.for_user(user)
-    posts = []
-    TYPES.each do |klass|
-      posts += klass.find_all_by_user_id(user.id.to_s)
-    end
-    posts
-  end
-
   def self.included(base)
     base.class_eval do
       attr_accessible :content, :type, :user_id

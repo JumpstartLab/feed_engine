@@ -9,7 +9,9 @@ class User < ActiveRecord::Base
     UserMailer.welcome_email(self).deliver
   end
 
-  def all_posts(page = 1)
-    Post.all_by_user(self.id)
+  def posts
+    TYPES.inject([]) do |posts, klass|
+      posts << klass.find_all_by_user_id(id.to_s)
+    end.uniq!.compact!
   end
 end

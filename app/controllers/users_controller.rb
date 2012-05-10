@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
-
+  before_filter :authenticate_user!, except: [:show, :new, :create]
+  
   def show
     @user = User.find(params[:id])
-
+    @posts = @user.posts
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }
@@ -50,18 +52,4 @@ class UsersController < ApplicationController
       end
     end
   end
-
-  def destroy
-    @user = User.find(params[:id])
-    @user.destroy
-
-    respond_to do |format|
-      format.html { redirect_to users_url }
-      format.json { head :no_content }
-    end
-  end
-
-  def dashboard
-  end
-
 end
