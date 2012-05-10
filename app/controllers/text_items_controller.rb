@@ -5,9 +5,9 @@ class TextItemsController < ApplicationController
   end
 
   def create
-    @text_item = TextItem.new(params[:text_item])
+    @text_item = current_user.text_items.new(params[:text_item])
 
-    if @text_item.save
+    if current_user.save
       redirect_to dashboard_path, notice: 'Post was successfully created.'
     else
       @link_item = LinkItem.new

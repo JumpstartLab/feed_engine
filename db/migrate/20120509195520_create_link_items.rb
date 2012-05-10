@@ -3,8 +3,6 @@ class CreateLinkItems < ActiveRecord::Migration
     create_table :link_items do |t|
       t.text :url
       t.text :comment
-      t.integer :user_id
-
       t.timestamps
     end
   end
