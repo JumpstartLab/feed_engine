@@ -34,11 +34,12 @@
           <div class="span3">
             <div class="login-container sidebar-nav">
               <a class="brand" href="/"><h1>Trout</h1></a>
-
+                  <br/>
               <ul class="nav">
                 <% if user_signed_in? %>
-                  <li><%= link_to "Dashboard", dashboard_path %></li>
-                  <li><%= link_to "Log Out", destroy_user_session_path, :method => :delete %></li>
+                  <li class="nav-item"><%= link_to "Dashboard", dashboard_path %></li>
+                  <br/>
+                  <li class="nav-item"><%= link_to "Log Out", destroy_user_session_path, :method => :delete %></li>
                 <% else %>
                   <br/>
                   <h2>Login</h2>
