@@ -1,16 +1,15 @@
+<div class="main-image">
+  <img src="/assets/dashboard.jpg">
+</div>
+
 <div class="row">
   <div class="span12">
     <div class="header">
-      <h1>Dashboard</h1>
-        <%= "Email: #{@current_user.email}" %><br>
-        <%= "Display Name: #{@current_user.display_name}" %><br>
-        <%= link_to "Edit", edit_user_registration_path %><br>
-        <br>
-      </div>
+      <h1>Dashboard</h1><br>
     <div class="row">
-      <br>
       <div class="span3">
-        <div class="dashboard-left">
+        <h3>Create Post</h3>
+        <div class="well create-post">
           <ul id='post_tabs' class="nav nav-pills">
             <li><a href="#text_post" data-toggle="tab">Text</a></li>
             <li><a href="#link_post" data-toggle="tab">Link</a></li>
@@ -29,13 +28,24 @@
             </div>
           </div>
         </div>
-        <br>
       </div>
-      <div class="span9">
-        <% @posts.each do |post| %>
-          <%= render "posts/show_#{post.template}", :post => post %>
-          <hr />
-        <% end %>
+      <div class="span6">
+        <h3>Most Recent Posts</h3>
+        <div class="well recent-posts">
+          <% @posts.each do |post| %>
+            <%= render "posts/show_#{post.template}", :post => post %>
+            <hr />
+          <% end %>
+        </div>
+      </div>
+      <div class="span3">
+        <h3>Account Info</h3>
+        <div class="account-info">
+          <%= "Email: #{@current_user.email}" %><br>
+          <%= "Display Name: #{@current_user.display_name}" %><br>
+          <%= link_to "Change Password", edit_user_registration_path %><br>
+          <br>
+        </div>
       </div>
     </div>
   </div>

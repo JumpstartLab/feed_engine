@@ -5,7 +5,7 @@ describe User do
     context "and when I visit the signup path" do
       before(:each) do
         visit signup_path
-        fill_in "Email", :with => "foo@bar.com"
+        fill_in "user_email", :with => "foo@bar.com"
         fill_in "Display name", :with => "displayname"
         fill_in "Password", :with => "hungry"
         fill_in "Password confirmation", :with => "hungry"
@@ -41,7 +41,7 @@ describe User do
         end
 
         it "should show an error message for a blank email" do
-          fill_in "Email", :with => ""
+          fill_in "user_email", :with => ""
           click_button "Sign Up"
           page.should have_content("can't be blank")
         end
@@ -83,7 +83,7 @@ describe User do
         let!(:user) { Fabricate(:user) }
 
         it "should show error message for existing" do
-          fill_in "Email", :with => user.email
+          fill_in "user_email", :with => user.email
           fill_in "Display name", :with => user.display_name
           fill_in "Password", :with => user.password
           fill_in "Password confirmation", :with => user.password

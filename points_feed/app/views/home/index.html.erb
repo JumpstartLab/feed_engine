@@ -1,12 +1,17 @@
-<div class="home-image">
-  <img src="/assets/welcome.jpg">
+<div class="main-image">
+  <% if current_user %>
+    <img src="/assets/post.jpg">
+  <% else %>
+    <img src="/assets/welcome.jpg">
+  <% end %>
 </div>
+
 <div class="root">
   <div class="row">
     <div class="span12">
       <div class="row">
         <% if current_user %>
-          <div class="span12">
+          <div class="well span4">
         <% else %>
           <div class="span4">
             <h1>Welcome to Points Feed</h1>
@@ -20,19 +25,21 @@
             <h3>Already a member?</h3>
             <%= render partial: "devise/sessions/signin_form" %>
           </div>
-          <div class="span8">
-        <% end %>
-        
-        <div class='well span7'>
-          <h3>Most Recent Posts</h3>
-          <br />
-          <% @posts.each do |post| %>
-            <hr />
-            <%= render "posts/show_#{post.template}", :post => post %>
-          <% end %>
-          <%= paginate @posts %>
+          <div class="span3">
+            &nbsp
           </div>
-        </div>
+          <div class="well span4">
+        <% end %> 
+            <div class="login-right">
+              <h3>Most Recent Posts</h3>
+              <br />
+              <% @posts.each do |post| %>
+                <hr />
+                <%= render "posts/show_#{post.template}", :post => post %>
+              <% end %>
+              <%= paginate @posts %>
+            </div>
+          </div>
       </div>
     </div>
   </div>

@@ -15,11 +15,11 @@ ActiveRecord::Schema.define(:version => 20120510202639) do
 
   create_table "posts", :force => true do |t|
     t.integer  "user_id"
-    t.text     "comment",    :limit => 256
+    t.text     "comment"
     t.string   "type"
     t.text     "content"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.string   "file"
   end
 
