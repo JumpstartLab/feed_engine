@@ -17,7 +17,7 @@ class Post < ActiveRecord::Base
   def as_json(*params)
     post = self.postable
     if post.class == ImagePost
-      {:photo => post.image.medium, :description => post.description,
+      {:photo => post.image.big, :description => post.description,
         :created_at => post.created_at}
     elsif post.class == LinkPost
       {:link => post.url, :description => post.description,
