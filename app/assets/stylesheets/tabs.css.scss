@@ -15,8 +15,8 @@ $wine: #832e2f;
 
 $white: #FFFFFF;
 
-@mixin borders($style){
-  border-color: $slushie;
+@mixin borders($style, $color: $slushie){
+  border-color: $color;
   border-radius: .25em;
   border-style: $style;
   border-width: .25em;
@@ -45,7 +45,7 @@ $white: #FFFFFF;
   .tab-body {
 
     .tab {
-      @include borders(dashed);
+      @include borders(solid, $honeycomb);
       margin: auto;
       position:relative;
       p {

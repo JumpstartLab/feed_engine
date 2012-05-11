@@ -3,7 +3,7 @@ class PostsController < ApplicationController
     klass_name = params[:type]
     params[klass_name][:user_id] = current_user.id
     klass = Module.const_get(klass_name.capitalize)
-    @post = klass.create!(params[klass_name.downcase])
+    @post = klass.create(params[klass_name.downcase])
     unless @post.errors.any?
       render "create",
               :status => :ok,
@@ -13,5 +13,9 @@ class PostsController < ApplicationController
               :status => :unprocessable_entity,
               :handlers => [:jbuilder]
     end
+  end
+
+  def index
+    @posts = current_user.posts.reverse.page(params[:page].to_i || 0)
   end
 end
