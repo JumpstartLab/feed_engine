@@ -50,9 +50,6 @@ class User < ActiveRecord::Base
   has_many :image_posts, through: :posts, source: :postable, source_type: 'ImagePost'
   has_many :link_posts, through: :posts, source: :postable, source_type: 'LinkPost'
 
-  # has_many :text_posts, through: :posts, source: :feed, source_type: 'TextPost'
-  # has_many :image_posts, through: :posts, source: :feed, source_type: 'ImagePost'
-  # has_many :link_posts, through: :posts, source: :feed, source_type: 'LinkPost'
   has_many :posts
 
   def send_welcome_email

@@ -11,9 +11,9 @@
 class TextPost < ActiveRecord::Base
   attr_accessible :text, :created_at, :updated_at, :user_id
 
-  validates_length_of   :text, within: 1..512
+  validates_length_of :text, within: 1..512
 
-  after_create :create_post
+  # after_create :create_post
 
   # has_one :post#, :as => :feed
   # has_one :user#, :through => :post
