@@ -3,6 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $.namespace = {
+  page_count: 0,
   activeTabId: null,
   activateTab: (tabId)->
     if $.namespace.activateTabId
@@ -12,15 +13,17 @@ $.namespace = {
   }
 
 update = ->
-  $.ajax({
-    type: "GET",
-    url: "/posts",
-    data: { page: window.page_count }
-    success: (response, status, jqXHR)->
-      posts = response["posts"]
-      for post in posts
-        render(post)
-        })
+  unless window.page_count > $.namespace["page_count"]
+    $.ajax({
+      type: "GET",
+      url: "/posts",
+      data: { page: window.page_count }
+      success: (response, status, jqXHR)->
+        $.namespace["page_count"] = response["page_count"]
+        posts = response["posts"]
+        for post in posts
+          render(post)
+          })
 
 render = (post) ->
   type = post["type"]
