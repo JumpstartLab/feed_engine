@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 $whale: #262626;
-$dolphin: #404040;
+$dolphin: #424242;
 
 $honeycomb: #e9ba26;
 $clementine: #f0812b;
@@ -25,7 +25,7 @@ p {
 
 body {
   background-color: $whale;
-  h1 {
+  h1, h2, h3 {
     color: $frosting;
   }
 }

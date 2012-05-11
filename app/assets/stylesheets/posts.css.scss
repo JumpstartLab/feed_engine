@@ -2,6 +2,52 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$whale: #262626;
+$dolphin: #464646;
+
+$honeycomb: #e9ba26;
+$clementine: #f0812b;
+$slushie: #5fb8dd;
+$frosting: #ea0b8c;
+
+$aloe: #50886b;
+$berry: #508395;
+$wasabi: #9eae3d;
+$grape: #92278f;
+$spice: #eb3f3c;
+$wine: #832e2f;
+
+$white: #FFFFFF;
+
+
 .post {
-  width:90%;
+  margin: auto;
+  .postbody{
+    width:100%;
+    background-color: $dolphin;
+    border-style: solid;
+    border-width:.25em;
+    border-radius: 4px;
+    border-color: $clementine;
+    margin: 2em auto;
+    padding: 1em;
+
+    &:nth-child(odd){
+      border-style: solid;
+      border-width:.25em;
+      border-radius: 4px;
+      border-color: $wasabi;
+
+    }
+    .posted {
+      color: $spice;
+      float: right;
+      margin-top: -1em;
+    }
+
+    img {
+      width: 100px;
+      height:100px;
+    }
+  }
 }
