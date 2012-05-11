@@ -1,11 +1,11 @@
-= simple_form_for @growl, :url => growls_path, :html => { :id => 'message_form' } do |f|
+= simple_form_for @growl, :url => growls_path, :input_html => { :id => 'message_form' } do |f|
   = f.input :type, :as => :hidden, :input_html => { :value => "Message" }
-  = f.input :comment
+  = f.input :comment, :input_html => { :id => "message_comment" }
   p
     | You have&nbsp;
     span#charsLeftMessage
     |  chars left.
-  = f.submit "Create Message"
+  = f.button :submit, "Create Message"
 
 coffee:
   jQuery ->

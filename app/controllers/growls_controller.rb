@@ -10,7 +10,6 @@ class GrowlsController < ApplicationController
   def create
     @type = params[:growl][:type]
     @growl = current_user.relation_for(@type).new(params[:growl])
-
     if @growl.save
       flash[:notice] = "Your #{@type.downcase} has been created."
       redirect_to dashboard_path
