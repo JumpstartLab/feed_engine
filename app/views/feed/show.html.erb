@@ -1,33 +1,40 @@
 
 <% if current_user %>
   <% @items.each do |item| %>
-    <div class="row">
-      <div class="span1 item_owner">
-        <%= item.user.display_name %>
-      </div>
-      <div class="span9 item_container"> 
-        <div class="span3 item_header">
+    <div class="row feed_row">
+      <div class="span8"> 
+        <div class="span3 time_header">
           <%= time_ago_in_words(item.created_at) %> ago
         </div>
         <% if item.class == TextItem %>
-          <div class="text_item_body">
+          <div class="span6 triangle-border right text_item_body">
             <%= item.body %>
           </div>
         <% elsif item.class == ImageItem %>
-          <div class="span4 body_image">
-            <%= image_tag item.url %>
-          </div>
-          <div class="span4 text_item_body">
-            <%= item.comment %>
+          <div class="span6 triangle-border right">
+            <div class="span3 body_image ">
+              <%= image_tag item.url %>
+            </div>
+            <div class="">
+              <%= item.comment %>
+            </div>
           </div>
         <% elsif item.class == LinkItem %>
-          <div class="text_item_body">
-            <%= item.url %>
+          <div class="span6 triangle-border right">
+            <div class="">
+              <%= item.url %>
+            </div>
+            <div class="text_item_body">
+              <%= item.comment %>
+            </div>
           </div>
         <% end %>
+        <div class="span1 item_owner">
+          <%= item.user.display_name %>
+        </div >
       </div>
     </div>
-  <% end %>
+    <% end %>
 
-  <%= paginate @stream_items %>
-<% end %>
+    <%= paginate @stream_items %>
+  <% end %>

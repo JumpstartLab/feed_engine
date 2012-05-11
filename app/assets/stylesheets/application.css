@@ -53,3 +53,7 @@
   display: block;
   font-style: italic;
 }
+
+body {
+  background-image: url("../images/groovepaper.png")
+}
