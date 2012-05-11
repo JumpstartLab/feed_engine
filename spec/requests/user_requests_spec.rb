@@ -4,10 +4,45 @@ describe User do
   let(:user) { Fabricate(:user) }
 
   context "who is authenticated" do
+    let!(:user) { Fabricate(:user) }
+
+    before(:all) do
+      login_as(user)
+    end
+
+    context "and has made posts" do
+      before(:each) do
+        @messages = []
+        @links = []
+        @images = []
+        3.times do
+          @messages << Fabricate(:message)
+          @images << Fabricate(:image)
+          @links << Fabricate(:link)
+        end
+      end
+
+      context "views their posts" do
+        before(:each) do
+          visit user_path(user)
+        end
+        it "sees all of their posts" do
+          @messages.each do |message|
+            page.should have_content message.body
+          end
+          @images.each do |image|
+            page.should have_content image.description
+          end
+          @links.each do |link|
+            page.should have_content link.description
+          end
+        end
+      end
+    end
+
     describe "and visits the dashboard account tab" do
       before(:each) do
         visit dashboard_path
-        click_link "Account"
       end
 
       it "sees a form to change password" do
@@ -73,6 +108,12 @@ describe User do
             ActionMailer::Base.deliveries.length
           }.by(1)
         end
+
+        it "doesn't need to re-enter their password if validations fail" do
+          fill_in "Display name", :with => 'ABC 123'
+          click_button "Sign Up"
+          find_field("Password").value.should_not be_blank
+        end
       end
 
       describe "cannot sign up" do
@@ -94,10 +135,16 @@ describe User do
           page.should have_content "Email is invalid"
         end
 
+        it "cannot sign up with a blank display name" do
+          fill_in "Display name", :with => ""
+          expect { click_button "Sign Up" }.to change { User.count }.by(0)
+          page.should have_content "Display name can't be blank"
+        end
+
         it "with an invalid display name" do
           fill_in "Display name", :with => "test test"
           expect { click_button "Sign Up" }.to change { User.count }.by(0)
-          page.should have_content "Display name must be only letters, numbers, dashes, or underscores"
+          page.should have_content "Display name must be only letters, numbers or dashes"
         end
 
         it "with an empty password" do

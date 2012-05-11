@@ -1,0 +1,7 @@
+= form_for @message, :validate => true do |f|
+  p
+    = f.label :body
+    = f.text_area :body, :rows => "5"
+  p
+    = f.hidden_field :poster_id, value: "1"
+  p = f.submit

@@ -1,9 +1,10 @@
 module UserRequestHelpers
   def login_as(user)
+    visit login_path
     fill_in "Email", :with => user.email
     fill_in "Password", :with =>
       Fabricate.attributes_for(:user)[:password]
-    click_link_or_button "Sign In"
+    click_link_or_button "Log In"
   end
 
   def signup_as(user)

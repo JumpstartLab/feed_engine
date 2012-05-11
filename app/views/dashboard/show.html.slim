@@ -6,7 +6,15 @@
       $("#services").hide();
       $("#subscriptions").hide();
       $("#account").hide();
+      $("#forms").html("#{j render :partial => "messages/form"}")
+      show_div_for_error();
     });
+    function show_div_for_error() {
+      var error_class = $("#error_explanation h2").attr("class");
+      if (error_class != null) {
+        $("#add_" + error_class).click();
+      }
+    }
     $("#posts_id").live('click', function() {
       $("#posts").show();
       $("#account").hide();
@@ -43,6 +51,19 @@
       $("#subscriptions").hide();
     });
 
+    $("#add_message").live('click', function(){
+      $("#forms").html("#{j render :partial => "messages/form"}")
+      make_active(this);
+    })
+    $("#add_link").live('click', function(){
+      $("#forms").html("#{j render :partial => "links/form"}")
+      make_active(this);
+    })
+    $("#add_image").live('click', function(){
+      $("#forms").html("#{j render :partial => "images/form"}")
+      make_active(this);
+    })
+
     $(function(){
       var sidebar=$('#sidebar');
       sidebar.delegate('a', 'click',function(){
@@ -51,7 +72,11 @@
       });
     });
 
-h1 This is your dashboard
+    function make_active(post) {
+      var posts=$('#posts');
+      posts.find('.active').toggleClass('active inactive');
+      $(post).toggleClass('inactive active');
+    }
 br
 br
 div.span3
@@ -64,14 +89,22 @@ div.span3
       li= link_to "Account", "#", :id => "account_id", :class => "inactive"
 div.span7
   div#posts
-    div
-      h2 Posts
-      br
-      = link_to 'Add text message', new_post_path, :class => "btn btn-medium"
-      |&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-      = link_to 'Add link message', nil, :class => "btn btn-medium"
-      |&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-      = link_to 'Add image message', nil, :class => "btn btn-medium"
+    = link_to 'Text', "#", :class => "btn btn-info btn-medium active", :id => "add_message"
+    |&nbsp;&nbsp;&nbsp;&nbsp;
+    = link_to 'Link', "#", :class => "btn btn-info btn-medium inactive", :id => "add_link"
+    |&nbsp;&nbsp;&nbsp;&nbsp;
+    = link_to 'Image', "#", :class => "btn btn-info btn-medium inactive", :id => "add_image"
+    br
+    br
+    - [@image, @message, @link].each do |post|
+      - if post.errors.any?
+        #error_explanation
+          h2 class="#{post.class.to_s.downcase}" #{pluralize(post.errors.count, "error")} prohibited this #{post.class.to_s.downcase} from being saved:
+          ul
+            - post.errors.full_messages.each do |message|
+              li = message
+    div#forms
+    hr
   div#privacy
     div
       h2 Privacy

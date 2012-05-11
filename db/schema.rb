@@ -11,32 +11,31 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120509130221) do
+ActiveRecord::Schema.define(:version => 20120509200823) do
 
   create_table "images", :force => true do |t|
-    t.text     "url"
-    t.integer  "user_id"
-    t.string   "comment"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "links", :force => true do |t|
-    t.text     "url"
-    t.integer  "user_id"
-    t.string   "comment"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "posts", :force => true do |t|
     t.text     "description"
-    t.integer  "user_id"
+    t.text     "url"
+    t.integer  "poster_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
 
-  create_table "texts", :force => true do |t|
+  add_index "images", ["poster_id"], :name => "index_images_on_poster_id"
+
+  create_table "links", :force => true do |t|
+    t.text     "description"
+    t.text     "url"
+    t.integer  "poster_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "links", ["poster_id"], :name => "index_links_on_poster_id"
+
+  create_table "messages", :force => true do |t|
+    t.text     "body"
+    t.integer  "poster_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
