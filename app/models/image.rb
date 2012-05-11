@@ -7,12 +7,12 @@ class Image < Growl
   after_validation :send_photo_to_amazon
   belongs_to :user
 
-  def self.new_image(input)
-    Image.new(
-              comment: input[:comment],
-              link: input[:link],
-              )
-  end
+  # def self.new_image(input)
+  #   Image.new(
+  #             comment: input[:comment],
+  #             link: input[:link],
+  #             )
+  # end
 
 end
 # == Schema Information

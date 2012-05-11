@@ -9,6 +9,7 @@ div.row
     dd= link_to "Account", edit_user_registration_path
 
   ul.nice.tabs-content.contained
+
     li#messageFormTab{ class=("active" if @type == 'Message' || @type.nil? ) }
       = render :partial => "messages/form"
     li#imageFormTab{ class=("active" if @type == 'Image') }

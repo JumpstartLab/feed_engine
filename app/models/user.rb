@@ -14,7 +14,6 @@ class User < ActiveRecord::Base
                   :remember_me, :display_name
 
   has_many :authentications, :dependent => :destroy
-
   has_many :growls, :dependent => :destroy
   has_many :images
   has_many :messages
@@ -38,10 +37,12 @@ class User < ActiveRecord::Base
     mail = UserMailer.welcome_message(self)
     mail.deliver
   end
+
   def username
     display_name
   end
 end
+
 # == Schema Information
 #
 # Table name: users
