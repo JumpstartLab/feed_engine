@@ -5,7 +5,7 @@ describe "Dashboard" do
   let!(:user) { FactoryGirl.create(:user) }
   let!(:site_domain) { "http://#{user.display_name}.example.com" }
   before(:each) do
-    login_factory_user
+    login_factory_user(user.email)
   end
 
 
