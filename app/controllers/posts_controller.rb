@@ -17,5 +17,6 @@ class PostsController < ApplicationController
 
   def index
     @posts = current_user.posts.reverse.page(params[:page].to_i || 0)
+    @page_count = (current_user.posts.length / Array::PER_PAGE)
   end
 end

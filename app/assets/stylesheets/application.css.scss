@@ -13,19 +13,27 @@
  *= require_tree .
  */
 
-h1 {
-  font-size: 3em;
+@import "partials/colors";
+@mixin headers {
   padding-bottom: .25em;
   padding-right: .25em;
   padding-top: .25em;
   display: inline-block;
 }
 
+h1 {
+  @include headers;
+  font-size: 3em;
+
+}
+
 h2 {
+  @include headers;
   font-size: 2.25em;
 }
 
 h3 {
+  @include headers;
   font-size: 1.5em;
 }
 

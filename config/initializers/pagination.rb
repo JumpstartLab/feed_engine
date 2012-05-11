@@ -1,7 +1,7 @@
 class Array
-  @@per_page_default = 12
+  PER_PAGE = 12
 
-  def page(page_num, per_page = @@per_page_default)
+  def page(page_num, per_page = PER_PAGE)
     unless (page_num * per_page) > self.length
       start_item = page_num * per_page
       unless (start_item + per_page) > self.length

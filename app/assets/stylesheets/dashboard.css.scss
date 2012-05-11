@@ -1,23 +1,4 @@
-// Place all the styles related to the dashboard controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
-$whale: #262626;
-$dolphin: #424242;
-
-$honeycomb: #e9ba26;
-$clementine: #f0812b;
-$slushie: #5fb8dd;
-$frosting: #ea0b8c;
-
-$aloe: #50886b;
-$berry: #508395;
-$wasabi: #9eae3d;
-$grape: #92278f;
-$spice: #eb3f3c;
-$wine: #832e2f;
-
-$white: #FFFFFF;
+@import "partials/colors";
 
 p {
   color: $white;
