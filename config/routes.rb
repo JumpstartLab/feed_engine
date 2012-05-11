@@ -5,6 +5,11 @@ FeedEngine::Application.routes.draw do
   resources :text_items
   resources :link_items
   resources :image_items
+
+  constraints :subdomain => "api" do
+    resources :text_items
+  end
+
   match '', to: 'feed#show', constraints: {subdomain: /.+/}
 
   devise_for :users 
@@ -17,4 +22,3 @@ FeedEngine::Application.routes.draw do
 
   root :to => 'dashboard#show'
 end
-

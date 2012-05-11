@@ -15,4 +15,7 @@ class TextItemsController < ApplicationController
       render :template => "dashboard/show"
     end
   end
+
+  def show
+  end
 end

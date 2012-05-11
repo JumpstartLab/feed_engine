@@ -3,6 +3,7 @@ require 'spec_helper'
 describe "Dashboard" do
 
   let!(:user) { FactoryGirl.create(:user) }
+  let!(:site_domain) { "http://#{user.display_name}.example.com" }
   before(:each) do
     login_factory_user
   end
@@ -37,7 +38,7 @@ describe "Dashboard" do
         valid_post = "New post for feed test!"
         fill_in "text_item[body]", :with => valid_post
         click_on "Textify"
-        visit root_path
+        visit site_domain
         page.should have_content valid_post
       end
 
@@ -72,8 +73,7 @@ describe "Dashboard" do
           good_url = "http://google.com/test_link_for_feed"
           fill_in "link_item[url]", :with => good_url
           click_on "Linkify"
-
-          visit root_path
+          visit site_domain
           page.should have_content good_url
         end
 
@@ -131,8 +131,7 @@ describe "Dashboard" do
           good_url = "http://google.com/foo.jpg"
           fill_in "image_item[url]", :with => good_url
           click_on "Imagify"
-
-          visit root_path
+          visit site_domain
           page.should have_content good_url 
         end
 

@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe "Feed" do
   let!(:user) { FactoryGirl.create(:user) }
+  let!(:site_domain) { "http://#{user.display_name}.example.com" }
 
   before(:each) do
     login_factory_user
@@ -15,7 +16,7 @@ describe "Feed" do
           user.text_items << text_item
           user.add_stream_item(text_item)
         end
-        visit root_path
+        visit site_domain
       end
 
       it "shows all the posts before the page max is reached" do
@@ -32,7 +33,7 @@ describe "Feed" do
           user.text_items << text_item
           user.add_stream_item(text_item)
         end
-        visit root_path
+        visit site_domain
       end
 
       it "pages the posts when there are more than 12" do
