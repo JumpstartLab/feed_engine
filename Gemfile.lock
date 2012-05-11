@@ -226,6 +226,7 @@ DEPENDENCIES
   kaminari
   launchy
   pg
+  rack-test
   rails (= 3.2.3)
   redis-store (~> 1.0.0)
   resque
