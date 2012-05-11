@@ -3,15 +3,17 @@
   <% @items.each do |item| %>
     <div class="row feed_row">
       <div class="span8"> 
-        <div class="span3 time_header">
+        <div class="span3 item_header">
+          <span class="item_owner"><%= item.user.display_name %></span>
           <%= time_ago_in_words(item.created_at) %> ago
         </div>
+
         <% if item.class == TextItem %>
-          <div class="span6 triangle-border right text_item_body">
+          <div class="span6 oval-thought-border text_item_body">
             <%= item.body %>
           </div>
         <% elsif item.class == ImageItem %>
-          <div class="span6 triangle-border right">
+          <div class="span6 oval-thought-border">
             <div class="span3 body_image ">
               <%= image_tag item.url %>
             </div>
@@ -20,18 +22,16 @@
             </div>
           </div>
         <% elsif item.class == LinkItem %>
-          <div class="span6 triangle-border right">
-            <div class="">
-              <%= item.url %>
+          <div class="span6 oval-thought-border">
+            <div class="item_link">
+              <%= link_to item.url %>
             </div>
+            <br/>
             <div class="text_item_body">
               <%= item.comment %>
             </div>
           </div>
         <% end %>
-        <div class="span1 item_owner">
-          <%= item.user.display_name %>
-        </div >
       </div>
     </div>
     <% end %>
