@@ -248,7 +248,7 @@ top:45px;
 }
 }*/
 
-/*@media only screen and min-width 768px*/ {
+screen {
 .top-bar .attached>ul>li:hover>a,.top-bar .attached>ul>li:hover>span {
 background:#222;
 }
