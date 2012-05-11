@@ -1,0 +1,16 @@
+<%= simple_form_for(@authentication) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :user_id %>
+    <%= f.input :provider %>
+    <%= f.input :uid %>
+    <%= f.input :index %>
+    <%= f.input :create %>
+    <%= f.input :destroy %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

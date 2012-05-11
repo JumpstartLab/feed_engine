@@ -1,5 +1,10 @@
 FeedEngine::Application.routes.draw do
+ 
+
   root :to => 'feed#show'
+  match '/auth/:provider/callback' => 'authentications#create'
+
+  resources :authentications
   resource :dashboard, :controller => 'dashboard'
 
   resources :text_items
@@ -13,7 +18,5 @@ FeedEngine::Application.routes.draw do
     get "login" => "devise/sessions#new", :as => :login
     delete "/logout" => "devise/sessions#destroy"
   end
-
-  root :to => 'dashboard#show'
 end
 
