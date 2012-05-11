@@ -1,4 +1,4 @@
-h1 Your dashboard!
+h1 Your dashboard
 
 .tabs
   .tab-bar
@@ -6,6 +6,8 @@ h1 Your dashboard!
       - TYPES.each do |type|
         li.tab-item*{id: "#{type}"}
           a = type.to_s
+  br
+  br
   .tab-body
     ul
       - TYPES.each_with_index do |type, index|
@@ -15,5 +17,5 @@ h1 Your dashboard!
           = render "#{type_name.pluralize}/#{type_name}_form"
     script*{type: "text/html", id: "errors_list_template"}
       = render 'shared/errors_list'
-br
-= render 'posts/index'
+
+ul#feed

@@ -1,65 +1,80 @@
-$whale: #262626;
-$dolphin: #424242;
+  $whale: #262626;
+  $dolphin: #424242;
 
-$honeycomb: #e9ba26;
-$clementine: #f0812b;
-$slushie: #5fb8dd;
-$frosting: #ea0b8c;
+  $honeycomb: #e9ba26;
+  $clementine: #f0812b;
+  $slushie: #5fb8dd;
+  $frosting: #ea0b8c;
 
-$aloe: #50886b;
-$berry: #508395;
-$wasabi: #9eae3d;
-$grape: #92278f;
-$spice: #eb3f3c;
-$wine: #832e2f;
+  $aloe: #50886b;
+  $berry: #508395;
+  $wasabi: #9eae3d;
+  $grape: #92278f;
+  $spice: #eb3f3c;
+  $wine: #832e2f;
 
-$white: #FFFFFF;
+  $white: #FFFFFF;
 
-@mixin borders($style){
-  border-color: $slushie;
-  border-radius: .25em;
-  border-style: $style;
-  border-width: .25em;
-}
-
-.tabs {
-  margin: auto;
-  width: 100%;
-  .tab-bar {
-    @include borders(solid);
-    background-color: $dolphin;
-    .tab-item {
-      display:inline-block;
-      a {
-        padding: 1em;
-        color: $white;
-        font-weight: bold;
-        font-family: Helvetica;
-        letter-spacing: .1em;
-        float: left;
-        &:hover{ color: $honeycomb;}
-      }
-    }
+  @mixin borders($style, $color: $slushie){
+    border-color: $color;
+    border-radius: .25em;
+    border-style: $style;
+    border-width: .25em;
   }
 
-  .tab-body {
+  @mixin selected {
+    color: $honeycomb;
+    background-color: $whale;
+  }
 
-    .tab {
-      @include borders(dashed);
-      margin: auto;
-      position:relative;
-      p {
-        color: $wasabi;
-      }
-      .errors{
-        p{
-          color: $spice;
+  .tabs {
+    margin: auto;
+    width: 100%;
+
+    .tab-bar {
+      @include borders(solid);
+      background-color: $dolphin;
+      .tab-item {
+        display:inline-block;
+        a {
+          padding: 1em;
           font-weight: bold;
-        } 
-        li {
-          color: $white;
+          font-family: Helvetica;
+          letter-spacing: .1em;
+          float: left;
+          &:hover{
+            @include selected;
+          }
+        }
+      }
+    }
+
+    .selected {
+      a {
+        @include selected;
+      }
+    }
+
+    .tab-body {
+      background-color: $dolphin;
+      .tab {
+        @include borders(solid, $honeycomb);
+        margin: auto;
+        position:relative;
+        p {
+          color: $wasabi;
+        }
+        .errors{
+          p{
+            color: $spice;
+            font-weight: bold;
+          } 
+          li {
+            color: $white;
+          }
         }
       }
     }
   }
-}
+
+
