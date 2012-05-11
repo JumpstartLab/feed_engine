@@ -2,10 +2,9 @@ require "open-uri"
 
 class Growl < ActiveRecord::Base
   attr_accessible :comment, :link, :user, :type
-
   validates_presence_of :type
   belongs_to :user
-  has_one :meta_data
+  has_one :meta_data, :autosave => true
   has_attached_file :photo,
                     :storage => :s3,
                     :s3_credentials => "#{Rails.root}/config/s3.yml",
@@ -15,21 +14,12 @@ class Growl < ActiveRecord::Base
                                }
   scope :by_date, order("created_at DESC")
 
-  def send_photo_to_amazon
-    begin
-      self.photo = open(link)
-    rescue
-      errors.add(:link, "Photo does not exist")
-    end
+  def self.paginated_by_type(type, page)
+    by_type(type).by_date.page(page)
   end
 
-  def by_type(input)
+  def self.by_type(input)
     input ? where(type: input) : where(:type != nil)
-  end
-
-  def self.for_user(display_name)
-    user = User.find_by_display_name(display_name)
-    user ? user.growls : nil
   end
 
   ["title", "thumbnail_url", "description"].each do |method|

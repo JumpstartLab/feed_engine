@@ -7,8 +7,8 @@ class User < ActiveRecord::Base
 
   before_save :ensure_authentication_token
   validates_uniqueness_of :display_name
-  validates_format_of :display_name, :with => /^[A-Za-z\d_]+$/, message:
-            "Required. Display name must only be letters, numbers, dashes, or underscores"
+  validates_format_of :display_name, :with => /^[A-Za-z\d]+$/, message:
+            "Required. Display name must only be letters, numbers, or dashes"
 
   attr_accessible :email, :password, :password_confirmation,
                   :remember_me, :display_name
@@ -38,8 +38,8 @@ class User < ActiveRecord::Base
     mail.deliver
   end
 
-  def username
-    display_name
+  def get_growls(type, page)
+    growls.paginated_by_type(type, page)
   end
 end
 

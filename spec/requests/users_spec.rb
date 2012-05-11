@@ -115,7 +115,7 @@ describe "User pages" do
         within(".actions") do
           click_link_or_button 'Sign up'
         end
-        page.should have_content('Display name must only be letters, numbers, dashes, or underscores')
+        page.should have_content('Display name must only be letters, numbers, or dashes')
       end
 
       it "keeps you on the signup for when submitted display name is bad" do

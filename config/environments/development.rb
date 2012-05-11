@@ -8,7 +8,7 @@ Hungrlr::Application.configure do
 
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true
-
+  Paperclip.options[:command_path] = "/usr/local/bin/identify"
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false

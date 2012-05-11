@@ -5,6 +5,14 @@ class Link < Growl
   validates_length_of :comment, :within => 3..256, :allow_blank => true
   after_validation :send_photo_to_amazon
 
+  def send_photo_to_amazon
+    begin
+      self.photo = open(link)
+    rescue
+      errors.add(:link, "Photo does not exist")
+    end
+  end
+
   # def self.new_link(input)
   #   link = Link.new(
   #                     comment: input[:comment],

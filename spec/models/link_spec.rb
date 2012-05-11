@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Link do
   describe "#new" do
     let(:link) { Link.new(comment: "I love this site!", link: "http://www.hungryacademy.com") }
+    before(:each) { link.stub(:send_photo_to_amazon).and_return(true) }
 
     context "when my link and comment are valid" do
       it "should be valid" do
