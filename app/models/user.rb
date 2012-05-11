@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
             :message => "may only contain letters, numbers, dashes, and underscores." }  
 
   after_create :send_welcome_mail
+  before_save :ensure_authentication_token
 
   has_many :text_items
   has_many :image_items

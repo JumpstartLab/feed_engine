@@ -5,11 +5,12 @@ FeedEngine::Application.routes.draw do
   resources :text_items
   resources :link_items
   resources :image_items
-  match '/api/stream_items', :to => 'api/stream_items_api#index'
 
-  constraints :subdomain => "api" do
+  namespace :api do
     namespace :v1 do
-      resources :stream_items
+      resources :users, :only => [:show] do
+        resource :feed, :only => [:show]
+      end
     end
   end
   devise_for :users
