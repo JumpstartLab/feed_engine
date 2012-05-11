@@ -6,6 +6,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    set_user_from_subdomain if request.subdomain
     @posts = Kaminari.paginate_array(
                         @user.sorted_posts
                       ).page(params[:page]).per(12)
@@ -32,5 +33,11 @@ class UsersController < ApplicationController
   def login_and_notify_user
     session[:user_id] = @user.id
     @user.send_welcome_email
+  end
+
+  def set_user_from_subdomain
+    @user = User.find_by_display_name(request.subdomain)
+    # The notice does not presently appear on the homepage after redirect, remove this when it does.
+    redirect_to(root_url(:host => request.domain), :notice => "User #{request.subdomain} not found.") unless @user
   end
 end
