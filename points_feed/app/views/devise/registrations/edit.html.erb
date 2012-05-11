@@ -1,12 +1,16 @@
+<div class="main-image">
+  <img src="/assets/dashboard.jpg">
+</div>
+
 <h2>Edit Your Account</h2>
 
 <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
 
-  <%= f.input :password %>
-  <%= f.input :password_confirmation %>
-  <%= f.input :current_password %>
+  <%= f.password_field :current_password, :placeholder => "Current Password" %><br>
+  <%= f.password_field :password, :placeholder => "New Password" %><br>
+  <%= f.password_field :password_confirmation, :placeholder => "New Password Confirmation" %><br>
 
-  <%= f.button :submit, "Update" %>
+  <%= f.button :submit, "Update", :class => "btn btn-info" %>
 <% end %>
 
 <h3>Cancel my account</h3>

@@ -1,12 +1,40 @@
-.dashboard-left{
-  border-right-style: solid;
-  border-color: gray;
-  border-width: 1px;
-  padding: 5px;
+.main-image{
+  position: fixed;
+  min-width: 1024px;
+  min-height: 800px;
+  top: 39px;
+  right: 0px;
+  left: 0px;
+  bottom: 0px;
+  overflow: hidden;
+  z-index: -4;
 }
 
-.header{
-  border-bottom-style: solid;
-  border-color:gray;
-  border-width: 1px;
+.account-info{
+  background: rgba(64, 64, 64, 0.5);
+  padding: 10px
+}
+
+.create-post{
+  left-padding: 10px;
+  background: rgba(64, 64, 64, 0.5);
+  min-height: 450px;
+}
+
+.create-post label{
+  color: white;
+}
+
+.recent-posts{
+  background: rgba(64, 64, 64, 0.5);
+  min-height: 450px;
+}
+
+body {
+  color:white;
+}
+
+hr{
+  color: gray;
+  opacity: 0.2
 }
