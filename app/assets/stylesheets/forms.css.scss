@@ -3,13 +3,25 @@
 .post-form {
   margin: 1em;
   label {
-    color:  $berry;
+    color:  $spice;
   }
 
   textarea {
     width: 35em;
     height: 10em;
     padding: .25em;
+  }
+
+  .button{
+    background-color: $whale;
+    color: $white;
+    cursor: pointer;
+    border-style: solid;
+    border-color: $honeycomb;
+    border-radius: .25em;
+    border-width: .1em;
+    padding: .5em;
+    display: inline-block;
   }
 }
 

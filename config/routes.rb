@@ -12,7 +12,7 @@ FeedEngine::Application.routes.draw do
   devise_scope :user do
     get 'sign_in', :to => 'devise/sessions#new', :as => 'sign_in'
   end
-
+  
   resources :posts, only: [:create, :index]
   resources :users
   resources :texts
