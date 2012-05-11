@@ -13,4 +13,8 @@ class ImagePostsController < ApplicationController
       render :new
     end
   end
+
+  def show
+    @image_post = ImagePost.find(params[:id])
+  end
 end

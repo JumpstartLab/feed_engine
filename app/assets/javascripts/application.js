@@ -14,3 +14,22 @@
 //= require jquery_ujs
 //= require mustache
 //= require_tree .
+
+$(function() {
+
+  $("#add_new_image_post").click(function(event){
+    $("#new_image").slideToggle();
+    event.preventDefault();
+  });
+
+  $("#add_new_link_post").click(function(event){
+    $("#new_link").slideToggle();
+    event.preventDefault();
+  });
+
+  $("#add_new_text_post").click(function(event){
+    $("#new_text").slideToggle();
+    event.preventDefault();
+  });
+
+});

@@ -14,10 +14,11 @@
 ActiveRecord::Schema.define(:version => 20120510213905) do
 
   create_table "image_posts", :force => true do |t|
-    t.string   "url"
+    t.string   "remote_image_url"
     t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.string   "image"
   end
 
   create_table "link_posts", :force => true do |t|

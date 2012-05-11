@@ -10,6 +10,9 @@ gem 'decent_exposure'
 gem 'squeel'
 gem 'devise'
 gem 'bootstrap-sass', '~> 2.0.2'
+gem 'carrierwave'
+gem 'rmagick'
+gem 'fog'
 
 group :production do
   gem 'pg'
