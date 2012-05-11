@@ -1,8 +1,4 @@
 h1= "#{@user.username}'s Feed"
-h1
-  = @user.display_name
-  | 's Feed
-
 br
 
 -if @growls.empty?
@@ -13,13 +9,13 @@ br
 -else
   dl.sub-nav
     dt Filter:
-    dd.active
+    dd{ class=("active" if params[:type] == nil ) }
       a(href="/") All
-    dd
+    dd{ class=("active" if params[:type] == 'Image' ) }
       a(href="?type=Image") Images
-    dd
+    dd{ class=("active" if params[:type] == 'Message' ) }
       a(href="?type=Message") Messages
-    dd
+    dd{ class=("active" if params[:type] == 'Link' ) }
       a(href="?type=Link") Links
   = render :partial => "shared/growl", :collection => @growls
   = paginate @growls

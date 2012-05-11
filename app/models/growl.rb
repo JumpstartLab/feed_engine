@@ -15,7 +15,15 @@ class Growl < ActiveRecord::Base
                                }
   scope :by_date, order("created_at DESC")
 
-  def self.by_type(input)
+  def send_photo_to_amazon
+    begin
+      self.photo = open(link)
+    rescue
+      errors.add(:link, "Photo does not exist")
+    end
+  end
+
+  def by_type(input)
     input ? where(type: input) : where(:type != nil)
   end
 
@@ -24,26 +32,18 @@ class Growl < ActiveRecord::Base
     user ? user.growls : nil
   end
 
-  def title
-    meta_data ? meta_data.title : ""
+  ["title", "thumbnail_url", "description"].each do |method|
+    define_method method.to_sym do
+      meta_data ? meta_data.send(method.to_sym) : ""
+    end
   end
 
-  def thumbnail_url
-    meta_data ? meta_data.thumbnail_url : ""
+  ["link", "message", "image"].each do |method|
+     define_method "#{method}?".to_sym do
+        self.type == method.capitalize
+    end
   end
 
-  def description
-    meta_data ? meta_data.description : ""
-  end
-  def image?
-    self.type == "Image"
-  end
-  def message?
-    self.type == "Message"
-  end
-  def link?
-    self.type == "Link"
-  end
 end
 
 # == Schema Information

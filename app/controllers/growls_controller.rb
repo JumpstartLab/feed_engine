@@ -1,10 +1,7 @@
 class GrowlsController < ApplicationController
   def show
-    subdomain = request.subdomain
-    @user = User.where{display_name.matches subdomain}.first
-    if @user
-      @growls = @user.growls.by_type(params[:type]).by_date.page(params[:page])
-    end
+    @user = User.for_user(request.subdomain)
+    @growls = @user.growls.by_type(params[:type]).by_date.page(params[:page]) if @user
   end
 
   def create

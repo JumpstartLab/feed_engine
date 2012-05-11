@@ -1,11 +1,10 @@
 .row
   h4 Image
-  .growl_avatar_wrapper= growl.user.username
   .growl_post
     span.growl_user= growl.user.username
     span.growl_posted &nbsp; posted: &nbsp;
     = growl.comment
     br
     = image_tag growl.photo(:medium)
-  .row
+    br
     i.growl_time_ago= "#{time_ago_in_words growl.created_at} ago"

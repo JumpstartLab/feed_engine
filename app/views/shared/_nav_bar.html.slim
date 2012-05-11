@@ -1,10 +1,11 @@
 .container.top-bar.home-border.blue-border
   .attached
     .name
-      a(href="#") Home
+      a(href="http://#{request.domain}#{dashboard_path}") Home
     ul.right
-      li
-        a(href="#{dashboard_path}") Dashboard
+      - if user_signed_in?
+        li
+          a(href="http://#{current_user.display_name}.#{request.domain}") Your Feed
       li.download
         - if user_signed_in?
           p= link_to "Sign out", destroy_user_session_path, class: "small blue nice button merge-down", method: "delete"

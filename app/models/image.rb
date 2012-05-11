@@ -14,14 +14,6 @@ class Image < Growl
               )
   end
 
-  def send_photo_to_amazon
-    begin
-      self.photo = open(link)
-    rescue
-      errors.add(:link, "Photo does not exist")
-    end
-  end
-
 end
 # == Schema Information
 #
