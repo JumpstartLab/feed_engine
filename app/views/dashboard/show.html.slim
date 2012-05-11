@@ -157,11 +157,5 @@ div.span7
   div#account
     div
       h2 Account Settings
-      br
-      h4 Change Password
-      p New Password
-      p Confirm Password
-      br
-      h4 Change Email
-      p New Email
+      = render partial: "users/update_password"
       = link_to "Disable Account", nil, :class => "btn btn-medium"

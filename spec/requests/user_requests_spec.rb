@@ -4,40 +4,8 @@ describe User do
   let(:user) { Fabricate(:user) }
 
   context "who is authenticated" do
-    let!(:user) { Fabricate(:user) }
-
-    before(:all) do
+    before(:each) do
       login_as(user)
-    end
-
-    context "and has made posts" do
-      before(:each) do
-        @messages = []
-        @links = []
-        @images = []
-        3.times do
-          @messages << Fabricate(:message)
-          @images << Fabricate(:image)
-          @links << Fabricate(:link)
-        end
-      end
-
-      context "views their posts" do
-        before(:each) do
-          visit user_path(user)
-        end
-        it "sees all of their posts" do
-          @messages.each do |message|
-            page.should have_content message.body
-          end
-          @images.each do |image|
-            page.should have_content image.description
-          end
-          @links.each do |link|
-            page.should have_content link.description
-          end
-        end
-      end
     end
 
     describe "and visits the dashboard account tab" do
@@ -46,28 +14,24 @@ describe User do
       end
 
       it "sees a form to change password" do
-        page.should have_content "Password"
-        page.should have_content "Password confirmation"
+        page.should have_field "Password"
+        page.should have_field "Password confirmation"
       end
 
       it "can change their password with valid input" do
-        click_button 'Change password'
         user.password = 'foobar'
         fill_password_change_form_for(user)
+        click_button 'Change Password'
         click_link "Log out"
         login_as(user)
-        page.should have_content "Logged in."
+        page.should have_content "Logged in!"
         current_path.should == dashboard_path
       end
 
       it "cannot change their password with invalid input" do
-        click_button 'Change password'
         user.password = '123'
         fill_password_change_form_for(user)
-        click_link "Log out"
-        login_as(user)
-        page.should_not have_content "Logged in."
-        current_path.should == dashboard_path
+        click_button 'Change Password'
       end
     end
   end
@@ -78,6 +42,16 @@ describe User do
     it "can sign up from the home page" do
       visit root_path
       page.should have_link "Sign Up"
+    end
+
+    it "can login using a form on the home page" do
+      visit root_path
+      page.should have_field "Email"
+      page.should have_field "Password"
+      fill_login_form_as(user)
+      click_button "Log In"
+      page.should have_content "Logged in!"
+      current_path.should == dashboard_path
     end
 
     describe "signing up" do
@@ -120,7 +94,7 @@ describe User do
         it "with an empty email address" do
           fill_in "Email", :with => ""
           expect { click_button "Sign Up" }.to change { User.count }.by(0)
-          page.should have_content "Email can't be blank"
+          page.should have_content "Email is required"
         end
 
         it "with an already-used email address" do
@@ -144,7 +118,7 @@ describe User do
         it "with an invalid display name" do
           fill_in "Display name", :with => "test test"
           expect { click_button "Sign Up" }.to change { User.count }.by(0)
-          page.should have_content "Display name must be only letters, numbers or dashes"
+          page.should have_content "Display name must contain only letters, numbers or dashes"
         end
 
         it "with an empty password" do

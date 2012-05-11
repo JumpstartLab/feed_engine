@@ -6,5 +6,6 @@ class DashboardController < ApplicationController
     @message = Message.new
     @image = Image.new
     @link = Link.new
+    @user = current_user
   end
 end
