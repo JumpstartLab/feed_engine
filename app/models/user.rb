@@ -38,6 +38,9 @@ class User < ActiveRecord::Base
     mail = UserMailer.welcome_message(self)
     mail.deliver
   end
+  def username
+    display_name
+  end
 end
 # == Schema Information
 #

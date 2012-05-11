@@ -11,7 +11,9 @@ describe Image do
     it "fails" do
       fill_in "growl[link]", :with => "abc123"
       click_on "Create Image"
-      page.should have_content "URL must start with http and be a .jpg, .gif, or .png"
+      pending "ERROR MESSAGE SHOULD BE MORE SPECIFIC"
+      # XXX ERROR MESSAGE SHOULD BE MORE SPECIFIC.
+      page.should have_content "There was an error saving this image."
     end
     it "passes" do
       fill_in "growl[link]", :with => "http://www.justanimal.org/images/gorilla-10.jpg"

@@ -1,30 +1,10 @@
-table
-  -if growl.type == "Message"
-    tr
-      td
-        b Comment:
-        = growl.comment
-      td
-        b= growl.created_at.strftime("%m/%d/%Y")
-  -if growl.type == "Link"
-    tr
-      td
-        b Link:
-        = link_to growl.link
-      -if growl.comment != ""
-        td
-          b Comment:
-          = growl.comment
-      td
-        b= growl.created_at.strftime("%m/%d/%Y")
-
-  -if growl.type == "Image"
-    tr
-      td
-        = image_tag growl.photo(:medium)
-      -if growl.comment != ""
-        td
-          b Comment:
-          = growl.comment
-      td
-        b= growl.created_at.strftime("%m/%d/%Y")
+-if growl.message?
+  = render partial: "messages/show", locals: { growl: growl }
+-if growl.link?
+  = render partial: "links/show", locals: { growl: growl}
+-elsif growl.image?
+  = render partial: "images/show", locals: { growl: growl}
+.growl_points
+  a.small.green.button.radius.points POINTS!
+br
+hr

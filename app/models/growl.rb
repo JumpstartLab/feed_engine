@@ -15,8 +15,12 @@ class Growl < ActiveRecord::Base
                                }
   scope :by_date, order("created_at DESC")
 
-  def self.for_user(name)
-    user = User.where{display_name.matches name}.first
+  def self.by_type(input)
+    input ? where(type: input) : where(:type != nil)
+  end
+
+  def self.for_user(display_name)
+    user = User.find_by_display_name(display_name)
     user ? user.growls : nil
   end
 
@@ -31,7 +35,15 @@ class Growl < ActiveRecord::Base
   def description
     meta_data ? meta_data.description : ""
   end
-
+  def image?
+    self.type == "Image"
+  end
+  def message?
+    self.type == "Message"
+  end
+  def link?
+    self.type == "Link"
+  end
 end
 
 # == Schema Information
