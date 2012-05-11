@@ -14,10 +14,15 @@ class User < ActiveRecord::Base
                   :remember_me, :display_name
 
   has_many :authentications, :dependent => :destroy
-  has_many :growls
+
+  has_many :growls, :dependent => :destroy
   has_many :images
   has_many :messages
   has_many :links
+
+  def relation_for(type)
+    self.send(type.downcase.pluralize.to_sym).scoped rescue text_posts.scoped
+  end
 
   def twitter_client
     return nil unless twitter_oauth = authentications.where(provider: "twitter").first
