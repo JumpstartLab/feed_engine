@@ -7,12 +7,12 @@ class Image < Growl
   after_validation :send_photo_to_amazon
   belongs_to :user
 
-  def self.new_image(input)
-    Image.new(
-              comment: input[:comment],
-              link: input[:link],
-              )
-  end
+  # def self.new_image(input)
+  #   Image.new(
+  #             comment: input[:comment],
+  #             link: input[:link],
+  #             )
+  # end
 
   def send_photo_to_amazon
     begin
@@ -21,7 +21,6 @@ class Image < Growl
       errors.add(:link, "Photo does not exist")
     end
   end
-
 end
 # == Schema Information
 #

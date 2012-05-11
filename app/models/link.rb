@@ -5,18 +5,19 @@ class Link < Growl
   validates_length_of :comment, :within => 3..256, :allow_blank => true
   after_validation :send_photo_to_amazon
 
-  def self.new_link(input)
-    link = Link.new(
-                      comment: input[:comment],
-                      link: input[:link],
-                      )
-    link.create_meta_data(
-                           description: input[:description],
-                           title: input[:title],
-                           thumbnail_url: input[:thumbnail_url]
-                           )
-    link
-  end
+  # def self.new_link(input)
+  #   link = Link.new(
+  #                     comment: input[:comment],
+  #                     link: input[:link],
+  #                     )
+  #   link.create_meta_data(
+  #                          description: input[:description],
+  #                          title: input[:title],
+  #                          thumbnail_url: input[:thumbnail_url]
+  #                          )
+  #   link
+  # end
+  
   def send_photo_to_amazon
     begin
       self.photo = open(link)
