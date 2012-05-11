@@ -2,18 +2,17 @@
   .six.columns
     = simple_form_for @growl, :url => growls_path, :html => { :id => 'link_form' } do |f|
       = f.input :type, :as => :hidden, :input_html => { :value => "Link" }
-      = f.label :link,  "URL to Link"
-      = f.input :link, :class => "medium input-text required", :maxlength => "2048"
-      = f.input :comment
+      = f.input :link, :class => "medium input-text required", :maxlength => "2048", label: "URL to Link", as: :string, input_html: { id: "link_link"}
+      = f.input :comment, input_html: { id: "link_comment" }
       p
         | You have&nbsp;
         span#charsLeftLink
         |  chars left.
       = simple_fields_for :meta_data do |m|
-        = m.input :title, as: :hidden
-        = m.input :description, as: :hidden
-        = m.input :thumbnail_url, as: :hidden
-      = f.submit "Create Link"
+        = m.input :title, as: :hidden, :input_html => { id: "link_title"}
+        = m.input :description, as: :hidden, :input_html => { id: "link_description"}
+        = m.input :thumbnail_url, as: :hidden, :input_html => { id: "link_thumbnail_url"}
+      = f.button :submit, "Create Link"
   .six.columns
     #loading(style="display:none;")= image_tag "loading_big.gif"
     h4#title(style="display:none;")
