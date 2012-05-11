@@ -2,6 +2,15 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
+$.namespace = {
+  activeTabId: null,
+  activateTab: (tabId)->
+    if $.namespace.activateTabId
+      $("##{$.namespace.activateTabId}").removeClass('selected')
+    $("##{tabId}").addClass('selected')
+    $.namespace.activateTabId = tabId
+  }
+
 update = ->
   $.ajax({
     type: "GET",
@@ -88,6 +97,7 @@ jQuery ->
   $('.tab-body ul').children().hide()
   $('.tab-body ul').children().first().show()
   $('.tab-item').click ->
+    $.namespace.activateTab(this['id'])
     tabId = "#{this['id']}-tab".toLowerCase()
     $('.tab-body ul').children().hide()
     $("##{tabId}").show()

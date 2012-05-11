@@ -21,7 +21,7 @@ $white: #FFFFFF;
 
 
 .post {
-  margin: auto;
+  margin: 2em 0em;
   .postbody{
     width:100%;
     background-color: $dolphin;
@@ -29,7 +29,6 @@ $white: #FFFFFF;
     border-width:.25em;
     border-radius: 4px;
     border-color: $clementine;
-    margin: 2em auto;
     padding: 1em;
 
     &:nth-child(odd){
