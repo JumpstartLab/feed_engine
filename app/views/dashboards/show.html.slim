@@ -12,6 +12,7 @@ br
 h1 Your Stream Playa
 div id="posts" data-json-url="#{dashboard_url(format: :json)}"
   - @posts.each do |post|
+    - post = post.postable
     div class="post"
       - if post.class == ImagePost
         = image_tag(post.url)

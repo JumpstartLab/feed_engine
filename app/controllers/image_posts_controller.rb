@@ -4,7 +4,7 @@ class ImagePostsController < ApplicationController
   end
 
   def create
-    @image_post = ImagePost.new(params[:image_post])
+    @image_post = current_user.image_posts.create(params[:image_post])
     if !@image_post.new_record?
       flash[:notice] = "Your message was saved!"
       redirect_to dashboard_path

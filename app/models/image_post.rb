@@ -22,7 +22,7 @@ class ImagePost < ActiveRecord::Base
     message: "Photo url must end in .jpeg, .jpg, .gif, .bmp, or .png"
   validates_length_of :description, maximum: 256
 
-  has_one :post, :as => :postable
+  has_one :post, :as => :postable, dependent: :destroy
   has_one :user, :through => :post
 
   def self.user

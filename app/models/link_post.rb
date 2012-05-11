@@ -19,7 +19,7 @@ class LinkPost < ActiveRecord::Base
     message: "Url must begin with http or https"
   validates_length_of :description, maximum: 256
 
-  has_one :post, :as => :postable
+  has_one :post, :as => :postable, dependent: :destroy
   has_one :user, :through => :post
 
   def self.user

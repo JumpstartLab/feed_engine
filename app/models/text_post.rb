@@ -18,7 +18,7 @@ class TextPost < ActiveRecord::Base
   # has_one :post#, :as => :feed
   # has_one :user#, :through => :post
 
-  has_one :post, :as => :postable
+  has_one :post, :as => :postable, dependent: :destroy
   has_one :user, :through => :post
 
   def create_post
