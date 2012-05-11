@@ -56,13 +56,13 @@ describe "User pages" do
         last_email.subject.should == "Welcome to Hungrlr!"
       end
 
-      it "sends you to the dashboard" do
+      it "sends you to a page asking you to connect with twitter" do
         fill_in 'user_email', with: 'foomeh@bar.com'
         fill_in 'user_display_name', with: 'displayname5'
         fill_in 'user_password', with: 'hungry'
         fill_in 'user_password_confirmation', with: 'hungry'
         within(".actions") { click_link_or_button 'Sign up' }
-        current_path.should == dashboard_path
+        current_path.should == new_authentication_path
       end
 
       # Unsuccessful Signup

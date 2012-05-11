@@ -33,6 +33,15 @@ class User < ActiveRecord::Base
                         :oauth_token_secret => twitter_oauth.secret)
   end
 
+  def github_client
+    return nil unless github_oauth = authentications.where(provider: "github").first
+
+    Github::Client.new(:consumer_key => GITHUB_KEY,
+                        :consumer_secret => GITHUB_SECRET,
+                        :oauth_token => github_oauth.token,
+                        :oauth_token_secret => github_oauth.secret)
+  end
+
   def send_welcome_message
     mail = UserMailer.welcome_message(self)
     mail.deliver

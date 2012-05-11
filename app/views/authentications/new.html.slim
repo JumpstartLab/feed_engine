@@ -1,0 +1,6 @@
+h1 Thanks for signing up!
+h3 Would you like to link your account with any of these services?
+ul.block-grid.two-up
+  li= link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter), class: "btn-auth btn-twitter large"
+  li= link_to "Sign in with Github", user_omniauth_authorize_path(:github), class: "btn-auth btn-github large"
+  li= link_to "No thanks, just take me to my dashboard", dashboard_path, class: "large green nice button radius"

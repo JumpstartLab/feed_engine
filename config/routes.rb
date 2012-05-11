@@ -12,7 +12,8 @@ Hungrlr::Application.routes.draw do
 
   match '/auth/:provider/callback' => 'authentications#create'
 
-  resources :growls, :images, :links, :messages
+  resources :growls, :images, :links, :messages, :authentications
+
   resource :dashboard
 
   namespace :api do
