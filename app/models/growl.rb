@@ -20,7 +20,7 @@ class Growl < ActiveRecord::Base
   end
 
   def self.for_user(display_name)
-    user = User.where{username.matches display_name}.first
+    user = User.find_by_display_name(display_name)
     user ? user.growls : nil
   end
 
