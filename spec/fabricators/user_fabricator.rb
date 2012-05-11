@@ -11,7 +11,7 @@
 #
 
 Fabricator(:user) do
-  display_name 'display_name'
+  display_name 'display-name'
   email Faker::Internet.email
   password 'hungry'
 end

@@ -7,6 +7,6 @@ class HomeController < ApplicationController
                           @user.sorted_posts
                         ).page(params[:page]).per(12)
     end
-    redirect_to user_path(current_user) if current_user
+    redirect_to dashboard_path if current_user
   end
 end

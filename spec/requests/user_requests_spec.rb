@@ -3,29 +3,28 @@ require 'spec_helper'
 describe User do
   context "who is authenticated" do
     let!(:user) { Fabricate(:user) }
+
     context "and has made posts" do
       before(:each) do
-        @messages = []
-        @links = []
-        @images = []
-        20.times do
-          @messages << Fabricate(:message)
-          @images << Fabricate(:image)
-          @links << Fabricate(:link)
+        3.times do
+          Fabricate(:message, :poster_id => user.id)
+          Fabricate(:image, :poster_id => user.id)
+          Fabricate(:link, :poster_id => user.id)
         end
       end
-      context "views their posts" do
+      context "visits their feed" do
         before(:each) do
           visit user_path(user)
         end
-        it "sees all of their posts" do
-          @messages.each do |message|
+
+        it "and sees their posts" do
+          user.messages.each do |message|
             page.should have_content message.body
           end
-          @images.each do |image|
+          user.images.each do |image|
             page.should have_content image.description
           end
-          @links.each do |link|
+          user.links.each do |link|
             page.should have_content link.description
           end
         end
@@ -40,6 +39,16 @@ describe User do
     it "can sign up from the home page" do
       visit root_path
       page.should have_link "Sign Up"
+    end
+
+    it "can login using a form on the home page" do
+      visit root_path
+      page.should have_field "Email"
+      page.should have_field "Password"
+      fill_login_form_as(user)
+      click_button "Log In"
+      page.should have_content "Logged in!"
+      current_path.should == dashboard_path
     end
 
     describe "signing up" do

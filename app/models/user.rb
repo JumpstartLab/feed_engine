@@ -13,9 +13,14 @@
 # Users of the site
 class User < ActiveRecord::Base
   has_secure_password
+  has_many :messages, :foreign_key => 'poster_id'
+  has_many :images, :foreign_key => 'poster_id'
+  has_many :links, :foreign_key => 'poster_id'
+
   default_scope order(:created_at)
 
   attr_accessible :email, :password, :password_confirmation, :display_name
+
   validates :email, :uniqueness => true
   validates_presence_of :email, :message => "is required."
   validates :password, :length => { :minimum => 6 }, :allow_blank => true

@@ -3,6 +3,8 @@
   = link_to 'sign out', logout_path
   = render :partial => "users/public"
 - else
-  = link_to 'Sign Up', signup_path
-  = " | "
-  = link_to 'log in', login_path
+  .span5
+    = link_to 'Sign Up', signup_path, class: "btn btn-primary btn-large"
+  .span5
+    h3 Log in
+    = render :partial => "sessions/form"
