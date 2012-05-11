@@ -1,15 +1,18 @@
 div.row
   h1 Dashboard
+  p= link_to "Link your Twitter account", user_omniauth_authorize_path(:twitter)
 
   dl.nice.contained.tabs
-    dd= link_to "Add an Image", "#imageForm", class: "active"
-    dd= link_to "Add a Link", "#linkForm"
-    dd= link_to "Add a Message", "#messageForm"
+    dd= link_to "Add a Message", "#messageForm", class: ("active" if @type == 'Message' || @type.nil? )
+    dd= link_to "Add an Image", "#imageForm", class: ("active" if @type == 'Image')
+    dd= link_to "Add a Link", "#linkForm", class: ("active" if @type == 'Link')
     dd= link_to "Account", edit_user_registration_path
 
   ul.nice.tabs-content.contained
-    li.active#imageFormTab= render :partial => "/images/form"
-    li#linkFormTab= render :partial => "/links/form"
-    li#messageFormTab= render :partial => "messages/form"
 
-  p= link_to "Link your Twitter account", user_omniauth_authorize_path(:twitter)
+    li#messageFormTab{ class=("active" if @type == 'Message' || @type.nil? ) }
+      = render :partial => "messages/form"
+    li#imageFormTab{ class=("active" if @type == 'Image') }
+      = render :partial => "/images/form"
+    li#linkFormTab{ class=("active" if @type == 'Link') }
+      = render :partial => "/links/form"

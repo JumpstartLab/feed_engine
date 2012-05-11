@@ -1,0 +1,11 @@
+.row
+  h4 Links
+  .growl_avatar_wrapper= image_tag growl.photo(:thumb)
+  .growl_post
+    span.growl_user
+      = growl.user.username
+      span.growl_posted &nbsp; posted: &nbsp;
+    = link_to growl.title, growl.link
+    .row.comments= growl.description
+    .row
+      i.growl_time_ago= "#{time_ago_in_words growl.created_at} ago"

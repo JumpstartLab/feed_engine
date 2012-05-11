@@ -1,11 +1,14 @@
-.container.top-bar.home-border
+.container.top-bar.home-border.blue-border
   .attached
     .name
+      a(href="#") Home
     ul.right
+      li
+        a(href="#{dashboard_path}") Dashboard
       li.download
         - if user_signed_in?
-          = link_to "Sign out", destroy_user_session_path, class: "small blue nice button", method: "delete"
+          p= link_to "Sign out", destroy_user_session_path, class: "small blue nice button merge-down", method: "delete"
         - else
           p
-            = link_to "Sign up", signup_path, class: "small green button radius"
-            = link_to "Sign in", new_user_session_path, class: "small blue button radius"
+            = link_to "Sign up", signup_path, class: "small blue nice button src-download merge-down"
+            = link_to "Sign in", new_user_session_path, class: "small blue nice button src-download merge-down"

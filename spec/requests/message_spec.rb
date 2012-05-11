@@ -5,17 +5,17 @@ describe Message do
   describe "Creating a message" do
     before(:each) do
       login(user)
-      visit new_message_path
+      visit dashboard_path
     end
 
     it "passes" do
-      fill_in "message[comment]", :with => "I love this site!"
+      fill_in "growl[comment]", :with => "I love this site!"
       click_on "Create Message"
-      page.should have_content "Message posted succesfully."
+      page.should have_content "Your message has been created."
     end
 
     it "fails" do
-      fill_in "message[comment]", :with => ""
+      fill_in "growl[comment]", :with => ""
       click_on "Create Message"
       page.should have_content "You must provide a message."
     end

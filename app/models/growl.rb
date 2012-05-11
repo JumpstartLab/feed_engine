@@ -1,21 +1,26 @@
 require "open-uri"
 
 class Growl < ActiveRecord::Base
-  attr_accessible :comment, :link
+  attr_accessible :comment, :link, :user, :type
+
   validates_presence_of :type
   belongs_to :user
   has_one :meta_data
   has_attached_file :photo,
-      :storage => :s3,
-      :s3_credentials => "#{Rails.root}/config/s3.yml",
-      :styles => {
-                    :medium => "300x300>",
-                    :thumb => "100x100>"
-                 }
+                    :storage => :s3,
+                    :s3_credentials => "#{Rails.root}/config/s3.yml",
+                    :styles => {
+                                  :medium => "300x300>",
+                                  :thumb => "100x100>"
+                               }
   scope :by_date, order("created_at DESC")
 
+  def self.by_type(input)
+    input ? where(type: input) : where(:type != nil)
+  end
+
   def self.for_user(display_name)
-    user = User.where{username.matches display_name}.first
+    user = User.find_by_display_name(display_name)
     user ? user.growls : nil
   end
 
@@ -30,7 +35,15 @@ class Growl < ActiveRecord::Base
   def description
     meta_data ? meta_data.description : ""
   end
-
+  def image?
+    self.type == "Image"
+  end
+  def message?
+    self.type == "Message"
+  end
+  def link?
+    self.type == "Link"
+  end
 end
 
 # == Schema Information
