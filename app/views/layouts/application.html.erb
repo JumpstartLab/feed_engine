@@ -32,13 +32,32 @@
       <div class="content">
         <div class="row">
           <div class="span3">
-            <div class="well sidebar-nav">
+            <div class="login-container sidebar-nav">
               <a class="brand" href="/"><h1>Trout</h1></a>
 
-        <div class="row">
-           <div class="span12">
-              <%= yield %>
-            </div>
+              <ul class="nav">
+                <% if user_signed_in? %>
+                  <li><%= link_to "Dashboard", dashboard_path %></li>
+                  <li><%= link_to "Log Out", destroy_user_session_path, :method => :delete %></li>
+                <% else %>
+                  <br/>
+                  <h2>Login</h2>
+                  <%= form_for :user, :url => user_session_path do |f| %>
+                    <%= f.label :email %>
+                    <%= f.email_field :email %>
+                    <%= f.label :password %>
+                    <%= f.password_field :password %>
+                    <div><%= f.submit "Log In" %></div>
+                  <% end %>
+                  <li><%= link_to "Sign Up", "/signup"  %></li>
+                <% end %>
+              </ul>
+            </div><!--/.well -->
+          </div><!--/span-->
+
+          <div class="span9">
+            <%= yield %>
+          </div>
         </div><!--/row-->
       </div><!--/content-->
 

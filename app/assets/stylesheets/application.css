@@ -57,3 +57,17 @@
 body {
   background-image: url("../images/groovepaper.png")
 }
+
+.nav-item {
+  font-size: 24px;
+}
+.login-container {
+  min-height: 140px; 
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #F0F5F2;
+  border: 1px solid #eee;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
