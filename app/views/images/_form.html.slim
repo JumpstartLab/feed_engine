@@ -1,12 +1,12 @@
-= simple_form_for @image, :html => { :id => 'image_form' } do |f|
-  = f.label :link,  "URL to Link"
-  = f.url_field :link, :class => "medium input-text required", :maxlength => "2048"
+= simple_form_for @growl, :url => growls_path, :html => { :id => 'image_form' } do |f|
+  = f.input :type, :as => :hidden, :input_html => { :value => "Image" }
+  = f.input :link, :class => "medium input-text required", :maxlength => "2048"
   = f.input :comment
   p
     | You have&nbsp;
     span#charsLeftImage
     |  chars left.
-  = f.button :submit
+  = f.submit "Create Image"
 
 coffee:
   jQuery ->
