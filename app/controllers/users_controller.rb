@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!, except: [:show, :new, :create]
   
   def show
-    @user = User.find(params[:id])
+    @user = User.find_by_display_name(request.subdomain)
     @posts = @user.posts
     
     respond_to do |format|
