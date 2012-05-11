@@ -34,9 +34,7 @@ class UsersController < ApplicationController
     if @user.update_attributes(params[:user])
       redirect_to dashboard_path, notice: "Password changed"
     else
-      @message = Message.new
-      @image = Image.new
-      @link = Link.new
+      @message, @image, @link = Message.new, Image.new, Link.new
       retain_password
       render "dashboard/show"
     end
