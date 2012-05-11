@@ -5,22 +5,27 @@ describe Link do
   describe "Creating a link" do
     before(:each) do
       login(user)
-      visit new_link_path
+      visit dashboard_path
     end
 
     it "passes" do
-      fill_in "link[link]", :with => "http://abc.com/"
-      fill_in "link[comment]", :with => "wooo"
-      click_on "Create Link"
-      page.should have_content "Link posted succesfully."
+      within("#link_form") do
+        fill_in "growl[link]", :with => "http://abc.com/"
+        fill_in "growl[comment]", :with => "wooo"
+        click_on "Create Link"
+      end
+      page.should have_content "Your link has been created."
     end
 
     context "When I do not input a link" do
       it "fails" do
-        fill_in "link[link]", :with => ""
-        fill_in "link[comment]", :with => "I love this site!"
-        click_on "Create Link"
-        page.should have_content "There was an error."
+        within("#link_form") do
+          fill_in "growl[link]", :with => ""
+          fill_in "growl[comment]", :with => "I love this site!"
+          click_on "Create Link"
+          # XXX PROBABLY NOT FILLING OUT THE RIGHT FIELD.
+        end
+        page.should have_content "You must provide a link."
       end
     end
   end

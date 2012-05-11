@@ -1,7 +1,7 @@
 require "open-uri"
 
 class Growl < ActiveRecord::Base
-  attr_accessible :comment, :link, :user
+  attr_accessible :comment, :link, :user, :type
 
   validates_presence_of :type
   belongs_to :user
