@@ -15,8 +15,16 @@ class Post < ActiveRecord::Base
   belongs_to :postable, :polymorphic => true, dependent: :destroy
 
   def as_json(*params)
-    super(:only => [:user_id], :methods => [:postable])
+    post = self.postable
+    if post.class == ImagePost
+      {:photo => post.image.medium, :description => post.description,
+        :created_at => post.created_at}
+    elsif post.class == LinkPost
+      {:link => post.url, :description => post.description,
+        :created_at => post.created_at}
+    elsif post.class == TextPost
+      {:text => post.text, :created_at => post.created_at}
+    end
   end
-
 
 end

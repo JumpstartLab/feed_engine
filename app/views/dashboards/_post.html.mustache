@@ -1,3 +1,13 @@
 <div class="post">
-  {{user_id}}
+  {{#photo}}
+    {{#image}}
+      <img src="{{url}}">
+    {{/image}}
+  {{/photo}}
+  {{#link}}
+    {{link}}
+  {{/link}}
+  {{#text}}
+    {{text}}
+  {{/text}}
 </div>
