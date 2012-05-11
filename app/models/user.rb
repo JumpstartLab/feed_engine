@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   has_many :image_items
   has_many :link_items
   has_many :stream_items
+  has_many :authentications
 
   def add_stream_item(item)
     stream_items << StreamItem.new(:streamable_id => item.id, 
