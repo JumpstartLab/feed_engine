@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   validates :display_name,
     :presence => true,
     :format => {
-      :with => /^[a-zA-Z\d\-_]*$/,
+      :with => /^[a-zA-Z\d\-]*$/,
       :message => "must contain only letters, numbers, dashes, or underscores"
     }
 
