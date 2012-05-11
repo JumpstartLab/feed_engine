@@ -1,4 +1,4 @@
-@media only screen and max-width 1024px and min-width 768px {
+/*@media only screen and max-width 1024px and min-width 768px {
 .top-bar {
 font-size:10px;
 height:36px !important;
@@ -41,9 +41,9 @@ top:36px;
 .top-bar .attached>ul>li,.top-bar img {
 height:36px;
 }
-}
+}*/
 
-@media only screen and max-width 767px {
+/*@media only screen and max-width 767px {
 .top-bar,.top-bar .attached {
 position:relative;
 background:#333;
@@ -246,9 +246,9 @@ left:100%;
 .top-bar .attached>ul>li.active>a+.dropdown {
 top:45px;
 }
-}
+}*/
 
-@media only screen and min-width 768px {
+/*@media only screen and min-width 768px*/ {
 .top-bar .attached>ul>li:hover>a,.top-bar .attached>ul>li:hover>span {
 background:#222;
 }
