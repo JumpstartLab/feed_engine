@@ -1,13 +1,13 @@
 Given /^I click the "image" tab$/ do
-  click_on "image"
+  click_on "Image"
 end
 
 Then /^I should see a form to create an image message$/ do
   should have_selector("form[name=image-post]")
 end
 
-When /^I click post$/ do
-  click_on "Post"
+When /^I click post image$/ do
+  click_on "Post Image"
 end
 
 Then /^I should see an error message requiring a link to an image$/ do
@@ -43,9 +43,9 @@ Then /^I should see an error message requiring the link format to end in an imag
   should have_content "must end in .jpeg, .jpg, .gif, .bmp, or .png"
 end
 
-When /^I fill in the comment field with (\d+) 'a's$/ do |arg1|
+When /^I fill in the image comment field with (\d+) 'a's$/ do |arg1|
   @description = ("a"*arg1.to_i)
-  fill_in "Description", with: @description
+  fill_in "image_post_description", with: @description
 end
 
 Then /^I should see an error message requiring the comment to be less than or equal to (\d+) characters$/ do |arg1|
