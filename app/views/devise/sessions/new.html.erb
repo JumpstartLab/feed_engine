@@ -11,6 +11,30 @@
     <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
   <% end -%>
 
+  <% if @authentications %>
+  <% unless @authentications.empty? %>
+    <p><strong>You can sign in to this account using:</strong></p>
+    <div class="authentications">
+      <% for authentication in @authentications %>
+        <div class="authentication">
+          <%= image_tag "#{authentication.provider}_32.png", :size => "32x32" %>
+          <div class="provider"><%= authentication.provider.titleize %></div>
+          <div class="uid"><%= authentication.uid %></div>
+          <%= link_to "X", authentication, :confirm => 'Are you sure you want to remove this authentication option?', :method => :delete, :class => "remove" %>
+        </div>
+      <% end %>
+      <div class="clear"></div>
+    </div>
+  <% end %>
+  <p><strong>Add another service to sign in with:</strong></p>
+      <a href="/auth/twitter" class="auth_provider">
+      <%= image_tag "twitter_64.png", :size => "64x64", :alt => "Twitter" %>
+          Twitter
+     </a>
+<% else %>
+  <p>Skip this step</p> 
+<% end %>
+
   <div><%= f.submit "Log In" %></div>
 <% end %>
 

@@ -3,6 +3,7 @@ FeedEngine::Application.routes.draw do
 
   root :to => 'feed#show'
   match '/auth/:provider/callback' => 'authentications#create'
+  match '/auth/:provider' => 'authentications#new'
 
   resources :authentications
   resource :dashboard, :controller => 'dashboard'
