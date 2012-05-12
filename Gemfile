@@ -13,6 +13,7 @@ gem 'bootstrap-sass', '~> 2.0.2'
 gem 'carrierwave'
 gem 'rmagick'
 gem 'fog'
+gem 'mustache'
 
 group :production do
   gem 'pg'
