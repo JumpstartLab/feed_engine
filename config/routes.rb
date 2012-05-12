@@ -16,10 +16,10 @@ Hungrlr::Application.routes.draw do
   resource :dashboard
 
   namespace :api do
-      namespace :v1 do
-        resources :images
-        resources :meta_data
-      end
+    namespace :v1 do
+      resources :images
+      resources :meta_data
+    end
   end
 
   constraints(Subdomain) do
