@@ -1,6 +1,6 @@
 class GrowlsController < ApplicationController
   def show
-    @user = User.find_by_display_name(request.subdomain)
+    @user = User.where(display_name: request.subdomain).first
     @growls = @user.get_growls(params[:type], params[:page])
   end
 
