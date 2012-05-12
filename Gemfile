@@ -20,6 +20,8 @@ gem 'omniauth-twitter'
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
+  gem 'rack-test'
+  gem 'guard'
   gem 'capybara'
   gem 'factory_girl_rails', '~> 3.1.0'
   gem 'simplecov'
