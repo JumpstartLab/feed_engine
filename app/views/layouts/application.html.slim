@@ -26,14 +26,14 @@ html
                     a href="#" = current_user.email
                   li class="divider-vertical"
                   li
-                    = link_to "Sign out", destroy_user_session_path, :method => :delete
+                    = link_to "Sign out", destroy_user_session_url(subdomain: false), :method => :delete
               - else
                 ul.nav.pull-right
                   li
                     p
-                      = link_to "Sign up", new_user_registration_path
+                      = link_to "Sign up", new_user_registration_url(subdomain: false)
                       |  or 
-                      = link_to "sign in", new_user_session_path, :id => "sign_in"
+                      = link_to "sign in", new_user_session_url(subdomain: false), :id => "sign_in"
 
       / Flashes
       #flash
