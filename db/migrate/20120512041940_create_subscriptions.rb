@@ -3,7 +3,7 @@ class CreateSubscriptions < ActiveRecord::Migration
     create_table :subscriptions do |t|
       t.string :provider
       t.string :uid
-      t.string :name
+      t.string :user_name
       t.integer :user_id
 
       t.timestamps
