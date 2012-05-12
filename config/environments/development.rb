@@ -42,4 +42,5 @@ FeedEngine::Application.configure do
    :password  => "hungryacademy",
    :authentication  => "plain"
  }
+
 end
