@@ -5,3 +5,14 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+user = User.create(email: 'ed.weng@livingsocial.com',
+                   password: 'hungry',
+                   display_name: 'wengzilla')
+
+user.growls << FactoryGirl.create(:image)
+user.growls << FactoryGirl.create(:link)
+user.growls << FactoryGirl.create(:message)
+user.growls << FactoryGirl.create(:message)
+user.growls << FactoryGirl.create(:link)
+user.growls << FactoryGirl.create(:image)

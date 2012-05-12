@@ -9,14 +9,17 @@ Hungrlr::Application.routes.draw do
     get '/login' => 'devise/sessions#new'
   end
 
-  resources :growls, :images, :links, :messages, :authentications
-  resource :dashboard
+  resources :growls, :only => [ :show, :create ]
+  resources :authentications, :only => [ :new ]
+  # resources :images, :links, :messages, :authentications
+
+  resource :dashboard, :only => [ :show ]
 
   namespace :api do
     namespace :v1 do
       scope ':display_name', :as => "user" do
-        resources :growls
-        resources :meta_data
+        resources :growls, :only => [ :index, :create ]
+        resources :meta_data, :only => [ :create ]
       end
     end
   end

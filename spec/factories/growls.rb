@@ -1,17 +1,23 @@
 FactoryGirl.define do
 
-  factory :image do
+  factory :growl do
+
+  end
+
+  factory :image, :parent => :growl do
+    type "Image"
     link "http://www.justanimal.org/images/gorilla-10.jpg"
     comment Faker::Lorem.sentences(1).join
   end
 
-  factory :message do
-   comment Faker::Lorem.sentences(1).join
+  factory :message, :parent => :growl do
+    type "Message"
+    comment Faker::Lorem.sentences(1).join
   end
 
-  factory :link do
-   link "http://www.google.com"
-   comment Faker::Lorem.sentences(1).join
+  factory :link, :parent => :growl do
+    type "Link"
+    link "http://www.google.com"
+    comment Faker::Lorem.sentences(1).join
   end
-
 end
