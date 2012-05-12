@@ -5,8 +5,10 @@ class SubscriptionsController < ApplicationController
 
   def create
     @subscription = Subscription.new(params[:subscription])
+    @subscription.user_id = current_user.id
     if @subscription.save
-      redirect_to dashboard_path, notice: "Thanks for signing up"
+      notice = "Your account has been linked with twitter"
+      redirect_to dashboard_path, notice: notice
     else
       render :new
     end

@@ -118,15 +118,19 @@ describe User do
       end
       context "after signing up" do
         it "sees a page with an option to authorize twitter" do
+          click_button "Sign Up"
           page.should have_content "Connect with Twitter"
         end
         it "can authorize twitter" do
+          pending
+          click_button "Sign Up"
           click_link_or_button "Connect with Twitter"
           page.should have_content "Twitter account has been linked"
         end
         it "can choose not to authorize twitter" do
+          click_button "Sign Up"
           click_link_or_button "Skip this step"
-          page.should have_content "connect later"
+          page.should have_content "twitter account later"
         end
 
       end

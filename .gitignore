@@ -15,3 +15,5 @@
 /tmp
 
 /coverage/*
+
+/config/initializers/auth_keys.rb
