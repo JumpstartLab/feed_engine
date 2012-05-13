@@ -16,3 +16,6 @@ div.row
       = render :partial => "/images/form"
     li#linkFormTab{ class=("active" if @type == 'Link') }
       = render :partial => "/links/form"
+
+javascript:
+  api_domain = "#{api_domain.html_safe}"

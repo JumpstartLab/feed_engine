@@ -19,8 +19,8 @@ class MessagesController < ApplicationController
   # end
 end
 
-client = Twitter::Client.new(:consumer_key => 'IXDAm8E6f0HOHLeJ2uZcTQ',
-                             :consumer_secret => 'piDvbV8wfzBklu4d2UOXSKeFRPEecAIzCZJF0JM')
-client.user_timeline("wengzilla").collect do |tweet|
-  tweet.text
-end
+# client = Twitter::Client.new(:consumer_key => 'IXDAm8E6f0HOHLeJ2uZcTQ',
+#                              :consumer_secret => 'piDvbV8wfzBklu4d2UOXSKeFRPEecAIzCZJF0JM')
+# client.user_timeline("wengzilla").collect do |tweet|
+#   tweet.text
+# end

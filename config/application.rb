@@ -55,5 +55,14 @@ module Hungrlr
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # XXX HOW TO PROPERLY DO THIS?
+    config.middleware.use Rack::Cors do |requests|
+      requests.allow do |allow|
+        allow.origins '*'
+        allow.resource '*', :headers => :any, :methods => [:get, :post]
+      end
+    end
+
   end
 end
