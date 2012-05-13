@@ -2,7 +2,7 @@ class Api::V1::FeedsController < ActionController::Base
   respond_to :json
 
   def show
-    @user = User.find_by_display_name(params[:id])
+    @user = User.find_by_display_name(params[:display_name])
     @recent_growls = Growl.order("created_at DESC").limit(3)
   end
 
