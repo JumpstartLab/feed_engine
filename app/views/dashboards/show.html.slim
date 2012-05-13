@@ -1,36 +1,41 @@
-div class="span8 stream"
-  ul id="content_tabs" class="nav nav-tabs"
-    li class="active"
-      a href='#text_post' data-toggle="tab" Text
-    li class="" 
-      a href='#link_post' data-toggle="tab" Link
-    li class=""
-      a href='#image_post' data-toggle="tab" Image
+div class="container"
+  div class="span8 stream"
+    ul id="content_tabs" class="nav nav-tabs"
+      li class="active"
+        a href='#text_post' data-toggle="tab" Text
+      li class="" 
+        a href='#link_post' data-toggle="tab" Link
+      li class=""
+        a href='#image_post' data-toggle="tab" Image
 
-  div id="content_tabs" class="tab-content"
-    div class="well tab-pane fade active in" id="text_post"
-      = render 'text_posts/form'
+    div id="content_tabs" class="tab-content"
+      div class="well tab-pane fade active in" id="text_post"
+        = render 'text_posts/form'
 
-    div class="well tab-pane fade" id="link_post"
-      = render 'link_posts/form'
+      div class="well tab-pane fade" id="link_post"
+        = render 'link_posts/form'
 
-    div class="well tab-pane fade" id="image_post"
-      = render 'image_posts/form'
-    
-  h1 Your Stream
-  div class="thumbnails" id="posts" data-json-url="#{dashboard_url(format: :json)}"
-    - @posts.each do |post|
-      - post = post.postable
-      div class="post well"
-        - if post.class == ImagePost
-          = image_tag(post.image_url(:big).to_s, class: "thumbnail")
-          = post.description
-        - elsif post.class == LinkPost
-          = post.description
-          = post.url
-        - elsif post.class == TextPost
-          = post.text
-        br
+      div class="well tab-pane fade" id="image_post"
+        = render 'image_posts/form'
+      
+    h1 Your Stream
+    div class="thumbnails" id="posts" data-json-url="#{dashboard_url(format: :json)}"
+      - @posts.each do |post|
+        - post = post.postable
+        div class="post well"
+          - if post.class == ImagePost
+            = image_tag(post.image_url(:big).to_s, class: "thumbnail")
+            = post.description
+          - elsif post.class == LinkPost
+            = post.description
+            = post.url
+          - elsif post.class == TextPost
+            = post.text
+          br
 
-  script type="text/html" id="post_template"
-      = render "/dashboards/post"
+    script type="text/html" id="post_template"
+        = render "/dashboards/post"
+
+  div class="span3 pull-right well"
+    h2 Mini-Dash
+    = link_to "View Your Live Stream!", root_url(subdomain: current_user.display_name), class: "btn btn-primary"
