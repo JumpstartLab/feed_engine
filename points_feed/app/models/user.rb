@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   has_many :text_posts
   has_many :link_posts
   has_many :image_posts
+  has_many :authentications
 
   validates :email, :format => {
       :message => "must be in the form a@b.com",

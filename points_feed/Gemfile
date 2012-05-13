@@ -11,6 +11,9 @@ gem 'lazy_susan'
 gem 'carrierwave'
 gem 'fog'
 gem 'draper'
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'resque'
 
 group :test, :development do
   gem 'sqlite3'
@@ -24,6 +27,7 @@ group :test, :development do
   gem 'simplecov'
   gem 'cane'
   gem 'reek'
+  gem 'nifty-generators'
 end
 
 group :production do
@@ -37,3 +41,5 @@ group :assets do
 end
 
 gem 'jquery-rails'
+
+gem "mocha", :group => :test
