@@ -1,0 +1,28 @@
+  <%#def index%>
+    <%#user = User.find(params[:user_id])%>
+    <%#@stream_items = user.stream_items.order("created_at DESC").page(params[:page]).per(12)%>
+    <%#@items = StreamItem.translate_batch(@stream_items)%>
+    <%#respond_with(@items)%>
+  <%#end%>
+
+{
+  <% if @items %>
+  <% @items.each do |item| %>
+    { "type": "<%= item.class.name %>",
+      <% if item.is_a?(ImageItem) %>
+      "image_url": "<%= item.url %>",
+      <% elsif item.is_a?(LinkItem) %>
+      "link_url": "<%= item.url %>",
+      <% end %>
+      <% if item.is_a?(ImageItem) || item.is_a?(LinkItem) %>
+      "comment": "<%= item.comment %>",
+      <% end %>
+      "created_at": "<%= item.created_at %>",
+      "id": "<%= item.id %>",
+      "feed": <%= "http://api.feedengine.com/feeds/#{item.user.display_name}"%>,
+      "link": "feed_item_path",
+      "refeed": false,
+      "refeed_link": "" }
+  <% end %>
+  <% end %>
+}

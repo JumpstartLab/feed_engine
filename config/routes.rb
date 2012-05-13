@@ -8,8 +8,10 @@ FeedEngine::Application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :users, :only => [:show] do
-        resource :feed, :only => [:show]
+      namespace :feeds do
+        resources :users, :only => [:show] do
+          resources :stream_items, :only => [:index, :show, :create]
+        end
       end
     end
   end
