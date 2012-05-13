@@ -15,7 +15,7 @@ describe 'api/v1/feed', type: :api do
         last_response.status.should == 200
       end
       it "returns the specified users last 3 growls" do
-        growls_json = user.growls.to_json
+        growls_json = user.growls.as_json
         JSON.parse(last_response.body)["items"].should == growls_json
       end
     end

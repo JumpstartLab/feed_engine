@@ -3,6 +3,8 @@ json.id @user.id
 json.private @user.private
 json.link @user.api_link(request)
 json.items do |json|
-  json.growls @user.growls
+  json.most_recent @recent_growls do |json, growl|
+    json.partial! growl
+  end
 end
 json.web_url @user.web_url(request)

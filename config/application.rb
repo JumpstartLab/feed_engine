@@ -65,4 +65,14 @@ module Hungrlr
     end
 
   end
+
+  class ActiveSupport
+    module JSON
+      module Encoding
+        # def use_standard_json_time_format
+          # false
+        # end
+      end
+    end
+  end
 end
