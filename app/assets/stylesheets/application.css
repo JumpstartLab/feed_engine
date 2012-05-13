@@ -47,7 +47,58 @@ textarea {
   font-weight:bold; font-size:11px;
 }
 .comments {
-  background-color: #EEE;
+  background-color: rgba(127, 174, 0, .4);
   padding: 10px;
   margin-bottom: 20px;
+}
+#main_content{
+  min-height: 100%;
+  margin-top:50px;
+}
+#footer {
+  background: whiteSmoke url('footer.jpg') no-repeat top center;
+  position:relative;
+  margin-top: 150px;
+  height:100px;
+  clear: both;
+}
+.blue-border {
+  border-color: #00A5FF;
+  border-style: solid;
+  border-bottom-width: 4px;
+}
+body {
+  font-family: 'Ubuntu', sans-serif !important;
+  font-size:14px;
+}
+.pull_right {
+  float:right;
+  text-align:right;
+}
+header {
+  margin:0 auto;
+  width:60%;
+  text-align:center;
+}
+header h2{
+  font-weight: 300;
+  font-size: 20px;
+  font-size: 2rem;
+  margin-bottom: 34px;
+  padding: 0 23%;
+}
+.content_bar {
+  background-color:rgba(255, 255, 255, .9); padding:20px;
+  border-radius: 5px;
+}
+.header_image {
+  background: white url('/assets/background.jpg');
+  background-repeat: no-repeat;
+  background-size:cover;
+  height:700px;
+  margin-top:-30px;
+  width:100%;
+}
+.center_text{
+  text-align:center;
 }

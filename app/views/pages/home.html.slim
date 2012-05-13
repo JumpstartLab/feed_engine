@@ -1,2 +1,16 @@
-h1 Welcome to Hungrlr!
-p Manage all of your social networks in one place!
+.row
+  .five.columns.content_bar
+    h1 Hungrlr
+    h5 An easy to use social network aggregator, to manage your Twitter, Facebook, GitHub, MySpace &amp; Instagram
+    #login.row(style="display:none;")
+      = render "shared/login"
+      .user_helper.row= link_to "Whoops, I do need to signup", "#"
+    #signup.row
+      = render "shared/signup"
+      .user_helper.row= link_to "Already have an account?", "#"
+coffee:
+  jQuery ->
+    $('.user_helper').click( ->
+      $("#login").toggle()
+      $("#signup").toggle()
+    )

@@ -54,8 +54,7 @@ class User < ActiveRecord::Base
 
   def avatar
     require 'digest/md5'
-     "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email)
-}"
+     "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email)}"
   end
 end
 

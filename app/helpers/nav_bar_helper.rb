@@ -26,8 +26,8 @@ module NavBarHelper
       }
     else
       {
-        "Sign up" => [signup_path, "get"],
-        "Sign in" => [login_path, "get"]
+        #"Sign up" => [signup_path, "get"],
+        #"Sign in" => [login_path, "get"]
       }
     end
   end

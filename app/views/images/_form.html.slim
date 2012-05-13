@@ -5,8 +5,8 @@
   .six.columns
     = simple_form_for @growl, :url => growls_path, :html => { :id => 'image_form' } do |f|
       = f.input :type, :as => :hidden, :input_html => { :value => "Image" }
-      = f.input :link, :class => "medium input-text required", :maxlength => "2048", as: :string, input_html: { id: "image_url"}, label: "URL to Image"
-      = f.input :comment, input_html: { id: "image_comment" }
+      = f.input :link, :class => "medium input-text required", :maxlength => "2048", as: :string, input_html: { id: "image_url"}, label: "&nbsp;", placeholder: "Image URL"
+      = f.input :comment, input_html: { id: "image_comment" }, label: "&nbsp;", placeholder: "Comment"
       p
         | You have&nbsp;
         span#charsLeftImage

@@ -5,8 +5,8 @@
   .six.columns
     = simple_form_for @growl, :url => growls_path, :html => { :id => 'link_form' } do |f|
       = f.input :type, :as => :hidden, :input_html => { :value => "Link" }
-      = f.input :link, :class => "medium input-text required", :maxlength => "2048", label: "URL to Link", as: :string, input_html: { id: "link_link"}
-      = f.input :comment, input_html: { id: "link_comment" }
+      = f.input :link, :maxlength => "2048", label: "&nbsp;", as: :string, input_html: { id: "link_link", placeholder: "Link URL"}
+      = f.input :comment, input_html: { id: "link_comment" }, label: "&nbsp;", placeholder: "Comment"
       p
         | You have&nbsp;
         span#charsLeftLink

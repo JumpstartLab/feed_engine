@@ -7,7 +7,7 @@ class Link < Growl
 
   def send_photo_to_amazon
     begin
-      self.photo = open(link)
+      self.photo = open(thumbnail_url)
     rescue
       errors.add(:link, "Photo does not exist")
     end
