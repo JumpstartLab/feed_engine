@@ -3,15 +3,16 @@
 # Table name: text_posts
 #
 #  id         :integer         not null, primary key
-#  text       :string(255)
 #  created_at :datetime        not null
 #  updated_at :datetime        not null
+#  title      :string(255)
+#  body       :text
 #
 
 class TextPost < ActiveRecord::Base
-  attr_accessible :text, :created_at, :updated_at, :user_id
+  attr_accessible :body, :created_at, :updated_at, :user_id, :title
 
-  validates_length_of :text, within: 1..512
+  validates_length_of :body, within: 1..512
 
   # after_create :create_post
 

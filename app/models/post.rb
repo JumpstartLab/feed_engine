@@ -23,7 +23,7 @@ class Post < ActiveRecord::Base
       {:link => post.url, :description => post.description,
         :created_at => post.created_at}
     elsif post.class == TextPost
-      {:text => post.text, :created_at => post.created_at}
+      {title: post.title, :body => post.body, :created_at => post.created_at}
     end
   end
 
