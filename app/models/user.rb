@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
     presence: true, 
     uniqueness: true,
     exclusion: { in: %w(www ftp api), message: "can not be www, ftp, or api" }
+
   def send_welcome_email
     UserMailer.welcome_email(self).deliver
   end
