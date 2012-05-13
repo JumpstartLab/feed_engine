@@ -3,8 +3,8 @@ Given /^my display name is "(.*?)"$/ do |arg1|
 end
 
 Given /^I have created messages$/ do
-  @post1 = @user1.text_posts.create(text: "Example message 1")
-  @post2 = @user1.text_posts.create(text: "Example message 2")
+  @post1 = @user1.text_posts.create(body: "Example message 1")
+  @post2 = @user1.text_posts.create(body: "Example message 2")
 end
 
 When /^I view my subdomain site$/ do
@@ -12,8 +12,8 @@ When /^I view my subdomain site$/ do
 end
 
 Then /^I should see my most recent messages$/ do
-  should have_content @post1.text
-  should have_content @post2.text
+  should have_content @post1.body
+  should have_content @post2.body
 end
 
 When /^I view feedengine\.com$/ do
