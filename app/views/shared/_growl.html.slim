@@ -1,9 +1,21 @@
--if growl.message?
-  = render partial: "messages/show", locals: { growl: growl }
--if growl.link?
-  = render partial: "links/show", locals: { growl: growl}
--elsif growl.image?
-  = render partial: "images/show", locals: { growl: growl}
+.row
+  .six.columns
+    h4= growl.user.display_name
+  .six.columns
+    img.pull_right(src="assets/glyphicons/#{growl.icon}")
+.row
+  .two.columns
+    = image_tag growl.user.avatar
+    br
+    b Posted:
+    growl_time_ago= "#{time_ago_in_words growl.created_at} ago"
+  .ten.columns
+    -if growl.message?
+      = render partial: "messages/show", locals: { growl: growl }
+    -if growl.link?
+      = render partial: "links/show", locals: { growl: growl}
+    -elsif growl.image?
+      = render partial: "images/show", locals: { growl: growl}
 .growl_points
   a.small.green.button.radius.points POINTS!
 br

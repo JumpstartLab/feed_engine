@@ -1,7 +1,9 @@
 class GrowlsController < ApplicationController
-  def show
+
+  def index
     @user = User.find_by_display_name(request.subdomain)
-    @growls = @user.get_growls(params[:type], params[:page])
+    @growls = @user.get_growls.page(params[:page])
+    # @growls = Growl.page(params[:page])
   end
 
   def create

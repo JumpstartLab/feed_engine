@@ -1,10 +1,3 @@
-.row
-  h4 Image
-  .growl_post
-    span.growl_user= growl.user.display_name
-    span.growl_posted &nbsp; posted: &nbsp;
-    = growl.comment
-    br
-    = image_tag growl.photo(:medium)
-    br
-    i.growl_time_ago= "#{time_ago_in_words growl.created_at} ago"
+= growl.comment
+br
+.comments= image_tag growl.photo(:medium)

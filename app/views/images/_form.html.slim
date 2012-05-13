@@ -1,18 +1,23 @@
-= simple_form_for @growl, :url => growls_path, :html => { :id => 'image_form' } do |f|
-  = f.input :type, :as => :hidden, :input_html => { :value => "Image" }
-  = f.input :link, :class => "medium input-text required", :maxlength => "2048", as: :string, :input_html => { :id => "sdfsdfs"}
-  = f.label :comment
-  = f.text_area :comment, id: "image_comment"
-  p
-    | You have&nbsp;
-    span#charsLeftImage
-    |  chars left.
-  = f.button :submit, "Create Image"
+/
+/ USED FOR IMAGES
+/
+.row
+  .six.columns
+    = simple_form_for @growl, :url => growls_path, :html => { :id => 'image_form' } do |f|
+      = f.input :type, :as => :hidden, :input_html => { :value => "Image" }
+      = f.input :link, :class => "medium input-text required", :maxlength => "2048", as: :string, input_html: { id: "image_url"}, label: "URL to Image"
+      = f.input :comment, input_html: { id: "image_comment" }
+      p
+        | You have&nbsp;
+        span#charsLeftImage
+        |  chars left.
+      = f.button :submit, "Create Image"
+  .six.columns
+    h4#title_image(style="display:none;") Preview your Image:
+    .comments.comment_image(style="display:none;")
+      img#image_preview
 
 coffee:
   jQuery ->
     $("#image_form").validate()
     $("#image_comment").limit "256", "#charsLeftImage"
-    # $("#image_link").blur ->
-    #  if $(".error").length > 0
-    #    $(".error").html("URL must start with http and be a .jpg, .gif, or .png")
