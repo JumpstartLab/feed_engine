@@ -14,6 +14,7 @@ gem 'aws-sdk'
 gem 'squeel'
 gem 'twitter'
 gem 'omniauth-twitter'
+gem 'newrelic_rpm'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
