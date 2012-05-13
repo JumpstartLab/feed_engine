@@ -36,6 +36,7 @@
               <% @posts.each do |post| %>
                 <%= render "posts/show_#{post.template}", :post => post %>
                 <%= @duration %>
+                <%= link_to "Details", post_path(post) %>
                 <hr />
               <% end %>
               <%= paginate @posts %>

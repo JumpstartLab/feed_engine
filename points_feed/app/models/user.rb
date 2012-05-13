@@ -40,4 +40,39 @@ class User < ActiveRecord::Base
   def total_pages
     self.posts.size() / 12 + 1
   end
+
+  def apply_omniauth(omniauth)
+    case omniauth['provider']
+    when 'twitter'
+      self.apply_twitter(omniauth)
+    end
+    a = authentications.build(hash_from_omniauth(omniauth))
+    a.inspect
+  end
+
+  def twitter
+    unless @twitter_user
+      provider = self.authentications.find_by_provider('twitter')
+      @twitter_user = Twitter::Client.new(:oauth_token => provider.token, :oauth_token_secret => provider.secret) rescue nil
+    end
+    @twitter_user
+  end
+
+  private
+
+  def apply_twitter(omniauth)
+    if (extra = omniauth['extra']['user_hash'] rescue false)
+      # Example fetching extra data. Needs migration to User model:
+      # self.firstname = (extra['name'] rescue '')
+    end
+  end
+
+  def hash_from_omniauth(omniauth)
+    {
+      :provider => omniauth['provider'], 
+      :uid => omniauth['uid'], 
+      :token => (omniauth['credentials']['token'] rescue nil),
+      :secret => (omniauth['credentials']['secret'] rescue nil)
+    }
+  end
 end
