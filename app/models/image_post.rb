@@ -14,7 +14,8 @@
 # I have no idea why, but I've blown plenty of fucking time
 # in the process of figuring that out.
 class ImagePost < ActiveRecord::Base
-  attr_accessible :description, :remote_image_url, :image
+
+  attr_accessible :description, :remote_image_url, :image, :user_id
   mount_uploader :image, ImageUploader
 
   validates_length_of :description, maximum: 256
@@ -28,10 +29,13 @@ class ImagePost < ActiveRecord::Base
     message: "Photo url must begin with http or https",
     unless: "image.present?"
 
-   validates_format_of :remote_image_url,
-     with: %r{(?:[a-z\-]+\.)+[a-z]{2,6}(?:/[^/#?]+)+\.(?:jpg|gif|bmp|png)$},
-     message: "Photo url must end in .jpeg, .jpg, .gif, .bmp, or .png",
-     unless: "image.present?"
+  validates_format_of :remote_image_url,
+    with: %r{(?:[a-z\-]+\.)+[a-z]{2,6}(?:/[^/#?]+)+\.(?:jpg|gif|bmp|png)$},
+    message: "Photo url must end in .jpeg, .jpg, .gif, .bmp, or .png",
+    unless: "image.present?"
+
+  has_one :post, :as => :postable, dependent: :destroy
+  has_one :user, :through => :post
 
   # Work around carrierwave blowing up.
   alias :old_remote_image_url= :remote_image_url=
@@ -48,16 +52,7 @@ class ImagePost < ActiveRecord::Base
     @download_failed
   end
 
-  def self.stream
-    stream = []
-    link_posts = LinkPost.all
-    image_posts = ImagePost.all
-    text_posts = TextPost.all
-    stream << [link_posts, image_posts, text_posts]
-    stream.flatten
-  end
-
-  def self.order_stream
-    stream.sort_by {|content| content.created_at}.reverse
+  def self.user
+    post.user
   end
 end

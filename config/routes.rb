@@ -1,4 +1,6 @@
 FeedEngine::Application.routes.draw do
+  get "static_pages/show"
+
   devise_for :users
 
   resource "dashboard"
@@ -7,5 +9,5 @@ FeedEngine::Application.routes.draw do
   resources "image_posts"
   resources "link_posts"
 
-  root :to => "dashboards#show"
+  root :to => "static_pages#show"
 end

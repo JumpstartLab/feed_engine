@@ -6,8 +6,8 @@ Then /^I should see a form to create a text message$/ do
   should have_selector("form[name=text-message]")
 end
 
-When /^I click create$/ do
-  click_on "Create"
+When /^I click post message$/ do
+  click_on "Post Message"
 end
 
 Then /^I should see an error message requiring text contents$/ do

@@ -12,24 +12,16 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap_tabs
 //= require mustache
 //= require_tree .
 
 $(function() {
 
-  $("#add_new_image_post").click(function(event){
-    $("#new_image").slideToggle();
-    event.preventDefault();
-  });
+  $('#content_tabs a').click(function (e) {
+    e.preventDefault();
+    $(this).tab('show');
+  })
 
-  $("#add_new_link_post").click(function(event){
-    $("#new_link").slideToggle();
-    event.preventDefault();
-  });
-
-  $("#add_new_text_post").click(function(event){
-    $("#new_text").slideToggle();
-    event.preventDefault();
-  });
 
 });
