@@ -17,15 +17,12 @@ Hungrlr::Application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-<<<<<<< HEAD
       resources :images
       resources :meta_data
-=======
       scope ':display_name', :as => "user" do
         resources :growls, :only => [ :index, :create ]
         resources :meta_data, :only => [ :create ]
       end
->>>>>>> 362f555744dd7cf11e08388cc0c92d20bc1fe4ae
     end
   end
 
