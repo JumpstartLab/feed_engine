@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-                  :display_name
+                  :display_name, :full_name
 
   validates_presence_of :display_name
   validates_uniqueness_of :display_name
@@ -46,11 +46,11 @@ class User < ActiveRecord::Base
 
   after_create :send_welcome_email
 
-  has_many :text_posts, through: :posts, source: :postable, source_type: 'TextPost' 
+  has_many :text_posts, through: :posts, source: :postable, source_type: 'TextPost'
   has_many :image_posts, through: :posts, source: :postable, source_type: 'ImagePost'
   has_many :link_posts, through: :posts, source: :postable, source_type: 'LinkPost'
 
-  has_many :posts
+  has_many :posts, dependent: :destroy
 
   def send_welcome_email
     UserMailer.welcome_email(self).deliver

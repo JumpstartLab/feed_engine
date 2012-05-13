@@ -2,12 +2,11 @@
 #
 # Table name: image_posts
 #
-#  id               :integer         not null, primary key
-#  remote_image_url :string(255)
-#  description      :string(255)
-#  created_at       :datetime        not null
-#  updated_at       :datetime        not null
-#  image            :string(255)
+#  id          :integer         not null, primary key
+#  description :string(255)
+#  created_at  :datetime        not null
+#  updated_at  :datetime        not null
+#  image       :string(255)
 #
 
 # CCS: Note that CarrierWave sets #remote_image_url to nil...
