@@ -1,0 +1,9 @@
+json.type link.type
+json.link_url link.link
+json.comment link.comment
+json.created_at link.created_at
+json.id link.id
+json.feed v1_feed_url(@user.display_name)
+json.link link_url(link)
+json.refeed ""
+json.refeed_link ""
