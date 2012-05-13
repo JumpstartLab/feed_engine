@@ -14,6 +14,7 @@ class Image < Growl
       errors.add(:link, "Photo does not exist")
     end
   end
+
   def icon
     "glyphicons_011_camera.png"
   end
