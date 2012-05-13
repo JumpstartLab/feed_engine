@@ -1,10 +1,15 @@
 FeedEngine::Application.routes.draw do
   match '/dashboard' => 'dashboard#show', as: :user_root
-  match '', to: 'users#show', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
+  scope "", constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' } do
+    match "", to: "users#show"
+    resource "user"
+  end
+
   devise_for :users
   authenticated :user do
     root :to => 'dashboard#show'
   end
+  
   devise_scope :user do
     get 'sign_in', :to => 'devise/sessions#new', :as => 'sign_in'
   end

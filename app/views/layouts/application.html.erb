@@ -14,8 +14,8 @@
     <%= current_user.email %>
     <%= link_to "Sign out", destroy_user_session_url, :method => :delete %>
   <% else %>
-    <%= link_to "Sign In", sign_in_url(subdomain: false) %>
-    <%= link_to "Sign Up", sign_up_url(subdomain: false) %>
+    <%= link_to "Sign In", sign_in_url(:host => request.domain) %>
+    <%= link_to "Sign Up", sign_up_url(:host => request.domain) %>
   <% end %>
 </div>
   <%= yield %>
