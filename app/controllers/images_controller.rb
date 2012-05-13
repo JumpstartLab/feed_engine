@@ -1,9 +1,9 @@
 class ImagesController < ApplicationController
   before_filter :authenticate_user!
 
-  def new
-    @image = Image.new
-  end
+  # def new
+  #   @image = Image.new
+  # end
 
   # def create
   #   @image = current_user.images.new_image(params[:image])

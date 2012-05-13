@@ -21,6 +21,10 @@ class Message < Growl
     client = user.twitter_client
     client.update(comment) if client
   end
+
+  def icon
+    "glyphicons_010_envelope.png"
+  end
 end
 # == Schema Information
 #

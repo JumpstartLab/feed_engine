@@ -1,0 +1,19 @@
+.row
+  .six.columns
+    h4= message.user.display_name
+  .six.columns
+    img.pull_right(src="assets/glyphicons/#{message.icon}")
+.row
+  .two.columns
+    = image_tag message.user.avatar
+    br
+    b Posted:
+    growl_time_ago= "#{time_ago_in_words message.created_at} ago"
+  .ten.columns
+    .growl_post
+      = link_to message.title, message.link
+      .row= message.comment
+.growl_points
+  a.small.green.button.radius.points POINTS!
+br
+hr

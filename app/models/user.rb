@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
     return nil unless twitter_oauth = authentications.where(provider: "twitter").first
 
     # XXX what if they have multiple twitters?
+    # MS: I don't care... They are weird if they do.
     Twitter::Client.new(:consumer_key => TWITTER_KEY,
                         :consumer_secret => TWITTER_SECRET,
                         :oauth_token => twitter_oauth.token,
@@ -47,8 +48,14 @@ class User < ActiveRecord::Base
     mail.deliver
   end
 
-  def get_growls(type, page)
-    growls.paginated_by_type(type, page)
+  def get_growls(type=nil)
+    growls.by_type_and_date(type)
+  end
+
+  def avatar
+    require 'digest/md5'
+     "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email)
+}"
   end
 end
 

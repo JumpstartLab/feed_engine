@@ -13,6 +13,9 @@ class Link < Growl
     end
   end
 
+  def icon
+    "glyphicons_036_file.png"
+  end
   # def self.new_link(input)
   #   link = Link.new(
   #                     comment: input[:comment],

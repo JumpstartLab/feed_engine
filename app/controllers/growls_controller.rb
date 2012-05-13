@@ -4,6 +4,12 @@ class GrowlsController < ApplicationController
     @growls = @user.get_growls(params[:type], params[:page])
   end
 
+  def index
+    @user = User.find_by_display_name(request.subdomain)
+    @growls = @user.get_growls.page(params[:page])
+    # @growls = Growl.page(params[:page])
+  end
+
   def create
     @type = params[:growl][:type]
     @growl = current_user.relation_for(@type).new(params[:growl])
