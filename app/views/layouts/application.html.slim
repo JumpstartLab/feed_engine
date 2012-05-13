@@ -1,0 +1,50 @@
+doctype html
+html
+  head
+    title FeedEngine
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  body
+    .container
+      / Navigation
+      #nav.navbar
+        .navbar-inner
+          .container
+            a.btn.btn-navbar data-toggle="collapse" data-target=".nav-collapse"
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            a.brand href="#"
+              | SociablyGrown
+            .nav-collapse
+              ul.nav
+                / Nav Links
+              - if user_signed_in?
+                ul.nav.pull-right
+                  li
+                    a href="#" = current_user.email
+                  li class="divider-vertical"
+                  li
+                    = link_to "Sign out", destroy_user_session_path, :method => :delete
+              - else
+                ul.nav.pull-right
+                  li
+                    p
+                      = link_to "Sign up", new_user_registration_path
+                      |  or 
+                      = link_to "sign in", new_user_session_path, :id => "sign_in"
+
+      / Flashes
+      #flash
+        - if flash[:notice].present?
+          .alert= flash[:notice]
+        - if flash[:error].present?
+          .alert.alert-error= flash[:error]
+
+      / Main Content
+      = yield
+
+    / Footer
+    div class="span12"
+      = debug(params)
