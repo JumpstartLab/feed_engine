@@ -29,6 +29,7 @@
         float: left;
         &:hover{
           @include selected;
+          cursor: pointer;
         }
       }
     }
@@ -46,9 +47,7 @@
       @include borders(solid, $honeycomb);
       margin: auto;
       position:relative;
-      p {
-        color: $wasabi;
-      }
+      p { color: $wasabi; }
       .errors{
         p{
           color: $spice;

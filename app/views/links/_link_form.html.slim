@@ -2,7 +2,7 @@
   h3 Share a link
   .errors
     #link_errors
-      p You have done something wrong
+      p Oops! Something went wrong.
       ul#link_errors_list
   br
   = form_for @new_link, url: "#", id: "link_form" do |f|
@@ -17,4 +17,4 @@
     = f.text_field :content
     br
     br
-  button*{id: "link-submit"} Create Post
+  a.button*{id: "link-submit"} Create Post

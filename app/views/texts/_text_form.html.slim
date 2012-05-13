@@ -2,7 +2,7 @@
   h3 Share your thoughts
   .errors
     #text_errors
-      p You have done something wrong
+      p Oops! Something went wrong.
       ul#text_errors_list
   br
     = form_for @new_text, url: "#", id: "text_form" do |f|
@@ -13,4 +13,4 @@
       = f.text_area :content
       br
       br
-    button*{id: "text-submit"} Create Post
+    a.button*{id: "text-submit"} Create Post

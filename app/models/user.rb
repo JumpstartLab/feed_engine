@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
     format: { with: DISPLAY_NAME_REGEX, message: "must be only letters, numbers, dashes, or underscores" },
     presence: true, 
     uniqueness: true,
-    exclusion: { in: %w(www ftp), message: "can not be www or ftp" }
+    exclusion: { in: %w(www ftp api), message: "can not be www, ftp, or api" }
   def send_welcome_email
     UserMailer.welcome_email(self).deliver
   end

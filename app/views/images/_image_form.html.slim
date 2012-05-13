@@ -2,7 +2,7 @@
   h3 Share a picture
   .errors
     #image_errors
-      p You have done something wrong
+      p Oops! Something went wrong.
       ul#image_errors_list
   = form_for @new_image, url: "#", id: "image_form" do |f|
     br
@@ -15,4 +15,5 @@
     br
     = f.text_field :content
     br
-  button*{id: "image-submit"} Create Post
+    br
+  a.button*{id: "image-submit"} Create Post
