@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :meta_datum, :class => 'MetaData' do
-    title "MyString"
-    description "MyString"
-    thumbnail_url "MyString"
+    title "Pandas"
+    description "A fleet of pandas."
+    thumbnail_url "http://i.imgur.com/qcbwG.jpg"
   end
 end

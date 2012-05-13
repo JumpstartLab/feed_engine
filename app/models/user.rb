@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   has_many :links
 
   def relation_for(type)
-    self.send(type.downcase.pluralize.to_sym).scoped rescue text_posts.scoped
+    self.send(type.downcase.pluralize.to_sym).scoped rescue messages.scoped
   end
 
   def twitter_client
