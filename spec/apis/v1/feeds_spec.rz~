@@ -4,10 +4,11 @@ describe 'api/v1/feed', type: :api do
   let!(:user) { FactoryGirl.create(:user_with_growls) }
   let!(:token) { user.authentication_token }
   let!(:other_user) { FactoryGirl.create(:user_with_growls) }
-  
+
   context "growls viewable by this user" do
     let(:url) { "http://api.hungrlr.com/v1/feeds/#{user.display_name}" }
     before(:each) do
+      ActiveSupport::JSON::Encoding.user_standard_json_time_format = false
       get "#{url}.json"
     end
     describe "json" do

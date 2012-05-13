@@ -2,10 +2,8 @@ class Api::V1::FeedsController < ActionController::Base
   respond_to :json
 
   def show
-    user = User.where(display_name: params[:display_name]).first
-    if user
-      respond_with(user.growls)
-    end
+    @user = User.find_by_display_name(params[:id])
+    @recent_growls = Growl.order("created_at DESC").limit(3)
   end
 
   def create
