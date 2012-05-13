@@ -1,6 +1,6 @@
 div class="span8 stream"
     
-  h1 Your Stream
+  h1 #{user.display_name} Stream
   div class="thumbnails" id="posts" data-json-url="#{user_url(format: :json)}"
     - @posts.each do |post|
       - post = post.postable
