@@ -2,9 +2,9 @@ require 'twitter'
 
 class MessagesController < ApplicationController
   before_filter :authenticate_user!
-  def new
-    @growl = Message.new
-  end
+  # def new
+  #   @growl = Message.new
+  # end
 
   # def create
   #   @growl = current_user.messages.new(params[:message])

@@ -34,7 +34,7 @@ Hungrlr::Application.routes.draw do
         end
       end
     end
-    match '/' => 'growls#show'
+    match '/' => 'growls#index'
   end
 
   root :to => 'pages#home'

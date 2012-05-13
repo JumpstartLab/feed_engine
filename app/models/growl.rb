@@ -4,7 +4,7 @@ class Growl < ActiveRecord::Base
   attr_accessible :comment, :link, :user, :type
   validates_presence_of :type
   belongs_to :user
-  has_one :meta_data, :autosave => true
+  has_one :meta_data, :autosave => true, dependent: :destroy
   has_attached_file :photo,
                     :storage => :s3,
                     :s3_credentials => "#{Rails.root}/config/s3.yml",
@@ -14,8 +14,8 @@ class Growl < ActiveRecord::Base
                                }
   scope :by_date, order("created_at DESC")
 
-  def self.paginated_by_type(type, page)
-    by_type(type).by_date.page(page)
+  def self.by_type_and_date(type)
+    by_type(type).by_date
   end
 
   def self.by_type(input)

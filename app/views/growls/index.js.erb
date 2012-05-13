@@ -1,0 +1,4 @@
+$('#growls').append('<%=j render(@growls) %>');
+$('.pagination').replaceWith('<%= j paginate(@growls) %>');
+if ($('.pagination .next').length == 0)
+  $('.pagination').remove();

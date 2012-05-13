@@ -1,0 +1,27 @@
+.row
+  .six.columns
+    h4= link.user.display_name
+  .six.columns
+    img.pull_right(src="assets/glyphicons/#{link.icon}")
+.row
+  .two.columns
+    = image_tag link.user.avatar
+    br
+    b Posted:
+    link_time_ago= "#{time_ago_in_words link.created_at} ago"
+  .ten.columns
+    .row
+      = link.comment
+    .row
+      .comments
+        -if link.title.present?
+          = link_to link.title, link.link
+        -else
+          = link_to link.link
+          .row.comments= link.description
+        br
+        = image_tag link.photo(:thumb)
+.row
+  .pull_right
+    a.small.green.button.radius.points POINTS!
+hr

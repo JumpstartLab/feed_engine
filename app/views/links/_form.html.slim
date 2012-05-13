@@ -1,3 +1,6 @@
+/
+/ USED FOR LINKS
+/
 .row
   .six.columns
     = simple_form_for @growl, :url => growls_path, :html => { :id => 'link_form' } do |f|
@@ -13,11 +16,13 @@
         = m.input :description, as: :hidden, :input_html => { id: "link_description"}
         = m.input :thumbnail_url, as: :hidden, :input_html => { id: "link_thumbnail_url"}
       = f.button :submit, "Create Link"
-  .six.columns
-    #loading(style="display:none;")= image_tag "loading_big.gif"
-    h4#title(style="display:none;")
-    #description(style="display:none;")
-    img#thumbnail(style="display:none;" src="")
+  .six.columns#link_show(style="display:none;")
+    #loading= image_tag "loading_big.gif"
+    h3#image_helper Preview your Link Contents:
+    .comments
+      h4#title
+      #description
+      img#thumbnail(src="")
 
 coffee:
   jQuery ->
