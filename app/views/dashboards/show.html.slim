@@ -23,14 +23,23 @@ div class="span8 stream"
       - post = post.postable
       div class="post well"
         - if post.class == ImagePost
+          div class="pull-right"
+            #{link_to "Remove", image_post_path(post.id), method: :delete, confirm: "Are You Sure"}
+            #{link_to "Edit", edit_image_post_path(post.id)}
+          h3 = post.description
           = image_tag(post.image_url(:big).to_s, class: "thumbnail")
-          = post.description
         - elsif post.class == LinkPost
-          = post.description
-          = link_to(post.url, post.url)
+          div class="pull-right"
+            #{link_to "Remove", link_post_path(post.id), method: :delete, confirm: "Are You Sure"}
+            #{link_to "Edit", edit_link_post_path(post.id)}
+          h3 = post.description
+          p = link_to(post.url, post.url, target: "_blank")
         - elsif post.class == TextPost
-          = post.title if post.title
-          = post.body
+          div class="pull-right"
+            #{link_to "Remove", text_post_path(post.id), method: :delete, confirm: "Are You Sure"}
+            #{link_to "Edit", edit_text_post_path(post.id)}
+          h3 = post.title if post.title
+          p = post.body
         br
 
   script type="text/html" id="post_template"
