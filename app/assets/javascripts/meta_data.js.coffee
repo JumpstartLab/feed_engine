@@ -1,7 +1,7 @@
 jQuery ->
   $("#link_link").focusout( ->
     $("#loading").toggle()
-    $.post "/api/v1/meta_data", url: $("#link_link").val(), dataType: 'json', ((data) ->
+    $.post api_domain + "/meta_data", url: $("#link_link").val(), dataType: 'json', ((data) ->
        # Setting up the form
        $("#link_title").val(data.title)
        $("#link_description").val(data.description)

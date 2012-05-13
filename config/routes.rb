@@ -15,22 +15,13 @@ Hungrlr::Application.routes.draw do
 
   resource :dashboard, :only => [ :show ]
 
-  namespace :api do
-    namespace :v1 do
-      resources :images
-      resources :meta_data
-      scope ':display_name', :as => "user" do
-        resources :growls, :only => [ :index, :create ]
-        resources :meta_data, :only => [ :create ]
-      end
-    end
-  end
-
   constraints(Subdomain) do
     constraints :subdomain => 'api' do
       scope module: "api" do
         namespace "v1" do
-          resources :feeds
+          match '/feeds/:display_name' => 'feeds#show'  , :via => :get
+          match '/feeds/:display_name' => 'feeds#create', :via => :post
+          resources :meta_data, :only => [ :create ]
         end
       end
     end
