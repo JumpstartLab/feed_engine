@@ -1,10 +1,6 @@
-require 'subdomain'
-
 FeedEngine::Application.routes.draw do
   match '/dashboard' => 'dashboard#show', as: :user_root
-  constraints(Subdomain) do
-    match '/' => 'users#show'
-  end
+  match '', to: 'users#show', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
   devise_for :users
   authenticated :user do
     root :to => 'dashboard#show'

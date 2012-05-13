@@ -1,4 +1,9 @@
 class ApplicationController < ActionController::Base
-  include UrlHelper
   protect_from_forgery
+
+private
+
+  def load_user
+    @user = User.find_by_subdomain!(request.subdomain)
+  end
 end

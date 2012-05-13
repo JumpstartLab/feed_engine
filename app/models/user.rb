@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
+  before_create :set_user_subdomain
   after_create :send_welcome_email
   devise :database_authenticatable, :recoverable, :validatable
-  attr_accessible :email, :password, :password_confirmation, :display_name
+  attr_accessible :email, :password, :password_confirmation, :display_name, :subdomain
 
   DISPLAY_NAME_REGEX = /^[\w-]*$/
   validates :display_name, 
@@ -12,6 +13,10 @@ class User < ActiveRecord::Base
 
   def send_welcome_email
     UserMailer.welcome_email(self).deliver
+  end
+
+  def set_user_subdomain
+    self.subdomain = self.display_name.downcase
   end
 
   def posts
