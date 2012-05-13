@@ -1,12 +1,11 @@
-div class="container"
-  div class="span8 stream"
-    ul id="content_tabs" class="nav nav-tabs"
-      li class="active"
-        a href='#text_post' data-toggle="tab" Text
-      li class="" 
-        a href='#link_post' data-toggle="tab" Link
-      li class=""
-        a href='#image_post' data-toggle="tab" Image
+div class="span8 stream"
+  ul id="content_tabs" class="nav nav-tabs"
+    li class="active"
+      a href='#text_post' data-toggle="tab" Text
+    li class=""
+      a href='#link_post' data-toggle="tab" Link
+    li class=""
+      a href='#image_post' data-toggle="tab" Image
 
     div id="content_tabs" class="tab-content"
       div class="well tab-pane fade active in" id="text_post"
@@ -17,21 +16,22 @@ div class="container"
 
       div class="well tab-pane fade" id="image_post"
         = render 'image_posts/form'
-      
-    h1 Your Stream
-    div class="thumbnails" id="posts" data-json-url="#{dashboard_url(format: :json)}"
-      - @posts.each do |post|
-        - post = post.postable
-        div class="post well"
-          - if post.class == ImagePost
-            = image_tag(post.image_url(:big).to_s, class: "thumbnail")
-            = post.description
-          - elsif post.class == LinkPost
-            = post.description
-            = post.url
-          - elsif post.class == TextPost
-            = post.text
-          br
+
+  h1 Your Stream
+  div class="thumbnails" id="posts" data-json-url="#{dashboard_url(format: :json)}"
+    - @posts.each do |post|
+      - post = post.postable
+      div class="post well"
+        - if post.class == ImagePost
+          = image_tag(post.image_url(:big).to_s, class: "thumbnail")
+          = post.description
+        - elsif post.class == LinkPost
+          = post.description
+          = link_to(post.url, post.url)
+        - elsif post.class == TextPost
+          = post.title if post.title
+          = post.body
+        br
 
     script type="text/html" id="post_template"
         = render "/dashboards/post"

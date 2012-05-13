@@ -21,7 +21,7 @@ end
 
 When /^I fill in the message text with 513 'a's$/ do
   @message = "a"*513
-  fill_in("Text", with: @message)
+  fill_in("Body", with: @message)
 end
 
 Then /^I should see an error message requiring text to be less than or equal to 512 characters$/ do
@@ -29,12 +29,14 @@ Then /^I should see an error message requiring text to be less than or equal to 
 end
 
 Then /^the data I have entered is present$/ do
-  find('input[name="text_post[text]"]').value.should include @message
+  save_and_open_page
+  page.should have_content @message
+  # find('input[name="text_post[body]"]').value.should include @message
 end
 
 When /^I fill in the message text with "(.*?)"$/ do |text|
   @message = text
-  fill_in("Text", with: @message)
+  fill_in("Body", with: @message)
 end
 
 Then /^I should see a confirmation message that my message has been saved$/ do
