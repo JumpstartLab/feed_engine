@@ -56,6 +56,7 @@
 
 body {
   background-image: url("../images/groovepaper.png")
+  font-color: white;
 }
 
 .nav-item {
@@ -71,3 +72,19 @@ body {
   border: 1px solid rgba(0, 0, 0, 0.05);
   border-radius: 4px;
 }
+
+.navigation-item {
+  padding: 0px 4px 0;
+}
+
+@font-face {
+    font-family: 'EntypoRegular';
+    src: url('../fonts/entypo-webfont.eot');
+    src: url('../fonts/entypo-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/entypo-webfont.woff') format('woff'),
+         url('../fonts/entypo-webfont.ttf') format('truetype'),
+         url('../fonts/entypo-webfont.svg#EntypoRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+

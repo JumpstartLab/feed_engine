@@ -1,12 +1,6 @@
 <% if current_user %>
   <% @items.each do |item| %>
     <div class="row feed_row">
-      <div class="span8"> 
-        <div class="item-header">
-          <span class="item-header-user"><%= item.user.display_name %></span>
-          <%= time_ago_in_words(item.created_at) %> ago
-        </div>
-      </div>
       <%= render :partial => "item", :locals => {:item => item} %>
     </div>
   </div>
