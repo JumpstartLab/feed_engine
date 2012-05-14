@@ -11,6 +11,7 @@ gem 'carrierwave'
 gem 'fog'
 gem 'draper'
 gem 'gravatar-ultimate'
+gem 'puma'
 
 group :test, :development do
   gem 'sqlite3'
