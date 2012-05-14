@@ -1,10 +1,12 @@
 <% if current_user %>
+  <div class="items-container">
   <% @items.each do |item| %>
     <div class="row feed_row">
       <%= render :partial => "item", :locals => {:item => item} %>
     </div>
   </div>
 <% end %>
+</div>
 
 <%= paginate @stream_items %>
 <% end %>

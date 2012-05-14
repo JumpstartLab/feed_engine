@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .feed_row {
-  padding: 0 0 0 10px;
+  padding: 0 20px 0 50px;
 }
 
 .item-header {
@@ -46,3 +46,13 @@ $body_font: comic sans;
   margin: 30px 0 10px 0;
   padding: 10px;
 }
+
+.items-container {
+  min-height: 140px; 
+  background-color: #FAFAFA;
+  border: 1px solid #eee;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
