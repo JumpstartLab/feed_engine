@@ -10,11 +10,7 @@ class Api::V1::FeedsController < ActionController::Base
     user = User.where(display_name: params[:display_name]).first
     @growl = user.relation_for(@type).new(params[:body])
     # @growl.build_meta_data(params[:meta_data]) if params[:meta_data]
-    if @growl.save
-      render :json => @growl, :status => 201
-    else
-      render :json => @growl.errors
-    end
+    response_body = @growl.save ? json: @growl, status: 201 : @growl.errors
+    render response_body
   end
-
 end

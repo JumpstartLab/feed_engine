@@ -28,7 +28,6 @@ Hungrlr::Application.routes.draw do
   resources :authentications, :only => [ :new ]
   resources :images, :links, :messages, :authentications
   resource :dashboard, :only => [ :show ]
-
-
+  
   root :to => 'pages#home'
 end

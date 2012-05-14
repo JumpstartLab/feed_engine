@@ -21,4 +21,16 @@ describe 'api/v1/feed', type: :api do
       end
     end
   end
+
+  context "creating growls through the api" do
+    let(:url) { "http://api.hungrlr.com/v1/feeds/#{user.display_name}" }
+    before(:each) do
+      post "#{url}.json"
+    end
+    describe "json" do
+      it "returns a successful response" do
+        pending
+      end
+    end
+  end
 end
