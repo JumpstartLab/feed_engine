@@ -35,3 +35,28 @@ end
 When /^I log out$/ do
   click_on "Sign out"
 end
+
+When /^I view hungryfeeder\.feedengine\.com$/ do
+  visit root_url(subdomain: @user1.display_name)
+end
+
+Given /^there is a feed with messages at "(.*?)"$/ do |arg1|
+  @user1 = User.create(:display_name => "charles", 
+                      :email => "foo@bar.com",
+                      :password => "charles",
+                      :password_confirmation => "charles")
+  @post1 = @user1.text_posts.create(body: "Example message 1")
+  @post2 = @user1.text_posts.create(body: "Example message 2")
+end
+
+Then /^I should see the most recent messages$/ do
+  should have_content @post1.body
+  should have_content @post2.body
+end
+
+Given /^I am logged out$/ do
+  visit root_url(subdomain: false)
+  if page.has_selector?("#sign_out")
+    click_on("Sign out")
+  end
+end
