@@ -23,3 +23,5 @@
 # Ignore rvm
 .rvmrc
 
+# Ignore POW env
+.powenv

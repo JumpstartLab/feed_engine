@@ -12,6 +12,10 @@ gem 'carrierwave'
 gem 'fog'
 gem 'mustache'
 gem 'kaminari'
+gem 'jbuilder'
+gem 'jquery-rails'
+gem 'fabrication'
+gem 'faker'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -40,3 +44,5 @@ gem 'capistrano'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+
+end
