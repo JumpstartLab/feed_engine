@@ -19,7 +19,6 @@ class Api::V1::Feeds::StreamItemsController < Api::V1::BaseController
       respond_with(@item, :status => :created, :location => v1_feeds_user_stream_item_path(@user, @item))
     else
       render :json => {errors: [@item.errors]}, :status => :not_acceptable
-      #respond_with(@item.errors, :status => :unprocessable_entity)
     end
   end
 

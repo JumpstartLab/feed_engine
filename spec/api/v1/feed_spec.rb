@@ -81,6 +81,8 @@ describe "API feeds/user/... ", :type => :api do
 
       last_response.status.should == 401
 
+      user.image_items.last.comment.should_not == "An insidious evil post."
+
     end
 
   end
