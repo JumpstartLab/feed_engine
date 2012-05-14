@@ -11,7 +11,7 @@ Hungrlr::Application.routes.draw do
 
   resources :growls, :only => [ :show, :create ]
   resources :authentications, :only => [ :new ]
-  # resources :images, :links, :messages, :authentications
+  resources :images, :links, :messages, :authentications
 
   resource :dashboard, :only => [ :show ]
 
@@ -21,6 +21,7 @@ Hungrlr::Application.routes.draw do
         namespace "v1" do
           match '/feeds/:display_name' => 'feeds#show'  , :via => :get
           match '/feeds/:display_name' => 'feeds#create', :via => :post
+          # resources :feeds
           resources :meta_data, :only => [ :create ]
         end
       end
