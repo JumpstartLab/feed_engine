@@ -11,7 +11,7 @@
  *= require ./reset.css
  *= require_self
  *= require_tree .
- *= require ./partials/colors
+ *= require ./partials/colors.css.scss
  */
 
 $whale: #262626;
