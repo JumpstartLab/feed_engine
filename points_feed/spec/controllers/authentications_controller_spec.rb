@@ -17,7 +17,7 @@ describe AuthenticationsController do
 
   it "create action should render new template when model is invalid" do
     Authentication.any_instance.stubs(:valid?).returns(false)
-    post :create
+    post :create, "twitter"
     response.should render_template(:new)
   end
 
