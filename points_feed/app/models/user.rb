@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-                  :display_name, :private, :background
+                  :display_name, :private, :background, :twitter_name
 
   has_many :posts, dependent: :destroy
   has_many :text_posts
@@ -87,7 +87,7 @@ class User < ActiveRecord::Base
   def twitter
     unless @twitter_user
       provider = self.authentications.find_by_provider('twitter')
-      @twitter_user = Twitter::Client.new(:oauth_token => provider.token, :oauth_token_secret => provider.secret) rescue nil
+      @twitter_user = Twitter::Client.new(:oauth_token => provider.token, :oauth_token_secret => provider.secret) #rescue nil
     end
     @twitter_user
   end

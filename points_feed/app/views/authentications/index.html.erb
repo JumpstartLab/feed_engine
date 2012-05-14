@@ -10,7 +10,7 @@
     <th>Provider</th>
     <th>Uid</th>
   </tr>
-  <% for authentication in @authentications %>
+  <% @authentications.each do |authentication| %>
     <tr>
       <td><%= authentication.user_id %></td>
       <td><%= authentication.provider %></td>
@@ -20,3 +20,8 @@
   <% end %>
 </table>
 
+<ul>
+  <% if current_user %>
+    <%= Twitter.user_timeline(current_user.twitter_name).first.text %>
+  <% end %>
+</ul>
