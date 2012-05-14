@@ -1,0 +1,7 @@
+Twitter
+=======
+
+* https://dev.twitter.com/docs/auth/obtaining-access-tokens
+* http://mifsud.me/simple-two-legged-oauth-provider-in-rails-2/
+* http://www.arctickiwi.com/blog/download-you-twitter-feed-using-ruby-on-rails-with-oauth
+* `Twitter::Client.new` is probably what we want.
