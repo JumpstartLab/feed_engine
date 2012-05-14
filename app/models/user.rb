@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   has_many :text_items
   has_many :image_items
   has_many :link_items
-  has_many :stream_items, :includes => :streamable
+  has_many :stream_items
 
   def add_stream_item(item)
     stream_items << StreamItem.new(:streamable_id => item.id,

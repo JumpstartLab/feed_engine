@@ -75,6 +75,14 @@ describe "API feeds/user/... ", :type => :api do
       last_response.body.should include("must be jpg, bmp, png, or gif and start with http/https")
     end
 
+    it "prevents a user from posting to another user's feed" do
+      body = '{"type":"ImageItem","comment": "An insidious evil post.", "image_url": "http://troll.com/cat.jpg"}'
+      post "#{url}.json", :token => user2.authentication_token, :body => body
+
+      raise last_response.inspect
+
+    end
+
   end
 
   context "getting a feed item" do
