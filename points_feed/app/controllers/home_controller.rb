@@ -1,5 +1,11 @@
 class HomeController < ApplicationController
   def index
-    @posts = Post.page(params[:page]).per(12)
+    if current_user
+      redirect_to dashboard_path
+    end
+  end
+
+  def profile
+    @post = current_user.posts.new if current_user
   end
 end

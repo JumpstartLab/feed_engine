@@ -1,50 +1,55 @@
+<% unless current_user.blank? %>
+  <script type="text/javascript">
+    access_token = "<%= current_user.authentication_token %>";
+    display_name = "<%= current_user.display_name %>";
+  </script>
+<% end %>
+
+<%= render 'posts/show_templates' %>
+
 <div class="main-image">
-  <img src="/assets/dashboard.jpg">
+  <%= image_tag current_user.background_image %>
 </div>
 
 <div class="row">
   <div class="span12">
-    <div class="header">
-      <h1>Dashboard</h1><br>
     <div class="row">
-      <div class="span3">
-        <h3>Create Post</h3>
-        <div class="well create-post">
-          <ul id='post_tabs' class="nav nav-pills">
-            <li><a href="#text_post" data-toggle="tab">Text</a></li>
-            <li><a href="#link_post" data-toggle="tab">Link</a></li>
-            <li><a href="#image_post" data-toggle="tab">Image</a></li>
-          </ul>
+      <div class="header span12">
+        <h1>Dashboard</h1>
+        <br>
+      </div>
 
-          <div class="tab-content">
-            <div class="tab-pane active" id="text_post">
-              <%= render "posts/form_text_post", :post => @post %>
-            </div>
-            <div class="tab-pane active" id="link_post">
-              <%= render "posts/form_link_post", :post => @post %>
-            </div>
-            <div class="tab-pane active" id="image_post">
-              <%= render "posts/form_image_post", :post => @post %>
+      <div class='span4'>
+        <ul id='nav_tabs' class="nav nav-pills nav-stacked well">
+          <li><a href="#posts_tab" data-toggle="tab">Post</a></li>
+          <li><a href="#edit_account_tab" data-toggle="tab">Edit Account</a></li>
+        </ul>
+      </div>
+      <div class="span8">
+        <div class="well black-transparent-box">
+          <div>
+            <img src="<%= current_user.avatar %>" style='float:left'></img>
+            <div style='float:left; margin-left: 15px; color: white'>
+              <h3><%= link_to current_user.display_name, "http://#{current_user.display_name}.pf.dev" %></h3>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="span6">
-        <h3>Most Recent Posts</h3>
-        <div class="well recent-posts">
-          <% @posts.each do |post| %>
-            <%= render "posts/show_#{post.template}", :post => post %>
-            <hr />
-          <% end %>
-        </div>
-      </div>
-      <div class="span3">
-        <h3>Account Info</h3>
-        <div class="account-info">
-          <%= "Email: #{@current_user.email}" %><br>
-          <%= "Display Name: #{@current_user.display_name}" %><br>
-          <%= link_to "Change Password", edit_user_registration_path %><br>
-          <br>
+          <div style='clear:both'></div>
+          <br />
+
+          <div class="tab-content">
+            <div class="tab-pane active" id="posts_tab">
+              <%= render 'posts/form' %>
+            </div>
+            <div class='tab-pane' id='edit_account_tab'>
+              <div class='grey-box'>
+                <h3>Edit Your Account</h3>
+                <hr />
+
+                <%= render 'devise/registrations/form', :resource => @current_user %>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>

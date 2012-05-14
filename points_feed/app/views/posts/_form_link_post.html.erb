@@ -1,6 +1,7 @@
-<%= simple_form_for post, url: posts_path, method: :post do |f| %>
+<%= simple_form_for post, url: api_posts_path, method: :post, :remote => true do |f| %>
   <%= f.input :content, :label => "Link Url", :input_html => { :rows => 3 } %>
   <%= f.input :comment, :as => :text, :input_html => { :rows => 5 } %>
   <%= f.input :type, :as => :hidden, :input_html => { :value => "LinkPost" } %>
   <%= f.submit "Post Link", :class => 'btn btn-primary' %>
+  <input type='hidden' id='success' value='post_added' />
 <% end %>

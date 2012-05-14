@@ -9,12 +9,26 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-                  :display_name
+                  :display_name, :private, :background
+
   has_many :posts, dependent: :destroy
   has_many :text_posts
   has_many :link_posts
   has_many :image_posts
   has_many :authentications
+
+  has_many :friendships
+  has_many :friends, :through => :friendships
+
+  has_many :pending_friends, :through => :friendships, 
+                             :source => :user,
+                             :conditions => {'friendships.status' => Friendship::PENDING }
+  has_many :active_friends,  :through => :friendships, 
+                             :source => :user,
+                           :conditions => {'friendships.status' => Friendship::ACTIVE }
+  has_many :ignored_friends,  :through => :friendships, 
+                           :source => :user,
+                           :conditions => {'friendships.status' => Friendship::IGNORED }
 
   validates :email, :format => {
       :message => "must be in the form a@b.com",
@@ -29,10 +43,30 @@ class User < ActiveRecord::Base
                          },
                          :uniqueness => true
 
+  mount_uploader :background, BackgroundUploader
+
   def relation_for(type)
+    type = type.gsub(/Item/i, "Post")
     self.send(type.underscore.pluralize.to_sym).scoped rescue text_posts.scoped
   end
+
+  def background_image
+    background.url || "dashboard.jpg"
+  end
+
+  def avatar
+    Gravatar.new(self.email).image_url
+  end
   
+  def can_view_feed?(user)
+    return true if user and (self == user or self.is_friend?(user))
+    !self.private
+  end
+
+  def is_friend?(user)
+    !Friendship.where(:friend_id => user.id, :user_id => self.id).first.nil?
+  end
+
   def send_welcome_message
     UserMailer.welcome_message(self).deliver
   end

@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.3'
 gem 'devise'
 
-gem 'jquery-rails'
 gem "twitter-bootstrap-rails"
 gem 'simple_form'
 gem 'kaminari'
@@ -15,6 +14,8 @@ gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'resque'
 gem 'twitter'
+gem 'gravatar-ultimate'
+gem 'puma'
 
 group :test, :development do
   gem 'sqlite3'
@@ -27,8 +28,9 @@ group :test, :development do
   gem 'launchy'
   gem 'simplecov'
   gem 'cane'
-  gem 'reek'
+  # gem 'reek'
   gem 'nifty-generators'
+
 end
 
 group :production do
@@ -39,6 +41,7 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
+  gem 'jquery-rails'
 end
 
 gem 'jquery-rails'

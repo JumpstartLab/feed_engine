@@ -16,6 +16,11 @@
   margin-left: 10px;
 }
 
+input[type=text], input[type=password], input[type=email], textarea, select {
+  color: black;
+  font: 13px/20px "HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
 .current {
   float: left;
   padding: 0 14px;
@@ -23,4 +28,73 @@
   text-decoration: none;
   border: 1px solid #DDD;
   border-left-width: 0;
+}
+
+.white-box {
+  border: 4px solid #ccc;
+  background-color: #fff;
+  padding: 20px;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  border-radius: 7px;
+  color: black;
+}
+
+.black-transparent-box {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+}
+
+.black-transparent-box label {
+  color: white;
+}
+
+.black-transparent-box li.active > a {
+  background-color: #E0F2F7;
+}
+
+.black-transparent-box li > a {
+  color: #E0F2F7;
+}
+
+.grey-box {
+  background: rgba(245, 245, 245, .93);
+  color: black;
+  padding: 20px;
+}
+
+.grey-box hr {
+  background-color: #49708A;
+  height: 3px;
+}
+
+.root {
+  margin-top: 30px;
+}
+
+.navbar_inner {
+  background-color: #000;
+  border-bottom: 3px solid #49708A;
+}
+
+.navbar_inner .brand {
+  color: white;
+  font-weight: bold;
+}
+
+.navbar_inner li > a {
+  color: red;
+}
+
+.well {
+  color: #000;
+}
+
+.light {
+  font-size: 11px;
+  color: #333;
+}
+
+.full_width {
+  width: 95%;
 }

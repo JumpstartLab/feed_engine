@@ -1,16 +1,23 @@
 <div class="main-image">
   <img src="/assets/welcome.jpg">
 </div>
+
 <div class="root">
-  <h2>Sign up</h2>
+  <div class='row'>
+    <div class='span8 offset2 grey-box well'>
+      <h3>Sign up</h3>
+      <hr />
 
-  <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-    <%= f.text_field :email, :placeholder => "E-mail Address" %><br>
-    <%= f.text_field :display_name, :placeholder => "Display Name" %><br>
-    <%= f.password_field :password, :placeholder => "Password" %><br>
-    <%= f.password_field :password_confirmation, :placeholder => "Confirm Password" %><br>
-    <%= f.button :submit, "Sign Up" %>
-  <% end %>
-
-  <%= render "links" %>
+      <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+        <%= f.input :display_name, :placeholder => 'Display Name', :label => false, :input_html => { :class => 'span5' } %>
+        <%= f.input :email, :placeholder => 'Email Address', :label => false, :input_html => { :class => 'span5' } %>
+        <%= f.input :password, :placeholder => 'Password', :label => false, :input_html => { :class => 'span5' } %>
+        <%= f.input :password_confirmation, :placeholder => 'Password Confirmation', :label => false, :input_html => { :class => 'span5' } %>
+        <hr />
+        <div style='text-align:center'>
+          <%= f.submit 'Create An Account', :class => 'btn-warning btn-large span6' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>

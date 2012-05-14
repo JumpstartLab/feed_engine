@@ -13,11 +13,16 @@ PointsFeed::Application.routes.draw do
   
   namespace :api do
     resources :feeds do
-      get '/items/' => 'feeds#items'
+      collection do
+        get "/:id/items.json" => 'feeds#items'
+      end
     end
+
+    resources :posts
   end
 
-  scope '', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' } do
+  scope '/', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' } do
+    get '/' => 'home#profile'
   end
 
   root :to => "home#index"

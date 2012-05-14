@@ -1,14 +1,24 @@
 class TextPostDecorator < ApplicationDecorator
   decorates :text_post
 
+  def url
+    "http://api.feedengine.com/feeds/#{model.user.display_name}"
+  end
+
   def as_json(*params)
+    return {} if model.nil?
+    
     {
       :type => "TextItem",
       :text => model.content,
+      :feeder => {
+        :avatar => model.user.avatar,
+        :name => model.user.display_name
+      },
       :created_at => model.created_at,
       :id => model.id,
-      :feed => "http://api.feedengine.com/feeds/#{model.user.display_name}",
-      :link => "http://api.feedengine.com/feeds/#{model.user.display_name}/items/#{model.id}",
+      :feed => url,
+      :link => "#{url}/items/#{model.id}",
       :refeed => false,
       :refeed_link => ""
     }
