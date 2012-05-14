@@ -16,3 +16,14 @@ user.growls << FactoryGirl.create(:message)
 user.growls << FactoryGirl.create(:message)
 user.growls << FactoryGirl.create(:link)
 user.growls << FactoryGirl.create(:image)
+
+user = User.create(email: 'mike.silvis@livingsocial.com',
+                   password: 'hungry',
+                   display_name: 'mikesilvis')
+
+user.growls << FactoryGirl.create(:image)
+user.growls << FactoryGirl.create(:link)
+user.growls << FactoryGirl.create(:message)
+user.growls << FactoryGirl.create(:message)
+user.growls << FactoryGirl.create(:link)
+user.growls << FactoryGirl.create(:image)
