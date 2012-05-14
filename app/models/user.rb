@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   after_create :send_welcome_email
   devise :database_authenticatable, :recoverable, :validatable
   attr_accessible :email, :password, :password_confirmation, :display_name, :subdomain
+  has_many :authentications
+
 
   DISPLAY_NAME_REGEX = /^[\w-]*$/
   validates :display_name, 

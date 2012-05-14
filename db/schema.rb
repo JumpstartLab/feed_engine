@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120514182947) do
+ActiveRecord::Schema.define(:version => 20120514184902) do
+
+  create_table "authentications", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+>>>>>>> starting oauth, not workign yet
 
   create_table "images", :force => true do |t|
     t.text     "content"
