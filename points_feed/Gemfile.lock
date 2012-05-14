@@ -123,6 +123,8 @@ GEM
     orm_adapter (0.0.7)
     pg (0.13.2)
     polyglot (0.3.3)
+    puma (1.2.1)
+      rack (~> 1.2)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -228,6 +230,7 @@ DEPENDENCIES
   launchy
   lazy_susan
   pg
+  puma
   rails (= 3.2.3)
   rspec-rails (~> 2.0)
   ruby_gntp
