@@ -21,7 +21,7 @@ test:
 production:
   adapter: postgresql
   database: hungryfeeder_production
-  username: hungry_feed
+  user: hungry_feed
   password: postgres
   pool: 5
   timeout: 5000
