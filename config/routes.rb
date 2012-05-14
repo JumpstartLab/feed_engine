@@ -17,7 +17,7 @@ FeedEngine::Application.routes.draw do
   match "/auth/:provider/callback" => "subscriptions#create"
 
   constraints :subdomain => 'api', :format => :json do
-    match '/feeds/:display_name(.:format)' => 'api/users#show'
+    match '/feeds/:display_name(.:format)' => 'api/users#show', as: "feed"
   end
 
   constraints(Subdomain) do
@@ -26,5 +26,3 @@ FeedEngine::Application.routes.draw do
 
   root to: "home#index"
 end
-
-#jonan's a punk
