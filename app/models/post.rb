@@ -27,4 +27,8 @@ class Post < ActiveRecord::Base
     end
   end
 
+  def instance_of_a_particular_post_type
+    self.postable
+  end
+
 end
