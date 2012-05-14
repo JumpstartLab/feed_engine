@@ -1,0 +1,5 @@
+- @posts.each do |post|
+  - post = post.instance_of_a_particular_post_type
+  div class="post well"
+    = render partial: post_template_for_post(post), locals: { post: post }
+    br
