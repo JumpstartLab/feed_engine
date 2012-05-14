@@ -14,6 +14,7 @@ gem 'carrierwave'
 gem 'rmagick'
 gem 'fog'
 gem 'mustache'
+gem 'exceptional'
 
 group :production do
   gem 'pg'
