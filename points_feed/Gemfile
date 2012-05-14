@@ -10,6 +10,10 @@ gem 'lazy_susan'
 gem 'carrierwave'
 gem 'fog'
 gem 'draper'
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'resque'
+gem 'twitter'
 gem 'gravatar-ultimate'
 gem 'puma'
 
@@ -26,7 +30,8 @@ group :test, :development do
   gem 'simplecov'
   gem 'cane'
   gem 'database_cleaner'
-  #gem 'reek'
+  gem 'reek'
+  gem 'nifty-generators'
 end
 
 group :production do
@@ -39,3 +44,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'jquery-rails'
 end
+
+gem 'jquery-rails'
+
+gem "mocha", :group => :test
