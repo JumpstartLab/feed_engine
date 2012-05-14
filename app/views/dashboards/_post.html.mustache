@@ -1,0 +1,14 @@
+<div class="post well">
+  {{#photo}}
+    {{#image}}
+      <img src="{{url}}" class="thumbnail">
+      {{description}}
+    {{/image}}
+  {{/photo}}
+  {{#link}}
+    <a href="{{link}}">{{link}}</a>
+  {{/link}}
+  {{#text}}
+    {{body}}
+  {{/text}}
+</div>

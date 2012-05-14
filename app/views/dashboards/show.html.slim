@@ -1,0 +1,46 @@
+div class="span8 stream"
+  ul id="content_tabs" class="nav nav-tabs"
+    li class="active"
+      a href='#text_post' data-toggle="tab" Text
+    li class=""
+      a href='#link_post' data-toggle="tab" Link
+    li class=""
+      a href='#image_post' data-toggle="tab" Image
+
+  div id="content_tabs" class="tab-content"
+    div class="well tab-pane fade active in" id="text_post"
+      = render 'text_posts/form'
+
+    div class="well tab-pane fade" id="link_post"
+      = render 'link_posts/form'
+
+    div class="well tab-pane fade" id="image_post"
+      = render 'image_posts/form'
+
+  h1 Your Stream
+  div class="thumbnails" id="posts" data-json-url="#{dashboard_url(format: :json)}"
+    - @posts.each do |post|
+      - post = post.instance_of_a_particular_post_type
+      div class="post well"
+        - if post.class == ImagePost
+          div class="pull-right"
+            #{link_to "Remove", image_post_path(post.id), method: :delete, confirm: "Are You Sure"}
+            #{link_to "Edit", edit_image_post_path(post.id)}
+          h3 = post.description
+          = image_tag(post.image_url(:big).to_s, class: "thumbnail")
+        - elsif post.class == LinkPost
+          div class="pull-right"
+            #{link_to "Remove", link_post_path(post.id), method: :delete, confirm: "Are You Sure"}
+            #{link_to "Edit", edit_link_post_path(post.id)}
+          h3 = post.description
+          p = link_to(post.url, post.url, target: "_blank")
+        - elsif post.class == TextPost
+          div class="pull-right"
+            #{link_to "Remove", text_post_path(post.id), method: :delete, confirm: "Are You Sure"}
+            #{link_to "Edit", edit_text_post_path(post.id)}
+          h3 = post.title if post.title
+          p = post.body
+        br
+
+  script type="text/html" id="post_template"
+      = render "/dashboards/post"
