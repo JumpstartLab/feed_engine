@@ -2,9 +2,23 @@ require 'spec_helper'
 
 describe User do
   let(:user) { FactoryGirl.create(:user) }
+  let(:link_item) { FactoryGirl.create(:link_item, :user_id => user.id) }
+  let(:text_item) { FactoryGirl.create(:text_item, :user_id => user.id) }
+  let(:image_item) { FactoryGirl.create(:image_item, :user_id => user.id) }
+
 
   context "#add_stream_item" do
     it "adds a link item" do
+      user.add_stream_item(link_item)
+      StreamItem.translate_item(user.stream_items.last).should == link_item
+    end
+    it "adds an image_item" do
+      user.add_stream_item(image_item)
+      StreamItem.translate_item(user.stream_items.last).should == image_item
+    end
+    it "adds a text_item" do
+      user.add_stream_item(text_item)
+      StreamItem.translate_item(user.stream_items.last).should == text_item
     end
   end
 

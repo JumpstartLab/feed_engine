@@ -5,7 +5,12 @@ class StreamItem < ActiveRecord::Base
 
   def self.translate_batch(items)
     items.collect do |item|
-      eval "#{item.streamable_type}.find #{item.streamable_id}"
+      translate_item(item)
     end
   end
+
+  def self.translate_item(item)
+    eval "#{item.streamable_type}.find #{item.streamable_id}"
+  end
+
 end

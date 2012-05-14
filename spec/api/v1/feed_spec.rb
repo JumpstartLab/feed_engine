@@ -7,22 +7,22 @@ describe "API feeds/user/... ", :type => :api do
   let(:token) { user.authentication_token }
 
   before do
-    10.times do
+    5.times do
       item = FactoryGirl.create(:text_item)
       user.text_items << item
       user.add_stream_item(item)
     end
-    10.times do
+    5.times do
       item = FactoryGirl.create(:image_item)
       user.image_items << item
       user.add_stream_item(item)
     end
-    10.times do
+    5.times do
       item = FactoryGirl.create(:link_item)
       user.link_items << item
       user.add_stream_item(item)
     end
-    10.times do
+    5.times do
       item = FactoryGirl.create(:text_item, body: "user2 comment")
       user2.text_items << item
       user2.add_stream_item(item)
@@ -33,11 +33,46 @@ describe "API feeds/user/... ", :type => :api do
     let(:url) { api_v1_feeds_user_stream_items_path(user) }
 
     it "creates a text_item via the api" do
-      new_post_json = "{'type': 'TextItem','text': 'I had some really good Chinese food for lunch today.'}"
-      post "#{url}.json", :token => token, :body => new_post_json
+      body = '{"type":"TextItem","body": "I had some really good Chinese food for lunch today."}'
+      post "#{url}.json", :token => token, :body => body
 
-      raise last_response.inspect
+      last_response.status.should == 201
 
+      new_post = StreamItem.translate_item(user.stream_items.last)
+      new_post.body.should == "I had some really good Chinese food for lunch today."
+      new_post.should be_a(TextItem)
+    end
+
+    it "creates a link_item via the api" do
+      body = '{"type":"LinkItem","comment": "I love Flash games", "link_url": "http://www.games.com/awesome.swf"}'
+      post "#{url}.json", :token => token, :body => body
+
+      last_response.status.should == 201
+
+      new_post = StreamItem.translate_item(user.stream_items.last)
+      new_post.comment.should == "I love Flash games"
+      new_post.url.should == "http://www.games.com/awesome.swf"
+      new_post.should be_a(LinkItem)
+    end
+
+    it "creates an image_item via the api" do
+      body = '{"type":"ImageItem","comment": "This image is cool.", "image_url": "http://foo.com/cat.jpg"}'
+      post "#{url}.json", :token => token, :body => body
+
+      last_response.status.should == 201
+
+      new_post = StreamItem.translate_item(user.stream_items.last)
+      new_post.comment.should == "This image is cool."
+      new_post.url.should == "http://foo.com/cat.jpg"
+      new_post.should be_a(ImageItem)
+    end
+
+    it "responds with errors for an invalid post" do
+      body = '{"type":"ImageItem","comment": "This image is cool.", "image_url": "http://foo.com/cat.html"}'
+      post "#{url}.json", :token => token, :body => body
+
+      last_response.status.should == 406
+      last_response.body.should include("must be jpg, bmp, png, or gif and start with http/https")
     end
 
   end
