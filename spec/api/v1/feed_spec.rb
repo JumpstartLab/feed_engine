@@ -79,7 +79,7 @@ describe "API feeds/user/... ", :type => :api do
       body = '{"type":"ImageItem","comment": "An insidious evil post.", "image_url": "http://troll.com/cat.jpg"}'
       post "#{url}.json", :token => user2.authentication_token, :body => body
 
-      raise last_response.inspect
+      last_response.status.should == 401
 
     end
 
