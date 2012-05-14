@@ -10,9 +10,13 @@ FeedEngine::Application.routes.draw do
   end
 
   # Api subdomain
-  scope "", module: "Api", constraints: Subdomains.api do
-    scope ":user" do
-      resources "feed_items", path: "items"
+  scope module: "api", as: "api", constraints: Subdomains.api do
+    resources "feeds" do
+      collection do
+        scope ":user_display_name" do
+          resources "items"
+        end
+      end
     end
   end
 

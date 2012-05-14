@@ -15,6 +15,7 @@ gem 'rmagick'
 gem 'fog'
 gem 'mustache'
 gem 'exceptional'
+gem 'rabl'
 
 group :production do
   gem 'pg'
