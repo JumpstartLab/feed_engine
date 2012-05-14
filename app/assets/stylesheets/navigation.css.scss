@@ -32,16 +32,22 @@
         a {
           white-space: nowrap;
         }
+        
+        &:hover{
+          opacity: .8;
+        }
       }
     }
     &:hover{
-      opacity: .8;
+      a{
+        text-shadow: 1px 1px .15em $whale;
+      }
       ul {
-        opacity: 1;
         background-color: $white;
         left: 0;
         li {
           a {
+            text-shadow: none;
             color: $whale;
             text-decoration: none;
           }
