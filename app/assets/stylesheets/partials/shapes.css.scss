@@ -1,4 +1,4 @@
-@import "partials/colors";
+@import "./colors.css.scss";
 
 @mixin parallelogram($color, $degrees: 160deg) {
   width: 23%;
