@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me,
                   :display_name, :full_name
 
-  validates_presence_of :display_name
+  validates_presence_of :display_name, :case_sensitive => false
   validates_uniqueness_of :display_name
   validates_format_of :display_name, :with => /^[^ ]+$/
 
