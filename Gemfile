@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.3'
 gem 'slim'
 gem 'simple_form', '~> 2.0'
+gem 'jbuilder'
 gem 'devise'
 gem 'embedly'
 gem 'twitter'
@@ -28,6 +29,7 @@ group :development, :test do
   gem 'simplecov'
   gem 'launchy'
   gem 'faker'
+  gem 'rack-cors', :require => 'rack/cors'
 end
 
 group :production do
