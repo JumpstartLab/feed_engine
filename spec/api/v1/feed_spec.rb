@@ -86,7 +86,7 @@ describe "API feeds/user/... ", :type => :api do
 
       expected_json = StreamItem.translate_batch(stream_items).to_json
       feed = JSON.parse(last_response.body)
-      feed.should include(expected_json)
+      feed.count.should == 12
       last_response.status.should == 200
 
     end

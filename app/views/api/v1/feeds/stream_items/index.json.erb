@@ -5,7 +5,7 @@
     <%#respond_with(@items)%>
   <%#end%>
 
-{
+[
   <% if @items %>
   <% @items.each do |item| %>
     { "type": "<%= item.class.name %>",
@@ -14,15 +14,18 @@
       <% elsif item.is_a?(LinkItem) %>
       "link_url": "<%= item.url %>",
       <% end %>
+      <% if item.is_a?(TextItem) %>
+      "body": "<%=item.body %>",
+      <% end %>
       <% if item.is_a?(ImageItem) || item.is_a?(LinkItem) %>
       "comment": "<%= item.comment %>",
       <% end %>
       "created_at": "<%= item.created_at %>",
       "id": "<%= item.id %>",
-      "feed": <%= "http://api.feedengine.com/feeds/#{item.user.display_name}"%>,
-      "link": "feed_item_path",
+      "feed": "<%= "http://api.feedengine.com/feeds/#{item.user.display_name}"%>",
+      "link": "<%= api_v1_feeds_user_stream_item_path(item.user, item) %>",
       "refeed": false,
-      "refeed_link": "" }
+      "refeed_link": "" },
   <% end %>
   <% end %>
-}
+]
