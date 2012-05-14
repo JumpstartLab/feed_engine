@@ -1,5 +1,0 @@
-<%= simple_form_for post, url: posts_path, method: :post do |f| %>
-  <%= f.input :content, :as => :text, :input_html => { :rows => 5 }, :label => "Message" %>
-  <%= f.input :type, :as => :hidden, :input_html => { :value => "TextPost" } %>
-  <%= f.submit "Post", :class => 'btn btn-primary' %>
-<% end %>

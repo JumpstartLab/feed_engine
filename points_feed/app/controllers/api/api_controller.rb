@@ -1,15 +1,24 @@
 class Api::ApiController < ActionController::Base
   respond_to :json, :xml
-  before_filter :authenticate_token!
 
-  def authenticate_token!
-    if request.post?
-      auth_token = params[:auth_token]
-      user = User.where(:authentication_token => auth_token).first
+  def validation_error(obj)
+    error(406, obj.errors.full_messages)
+  end
 
-      if user.blank?
-        raise "Need authentication token"
-      end
-    end
+  def success(code=201)
+    render :status => code, :json => true
+  end
+
+  def error(code, msg="")
+    render :status => code, :json => msg
+  end
+
+  def authenticate_user
+    @current_user = User.where(:authentication_token => params[:access_token]).first
+  end
+
+  def authenticate_user!
+    authenticate_user
+    error(403) if @current_user.nil? or params[:access_token].blank?
   end
 end

@@ -1,0 +1,16 @@
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+
+  <%= f.input :email, :placeholder => "Email", :label => false %>
+  <%= f.input :current_password, :placeholder => "Current Password", :label => false %>
+  <%= f.input :password, :placeholder => "New Password", :label => false %>
+  <%= f.input :password_confirmation, :placeholder => "New Password Confirmation", :label => false %>
+  <%= f.check_box :private %>&nbsp;&nbsp;Feed Private?
+
+  <hr />
+
+  <%= f.input :background, :label => "Background Image" %>
+
+  <div class='form-actions'>
+    <%= f.button :submit, "Update", :class => "btn btn-info" %>
+  </div>
+<% end %>

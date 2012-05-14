@@ -10,36 +10,41 @@
   <div class="row">
     <div class="span12">
       <div class="row">
-        <% if current_user %>
-          <div class="well span4">
-        <% else %>
-          <div class="span4">
-            <h1>Welcome to Points Feed</h1>
-            <h3>Take a Point, Give a Point, Get the Point?</h3>
-            </br>
-            <p>Nostrud quis tattooed, next level squid nulla eu put a bird on it est pinterest fap bespoke synth art party cred. Williamsburg put a bird on it wayfarers, next level DIY quinoa post-ironic thundercats leggings banksy. Messenger bag pour-over sapiente sartorial officia mumblecore. Vice polaroid hoodie readymade id.</p>
-            <br>
-            <h3>Not a member yet? Sign up for free!</h3>
-            <%= link_to "Register", signup_path, :class => 'btn btn-info' %><br>
-            <br>
-            <h3>Already a member?</h3>
-            <%= render partial: "devise/sessions/signin_form" %>
+        <div class='span6 offset1'>
+          <div class='black-transparent-box'>
+            <h3>Welcome to PointsFeed</h3>
+            <hr />
+            <p>
+              Have too many social media platforms? PointsFeed allows you to combine
+              your twitter, instagram, etc feeds into a single - easy to
+              navigate interface. Check it out!
+            </p>
           </div>
-          <div class="span3">
-            &nbsp
+        </div>
+
+        <div class='span3' style='margin-left: 40px; width: 260px'>
+          <div class='well'>
+            <form method='post' action='<%= new_user_session_path %>'>
+              <input type='text' placeholder='Email' name='user[email]' />
+              <input type='password' placeholder='Password' name='user[password]' />
+              <div style='float: right;'>
+                <input type='submit' value='Sign In' class='btn btn-info' />
+              </div>
+            </form>
           </div>
-          <div class="well span4">
-        <% end %> 
-            <div class="login-right">
-              <h3>Most Recent Posts</h3>
-              <br />
-              <% @posts.each do |post| %>
-                <hr />
-                <%= render "posts/show_#{post.template}", :post => post %>
-              <% end %>
-              <%= paginate @posts %>
-            </div>
+
+          <div class='well'>
+            <form method='post' action='<%= user_registration_path %>'>
+              <input type='text' placeholder='Display Name' name='user[display_name]' />
+              <input type='text' placeholder='Email' name='user[email]' />
+              <input type='password' placeholder='Password' name='user[password]' />
+              <input type='password' placeholder='Password Confirmation' name='user[password_confirmation]' />
+              <div style='float:right'>
+                <input type='submit' value='Create An Account' class='btn btn-warning' />
+              </div>
+            </form>
           </div>
+        </div>
       </div>
     </div>
   </div>

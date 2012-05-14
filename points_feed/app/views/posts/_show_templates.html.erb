@@ -1,0 +1,46 @@
+<script type="text/template" id='TextItemTemplate'>
+  <div class='row'>
+    <div class='span1'>
+      <img src="{{feeder.avatar}}"></img>
+    </div>
+    <div class='offset1'>
+      <span class='light'>Posted {{created_at}} ago by <a href="#">{{feeder.name}}</a></span><br />
+      {{text}}
+    </div>
+  </div>
+  <hr />
+</script>
+
+<script type="text/template" id='ImageItemTemplate'>
+  <div class='row'>
+    <div class='span1'>
+      <img src="{{feeder.avatar}}"></img>
+    </div>
+    <div class='offset1'>
+      <span class='light'>Posted {{created_at}} ago by <a href="#">{{feeder.name}}</a></span><br />
+      <div class='row' style='margin-top: 20px'>
+        <div class='span2'>
+          <img src="{{image_url}}" class='span2 well'></img>
+        </div>
+        <div class='offset3'>
+          {{comment}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+</script>
+
+<script type="text/template" id='LinkItemTemplate'>
+  <div class='row'>
+    <div class='span1'>
+      <img src="{{feeder.avatar}}"></img>
+    </div>
+    <div class='offset1'>
+      <a href='{{link_url}}' class='alert alert-info span2' style='float:right; word-wrap: break-word;'>{{link_url}}</a>
+      <span class='light'>Posted {{created_at}} ago by <a href="#">{{feeder.name}}</a></span><br />
+      {{comment}}
+    </div>
+  </div>
+  <hr />
+</script>

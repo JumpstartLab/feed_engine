@@ -14,4 +14,28 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require cookies
+//= require mustache
+//= require timeago
 //= require_tree .
+
+//access_token = $("#access_token").val();
+
+function success_notify(msg) {
+  $(".alert-success").html(msg).slideDown('slow').delay(2000).slideUp('slow');
+}
+
+function error_notify(msg) {
+  $(".alert-error").html(msg).slideDown('slow').delay(2000).slideUp('slow');
+}
+
+function info_notify(msg) {
+  $(".alert-info").html(msg).slideDown('slow').delay(2000).slideUp('slow');
+}
+
+function show_loading(div) {
+  div.html('<div id="loading" style="width:100%; text-align:center"><img src="assets/loading.gif"></img></div>');
+}
+
+function hide_loading(div) {
+  div.find('#loading').slideUp('slow').html('');
+}

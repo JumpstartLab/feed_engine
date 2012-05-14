@@ -17,6 +17,10 @@
     <link href="images/apple-touch-icon.png" rel="apple-touch-icon">
     <link href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
     <link href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114"> -->
+
+    <script type="text/javascript">
+      display_name = undefined;
+    </script>
   </head>
   <body>
 
@@ -33,8 +37,13 @@
           </div>
         </div><!--/row-->
       </div><!--/content-->
-
     </div> <!-- /container -->
+
+    <% unless current_user.blank? %>
+      <input type='hidden' id='access_token' value='<%= current_user.authentication_token %>' />
+    <% end %>
+
+    <br />
 
     <!-- Javascripts
     ================================================== -->
