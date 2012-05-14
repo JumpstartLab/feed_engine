@@ -16,7 +16,7 @@ class Api::V1::Feeds::StreamItemsController < Api::V1::BaseController
     @item = user.new_stream_item_from_json(JSON.parse(params[:body]))
     if @item.save
       user.add_stream_item(@item)
-      respond_with(@item, :status => :created, :location => api_v1_feeds_user_stream_item_path(user, @item))
+      respond_with(@item, :status => :created, :location => v1_feeds_user_stream_item_path(user, @item))
     else
       render :json => {errors: [@item.errors]}, :status => :not_acceptable
       #respond_with(@item.errors, :status => :unprocessable_entity)

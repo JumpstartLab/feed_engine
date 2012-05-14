@@ -30,7 +30,7 @@ describe "API feeds/user/... ", :type => :api do
   end
 
   context "creating feed items via the API" do
-    let(:url) { api_v1_feeds_user_stream_items_path(user) }
+    let(:url) { "http://api.example.com#{v1_feeds_user_stream_items_path(user)}" }
 
     it "creates a text_item via the api" do
       body = '{"type":"TextItem","body": "I had some really good Chinese food for lunch today."}'
@@ -79,25 +79,25 @@ describe "API feeds/user/... ", :type => :api do
 
   context "getting a feed item" do
     let!(:stream_item) { user.stream_items.last }
-    let!(:url) { api_v1_feeds_user_stream_item_path(user, stream_item)}
+    let(:url) { "http://api.example.com#{v1_feeds_user_stream_items_path(user)}" }
 
     it "returns a json representation for a text post" do
       item = user.text_items.last
       stream_item = user.stream_items.where(:streamable_id => item.id).where(:streamable_type => item.class.name).first
-      url = api_v1_feeds_user_stream_item_path(user, stream_item)
-      get "#{url}.json", :token => token
+      url = v1_feeds_user_stream_item_path(user, stream_item)
+      get "http://api.example.com#{url}.json", :token => token
 
       resp = JSON.parse(last_response.body)
       resp["id"].should == item.id
       resp["type"].should == item.class.name
       Date.parse(resp["created_at"]).should == Date.parse(item.created_at.to_s)
       resp["body"].should == item.body
-      resp["link"].should == api_v1_feeds_user_stream_item_path(item.user, item.stream_items.first)
+      resp["link"].should == v1_feeds_user_stream_item_path(item.user, item.stream_items.first)
     end
   end
 
   context "getting the user's feed items" do
-    let(:url) { api_v1_feeds_user_stream_items_path(user) }
+    let(:url) { "http://api.example.com#{v1_feeds_user_stream_items_path(user)}" }
     before(:each) { get "#{url}.json", :token => token }
 
     it "returns an array of most recent stream items as json" do
@@ -126,17 +126,17 @@ describe "API feeds/user/... ", :type => :api do
 
     it "gives a link to the feed" do
       feed = JSON.parse(last_response.body)
-      feed["link"].should == api_v1_feeds_user_stream_items_path(user)
+      feed["link"].should == v1_feeds_user_stream_items_path(user)
     end
 
     it "gives a link to the first_page" do
       feed = JSON.parse(last_response.body)
-      feed["items"]["first_page"].should == api_v1_feeds_user_stream_items_path(user, :page => 1)
+      feed["items"]["first_page"].should == v1_feeds_user_stream_items_path(user, :page => 1)
     end
 
     it "gives a link to the last_page" do
       feed = JSON.parse(last_response.body)
-      feed["items"]["last_page"].should == api_v1_feeds_user_stream_items_path(user, :page => (user.stream_items.count/12.0).ceil)
+      feed["items"]["last_page"].should == v1_feeds_user_stream_items_path(user, :page => (user.stream_items.count/12.0).ceil)
     end
 
     it "formats the json response for an image_item " do

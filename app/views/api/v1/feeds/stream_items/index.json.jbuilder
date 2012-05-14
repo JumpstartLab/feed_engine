@@ -2,12 +2,12 @@
   json.name            @user.display_name
   json.id              @user.id
   json.private         false
-  json.link            api_v1_feeds_user_stream_items_path(@user)
+  json.link            v1_feeds_user_stream_items_path(@user)
 
   json.items do |json|
     json.pages         @stream_items.num_pages
-    json.first_page    api_v1_feeds_user_stream_items_path(@user, :page => 1)
-    json.last_page     api_v1_feeds_user_stream_items_path(@user, :page => @stream_items.num_pages)
+    json.first_page    v1_feeds_user_stream_items_path(@user, :page => 1)
+    json.last_page     v1_feeds_user_stream_items_path(@user, :page => @stream_items.num_pages)
     json.most_recent   @items do |json, item|
       json.(item, :id, :created_at)
       json.type        item.class.name
@@ -16,7 +16,7 @@
       json.body        item.body if item.is_a?(TextItem)
       json.comment     item.comment if item.is_a?(LinkItem) || item.is_a?(ImageItem)
       json.feed        "http://api.feedengine.com/feeds/#{item.user.display_name}"
-      json.link        api_v1_feeds_user_stream_item_path(item.user, item.stream_items.first)
+      json.link        v1_feeds_user_stream_item_path(item.user, item.stream_items.first)
       json.refeed      false
       json.refeed_link ""
     end
