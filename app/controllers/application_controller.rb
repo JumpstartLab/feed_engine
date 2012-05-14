@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   private
 
   def user
-    @user ||= User.find_by_display_name(request.subdomain)
+    @user ||= User.where("lower(display_name) = ?", request.subdomain).first
   end
 
 end
