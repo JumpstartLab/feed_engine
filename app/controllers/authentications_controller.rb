@@ -40,20 +40,48 @@ class AuthenticationsController < ApplicationController
   # POST /authentications
   # POST /authentications.json
   def create
-    auth = request.env["omniauth.auth"]
-    current_user.authentications.find_or_create_by_auth(auth['provider'], auth['uid'])
-    flash[:notice] = "Authentication successful."
-    redirect_to authentications_urll
 
-    respond_to do |format|
-      if @authentication.save
-        format.html { redirect_to @authentication, notice: 'Authentication was successfully created.' }
-        format.json { render json: @authentication, status: :created, location: @authentication }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @authentication.errors, status: :unprocessable_entity }
+    auth = request.env["omniauth.auth"]
+    token = auth["credentials"]["token"]
+    secret = auth["credentials"]["secret"]
+
+    current_user.authentications.build(:provider => auth['provider'], :uid => auth['uid'], 
+     :token => token, :secret => secret)
+    if current_user.save
+      Twitter.configure do |config|
+        config.consumer_key = 'ubCmGXxyj0ZQ2guzFXdg'
+        config.consumer_secret = 'ytoc7GZ05NqSgKZqpW0O1PjyCUiEuPrDuuHV0rLKE'
+        config.oauth_token = token
+        config.oauth_token_secret = secret
       end
+
+      raise Twitter.home_timeline.first.text
+      flash[:notice] = "Authentication successful."
+    else
+      flash[:notice] = "Authentication failed."
     end
+    redirect_to dashboard_url
+    
+
+    # authentication = Authentication.find_by_provder_and_uid(auth['provider'], auth['uid'])
+    # if authentication
+    #   flash[:notice] = "Authentication successful."
+    #   sign_in_and_redirect(:user, authentication.user)
+    # else
+    #   current_user.authentications.create(:provider => auth['provider'], :uid => auth['uid'])
+    #   flash[:notice] = "Authentication successful"
+    #   redirect_to authentications_url
+    # end
+
+    # respond_to do |format|
+    #   if @authentication.save
+    #     format.html { redirect_to @authentication, notice: 'Authentication was successfully created.' }
+    #     format.json { render json: @authentication, status: :created, location: @authentication }
+    #   else
+    #     format.html { render action: "new" }
+    #     format.json { render json: @authentication.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PUT /authentications/1
