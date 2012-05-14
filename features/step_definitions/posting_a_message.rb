@@ -30,7 +30,6 @@ end
 
 Then /^the data I have entered is present$/ do
   page.should have_content @message
-  # find('input[name="text_post[body]"]').value.should include @message
 end
 
 When /^I fill in the message text with "(.*?)"$/ do |text|
