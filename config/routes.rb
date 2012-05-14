@@ -13,4 +13,12 @@ FeedEngine::Application.routes.draw do
   resources "image_posts"
   resources "link_posts"
   root :to => "static_pages#show"
+
+  devise_scope :user do
+    get "signup" => "devise/registrations#new", :as => :new_user
+    get "login" => "devise/sessions#new", :as => :login
+    delete "/logout" => "devise/sessions#destroy"
+  end
+
+  root :to => "dashboards#show"
 end
