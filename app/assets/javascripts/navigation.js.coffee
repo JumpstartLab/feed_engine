@@ -1,0 +1,5 @@
+$ -> 
+  addNavBarHandlers()
+
+addNavBarHandlers = ->
+  

@@ -18,6 +18,6 @@ FeedEngine::Application.routes.draw do
   resources :texts
   resources :images
   resources :links
-  match '/sign_up' => 'users#new'
+  match '/sign_up' => 'users#new', as: 'sign_up'
   root :to => 'pages#index'
 end

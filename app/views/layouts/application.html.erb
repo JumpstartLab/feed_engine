@@ -9,6 +9,7 @@
 <body>
 <p id="notice"><%= notice %></p>
 <p id="flash"></p>
+<%= render "nav_bar" %>
 <div id="nav">
   <% if current_user %>
     <%= current_user.email %>

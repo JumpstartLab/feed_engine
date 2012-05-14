@@ -3,69 +3,13 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $.namespace = {
-  page_count: 0,
   activeTabId: null,
   activateTab: (tabId)->
     if $.namespace.activateTabId
       $("##{$.namespace.activateTabId}").removeClass('selected')
     $("##{tabId}").addClass('selected')
     $.namespace.activateTabId = tabId
-  }
-
-update = ->
-  unless window.page_count > $.namespace["page_count"]
-    $.ajax({
-      type: "GET",
-      url: "/posts",
-      data: { page: window.page_count }
-      success: (response, status, jqXHR)->
-        $.namespace["page_count"] = response["page_count"]
-        posts = response["posts"]
-        for post in posts
-          render(post)
-          })
-
-render = (post) ->
-  type = post["type"]
-  feed = $("#feed")
-
-  if type == "text"
-    feed.append(text_to_html(post)).show()
-  else if type == "image"
-    feed.append(image_to_html(post)).show()
-  else if type == "link"
-    feed.append(link_to_html(post)).show()
-
-image_to_html = (post) ->
-  html = "
-  <div class='post'>
-    <li class='postbody'><img src='#{post.content}' />
-      </br>
-      <p>#{post.comment}</p>
-      <p class='posted'>posted #{post.created_at} ago</p>
-    </li>
-  </div>
-  "
-
-link_to_html = (post) ->
-  html = "
-  <div class='post'>
-    <li class='postbody'><a href=#{post.content} target='_blank'>#{post.content}</a>
-      </br>
-      <p>#{post.comment}</p>
-      <p class='posted'>posted #{post.created_at} ago</p>
-    </li>
-  </div>
-  "
-
-text_to_html = (post) ->
-  html = "
-  <div class='post'>
-    <li class='postbody'><p>#{post.content}</p>
-      <p class='posted'>posted #{post.created_at} ago</p>
-    </li>
-  </div>
-  "
+}
 
 addSubmitHandler = (klass) ->
   $("##{klass}_errors").hide()
@@ -81,8 +25,7 @@ addSubmitHandler = (klass) ->
         $('#flash').text('Posted successfully')
         form.clearForm()
         $("#feed").children() .remove()
-        window.page_count = 0
-        update()
+        new PostsPager().render()
       error: (response, status)->
         resp = $.parseJSON(response.responseText)
         $("##{klass}_errors").show()
@@ -90,33 +33,58 @@ addSubmitHandler = (klass) ->
           $("##{klass}_errors_list").html "<li>#{error}</li>"
     })
 
+#check if has has any items
 hasItems = (hash) ->
   for key in hash
     if hash.hasOwnProperty key
       return true
   false
 
-jQuery ->
-  $('.tab-body ul').children().hide()
-  $('.tab-body ul').children().first().show()
+addTabMenuHandler = ->
   $('.tab-item').click ->
     $.namespace.activateTab(this['id'])
     tabId = "#{this['id']}-tab".toLowerCase()
     $('.tab-body ul').children().hide()
     $("##{tabId}").show()
-    
+
+
+addHandlers = ->
   addSubmitHandler("text")
   addSubmitHandler("image")
   addSubmitHandler("link")
-  window.page_count = 0
-  update()
+  addTabMenuHandler()
 
-  $(window).scroll ->
-    if $(window).scrollTop() > $(document).height() - $(window).height() - 50
-      window.page_count++
-      update()
+jQuery ->
+  $('.tab-body ul').children().hide()
+  $('.tab-body ul').children().first().show()
+  
+  addHandlers()
+  $.namespace.activateTab('text')
+  if $('#feed').length
+    new PostsPager().render()
 
+class PostsPager
+  contructor: (@page=0)->
+    $(window).scroll(@check)
 
+  check: =>
+    if @nearBottom()
+      @render
+
+  render: =>
+    @page++
+    $(window).unbind('scroll', @check)
+    $.getJSON($('#feed').data('json-url'), page: @page, @renderPosts)
+
+  nearBottom: =>
+    $(window).scrollTop() > $(document).height() - $(window).height() - 50
+
+  renderPosts: (response, status, jqXHR) =>
+    posts = response['posts']
+    for post in posts
+      type = post["type"]
+      $("#feed").append Mustache.to_html($("##{type}_template").html(), post)
+    $(window).scroll(@check) if posts.length > 0
 
 
 
