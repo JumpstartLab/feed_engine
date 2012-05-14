@@ -1,9 +1,8 @@
 .post-form
   h3 Share your thoughts
   .errors
-    #text_errors
-      p Oops! Something went wrong.
-      ul#text_errors_list
+    p Oops! Something went wrong.
+    ul.errors_list
   br
     = form_for @new_text, url: "#", id: "text_form" do |f|
       = hidden_field_tag :type, "text"
@@ -13,4 +12,4 @@
       = f.text_area :content
       br
       br
-    a.button*{id: "text-submit"} Create Post
+      a.button*{id: "text-submit"} Create Post

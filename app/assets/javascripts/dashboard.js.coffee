@@ -7,27 +7,28 @@ $.namespace = {
     $.namespace.activateTabId = tabId
 }
 
-addSubmitHandler = (klass) ->
-  $("##{klass}_errors").hide()
-  $("##{klass}-submit").click ->
-    $("##{klass}_errors").hide()
-    form = $("#new_#{klass}")
+addSubmitHandlers = ->
+  $(".errors").hide()
+  $(".post-form form .button").click ->
+    $(".errors").hide()
+    form = $(this).closest('form')
     formData = form.serialize()
-    $.ajax({
+    request = $.ajax(
       type: "POST",
       url: "/posts",
-      data: formData,
-      success: ->
-        $('#flash').text('Posted successfully')
-        form.clearForm()
-        $("#feed").children().remove()
-        new PostsPager().render()
-      error: (response, status)->
-        resp = $.parseJSON(response.responseText)
-        $("##{klass}_errors").show()
-        for error in resp.errors
-          $("##{klass}_errors_list").html "<li>#{error}</li>"
-    })
+      data: formData
+    )
+    request.success ->
+      $('#flash').text('Posted successfully')
+      form.clearForm()
+      $("#feed").children().remove()
+      new PostsPager().render()
+    request.error (response, status) ->
+      resp = $.parseJSON(response.responseText)
+      $(".errors", form).show()
+      for error in resp.errors
+        $(".errors_list", form).html "<li>#{error}</li>"
+
 
 addTabMenuHandler = ->
   $('.tab-item').click ->
@@ -41,9 +42,7 @@ addPreviewHandler = ->
     $('#image_preview').attr('src', $('#image_url').val()).show()
 
 addHandlers = ->
-  addSubmitHandler("text")
-  addSubmitHandler("image")
-  addSubmitHandler("link")
+  addSubmitHandlers()
   addPreviewHandler()
   addTabMenuHandler()
 

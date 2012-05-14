@@ -1,9 +1,8 @@
 .post-form
   h3 Share a link
   .errors
-    #link_errors
-      p Oops! Something went wrong.
-      ul#link_errors_list
+    p Oops! Something went wrong.
+    ul.errors_list
   br
   = form_for @new_link, url: "#", id: "link_form" do |f|
     = hidden_field_tag :type, "link"
@@ -17,4 +16,4 @@
     = f.text_field :comment
     br
     br
-  a.button*{id: "link-submit"} Create Post
+    a.button*{id: "link-submit"} Create Post
