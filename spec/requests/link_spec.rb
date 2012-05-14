@@ -12,7 +12,7 @@ describe Link do
       within("#link_form") do
         fill_in "growl[link]", :with => "http://abc.com/"
         fill_in "growl[comment]", :with => "wooo"
-        click_on "Create Link"
+        click_link_or_button "Create Link"
       end
       page.should have_content "Your link has been created."
     end

@@ -1,4 +1,19 @@
 Hungrlr::Application.routes.draw do
+
+  constraints(Subdomain) do
+    constraints :subdomain => 'api' do
+      scope module: "api" do
+        namespace "v1" do
+          get '/feeds/:display_name' => 'feeds#show'
+          post '/feeds/:display_name' => 'feeds#create'
+          # resources :feeds
+          resources :meta_data, :only => [ :create ]
+        end
+      end
+    end
+    match '/' => 'growls#index'
+    # match '*' => "growls#index"
+  end
   match "/home" => "pages#home"
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
@@ -15,19 +30,6 @@ Hungrlr::Application.routes.draw do
 
   resource :dashboard, :only => [ :show ]
 
-  constraints(Subdomain) do
-    constraints :subdomain => 'api' do
-      scope module: "api" do
-        namespace "v1" do
-          match '/feeds/:display_name' => 'feeds#show'  , :via => :get
-          match '/feeds/:display_name' => 'feeds#create', :via => :post
-          # resources :feeds
-          resources :meta_data, :only => [ :create ]
-        end
-      end
-    end
-    match '/' => 'growls#index'
-  end
 
   root :to => 'pages#home'
 end

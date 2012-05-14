@@ -1,7 +1,8 @@
 require "open-uri"
 
 class Growl < ActiveRecord::Base
-  attr_accessible :comment, :link, :user, :type
+  attr_accessible :comment, :link, :user, :type,
+                  :external_id, :created_at, :user_id
   validates_presence_of :type
   belongs_to :user
   has_one :meta_data, :autosave => true, dependent: :destroy
@@ -51,5 +52,6 @@ end
 #  photo_content_type :string(255)
 #  photo_file_size    :integer
 #  photo_updated_at   :datetime
+#  external_id        :integer
 #
 

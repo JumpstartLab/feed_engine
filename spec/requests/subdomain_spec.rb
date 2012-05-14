@@ -25,7 +25,7 @@ describe "Subdomains" do
     context "not logged in" do
       it "shows a link to sign up" do
         visit root_path
-        page.should have_link "Sign up"
+        page.should have_content "Sign up"
       end
     end
   end

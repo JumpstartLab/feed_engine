@@ -1,9 +1,5 @@
-require "spec_helper"
-describe Growl do
-  describe ".for_user(display_name)" do
-    before(:each) { x.any_instance.stub(:send_photo_to_amazon).and_return(true) }
-    pending "Unit tests need written."
-  end
+class Tweet < Growl
+
 end
 # == Schema Information
 #

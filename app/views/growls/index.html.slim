@@ -1,26 +1,28 @@
-h1= "#{@user.display_name}'s Feed"
-br
+.row
+  .content_bar
+    h1= "#{@user.display_name}'s Feed"
+    br
 
--if @growls.empty?
-  p
-    | You currently have no growls. Add some in your
-    =link_to "dashboard", "http://hungrlr.com/dashboard"
-    | .
--else
-  dl.sub-nav
-    dt Filter:
-    dd{ class=("active" if params[:type] == nil ) }
-      a(href="/") All
-    dd{ class=("active" if params[:type] == 'Image' ) }
-      a(href="?type=Image") Images
-    dd{ class=("active" if params[:type] == 'Message' ) }
-      a(href="?type=Message") Messages
-    dd{ class=("active" if params[:type] == 'Link' ) }
-      a(href="?type=Link") Links
-  #growls
-    = render @growls
-  = paginate @growls
+    -if @growls.empty?
+      p
+        | You currently have no growls. Add some in your
+        =link_to "dashboard", "http://hungrlr.com/dashboard"
+        | .
+    -else
+      dl.sub-nav
+        dt Filter:
+        dd{ class=("active" if params[:type] == nil ) }
+          a(href="/") All
+        dd{ class=("active" if params[:type] == 'Image' ) }
+          a(href="?type=Image") Images
+        dd{ class=("active" if params[:type] == 'Message' ) }
+          a(href="?type=Message") Messages
+        dd{ class=("active" if params[:type] == 'Link' ) }
+          a(href="?type=Link") Links
+      #growls
+        = render @growls
+      = paginate @growls
 
-coffee:
-  $(".points").click ->
-    alert Math.floor((Math.random()*100)+1) + " Points achieved!"
+    coffee:
+      $(".points").click ->
+        alert Math.floor((Math.random()*100)+1) + " Points achieved!"

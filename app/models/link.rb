@@ -7,27 +7,15 @@ class Link < Growl
 
   def send_photo_to_amazon
     begin
-      self.photo = open(link)
+      self.photo = open(thumbnail_url)
     rescue
-      errors.add(:link, "Photo does not exist")
+      #errors.add(:link, "Photo does not exist")
     end
   end
 
   def icon
     "glyphicons_036_file.png"
   end
-  # def self.new_link(input)
-  #   link = Link.new(
-  #                     comment: input[:comment],
-  #                     link: input[:link],
-  #                     )
-  #   link.create_meta_data(
-  #                          description: input[:description],
-  #                          title: input[:title],
-  #                          thumbnail_url: input[:thumbnail_url]
-  #                          )
-  #   link
-  # end
 
 end
 # == Schema Information
@@ -45,5 +33,6 @@ end
 #  photo_content_type :string(255)
 #  photo_file_size    :integer
 #  photo_updated_at   :datetime
+#  external_id        :integer
 #
 
