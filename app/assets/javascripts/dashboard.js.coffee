@@ -1,7 +1,3 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
-
 $.namespace = {
   activeTabId: null,
   activateTab: (tabId)->
@@ -24,7 +20,7 @@ addSubmitHandler = (klass) ->
       success: ->
         $('#flash').text('Posted successfully')
         form.clearForm()
-        $("#feed").children() .remove()
+        $("#feed").children().remove()
         new PostsPager().render()
       error: (response, status)->
         resp = $.parseJSON(response.responseText)
@@ -32,13 +28,6 @@ addSubmitHandler = (klass) ->
         for error in resp.errors
           $("##{klass}_errors_list").html "<li>#{error}</li>"
     })
-
-#check if has has any items
-hasItems = (hash) ->
-  for key in hash
-    if hash.hasOwnProperty key
-      return true
-  false
 
 addTabMenuHandler = ->
   $('.tab-item').click ->
@@ -63,7 +52,7 @@ jQuery ->
   $('.tab-body ul').children().first().show()
   
   addHandlers()
-  $.namespace.activateTab('text')
+  $.namespace.activateTab('Text')
   if $('#feed').length
     new PostsPager().render()
 
