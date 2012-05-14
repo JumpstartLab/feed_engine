@@ -1,4 +1,4 @@
-@import "partials/colors";
+@import "./partials/colors.scss.css";
 
 @mixin borders($style, $color: $slushie){
   border-color: $color;
