@@ -2,10 +2,11 @@ require 'spec_helper'
 
 describe 'api/v1/feed', type: :api do
   let!(:user) { FactoryGirl.create(:user_with_growls) }
-  let!(:other_user) { FactoryGirl.create(:user_with_growls) }
+  let!(:token) { user.authentication_token }
   
   context "growls viewable by this user" do
-    let(:url) { "http://api.hungrlr.dev/v1/feeds/#{user.display_name}" }
+    # visit new_user_session_path(user)
+    let(:url) { "http://api.hungrlr.com/v1/feeds/#{user.display_name}" }
     before(:each) do
       get "#{url}.json"
     end
