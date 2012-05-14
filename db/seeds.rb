@@ -1,7 +1,12 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+Dir[Rails.root.join("test/fabricators/*.rb")].each {|f| require f}
+
+User.destroy_all
+Text.destroy_all
+Image.destroy_all
+Link.destroy_all
+
+jeff = Fabricate(:jeff)
+
+10.times { Fabricate(:text_post, user_id: jeff.id) }
+10.times { Fabricate(:image_post, user_id: jeff.id) }
+10.times { Fabricate(:link_post, user_id: jeff.id) }
