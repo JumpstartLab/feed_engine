@@ -1,4 +1,8 @@
 module Postable
+  def type
+    self.class.name
+  end
+
   def message?
     is_a? Message
   end
