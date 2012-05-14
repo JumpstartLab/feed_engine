@@ -17,7 +17,7 @@ describe Post do
       TextPost.count.should == 1
     end
 
-    it "disallows me from creating a blank Text post" do
+    it "disallows me from creating a blank Text post", js: true do
       click_button "Post"
       TextPost.count.should == 0
     end
