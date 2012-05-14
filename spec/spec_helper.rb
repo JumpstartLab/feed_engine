@@ -15,6 +15,8 @@ require 'rspec/autorun'
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 include UserRequestHelpers
+include SetHostHelper
+reset_host #the host is global and MUST be reset before test runs
 
 RSpec.configure do |config|
   # ## Mock Framework

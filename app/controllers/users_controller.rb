@@ -5,10 +5,16 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    @posts = Kaminari.paginate_array(
-                        @user.sorted_posts
-                      ).page(params[:page]).per(12)
+    @user = User.find_by_display_name(request.subdomain)
+
+    if @user
+      @posts = Kaminari.paginate_array(
+                          @user.sorted_posts
+                        ).page(params[:page]).per(12)
+    else
+      redirect_to root_url(:host => request.domain),
+        :notice => "User #{request.subdomain} not found."
+    end
   end
 
   def create
@@ -22,6 +28,18 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    @user = User.find(params[:id])
+
+    if @user.update_attributes(params[:user])
+      redirect_to dashboard_path, notice: "Password changed"
+    else
+      @message, @image, @link = Message.new, Image.new, Link.new
+      retain_password
+      render "dashboard/show"
+    end
+  end
+
   private
 
   def retain_password
@@ -32,5 +50,8 @@ class UsersController < ApplicationController
   def login_and_notify_user
     session[:user_id] = @user.id
     @user.send_welcome_email
+  end
+
+  def set_user_from_subdomain
   end
 end
