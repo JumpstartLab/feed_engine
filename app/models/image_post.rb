@@ -54,4 +54,5 @@ class ImagePost < ActiveRecord::Base
   def self.user
     post.user
   end
+
 end

@@ -20,7 +20,7 @@ div class="span8 stream"
   h1 Your Stream
   div class="thumbnails" id="posts" data-json-url="#{dashboard_url(format: :json)}"
     - @posts.each do |post|
-      - post = post.postable
+      - post = post.instance_of_a_particular_post_type
       div class="post well"
         - if post.class == ImagePost
           div class="pull-right"
