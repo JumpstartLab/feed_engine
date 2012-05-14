@@ -13,7 +13,7 @@ gem 'redis-store', "~> 1.0.0"
 gem 'resque'
 gem 'kaminari'
 gem "ember-rails"
-gem 'rabl'
+gem 'jbuilder'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -47,10 +47,7 @@ end
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
+#
 # Use unicorn as the app server
 # gem 'unicorn'
 

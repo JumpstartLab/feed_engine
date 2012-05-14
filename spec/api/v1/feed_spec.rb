@@ -77,6 +77,25 @@ describe "API feeds/user/... ", :type => :api do
 
   end
 
+  context "getting a feed item" do
+    let!(:stream_item) { user.stream_items.last }
+    let!(:url) { api_v1_feeds_user_stream_item_path(user, stream_item)}
+
+    it "returns a json representation for a text post" do
+      item = user.text_items.last
+      stream_item = user.stream_items.where(:streamable_id => item.id).where(:streamable_type => item.class.name).first
+      url = api_v1_feeds_user_stream_item_path(user, stream_item)
+      get "#{url}.json", :token => token
+
+      resp = JSON.parse(last_response.body)
+      resp["id"].should == item.id
+      resp["type"].should == item.class.name
+      Date.parse(resp["created_at"]).should == Date.parse(item.created_at.to_s)
+      resp["body"].should == item.body
+      resp["link"].should == api_v1_feeds_user_stream_item_path(item.user, item.stream_items.first)
+    end
+  end
+
   context "getting the user's feed items" do
     let(:url) { api_v1_feeds_user_stream_items_path(user) }
     before(:each) { get "#{url}.json", :token => token }
