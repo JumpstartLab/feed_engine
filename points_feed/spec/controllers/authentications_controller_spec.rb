@@ -1,8 +1,14 @@
 require File.dirname(__FILE__) + '/../spec_helper'
+include Devise::TestHelpers
 
 describe AuthenticationsController do
   fixtures :all
   render_views
+
+  before(:each) do
+    @user = Fabricate(:user)
+    sign_in(@user)
+  end
 
   it "index action should render index template" do
     get :index
