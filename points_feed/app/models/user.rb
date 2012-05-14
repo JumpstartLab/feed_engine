@@ -45,8 +45,9 @@ class User < ActiveRecord::Base
   mount_uploader :background, BackgroundUploader
 
   def relation_for(type)
-    type = type.gsub(/Item/i, "Post")
-    self.send(type.underscore.pluralize.to_sym).scoped rescue text_posts.scoped
+    # child_type_for_name (pass type and get a symbol)
+    type = type.gsub(/Item/i, "Post").underscore.pluralize.to_sym
+    self.send(type).scoped rescue text_posts.scoped
   end
 
   def background_image
