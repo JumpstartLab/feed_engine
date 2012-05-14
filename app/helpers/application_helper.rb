@@ -1,2 +1,14 @@
 module ApplicationHelper
+
+  def post_template_for_post(post)
+    if post.class == ImagePost
+      "image_posts/post"
+    elsif post.class == LinkPost
+      "link_posts/post"
+    elsif post.class == TextPost
+      "text_posts/post"
+    else
+      "NEED TO ADD A TEMPLATE"
+    end
+  end
 end
