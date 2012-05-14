@@ -3,15 +3,24 @@ FeedEngine::Application.routes.draw do
 
   devise_for :users
 
-  scope "", constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' } do
+  # User subdomains
+  scope "", constraints: Subdomains.user_feeds do
     match "", to: "users#show"
     resource "user"
+  end
+
+  # Api subdomain
+  scope "", module: "Api", constraints: Subdomains.api do
+    scope ":user" do
+      resources "feed_items", path: "items"
+    end
   end
 
   resource "dashboard"
   resources "text_posts"
   resources "image_posts"
   resources "link_posts"
+  resources "feed_items"
   root :to => "static_pages#show"
 
   devise_scope :user do

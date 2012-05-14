@@ -51,7 +51,7 @@ class ImagePost < ActiveRecord::Base
     @download_failed
   end
 
-  def self.user
+  def user
     post.user
   end
 
