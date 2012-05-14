@@ -1,9 +1,12 @@
+/
+/ USED FOR LINKS
+/
 .row
   .six.columns
     = simple_form_for @growl, :url => growls_path, :html => { :id => 'link_form' } do |f|
       = f.input :type, :as => :hidden, :input_html => { :value => "Link" }
-      = f.input :link, :class => "medium input-text required", :maxlength => "2048", label: "URL to Link", as: :string, input_html: { id: "link_link"}
-      = f.input :comment, input_html: { id: "link_comment" }
+      = f.input :link, :maxlength => "2048", label: "&nbsp;", as: :string, input_html: { id: "link_link", placeholder: "Link URL"}
+      = f.input :comment, input_html: { id: "link_comment" }, label: "&nbsp;", placeholder: "Comment"
       p
         | You have&nbsp;
         span#charsLeftLink
@@ -13,11 +16,13 @@
         = m.input :description, as: :hidden, :input_html => { id: "link_description"}
         = m.input :thumbnail_url, as: :hidden, :input_html => { id: "link_thumbnail_url"}
       = f.button :submit, "Create Link"
-  .six.columns
-    #loading(style="display:none;")= image_tag "loading_big.gif"
-    h4#title(style="display:none;")
-    #description(style="display:none;")
-    img#thumbnail(style="display:none;" src="")
+  .six.columns#link_show(style="display:none;")
+    #loading= image_tag "loading_big.gif"
+    h3#image_helper Preview your Link Contents:
+    .comments
+      h4#title
+      #description
+      img#thumbnail(src="")
 
 coffee:
   jQuery ->

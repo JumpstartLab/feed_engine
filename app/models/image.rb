@@ -7,6 +7,17 @@ class Image < Growl
   after_validation :send_photo_to_amazon
   belongs_to :user
 
+  def send_photo_to_amazon
+    begin
+      self.photo = open(link)
+    rescue
+      errors.add(:link, "Photo does not exist")
+    end
+  end
+
+  def icon
+    "glyphicons_011_camera.png"
+  end
   # def self.new_image(input)
   #   Image.new(
   #             comment: input[:comment],
@@ -30,5 +41,6 @@ end
 #  photo_content_type :string(255)
 #  photo_file_size    :integer
 #  photo_updated_at   :datetime
+#  external_id        :integer
 #
 

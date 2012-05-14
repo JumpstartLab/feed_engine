@@ -1,25 +1,8 @@
 require "spec_helper"
 describe Growl do
   describe ".for_user(display_name)" do
-    context "user exists" do
-      context "user has growls" do
-        let!(:user) { FactoryGirl.create(:user_with_growls) }
-        it "returns an array of the user's growls" do
-          Growl.for_user(user.display_name).should == user.growls
-        end
-      end
-      context "user does not have growls" do
-        let!(:user) { FactoryGirl.create(:user) }
-        it "returns an empty array" do
-          Growl.for_user(user.display_name).should == []
-        end
-      end
-    end
-    context "user does not exist" do
-      it "should return nil" do
-        Growl.for_user("user").should be_nil
-      end
-    end
+    before(:each) { x.any_instance.stub(:send_photo_to_amazon).and_return(true) }
+    pending "Unit tests need written."
   end
 end
 # == Schema Information
@@ -37,5 +20,6 @@ end
 #  photo_content_type :string(255)
 #  photo_file_size    :integer
 #  photo_updated_at   :datetime
+#  external_id        :integer
 #
 

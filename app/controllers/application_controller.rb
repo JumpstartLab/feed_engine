@@ -1,14 +1,15 @@
 class ApplicationController < ActionController::Base
   include UrlHelper
   # include SessionsHelper
-
   protect_from_forgery
 
   def after_sign_in_path_for(user)
     if resource.is_a? User
       user.send_welcome_message
+      new_authentication_path
+    else
+      dashboard_path
     end
-    dashboard_path
   end
 
   def after_sign_out_path_for(user)

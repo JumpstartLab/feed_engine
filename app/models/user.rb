@@ -7,8 +7,8 @@ class User < ActiveRecord::Base
 
   before_save :ensure_authentication_token
   validates_uniqueness_of :display_name
-  validates_format_of :display_name, :with => /^[A-Za-z\d_]+$/, message:
-            "Required. Display name must only be letters, numbers, dashes, or underscores"
+  validates_format_of :display_name, :with => /^[A-Za-z\d]+$/, message:
+            "Required. Display name must only be letters, numbers, or dashes"
 
   attr_accessible :email, :password, :password_confirmation,
                   :remember_me, :display_name
@@ -18,19 +18,19 @@ class User < ActiveRecord::Base
   has_many :images
   has_many :messages
   has_many :links
+  has_many :tweets
 
   def relation_for(type)
-    self.send(type.downcase.pluralize.to_sym).scoped rescue text_posts.scoped
+    self.send(type.downcase.pluralize.to_sym).scoped rescue messages.scoped
   end
 
-  def twitter_client
-    return nil unless twitter_oauth = authentications.where(provider: "twitter").first
+  def github_client
+    return nil unless github_oauth = authentications.where(provider: "github").first
 
-    # XXX what if they have multiple twitters?
-    Twitter::Client.new(:consumer_key => TWITTER_KEY,
-                        :consumer_secret => TWITTER_SECRET,
-                        :oauth_token => twitter_oauth.token,
-                        :oauth_token_secret => twitter_oauth.secret)
+    Github::Client.new(:consumer_key => GITHUB_KEY,
+                        :consumer_secret => GITHUB_SECRET,
+                        :oauth_token => github_oauth.token,
+                        :oauth_token_secret => github_oauth.secret)
   end
 
   def send_welcome_message
@@ -38,9 +38,57 @@ class User < ActiveRecord::Base
     mail.deliver
   end
 
-  def username
-    display_name
+  def get_growls(type=nil)
+    growls.by_type_and_date(type)
   end
+
+ def get_tweets()
+    since = since_last_checked
+    if since
+      twitter_client.user_timeline({:since_id => since})
+    else
+      twitter_client.user_timeline()
+    end
+  end
+
+  def store_tweets
+    get_tweets.each do |tweet|
+        Tweet.create(
+                     comment: tweet.text,
+                     link: tweet.source,
+                     external_id: tweet.id,
+                     created_at: tweet.created_at, # Not sure if this will work...
+                     user_id: self.id
+                    )
+    end
+  end
+
+  def since_last_checked
+    self.tweets.order(:external_id).last.external_id if self.tweets.size > 0
+  end
+
+  def avatar
+    require 'digest/md5'
+     "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email)}"
+  end
+
+  def api_link(request)
+    "http://api.#{request.domain}/feeds/#{display_name}"
+  end
+
+  def web_url(request)
+    "http://#{display_name}.#{request.domain}"
+  end
+
+  def twitter_client
+    return nil unless twitter_oauth = self.authentications.twitter
+
+    Twitter::Client.new(:consumer_key => TWITTER_KEY,
+                        :consumer_secret => TWITTER_SECRET,
+                        :oauth_token => twitter_oauth.token,
+                        :oauth_token_secret => twitter_oauth.secret)
+  end
+
 end
 
 # == Schema Information
@@ -60,7 +108,8 @@ end
 #  last_sign_in_ip        :string(255)
 #  created_at             :datetime        not null
 #  updated_at             :datetime        not null
-#  username               :string(255)
+#  display_name           :string(255)
 #  authentication_token   :string(255)
+#  private                :boolean         default(FALSE)
 #
 

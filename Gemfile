@@ -3,27 +3,33 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.3'
 gem 'slim'
 gem 'simple_form', '~> 2.0'
+gem 'jbuilder'
 gem 'devise'
 gem 'embedly'
 gem 'twitter'
 gem 'omniauth-twitter'
+gem 'omniauth-github'
 gem 'paperclip'
 gem 'aws-s3', :require => 'aws/s3'
 gem 'aws-sdk'
 gem 'squeel'
 gem 'twitter'
 gem 'omniauth-twitter'
+gem 'newrelic_rpm'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
+  gem 'rack-test'
+  gem 'guard'
   gem 'capybara'
   gem 'factory_girl_rails', '~> 3.1.0'
   gem 'simplecov'
   gem 'launchy'
   gem 'faker'
+  gem 'rack-cors', :require => 'rack/cors'
 end
 
 group :production do

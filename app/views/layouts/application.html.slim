@@ -3,15 +3,15 @@ html
   head
     title Hungrlr
     = stylesheet_link_tag    "application", :media => "all"
+    = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Ubuntu:400,700,400italic' rel='stylesheet"
     = javascript_include_tag "application"
     = csrf_meta_tags
 
   body
     =render partial: 'shared/nav_bar'
+  .header_image
     =render partial: 'shared/flash_message'
-
     div class="container" id="main_content"
-      div class="row"
-        = yield
+      = yield
 
     =render partial: 'shared/footer'

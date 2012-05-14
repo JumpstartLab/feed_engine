@@ -8,7 +8,6 @@ describe "User pages" do
       visit root_path
     end
     it "sends me to a signup form" do
-      click_link_or_button "Sign up"
       page.should have_content("Sign up")
     end
 
@@ -56,13 +55,13 @@ describe "User pages" do
         last_email.subject.should == "Welcome to Hungrlr!"
       end
 
-      it "sends you to the dashboard" do
+      it "sends you to a page asking you to connect with twitter" do
         fill_in 'user_email', with: 'foomeh@bar.com'
         fill_in 'user_display_name', with: 'displayname5'
         fill_in 'user_password', with: 'hungry'
         fill_in 'user_password_confirmation', with: 'hungry'
         within(".actions") { click_link_or_button 'Sign up' }
-        current_path.should == dashboard_path
+        current_path.should == new_authentication_path
       end
 
       # Unsuccessful Signup
@@ -115,7 +114,7 @@ describe "User pages" do
         within(".actions") do
           click_link_or_button 'Sign up'
         end
-        page.should have_content('Display name must only be letters, numbers, dashes, or underscores')
+        page.should have_content('Display name must only be letters, numbers, or dashes')
       end
 
       it "keeps you on the signup for when submitted display name is bad" do

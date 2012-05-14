@@ -2,9 +2,9 @@ require 'twitter'
 
 class MessagesController < ApplicationController
   before_filter :authenticate_user!
-  def new
-    @growl = Message.new
-  end
+  # def new
+  #   @growl = Message.new
+  # end
 
   # def create
   #   @growl = current_user.messages.new(params[:message])
@@ -19,4 +19,8 @@ class MessagesController < ApplicationController
   # end
 end
 
-# Twitter::Client.new(:consumer_key => 'IXDAm8E6f0HOHLeJ2uZcTQ', :consumer_secret => 'piDvbV8wfzBklu4d2UOXSKeFRPEecAIzCZJF0JM', :oauth_token => '500861259-5ADrlugyc0uKTNIs3RPJaSXrrFxh2AvlWH8BombO', :oauth_token_secret => 'lpaJ9fuW4qLq4vKqNtC3JdHAdUV4Mi1nxsTcIfsw')
+# client = Twitter::Client.new(:consumer_key => 'IXDAm8E6f0HOHLeJ2uZcTQ',
+#                              :consumer_secret => 'piDvbV8wfzBklu4d2UOXSKeFRPEecAIzCZJF0JM')
+# client.user_timeline("wengzilla").collect do |tweet|
+#   tweet.text
+# end
