@@ -29,7 +29,6 @@ group :development, :test do
   gem 'simplecov'
   gem 'launchy'
   gem 'faker'
-  gem 'rack-cors', :require => 'rack/cors'
 end
 
 group :production do
