@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!, except: [:show, :new, :create]
   
   def show
-    @user = User.find_by_display_name(request.subdomain)
+    @user = User.find_by_subdomain!(request.subdomain)
     @posts = @user.posts
     
     respond_to do |format|
@@ -22,11 +22,13 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    @user = current_user
   end
 
   def create
+    # raise params[:user][:display_name].downcase.inspect
     @user = User.new(params[:user])
+    # raise @user.inspect
 
     respond_to do |format|
       if @user.save
@@ -40,7 +42,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
+    @user = current_user
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
