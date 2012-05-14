@@ -103,11 +103,40 @@ describe "API feeds/user/... ", :type => :api do
     it "returns an array of most recent stream items as json" do
       stream_items = user.stream_items.order("created_at DESC")[0..11]
 
-      expected_json = StreamItem.translate_batch(stream_items).to_json
       feed = JSON.parse(last_response.body)
-      feed.count.should == 12
+      feed["items"]["most_recent"].count.should == 12
       last_response.status.should == 200
 
+    end
+
+    it "includes the feed name in the response" do
+      feed = JSON.parse(last_response.body)
+      feed["name"].should == user.display_name
+    end
+
+    it "includes the user id in the response" do
+      feed = JSON.parse(last_response.body)
+      feed["id"].should == user.id
+    end
+
+    it "says whether the feed is private" do
+      feed = JSON.parse(last_response.body)
+      feed["private"].should == false
+    end
+
+    it "gives a link to the feed" do
+      feed = JSON.parse(last_response.body)
+      feed["link"].should == api_v1_feeds_user_stream_items_path(user)
+    end
+
+    it "gives a link to the first_page" do
+      feed = JSON.parse(last_response.body)
+      feed["items"]["first_page"].should == api_v1_feeds_user_stream_items_path(user, :page => 1)
+    end
+
+    it "gives a link to the last_page" do
+      feed = JSON.parse(last_response.body)
+      feed["items"]["last_page"].should == api_v1_feeds_user_stream_items_path(user, :page => (user.stream_items.count/12.0).ceil)
     end
 
     it "formats the json response for an image_item " do
@@ -126,7 +155,7 @@ describe "API feeds/user/... ", :type => :api do
       expected_keys = ["type", "image_url", "created_at", "id", "feed", "link", "refeed", "refeed_link"]
 
       expected_keys.each do |key|
-        feed.first.keys.should include(key)
+        feed["items"]["most_recent"].first.keys.should include(key)
       end
 
     end
