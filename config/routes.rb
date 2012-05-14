@@ -7,19 +7,20 @@ FeedEngine::Application.routes.draw do
   resources :image_items
 
   namespace :api do
-    namespace :v1 do
-      namespace :feeds do
-        resources :users, :only => [:show] do
-          resources :stream_items, :only => [:index, :show, :create]
+  end
+  devise_for :users
+
+  constraints :subdomain => "api" do
+    scope :module => 'api' do
+      namespace :v1 do
+        namespace :feeds do
+          resources :users, :only => [:show] do
+            resources :stream_items, :only => [:index, :show, :create]
+          end
         end
       end
     end
   end
-  devise_for :users
-
-  #constraints :subdomain => "api" do
-    #resources :text_items
-  #end
 
   match '', to: 'feed#show', constraints: {subdomain: /.+/}
 
