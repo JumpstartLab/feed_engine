@@ -6,7 +6,7 @@ class GrowlsController < ApplicationController
 
   def index
     @user = User.find_by_display_name(request.subdomain)
-    @growls = @user.get_growls(params[:type])#.page(params[:page])
+    @growls = @user.get_growls(params[:type]).page(params[:page])
   end
 
   def create
