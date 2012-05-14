@@ -1,4 +1,5 @@
 FeedEngine::Application.routes.draw do
+
   resources :subscriptions
   resources :messages
   resources :images
@@ -14,6 +15,10 @@ FeedEngine::Application.routes.draw do
   get "login", to: "sessions#new", as: "login"
   get "logout", to: "sessions#destroy", as: "logout"
   match "/auth/:provider/callback" => "subscriptions#create"
+
+  constraints :subdomain => 'api', :format => :json do
+    match '/feeds/:display_name(.:format)' => 'api/users#show'
+  end
 
   constraints(Subdomain) do
     match "/" => "users#show"
