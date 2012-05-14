@@ -16,6 +16,8 @@ gem 'squeel'
 gem 'twitter'
 gem 'omniauth-twitter'
 gem 'newrelic_rpm'
+gem 'factory_girl_rails', '~> 3.1.0'
+gem 'faker'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -25,10 +27,8 @@ group :development, :test do
   gem 'rack-test'
   gem 'guard'
   gem 'capybara'
-  gem 'factory_girl_rails', '~> 3.1.0'
   gem 'simplecov'
   gem 'launchy'
-  gem 'faker'
 end
 
 group :production do
