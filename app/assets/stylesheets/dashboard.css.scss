@@ -6,8 +6,11 @@ p {
 
 body {
   background-color: $whale;
-  h1, h2, h3 {
+  h1, h2{
     color: $frosting;
+  }
+  h3 {
+    color: $white;
   }
 }
 

@@ -7,18 +7,9 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<p id="notice"><%= notice %></p>
-<p id="flash"></p>
-<%= render "nav_bar" %>
-<div id="nav">
-  <% if current_user %>
-    <%= current_user.email %>
-    <%= link_to "Sign out", destroy_user_session_url, :method => :delete %>
-  <% else %>
-    <%= link_to "Sign In", sign_in_url(:host => request.domain) %>
-    <%= link_to "Sign Up", sign_up_url(:host => request.domain) %>
-  <% end %>
-</div>
+  <%= render "nav_bar" %>
+  <p id="flash"></p>
+  <p id="notice"><%= notice %></p>
   <%= yield %>
 
 </body>

@@ -47,11 +47,15 @@ addTabMenuHandler = ->
     $('.tab-body ul').children().hide()
     $("##{tabId}").show()
 
+addPreviewHandler = ->
+  $('#image_url').blur ->
+    $('#image_preview').attr('src', $('#image_url').val()).show()
 
 addHandlers = ->
   addSubmitHandler("text")
   addSubmitHandler("image")
   addSubmitHandler("link")
+  addPreviewHandler()
   addTabMenuHandler()
 
 jQuery ->

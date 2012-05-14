@@ -1,7 +1,7 @@
 @import "partials/colors";
 
 @mixin parallelogram($color, $degrees: 160deg) {
-  width: 20%;
+  width: 23%;
   height: 2em;
   -webkit-transform: skew($degrees);
   -moz-transform: skew($degrees);

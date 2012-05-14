@@ -5,6 +5,7 @@
   list-style: none;
   width: 100%;
   display: inline-block;
+
   a {
     display: block;
     padding: .5em;
@@ -15,7 +16,7 @@
 
   li {
     float: left;
-    margin-right: .75em;
+    margin-left: .75em;
     postion: relative;
 
     ul {
