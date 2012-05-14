@@ -1,15 +1,15 @@
 require "bundler/capistrano"
 
-server "vs475379.blueboxgrid.com", :web, :app, :db, primary: true
+server "108.171.191.137", :web, :app, :db, primary: true
 
 set :application, "feed_engine"
-set :user, "deploy"
+set :user, "deployer"
 set :deploy_to, "/home/#{user}/apps/#{application}"
 set :deploy_via, :remote_cache
 set :use_sudo, false
 
 set :scm, "git"
-set :repository, "git@github.com:andrewglass1/#{application}.git"
+set :repository, "git@github.com:Andrewglass1/#{application}.git"
 set :branch, "master"
 
 default_run_options[:pty] = true
