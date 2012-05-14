@@ -1,6 +1,6 @@
-<h1>Your Feed</h1>
+<h1><%= @feed_owner %></h1>
 
-<% if current_user %>
+<% if @items %>
   <% @items.each do |item| %>
     <div class="item_container"> 
       <div class="row">
@@ -18,3 +18,4 @@
 
   <%= paginate @stream_items %>
 <% end %>
+

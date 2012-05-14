@@ -7,7 +7,10 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-user = FactoryGirl.create(:user)
+user = FactoryGirl.create(:user, :display_name => "testuser",
+                         :email => "user@badger.com",
+                         :password => "password",
+                         :password_confirmation => "password")
 50.times do
   item = FactoryGirl.create(:text_item)
   user.text_items << item 
