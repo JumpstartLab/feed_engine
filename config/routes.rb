@@ -12,8 +12,9 @@ FeedEngine::Application.routes.draw do
   resources :text_items
   resources :link_items
   resources :image_items
+  resources :external_accounts
 
-  devise_for :users 
+  devise_for :users, :controllers => { :registrations => "users/registrations" }
 
   devise_scope :user do 
     get "signup" => "devise/registrations#new", :as => :new_user

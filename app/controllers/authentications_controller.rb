@@ -54,8 +54,6 @@ class AuthenticationsController < ApplicationController
         config.oauth_token = token
         config.oauth_token_secret = secret
       end
-
-      raise Twitter.home_timeline.first.text
       flash[:notice] = "Authentication successful."
     else
       flash[:notice] = "Authentication failed."
