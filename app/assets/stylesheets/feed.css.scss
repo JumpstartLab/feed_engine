@@ -6,9 +6,13 @@
   padding: 0 0 0 10px;
 }
 
-.item_header {
-  padding: 0px 390px 0px;
+.item-header {
+  padding: 10px 0;
   font-size: 14px;
+}
+
+.item-header-user {
+  font-size: 24px;
 }
 
 $body_font_size: 16px;
@@ -25,6 +29,7 @@ $body_font: comic sans;
 }
 
 .item_owner {
+  padding: 0 0 0 22px;
   font-size: 24px;
 }
 
@@ -33,27 +38,10 @@ $body_font: comic sans;
  word-wrap: break-word;
 }
 
-$bubble-border-color: #7AB317;
-
-.oval-thought-border {
-	position:relative; 
-	padding:65px 30px;
-	margin:1em auto 80px;
-	border:10px solid $bubble-border-color;
-	text-align:center;
-	color:#333; 
-	background:#fff;
-	/* css3 */
-	/*
-	NOTES:
-	-webkit-border-radius:240px 140px; // produces oval in safari 4 and chrome 4
-	-webkit-border-radius:240px / 140px; // produces oval in chrome 4 (again!) but not supported in safari 4
-	Not correct application of the current spec, therefore, using longhand to avoid future problems with webkit corrects this
-	*/
-	-webkit-border-top-left-radius:240px 140px;
-	-webkit-border-top-right-radius:240px 140px;
-	-webkit-border-bottom-right-radius:240px 140px;
-	-webkit-border-bottom-left-radius:240px 140px;
-	-moz-border-radius:240px / 140px;
-	border-radius:240px / 140px;
+.item-container-body {
+  -webkit-border-radius: 25px;
+  border-radius: 5px;
+  background-color: #F2DEA0;
+  margin: 15px 0 10px 0;
+  padding: 10px;
 }
