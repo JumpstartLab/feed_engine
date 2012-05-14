@@ -18,12 +18,14 @@ group :test, :development do
   gem 'ruby_gntp'
   gem "rspec-rails", "~> 2.0"
   gem "capybara"
+  gem 'capybara-webkit'
   gem 'guard'
   gem 'fabrication'
   gem 'faker'
   gem 'launchy'
   gem 'simplecov'
   gem 'cane'
+  gem 'database_cleaner'
   #gem 'reek'
 end
 
