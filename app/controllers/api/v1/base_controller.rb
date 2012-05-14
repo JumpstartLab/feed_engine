@@ -8,7 +8,9 @@ private
     @current_user = User.find_by_authentication_token(params[:token])
     unless @current_user
       error = { :error => "Token is invalid." }
-      respond_with(error)
+      respond_with(error) do |format|
+        format.json { render :json => error }
+      end
     end
   end
 
