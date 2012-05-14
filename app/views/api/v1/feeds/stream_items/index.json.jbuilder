@@ -8,7 +8,7 @@
     json.pages         @stream_items.num_pages
     json.first_page    api_v1_feeds_user_stream_items_path(@user, :page => 1)
     json.last_page     api_v1_feeds_user_stream_items_path(@user, :page => @stream_items.num_pages)
-    json.most_recent @items do |json, item|
+    json.most_recent   @items do |json, item|
       json.(item, :id, :created_at)
       json.type        item.class.name
       json.image_url   item.url if item.is_a?(ImageItem)
