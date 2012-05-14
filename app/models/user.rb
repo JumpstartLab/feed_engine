@@ -56,4 +56,8 @@ class User < ActiveRecord::Base
     UserMailer.welcome_email(self).deliver
   end
 
+  def to_param
+    display_name
+  end
+
 end
