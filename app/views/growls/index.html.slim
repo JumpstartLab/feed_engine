@@ -3,7 +3,7 @@
     h1= "#{@user.display_name}'s Feed"
     br
 
-    -unless @growls
+    -if @growls.empty?
       p
         | You currently have no growls. Add some in your
         =link_to "dashboard", "http://hungrlr.com/dashboard"

@@ -15,12 +15,16 @@ class Growl < ActiveRecord::Base
                                }
   scope :by_date, order("created_at DESC")
 
-  def self.by_type_and_date(type)
-    by_type(type).by_date
+  def self.by_type_and_date(type=nil)
+    if type
+      by_type(type).by_date
+    else
+      by_date
+    end
   end
 
   def self.by_type(input)
-    input ? where(type: input) : where(:type != nil)
+    where(type: input)
   end
 
   ["title", "thumbnail_url", "description"].each do |method|
