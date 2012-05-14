@@ -1,9 +1,5 @@
-require 'test_helper'
+class Tweet < Growl
 
-class ImageTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
 end
 # == Schema Information
 #
@@ -20,5 +16,6 @@ end
 #  photo_content_type :string(255)
 #  photo_file_size    :integer
 #  photo_updated_at   :datetime
+#  external_id        :integer
 #
 
