@@ -88,7 +88,12 @@ class User < ActiveRecord::Base
                         :oauth_token => twitter_oauth.token,
                         :oauth_token_secret => twitter_oauth.secret)
   end
-
+  def twitter?
+    authentications.twitter?
+  end
+  def github?
+    authentications.github?
+  end
 end
 
 # == Schema Information

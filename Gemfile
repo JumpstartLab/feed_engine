@@ -16,6 +16,7 @@ gem 'squeel'
 gem 'twitter'
 gem 'omniauth-twitter'
 gem 'newrelic_rpm'
+gem 'resque_mailer'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
