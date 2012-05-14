@@ -1,6 +1,6 @@
 = simple_form_for @growl, :url => growls_path, :input_html => { :id => 'message_form' } do |f|
   = f.input :type, :as => :hidden, :input_html => { :value => "Message" }
-  = f.input :comment, :input_html => { :id => "message_comment" }
+  = f.input :comment, :input_html => { :id => "message_comment" }, placeholder: "Comment", label: "&nbsp;"
   p
     | You have&nbsp;
     span#charsLeftMessage

@@ -1,0 +1,32 @@
+.row
+  .five.columns.content_bar
+    h2
+      | Edit Your Account
+    = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+      - if f.error_notification
+        .alert-box.error
+          = f.error_notification
+          a.close(href="") ×
+      .current_information
+        p
+          strong Display Name:
+          = current_user.display_name
+          br
+          strong Email:
+          = current_user.email
+          br
+      .inputs
+        = f.input :password, :autocomplete => "off", :required => false
+        = f.input :password_confirmation, :required => false
+        = f.input :current_password, :required => true
+      .actions
+        = f.button :submit, "Update"
+      hr
+
+      ul.block-grid.two-up.center_text
+            .row
+              li= link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter), class: "btn-auth btn-twitter large"
+            .row
+              li= link_to "Sign in with Github", user_omniauth_authorize_path(:github), class: "btn-auth btn-github large"
+    hr
+    = link_to "Back", :back
