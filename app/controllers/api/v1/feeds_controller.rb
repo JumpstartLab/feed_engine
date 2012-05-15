@@ -23,8 +23,10 @@ class Api::V1::FeedsController < ActionController::Base
   private
 
   def authenticate_user
-    @current_user = User.where(authentication_token: params[:token]).first
-    render :json => "Token is invalid.".to_json unless @current_user
+    @current_user = User.find_by_authentication_token(params[:token])
+    unless @current_user
+      render :json => "Token is invalid.".to_json, status: 401
+    end
   end
 
   def current_user
