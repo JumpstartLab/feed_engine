@@ -48,8 +48,8 @@ $(document).ready(function() {
   });
 
   // Form
-  $('form[data-remote]').each(function(e) {
-    $(this).bind('ajax:success', function() {
+  $('form[data-remote]').each(function() {
+    $(this).bind('ajax:success', function(e) {
       form_success($(this));
     });
 

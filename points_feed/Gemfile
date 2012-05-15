@@ -16,21 +16,28 @@ gem 'resque'
 gem 'twitter'
 gem 'gravatar-ultimate'
 gem 'puma'
+gem "remotipart", "~> 1.0"
 
 group :test, :development do
   gem 'sqlite3'
   gem 'ruby_gntp'
   gem "rspec-rails", "~> 2.0"
   gem "capybara"
+  gem 'capybara-webkit'
   gem 'guard'
   gem 'fabrication'
   gem 'faker'
   gem 'launchy'
   gem 'simplecov'
   gem 'cane'
+<<<<<<< HEAD
   # gem 'reek'
   gem 'nifty-generators'
 
+=======
+  gem 'database_cleaner'
+  #gem 'reek'
+>>>>>>> 1d0a768a48c8aacac82ec582151034d2e3024912
 end
 
 group :production do

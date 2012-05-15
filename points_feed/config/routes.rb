@@ -10,7 +10,7 @@ PointsFeed::Application.routes.draw do
   end
 
   resource :dashboard
-  
+
   namespace :api do
     resources :feeds do
       collection do
@@ -19,6 +19,18 @@ PointsFeed::Application.routes.draw do
     end
 
     resources :posts
+  end
+
+  scope '/', constraints: lambda { |r| r.subdomain == 'api' } do
+    namespace :api, :path => '/' do
+      resources :feeds do
+        collection do
+          get "/:id/items.json" => 'feeds#items'
+        end
+      end
+
+      resources :posts
+    end
   end
 
   scope '/', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' } do

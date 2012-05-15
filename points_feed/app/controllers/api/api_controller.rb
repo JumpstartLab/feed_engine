@@ -1,11 +1,13 @@
 class Api::ApiController < ActionController::Base
   respond_to :json, :xml
 
+  private
+
   def validation_error(obj)
     error(406, obj.errors.full_messages)
   end
 
-  def success(code=201)
+  def success(code=200)
     render :status => code, :json => true
   end
 
@@ -13,12 +15,11 @@ class Api::ApiController < ActionController::Base
     render :status => code, :json => msg
   end
 
-  def authenticate_user
-    @current_user = User.where(:authentication_token => params[:access_token]).first
+  def current_user
+    @current_user ||= User.where(:authentication_token => params[:access_token]).first
   end
 
   def authenticate_user!
-    authenticate_user
-    error(403) if @current_user.nil? or params[:access_token].blank?
+    error(403) unless current_user
   end
 end

@@ -57,10 +57,18 @@ input[type=text], input[type=password], input[type=email], textarea, select {
   color: #E0F2F7;
 }
 
+.black-transparent-box li > a:hover {
+  color: black;
+}
+
 .grey-box {
   background: rgba(245, 245, 245, .93);
   color: black;
   padding: 20px;
+}
+
+.grey-box label {
+  color: black;
 }
 
 .grey-box hr {
