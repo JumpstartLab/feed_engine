@@ -52,8 +52,7 @@ textarea {
   margin-bottom: 20px;
 }
 #main_content{
-  min-height: 100%;
-  margin-top:50px;
+  margin-top:120px;
 }
 #footer {
   background: whiteSmoke url('footer.jpg') no-repeat top center;
@@ -92,10 +91,9 @@ header h2{
   border-radius: 5px;
 }
 .header_image {
-  background: white url('/assets/background.jpg');
+  background: white url('/assets/background.jpg') center fixed;
   background-repeat: no-repeat;
   background-size:cover;
-  height:700px;
   margin-top:-30px;
   width:100%;
 }

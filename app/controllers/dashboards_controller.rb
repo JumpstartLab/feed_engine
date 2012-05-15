@@ -3,6 +3,7 @@ class DashboardsController < ApplicationController
 
   def show
     flash[:notice] = params[:message] if params[:message]
+    Resque.enqueue(PullTwitterFeed)
     @growl  = current_user.growls.build
     @growls = current_user.growls.by_date.page(params[:page])
   end
