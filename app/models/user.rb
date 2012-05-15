@@ -62,4 +62,12 @@ class User < ActiveRecord::Base
     display_name
   end
 
+  def providers
+    self.authentications.map { |a| a.provider }
+  end
+
+  def twitter_linked?
+    providers.include?("twitter")
+  end
+
 end

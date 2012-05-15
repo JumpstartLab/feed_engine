@@ -1,5 +1,19 @@
+# == Schema Information
+#
+# Table name: authentications
+#
+#  id         :integer         not null, primary key
+#  user_id    :integer
+#  provider   :string(255)
+#  token      :string(255)
+#  secret     :string(255)
+#  created_at :datetime        not null
+#  updated_at :datetime        not null
+#  uid        :string(255)
+#
+
 class Authentication < ActiveRecord::Base
-  attr_accessible :user_id, :provider, :token, :secret
+  attr_accessible :user_id, :provider, :token, :secret, :uid
   #attr_accessor :provider, :token, :secret
 
   belongs_to :user
@@ -7,6 +21,7 @@ class Authentication < ActiveRecord::Base
   def create_with_omniauth(auth)
     self.update_attributes(provider: auth["provider"],
                            token: auth["credentials"]["token"],
-                           secret: auth["credentials"]["secret"])
+                           secret: auth["credentials"]["secret"],
+                           uid: auth["uid"])
   end
 end
