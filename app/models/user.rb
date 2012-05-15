@@ -19,6 +19,7 @@
 #  updated_at             :datetime        not null
 #  display_name           :string(255)
 #  full_name              :string(255)
+#  private                :boolean         default(FALSE)
 #
 # Indexes
 #

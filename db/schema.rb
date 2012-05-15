@@ -11,13 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120513194019) do
+ActiveRecord::Schema.define(:version => 20120515004845) do
 
   create_table "image_posts", :force => true do |t|
     t.string   "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.string   "image"
+    t.integer  "refeed_id"
   end
 
   create_table "link_posts", :force => true do |t|
@@ -25,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20120513194019) do
     t.string   "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "refeed_id"
   end
 
   create_table "posts", :force => true do |t|
@@ -40,11 +42,12 @@ ActiveRecord::Schema.define(:version => 20120513194019) do
     t.datetime "updated_at", :null => false
     t.string   "title"
     t.text     "body"
+    t.integer  "refeed_id"
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "email",                  :default => "",    :null => false
+    t.string   "encrypted_password",     :default => "",    :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -55,10 +58,11 @@ ActiveRecord::Schema.define(:version => 20120513194019) do
     t.string   "last_sign_in_ip"
     t.string   "password_salt"
     t.string   "authentication_token"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
     t.string   "display_name"
     t.string   "full_name"
+    t.boolean  "private",                :default => false
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
