@@ -12,6 +12,7 @@
 
 # Users of the site
 class User < ActiveRecord::Base
+  POST_TYPES = [Message, Link, Image, Tweet]
   has_secure_password
   has_many :messages, :foreign_key => 'poster_id'
   has_many :images, :foreign_key => 'poster_id'
@@ -19,6 +20,7 @@ class User < ActiveRecord::Base
 
   default_scope order(:created_at)
   has_many :subscriptions
+  has_many :tweets, :through => :subscriptions, :foreign_key => 'poster_id'
 
   attr_accessible :email, :password, :password_confirmation, :display_name
 
@@ -41,7 +43,7 @@ class User < ActiveRecord::Base
 
   def posts
     posts = []
-    [Message, Link, Image].each do |post_type|
+    POST_TYPES.each do |post_type|
       post_collection = post_type.find_all_by_poster_id(self.id)
       posts = posts | post_collection
     end
@@ -50,6 +52,10 @@ class User < ActiveRecord::Base
 
   def sorted_posts
     posts.sort_by(&:created_at).reverse
+  end
+
+  def get_tweets
+
   end
 
 end

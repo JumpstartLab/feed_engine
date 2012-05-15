@@ -14,6 +14,7 @@ gem 'coffee-rails', '~> 3.2.1'
 gem 'twitter'
 gem 'omniauth-twitter'
 gem 'omniauth'
+gem 'whenever'
 
 group :production do
   gem 'pg'

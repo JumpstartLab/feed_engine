@@ -8,7 +8,7 @@ div.span4.offset4
   br
   - @posts.each do |post|
     p
-      - if post.is_a?(Message)
+      - if post.is_a?(Message) || post.is_a?(Tweet)
         = post.body
       - if post.is_a?(Link)
         h3= link_to post.url, post.url
