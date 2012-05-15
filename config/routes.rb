@@ -12,8 +12,8 @@ FeedEngine::Application.routes.draw do
   resources :text_items
   resources :link_items
   resources :image_items
-  resources :external_accounts
-
+  resources :external_accounts 
+  get 'external_accounts_skip' => 'external_accounts#skip_link', :as => :external_accounts_skip
   devise_for :users, :controllers => { :registrations => "users/registrations" }
 
   devise_scope :user do 
