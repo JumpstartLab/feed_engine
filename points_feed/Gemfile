@@ -17,6 +17,7 @@ gem 'twitter'
 gem 'gravatar-ultimate'
 gem 'puma'
 gem "remotipart", "~> 1.0"
+gem 'whenever', :require => false
 
 group :test, :development do
   gem 'sqlite3'
