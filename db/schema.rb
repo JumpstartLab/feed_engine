@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20120515012759) do
   add_index "images", ["poster_id"], :name => "index_images_on_poster_id"
 
   create_table "items", :force => true do |t|
+    t.integer  "poster_id"
     t.integer  "post_id"
     t.string   "post_type"
     t.datetime "created_at", :null => false

@@ -53,4 +53,7 @@ class User < ActiveRecord::Base
     posts.sort_by(&:created_at).reverse
   end
 
+  def items
+    Item.find_all_by_poster_id(id)
+  end
 end
