@@ -34,7 +34,7 @@ describe User do
         click_button 'Change Password'
       end
     end
-    
+
     context "and navigating the site from the header" do
 
       it "has the app name with a link to the dashboard" do
@@ -207,10 +207,20 @@ describe User do
           click_link_or_button "Connect with Twitter"
           page.should have_content "Twitter account has been linked"
         end
-        it "can choose not to authorize twitter" do
+        it "sees a page with an option to authorize github" do
+          click_button "Sign Up"
+          page.should have_content "Connect with Github"
+        end
+        it "can authorize github" do
+          pending
+          click_button "Sign Up"
+          click_link_or_button "Connect with Github"
+          page.should have_content "Github account has been linked"
+        end
+        it "can choose not to authorize a service" do
           click_button "Sign Up"
           click_link_or_button "Skip this step"
-          page.should have_content "twitter account later"
+          page.should have_content "account later"
         end
       end
     end
