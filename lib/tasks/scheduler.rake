@@ -4,6 +4,6 @@ require './app/jobs/pull_twitter_feed.rb'
 require './config/initializers/redis.rb'
 task :get_tweets do
   Resque.enqueue(PullTwitterFeed)
-  #sleep(300)
-  #Resque.enqueue(PullTwitterFeed)
+  sleep(300)
+  Resque.enqueue(PullTwitterFeed)
 end
