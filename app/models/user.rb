@@ -42,8 +42,11 @@ class User < ActiveRecord::Base
 
   def import_posts(provider)
     #for now, just twitter
-    tweets = Twitter.user_timeline(:user_id=> twitter_id, :count=>10)
-    tweets.each do |tweet|
+    params = {:user_id => twitter_id, :count=>200}
+    params[:since_id] = self.tweets.last.source_id if self.tweets.any?
+    imported_tweets = Twitter.user_timeline(params)
+    raise imported_tweets.inspect
+    imported_tweets.each do |tweet|
       self.tweets.create(content: tweet.text, source_id: tweet.id, handle: tweet.user.screen_name, tweet_time: tweet.created_at)
     end
   end

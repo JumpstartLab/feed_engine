@@ -1,0 +1,4 @@
+get_latest_tweets:
+  every: ["10s"]
+  class: GetLatestTweets
+  description: "resuqes!"
