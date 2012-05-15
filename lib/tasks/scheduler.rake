@@ -3,7 +3,8 @@ ENV["REDISTOGO_URL"] = 'redis://redistogo:6b3900eac2b9d03ecf69a503a771d644@panga
 require './app/jobs/pull_twitter_feed.rb'
 require './config/initializers/redis.rb'
 
-task "jobs:work" => "resque:work"
+task "jobs:work" => "QUEUE=* resque:work"
+
 
 task :get_tweets do
   Resque.enqueue(PullTwitterFeed)
