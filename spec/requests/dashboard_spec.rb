@@ -132,7 +132,7 @@ describe "Dashboard" do
           fill_in "image_item[url]", :with => good_url
           click_on "Imagify"
           visit site_domain
-          page.should have_content good_url 
+          page.should have_selector("img[src$='#{good_url}']")
         end
 
         describe "comments" do
