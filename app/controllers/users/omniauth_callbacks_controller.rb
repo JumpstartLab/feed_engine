@@ -4,7 +4,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     current_user.authentications.create(provider: data["provider"],
                                         token: data["credentials"]["token"],
                                         secret: data["credentials"]["secret"])
-    redirect_to dashboard_path, :notice => "Twitter account successfully added."
+    redirect_to new_authentication_path, :notice => "Twitter account successfully added."
   end
 
   def github
@@ -12,6 +12,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     current_user.authentications.create(provider: data["provider"],
                                         token: data["credentials"]["token"],
                                         secret: data["credentials"]["secret"])
-    redirect_to dashboard_path, :notice => "Github account successfully added."
+    redirect_to new_authentication_path, :notice => "Github account successfully added."
   end
 end

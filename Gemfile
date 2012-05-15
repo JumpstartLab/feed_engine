@@ -19,6 +19,9 @@ gem 'newrelic_rpm'
 gem 'redis-store', "~> 1.0.0"
 gem 'resque', :require => "resque/server"
 gem 'resque_mailer'
+gem 'factory_girl_rails', '~> 3.1.0'
+gem 'faker'
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 group :development, :test do
@@ -27,11 +30,8 @@ group :development, :test do
   gem 'rack-test'
   gem 'guard'
   gem 'capybara'
-  gem 'factory_girl_rails', '~> 3.1.0'
   gem 'simplecov'
   gem 'launchy'
-  gem 'faker'
-  gem 'rack-cors', :require => 'rack/cors'
 end
 
 group :production do
