@@ -24,6 +24,13 @@
 
 
     <div class="container">
+      <br/>
+      <% flash.each do |name, msg| %>
+        <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+          <a class="close" data-dismiss="alert">×</a>
+          <%= msg %>
+        </div>
+      <% end %>
         <ul class="nav nav-section">
           <% if user_signed_in? %>
             <li class="offset8 pull-left navigation-item"><%= link_to image_tag("../images/home.png", :title => "Home"), root_path%></li>
@@ -37,12 +44,6 @@
             </a>
           <% end %>
         </ul>
-      <% flash.each do |name, msg| %>
-        <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
-          <a class="close" data-dismiss="alert">×</a>
-          <%= msg %>
-        </div>
-      <% end %>
 
       <div class="content">
         <div class="row">
