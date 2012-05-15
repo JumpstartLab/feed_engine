@@ -26,9 +26,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    # raise params[:user][:display_name].downcase.inspect
     @user = User.new(params[:user])
-    # raise @user.inspect
 
     respond_to do |format|
       if @user.save
