@@ -1,5 +1,8 @@
 PointsFeed::Application.routes.draw do
+  resources :authentications
+
   match "home/index" => redirect("/")
+  match "auth/:provider/callback" => "authentications#create"
 
   devise_for :users do
     get "signin", :to => "devise/sessions#new"

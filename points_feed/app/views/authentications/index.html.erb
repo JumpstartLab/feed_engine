@@ -1,0 +1,27 @@
+<div class="main-image">
+  <img src="/assets/dashboard.jpg">
+</div>
+
+<h1>Authentications</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Provider</th>
+    <th>Uid</th>
+  </tr>
+  <% @authentications.each do |authentication| %>
+    <tr>
+      <td><%= authentication.user_id %></td>
+      <td><%= authentication.provider %></td>
+      <td><%= authentication.uid %></td>
+      <td><%= link_to "Destroy", authentication, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<ul>
+  <% if current_user %>
+    <%= Twitter.user_timeline(current_user.twitter_name).first.text %>
+  <% end %>
+</ul>

@@ -1,7 +1,7 @@
 class ApplicationDecorator < Draper::Base
   
   def self.per_page
-    10
+    12
   end
   
 end

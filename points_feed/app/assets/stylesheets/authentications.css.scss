@@ -1,4 +1,4 @@
-.main-image{
+.home-image{
   position: fixed;
   min-width: 1024px;
   min-height: 800px;
@@ -8,15 +8,4 @@
   bottom: 0px;
   overflow: hidden;
   z-index: -4;
-}
-
-.root {
-  color: white;
-  position: absolute;
-}
-
-.login-right{
-  background: rgba(64, 64, 64, 0.5);
-  padding: 10px;
-  color: white;
 }
