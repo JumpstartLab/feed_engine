@@ -50,10 +50,13 @@ class User < ActiveRecord::Base
   has_many :text_posts,  through: :posts, source: :postable, source_type: 'TextPost'
   has_many :image_posts, through: :posts, source: :postable, source_type: 'ImagePost'
   has_many :link_posts,  through: :posts, source: :postable, source_type: 'LinkPost'
+  has_many :twitter_posts, through: :posts, source: :postable, source_type: 'TwitterPost'
 
   has_many :posts, dependent: :destroy, :extend => PageExtension
 
   has_many :authentications
+
+
 
   def send_welcome_email
     UserMailer.welcome_email(self).deliver
@@ -68,11 +71,33 @@ class User < ActiveRecord::Base
   end
 
   def providers
-    self.authentications.map { |a| a.provider }
+    authentications.map { |a| a.provider }
   end
 
   def twitter_linked?
     providers.include?("twitter")
+  end
+
+  def auth_for(provider)
+    authentications.where(provider: provider).first
+  end
+
+  # defaults to 20, unless it doesn't
+  def fetch_tweets(count=nil)
+    if count
+      Twitter.user_timeline(user_id: auth_for("twitter").uid.to_i, 
+                            count: count)
+    else
+      Twitter.user_timeline(user_id: auth_for("twitter").uid.to_i)
+    end
+  end
+
+  def create_post_from_twitter(status)
+    self.twitter_posts.create(
+      twitter_id: status.id,
+      text: status.text,
+      published_at: status.created_at
+      )
   end
 
 end
