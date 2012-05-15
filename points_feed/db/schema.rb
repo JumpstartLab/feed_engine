@@ -12,6 +12,7 @@
 # It's strongly recommended to check this file into your version control system.
 
 ActiveRecord::Schema.define(:version => 20120515011351) do
+
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
     t.string   "provider"
@@ -23,7 +24,7 @@ ActiveRecord::Schema.define(:version => 20120515011351) do
 
   add_index "authentications", ["id"], :name => "index_authentications_on_id"
   add_index "authentications", ["user_id"], :name => "index_authentications_on_user_id"
-  
+
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
     t.integer  "friend_id"

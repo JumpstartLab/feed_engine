@@ -58,6 +58,12 @@ class User < ActiveRecord::Base
     self.send(type).scoped rescue text_posts.scoped
   end
 
+  def stream(limit, offset=0)
+    items = self.posts + self.twitter_feed_items
+    items = items.sort_by { |item| item.posted_at }.reverse
+    items.slice(offset, offset + limit)
+  end
+
   def background_image
     background.url || "dashboard.jpg"
   end

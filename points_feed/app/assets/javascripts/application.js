@@ -17,6 +17,7 @@
 //= require cookies
 //= require mustache
 //= require timeago
+//= require waypoint
 //= require_tree .
 
 //access_token = $("#access_token").val();

@@ -9,6 +9,10 @@ class Post < ActiveRecord::Base
 
   default_scope :order => 'created_at DESC'
 
+  def posted_at
+    self.created_at
+  end
+
   # def self.class_for(type)
   #   type.to_s.constantize rescue TextPost
   # end
