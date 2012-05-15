@@ -34,36 +34,18 @@ class User < ActiveRecord::Base
   end
 
   def send_welcome_message
-    mail = UserMailer.welcome_message(self)
-    mail.deliver
+    mail = UserMailer.welcome_message(self).deliver
+  end
+
+  def self.find_twitter_users
+    includes(:authentications).where("authentications.provider" => "twitter")
   end
 
   def get_growls(type=nil)
     growls.by_type_and_date(type)
   end
 
- def get_tweets()
-    since = since_last_checked
-    if since
-      twitter_client.user_timeline({:since_id => since})
-    else
-      twitter_client.user_timeline()
-    end
-  end
-
-  def store_tweets
-    get_tweets.each do |tweet|
-        Tweet.create(
-                     comment: tweet.text,
-                     link: tweet.source,
-                     external_id: tweet.id,
-                     created_at: tweet.created_at, # Not sure if this will work...
-                     user_id: self.id
-                    )
-    end
-  end
-
-  def since_last_checked
+  def last_twitter_id
     self.tweets.order(:external_id).last.external_id if self.tweets.size > 0
   end
 
@@ -80,17 +62,14 @@ class User < ActiveRecord::Base
     "http://#{display_name}.#{request.domain}"
   end
 
-  def twitter_client
-    return nil unless twitter_oauth = self.authentications.twitter
-
-    Twitter::Client.new(:consumer_key => TWITTER_KEY,
-                        :consumer_secret => TWITTER_SECRET,
-                        :oauth_token => twitter_oauth.token,
-                        :oauth_token_secret => twitter_oauth.secret)
-  end
   def twitter?
     authentications.twitter?
   end
+
+  def twitter
+    authentications.twitter
+  end
+
   def github?
     authentications.github?
   end

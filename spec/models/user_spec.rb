@@ -20,8 +20,7 @@ describe User do
     context "if user has linked his account with Twitter" do
       let!(:authentication) { user.authentications.create(provider: 'twitter') }
       it "should return a Twitter client instance" do
-        user.authentications.twitter.should_not be_nil
-        user.twitter_client.should be_kind_of(Twitter::Client)
+        user.twitter?.should == true
       end
     end
   end

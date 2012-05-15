@@ -6,7 +6,7 @@ describe 'api/v1/feed', type: :api do
   let!(:other_user) { FactoryGirl.create(:user_with_growls) }
 
   context "growls viewable by this user" do
-    let(:url) { "http://api.matt.awesome/v1/feeds/#{user.display_name}" }
+    let(:url) { "http://api.hungrlr.awesome/v1/feeds/#{user.display_name}" }
     before(:each) do
       get "#{url}.json"
     end
