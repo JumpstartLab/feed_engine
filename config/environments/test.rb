@@ -37,4 +37,6 @@ Hungrlr::Application.configure do
   config.active_support.deprecation = :stderr
 
   SUBDOMAIN_NUMBER = 1
+  
+  ENV["REDISTOGO_URL"] = 'redis://redistogo:6b3900eac2b9d03ecf69a503a771d644@panga.redistogo.com:9579/'
 end
