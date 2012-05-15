@@ -61,4 +61,8 @@ class User < ActiveRecord::Base
   def subdomain
     display_name
   end
+
+  def post_page_count
+    (posts.length.to_f / 12).ceil
+end
 end
