@@ -1,5 +1,6 @@
 @import "variables";
 @import "containers";
+@import "buttons";
 
 .login-title {
   font-size: 80px;
@@ -11,16 +12,3 @@
   width: 250px;
 }
 
-.login-submit { 
-	-webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px 0px;
-	background-color: #7cceee;
-	border-radius: 5px;
-	border-bottom-color: #333;
-	border: 1px solid #61c4ea;
-	box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px 0px;
-	color: #333;
-	font-family: 'Verdana', Arial, sans-serif;
-	font-size: 14px;
-	text-shadow: #b2e2f5 0px 1px 0px;
-  padding: 10px 40px 10px 40px;
-}
