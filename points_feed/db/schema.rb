@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120515011351) do
+ActiveRecord::Schema.define(:version => 20120515181422) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -44,9 +44,10 @@ ActiveRecord::Schema.define(:version => 20120515011351) do
     t.text     "comment"
     t.string   "type"
     t.text     "content"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.string   "file"
+    t.integer  "original_post_id"
   end
 
   add_index "posts", ["id"], :name => "index_posts_on_id"
