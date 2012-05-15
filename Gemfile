@@ -21,6 +21,7 @@ gem 'resque', :require => "resque/server"
 gem 'resque_mailer'
 gem 'factory_girl_rails', '~> 3.1.0'
 gem 'faker'
+gem 'delayed_job'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
