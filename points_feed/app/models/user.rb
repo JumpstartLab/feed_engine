@@ -1,4 +1,11 @@
 class User < ActiveRecord::Base
+   
+  validate do
+    return self.errors.add(:email, "can't be blank") if email.blank?
+    unless email.match(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/)
+      self.errors.add(:email, "must be in the form user@server.com") 
+    end
+  end
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -33,11 +40,7 @@ class User < ActiveRecord::Base
                            :source => :user,
                            :conditions => {'friendships.status' => Friendship::IGNORED }
 
-  validates :email, :format => {
-      :message => "must be in the form a@b.com",
-      :with => /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/
-
-    }
+ 
 
   validates :display_name, :presence => true, 
                          :format => { 
