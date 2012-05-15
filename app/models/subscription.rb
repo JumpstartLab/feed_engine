@@ -30,7 +30,7 @@ class Subscription < ActiveRecord::Base
     twitter_subscriptions.each do |t_subscription|
       t_subscription.get_new_tweets
     end
-    self.delay(:run_at => GET_TWEET_FREQUENCY.secondsafrom_now).get_new_tweets
+    self.delay(:run_at => GET_TWEET_FREQUENCY.seconds.from_now).get_new_tweets
   end
 
   def get_new_tweets

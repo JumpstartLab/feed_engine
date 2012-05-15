@@ -17,10 +17,10 @@ class User < ActiveRecord::Base
   has_many :messages, :foreign_key => 'poster_id'
   has_many :images, :foreign_key => 'poster_id'
   has_many :links, :foreign_key => 'poster_id'
-
-  default_scope order(:created_at)
   has_many :subscriptions
   has_many :tweets, :through => :subscriptions, :foreign_key => 'poster_id'
+
+  default_scope order(:created_at)
 
   attr_accessible :email, :password, :password_confirmation, :display_name
 
@@ -54,8 +54,5 @@ class User < ActiveRecord::Base
     posts.sort_by(&:created_at).reverse
   end
 
-  def get_tweets
-
-  end
 
 end
