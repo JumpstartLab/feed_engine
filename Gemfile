@@ -54,7 +54,7 @@ group :development, :test do
   gem 'launchy'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
-  gem 'simplecov'
+  gem 'simplecov', require: false
   gem 'redis-store', '~>1.0.0'
   #gem 'rack-perftools_profiler', :require => 'rack/perftools_profiler'
 end

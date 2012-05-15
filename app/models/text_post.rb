@@ -7,6 +7,7 @@
 #  updated_at :datetime        not null
 #  title      :string(255)
 #  body       :text
+#  refeed_id  :integer
 #
 
 class TextPost < ActiveRecord::Base
@@ -26,7 +27,7 @@ class TextPost < ActiveRecord::Base
     Post.new()
   end
 
-  def self.user
-    post.user
+  def refeed?
+    refeed_id.present?
   end
 end
