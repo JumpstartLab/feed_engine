@@ -1,0 +1,100 @@
+- content_for :head do
+  javascript:
+    $(function() {
+      $("#forms").html("#{j render :partial => "messages/form"}")
+    });
+    $("#add_message").live('click', function(){
+      $("#forms").html("#{j render :partial => "messages/form"}")
+      make_active(this);
+    })
+    $("#add_link").live('click', function(){
+      $("#forms").html("#{j render :partial => "links/form"}")
+      make_active(this);
+    })
+    $("#add_image").live('click', function(){
+      $("#forms").html("#{j render :partial => "images/form"}")
+      make_active(this);
+    })
+  =javascript_include_tag "dashboard_show"
+br
+br
+div.span3
+  div#sidebar
+    ul
+      li= link_to "Posts", "#", :id => "posts_id", :class => "active"
+      li= link_to "Privacy", "#", :id => "privacy_id", :class => "inactive"
+      li= link_to "Services", "#", :id => "services_id", :class => "inactive"
+      li= link_to "Subscriptions", "#", :id => "subscriptions_id", :class => "inactive"
+      li= link_to "Account", "#", :id => "account_id", :class => "inactive"
+div.span7
+  div#posts
+    = link_to 'Text', "#", :class => "btn btn-info btn-medium active", :id => "add_message"
+    |&nbsp;&nbsp;&nbsp;&nbsp;
+    = link_to 'Link', "#", :class => "btn btn-info btn-medium inactive", :id => "add_link"
+    |&nbsp;&nbsp;&nbsp;&nbsp;
+    = link_to 'Image', "#", :class => "btn btn-info btn-medium inactive", :id => "add_image"
+    br
+    br
+    - [@image, @message, @link].each do |post|
+      - if post.errors.any?
+        #error_explanation
+          h2 class="#{post.class.to_s.downcase}" #{pluralize(post.errors.count, "error")} prohibited this #{post.class.to_s.downcase} from being saved:
+          ul
+            - post.errors.full_messages.each do |message|
+              li = message
+    div#forms
+    hr
+  div#privacy
+    div
+      h2 Privacy
+      br
+      - if dashboard_posts_private?
+        = render :partial => "dashboard/posts_private"
+      - else
+        = link_to "Make my posts private", nil, :class => "btn btn-primary btn-large"
+  div#services
+    div
+      h2 Services
+      br
+      table.table.table-striped
+        tbody
+          tr
+            td Github
+            td
+              = link_to "Add", nil, :class => "btn btn-small btn-info"
+          tr
+            td Twitter
+            td
+              = link_to "Add", nil, :class => "btn btn-small btn-info"
+          tr
+            td Instagram
+            td
+              = link_to "Remove", nil, :class => "btn btn-small btn-info"
+  div#subscriptions
+    div
+      h2 Subscriptions
+      br
+      table.table.table-striped
+        tbody
+          tr
+            td Elise Worthy
+            td
+              = link_to "Remove", nil, :class => "btn btn-small btn-info"
+          tr
+            td Jonan Scheffler
+            td
+              = link_to "Remove", nil, :class => "btn btn-small btn-info"
+          tr
+            td Andrew Thal
+            td
+              = link_to "Remove", nil, :class => "btn btn-small btn-info"
+          tr
+            td Travis Valentine
+            td
+              = link_to "Remove", nil, :class => "btn btn-small btn-info"
+
+  div#account
+    div
+      h2 Account Settings
+      = render partial: "users/update_password"
+      = link_to "Disable Account", nil, :class => "btn btn-medium"

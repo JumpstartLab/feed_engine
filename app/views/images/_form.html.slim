@@ -1,0 +1,10 @@
+= form_for @image, :validate => true do |f|
+  p
+    = f.label :url
+    = f.text_field :url
+  p
+    = f.label :description
+    = f.text_area :description, :rows => "5"
+  p
+    = f.hidden_field :poster_id, value: current_user.id
+  p = f.submit

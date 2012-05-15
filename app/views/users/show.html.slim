@@ -1,0 +1,5 @@
+h1 = "#{@user.display_name}'s feed"
+- if public?
+  = render :partial => "users/public"
+- else
+  = render :partial => "users/private"
