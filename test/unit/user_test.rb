@@ -1,6 +1,6 @@
-require 'test_helper'
+require 'minitest_helper'
 
-class UserTest < ActiveSupport::TestCase
+class UserTest < MiniTest::Unit::TestCase
   # test "the truth" do
   #   assert true
   # end
