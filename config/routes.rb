@@ -6,7 +6,6 @@ FeedEngine::Application.routes.draw do
   resources :users
   resources :sessions
   resources :links
-  resources :posts
   resource  :dashboard,
             :controller => "dashboard",
             :only => "show"
