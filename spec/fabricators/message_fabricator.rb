@@ -10,5 +10,6 @@
 #
 
 Fabricator(:message) do
-  body  { Faker::Lorem.words(10).join(' ') }
+  poster_id { Fabricate(:user).id }
+  body      { Faker::Lorem.words(10).join(' ') }
 end

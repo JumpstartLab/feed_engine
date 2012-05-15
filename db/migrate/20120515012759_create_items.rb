@@ -1,8 +1,7 @@
 class CreateItems < ActiveRecord::Migration
   def change
     create_table :items do |t|
-      t.integer :user_id
-      t.integer :post_id
+      t.references :post, :polymorphic => true
 
       t.timestamps
     end

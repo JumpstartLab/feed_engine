@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   has_many :messages, :foreign_key => 'poster_id'
   has_many :images, :foreign_key => 'poster_id'
   has_many :links, :foreign_key => 'poster_id'
+  has_many :items, :foreign_key => 'poster_id'
 
   default_scope order(:created_at)
   has_many :subscriptions
