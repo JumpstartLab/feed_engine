@@ -24,12 +24,12 @@ class User < ActiveRecord::Base
     self.subdomain = self.display_name.downcase
   end
 
-  TYPES.each do |type_name|
+  FEED_TYPES.each do |type_name|
     has_many type_name.to_s.to_sym
   end
   
   def posts
-    TYPES.map do |association|
+    FEED_TYPES.map do |association|
       self.send(association.to_s.to_sym).all
     end.flatten.uniq.compact.sort_by { |post| post.created_at }
   end
@@ -46,7 +46,6 @@ class User < ActiveRecord::Base
     # make a setup method for params
     params = {:user_id => twitter_id, :count=>200}
     params[:since_id] = self.tweets.last.source_id if self.tweets.any?
-
     Twitter.user_timeline(params).each do |tweet|
       self.tweets.create(content: tweet.text, source_id: tweet.id, handle: tweet.user.screen_name, tweet_time: tweet.created_at)
     end
