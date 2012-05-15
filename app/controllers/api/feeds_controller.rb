@@ -4,6 +4,6 @@ class Api::FeedsController < ApiController
   end
 
   def show
-    @user = User.find_by_display_name(params[:id])
+    @feed = Feed.find_by_name(params[:id])
   end
 end
