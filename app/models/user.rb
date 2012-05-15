@@ -33,7 +33,8 @@ class User < ActiveRecord::Base
     :format => {
       :with => /^[a-zA-Z\d\-]*$/,
       :message => "must contain only letters, numbers or dashes"
-    }
+    },
+    :uniqueness => true
 
   def send_welcome_email
     UserMailer.signup_notification(self).deliver
