@@ -1,5 +1,4 @@
 - content_for :head do
-  =javascript_include_tag "dashboard_show"
   javascript:
     $(function() {
       $("#forms").html("#{j render :partial => "messages/form"}")
@@ -16,6 +15,7 @@
       $("#forms").html("#{j render :partial => "images/form"}")
       make_active(this);
     })
+  =javascript_include_tag "dashboard_show"
 br
 br
 div.span3

@@ -29,6 +29,10 @@ class UsersController < ApplicationController
   end
 
   def update
+    @link = Link.new
+    @image = Image.new
+    @message = Message.new
+
     @user = User.find(params[:id])
 
     if @user.update_attributes(params[:user])

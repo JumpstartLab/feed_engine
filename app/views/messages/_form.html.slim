@@ -3,5 +3,5 @@
     = f.label :body
     = f.text_area :body, :rows => "5"
   p
-    = f.hidden_field :poster_id, value: "1"
+    = f.hidden_field :poster_id, value: current_user.id
   p = f.submit

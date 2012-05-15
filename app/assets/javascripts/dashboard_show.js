@@ -6,14 +6,12 @@ $(function() {
   $("#account").hide();
   show_div_for_error();
 });
-
 function show_div_for_error() {
   var error_class = $("#error_explanation h2").attr("class");
   if (error_class != null) {
     $("#add_" + error_class).click();
   }
 }
-
 $("#posts_id").live('click', function() {
   $("#posts").show();
   $("#account").hide();
@@ -49,7 +47,6 @@ $("#account_id").live('click', function() {
   $("#services").hide();
   $("#subscriptions").hide();
 });
-
 $(function(){
   var sidebar=$('#sidebar');
   sidebar.delegate('a', 'click',function(){
@@ -57,7 +54,6 @@ $(function(){
     $(this).toggleClass('active inactive');
   });
 });
-
 function make_active(post) {
   var posts=$('#posts');
   posts.find('.active').toggleClass('active inactive');
