@@ -14,7 +14,8 @@ Scenario: Signing up
   And I fill in password and password confirmation with "hungry"
   And I submit the form
   Then I should see a confirmation message thanking me for signing up
-  And I should be viewing the dashboard at '/dashboard'
+  And I skip the link accounts page
+  Then I should be viewing the dashboard at '/dashboard'
   And I should receive a welcome email at my address
 
 Scenario: Signing up with an already-used email address

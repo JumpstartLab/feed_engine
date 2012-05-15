@@ -118,3 +118,7 @@ end
 Then /^I should see an error message that the passwords must match$/ do
   find("form").text.should include "doesn't match confirmation"
 end
+
+Then /^I skip the link accounts page$/ do
+  click_on("Skip this step")
+end
