@@ -7,7 +7,7 @@ class Api::V1::UserTweetsController < ActionController::Base
 
   def create
     tweets = JSON.parse(params["tweets"])
-    params["tweets"].each do |tweet|
+    tweets.each do |tweet|
       Tweet.create(tweet)
     end
     render :json => true, :status => 201
