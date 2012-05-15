@@ -21,9 +21,24 @@ describe User do
           page.should have_content("Welcome! You have signed up successfully.")
         end
 
-        it "should redirect me to dashboard" do
+        it "should redirect me to sign up with Twitter" do
           click_button "Create An Account"
-          page.should have_content("Dashboard")
+          page.should have_content("As a member, you can connect one of your social media")
+        end
+
+        context "when linking to a social media outlet" do
+          it "should allow me to skip linking to Twitter" do
+            click_button "Create An Account"
+            click_link "Skip This Step"
+            page.should have_content("You can sign up with Twitter by visiting dashboard")
+          end
+
+          it "should allow me to link to Twitter" do
+            pending
+            click_button "Create An Account"
+            page.find(:css, 'img').click
+
+          end
         end
 
         it "should send welcome email to user" do
