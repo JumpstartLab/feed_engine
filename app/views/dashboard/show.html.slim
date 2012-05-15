@@ -3,20 +3,18 @@ h1 Your dashboard
 .tabs
   .tab-bar
     ul
-      - TYPES.each do |type|
-        - unless type.eql? Tweet
-          li.tab-item*{id: "#{type}"}
-            a = type.to_s
+      - INPUT_TYPES.each do |type|
+        li.tab-item*{id: "#{type}"}
+          a = type.to_s
   br
   br
   .tab-body
     ul
-      - TYPES.each do |type|
-        - unless type.eql? Tweet
-          - type_name = type.to_s.downcase
-          li.tab*{id: "#{type_name}-tab"}
-            - instance_variable_set("@new_#{type_name}", type.new)
-            = render "#{type_name.pluralize}/#{type_name}_form"
+      - INPUT_TYPES.each do |type|
+        - type_name = type.to_s.downcase
+        li.tab*{id: "#{type_name}-tab"}
+          - instance_variable_set("@new_#{type_name}", type.new)
+          = render "#{type_name.pluralize}/#{type_name}_form"
     
     script*{type: "text/html", id: "errors_list_template"}
       = render 'shared/errors_list'  
