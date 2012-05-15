@@ -16,6 +16,7 @@ class PostsController < ApplicationController
   end
 
   def index
+    params[:page] = "0" if params[:page] && params[:page] == "NaN"
     @posts = current_user.posts.reverse.page(params[:page].to_i || 0)
   end
 end
