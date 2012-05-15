@@ -56,7 +56,7 @@ FeedEngine::Application.configure do
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found)
-config.i18n.fallbacks = true
+  config.i18n.fallbacks = true
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
@@ -64,6 +64,18 @@ config.i18n.fallbacks = true
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+
+####### undefine these evals because tlsmail will take care of it
+  require 'net/smtp'
+  Net.instance_eval {remove_const :SMTPSession} if defined?(Net::SMTPSession)
+
+  require 'net/pop'
+  Net::POP.instance_eval {remove_const :Revision} if defined?(Net::POP::Revision)
+  Net.instance_eval {remove_const :POP} if defined?(Net::POP)
+  Net.instance_eval {remove_const :POPSession} if defined?(Net::POPSession)
+  Net.instance_eval {remove_const :POP3Session} if defined?(Net::POP3Session)
+  Net.instance_eval {remove_const :APOPSession} if defined?(Net::APOPSession)
+####### god that was ugly
 
   require 'tlsmail'
   Net::SMTP.enable_tls(OpenSSL::SSL::VERIFY_NONE)
