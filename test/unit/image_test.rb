@@ -23,7 +23,6 @@ describe Image do
     assert_equal image.valid?, false
   end
   
-  # validates :content, length: { maximum: 2048 }, presence: true
   it "rejects image urls longer than 2048 characters" do
     image = Image.create(:user_id => 1, 
       :content => "http://www.#{'a'*2024}.com/image.jpg")
