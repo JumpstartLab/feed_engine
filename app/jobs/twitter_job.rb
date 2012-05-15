@@ -3,8 +3,8 @@ class TwitterJob
 
   def self.perform(current_user, authentication)
    client = Twitter::Client.new ({
-    :consumer_key => 'ubCmGXxyj0ZQ2guzFXdg',
-    :consumer_secret => 'ytoc7GZ05NqSgKZqpW0O1PjyCUiEuPrDuuHV0rLKE',
+    :consumer_key => ENV["TWITTER_KEY"],
+    :consumer_secret => ENV["TWITTER_SECRET"],
     :oauth_token => authentication["token"],
     :oauth_token_secret => authentication["secret"]})
   uid = authentication["uid"] 
