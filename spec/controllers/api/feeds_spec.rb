@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe Api::FeedsController, :type => :api do
   it "returns feed" do
-    request.env["devise.mapping"] = Devise.mappings[:user]
     user = Factory.create(:user)
 
     get :show, host: "api.lvh.me",
