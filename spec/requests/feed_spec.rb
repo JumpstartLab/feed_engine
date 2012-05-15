@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe "Feed" do
   let!(:user) { FactoryGirl.create(:user) }
+  let(:user_2) { FactoryGirl.create(:user, :display_name => "test") }
   let!(:site_domain) { "http://#{user.display_name}.example.com" }
 
   context "when a logged in user views the feed" do
@@ -72,8 +73,41 @@ describe "Feed" do
       end
     end
 
+    it "does not show posts by a different user" do
+      save_and_open_page
+      page.should_not have_content(user_2.text_items.first.body)
+    end
+
     it "has the user as the title" do
       find('h1').should have_content user.display_name
+    end
+  end
+
+  context "refeeds" do
+    
+    let!(:user_domain) { "http://#{user_2.display_name}.example.com" }
+    before(:each) do
+      5.times do 
+        text_item = FactoryGirl.create(:text_item)
+        user_2.text_items << text_item
+        user_2.add_stream_item(text_item)
+      end
+    end
+
+    before(:each) do
+      5.times do 
+        text_item = FactoryGirl.create(:text_item)
+        user.text_items << text_item
+        user.add_stream_item(text_item)
+      end
+    end
+
+
+    context "when a logged in user views another feed" do
+      it "shows a button to refeed each post" do
+        visit user_domain
+        page.should have_content user_2.text_items.first.body
+      end
     end
   end
 end
