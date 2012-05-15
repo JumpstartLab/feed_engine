@@ -30,7 +30,7 @@ describe "API feeds/user/... ", :type => :api do
   end
 
   context "creating feed items via the API" do
-    let(:url) { "http://api.example.com#{v1_feeds_user_stream_items_path(user)}" }
+    let(:url) { "http://api.example.com#{new_api_item_path(user)}" }
 
     it "creates a text_item via the api" do
       body = '{"type":"TextItem","body": "New text post via the api."}'
@@ -89,13 +89,13 @@ describe "API feeds/user/... ", :type => :api do
 
   context "getting a feed item" do
     let!(:stream_item) { user.stream_items.last }
-    let(:url) { "http://api.example.com#{v1_feeds_user_stream_items_path(user)}" }
+    let(:url) { "http://api.example.com#{api_item_path(user, stream_item)}" }
 
     it "returns a json representation for a text post" do
       item = user.text_items.last
       stream_item = user.stream_items.where(:streamable_id => item.id).where(:streamable_type => item.class.name).first
-      url = v1_feeds_user_stream_item_path(user, stream_item)
-      get "http://api.example.com#{url}.json", :token => token
+      text_item_url = "http://api.example.com#{api_item_path(user, stream_item)}"
+      get "#{text_item_url}.json", :token => token
 
       resp = JSON.parse(last_response.body)
       resp["id"].should == item.id
@@ -107,7 +107,7 @@ describe "API feeds/user/... ", :type => :api do
   end
 
   context "getting the user's feed items" do
-    let(:url) { "http://api.example.com#{v1_feeds_user_stream_items_path(user)}" }
+    let(:url) { "http://api.example.com#{api_feed_path(user)}" }
     before(:each) { get "#{url}.json", :token => token }
 
     it "returns an array of most recent stream items as json" do
