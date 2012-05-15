@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
     #for now, just twitter
     tweets = Twitter.user_timeline(:user_id=> twitter_id, :count=>10)
     tweets.each do |tweet|
-      self.tweets.create(content: tweet.text, source_id: tweet.id)
+      self.tweets.create(content: tweet.text, source_id: tweet.id, handle: tweet.user.screen_name, tweet_time: tweet.created_at)
     end
   end
 
