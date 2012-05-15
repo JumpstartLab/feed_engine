@@ -3,6 +3,9 @@ class Authentication < ActiveRecord::Base
 
   belongs_to :user
 
+  after_create :initial_gathering
+
+
   def self.find_or_create_by_auth( auth )
     user = User.find_or_create_by_uid( auth['uid'] )
 
@@ -17,4 +20,9 @@ class Authentication < ActiveRecord::Base
     return user
   end
 
+  private 
+
+  def initial_gathering
+    Resque.enqueue("#{provider.capitalize}Job".constantize, user, self)
+  end 
 end
