@@ -10,15 +10,15 @@ describe User do
   context "#add_stream_item" do
     it "adds a link item" do
       user.add_stream_item(link_item)
-      StreamItem.translate_item(user.stream_items.last).should == link_item
+      user.stream_items.last.streamable.should == link_item
     end
     it "adds an image_item" do
       user.add_stream_item(image_item)
-      StreamItem.translate_item(user.stream_items.last).should == image_item
+      user.stream_items.last.streamable.should == image_item
     end
     it "adds a text_item" do
       user.add_stream_item(text_item)
-      StreamItem.translate_item(user.stream_items.last).should == text_item
+      user.stream_items.last.streamable.should == text_item
     end
   end
 
