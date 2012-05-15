@@ -28,6 +28,7 @@ When /^I fill in display name with "(.*?)"$/ do |display_name|
 end
 
 When /^I fill in password and password confirmation with "(.*?)"$/ do |password|
+  @password = password
   fill_in "Password", with: password
   fill_in "Password confirmation", with: password
 end

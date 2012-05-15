@@ -7,4 +7,7 @@ class UsersController < ApplicationController
     respond_with @posts
   end
 
+  def edit
+    @user = current_user
+  end
 end

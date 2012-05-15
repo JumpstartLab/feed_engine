@@ -5,9 +5,9 @@ FeedEngine::Application.routes.draw do
 
   scope "", constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' } do
     match "", to: "users#show"
-    resource "user"
   end
 
+  resources "users", as: :user
   resource "dashboard"
   resources "text_posts"
   resources "image_posts"
