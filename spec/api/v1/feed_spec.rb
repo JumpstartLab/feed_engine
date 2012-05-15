@@ -33,13 +33,13 @@ describe "API feeds/user/... ", :type => :api do
     let(:url) { "http://api.example.com#{v1_feeds_user_stream_items_path(user)}" }
 
     it "creates a text_item via the api" do
-      body = '{"type":"TextItem","body": "I had some really good Chinese food for lunch today."}'
+      body = '{"type":"TextItem","body": "New text post via the api."}'
       post "#{url}.json", :token => token, :body => body
 
       last_response.status.should == 201
 
-      new_post = StreamItem.translate_item(user.stream_items.last)
-      new_post.body.should == "I had some really good Chinese food for lunch today."
+      new_post = user.stream_items.last.streamable
+      new_post.body.should == "New text post via the api."
       new_post.should be_a(TextItem)
     end
 
@@ -49,7 +49,7 @@ describe "API feeds/user/... ", :type => :api do
 
       last_response.status.should == 201
 
-      new_post = StreamItem.translate_item(user.stream_items.last)
+      new_post = user.stream_items.last.streamable
       new_post.comment.should == "I love Flash games"
       new_post.url.should == "http://www.games.com/awesome.swf"
       new_post.should be_a(LinkItem)
@@ -61,7 +61,7 @@ describe "API feeds/user/... ", :type => :api do
 
       last_response.status.should == 201
 
-      new_post = StreamItem.translate_item(user.stream_items.last)
+      new_post = user.stream_items.last.streamable
       new_post.comment.should == "This image is cool."
       new_post.url.should == "http://foo.com/cat.jpg"
       new_post.should be_a(ImageItem)
@@ -119,33 +119,13 @@ describe "API feeds/user/... ", :type => :api do
 
     end
 
-    it "includes the feed name in the response" do
+    it "includes item details in the response" do
       feed = JSON.parse(last_response.body)
       feed["name"].should == user.display_name
-    end
-
-    it "includes the user id in the response" do
-      feed = JSON.parse(last_response.body)
       feed["id"].should == user.id
-    end
-
-    it "says whether the feed is private" do
-      feed = JSON.parse(last_response.body)
       feed["private"].should == false
-    end
-
-    it "gives a link to the feed" do
-      feed = JSON.parse(last_response.body)
       feed["link"].should == v1_feeds_user_stream_items_path(user)
-    end
-
-    it "gives a link to the first_page" do
-      feed = JSON.parse(last_response.body)
       feed["items"]["first_page"].should == v1_feeds_user_stream_items_path(user, :page => 1)
-    end
-
-    it "gives a link to the last_page" do
-      feed = JSON.parse(last_response.body)
       feed["items"]["last_page"].should == v1_feeds_user_stream_items_path(user, :page => (user.stream_items.count/12.0).ceil)
     end
 
