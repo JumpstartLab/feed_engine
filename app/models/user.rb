@@ -57,4 +57,8 @@ class User < ActiveRecord::Base
   def items
     Item.find_all_by_poster_id(id)
   end
+
+  def subdomain
+    display_name
+  end
 end

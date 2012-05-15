@@ -39,4 +39,11 @@ describe User do
       user.items.should_not include item
     end
   end
+
+  describe "#subdomain" do
+    let!(:user) { Fabricate(:user) } 
+    it "returns the display name" do
+      user.subdomain.should == user.display_name
+    end
+  end
 end
