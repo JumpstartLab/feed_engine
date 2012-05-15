@@ -25,12 +25,4 @@ class Item < ActiveRecord::Base
   def post
     Kernel.const_get(self.post_type.capitalize).find(post_id)
   end
-
-  def self.page_count(page_size=10)
-    @items_page_count ||= begin
-      pages, rem = Item.all.count.divmod(page_size)
-      pages += 1 if rem > 0
-      pages
-    end
-  end
 end
