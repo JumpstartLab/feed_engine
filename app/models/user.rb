@@ -35,6 +35,7 @@ class User < ActiveRecord::Base
       :with => /^[a-zA-Z\d\-]*$/,
       :message => "must contain only letters, numbers or dashes"
     },
+    :exclusion => { :in => %w(www api nil) },
     :uniqueness => true
 
   def send_welcome_email
