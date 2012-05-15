@@ -20,4 +20,10 @@
         <%= item.comment %>
       </div>
     </div>
+  <% elsif item.class == TwitterItem %> 
+    <div> 
+      <div class="twitter">
+        <%= item.tweet.text %> 
+      </div> 
+    </div> 
   <% end %>
