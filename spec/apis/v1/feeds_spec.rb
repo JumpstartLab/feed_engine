@@ -7,7 +7,8 @@ describe 'api/v1/feed', type: :api do
 
   context "growls viewable by this user" do
     let(:url) { "http://api.hungrlr.awesome/v1/feeds/#{user.display_name}" }
-      get "#{url}.json"
+    before(:each) do
+      get "#{url}.json", token: token
     end
     describe "json" do
       it "returns a successful response" do
@@ -22,8 +23,6 @@ describe 'api/v1/feed', type: :api do
   context "creating growls through the api" do
     let(:message) { FactoryGirl.build(:message) }
     let(:url) { "http://api.hungrlr.dev/v1/feeds/#{user.display_name}" }
-    before(:each) do
-    end
 
     describe "when valid parameters are passed in" do
       it "returns a successful response" do
@@ -40,4 +39,5 @@ describe 'api/v1/feed', type: :api do
       end
     end
   end
+
 end

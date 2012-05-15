@@ -21,10 +21,10 @@ describe 'api/v1/user_tweets', type: :api do
   end
   context "Create tweet" do
     it "can create a tweet" do
-      # post "#{url}",  tweets[0] => { link: "sweeet", comment: "duuude"}
+      # post "#{url}",  tweets: [ { link: "sweeet", comment: "duuude"} ].to_json
       # last_response.status.should eq(201)
       # Tweet.last.comment.should == "duuude"
-      pending
+      pending "IDK..."
     end
   end
 end
