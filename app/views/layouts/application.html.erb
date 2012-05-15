@@ -30,8 +30,8 @@
             <li class="pull-left navigation-item"><%= link_to image_tag("/assets/dashboard.png", :title => "Dashboard"), dashboard_path %></li>
             <li class="pull-left navigation-item"><%= link_to image_tag("/assets/logout.png", :title => "Logout"), destroy_user_session_path, :method => :delete %></li>
           <% else %>
-            <li class="pull-left"><%= link_to "Login", login_path%></li>
-            <li><%= link_to "Sign Up", new_user_path  %></li>
+            <li class="pull-left"><%= link_to "Login", login_url(:host => request.domain) %></li>
+            <li><%= link_to "Sign Up", new_user_url(:host => request.domain)  %></li>
           <% end %>
         </ul>
       <% flash.each do |name, msg| %>
