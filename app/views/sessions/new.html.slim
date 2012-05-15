@@ -2,6 +2,7 @@
   h1 Log In
   = render :partial => "form"
 
-.span5
-  h1 Sign Up
-  = render :partial => "users/form"
+- if @user
+  .span5
+    h1 Sign Up
+    = render :partial => "users/form"
