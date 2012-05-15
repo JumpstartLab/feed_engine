@@ -76,7 +76,7 @@ config.i18n.fallbacks = true
     :domain => "gmail.com",
     :enable_starttls_auto => true,
     :authentication => :login,
-    :user_name => "storeengine3@gmail.com",
-    :password => "derpderp"
+    :user_name => "hungryfeeder@gmail.com",
+    :password => "hungryfeeder"
   }
 end

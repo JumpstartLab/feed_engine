@@ -178,9 +178,15 @@ GEM
       redis-namespace (~> 1.0.2)
       sinatra (>= 0.9.2)
       vegas (~> 0.1.2)
+    resque-scheduler (2.0.0)
+      redis (>= 2.0.1)
+      resque (>= 1.20.0)
+      rufus-scheduler
     rmagick (2.13.1)
     ruby-hmac (0.4.0)
     rubyzip (0.9.8)
+    rufus-scheduler (2.0.16)
+      tzinfo (>= 0.3.23)
     sass (3.1.18)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
@@ -262,6 +268,7 @@ DEPENDENCIES
   pg
   rails (= 3.2.3)
   resque
+  resque-scheduler
   rmagick
   sass-rails (~> 3.2.3)
   slim
