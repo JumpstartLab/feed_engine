@@ -2,6 +2,6 @@ class TwitterImporter
   @queue = :medium
 
   def self.perform
-    # do all of the twitter imports
+    puts "This is me, pretending to import all the twitters"
   end
 end
