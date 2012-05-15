@@ -16,6 +16,7 @@ gem 'fog'
 gem 'mustache'
 gem 'exceptional'
 gem 'rabl'
+gem 'omniauth-twitter'
 
 group :production do
   gem 'pg'

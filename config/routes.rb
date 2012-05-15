@@ -20,6 +20,7 @@ FeedEngine::Application.routes.draw do
     end
   end
 
+  match "/auth/twitter/callback" => "users#twitter"
   resource "dashboard"
   resources "text_posts"
   resources "image_posts"

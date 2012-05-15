@@ -52,6 +52,8 @@ class User < ActiveRecord::Base
 
   has_many :posts, dependent: :destroy
 
+  has_many :authentications
+
   def send_welcome_email
     UserMailer.welcome_email(self).deliver
   end
