@@ -12,6 +12,6 @@
 
 Fabricator(:user) do
   display_name { Faker::Lorem.words(2).join('-') }
-  email { Faker::Internet.email }
-  password 'hungry'
+  email        { Faker::Internet.email }
+  password     'hungry'
 end

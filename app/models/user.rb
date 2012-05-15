@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   has_many :messages, :foreign_key => 'poster_id'
   has_many :images, :foreign_key => 'poster_id'
   has_many :links, :foreign_key => 'poster_id'
+  has_many :items, :foreign_key => 'poster_id'
 
   default_scope order(:created_at)
   has_many :subscriptions
@@ -53,4 +54,7 @@ class User < ActiveRecord::Base
     posts.sort_by(&:created_at).reverse
   end
 
+  def items
+    Item.find_all_by_poster_id(id)
+  end
 end
