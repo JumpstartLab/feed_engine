@@ -27,10 +27,10 @@ describe User do
         end
 
         context "when linking to a social media outlet" do
-          it "should allow me to skip linking to Twitter" do
+          it "should allow me to skip linking to social media" do
             click_button "Create An Account"
             click_link "Skip This Step"
-            page.should have_content("You can sign up with Twitter by visiting dashboard")
+            page.should have_content("You can sign up with your social media accounts by visiting dashboard")
           end
 
           it "should allow me to link to Twitter" do
@@ -38,6 +38,10 @@ describe User do
             click_button "Create An Account"
             page.find(:css, 'img').click
 
+          end
+
+          it "should allow me to link to Github" do
+            pending
           end
         end
 
