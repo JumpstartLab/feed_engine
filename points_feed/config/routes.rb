@@ -5,8 +5,8 @@ PointsFeed::Application.routes.draw do
   match "auth/:provider/callback" => "authentications#create"
 
   devise_for :users do
-    get "signin", :to => "devise/sessions#new"
-    get "signup", :to => "devise/registrations#new"
+    get "signin", :to => "devise/sessions#new", as: :new_user_session
+    get "signup", :to => "devise/registrations#new", as: :new_user_registration
   end
 
   resource :twitter do

@@ -25,7 +25,7 @@ describe AuthenticationsController do
   end
 
   it "create action should redirect when model is valid", js: true do
-    visit signin_path
+    visit new_user_session_path
     fill_in "user_email", with: @user.email
     fill_in "user_password", with: "hungry"
     click_button "Sign in"
