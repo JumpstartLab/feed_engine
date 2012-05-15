@@ -55,8 +55,9 @@ class AuthenticationsController < ApplicationController
         config.oauth_token = token
         config.oauth_token_secret = secret
       end
-      Twitter.user_timeline(uid.to_i).each do |tweet| 
-        current_user.twitter_items.build(:tweet => tweet)
+      Twitter.user_timeline(uid.to_i).reverse.each do |tweet| 
+        twitter_item = current_user.twitter_items.create(:tweet => tweet)
+        current_user.add_stream_item(twitter_item)
       end 
       current_user.save
 
