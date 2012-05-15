@@ -46,4 +46,29 @@ describe User do
       user.subdomain.should == user.display_name
     end
   end
+
+  describe "is invalid with a" do
+    let(:new_user) { Fabricate.build(:user) }
+
+    after(:each) do
+      new_user.errors[:display_name].should include 'is reserved'
+    end
+
+    describe "forbidden display name" do
+      it "'www'" do
+        new_user.display_name = 'www'
+        new_user.should_not be_valid
+      end
+
+      it "'api'" do
+        new_user.display_name = 'api'
+        new_user.should_not be_valid
+      end
+
+      it "'nil'" do
+        new_user.display_name = 'nil'
+        new_user.should_not be_valid
+      end
+    end
+  end
 end

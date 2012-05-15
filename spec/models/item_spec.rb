@@ -12,7 +12,7 @@
 
 require 'spec_helper'
 
-describe Item, :focus => true do
+describe Item do
   let(:message) { Fabricate(:message) }
   let(:image) { Fabricate(:image) }
   let(:link) { Fabricate(:link) }
