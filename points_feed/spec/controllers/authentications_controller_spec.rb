@@ -1,8 +1,16 @@
 require File.dirname(__FILE__) + '/../spec_helper'
+include Devise::TestHelpers
 
 describe AuthenticationsController do
   fixtures :all
   render_views
+
+  before(:each) do
+    @user = Fabricate(:user)
+    sign_in(@user)
+  end
+
+  let(:authentications) { mock('Authentications',:find_or_create_by_provider_and_uid => "something") }
 
   it "index action should render index template" do
     get :index
@@ -10,15 +18,20 @@ describe AuthenticationsController do
   end
 
   it "create action should render new template when model is invalid" do
+
     Authentication.any_instance.stubs(:valid?).returns(false)
-    post :create
+    visit("/auth/twitter")
     response.should render_template(:new)
   end
 
-  it "create action should redirect when model is valid" do
+  it "create action should redirect when model is valid", js: true do
+    visit signin_path
+    fill_in "user_email", with: @user.email
+    fill_in "user_password", with: "hungry"
+    click_button "Sign in"
     Authentication.any_instance.stubs(:valid?).returns(true)
-    post :create
-    response.should redirect_to(authentications_url)
+    visit("/auth/twitter")
+    page.should have_content("Authentication successful")
   end
 
   it "destroy action should destroy model and redirect to index action" do

@@ -30,14 +30,9 @@ group :test, :development do
   gem 'launchy'
   gem 'simplecov'
   gem 'cane'
-<<<<<<< HEAD
-  # gem 'reek'
-  gem 'nifty-generators'
-
-=======
   gem 'database_cleaner'
-  #gem 'reek'
->>>>>>> 1d0a768a48c8aacac82ec582151034d2e3024912
+  gem 'reek'
+  gem 'nifty-generators'
 end
 
 group :production do
