@@ -13,7 +13,6 @@
 require 'spec_helper'
 
 describe User do
-
   let(:user) { Fabricate(:user) }
 
   it "can be queried for it's items" do
