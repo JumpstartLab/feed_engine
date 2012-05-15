@@ -1,3 +1,26 @@
-// Place all the styles related to the users/registrations controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "variables";
+@import "containers";
+
+.signup-title {
+  font-size: 62px;
+  padding: 0 0 10px 0;
+}
+
+.signup-fields {
+  height: 30px;
+  width: 250px;
+}
+
+.signup-submit { 
+	-webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px 0px;
+	background-color: #7cceee;
+	border-radius: 5px;
+	border-bottom-color: #333;
+	border: 1px solid #61c4ea;
+	box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px 0px;
+	color: #333;
+	font-family: 'Verdana', Arial, sans-serif;
+	font-size: 14px;
+	text-shadow: #b2e2f5 0px 1px 0px;
+  padding: 10px 40px 10px 40px;
+}

@@ -1,12 +1,12 @@
-<div class="span3 offset3 login-container">
-<h1 class="login-title">Trout</h1>
+<div class="span3 offset3 trout-container">
+  <h1 class="login-title">Troutr</h1>
 
-<br/>
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <%= f.email_field :email, :placeholder => "Email", :class => "login-fields" %>
+  <br/>
+  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+    <%= f.email_field :email, :placeholder => "Email", :class => "login-fields" %>
 
-  <%= f.password_field :password, :placeholder => "Password", :class => "login-fields" %>
+    <%= f.password_field :password, :placeholder => "Password", :class => "login-fields" %>
 
-  <div><%= f.submit "Log In", :class => "offset1 login-submit" %></div>
-<% end %>
+    <div><%= f.submit "Log In", :class => "offset1 login-submit" %></div>
+  <% end %>
 </div>

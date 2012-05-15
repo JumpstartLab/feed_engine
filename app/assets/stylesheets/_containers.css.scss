@@ -1,0 +1,13 @@
+@import "variables";
+
+.trout-container {
+  min-height: 140px; 
+  padding: 50px 50px 0 50px;
+  margin-bottom: 20px;
+  background-color: $trout;
+  border: 1px solid #eee;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  font-family: $font;
+}

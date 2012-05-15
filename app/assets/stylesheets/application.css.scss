@@ -119,7 +119,20 @@ body {
   text-decoration:underline;
 }
 
-.navigation-item, .navigation-item-signup > a:hover {
-  text-decoration: none;
-  color: $trout;
+
+@mixin nav-item-links {
+      text-decoration: none;
+      color: $trout;
 }
+
+.navigation-item {
+    a:hover {
+      @include nav-item-links;
+      }
+  }
+
+.navigation-item-signup {
+    a:hover {
+      @include nav-item-links;
+      }
+  }
