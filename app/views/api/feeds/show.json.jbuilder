@@ -1,2 +1,2 @@
-json.(@user, :id, :email, :display_name)
-json.posts @user.posts
+json.(@feed, :id, :private, :name, :link)
+json.posts @feed.posts
