@@ -1,5 +1,5 @@
-<%= form_for @link_item do |f| %>
-  <%= f.text_field :url, :placeholder => "URL", :class => "dashboard-text-field" %>
-  <%= f.text_area :comment, :placeholder => "Comment", :size => "40x10", :class => "dashboard-text-area" %>
-  <%= f.button "Linkify", :class => "link-item-submit-button" %>
+<%= simple_form_for @link_item do |f| %>
+  <%= f.input :url, :placeholder => "URL", :class => "dashboard-text-field" %>
+  <%= f.input :comment, :placeholder => "Comment", :size => "40x10", :class => "dashboard-text-area" %>
+  <%= f.submit "Linkify", :class => "link-item-submit-button" %>
 <% end %>

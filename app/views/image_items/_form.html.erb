@@ -1,5 +1,5 @@
-<%= form_for @image_item do |f| %>
-  <%= f.text_field :url, :placeholder => "Image URL", :class => "dashboard-text-field" %>
-  <%= f.text_area :comment, :placeholder => "Comment", :size => "40x10", :class => "dashboard-text-area" %>
-  <%= f.button "Imagify", :class => "link-item-submit-button" %>
+<%= simple_form_for @image_item do |f| %>
+  <%= f.input :url, :placeholder => "Image URL", :class => "dashboard-text-field" %>
+  <%= f.input :comment, :placeholder => "Comment", :size => "40x10", :class => "dashboard-text-area" %>
+  <%= f.submit "Imagify", :class => "link-item-submit-button" %>
 <% end %>
