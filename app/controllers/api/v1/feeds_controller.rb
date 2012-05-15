@@ -10,7 +10,6 @@ class Api::V1::FeedsController < ActionController::Base
   def create
     json_hash = JSON.parse(params[:body])
     @growl = current_user.relation_for(json_hash["type"]).new(json_hash)
-    @growl.build_meta_data(params[:meta_data]) if params[:meta_data]
   
     if @growl.save
       render location: @growl, status: :created

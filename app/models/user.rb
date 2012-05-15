@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   end
 
   def send_welcome_message
-    mail = UserMailer.welcome_message(self).deliver
+    mail = UserMailer.welcome_message(email).deliver
   end
 
   def self.find_twitter_users
