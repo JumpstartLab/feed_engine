@@ -2,8 +2,7 @@ class Api::PostsController < ApiController
   # before_filter :validate_api_token
 
   def index
-    @user = User.find_by_display_name(params[:user_display_name])
-    @posts = @user.posts
+    @posts = Post.for_feed(params[:user_display_name])  
   end
 
   def show
@@ -14,7 +13,7 @@ private
     token = params[:access_token] || current_user.api_key
     unless User.exists?(api_key: token)
       render json: {
-        :status => :forbidden,
+        :status => :unauthorized,
         text: "Access_token not valid or not included."
       }
     end
