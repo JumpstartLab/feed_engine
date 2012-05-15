@@ -1,4 +1,11 @@
 class User < ActiveRecord::Base
+   
+  validate do
+    return self.errors.add(:email, "can't be blank") if email.blank?
+    unless email.match(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/)
+      self.errors.add(:email, "must be in the form user@server.com") 
+    end
+  end
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -34,11 +41,7 @@ class User < ActiveRecord::Base
                            :source => :user,
                            :conditions => {'friendships.status' => Friendship::IGNORED }
 
-  validates :email, :format => {
-      :message => "must be in the form a@b.com",
-      :with => /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/
-
-    }
+ 
 
   validates :display_name, :presence => true, 
                          :format => { 
@@ -53,6 +56,12 @@ class User < ActiveRecord::Base
     # child_type_for_name (pass type and get a symbol)
     type = type.gsub(/Item/i, "Post").underscore.pluralize.to_sym
     self.send(type).scoped rescue text_posts.scoped
+  end
+
+  def stream(limit, offset=0)
+    items = self.posts + self.twitter_feed_items
+    items = items.sort_by { |item| item.posted_at }.reverse
+    items.slice(offset, offset + limit)
   end
 
   def background_image

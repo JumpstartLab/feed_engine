@@ -25,13 +25,13 @@ describe AuthenticationsController do
   end
 
   it "create action should redirect when model is valid", js: true do
-    visit signin_path
+    visit new_user_session_path
     fill_in "user_email", with: @user.email
     fill_in "user_password", with: "hungry"
     click_button "Sign in"
     Authentication.any_instance.stubs(:valid?).returns(true)
     visit("/auth/twitter")
-    page.should have_content("Authentication successful")
+    page.should have_content("Twitter account linked")
   end
 
   it "destroy action should destroy model and redirect to index action" do

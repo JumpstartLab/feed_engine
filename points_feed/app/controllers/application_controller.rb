@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   def validate_subdomain!
     @subdomain = request.subdomain(Rails.configuration.SUBDOMAIN_INDEX)
     unless @subdomain.blank? or @subdomain == "www"
-      @user = User.where(:display_name => @subdomain).first
+      @user = User.where("lower(display_name) = ?", @subdomain).first
       not_found if @user.nil?
     end
   end

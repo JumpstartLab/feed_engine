@@ -11,6 +11,20 @@
   <hr />
 </script>
 
+<script type="text/template" id='TwitterFeedItemTemplate'>
+  <div class='row'>
+    <div class='span1'>
+      <img src="{{feeder.avatar}}"></img>
+    </div>
+    <div class='offset1'>
+      <div style='float:right'><img src='/assets/twitter_32.png'></img></div>
+      <span class='light'>Posted {{created_at}} ago by <a href="#">{{feeder.name}}</a> via twitter</span><br />
+      {{content}}
+    </div>
+  </div>
+  <hr />
+</script>
+
 <script type="text/template" id='ImageItemTemplate'>
   <div class='row'>
     <div class='span1'>
@@ -20,7 +34,8 @@
       <span class='light'>Posted {{created_at}} ago by <a href="#">{{feeder.name}}</a></span><br />
       <div class='row' style='margin-top: 20px'>
         <div class='span2'>
-          <img src="{{image_url}}" class='span2 well'></img>
+        
+          <img src="{{image_url}}" rel="popover" class='span2 well popover-img'></img>
         </div>
         <div class='offset3'>
           {{comment}}
@@ -28,6 +43,7 @@
       </div>
     </div>
   </div>
+
   <hr />
 </script>
 

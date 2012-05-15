@@ -14,4 +14,8 @@ class TwitterFeedItem < ActiveRecord::Base
                                    posted_at: tweet.created_at,
                                    tweet_id: tweet.id)
   end
+
+  def decorate
+    TwitterFeedItemDecorator.decorate(self)
+  end
 end
