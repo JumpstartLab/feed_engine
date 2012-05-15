@@ -67,7 +67,6 @@ config.i18n.fallbacks = true
 
   require 'tlsmail'
   Net::SMTP.enable_tls(OpenSSL::SSL::VERIFY_NONE)
-  ActionMailer::Base.default_url_options = { :host => 'feedeng.in' }
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.perform_deliveries = true
   ActionMailer::Base.raise_delivery_errors = false
