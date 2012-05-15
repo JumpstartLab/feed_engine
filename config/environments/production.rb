@@ -56,7 +56,7 @@ FeedEngine::Application.configure do
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found)
-  config.i18n.fallbacks = true
+config.i18n.fallbacks = true
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
@@ -64,4 +64,19 @@ FeedEngine::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+
+  require 'tlsmail'
+  Net::SMTP.enable_tls(OpenSSL::SSL::VERIFY_NONE)
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.perform_deliveries = true
+  ActionMailer::Base.raise_delivery_errors = false
+  ActionMailer::Base.smtp_settings = {
+    :address => "smtp.gmail.com",
+    :port => "587",
+    :domain => "gmail.com",
+    :enable_starttls_auto => true,
+    :authentication => :login,
+    :user_name => "storeengine3@gmail.com",
+    :password => "derpderp"
+  }
 end
