@@ -2,8 +2,7 @@ class Api::PostsController < ApiController
   # before_filter :validate_api_token
 
   def index
-    @posts = User.find_by_display_name!(params[:user_display_name]).posts
-    @posts = Post.for_feed(params[:user_display_name])
+    @posts = Post.for_feed(params[:user_display_name])  
   end
 
   def show
