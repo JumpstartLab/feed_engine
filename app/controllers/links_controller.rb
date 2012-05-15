@@ -89,8 +89,8 @@ class LinksController < ApplicationController
 
   def initialize_post_types
     @user = User.new
-    @link = Link.new
+    @link = Link.new(params[:link])
     @image = Image.new
-    @message = Message.new(params[:message])
+    @message = Message.new
   end
 end

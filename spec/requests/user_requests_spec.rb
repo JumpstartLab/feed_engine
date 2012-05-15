@@ -34,6 +34,46 @@ describe User do
         click_button 'Change Password'
       end
     end
+    
+    context "and navigating the site from the header" do
+
+      it "has the app name with a link to the dashboard" do
+        within ".navbar" do
+          page.should have_link "SuperHotFeedEngine"
+          click_link_or_button "SuperHotFeedEngine"
+        end
+        current_path.should == dashboard_path
+      end
+
+      it "links to log out" do
+        within ".navbar" do
+          page.should have_link "Log out"
+          click_link_or_button "Log out"
+        end
+        page.should have_content "Logged out"
+        current_path.should == root_path
+      end
+
+      it "links to the current user's feed" do
+        within ".navbar" do
+          page.should have_link "#{user.display_name}'s Feed"
+          click_link_or_button "#{user.display_name}'s Feed"
+        end
+        within "#main-content" do
+          page.should have_content "#{user.display_name}'s feed"
+        end
+      end
+
+      it "links to the current user's dashboard" do
+        click_link_or_button "Dashboard"
+        current_path.should == dashboard_path
+        click_link_or_button "#{user.display_name}'s Feed"
+        click_link_or_button "Dashboard"
+        current_path.should == dashboard_path
+      end
+
+    end
+
   end
 
   context "who is unauthenticated" do
@@ -113,6 +153,13 @@ describe User do
           fill_in "Display name", :with => "test test"
           expect { click_button "Sign Up" }.to change { User.count }.by(0)
           page.should have_content "Display name must contain only letters, numbers or dashes"
+        end
+
+        it "with an already used display name" do
+          user.email = "test@test.com"
+          fill_signup_form_as(user)
+          expect { click_button "Sign Up" }.to change { User.count }.by(0)
+          page.should have_content "Display name has already been taken"
         end
 
         it "with an empty password" do

@@ -15,6 +15,7 @@ gem 'twitter'
 gem 'omniauth-twitter'
 gem 'omniauth'
 gem 'delayed_job_active_record'
+gem 'jbuilder'
 
 group :production do
   gem 'pg'

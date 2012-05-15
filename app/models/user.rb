@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   has_many :links, :foreign_key => 'poster_id'
   has_many :subscriptions
   has_many :tweets, :through => :subscriptions, :foreign_key => 'poster_id'
+  has_many :items, :foreign_key => 'poster_id'
 
   default_scope order(:created_at)
 
@@ -35,7 +36,8 @@ class User < ActiveRecord::Base
     :format => {
       :with => /^[a-zA-Z\d\-]*$/,
       :message => "must contain only letters, numbers or dashes"
-    }
+    },
+    :uniqueness => true
 
   def send_welcome_email
     UserMailer.signup_notification(self).deliver
@@ -54,5 +56,11 @@ class User < ActiveRecord::Base
     posts.sort_by(&:created_at).reverse
   end
 
+  def items
+    Item.find_all_by_poster_id(id)
+  end
 
+  def subdomain
+    display_name
+  end
 end

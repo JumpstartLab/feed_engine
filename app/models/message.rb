@@ -11,8 +11,9 @@
 
 # Posts that only have text
 class Message < ActiveRecord::Base
-  attr_accessible :body, :poster_id
+  include Postable
+
+  attr_accessible :body
 
   validates_length_of :body, in: 1..512
-  validates_presence_of :poster_id
 end
