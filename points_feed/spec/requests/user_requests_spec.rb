@@ -4,7 +4,7 @@ describe User do
   context "when I am not logged in" do
     context "and when I visit the signup path" do
       before(:each) do
-        visit signup_path
+        visit new_user_registration_path
         fill_in "user[email]", :with => "foo@bar.com"
         fill_in "user[display_name]", :with => "displayname"
         fill_in "user[password]", :with => "hungry"
@@ -52,7 +52,7 @@ describe User do
         it "should show an error message for improper email format" do
           fill_in "user[email]", :with => "foo@"
           click_button "Create An Account"
-          page.should have_content("is invalid")
+          page.should have_content("must be in the form")
         end
 
         it "should show an error message for a blank email" do

@@ -19,6 +19,6 @@ class Api::FeedsController < Api::ApiController
   end
 
   def user_for_page
-    @user ||= User.where(:display_name => params[:id]).first
+    @user ||= User.where("lower(display_name) = ?", params[:id].downcase).first
   end
 end
