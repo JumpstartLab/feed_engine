@@ -2,20 +2,22 @@ class TwitterImporter
   @queue = :medium
 
   def self.perform
-    users_with_twitter.each do |user|
-      import_tweets(user)
+    authentications_with_twitter.each do |authentication|
+      import_tweets(authentication)
     end
   end
 
   private
 
-  def self.users_with_twitter
-    User.where("twitter_name IS NOT null")
+  def self.authentications_with_twitter
+    Authentication.joins("JOIN users ON users.id == user_id")
+              .where("user_id is NOT NULL and provider is ?", "twitter")
+              .includes("user")
   end
 
-  def self.import_tweets(user)
-    Twitter.user_timeline(user.twitter_name).each do |tweet|
-      TwitterFeedItem.import(user, tweet)
+  def self.import_tweets(authentication)
+    Twitter.user_timeline(authentication.uid.to_i).each do |tweet|
+      TwitterFeedItem.import(authentication.user, tweet)
     end
   end
 end

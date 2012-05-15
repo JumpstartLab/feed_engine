@@ -19,6 +19,7 @@ gem 'gravatar-ultimate'
 gem 'puma'
 gem "remotipart", "~> 1.0"
 gem 'whenever', :require => false
+gem 'octokit'
 
 group :test, :development do
   gem 'sqlite3'

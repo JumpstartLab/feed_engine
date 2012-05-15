@@ -6,11 +6,9 @@ class AuthenticationsController < ApplicationController
   end
 
   def create
-    auth = request.env["omniauth.auth"]
-    current_user.authentications.find_or_create_by_provider_and_uid(auth["provider"], auth["uid"])
-    unless current_user.twitter_name.present?
-      current_user.update_attribute(:twitter_name, auth["extra"]["raw_info"]["screen_name"])
-    end
+    auth = request.env['omniauth.auth']
+    add_authentication(auth)
+
     flash[:notice] = "#{auth['provider'].titlecase} account linked."
     redirect_to dashboard_path
   end
@@ -20,6 +18,30 @@ class AuthenticationsController < ApplicationController
     @authentication.destroy
     redirect_to authentications_url, :notice => "Successfully destroyed authentication."
   end
+
+  private
+
+  def add_authentication(auth)
+    provider = auth['provider']
+    uid = auth['uid']
+    token = auth['credentials']['token']
+
+    authentication = current_user.authentications.find_or_create_by_provider_and_uid(provider, uid)
+    authentication.update_attributes(:secret => token)
+
+    github_authentication(authentication, auth) if provider == 'github'
+    # twitter_authentication(authentication, auth) if provider == 'twitter'
+  end
+
+  def github_authentication(authentication, auth)
+    login = auth['extra']['raw_info']['login']
+    authentication.update_attributes(:login => login)
+   end
+
+  # def twitter_authentication(authentication, auth)
+  #   token = auth['credentials']['token']
+  #   authentication.update_attributes(:secret => token)
+  # end
 
   # def pretty_hash(hash)
   #   results = []

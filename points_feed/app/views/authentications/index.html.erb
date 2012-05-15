@@ -19,9 +19,3 @@
     </tr>
   <% end %>
 </table>
-
-<ul>
-  <% if current_user %>
-    <%= Twitter.user_timeline(current_user.twitter_name).first.text %>
-  <% end %>
-</ul>

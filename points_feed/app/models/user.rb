@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-   
   validate do
     return self.errors.add(:email, "can't be blank") if email.blank?
     unless email.match(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/)
@@ -27,6 +26,7 @@ class User < ActiveRecord::Base
   has_many :authentications
 
   has_many :twitter_feed_items
+  has_many :github_feed_items
 
   has_many :friendships
   has_many :friends, :through => :friendships
@@ -59,7 +59,7 @@ class User < ActiveRecord::Base
   end
 
   def stream(limit, offset=0)
-    items = self.posts + self.twitter_feed_items
+    items = self.posts + self.twitter_feed_items + self.github_feed_items
     items = items.sort_by { |item| item.posted_at }.reverse
     items.slice(offset, offset + limit)
   end
@@ -98,12 +98,20 @@ class User < ActiveRecord::Base
     a.inspect
   end
 
-  def twitter
-    unless @twitter_user
-      provider = self.authentications.find_by_provider('twitter')
-      @twitter_user = Twitter::Client.new(:oauth_token => provider.token, :oauth_token_secret => provider.secret) #rescue nil
-    end
-    @twitter_user
+  # def twitter
+  #   unless @twitter_user
+  #     provider = self.authentications.find_by_provider('twitter')
+  #     @twitter_user = Twitter::Client.new(:oauth_token => provider.token, :oauth_token_secret => provider.secret) #rescue nil
+  #   end
+  #   @twitter_user
+  # end
+
+  def twitter_authentication
+    self.authentications.where(:provider => 'twitter').first
+  end
+
+  def github_authentication
+    self.authentications.where(:provider => 'github').first
   end
 
   private

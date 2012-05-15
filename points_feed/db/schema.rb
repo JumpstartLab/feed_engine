@@ -11,12 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120515011351) do
+ActiveRecord::Schema.define(:version => 20120515203930) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
     t.string   "provider"
     t.string   "uid"
+    t.string   "login"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "secret"
@@ -38,6 +39,16 @@ ActiveRecord::Schema.define(:version => 20120515011351) do
   add_index "friendships", ["id"], :name => "index_friendships_on_id"
   add_index "friendships", ["user_id", "friend_id"], :name => "index_friendships_on_user_id_and_friend_id"
   add_index "friendships", ["user_id"], :name => "index_friendships_on_user_id"
+
+  create_table "github_feed_items", :force => true do |t|
+    t.string   "content"
+    t.datetime "posted_at"
+    t.integer  "user_id"
+    t.string   "event_type"
+    t.integer  "github_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "posts", :force => true do |t|
     t.integer  "user_id"

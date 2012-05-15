@@ -25,6 +25,20 @@
   <hr />
 </script>
 
+<script type="text/template" id='GithubFeedItemTemplate'>
+  <div class='row'>
+    <div class='span1'>
+      <img src="{{feeder.avatar}}"></img>
+    </div>
+    <div class='offset1'>
+      <div style='float:right'><img src='/assets/github_32.png'></img></div>
+      <span class='light'>Posted {{created_at}} ago by <a href="#">{{feeder.name}}</a> via github</span><br />
+      {{content}}
+    </div>
+  </div>
+  <hr />
+</script>
+
 <script type="text/template" id='ImageItemTemplate'>
   <div class='row'>
     <div class='span1'>
