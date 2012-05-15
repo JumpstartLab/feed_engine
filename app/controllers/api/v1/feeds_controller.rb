@@ -24,24 +24,21 @@ class Api::V1::FeedsController < ActionController::Base
 
   def authenticate_user
     @current_user = User.find_by_authentication_token(auth_token)
-    # @current_user = sign_in(auth_user, auth_token)
     unless @current_user
       render :json => "Token is invalid.".to_json, status: :unauthorized
-      # render json: "Token invalid", status: 401
     end
   end
 
-  # def current_user
-  #   @current_user
+  # If wanted to use @current_user = sign_in(auth_user, auth_token) above,
+  # then this method applies
+  
+  # def auth_user
+  #   if Rails.env.development? || Rails.env.test?
+  #     headers['Auth-User'] || params[:display_name]
+  #   else
+  #     headers['Auth-User']
+  #   end
   # end
-
-  def auth_user
-    if Rails.env.development? || Rails.env.test?
-      headers['Auth-User'] || params[:display_name]
-    else
-      headers['Auth-User']
-    end
-  end
 
   def auth_token
     if Rails.env.development? || Rails.env.test?
