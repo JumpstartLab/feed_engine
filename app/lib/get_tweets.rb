@@ -14,7 +14,6 @@ module GetTweets
                           URI("http://api.hungrlr.dev/v1/user_tweets"),
                           tweets: collect_all_tweets.to_json
                           )
-      raise collect_all_tweets.inspect
     end
 
     def collect_all_tweets
@@ -56,3 +55,5 @@ module GetTweets
     end
   end
 end
+# tweet = GetTweets::Tweets.new
+# tweet.send
