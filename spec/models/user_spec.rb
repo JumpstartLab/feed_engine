@@ -13,4 +13,10 @@
 require 'spec_helper'
 
 describe User do
+  describe "#subdomain" do
+    let!(:user) { Fabricate(:user) } 
+    it "returns the display name" do
+      user.subdomain.should == user.display_name
+    end
+  end
 end

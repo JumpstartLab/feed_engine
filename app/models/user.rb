@@ -53,4 +53,7 @@ class User < ActiveRecord::Base
     posts.sort_by(&:created_at).reverse
   end
 
+  def subdomain
+    display_name
+  end
 end
