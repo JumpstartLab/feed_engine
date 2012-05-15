@@ -20,6 +20,10 @@ class User < ActiveRecord::Base
   has_many :links
   has_many :tweets
 
+  def twitter_account
+    authentications.twitter.twitter_account if authentications.twitter
+  end
+
   def relation_for(type)
     self.send(type.downcase.pluralize.to_sym).scoped rescue messages.scoped
   end
