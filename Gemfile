@@ -15,6 +15,7 @@ gem 'twitter'
 gem 'omniauth-twitter'
 gem 'omniauth'
 gem 'jbuilder'
+gem 'whenever', require: false
 
 group :production do
   gem 'pg'
