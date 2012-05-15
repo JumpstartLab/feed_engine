@@ -3,6 +3,6 @@ class Api::FeedsController < Api::BaseController
   end
 
   def show
-    @user = User.first
+    @user = current_user
   end
 end
