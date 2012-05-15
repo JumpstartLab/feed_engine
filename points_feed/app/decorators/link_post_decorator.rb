@@ -2,7 +2,7 @@ class LinkPostDecorator < ApplicationDecorator
   decorates :link_post
 
   def url
-    "http://api.feedengine.com/feeds/#{model.user.display_name}"
+    "http://api.pointsfeed.in/feeds/#{model.user.display_name}"
   end
 
   def as_json(*params)
@@ -18,8 +18,8 @@ class LinkPostDecorator < ApplicationDecorator
       :comment => model.comment,
       :created_at => model.created_at,
       :id => model.id,
-      :feed => url,
-      :link => "#{url}/items/#{model.id}",
+      :feed => "#{url}.json",
+      :link => "#{url}/items/#{model.id}.json",
       :refeed => false,
       :refeed_link => ""
     }

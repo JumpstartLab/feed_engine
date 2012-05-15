@@ -2,7 +2,7 @@ class UserDecorator < ApplicationDecorator
   decorates :user
 
   def url
-    "http://api.feedengine.com/feeds/#{model.display_name}"
+    "http://api.pointsfeed.in/feeds/#{model.display_name}"
   end
 
   def pages
@@ -29,11 +29,11 @@ class UserDecorator < ApplicationDecorator
       :avatar => model.avatar,
       :id => model.id,
       :private => model.private,
-      :link => url,
+      :link => "#{url}.json",
       :items => {
         :pages => pages,
-        :first_page => "#{url}/items?page=1",
-        :last_page => "#{url}/items?page=#{pages}",
+        :first_page => "#{url}/items.json?page=1",
+        :last_page => "#{url}/items.json?page=#{pages}",
         :most_recent => [
           TextPostDecorator.decorate(most_recent_text_item),
           ImagePostDecorator.decorate(most_recent_image_item),
