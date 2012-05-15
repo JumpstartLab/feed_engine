@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(:version => 20120514211004) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
->>>>>>> starting oauth, not workign yet
 
   create_table "images", :force => true do |t|
     t.text     "content"
