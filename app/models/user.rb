@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
       self.send(association.to_s.to_sym).all
     end.flatten.uniq.compact.sort_by { |post| post.created_at }
   end
-
+  
   def generate_api_key
     key = Digest::SHA256.hexdigest("#{SecureRandom.hex(15)}HuNgRyF33d#{Time.now}")
     key = generate_api_key if User.exists?(api_key: key)
