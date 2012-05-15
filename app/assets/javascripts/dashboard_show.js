@@ -5,11 +5,18 @@ $(function() {
   $("#subscriptions").hide();
   $("#account").hide();
   show_div_for_error();
+  show_sidebar_for_error();
 });
 function show_div_for_error() {
   var error_class = $("#error_explanation h2").attr("class");
   if (error_class != null) {
     $("#add_" + error_class).click();
+  }
+}
+function show_sidebar_for_error() {
+  var label_text = $("#.field_with_errors label").text();
+  if (label_text == "Password") {
+    $("#account_id").click();
   }
 }
 $("#posts_id").live('click', function() {
