@@ -39,9 +39,6 @@ FeedEngine::Application.routes.draw do
   end
 
   match '', to: 'feed#show', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
-
-
   
-
   root :to => 'dashboard#show'
 end
