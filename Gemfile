@@ -32,6 +32,7 @@ group :development, :test do
   gem 'capybara'
   gem 'simplecov'
   gem 'launchy'
+  gem 'debugger'
 end
 
 group :production do

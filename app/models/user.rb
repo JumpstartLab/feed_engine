@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
 
   def avatar
     require 'digest/md5'
-     "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email)}"
+    "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email)}"
   end
 
   def api_link(request)
@@ -66,13 +66,14 @@ class User < ActiveRecord::Base
     "http://#{display_name}.#{request.domain}"
   end
 
+  def twitter
+    authentications.twitter
+  end
+
   def twitter?
     authentications.twitter?
   end
 
-  def twitter
-    authentications.twitter
-  end
 
   def github?
     authentications.github?

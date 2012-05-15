@@ -1,0 +1,18 @@
+.row
+  .six.columns
+    h4= tweet.user.display_name
+  .six.columns
+    img.pull_right(src="assets/glyphicons/#{tweet.icon}")
+.row
+  .two.columns
+    = image_tag tweet.user.avatar
+    br
+    b Posted:
+    link_time_ago= "#{time_ago_in_words tweet.created_at} ago"
+  .ten.columns
+    .row
+      = tweet.comment_with_link.html_safe
+.row
+  .pull_right
+    a.small.green.button.radius.points POINTS!
+hr
