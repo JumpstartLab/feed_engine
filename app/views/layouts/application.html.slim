@@ -21,5 +21,6 @@ html
       = yield
 
       / Footer
-      div class="span12"
-        = debug(params)
+      - if Rails.env.development?
+        div class="span12"
+          = debug(params)
