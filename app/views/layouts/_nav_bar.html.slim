@@ -6,7 +6,7 @@
         span.icon-bar
         span.icon-bar
       a.brand href="#"
-        | SociablyGrown
+        | Feedonkulous
       .nav-collapse
         ul.nav
           / Nav Links
@@ -16,7 +16,7 @@
               = link_to current_user.email, edit_user_registration_url(current_user, subdomain: false), id: "account"
             li class="divider-vertical"
             li
-              = link_to "Sign out", destroy_user_session_url(subdomain: false), :method => :delete
+              = link_to "Sign out", destroy_user_session_url(subdomain: false), :method => :delete, id: "sign_out"
         - else
           ul.nav.pull-right
             li

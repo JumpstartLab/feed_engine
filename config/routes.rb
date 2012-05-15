@@ -20,11 +20,13 @@ FeedEngine::Application.routes.draw do
   end
 
   resources "users", as: :user
+  match "/auth/twitter/callback" => "users#twitter"
   resource "dashboard"
   resources "text_posts"
   resources "image_posts"
   resources "link_posts"
   resources "feed_items"
+  resources "authentications", only: [:show]
   root :to => "static_pages#show"
 
   devise_scope :user do

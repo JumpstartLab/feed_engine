@@ -53,6 +53,8 @@ class User < ActiveRecord::Base
 
   has_many :posts, dependent: :destroy, :extend => PageExtension
 
+  has_many :authentications
+
   def send_welcome_email
     UserMailer.welcome_email(self).deliver
   end
@@ -63,6 +65,14 @@ class User < ActiveRecord::Base
 
   def to_param
     display_name
+  end
+
+  def providers
+    self.authentications.map { |a| a.provider }
+  end
+
+  def twitter_linked?
+    providers.include?("twitter")
   end
 
 end

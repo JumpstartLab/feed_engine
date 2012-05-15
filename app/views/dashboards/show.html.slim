@@ -9,9 +9,12 @@ div class="span8 stream"
     script type="text/html" id="post_template"
         = render "/dashboards/post"
 
+br
+br
+br
+div class="span3 pull-right well"
+  h2 Mini-Dash
+  = link_to "View Your Live Stream!", root_url(subdomain: current_user.display_name), class: "btn btn-primary"
   br
   br
-  br
-  div class="span3 pull-right well"
-    h2 Mini-Dash
-    = link_to "View Your Live Stream!", root_url(subdomain: current_user.display_name), class: "btn btn-primary"
+  = twitter_button
