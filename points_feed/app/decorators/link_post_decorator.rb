@@ -2,7 +2,7 @@ class LinkPostDecorator < ApplicationDecorator
   decorates :link_post
 
   def url
-    "http://api.feedengine.com/feeds/#{model.user.display_name}"
+    "http://api.pointsfeed.in/feeds/#{model.user.display_name}"
   end
 
   def as_json(*params)

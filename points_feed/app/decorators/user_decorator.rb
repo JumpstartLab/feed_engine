@@ -2,7 +2,7 @@ class UserDecorator < ApplicationDecorator
   decorates :user
 
   def url
-    "http://api.feedengine.com/feeds/#{model.display_name}"
+    "http://api.pointsfeed.in/feeds/#{model.user.display_name}"
   end
 
   def pages
@@ -29,7 +29,7 @@ class UserDecorator < ApplicationDecorator
       :avatar => model.avatar,
       :id => model.id,
       :private => model.private,
-      :link => url,
+      :link => "#{url}.json",
       :items => {
         :pages => pages,
         :first_page => "#{url}/items?page=1",
