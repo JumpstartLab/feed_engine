@@ -92,7 +92,7 @@ class ImagesController < ApplicationController
   def initialize_post_types
     @user = User.new
     @link = Link.new
-    @image = Image.new
-    @message = Message.new(params[:message])
+    @image = Image.new(params[:image])
+    @message = Message.new
   end
 end
