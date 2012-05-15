@@ -28,7 +28,6 @@ module GetTweets
     def get_users
       users_json = Net::HTTP.get(URI("http://api.hungrlr.com/v1/user_tweets"))
       JSON.parse(users_json)
-      # JSON.parse(Net::HTTP.get(URI("v1/users?service=twitter")))
     end
 
     def get_tweets(twitter_id)
