@@ -1,5 +1,5 @@
 class ApiController < ApplicationController
-  before_filter :authenticate
+  # before_filter :authenticate
 
   attr_accessor :current_user
 
