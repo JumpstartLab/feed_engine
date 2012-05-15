@@ -1,7 +1,5 @@
 FeedEngine::Application.routes.draw do
 
-  get "posts/show"
-
   resources :subscriptions
   resources :messages
   resources :images
