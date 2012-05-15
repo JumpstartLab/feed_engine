@@ -6,7 +6,6 @@ FeedEngine::Application.routes.draw do
   # User subdomains
   scope "", constraints: Subdomains.user_feeds do
     match "", to: "users#show"
-    resource "user"
   end
 
   # Api subdomain
@@ -20,6 +19,7 @@ FeedEngine::Application.routes.draw do
     end
   end
 
+  resources "users", as: :user
   resource "dashboard"
   resources "text_posts"
   resources "image_posts"

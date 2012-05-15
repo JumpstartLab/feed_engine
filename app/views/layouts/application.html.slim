@@ -8,32 +8,7 @@ html
   body
     .container
       / Navigation
-      #nav.navbar
-        .navbar-inner
-          .container
-            a.btn.btn-navbar data-toggle="collapse" data-target=".nav-collapse"
-              span.icon-bar
-              span.icon-bar
-              span.icon-bar
-            a.brand href="#"
-              | SociablyGrown
-            .nav-collapse
-              ul.nav
-                / Nav Links
-              - if user_signed_in?
-                ul.nav.pull-right
-                  li
-                    a href="#" = current_user.email
-                  li class="divider-vertical"
-                  li
-                    = link_to "Sign out", destroy_user_session_url(subdomain: false), :method => :delete, id: "sign_out"
-              - else
-                ul.nav.pull-right
-                  li
-                    p
-                      = link_to "Sign up", new_user_registration_url(subdomain: false)
-                      |  or 
-                      = link_to "sign in", new_user_session_url(subdomain: false), :id => "sign_in"
+      = render "layouts/nav_bar"
 
       / Flashes
       #flash

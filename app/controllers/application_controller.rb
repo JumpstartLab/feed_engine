@@ -11,6 +11,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def after_update_path_for(resource_or_scope)
+    flash[:notice] = "Account updated!"
+    "/dashboard"
+  end
+
   private
 
   def user
