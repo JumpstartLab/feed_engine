@@ -1,0 +1,2 @@
+GET_TWEET_FREQUENCY=300
+Subscription.get_new_tweets
