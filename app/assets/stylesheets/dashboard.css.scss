@@ -3,12 +3,27 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 @import "buttons";
+@import "containers";
+@import "variables";
 
-.text-item-area {
-  margin: 0 0 0 23px; 
+.dashboard-text-field {
+  @include text-field;
   width: 450px;
 }
 
-.submit-button {
-  margin: 10px 0 0 350px;
+.dashboard-text-area {
+  width: 450px;
+  font-size: $input-font-size;
+}
+
+.text-item-submit-button {
+  @include trout-button;
+  margin: 10px 0 0 330px;
+  padding: $submit-button-padding; 
+}
+
+.link-item-submit-button {
+  @include trout-button;
+  margin: 10px 0 0 330px;
+  padding: $submit-button-padding; 
 }

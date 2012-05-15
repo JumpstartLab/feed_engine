@@ -8,7 +8,10 @@
 }
 
 .login-fields {
-  height: 30px;
-  width: 250px;
+  @include text-field;
+}
+
+.submit-button {
+  margin: 10px 0 0 133px
 }
 
