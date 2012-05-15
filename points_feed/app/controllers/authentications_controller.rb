@@ -11,8 +11,8 @@ class AuthenticationsController < ApplicationController
     unless current_user.twitter_name.present?
       current_user.update_attribute(:twitter_name, auth["extra"]["raw_info"]["screen_name"])
     end
-    flash[:notice] = "Authentication successful"
-    redirect_to authentications_url
+    flash[:notice] = "#{auth['provider'].titlecase} account linked."
+    redirect_to dashboard_path
   end
 
   def destroy

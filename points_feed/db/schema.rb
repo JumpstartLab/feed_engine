@@ -11,8 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120514224647) do
-
+ActiveRecord::Schema.define(:version => 20120515011351) do
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
     t.string   "provider"
@@ -22,6 +21,9 @@ ActiveRecord::Schema.define(:version => 20120514224647) do
     t.string   "secret"
   end
 
+  add_index "authentications", ["id"], :name => "index_authentications_on_id"
+  add_index "authentications", ["user_id"], :name => "index_authentications_on_user_id"
+  
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
     t.integer  "friend_id"
@@ -48,6 +50,18 @@ ActiveRecord::Schema.define(:version => 20120514224647) do
 
   add_index "posts", ["id"], :name => "index_posts_on_id"
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
+
+  create_table "twitter_feed_items", :force => true do |t|
+    t.text     "content"
+    t.datetime "posted_at"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "tweet_id"
+  end
+
+  add_index "twitter_feed_items", ["id"], :name => "index_twitter_feed_items_on_id"
+  add_index "twitter_feed_items", ["user_id"], :name => "index_twitter_feed_items_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false
