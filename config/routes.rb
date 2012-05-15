@@ -6,7 +6,7 @@ FeedEngine::Application.routes.draw do
   scope module: "api", as: "api", constraints: lambda { |r| r.subdomain == 'api' } do
     resources "feeds" do
       collection do
-        scope ":user_display_name" do
+        scope ":feed_name" do
           resources "posts"
         end
       end

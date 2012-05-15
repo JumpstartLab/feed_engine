@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   after_create :set_user_feed
   after_create :generate_api_key
   after_create :send_welcome_email
-  devise :database_authenticatable, :recoverable, :validatable
+  devise :database_authenticatable, :recoverable, :validatable, :token_authenticatable
   attr_accessible :email, :password, :password_confirmation, :display_name, :subdomain
   has_many :authentications
   has_many :tweets
