@@ -5,5 +5,5 @@ br
 - @users.each do |user|
   br
   = link_to user.display_name, root_url(:subdomain => user.subdomain)
-
+br
 = link_to 'root', root_url(:subdomain => false)
