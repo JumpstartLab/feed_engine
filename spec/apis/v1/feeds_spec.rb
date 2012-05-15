@@ -22,24 +22,51 @@ describe 'api/v1/feed', type: :api do
     end
   end
 
-  context "creating growls through the api" do
+  context "creating messages through the api" do
     let(:message) { FactoryGirl.build(:message) }
     let(:url) { "http://api.hungrlr.dev/v1/feeds/#{user.display_name}" }
-    before(:each) do
-    end
 
     describe "when valid parameters are passed in" do
       it "returns a successful response" do
-        post "#{url}.json", token: user.authentication_token, body: { type: "Message", comment: message.comment }
+        post "#{url}.json", token: user.authentication_token, body: { type: "Message", comment: message.comment }.to_json
         last_response.status.should == 201
+        user.messages.last.comment.should == message.comment
       end
     end
 
     describe "when invalid parameters are passed in" do
       it "returns a unsuccessful response" do
-        post "#{url}.json", token: user.authentication_token, body: { type: "Message" }
+        post "#{url}.json", token: user.authentication_token, body: { type: "Message" }.to_json
         last_response.status.should == 406
         last_response.body.should =~ /"You must provide a message."/
+      end
+    end
+  end
+
+  context "creating images through the api" do
+    let(:image) { FactoryGirl.build(:image) }
+    let(:url) { "http://api.hungrlr.dev/v1/feeds/#{user.display_name}" }
+
+    describe "when valid parameters are passed in" do
+      it "returns a successful response" do
+        post "#{url}.json",  token: user.authentication_token, 
+                             body: { type: "Image",
+                                     link: image.link,
+                                     comment: image.comment }.to_json
+        last_response.status.should == 201
+        user.images.last.link.should == image.link
+      end
+    end
+
+    describe "when invalid parameters are passed in" do
+      it "returns a unsuccessful response" do
+        post "#{url}.json", token: user.authentication_token, 
+                            body: { type: "Image", comment: image.comment }.to_json
+        last_response.status.should == 406
+        last_response.body.should =~ /"You must provide a link to an image."/
+        last_response.body.should =~ /"URL must start with http and be a .jpg, .gif, or .png"/
+        last_response.body.should =~ /"Given URL needs to be less then 2048 characters"/
+        last_response.body.should =~ /"Photo does not exist"/
       end
     end
   end
