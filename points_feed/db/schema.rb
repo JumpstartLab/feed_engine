@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120515010803) do
+ActiveRecord::Schema.define(:version => 20120515011351) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20120515010803) do
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "tweet_id"
   end
 
   add_index "twitter_feed_items", ["id"], :name => "index_twitter_feed_items_on_id"

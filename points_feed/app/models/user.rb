@@ -15,7 +15,10 @@ class User < ActiveRecord::Base
   has_many :text_posts
   has_many :link_posts
   has_many :image_posts
+
   has_many :authentications
+
+  has_many :twitter_feed_items
 
   has_many :friendships
   has_many :friends, :through => :friendships
