@@ -6,7 +6,7 @@ describe 'api/v1/user_tweets', type: :api do
   let(:url) { "http://api.hungrlr.awesome/v1/user_tweets" }
   context "Pulls tweet information" do
     before(:each) do
-      get "#{url}.json"
+      get "#{url}.json", token: user.authentication_token
     end
     it "returns a successful response" do
       last_response.status.should == 200

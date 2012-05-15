@@ -1,5 +1,5 @@
-class Api::V1::MetaDataController < ApplicationController
-    before_filter :authenticate_user
+class Api::V1::MetaDataController < Api::V1::BaseController
+    # before_filter :authenticate_user
 
   def create
     render :json => MetaData.find_link_data(params[:url])
