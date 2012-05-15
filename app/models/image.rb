@@ -5,7 +5,7 @@ class Image < Growl
    validates_length_of :link, :within => 3..2048, message: "Given URL needs to be less then 2048 characters"
    validates_length_of :comment, :within => 3..256, :allow_blank => true
    after_validation :send_photo_to_amazon if true
-   belongs_to :user
+    belongs_to :user
 
   def send_photo_to_amazon
     begin

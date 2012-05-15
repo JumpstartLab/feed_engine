@@ -55,5 +55,3 @@ module GetTweets
     end
   end
 end
-# tweet = GetTweets::Tweets.new
-# tweet.send
