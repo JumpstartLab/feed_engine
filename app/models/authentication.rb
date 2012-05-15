@@ -6,6 +6,15 @@ class Authentication < ActiveRecord::Base
   def self.twitter
     where(provider: "twitter").first
   end
+
+  def self.twitter?
+    where(provider: "twitter").size > 0 ? true : false
+  end
+
+  def self.github?
+    where(provider: "github").size > 0 ? true : false
+  end
+
 end
 # == Schema Information
 #
@@ -19,4 +28,3 @@ end
 #  created_at :datetime        not null
 #  updated_at :datetime        not null
 #
-

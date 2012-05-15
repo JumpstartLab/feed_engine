@@ -6,20 +6,14 @@ class Growl < ActiveRecord::Base
   validates_presence_of :type
   belongs_to :user
   has_one :meta_data, :autosave => true, dependent: :destroy
-  has_attached_file :photo,
-                    :storage => :s3,
-                    :s3_credentials => "#{Rails.root}/config/s3.yml",
-                    :styles => {
-                                  :medium => "300x300>",
-                                  :thumb => "100x100>"
-                               }
+  include HasUploadedFile
   scope :by_date, order("created_at DESC")
 
   def self.by_type_and_date(type=nil)
     if type
-      by_type(type).by_date
+      by_type(type).by_date.includes(:meta_data).includes(:user)
     else
-      by_date
+      by_date.includes(:meta_data).includes(:user)
     end
   end
 

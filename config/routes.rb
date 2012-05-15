@@ -1,12 +1,22 @@
 Hungrlr::Application.routes.draw do
+  require 'resque/server'
+  mount Resque::Server.new, :at => "/resque"
 
+  scope module: "api" do
+    namespace "v1" do
+      get '/feeds/:display_name' => 'feeds#show'
+      post '/feeds/:display_name' => 'feeds#create'
+      resources :user_tweets, only: [:create, :index]
+      resources :meta_data, :only => [ :create ]
+    end
+  end
   constraints(Subdomain) do
-    constraints :subdomain => 'api' do
+    constraints :subdomain => 'api' do ## For external use
       scope module: "api" do
         namespace "v1" do
           get '/feeds/:display_name' => 'feeds#show'
           post '/feeds/:display_name' => 'feeds#create'
-          # resources :feeds
+          resources :user_tweets, only: [:create, :index]
           resources :meta_data, :only => [ :create ]
         end
       end

@@ -21,12 +21,6 @@
         = f.input :current_password, :required => true
       .actions
         = f.button :submit, "Update"
-      hr
-
-      ul.block-grid.two-up.center_text
-            .row
-              li= link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter), class: "btn-auth btn-twitter large"
-            .row
-              li= link_to "Sign in with Github", user_omniauth_authorize_path(:github), class: "btn-auth btn-github large"
+      = render "shared/social_signin"
     hr
     = link_to "Back", :back

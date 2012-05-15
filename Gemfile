@@ -16,6 +16,9 @@ gem 'squeel'
 gem 'twitter'
 gem 'omniauth-twitter'
 gem 'newrelic_rpm'
+gem 'redis-store', "~> 1.0.0"
+gem 'resque', :require => "resque/server"
+gem 'resque_mailer'
 gem 'factory_girl_rails', '~> 3.1.0'
 gem 'faker'
 

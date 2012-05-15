@@ -16,6 +16,7 @@
       .comments
         -if link.title.present?
           = link_to link.title, link.link
+          .row= link.description
         -else
           = link_to link.link
           .row.comments= link.description

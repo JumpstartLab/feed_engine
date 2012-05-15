@@ -2,8 +2,6 @@
   .content_bar
     div.row
       h2 Dashboard
-      p= link_to "Link your Twitter account", user_omniauth_authorize_path(:twitter)
-
       dl.nice.contained.tabs
         dd= link_to "Add a Message", "#messageForm", class: ("active" if @type == 'Message' || @type.nil? )
         dd= link_to "Add an Image", "#imageForm", class: ("active" if @type == 'Image')
