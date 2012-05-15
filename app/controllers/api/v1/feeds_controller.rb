@@ -27,12 +27,13 @@ class Api::V1::FeedsController < ActionController::Base
     # @current_user = sign_in(auth_user, auth_token)
     unless @current_user
       render :json => "Token is invalid.".to_json, status: :unauthorized
+      # render json: "Token invalid", status: 401
     end
   end
 
-  def current_user
-    @current_user
-  end
+  # def current_user
+  #   @current_user
+  # end
 
   def auth_user
     if Rails.env.development? || Rails.env.test?
@@ -44,9 +45,9 @@ class Api::V1::FeedsController < ActionController::Base
 
   def auth_token
     if Rails.env.development? || Rails.env.test?
-      headers['Auth-Token'] || params[:token]
+      request.env['HTTP_AUTH_TOKEN'] || params[:token]
     else
-      headers['Auth-Token']
+      request.env['HTTP_AUTH_TOKEN']
     end
   end
 
