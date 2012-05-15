@@ -125,9 +125,10 @@ body {
       color: $trout;
 }
 
-.navigation-item {
+.nav > li.navigation-item {
     a:hover {
       @include nav-item-links;
+      background-color: transparent;
       }
   }
 
@@ -136,3 +137,6 @@ body {
       @include nav-item-links;
       }
   }
+
+.nav > li > a:hover {
+}
