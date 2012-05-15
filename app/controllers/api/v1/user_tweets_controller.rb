@@ -6,11 +6,10 @@ class Api::V1::UserTweetsController < ActionController::Base
   end
 
   def create
-    Tweet.create(comment: "BOOM")
-    # tweets = JSON.parse(params["tweets"])
-    # tweets.each do |tweet|
-      # Tweet.create(tweet)
-    # end
+    tweets = JSON.parse(params["tweets"])
+    tweets.each do |tweet|
+      Tweet.create(tweet)
+    end
     render :json => true, :status => 201
   end
 end
