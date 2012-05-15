@@ -32,8 +32,8 @@ class UserDecorator < ApplicationDecorator
       :link => "#{url}.json",
       :items => {
         :pages => pages,
-        :first_page => "#{url}/items?page=1",
-        :last_page => "#{url}/items?page=#{pages}",
+        :first_page => "#{url}/items.json?page=1",
+        :last_page => "#{url}/items.json?page=#{pages}",
         :most_recent => [
           TextPostDecorator.decorate(most_recent_text_item),
           ImagePostDecorator.decorate(most_recent_image_item),

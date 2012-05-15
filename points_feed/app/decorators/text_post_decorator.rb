@@ -17,8 +17,8 @@ class TextPostDecorator < ApplicationDecorator
       },
       :created_at => model.created_at,
       :id => model.id,
-      :feed => url,
-      :link => "#{url}/items/#{model.id}",
+      :feed => "#{url}.json",
+      :link => "#{url}/items/#{model.id}.json",
       :refeed => false,
       :refeed_link => ""
     }
