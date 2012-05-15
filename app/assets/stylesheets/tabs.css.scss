@@ -29,7 +29,6 @@
         float: left;
         &:hover{
           @include selected;
-          cursor: pointer;
         }
       }
     }
