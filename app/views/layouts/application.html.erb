@@ -26,9 +26,9 @@
     <div class="container">
         <ul class="nav nav-section">
           <% if user_signed_in? %>
-            <li class="offset8 pull-left navigation-item"><%= link_to image_tag("../images/home.png", :title => "Home"), root_path%></li>
-            <li class="pull-left navigation-item"><%= link_to image_tag("../images/dashboard.png", :title => "Dashboard"), dashboard_path %></li>
-            <li class="pull-left navigation-item"><%= link_to image_tag("../images/logout.png", :title => "Logout"), destroy_user_session_path, :method => :delete %></li>
+            <li class="offset8 pull-left navigation-item"><%= link_to image_tag("/assets/home.png", :title => "Home"), root_path%></li>
+            <li class="pull-left navigation-item"><%= link_to image_tag("/assets/dashboard.png", :title => "Dashboard"), dashboard_path %></li>
+            <li class="pull-left navigation-item"><%= link_to image_tag("/assets/logout.png", :title => "Logout"), destroy_user_session_path, :method => :delete %></li>
           <% else %>
             <li class="pull-left"><%= link_to "Login", login_path%></li>
             <li><%= link_to "Sign Up", new_user_path  %></li>
