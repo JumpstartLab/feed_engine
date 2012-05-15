@@ -11,7 +11,7 @@ module GetTweets
     end
     def send
       Net::HTTP.post_form(
-                          URI("http://api.hungrlr.dev/v1/user_tweets"),
+                          URI("http://api.hungrlr.com/v1/user_tweets"),
                           tweets: collect_all_tweets.to_json
                           )
     end
@@ -24,7 +24,7 @@ module GetTweets
     end
 
     def get_users
-      users_json = Net::HTTP.get(URI("http://api.hungrlr.dev/v1/user_tweets"))
+      users_json = Net::HTTP.get(URI("http://api.hungrlr.com/v1/user_tweets"))
       JSON.parse(users_json)
     end
 
