@@ -1,19 +1,12 @@
-<div class="signup-container">
-<h2>Log In</h2>
+<div class="span3 offset3 login-container">
+<h1 class="login-title">Trout</h1>
 
+<br/>
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
+  <%= f.email_field :email, :placeholder => "Email", :class => "login-fields" %>
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
+  <%= f.password_field :password, :placeholder => "Password", :class => "login-fields" %>
 
-  <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-  <% end %>
-
-  <div><%= f.submit "Log In" %></div>
+  <div><%= f.submit "Log In", :class => "offset1 login-submit" %></div>
 <% end %>
-
-<%= render "links" %>
 </div>
