@@ -92,7 +92,7 @@ header h2{
   border-radius: 5px;
 }
 .header_image {
-  background: white url('/assets/background.jpg');
+  background: white url('/assets/background.jpg') fixed;
   background-repeat: no-repeat;
   background-size:cover;
   height:700px;
