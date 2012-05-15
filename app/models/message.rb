@@ -11,7 +11,9 @@
 
 # Posts that only have text
 class Message < ActiveRecord::Base
-  attr_accessible :body, :poster_id
+  include Postable
+
+  attr_accessible :body
 
   include Postable
 
