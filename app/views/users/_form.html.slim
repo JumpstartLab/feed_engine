@@ -1,0 +1,37 @@
+.post-form
+  = form_for @user do |f|
+    - if @user.errors.any?
+      #error_explanation
+        
+        h2 #{pluralize(@user.errors.count, "error")} prohibited this user from being saved:
+
+        ul
+          - @user.errors.full_messages.each do |msg|
+            li
+              = msg
+
+    = f.label :email
+    br
+    = f.email_field :email
+    br
+    br
+       
+    = f.label :display_name
+    br
+    = f.text_field :display_name
+    br
+    br
+
+    = f.label :password
+    br
+    = f.password_field :password
+    br
+    br
+
+    = f.label :password_confirmation
+    br
+    = f.password_field :password_confirmation
+    br
+    br
+
+    = f.submit
