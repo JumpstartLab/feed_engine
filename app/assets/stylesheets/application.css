@@ -1,0 +1,99 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+*/
+
+.simple_form label {
+  float: left;
+  width: 100px;
+  text-align: right;
+  margin: 2px 10px;
+}
+
+.simple_form div.input {
+  margin-bottom: 10px;
+}
+
+.simple_form div.boolean, .simple_form input[type='submit'] {
+  margin-left: 120px;
+}
+
+.simple_form div.boolean label, .simple_form label.collection_radio {
+  float: none;
+  margin: 0;
+}
+
+.simple_form label.collection_radio {
+  margin-right: 10px;
+  margin-left: 2px;
+}
+
+.simple_form .error {
+  clear: left;
+  margin-left: 120px;
+  font-size: 12px;
+  color: #D00;
+  display: block;
+}
+
+.simple_form .hint {
+  clear: left;
+  margin-left: 120px;
+  font-size: 12px;
+  color: #555;
+  display: block;
+  font-style: italic;
+}
+
+body {
+  background-image: url("../images/groovepaper.png")
+}
+
+.nav-section {
+  padding: 1px;
+}
+
+.logo {
+  padding: 0 0 5px 115px;
+}
+
+.nav-item {
+  font-size: 24px;
+  padding: 10px;
+}
+
+.login-container {
+  min-height: 140px; 
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #F0F5F2;
+  border: 1px solid #eee;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+.navigation-item {
+  padding: 0px 10px 10px 0px;
+}
+
+@font-face {
+    font-family: 'EntypoRegular';
+    src: url('../fonts/entypo-webfont.eot');
+    src: url('../fonts/entypo-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/entypo-webfont.woff') format('woff'),
+         url('../fonts/entypo-webfont.ttf') format('truetype'),
+         url('../fonts/entypo-webfont.svg#EntypoRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+

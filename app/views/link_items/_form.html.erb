@@ -1,0 +1,6 @@
+<h2>Create link</h2>
+<%= simple_form_for @link_item do |f| %>
+  <%= f.input :url %>
+  <%= f.input :comment %>
+  <%= f.button :submit, "Linkify" %>
+<% end %>

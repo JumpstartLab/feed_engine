@@ -1,0 +1,13 @@
+<h1><%= @feed_owner %></h1>
+
+<% if @items %>
+  <% @items.each do |item| %>
+    <div class="item_container"> 
+      <div class="row feed_row">
+        <%= render :partial => "item", :locals => {:item => item} %>
+      </div>
+    </div>
+  <% end %>
+  <%= paginate @stream_items %>
+<% end %>
+
