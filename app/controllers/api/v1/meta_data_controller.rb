@@ -9,7 +9,9 @@ class Api::V1::MetaDataController < ApplicationController
 
   def authenticate_user
     @current_user = User.find_by_authentication_token(params[:token])
-    render :json => "Token is invalid.".to_json unless @current_user
+    unless @current_user
+      render :json => "Token is invalid.".to_json, status: 401
+    end
   end
 
   def current_user

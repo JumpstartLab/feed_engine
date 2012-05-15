@@ -8,7 +8,7 @@ describe 'api/v1/feed', type: :api do
   context "growls viewable by this user" do
     let(:url) { "http://api.hungrlr.awesome/v1/feeds/#{user.display_name}" }
     before(:each) do
-      get "#{url}.json", token: token
+      get "#{url}.json", token: user.authentication_token
     end
     describe "json" do
       it "returns a successful response" do
