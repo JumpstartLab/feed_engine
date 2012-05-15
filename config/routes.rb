@@ -1,10 +1,15 @@
 FeedEngine::Application.routes.draw do
- 
 
-  root :to => 'feed#show'
+  match "home/index" => redirect("/")
 
   match 'users/auth/:provider' => 'authentications#new'
   match 'users/auth/:provider/callback' => 'authentications#create'
+
+  devise_scope :user do
+    get "signup" => "devise/registrations#new", :as => :new_user
+    get "login" => "devise/sessions#new", :as => :login
+    delete "/logout" => "devise/sessions#destroy"
+  end
   
   resources :authentications
   resource :dashboard, :controller => 'dashboard'
@@ -33,12 +38,12 @@ FeedEngine::Application.routes.draw do
     end
   end
 
-  match '', to: 'feed#show', constraints: {subdomain: /.+/}
-
-
-  devise_scope :user do
-    get "signup" => "devise/registrations#new", :as => :new_user
-    get "login" => "devise/sessions#new", :as => :login
-    delete "/logout" => "devise/sessions#destroy"
+  scope '/', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' } do
+    get '/' => 'feed#show'
   end
+
+
+  
+
+  root :to => 'dashboard#show'
 end
