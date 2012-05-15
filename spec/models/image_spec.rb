@@ -1,5 +1,11 @@
 require 'spec_helper'
+# require 'active_record_spec_helper'
+# module HasUploadedFile; end
+# require 'growl'
+# require 'image_validations'
+# require 'image'
 
+ImageValidations.allow_amazon_uploads(false)
 describe Image do
   describe "#new" do
     context "Validations" do

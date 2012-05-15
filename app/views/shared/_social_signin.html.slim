@@ -6,3 +6,6 @@ ul.block-grid.two-up.center_text
   .row
     - unless current_user.github?
       li= link_to "Merge Github Feeds", user_omniauth_authorize_path(:github), class: "btn-auth btn-github large"
+  hr
+    .row
+      li= link_to "No thanks, just take me to my dashboard", dashboard_path(message: "Don't worry, you can link these later."), class: "large green nice button radius"
