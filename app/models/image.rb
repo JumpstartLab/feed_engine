@@ -12,10 +12,10 @@
 
 # Posts with images
 class Image < ActiveRecord::Base
-  attr_accessible :description, :poster_id, :url
-
   include ExternalContent
   include Postable
+
+  attr_accessible :description, :url
 
   validates_format_of(
     :url,

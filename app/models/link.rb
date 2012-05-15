@@ -12,9 +12,8 @@
 
 # Posts with links
 class Link < ActiveRecord::Base
-  attr_accessible :description, :poster_id, :url
-
   include ExternalContent
   include Postable
 
+  attr_accessible :description, :url
 end
