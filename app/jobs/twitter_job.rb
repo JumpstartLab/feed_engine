@@ -2,9 +2,10 @@ class TwitterJob
   @queue = :tweet 
 
   def self.perform(current_user, authentication)
+    raise authentication.inspect
    client = Twitter::Client.new ({
-    :consumer_key => ENV["TWITTER_KEY"],
-    :consumer_secret => ENV["TWITTER_SECRET"],
+    :consumer_key => ENV["TWITTER_DEV_KEY"],
+    :consumer_secret => ENV["TWITTER_DEV_SECRET"],
     :oauth_token => authentication["token"],
     :oauth_token_secret => authentication["secret"]})
   uid = authentication["uid"] 
