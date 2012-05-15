@@ -1,5 +1,5 @@
 tweet:
-  every: '1m'
+  every: '5m'
   class: SubscriptionJob
   queue: subscription
   description: "This will gather tweets every 5 min for user"
