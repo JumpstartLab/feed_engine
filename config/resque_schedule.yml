@@ -1,0 +1,5 @@
+tweet:
+  every: ['5m', :first_in => '0s']
+  class: TwitterJob
+  queue: tweet
+  description: "This will gather tweets every 5 min for user"
