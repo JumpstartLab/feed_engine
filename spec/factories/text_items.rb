@@ -3,5 +3,6 @@
 FactoryGirl.define do
   factory :text_item do
     body { Faker::Lorem.paragraph(sentence_count = 2) }
+    user
   end
 end

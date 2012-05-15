@@ -13,9 +13,7 @@ describe "Feed" do
     context "and there is less than 12 posts" do
       before(:each) do
         5.times do 
-          text_item = FactoryGirl.create(:text_item)
-          user.text_items << text_item
-          user.add_stream_item(text_item)
+          text_item = FactoryGirl.create(:text_item, :user => user)
         end
         visit site_domain
       end
@@ -52,9 +50,7 @@ describe "Feed" do
 
     before(:each) do
       5.times do 
-        text_item = FactoryGirl.create(:text_item)
-        user_2.text_items << text_item
-        user_2.add_stream_item(text_item)
+        text_item = FactoryGirl.create(:text_item, :user => user_2)
       end
     end
 
@@ -74,8 +70,7 @@ describe "Feed" do
     end
 
     it "does not show posts by a different user" do
-      save_and_open_page
-      page.should_not have_content(user_2.text_items.first.body)
+      page.should_not have_content(user_2.text_items.first)
     end
 
     it "has the user as the title" do
@@ -84,7 +79,6 @@ describe "Feed" do
   end
 
   context "refeeds" do
-    
     let!(:user_domain) { "http://#{user_2.display_name}.example.com" }
     before(:each) do
       5.times do 
@@ -94,19 +88,14 @@ describe "Feed" do
       end
     end
 
-    before(:each) do
-      5.times do 
-        text_item = FactoryGirl.create(:text_item)
-        user.text_items << text_item
-        user.add_stream_item(text_item)
-      end
-    end
-
-
     context "when a logged in user views another feed" do
       it "shows a button to refeed each post" do
         visit user_domain
-        page.should have_content user_2.text_items.first.body
+        user_2.text_items.each do |item|
+          within("#item_#{item.id}") do
+            page.should have_link("Refeed")
+          end
+        end
       end
     end
   end

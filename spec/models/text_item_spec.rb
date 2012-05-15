@@ -17,4 +17,12 @@ describe TextItem do
     test_item = TextItem.new(body:good_body)
     test_item.should be_valid
   end
+
+  context "#unique_id" do
+    let!(:user) { FactoryGirl.create(:user) }
+    let!(:text_item) { FactoryGirl.create(:text_item, :user => user) }
+    it "returns the id for the stream item between the post and its author" do
+      text_item.to_param.should == text_item.stream_items.where(user_id: text_item.user_id).first.id
+    end
+  end
 end

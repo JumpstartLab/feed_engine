@@ -8,22 +8,22 @@ describe "API feeds/user/... ", :type => :api do
 
   before do
     5.times do
-      item = FactoryGirl.create(:text_item)
+      item = FactoryGirl.create(:text_item, :user => user)
       user.text_items << item
       user.add_stream_item(item)
     end
     5.times do
-      item = FactoryGirl.create(:image_item)
+      item = FactoryGirl.create(:image_item, :user => user)
       user.image_items << item
       user.add_stream_item(item)
     end
     5.times do
-      item = FactoryGirl.create(:link_item)
+      item = FactoryGirl.create(:link_item, :user => user)
       user.link_items << item
       user.add_stream_item(item)
     end
     5.times do
-      item = FactoryGirl.create(:text_item, body: "user2 comment")
+      item = FactoryGirl.create(:text_item, body: "user2 comment", :user => user2)
       user2.text_items << item
       user2.add_stream_item(item)
     end
@@ -88,9 +88,6 @@ describe "API feeds/user/... ", :type => :api do
   end
 
   context "getting a feed item" do
-    let!(:stream_item) { user.stream_items.last }
-    let(:url) { "http://api.example.com#{api_item_path(user, stream_item)}" }
-
     it "returns a json representation for a text post" do
       item = user.text_items.last
       stream_item = user.stream_items.where(:streamable_id => item.id).where(:streamable_type => item.class.name).first

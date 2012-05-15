@@ -14,6 +14,7 @@ gem 'resque'
 gem 'kaminari'
 gem 'omniauth'
 gem 'omniauth-twitter'
+gem 'debugger'
 gem 'omniauth-github'
 gem 'twitter'
 gem "ember-rails"

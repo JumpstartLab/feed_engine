@@ -1,4 +1,4 @@
-<div class="item-container-body">
+<div class="item-container-body" id="item_<%= item.stream_items.first.id %>">
   <div class="item-header">
     <span class="item-header-user"><%= item.user.display_name %></span>
     <%= time_ago_in_words(item.created_at) %> ago
