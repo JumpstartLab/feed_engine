@@ -26,31 +26,7 @@ class User < ActiveRecord::Base
                                    :streamable_type => item.class.name)
   end
 
-  def new_stream_item_from_json(parsed_json)
-    case parsed_json["type"]
-    when "TextItem"
-      new_text_item_from_json(parsed_json)
-    when "LinkItem"
-      new_link_item_from_json(parsed_json)
-    when "ImageItem"
-      new_image_item_from_json(parsed_json)
-    end
-
-  end
-
   private
-
-  def new_text_item_from_json(parsed_json)
-    text_items.new(:body => parsed_json["body"])
-  end
-
-  def new_image_item_from_json(parsed_json)
-    image_items.new(:url => parsed_json["image_url"], :comment => parsed_json["comment"])
-  end
-
-  def new_link_item_from_json(parsed_json)
-    link_items.new(:url => parsed_json["link_url"], :comment => parsed_json["comment"])
-  end
 
   def send_welcome_mail
     Resque.enqueue(WelcomeMailJob, self)
