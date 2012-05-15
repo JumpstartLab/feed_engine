@@ -5,16 +5,10 @@ FeedEngine::Application.routes.draw do
     resources "users"
   end
 
-
   scope "", constraints: lambda { |r| r.subdomain.present? &&
     r.subdomain != 'www' && r.subdomain != 'api' } do
-
     match "", to: "users#show" 
     resource "user"
-    resources :posts, only: [:create, :index]
-    resources :texts
-    resources :images
-    resources :links
   end
 
   devise_for :users
@@ -28,6 +22,10 @@ FeedEngine::Application.routes.draw do
   end
   
   resources :users
+  resources :posts, only: [:create, :index]
+  resources :texts
+  resources :images
+  resources :links
 
   match '/sign_up' => 'users#new', as: 'sign_up'
   root :to => 'pages#index'
