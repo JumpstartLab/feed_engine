@@ -13,10 +13,10 @@ class Api::V1::FeedsController < ActionController::Base
     @growl.build_meta_data(params[:meta_data]) if params[:meta_data]
   
     if @growl.save
-      render json: @growl, status: 201
+      render location: @growl, status: :created
     else
       @errors = @growl.errors.collect { |k,v| v }
-      render 'create', status: 406
+      render 'create', status: :not_acceptable
     end
   end
 
