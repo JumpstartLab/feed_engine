@@ -16,6 +16,7 @@
 class ImagePost < ActiveRecord::Base
 
   attr_accessible :description, :remote_image_url, :image, :user_id
+
   mount_uploader :image, ImageUploader
 
   validates_length_of :description, maximum: 256

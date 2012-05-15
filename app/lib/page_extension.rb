@@ -11,7 +11,10 @@ module PageExtension
   end
 
   def pages
-    ((self.count - 1) / PAGE_SIZE) + 1
+    pages, rem = self.count.divmod(PAGE_SIZE)
+    pages += 1 if rem > 0
+
+    pages
   end
 end
 

@@ -57,6 +57,10 @@ class User < ActiveRecord::Base
     UserMailer.welcome_email(self).deliver
   end
 
+  def post_of(kind)
+    send(kind.tableize.to_sym)
+  end
+
   def to_param
     display_name
   end
