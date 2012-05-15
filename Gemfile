@@ -11,6 +11,7 @@ gem 'client_side_validations'
 gem 'devise'
 gem 'redis-store', "~> 1.0.0"
 gem 'resque'
+gem 'resque-scheduler'
 gem 'kaminari'
 gem 'omniauth'
 gem 'omniauth-twitter'
