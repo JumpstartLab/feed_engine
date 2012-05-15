@@ -47,11 +47,11 @@ class User < ActiveRecord::Base
 
   after_create :send_welcome_email
 
-  has_many :text_posts, through: :posts, source: :postable, source_type: 'TextPost'
+  has_many :text_posts,  through: :posts, source: :postable, source_type: 'TextPost'
   has_many :image_posts, through: :posts, source: :postable, source_type: 'ImagePost'
-  has_many :link_posts, through: :posts, source: :postable, source_type: 'LinkPost'
+  has_many :link_posts,  through: :posts, source: :postable, source_type: 'LinkPost'
 
-  has_many :posts, dependent: :destroy
+  has_many :posts, dependent: :destroy, :extend => PageExtension
 
   def send_welcome_email
     UserMailer.welcome_email(self).deliver
