@@ -33,7 +33,7 @@
           <% else %>
             <li class="pull-left"><%= link_to "Login", login_url(:host => request.domain) %></li>
             <li><%= link_to "Sign Up", new_user_url(:host => request.domain)  %></li>
-            <li><%= link_to "Sign Up", new_user_url(:subdomain => "pleaseworksir"  %></li>
+            <li><%= link_to "Sign Up", new_user_url(:subdomain => "pleaseworksir")  %></li>
           <% end %>
         </ul>
       <% flash.each do |name, msg| %>
