@@ -94,6 +94,18 @@ describe User do
       current_path.should == dashboard_path
     end
 
+    it "is shown a signup form when validations fail" do
+      visit root_path
+      page.should have_field "Email"
+      page.should have_field "Password"
+      click_button "Log In"
+      page.should have_content "Email or password is invalid."
+      page.should have_content "Sign Up"
+      page.should have_content "Email"
+      page.should have_content "Password"
+      current_path.should == sessions_path
+    end
+
     describe "signing up" do
       before(:each) do
         visit signup_path
