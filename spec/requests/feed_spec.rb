@@ -82,9 +82,7 @@ describe "Feed" do
     let!(:user_domain) { "http://#{user_2.display_name}.example.com" }
     before(:each) do
       5.times do 
-        text_item = FactoryGirl.create(:text_item)
-        user_2.text_items << text_item
-        user_2.add_stream_item(text_item)
+        text_item = FactoryGirl.create(:text_item, :user => user_2)
       end
     end
 

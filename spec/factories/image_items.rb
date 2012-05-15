@@ -4,5 +4,6 @@ FactoryGirl.define do
   factory :image_item do
     url "http://hungryacademy.com/images/beast.png"
     comment "MyString"
+    user
   end
 end

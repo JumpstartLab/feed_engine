@@ -1,5 +1,6 @@
 class LinkItem < ActiveRecord::Base
-  attr_accessible :comment, :url, :user_id
+  include Streamable
+  attr_accessible :comment, :url
 
   validates_presence_of :url
   validates_length_of :url, :maximum => 2048
@@ -8,13 +9,8 @@ class LinkItem < ActiveRecord::Base
 
   has_many :stream_items, :as => :streamable
   has_many :users, :through => :stream_items
-  belongs_to :user
 
   def self.create_from_json(user_id, parsed_json)
     new(:user_id => user_id, :url => parsed_json["link_url"], :comment => parsed_json["comment"])
-  end
-
-  def to_param
-    stream_items.where(:user_id => user.id).first.id
   end
 end
