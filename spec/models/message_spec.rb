@@ -14,8 +14,7 @@ require 'spec_helper'
 describe Message do
 
   context "attributes" do
-    let(:message){ Message.new(poster_id: 1, 
-                           body: "wow" ) }
+    let(:message){ Fabricate(:message) }
 
     it "is valid" do
       message.should be_valid 
@@ -24,6 +23,10 @@ describe Message do
     it "is not valid without a poster" do
       message.poster_id = nil
       message.should_not be_valid
+    end
+
+    it "can be queried for the associated item" do
+      message.item.should_not be_nil
     end
 
     context "for body" do

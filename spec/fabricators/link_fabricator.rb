@@ -11,6 +11,7 @@
 #
 
 Fabricator(:link) do
+  poster_id    { Fabricate(:user).id }
   description  { Faker::Lorem.words(10).join(' ') }
   url          { Faker::Internet.url }
 end
