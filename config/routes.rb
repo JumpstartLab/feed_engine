@@ -38,9 +38,7 @@ FeedEngine::Application.routes.draw do
     end
   end
 
-  scope '/', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' } do
-    get '/' => 'feed#show'
-  end
+  match '', to: 'feed#show', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
 
 
   
