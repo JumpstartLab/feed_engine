@@ -7,6 +7,16 @@ FeedEngine::Application.routes.draw do
     resources "users"
   end
 
+  # scope "", constraints: lambda { |r| r.subdomain.present? && r.subdomain == 'api' } do
+  #   resources "feeds" do
+  #     collection do
+  #       scope ":user_display_name" do
+  #         resources "items"
+  #       end
+  #     end
+  #   end
+  # end
+
   scope "", constraints: lambda { |r| r.subdomain.present? &&
     r.subdomain != 'www' && r.subdomain != 'api' } do
     match "", to: "users#show" 

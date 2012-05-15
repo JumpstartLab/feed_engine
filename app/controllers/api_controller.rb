@@ -12,7 +12,6 @@ class ApiController < ApplicationController
   def authenticate
     if self.current_user = authenticate_or_request_with_http_basic do |username, password|
         login(username, password)
-      # User.where(username: username, password: password)
       end
     else
       request_http_basic_authentication
