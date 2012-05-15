@@ -21,6 +21,7 @@ PointsFeed::Application.routes.draw do
     resources :feeds do
       collection do
         get "/:id/items.json" => 'feeds#items'
+        post "/:id/items/:item_id/refeeds.json" => 'feeds#refeed'
       end
     end
 
@@ -32,6 +33,7 @@ PointsFeed::Application.routes.draw do
       resources :feeds do
         collection do
           get "/:id/items.json" => 'feeds#items'
+          post "/:id/items/:item_id/refeeds.json" => 'feeds#refeed'
         end
       end
 

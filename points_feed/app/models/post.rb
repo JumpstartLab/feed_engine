@@ -24,7 +24,13 @@ class Post < ActiveRecord::Base
     refeeded_post.update_attribute(:original_post_id, self.original_post_id)
   end
 
+  def original_post
+    Post.find(original_post_id)
+  end
 
+  def attributed_user
+    original_post.user
+  end
 
   # def self.class_for(type)
   #   type.to_s.constantize rescue TextPost
