@@ -11,7 +11,6 @@ class UsersController < ApplicationController
     end
   end
 
-
   def new
     @user = User.new
 
@@ -30,7 +29,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { sign_in_and_redirect @user, notice: 'User was successfully created.' }
+        format.html { sign_in @user 
+          redirect_to twitter_path, notice: 'User was successfully created.' }
         format.json { render json: @user, status: :created, location: @user }
       else
         format.html { render action: "new" }

@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120514182947) do
+ActiveRecord::Schema.define(:version => 20120514211004) do
+
+  create_table "authentications", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "images", :force => true do |t|
     t.text     "content"
@@ -44,6 +52,14 @@ ActiveRecord::Schema.define(:version => 20120514182947) do
   end
 
   add_index "texts", ["user_id"], :name => "index_texts_on_user_id"
+
+  create_table "tweets", :force => true do |t|
+    t.text     "content"
+    t.text     "source_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false

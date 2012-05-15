@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
   after_create :send_welcome_email
   devise :database_authenticatable, :recoverable, :validatable
   attr_accessible :email, :password, :password_confirmation, :display_name, :subdomain
+  has_many :authentications
+  has_many :tweets
+
 
   DISPLAY_NAME_REGEX = /^[\w-]*$/
   validates :display_name, 
@@ -35,5 +38,17 @@ class User < ActiveRecord::Base
     key = Digest::SHA256.hexdigest("#{SecureRandom.hex(15)}HuNgRyF33d#{Time.now}")
     key = generate_api_key if User.exists?(api_key: key)
     self.update_attribute(:api_key, key)
+  end
+
+  def import_posts(provider)
+    #for now, just twitter
+    tweets = Twitter.user_timeline(:user_id=> twitter_id, :count=>10)
+    tweets.each do |tweet|
+      self.tweets.create(content: tweet.text, source_id: tweet.id)
+    end
+  end
+
+  def twitter_id
+    authentications.find_by_provider('twitter').uid
   end
 end
