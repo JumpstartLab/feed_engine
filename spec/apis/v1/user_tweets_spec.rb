@@ -21,7 +21,7 @@ describe 'api/v1/user_tweets', type: :api do
   end
   context "Create tweet" do
     it "can create a tweet" do
-      post "#{url}.json",  tweets: [ {:comment => "hello" } ].to_json
+      post "#{url}.json",  tweets: [ {:comment => "hello" } ].to_json, token: user.authentication_token
       last_response.status.should eq(201)
       Tweet.last.comment.should == "hello"
     end
