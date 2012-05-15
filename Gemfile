@@ -13,9 +13,11 @@ gem 'sass-rails',   '~> 3.2.3'
 gem 'coffee-rails', '~> 3.2.1'
 gem 'twitter'
 gem 'omniauth-twitter'
+gem 'omniauth-github'
 gem 'omniauth'
 gem 'delayed_job_active_record'
 gem 'jbuilder'
+gem 'whenever', require: false
 
 group :production do
   gem 'pg'

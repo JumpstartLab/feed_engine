@@ -14,16 +14,13 @@
 class Item < ActiveRecord::Base
   attr_accessible :post_id, :post_type, :poster_id
 
-  has_one :message, :as => :post
-  has_one :image, :as => :post
-  has_one :link, :as => :post
-  has_one :tweet, :as => :post
+  belongs_to :post, :polymorphic => true
 
   def poster
     User.where(id: poster_id)
   end
 
-  def post
-    Kernel.const_get(self.post_type.capitalize).find(post_id)
-  end
+  # def post
+  #   post_type.constantize.find(post_id)
+  # end
 end
