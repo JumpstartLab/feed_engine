@@ -4,7 +4,8 @@ module Postable
       attr_accessible :poster_id
       after_create :create_item
       validates_presence_of :poster_id
-      belongs_to :item, :polymorphic => true
+      has_one :item, :as => :post
+      belongs_to :user, :foreign_key => :poster_id
     end
   end
 
@@ -24,14 +25,10 @@ module Postable
     is_a? Link
   end
 
-  def item
-    Item.find_by_post_id_and_post_type(id, self.class.to_s.downcase)
-  end
-
   def create_item
     Item.create(
       :post_id => id,
-      :post_type => self.class.to_s.downcase,
+      :post_type => self.class.to_s,
       :poster_id => poster_id
     )
   end
