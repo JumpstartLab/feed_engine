@@ -14,3 +14,6 @@ json.most_recent @user.posts do |json, post|
 end
 
 json.web_url root_url(subdomain: @user.display_name)
+#json.private @user.private
+json.link feed_url(@user.display_name)
+

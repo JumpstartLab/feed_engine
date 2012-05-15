@@ -15,6 +15,4 @@ class Message < ActiveRecord::Base
 
   validates_length_of :body, in: 1..512
   validates_presence_of :poster_id
-  
-  include Postable
 end
