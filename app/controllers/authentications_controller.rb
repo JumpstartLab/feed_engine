@@ -42,10 +42,11 @@ class AuthenticationsController < ApplicationController
   def create
 
     auth = request.env["omniauth.auth"]
+    uid = auth['uid']
     token = auth["credentials"]["token"]
     secret = auth["credentials"]["secret"]
 
-    current_user.authentications.build(:provider => auth['provider'], :uid => auth['uid'], 
+    current_user.authentications.build(:provider => auth['provider'], :uid => uid, 
      :token => token, :secret => secret)
     if current_user.save
       Twitter.configure do |config|
@@ -54,6 +55,11 @@ class AuthenticationsController < ApplicationController
         config.oauth_token = token
         config.oauth_token_secret = secret
       end
+      Twitter.user_timeline(uid.to_i).each do |tweet| 
+        current_user.twitter_items.build(:tweet => tweet)
+      end 
+      current_user.save
+
       flash[:notice] = "Authentication successful."
     else
       flash[:notice] = "Authentication failed."

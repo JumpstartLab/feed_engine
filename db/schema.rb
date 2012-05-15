@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(:version => 20120515011427) do
   end
 
   create_table "twitter_items", :force => true do |t|
-    t.text     "json_blob"
+    t.text     "tweet"
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false

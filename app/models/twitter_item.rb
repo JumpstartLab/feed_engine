@@ -1,8 +1,8 @@
 class TwitterItem < ActiveRecord::Base
-  attr_accessible :json_blob
+  attr_accessible :tweet
 
   belongs_to :user
   has_many :stream_items, :as => :streamable
 
-  serialize :json_blob
+  serialize :tweet
 end

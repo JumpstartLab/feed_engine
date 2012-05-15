@@ -1,7 +1,7 @@
 class CreateTwitterItems < ActiveRecord::Migration
   def change
     create_table :twitter_items do |t|
-      t.text :json_blob
+      t.text :tweet
       t.references :user
 
       t.timestamps
