@@ -65,8 +65,5 @@ module FeedEngine
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    config.after_initialize do
-      Subscription.get_all_new_tweets
-    end
   end
 end
