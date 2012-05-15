@@ -9,6 +9,10 @@ PointsFeed::Application.routes.draw do
     get "signup", :to => "devise/registrations#new"
   end
 
+  resource :twitter do
+    get "/skip", :to => "twitters#skip_step"
+  end
+
   resource :dashboard
 
   namespace :api do
