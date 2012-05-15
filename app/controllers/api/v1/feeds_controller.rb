@@ -8,20 +8,22 @@ class Api::V1::FeedsController < ActionController::Base
   end
 
   def create
-    user = User.where(display_name: params[:display_name]).first
-    @growl = user.relation_for(@type).new(params[:body])
-    # @growl.build_meta_data(params[:meta_data]) if params[:meta_data]
-    if @growl.save 
+    json_hash = JSON.parse(params[:body])
+    @growl = current_user.relation_for(json_hash["type"]).new(json_hash)
+    @growl.build_meta_data(params[:meta_data]) if params[:meta_data]
+  
+    if @growl.save
       render json: @growl, status: 201
     else
-      render json: @growl.errors, status: 406
+      @errors = @growl.errors.collect { |k,v| v }
+      render 'create', status: 406
     end
   end
 
   private
 
   def authenticate_user
-    @current_user = User.find_by_authentication_token(params[:token])
+    @current_user = User.where(authentication_token: params[:token]).first
     render :json => "Token is invalid.".to_json unless @current_user
   end
 
