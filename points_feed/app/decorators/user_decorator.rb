@@ -2,7 +2,7 @@ class UserDecorator < ApplicationDecorator
   decorates :user
 
   def url
-    "http://api.pointsfeed.in/feeds/#{model.user.display_name}"
+    "http://api.pointsfeed.in/feeds/#{model.display_name}"
   end
 
   def pages

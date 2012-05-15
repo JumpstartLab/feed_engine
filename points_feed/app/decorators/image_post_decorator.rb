@@ -2,7 +2,7 @@ class ImagePostDecorator < ApplicationDecorator
   decorates :image_post
 
   def url
-    "http://api.pointsfeed.in/feeds/#{model.user.display_name}"
+    "http://api.pointsfeed.in/feeds/#{model.display_name}"
   end
 
   def as_json(*params)
