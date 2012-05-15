@@ -8,7 +8,7 @@ describe 'api/v1/feed', type: :api do
     # visit new_user_session_path(user)
     let(:url) { "http://api.hungrlr.com/v1/feeds/#{user.display_name}" }
     before(:each) do
-      get "#{url}.json"
+      get "#{url}.json", token: user.authentication_token
     end
     describe "json" do
       it "returns a successful response" do
