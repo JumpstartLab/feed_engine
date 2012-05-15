@@ -4,6 +4,8 @@ PointsFeed::Application.routes.draw do
   match "home/index" => redirect("/")
   match "auth/:provider/callback" => "authentications#create"
 
+  get "/socialmedia", :to => "twitters#show"
+
   devise_for :users, :controllers => { :registrations => :registrations } do
     get "signin", :to => "devise/sessions#new", as: :new_user_session
     get "signup", :to => "devise/registrations#new", as: :new_user_registration
