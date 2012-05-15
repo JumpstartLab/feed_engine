@@ -1,6 +1,6 @@
-require 'test_helper'
+require 'minitest_helper'
 
-class LinkTest < ActiveSupport::TestCase
+class LinkTest < MiniTest::Unit::TestCase
   # test "the truth" do
   #   assert true
   # end
