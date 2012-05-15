@@ -17,6 +17,7 @@ class Item < ActiveRecord::Base
   has_one :message, :as => :post
   has_one :image, :as => :post
   has_one :link, :as => :post
+  has_one :tweet, :as => :post
 
   def poster
     User.where(id: poster_id)

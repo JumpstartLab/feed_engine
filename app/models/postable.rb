@@ -24,6 +24,10 @@ module Postable
     is_a? Link
   end
 
+  def tweet?
+    is_a? Tweet
+  end
+
   def item
     Item.find_by_post_id_and_post_type(id, self.class.to_s.downcase)
   end

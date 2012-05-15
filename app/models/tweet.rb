@@ -1,5 +1,6 @@
 class Tweet < ActiveRecord::Base
-  attr_accessible :body, :subscription_id, :poster_id, :created_at
+  include Postable
+  attr_accessible :body, :subscription_id, :created_at
 
   belongs_to :subscription
 

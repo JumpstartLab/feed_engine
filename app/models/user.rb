@@ -12,7 +12,6 @@
 
 # Users of the site
 class User < ActiveRecord::Base
-  POST_TYPES = [Message, Link, Image, Tweet]
   has_secure_password
   has_many :messages, :foreign_key => 'poster_id'
   has_many :images, :foreign_key => 'poster_id'
@@ -44,12 +43,7 @@ class User < ActiveRecord::Base
   end
 
   def posts
-    posts = []
-    POST_TYPES.each do |post_type|
-      post_collection = post_type.find_all_by_poster_id(self.id)
-      posts = posts | post_collection
-    end
-    posts
+    items.map(&:post)
   end
 
   def sorted_posts
