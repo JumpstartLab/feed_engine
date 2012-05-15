@@ -12,6 +12,6 @@
 
 Fabricator(:image) do
   poster_id    { Fabricate(:user).id }
-  description  { Faker::Lorem.paragraph(word_count = 3) }
+  description  { Faker::Lorem.words(10).join(' ') }
   url          { Faker::Internet.url + '.jpg' }
 end
