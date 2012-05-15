@@ -2,13 +2,55 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$wellsize: 120px;
+.feed_row {
+  padding: 0 20px 0 50px;
+}
 
-.item_container {
-  min-height: $wellsize;
-  padding: ($wellsize - 1);
-  margin-bottom: $wellsize;
-  background-color: #f5f5f5;
+.item-header {
+  padding: 15px 0;
+  font-size: 14px;
+}
+
+.item-header-user {
+  font-size: 24px;
+}
+
+$body_font_size: 16px;
+$body_font: comic sans;
+
+.text_item_body {
+  font-size: $body_font_size;
+  font-family: $body_font;
+}
+
+.body_image {
+  max-height: 150px;
+  max-width: 150px;
+}
+
+.item_owner {
+  padding: 0 0 0 22px;
+  font-size: 24px;
+}
+
+.item_link {
+ font-size: 16px;
+ word-wrap: break-word;
+}
+
+.item-container-body {
+  -webkit-border-radius: 25px;
+  border-radius: 5px;
+  background-color: #B1D58B;
+  font-size: 16px;
+  margin: 30px 0 10px 0;
+  padding: 10px;
+  font-family: "museo-slab"
+}
+
+.items-container {
+  min-height: 140px; 
+  background-color: #FAFAFA;
   border: 1px solid #eee;
   border: 1px solid rgba(0, 0, 0, 0.05);
   border: 1px solid rgba(0, 0, 0, 0.05);

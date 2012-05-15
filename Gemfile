@@ -14,9 +14,11 @@ gem 'resque'
 gem 'kaminari'
 gem 'omniauth'
 gem 'omniauth-twitter'
-#gem 'omniauth-facebook'
 gem 'twitter'
- 
+gem "ember-rails"
+gem 'jbuilder'
+gem 'growl'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -37,6 +39,7 @@ group :development, :test do
 end
 
 group :test do
+  gem "rack-test", require: "rack/test"
   gem 'guard-spork'
   gem 'spork'
   gem 'launchy'
@@ -49,10 +52,7 @@ end
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
+#
 # Use unicorn as the app server
 # gem 'unicorn'
 

@@ -1,0 +1,23 @@
+<div class="item-container-body">
+  <div class="item-header">
+    <span class="item-header-user"><%= item.user.display_name %></span>
+    <%= time_ago_in_words(item.created_at) %> ago
+  </div>
+  <% if item.class == TextItem %>
+    <%= item.body %>
+  <% elsif item.class == ImageItem %>
+    <div class="body_image">
+      <%= image_tag item.url %>
+    </div>
+    <%= item.comment %>
+  <% elsif item.class == LinkItem %>
+    <div>
+      <div class="item_link">
+        <%= link_to item.url, item.url %>
+      </div>
+      <br/>
+      <div class="text_item_body">
+        <%= item.comment %>
+      </div>
+    </div>
+  <% end %>
