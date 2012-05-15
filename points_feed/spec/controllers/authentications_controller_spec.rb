@@ -31,7 +31,7 @@ describe AuthenticationsController do
     click_button "Sign in"
     Authentication.any_instance.stubs(:valid?).returns(true)
     visit("/auth/twitter")
-    page.should have_content("Authentication successful")
+    page.should have_content("Twitter account linked")
   end
 
   it "destroy action should destroy model and redirect to index action" do
