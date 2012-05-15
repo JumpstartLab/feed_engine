@@ -115,6 +115,13 @@ describe User do
           page.should have_content "Display name must contain only letters, numbers or dashes"
         end
 
+        it "with an already used display name" do
+          user.email = "test@test.com"
+          fill_signup_form_as(user)
+          expect { click_button "Sign Up" }.to change { User.count }.by(0)
+          page.should have_content "Display name has already been taken"
+        end
+
         it "with an empty password" do
           fill_in "Password", :with => ""
           fill_in "Password confirmation", :with => ""
