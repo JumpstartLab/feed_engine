@@ -10,7 +10,7 @@ ul.nav-bar
     - if current_user
       ul
         li
-          = link_to "Settings", user_root_path
+          = link_to "Settings", edit_user_path(current_user)
         li
           = link_to "Logout", destroy_user_session_url(subdomain: false), :method => :delete
     - else
