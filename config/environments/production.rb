@@ -74,6 +74,5 @@ Hungrlr::Application.configure do
   }
 
   SUBDOMAIN_NUMBER = 2
-
   ENV["REDISTOGO_URL"] = 'redis://redistogo:6b3900eac2b9d03ecf69a503a771d644@panga.redistogo.com:9579/'
 end

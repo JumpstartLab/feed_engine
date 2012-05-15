@@ -5,17 +5,19 @@ require "./config/initializers/twitter"
 
 module GetTweets
   class Tweets
-    attr_accessor :client
+    attr_accessor :client, :base_url
     def initialize
-
+      @base_url = ENV["DOMAIN"] || "http://api.hungrlr.dev/v1"
     end
+    # Name needs changed
     def send
       Net::HTTP.post_form(
                           URI("http://api.hungrlr.dev/v1/user_tweets"),
                           tweets: collect_all_tweets.to_json
                           )
     end
-
+    # client  = twitter_client
+    #client.prepare_tweets
     def collect_all_tweets
       get_users["users"].collect do |user|
         twitter_client(user["twitter_token"], user["twitter_secret"])
@@ -26,6 +28,7 @@ module GetTweets
     def get_users
       users_json = Net::HTTP.get(URI("http://api.hungrlr.dev/v1/user_tweets"))
       JSON.parse(users_json)
+      # JSON.parse(Net::HTTP.get(URI("v1/users?service=twitter")))
     end
 
     def get_tweets(twitter_id)
@@ -55,6 +58,3 @@ module GetTweets
     end
   end
 end
-
-tweet = GetTweets::Tweets.new
-tweet.send
