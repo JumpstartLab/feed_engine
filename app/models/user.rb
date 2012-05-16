@@ -46,16 +46,16 @@ class User < ActiveRecord::Base
     self.update_attribute(:api_key, key)
   end
 
-  def import_posts(provider)
-    #for now, just twitter
-    # build import methods off of Tweet model (same for other providers)
-    # make a setup method for params
-    params = {:user_id => twitter_id, :count=>200}
-    params[:since_id] = self.tweets.last.source_id if self.tweets.any?
-    Twitter.user_timeline(params).each do |tweet|
-      self.tweets.create(content: tweet.text, source_id: tweet.id, handle: tweet.user.screen_name, tweet_time: tweet.created_at)
-    end
-  end
+  # def import_posts(provider)
+  #   #for now, just twitter
+  #   # build import methods off of Tweet model (same for other providers)
+  #   # make a setup method for params
+  #   params = {:user_id => twitter_id, :count=>200}
+  #   params[:since_id] = self.tweets.last.source_id if self.tweets.any?
+  #   Twitter.user_timeline(params).each do |tweet|
+  #     self.tweets.create(content: tweet.text, source_id: tweet.id, handle: tweet.user.screen_name, tweet_time: tweet.created_at)
+  #   end
+  # end
 
   def twitter_id
     authentications.find_by_provider('twitter').uid
