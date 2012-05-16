@@ -52,8 +52,8 @@
 .item-container-body {
   @include container;
   padding: 10px 15px 15px 15px;
-  -webkit-box-shadow: 1px 1px 5px 1px rgba(1, 1, 1, 1);
-  box-shadow: 1px 1px 5px 1px rgba(1, 1, 1, 1);
+  -webkit-box-shadow: 1px 1px 3px 1px rgba(1, 1, 1, 0.5);
+  box-shadow: 1px 1px 3px 1px rgba(1, 1, 1, 0.5);
 }
 
 .points-container {
@@ -159,7 +159,7 @@ $stat-count-font-size: 18px;
 }
 
 .feed-title {
-  font-family: $font-secondary;
+  font-family: $font;
   color: $trout-main-color;
   padding: 0 0 14px 50px;
 }
