@@ -1,12 +1,14 @@
 require 'securerandom'
 class User < ActiveRecord::Base
   before_create :set_user_subdomain
+  after_create :set_user_feed
   after_create :generate_api_key
   after_create :send_welcome_email
   devise :database_authenticatable, :recoverable, :validatable
   attr_accessible :email, :password, :password_confirmation, :display_name, :subdomain
   has_many :authentications
   has_many :tweets
+  has_one :feed
 
 
   DISPLAY_NAME_REGEX = /^[\w-]*$/
@@ -22,6 +24,10 @@ class User < ActiveRecord::Base
 
   def set_user_subdomain
     self.subdomain = self.display_name.downcase
+  end
+
+  def set_user_feed
+    Feed.create(:user_id => self.id, :name => self.subdomain)
   end
 
   FEED_TYPES.each do |type_name|
