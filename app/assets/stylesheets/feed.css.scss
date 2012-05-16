@@ -44,6 +44,25 @@
   float: right;
 }
 
+@mixin item-logo {
+  font-size: 48px;
+  padding: 0 0 0 5px;
+}
+
+.post-logo {
+ @include item-logo;
+}
+
+.twitter-logo {
+  @include item-logo;
+  color: $twitter-blue; 
+}
+
 .points {
   font-size: 48px;
+}
+
+.image-item {
+ max-height: 500px;
+ max-width: 500px;
 }
