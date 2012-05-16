@@ -13,22 +13,6 @@ module Postable
     self.class.name
   end
 
-  def message?
-    is_a? Message
-  end
-
-  def image?
-    is_a? Image
-  end
-
-  def link?
-    is_a? Link
-  end
-
-  def tweet?
-    is_a? Tweet
-  end
-
   def item
     Item.find_by_post_id_and_post_type(id, self.class.to_s.downcase)
   end
@@ -39,5 +23,35 @@ module Postable
       :post_type => self.class.to_s,
       :poster_id => poster_id
     )
+  end
+
+  def respond_to?(method_name, include_private = false)
+    if method_name.to_s == "#{self.class.name.underscore}?"
+      true
+    elsif klass = method_name.to_s.chomp('?').classify.safe_constantize
+      if klass.ancestors.include?(Postable)
+        false
+      else
+        super
+      end
+    else
+      super
+    end
+  end
+
+  private
+
+  def method_missing(method_name, *args, &block)
+    if method_name.to_s == "#{self.class.name.underscore}?"
+      true
+    elsif klass = method_name.to_s.chomp('?').classify.safe_constantize
+      if klass.ancestors.include?(Postable)
+        false
+      else
+        super
+      end
+    else
+      super
+    end
   end
 end
