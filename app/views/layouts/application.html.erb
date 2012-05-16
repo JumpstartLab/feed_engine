@@ -32,8 +32,8 @@
       <% end %>
       <ul class="nav nav-section">
         <% if user_signed_in? %>
-          <li><%= current_user.display_name %></li>
-          <li class="offset7 pull-left navigation-item">
+          <li class="user-name offset5 pull-left"><%= current_user.display_name %></li>
+          <li class="pull-left navigation-item">
           <a href="<%= root_url(:subdomain => current_user.display_name) %>"> <span class="raphael-icon">S</span>Stream</a>
           </li>
           <li class="pull-left navigation-item">
@@ -62,6 +62,8 @@
       <% end %>
     </ul>
 
+    <br/>
+    <br/>
     <div class="content">
       <div class="row">
           <%= yield %>
