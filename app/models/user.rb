@@ -32,6 +32,10 @@ class User < ActiveRecord::Base
     display_name
   end
 
+  def last_twitter_item
+    twitter_items.order("tweet_time DESC").first
+  end 
+
   private
 
   def send_welcome_mail

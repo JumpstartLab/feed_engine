@@ -60,4 +60,28 @@ describe User do
       user.image_items.last.should == item
     end
   end
+
+  context "#last_twitter_item" do
+
+    before do
+      user.twitter_items.create :tweet => latest_tweet, :tweet_time => Time.now
+      user.twitter_items.create :tweet => oldest_tweet, :tweet_time => 1.day.ago
+    end
+
+    subject { user.last_twitter_item }
+
+    let(:latest_tweet) do
+      { "id" => "latest tweet" }
+    end
+
+    let(:oldest_tweet) do
+      { "id" => "oldest tweet" }
+    end
+
+    it "should return the last tweet" do
+      subject.should_not be_nil
+      subject.tweet.should eq latest_tweet
+    end
+  end
+
 end

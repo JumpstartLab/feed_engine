@@ -5,5 +5,5 @@ class GithubItem < ActiveRecord::Base
 
   has_many :stream_items, :as => :streamable
 
-  serialize :activity
+  serialize :gist
 end

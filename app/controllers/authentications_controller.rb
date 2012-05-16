@@ -45,9 +45,10 @@ class AuthenticationsController < ApplicationController
     uid = auth['uid']
     token = auth["credentials"]["token"]
     secret = auth["credentials"]["secret"]
+    login = auth["extra"]["raw_info"]["login"]
 
     current_user.authentications.build(:provider => auth['provider'], :uid => uid, 
-     :token => token, :secret => secret)
+     :token => token, :secret => secret, :login => login)
     if current_user.save
 
       flash[:notice] = "Authentication successful."
