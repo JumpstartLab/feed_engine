@@ -26,11 +26,11 @@ module Postable
   end
 
   def respond_to?(method_name, include_private = false)
-    if method_name.to_s == "#{self.class.name.underscore}?"
+    if predicate?(method_name)
       true
-    elsif klass = method_name.to_s.chomp('?').classify.safe_constantize
-      if klass.ancestors.include?(Postable)
-        false
+    elsif klass = predicate_class_name(method_name)
+      if postable?(klass)
+        true
       else
         super
       end
@@ -41,11 +41,23 @@ module Postable
 
   private
 
+  def predicate?(method_name)
+    method_name.to_s == "#{self.class.name.underscore}?"
+  end
+
+  def postable?(klass)
+    klass.ancestors.include?(Postable)
+  end
+
+  def predicate_class_name(method_name)
+    method_name.to_s.chomp('?').classify.safe_constantize
+  end
+
   def method_missing(method_name, *args, &block)
-    if method_name.to_s == "#{self.class.name.underscore}?"
+    if predicate?(method_name)
       true
-    elsif klass = method_name.to_s.chomp('?').classify.safe_constantize
-      if klass.ancestors.include?(Postable)
+    elsif klass = predicate_class_name(method_name)
+      if postable?(klass)
         false
       else
         super
