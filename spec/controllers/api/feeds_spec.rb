@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Api::FeedsController, :type => :api do
   it "GET 'show'" do
-    user = Factory.create(:user)
+    user = FactoryGirl.create(:user)
 
     request.host = "api.lvh.me"
     get :show, id:     user.display_name,

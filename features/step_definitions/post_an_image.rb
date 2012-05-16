@@ -20,11 +20,11 @@ end
 
 When /^I fill in the image link field with a link of (\d+) characters$/ do |arg1|
   @url = ("a" * 2049)
-  fill_in "Remote image url", with: @url
+  fill_in "External image url", with: @url
 end
 
 Then /^the image url I have entered is present$/ do
-  find_field("Remote image url").value.should include @url
+  find_field("External image url").value.should include @url
 end
 
 Then /^the image comment I have entered is present$/ do
@@ -59,5 +59,5 @@ end
 
 When /^I fill in the image link field with "(.*?)"$/ do |url|
   @url = url
-  fill_in "Remote image url", with: url
+  fill_in "External image url", with: url
 end

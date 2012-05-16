@@ -72,7 +72,7 @@ class Api::ItemsController < Api::BaseController
   class ImagePostMapper < Mapper
     association "image_posts"
     type        "ImageItem"
-    mapping  :image_url   => :remote_image_url,
+    mapping  :image_url   => :external_image_url,
              :description => :self
   end
 

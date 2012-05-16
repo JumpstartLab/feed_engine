@@ -6,7 +6,7 @@ div class="span8 stream"
       - post = post.postable
       div class="post well"
         - if post.class == ImagePost
-          = image_tag(post.image_url(:big).to_s, class: "thumbnail")
+          = image_tag(post.image, class: "thumbnail")
           = post.description
         - elsif post.class == LinkPost
           = post.description

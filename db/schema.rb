@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120516222832) do
+ActiveRecord::Schema.define(:version => 20120516233659) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -25,9 +25,10 @@ ActiveRecord::Schema.define(:version => 20120516222832) do
 
   create_table "image_posts", :force => true do |t|
     t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.string   "image"
+    t.string   "external_image_url"
   end
 
   create_table "link_posts", :force => true do |t|

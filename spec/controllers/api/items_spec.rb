@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Api::ItemsController, :type => :api do
   it "GET 'index'" do
-    user = Factory.create(:user)
+    user = FactoryGirl.create(:user)
 
     request.host = "api.lvh.me"
     get :index, user_display_name: user.display_name,

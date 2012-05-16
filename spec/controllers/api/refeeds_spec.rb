@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe Api::RefeedsController, :type => :api do
   it "GET 'index' proper" do
-    user1     = Factory.create(:user)
-    user2     = Factory.create(:user)
+    user1     = FactoryGirl.create(:user)
+    user2     = FactoryGirl.create(:user)
     old_post = user1.posts.create(postable: TextPost.new(body: "Foo", title: "Bar"))
 
     request.host = "api.lvh.me"
@@ -23,7 +23,7 @@ describe Api::RefeedsController, :type => :api do
   end
 
   it "GET 'index' with same user" do
-    user     = Factory.create(:user)
+    user     = FactoryGirl.create(:user)
     old_post = user.posts.create(postable: TextPost.new(body: "Foo", title: "Bar"))
 
     request.host = "api.lvh.me"
