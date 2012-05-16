@@ -82,22 +82,4 @@ class User < ActiveRecord::Base
     authentications.where(provider: provider).first
   end
 
-  # defaults to 20, unless it doesn't
-  def fetch_tweets(count=nil)
-    if count
-      Twitter.user_timeline(user_id: auth_for("twitter").uid.to_i, 
-                            count: count)
-    else
-      Twitter.user_timeline(user_id: auth_for("twitter").uid.to_i)
-    end
-  end
-
-  def create_post_from_twitter(status)
-    self.twitter_posts.create(
-      twitter_id: status.id,
-      text: status.text,
-      published_at: status.created_at
-      )
-  end
-
 end
