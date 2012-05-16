@@ -14,12 +14,18 @@ class User < ActiveRecord::Base
                   :remember_me, :display_name
 
   has_many :authentications, :dependent => :destroy
+  has_one :twitter_account, :through => :authentications
+
   has_many :growls, :dependent => :destroy
   has_many :images
   has_many :messages
   has_many :links
   has_many :tweets
-  has_one :twitter_account, :through => :authentications
+
+  has_many :subscriptions
+  has_many :subscribers, :through => :subscriptions
+  has_many :inverse_subscriptions, :class_name => "Subscription", :foreign_key => "subscriber_id"
+  has_many :inverse_subscribers, :through => :inverse_subscriptions, :source => :user
 
   def twitter_account
     authentications.twitter.twitter_account if authentications.twitter
@@ -32,7 +38,7 @@ class User < ActiveRecord::Base
   def github_client
     return nil unless github_oauth = authentications.where(provider: "github").first
 
-    Github::Client.new(:consumer_key => GITHUB_KEY,
+    Github::Client.new( :consumer_key => GITHUB_KEY,
                         :consumer_secret => GITHUB_SECRET,
                         :oauth_token => github_oauth.token,
                         :oauth_token_secret => github_oauth.secret)
