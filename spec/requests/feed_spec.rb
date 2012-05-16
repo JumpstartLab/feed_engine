@@ -68,10 +68,6 @@ describe "Feed" do
     it "does not show posts by a different user" do
       page.should_not have_content(user_2.text_items.first)
     end
-
-    it "has the user as the title" do
-      find('h1').should have_content user.display_name
-    end
   end
 
   context "refeeds" do
@@ -102,7 +98,6 @@ describe "Feed" do
         page.should have_content("You retrouted")
         visit "http://#{user.display_name}.example.com"
         page.should have_content sample_item.body
-        save_and_open_page
       end
     end
   end

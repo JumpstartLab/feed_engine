@@ -24,42 +24,53 @@
 
 
     <div class="container">
-        <ul class="nav nav-section">
-          <% if user_signed_in? %>
-            <li class="offset8 pull-left navigation-item"><%= current_user.display_name %></li>
-            <li class="offset8 pull-left navigation-item"><%= link_to image_tag("/assets/home.png", :title => "Home"), root_url(:subdomain => current_user.display_name) %></li>
-            <li class="pull-left navigation-item"><%= link_to image_tag("/assets/dashboard.png", :title => "Dashboard"), dashboard_url(:subdomain => false) %></li>
-            <li class="pull-left navigation-item"><%= link_to image_tag("/assets/logout.png", :title => "Logout"), destroy_user_session_path, :method => :delete %></li>
-          <% else %>
-            <li class="pull-left"><%= link_to "Login", login_url(:subdomain => false) %></li>
-            <li><%= link_to "Sign Up", new_user_url(:subdomain => false)  %></li>
-          <% end %>
-        </ul>
       <% flash.each do |name, msg| %>
         <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
           <a class="close" data-dismiss="alert">×</a>
           <%= msg %>
         </div>
       <% end %>
+      <ul class="nav nav-section">
+        <% if user_signed_in? %>
+          <li class="offset7 pull-left navigation-item">
+          <a href="<%= root_url(:subdomain => current_user.display_name) %>"> <span class="raphael-icon">S</span>Stream</a>
+          </li>
+          <li class="pull-left navigation-item">
+          <a href="<%= dashboard_url(:subdomain => false) %>"> <span class="raphael-icon">></span>Dashboard</a>
+          </li>
+          <li class="pull-left navigation-item">
+          <a href="<%= destroy_user_session_path(:subdomain => false)%>" data-method="delete"> <span class="raphael-icon">Ï</span>Logout </a>
+          </li>
+        <% else %>
+          <% if request.fullpath == new_user_path %>
+            <li class="offset7 pull-left navigation-item">
+            <a href="<%= root_path %>"> <span class="raphael-icon">S</span>Home </a>
+            </li>
+          <% else %>
+            <li class="offset6 pull-left, navigation-item-signup">
+            <a href="<%= new_user_url(:subdomain => false) %>">
+              <span class="raphael-icon">]</span>Sign Up
+            </a>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
 
-      <div class="content">
-        <div class="row">
-          <div class="offset1 span9">
-            <%= yield %>
-          </div>
-        </div><!--/row-->
-      </div><!--/content-->
+    <div class="content">
+      <div class="row">
+          <%= yield %>
+      </div><!--/row-->
+    </div><!--/content-->
 
-      <footer>
-      <p>&copy; Company 2012</p>
-      </footer>
+    <footer>
+    </footer>
 
-    </div> <!-- /container -->
+  </div> <!-- /container -->
 
-    <!-- Javascripts
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <%= javascript_include_tag "application" %>
+  <!-- Javascripts
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <%= javascript_include_tag "application" %>
 
-  </body>
+</body>
 </html>

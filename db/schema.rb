@@ -24,15 +24,15 @@ ActiveRecord::Schema.define(:version => 20120516013039) do
   end
 
   create_table "image_items", :force => true do |t|
-    t.text     "url"
-    t.string   "comment"
+    t.string   "url"
+    t.text     "comment"
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
   create_table "link_items", :force => true do |t|
-    t.text     "url"
+    t.string   "url"
     t.text     "comment"
     t.integer  "user_id"
     t.datetime "created_at", :null => false
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(:version => 20120516013039) do
   end
 
   create_table "text_items", :force => true do |t|
-    t.string   "body"
+    t.text     "body"
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false

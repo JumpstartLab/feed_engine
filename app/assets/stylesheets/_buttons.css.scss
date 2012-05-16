@@ -1,17 +1,6 @@
-@import "variables";
-@import "containers";
+$submit-button-padding: 10px 40px 10px 40px;
 
-.signup-title {
-  font-size: 62px;
-  padding: 0 0 10px 0;
-}
-
-.signup-fields {
-  height: 30px;
-  width: 250px;
-}
-
-.signup-submit { 
+@mixin trout-button {
 	-webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px 0px;
 	background-color: #7cceee;
 	border-radius: 5px;
@@ -22,5 +11,10 @@
 	font-family: 'Verdana', Arial, sans-serif;
 	font-size: 14px;
 	text-shadow: #b2e2f5 0px 1px 0px;
+}
+
+
+.submit-button { 
+  @include trout-button; 
   padding: 10px 40px 10px 40px;
 }
