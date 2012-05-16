@@ -1,3 +1,5 @@
+#This controller manages api requests related to item.
+#Note that the api routes default to json.
 class Api::ItemsController < ApplicationController
   respond_to :json
   def show

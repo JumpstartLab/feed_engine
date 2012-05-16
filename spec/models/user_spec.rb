@@ -8,6 +8,7 @@
 #  created_at      :datetime        not null
 #  updated_at      :datetime        not null
 #  display_name    :string(255)
+#  api_key         :string(255)
 #
 
 require 'spec_helper'
