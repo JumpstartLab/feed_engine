@@ -6,17 +6,22 @@
 }
 
 .item-header {
-  padding: 15px 0;
-  font-size: 14px;
+  padding: 10px 0;
 }
 
 .item-header-user {
-  font-size: 32px;
+  font-size: 14px;
   font-weight: 700;
+  vertical-align: bottom;
+}
+
+.item-user-image {
+  width: 48px;
+  height: 48px;
 }
 
 .text-item-body {
-  font-size: 24px; 
+  font-size: 16px; 
   font-family: $font;
 }
 
@@ -35,6 +40,11 @@
  word-wrap: break-word;
 }
 
+.item-time {
+  font-size: 14px;
+  vertical-align: bottom;
+}
+
 .item-container-body {
   @include container;
   padding: 10px 20px 20px 20px;
@@ -44,9 +54,20 @@
   float: right;
 }
 
+.points {
+  font-size: 16px;
+}
+
+.image-item {
+ max-height: 500px;
+ max-width: 500px;
+}
+
+/*Post logos*/
 @mixin item-logo {
-  font-size: 48px;
+  font-size: 24px;
   padding: 0 0 0 5px;
+  float: right;
 }
 
 .post-logo {
@@ -67,15 +88,11 @@
   color: $twitter-blue; 
 }
 
-.points {
-  font-size: 48px;
+.refeed {
+  @include item-logo;
 }
 
-.image-item {
- max-height: 500px;
- max-width: 500px;
-}
-
+/*Stats*/
 $stat-count-font-size: 32px;
 
 @mixin stat-container {
@@ -107,9 +124,4 @@ $stat-count-font-size: 32px;
 
 .follower-count {
   font-size: $stat-count-font-size;
-}
-
-.refeed {
-  font-size: 28px;
-  float: right;
 }
