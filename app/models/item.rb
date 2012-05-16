@@ -20,7 +20,7 @@ class Item < ActiveRecord::Base
     User.where(id: poster_id)
   end
 
-  def post    
-    Kernel.const_get(self.post_type.capitalize).find(post_id)    
+  def post  
+    Kernel.const_get(self.post_type.capitalize).find(post_id)  
   end
 end
