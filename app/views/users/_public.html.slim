@@ -8,13 +8,13 @@ div.span4.offset4
   br
   - @posts.each do |post|
     p
-      - if post.is_a?(Message) || post.is_a?(Tweet)
+      - if post.message? || post.tweet?
         = post.body
-      - if post.is_a?(Link)
+      - if post.link?
         h3= link_to post.url, post.url
         br/
         = post.description
-      - if post.is_a?(Image)
+      - if post.image?
         = image_tag post.url
         br/
         = post.description
