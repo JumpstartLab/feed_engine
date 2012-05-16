@@ -7,9 +7,9 @@ class AuthenticationsController < ApplicationController
 
   def create
     auth = request.env["omniauth.auth"]
-    current_user.authentications.find_or_create_by_provider_and_uid(auth['provider'], auth['uid'])
+    current_user.authentications.find_or_create_by_provider_and_uid(auth['provider'], auth['uid'].to_s)
 
-    #Resque.enqueue(TwitterFeeder, current_user.id)
+    Resque.enqueue(TwitterFeeder, current_user.id)
     flash[:notice] = "#{auth['provider'].capitalize} link successful"
     redirect_to user_root_path
   end
