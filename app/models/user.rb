@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   has_many :image_items
   has_many :link_items
   has_many :twitter_items
+  has_many :github_items
   has_many :stream_items
   has_many :authentications
 
