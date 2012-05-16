@@ -71,17 +71,18 @@ describe "Feed" do
   end
 
   context "refeeds" do
-    let!(:user_domain) { "http://#{user_2.display_name}.example.com" }
+    let(:user_3) { FactoryGirl.create(:user) }
+    let!(:user_3_domain) { "http://#{user_3.display_name}.example.com" }
     before(:each) do
-      5.times do 
-        text_item = FactoryGirl.create(:text_item, :user => user_2)
+      5.times do
+        text_item = FactoryGirl.create(:text_item, :user => user_3)
       end
     end
 
     context "when a logged in user views another feed" do
       before(:each) do
         login_factory_user(user.email)
-        visit user_domain
+        visit user_3_domain
       end
 
       it "shows a button to refeed each post" do
@@ -93,10 +94,11 @@ describe "Feed" do
       end
 
       it "refeeds an item" do
-        sample_item = user_2.text_items.first
+        sample_item = user_3.text_items.first
         within("#item_#{sample_item.id}") { click_on "Refeed" }
         page.should have_content("You retrouted")
         visit "http://#{user.display_name}.example.com"
+
         page.should have_content sample_item.body
       end
     end

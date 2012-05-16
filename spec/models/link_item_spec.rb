@@ -26,12 +26,12 @@ describe LinkItem do
   end
 
   it "limits comment length to 256" do
-    link_item.update_attributes(comment: bad_comment, :user => user)
+    link_item = LinkItem.new(url: good_url, comment: bad_comment, :user => user)
     link_item.should_not be_valid
   end
 
   it "allows proper comments" do
-    link_item.update_attributes(comment: good_comment, :user => user)
+    link_item = user.link_items.new(url: good_url, comment: good_comment)
     link_item.should be_valid
   end
 

@@ -9,7 +9,7 @@ module Streamable
       after_save :add_to_author_stream
 
       def to_param
-        stream_items.where(:user_id => user.id).first.id
+        stream_items.where(:user_id => user.id).where(:refeed => false).first.id
       end
 
       def add_to_author_stream
