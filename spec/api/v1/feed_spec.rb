@@ -9,23 +9,15 @@ describe "API feeds/user/... ", :type => :api do
   before do
     5.times do
       item = FactoryGirl.create(:text_item, :user => user)
-      user.text_items << item
-      user.add_stream_item(item)
     end
     5.times do
       item = FactoryGirl.create(:image_item, :user => user)
-      user.image_items << item
-      user.add_stream_item(item)
     end
     5.times do
       item = FactoryGirl.create(:link_item, :user => user)
-      user.link_items << item
-      user.add_stream_item(item)
     end
     5.times do
       item = FactoryGirl.create(:text_item, body: "user2 comment", :user => user2)
-      user2.text_items << item
-      user2.add_stream_item(item)
     end
   end
 
@@ -131,7 +123,6 @@ describe "API feeds/user/... ", :type => :api do
       comment = "wonderful wares whenever worace wants"
 
       new_image_item = user.image_items.create(:comment => comment, :url => new_url)
-      user.add_stream_item(new_image_item)
 
       #set the created_at to make the item come first
       user.stream_items.find_by_streamable_id(new_image_item.id).created_at = Date.today+100000

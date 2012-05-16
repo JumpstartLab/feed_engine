@@ -3,7 +3,6 @@ class ImageItemsController < ApplicationController
     @image_item = current_user.image_items.new(params[:image_item])
 
     if @image_item.save
-      current_user.add_stream_item(@image_item)
       redirect_to dashboard_path, notice: 'Image was successfully created.'
     else
       @text_item = TextItem.new

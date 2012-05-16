@@ -28,9 +28,7 @@ describe "Feed" do
     context "and there are more than 12 posts" do
       before(:each) do
         15.times do 
-          text_item = FactoryGirl.create(:text_item)
-          user.text_items << text_item
-          user.add_stream_item(text_item)
+          text_item = FactoryGirl.create(:text_item, :user => user)
         end
         visit site_domain
       end
@@ -55,10 +53,8 @@ describe "Feed" do
     end
 
     before(:each) do
-      5.times do 
-        text_item = FactoryGirl.create(:text_item)
-        user.text_items << text_item
-        user.add_stream_item(text_item)
+      5.times do
+        text_item = FactoryGirl.create(:text_item, :user => user)
       end
       visit site_domain
     end

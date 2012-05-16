@@ -1,6 +1,6 @@
 class StreamItemsController < ApplicationController
   before_filter :authenticate_user!
-  
+
   def create
     @stream_item = current_user.stream_items.new(:streamable_id => params[:streamable_id], 
       :streamable_type => params[:streamable_type])

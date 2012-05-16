@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe User do
   let(:user) { FactoryGirl.create(:user) }
-  let(:link_item) { FactoryGirl.create(:link_item, :user_id => user.id) }
-  let(:text_item) { FactoryGirl.create(:text_item, :user_id => user.id) }
-  let(:image_item) { FactoryGirl.create(:image_item, :user_id => user.id) }
+  let(:link_item) { FactoryGirl.create(:link_item) }
+  let(:text_item) { FactoryGirl.create(:text_item) }
+  let(:image_item) { FactoryGirl.create(:image_item) }
 
 
   context "#add_stream_item" do
@@ -32,6 +32,7 @@ describe User do
 
       item.save
       user.text_items.last.should == item
+      user.stream_items.last.streamable.should == item
     end
 
     it "returns a link_item for a request with type link_item" do
@@ -45,6 +46,7 @@ describe User do
       item.comment.should == "I love Flash games."
       item.save
       user.link_items.last.should == item
+      user.stream_items.last.streamable.should == item
     end
 
     it "returns an image_item for a request with type image_item" do
@@ -58,6 +60,7 @@ describe User do
       item.url.should == "http://foo.com/cat.jpg"
       item.save
       user.image_items.last.should == item
+      user.stream_items.last.streamable.should == item
     end
   end
 end

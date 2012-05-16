@@ -5,19 +5,13 @@ describe StreamItem do
   let!(:user) { FactoryGirl.create(:user) }
   before do
     10.times do
-      item = FactoryGirl.create(:text_item)
-      user.text_items << item
-      user.add_stream_item(item)
+      item = FactoryGirl.create(:text_item, :user => user)
     end
     10.times do
-      item = FactoryGirl.create(:image_item)
-      user.image_items << item
-      user.add_stream_item(item)
+      item = FactoryGirl.create(:image_item, :user => user)
     end
     10.times do
-      item = FactoryGirl.create(:link_item)
-      user.link_items << item
-      user.add_stream_item(item)
+      item = FactoryGirl.create(:link_item, :user => user)
     end
   end
 

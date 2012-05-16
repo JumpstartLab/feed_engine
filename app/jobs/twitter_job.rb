@@ -1,5 +1,5 @@
 class TwitterJob
-  @queue = :tweet 
+  @queue = :tweet
 
   def self.perform(current_user, authentication)
    client = Twitter::Client.new ({
@@ -7,13 +7,12 @@ class TwitterJob
     :consumer_secret => ENV["TWITTER_SECRET"],
     :oauth_token => authentication["token"],
     :oauth_token_secret => authentication["secret"]})
-  uid = authentication["uid"] 
+  uid = authentication["uid"]
 
   user = User.find(current_user["id"])
-  client.user_timeline(uid.to_i).reverse.each do |tweet| 
+  client.user_timeline(uid.to_i).reverse.each do |tweet|
     twitter_item = user.twitter_items.create(:tweet => tweet)
-    user.add_stream_item(twitter_item)
-  end 
+  end
   user.save
-  end 
-end 
+  end
+end
