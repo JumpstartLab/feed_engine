@@ -11,7 +11,7 @@ html
     =render partial: 'shared/nav_bar'
   .header_image
     =render partial: 'shared/flash_message'
-    div class="container" id="main_content"
+    .container#main_content
       = yield
 
     =render partial: 'shared/footer'
