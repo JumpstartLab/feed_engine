@@ -20,6 +20,7 @@
 
 .text-item-body {
   font-size: 16px; 
+  font-weight: 200;
   font-family: $font;
   color: $font-color;
 }
@@ -56,6 +57,7 @@
 
 .points-container {
   float: right;
+  color: $trout-main-color; 
 }
 
 .entypo-icon {
@@ -76,6 +78,7 @@
   font-size: 24px;
   padding: 0 0 0 5px;
   float: right;
+  color: $trout-main-color;
 }
 
 .post-logo {
@@ -102,14 +105,15 @@
 
 /*Stats*/
 .feed-meta-container {
-  margin: 17px 0 0 100px
+  @include container;
+  padding: 10px;
+  margin: 45px 0 0 100px;
 }
 $stat-count-font-size: 18px;
 
 @mixin stat-container {
-  margin: 0 35px 0 0;
-  font-family: $font;
-  outline: 2px auto $trout;
+  margin: 15px 18px 0 20px;
+  outline: 1px solid $trout-main-color;
   outline-offset: 10px;
 }
 
@@ -139,15 +143,22 @@ $stat-count-font-size: 18px;
 
 .text-item-body > a {
   font-weight: 500;
-  color: $trout-secondary;
+  color: $trout-main-color;
 }
+
 .text-item-body > a:visited {
   font-weight: 500;
-  color: $trout-secondary;
+  color: $trout-main-color;
 }
 
 .text-item-body > a:hover {
   font-weight: 500;
-  color: $trout-secondary;
+  color: $trout-main-color;
   background-color: transparent;
+}
+
+.feed-title {
+  font-family: $font-secondary;
+  color: $trout-main-color;
+  padding: 0 0 14px 50px;
 }
