@@ -2,6 +2,8 @@ require 'securerandom'
 class User < ActiveRecord::Base
   before_create :set_user_subdomain
   before_save :ensure_authentication_token
+  before_save :set_user_subdomain
+  before_save :set_user_feed_name
   after_create :set_user_feed
   after_create :generate_api_key
   after_create :send_welcome_email
@@ -25,6 +27,10 @@ class User < ActiveRecord::Base
 
   def set_user_subdomain
     self.subdomain = self.display_name.downcase
+  end
+
+  def set_user_feed_name
+    self.feed.set_name(self.subdomain)
   end
 
   def set_user_feed
