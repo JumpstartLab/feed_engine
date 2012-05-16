@@ -23,7 +23,7 @@ module Fetcher
     statuses.each do |status|
       Fetcher.create_post_from_twitter(user_id, status)
     end
-    Fetcher.delay(run_at: 2.minutes.from_now).fetch_and_import_tweets(uid, user_id)
+    Fetcher.delay(run_at: 5.minutes.from_now).fetch_and_import_tweets(uid, user_id)
   end
 
   def self.import_items(provider, uid, user_id)
