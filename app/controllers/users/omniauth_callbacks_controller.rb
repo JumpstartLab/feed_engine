@@ -20,7 +20,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     
     auth.create_github_account(uid: data["uid"],
                                nickname: data["info"]["nickname"],
-                               image: data["raw_info"]["avatar_url"],
+                               image: data["extra"]["raw_info"]["avatar_url"],
                                last_status_id: DateTime.now)
 
     redirect_to new_authentication_path, :notice => "Github account successfully added."
