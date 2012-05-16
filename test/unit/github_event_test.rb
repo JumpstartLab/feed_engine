@@ -1,6 +1,6 @@
-require 'test_helper'
+require 'minitest_helper'
 
-class GithubEventTest < ActiveSupport::TestCase
+class GithubeventTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
