@@ -1,4 +1,10 @@
-$('#growls').append('<%=j render(@growls) %>');
+<% if params["replace"] == "true" && params["page"] == nil %>
+  $('#growls').hide().html('<%=j render(@growls) %>').fadeIn();
+  $('#page').html("<%= j paginate(@growls) %>");
+  $(window).scroll();
+<% else %>
+  $('#growls').append('<%=j render(@growls) %>');
+<% end %>
 $('.pagination').replaceWith('<%= j paginate(@growls) %>');
 if ($('.pagination .next').length == 0)
-  $('.pagination').remove();
+  $('.pagination').hide();

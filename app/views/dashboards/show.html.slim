@@ -2,13 +2,13 @@
   .content_bar
     div.row
       h2 Dashboard
-      dl.nice.contained.tabs
-        dd= link_to "Add a Message", "#messageForm", class: ("active" if @type == 'Message' || @type.nil? )
-        dd= link_to "Add an Image", "#imageForm", class: ("active" if @type == 'Image')
-        dd= link_to "Add a Link", "#linkForm", class: ("active" if @type == 'Link')
+      dl.nice.contained.awesome-tabs
+        dd#message= link_to "Add a Message", "#", class: ("active" if @type == 'Message' || @type.nil? )
+        dd#image= link_to "Add an Image", "#", class: ("active" if @type == 'Image')
+        dd#link= link_to "Add a Link", "#", class: ("active" if @type == 'Link')
         dd= link_to "Account", edit_user_registration_path
 
-      ul.nice.tabs-content.contained
+      ul.nice.awesome-tabs-content.contained
 
         li#messageFormTab{ class=("active" if @type == 'Message' || @type.nil? ) }
           = render :partial => "messages/form"
@@ -18,5 +18,29 @@
           = render :partial => "/links/form"
 
 javascript:
+  api_domain = "#{api_domain.html_safe}"
+coffee:
+  jQuery ->
+    $("#message").click ->
+      $("#imageFormTab").hide()
+      $("#linkFormTab").hide()
+      $("#messageFormTab").fadeIn()
+      $("#message > a").addClass("active")
+      $("#image > a").removeClass("active")
+      $("#link > a").removeClass("active")
+    $("#image").click ->
+      $("#imageFormTab").fadeIn()
+      $("#linkFormTab").hide()
+      $("#messageFormTab").hide()
+      $("#image > a").addClass("active")
+      $("#message > a").removeClass("active")
+      $("#link > a").removeClass("active")
+    $("#link").click ->
+      $("#imageFormTab").hide()
+      $("#linkFormTab").fadeIn()
+      $("#messageFormTab").hide()
+      $("#link > a").addClass("active")
+      $("#image > a").removeClass("active")
+      $("#message > a").removeClass("active")
   api_path = "#{api_path.html_safe}"
   authentication_token = "#{current_user.authentication_token}"
