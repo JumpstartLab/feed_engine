@@ -3,6 +3,8 @@ class StreamItem < ActiveRecord::Base
   belongs_to :user
   belongs_to :streamable, :polymorphic => true
 
+  delegate :author, :to => :streamable
+
   def self.new_stream_item_from_json(user_id, parsed_json)
     parsed_json["type"].constantize.create_from_json(user_id, parsed_json)
   end
