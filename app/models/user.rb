@@ -21,6 +21,8 @@ class User < ActiveRecord::Base
   has_many :tweets
   has_one :twitter_account, :through => :authentications
 
+  has_many :regrowls
+
   def twitter_account
     authentications.twitter.twitter_account if authentications.twitter
   end

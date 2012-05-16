@@ -19,28 +19,25 @@
 
 javascript:
   api_domain = "#{api_domain.html_safe}"
+  api_path = "#{api_path.html_safe}"
+  authentication_token = "#{current_user.authentication_token}"
 coffee:
   jQuery ->
     $("#message").click ->
       $("#imageFormTab").hide()
       $("#linkFormTab").hide()
       $("#messageFormTab").fadeIn()
+      $(".active").removeClass("active")
       $("#message > a").addClass("active")
-      $("#image > a").removeClass("active")
-      $("#link > a").removeClass("active")
     $("#image").click ->
       $("#imageFormTab").fadeIn()
       $("#linkFormTab").hide()
       $("#messageFormTab").hide()
+      $(".active").removeClass("active")
       $("#image > a").addClass("active")
-      $("#message > a").removeClass("active")
-      $("#link > a").removeClass("active")
     $("#link").click ->
       $("#imageFormTab").hide()
       $("#linkFormTab").fadeIn()
       $("#messageFormTab").hide()
+      $(".active").removeClass("active")
       $("#link > a").addClass("active")
-      $("#image > a").removeClass("active")
-      $("#message > a").removeClass("active")
-  api_path = "#{api_path.html_safe}"
-  authentication_token = "#{current_user.authentication_token}"

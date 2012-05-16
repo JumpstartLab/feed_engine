@@ -1,4 +1,4 @@
-<% if params["replace"] == "true" && params["page"] == nil %>
+<% if params["page"] == nil %>
   $('#growls').hide().html('<%=j render(@growls) %>').fadeIn();
   $('#page').html("<%= j paginate(@growls) %>");
   $(window).scroll();

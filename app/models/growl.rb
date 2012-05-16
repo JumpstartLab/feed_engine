@@ -6,6 +6,7 @@ class Growl < ActiveRecord::Base
   validates_presence_of :type
   belongs_to :user
   has_one :meta_data, :autosave => true, dependent: :destroy
+  has_many :regrowls
   include HasUploadedFile
   scope :by_date, order("created_at DESC")
 
