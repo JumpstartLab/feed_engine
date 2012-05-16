@@ -36,19 +36,9 @@ class Subscription < ActiveRecord::Base
   end
 
   def get_new_posts
-    new_posts = []
-    i = 0
-    while true do
-      post = posts_for(self.provider)[i]
-      break if post.nil?
-      if is_a_new_post?(post)
-        new_posts << post
-      else
-        break
-      end
-      i += 1
+    posts_for(self.provider).select do |post|
+      post if !post.nil? && is_a_new_post?(post)
     end
-    new_posts
   end
 
   def is_a_new_post?(post)
@@ -82,21 +72,28 @@ class Subscription < ActiveRecord::Base
   def create_records_of_posts(new_posts)
     new_posts.each do |new_post|
       if provider == "twitter"
-        t = Tweet.create!(subscription_id: self.id,
-                         body: new_post.text,
-                         created_at: new_post.created_at,
-                         poster_id: self.user_id
-                        )
-
+        create_tweet(new_post)
       elsif provider == "github"
-        GithubEvent.create!(subscription_id: self.id,
-                               repo: new_post.repo.name,
-                               created_at: new_post.created_at,
-                               poster_id: self.user_id,
-                               event_type: new_post.type
-                              )
+        create_github_event(new_post)
       end
     end
+  end
+
+  def create_tweet(new_post)
+    Tweet.create!(subscription_id: self.id,
+                  body: new_post.text,
+                  created_at: new_post.created_at,
+                  poster_id: self.user_id
+                 )
+  end
+
+  def create_github_event(new_post)
+    GithubEvent.create!(subscription_id: self.id,
+                        repo: new_post.repo.name,
+                        created_at: new_post.created_at,
+                        poster_id: self.user_id,
+                        event_type: new_post.type
+                       )
   end
 
   def get_tweets

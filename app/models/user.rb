@@ -70,6 +70,18 @@ class User < ActiveRecord::Base
     (posts.length.to_f / 12).ceil
   end
 
+  def has_subscription?(provider)
+    subscription(provider) ? true : false
+  end
+
+  def subscription(provider)
+    subscriptions.select do |subscription|
+      if subscription.user_id == self.id && subscription.provider == provider
+        subscription
+      end
+    end.first
+  end
+
   private
 
   def generate_api_key
