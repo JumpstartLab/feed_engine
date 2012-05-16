@@ -74,8 +74,8 @@ class User < ActiveRecord::Base
     authentications.map { |a| a.provider }
   end
 
-  def twitter_linked?
-    providers.include?("twitter")
+  def provider_added?(provider)
+    providers.include?(provider)
   end
 
   def auth_for(provider)
