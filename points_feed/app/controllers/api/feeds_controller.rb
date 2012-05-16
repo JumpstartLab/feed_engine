@@ -16,11 +16,8 @@ class Api::FeedsController < Api::ApiController
   end
 
   def refeed
-    # TODO: We need to accept authentication with requests, and use that
-    # authentication to look up a user and replace current_user.
-    current_user ||= User.last
     source_feed_item = user_for_page.posts.find_by_id(params[:item_id].to_i)
-    unless current_user == user_for_page
+    unless current_user && current_user == user_for_page
       source_feed_item.refeed(current_user)
       head :status => 201
     else
