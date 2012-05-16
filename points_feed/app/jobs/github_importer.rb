@@ -21,16 +21,16 @@ class GithubImporter
     end
   end
 
-  def self.pretty_hash(hash)
-    results = []
-    hash.keys.each do |key|
-      results << key
-      if hash[key].respond_to?(:keys)
-        results << pretty_hash(hash[key]).split("\n").map do | line |
-          " -- " + line
-        end
-      end
-    end
-    results.join("\n")
-  end
+  # def self.pretty_hash(hash)
+  #   results = []
+  #   hash.keys.each do |key|
+  #     results << key
+  #     if hash[key].respond_to?(:keys)
+  #       results << pretty_hash(hash[key]).split("\n").map do | line |
+  #         " -- " + line
+  #       end
+  #     end
+  #   end
+  #   results.join("\n")
+  # end
 end
