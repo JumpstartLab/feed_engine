@@ -98,13 +98,12 @@ class User < ActiveRecord::Base
     a.inspect
   end
 
-  # def twitter
-  #   unless @twitter_user
-  #     provider = self.authentications.find_by_provider('twitter')
-  #     @twitter_user = Twitter::Client.new(:oauth_token => provider.token, :oauth_token_secret => provider.secret) #rescue nil
-  #   end
-  #   @twitter_user
-  # end
+  def twitter
+    auth = twitter_authentication
+    if auth
+      client = Twitter::Client.new(:oauth_token => auth.login, :oauth_token_secret => auth.secret) #rescue nil
+    end
+  end
 
   def twitter_authentication
     self.authentications.where(:provider => 'twitter').first

@@ -30,7 +30,7 @@ class AuthenticationsController < ApplicationController
     authentication.update_attributes(:secret => token)
 
     github_authentication(authentication, auth) if provider == 'github'
-    # twitter_authentication(authentication, auth) if provider == 'twitter'
+    twitter_authentication(authentication, auth) if provider == 'twitter'
   end
 
   def github_authentication(authentication, auth)
@@ -38,10 +38,11 @@ class AuthenticationsController < ApplicationController
     authentication.update_attributes(:login => login)
    end
 
-  # def twitter_authentication(authentication, auth)
-  #   token = auth['credentials']['token']
-  #   authentication.update_attributes(:secret => token)
-  # end
+  def twitter_authentication(authentication, auth)
+    token = auth['credentials']['token']
+    secret = auth['credentials']['secret']
+    authentication.update_attributes(:login => token, :secret => secret)
+  end
 
   # def pretty_hash(hash)
   #   results = []
