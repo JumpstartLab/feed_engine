@@ -1,26 +1,22 @@
-<div class="signup-container">
-<h2>Sign up</h2>
+<div class="span3 offset3 trout-container">
+  <h1 class="signup-title">Sign up</h1>
+  <br/>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+    <%= devise_error_messages! %>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
+   <%= f.label :email %><br />
+      <%= f.email_field :email, :class => "signup-fields" %>
 
-  <div><%= f.label :display_name %><br />
-  <%= f.text_field :display_name %></div>
+    <%= f.label :display_name %><br />
+      <%= f.text_field :display_name, :class => "signup-fields" %>
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
+    <%= f.label :password %><br />
+      <%= f.password_field :password, :class => "signup-fields" %>
 
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, :class => "signup-fields" %>
 
   <div><%= f.submit "Sign up" %></div>
 <% end %>
-
- <p><strong>Sign in through one of these services:</strong></p>
-
->>>>>>> twitter_feed
-<%= render "links" %>
 </div>

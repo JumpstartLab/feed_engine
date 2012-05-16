@@ -1,13 +1,171 @@
-<h1><%= @feed_owner %></h1>
+<div class="span7">
 
-<% if @items %>
-  <% @items.each do |item| %>
-    <div class="item_container"> 
-      <div class="row feed_row">
-        <%= render :partial => "item", :locals => {:item => item} %>
+  <% if @items %>
+    <!-- Text Item Mocked data -->
+    <br/>
+      <div class="span7 row feed_row">
+        <div class=" item-container-body">
+          <div class="item-header">
+            <%= image_tag"http://bit.ly/KMVVHZ", :class => "item-user-image"%>
+            <span class="item-header-user">Horace Williams</span>
+            <span class="points-container">
+              <span class="entypo-icon">8</span>
+              <span class="points">12 </span>
+            </span>
+          </div>
+
+          <br/>
+          <span class="text-item-body">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+            when an unknown printer took a galley of type and scrambled it to make a type
+            specimen book. It has survived 
+          </span>
+
+          <br/>
+          <br/>
+          <div>
+            <span class="item-time">10 minutes ago</span>
+            <span class="raphael-icon post-logo">E</span>
+            <span class="raphael-icon refeed">0</span>
+          </div>
+        </div>
       </div>
-    </div>
-  <% end %>
-  <%= paginate @stream_items %>
-<% end %>
 
+
+    <!-- Twitter Mocked Data -->
+      <div class="span7 row feed_row">
+        <div class=" item-container-body">
+          <div class="item-header">
+            <%= image_tag"http://bit.ly/KMVVHZ", :class => "item-user-image"%>
+            <span class="item-header-user">Horace Williams</span>
+            <span class="points-container">
+              <span class="entypo-icon">8</span>
+              <span class="points">10 </span>
+            </span>
+          </div>
+
+          <br/>
+          <span class="text-item-body">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+            Lorem Ipsum has been the industry's</span>
+
+          <br/>
+          <br/>
+          <div>
+            <span class="item-time">10 minutes ago</span>
+            <span class="raphael-icon twitter-logo">^</span>
+            <span class="raphael-icon refeed">0</span>
+          </div>
+        </div>
+      </div>
+
+    <!-- Link Mocked Data -->
+      <div class="span7 row feed_row">
+        <div class=" item-container-body">
+          <div class="item-header">
+            <%= image_tag"http://bit.ly/KMVVHZ", :class => "item-user-image"%>
+            <span class="item-header-user">Chris Anderson</span>
+            <span class="points-container">
+              <span class="entypo-icon">8</span>
+              <span class="points">5 </span>
+            </span>
+
+          </div>
+
+          <br/>
+          <span class="text-item-body">
+            <%= link_to "http://google.com" %>
+            <br/>
+            <br/>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+            Lorem Ipsum has been the industry's</span>
+
+          <br/>
+          <br/>
+          <div>
+            <span class="item-time">10 minutes ago</span>
+            <span class="raphael-icon post-logo">È</span>
+            <span class="raphael-icon refeed">0</span>
+          </div>
+        </div>
+      </div>
+
+    <!-- Image Mocked Data -->
+      <div class="span7 row feed_row">
+        <div class=" item-container-body">
+          <div class="item-header">
+            <%= image_tag"http://bit.ly/KMVVHZ", :class => "item-user-image"%>
+            <span class="item-header-user">Chris Anderson</span>
+            <span class="points-container">
+              <span class="entypo-icon">8</span>
+              <span class="points">500 </span>
+            </span>
+
+          </div>
+
+          <br/>
+          <span class="text-item-body">
+            <%= image_tag "http://theawesomer.com/photos/2011/04/041911_nyan_pop_tart_cat_t.jpg",
+              :class => "image-item"%>
+              <br/>
+              <br/>
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+              Lorem Ipsum has been the industry's</span>
+
+            <br/>
+            <br/>
+            <div>
+              <span class="item-time">10 minutes ago</span>
+              <span class="raphael-icon post-logo">N</span>
+              <span class="raphael-icon refeed">0</span>
+            </div>
+          </div>
+        </div>
+
+      <% @items.each do |item| %>
+          <div class="span7 row feed_row">
+            <%= render :partial => "item", :locals => {:item => item} %>
+        </div>
+      <% end %>
+
+    <% end %>
+  </div>
+
+  <div class="feed-meta-container well offset1 span3">
+    <table>
+      <tr>
+        <td>
+          <div class="post-count-container">
+            <span class="post-count">2000</span>
+            <br/>
+            <span class="post-count-label">posts</span>
+          </div>
+        </td>
+        <td>
+          <div class="following-count-container">
+            <span class="following-count">10</span>
+            <br/>
+            <span class="following-count-label">trouting</span>
+          </div>
+        </td>
+        <td>
+          <div class="follower-count-container">
+            <span class="follower-count">1000</span>
+            <br/>
+            <span class="follower-count-label">trouters</span>
+          </div>
+        </td>
+      </tr>
+    </table>
+    <br/>
+    <br/>
+    <br/>
+    <h3>Linked Services</h3>
+    <span class="raphael-icon linked-twitter-logo">^</span>
+    <span class="raphael-icon linked-post-logo">U</span>
+  </div>
+
+  <div class="span12">
+    <%= paginate @stream_items %>
+  </div>
