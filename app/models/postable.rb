@@ -29,6 +29,10 @@ module Postable
     is_a? GithubEvent
   end
 
+  def tweet?
+    is_a? Tweet
+  end
+
   def create_item
     Item.create(
       :post_id => id,
