@@ -27,6 +27,9 @@ class User < ActiveRecord::Base
   has_many :inverse_subscriptions, :class_name => "Subscription", :foreign_key => "subscriber_id"
   has_many :inverse_subscribers, :through => :inverse_subscriptions, :source => :user
 
+  has_one :twitter_account, :through => :authentications
+  has_one :github_account, :through => :authentications
+
   def twitter_account
     authentications.twitter.twitter_account if authentications.twitter
   end

@@ -22,6 +22,17 @@ ActiveRecord::Schema.define(:version => 20120516181430) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "github_accounts", :force => true do |t|
+    t.integer  "authentication_id"
+    t.integer  "uid"
+    t.string   "nickname"
+    t.string   "last_status_id",    :default => "0", :null => false
+    t.string   "string",            :default => "0", :null => false
+    t.string   "image"
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+  end
+
   create_table "growls", :force => true do |t|
     t.string   "type"
     t.text     "comment"

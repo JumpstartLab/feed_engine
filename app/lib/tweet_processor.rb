@@ -14,7 +14,7 @@ module Hungrlr
     end
 
     def twitter_accounts
-      accounts = Net::HTTP.get(URI("#{base_url}/users.json?token=HUNGRLR"))
+      accounts = Net::HTTP.get(URI("#{base_url}/users/twitter.json?token=HUNGRLR"))
       JSON.parse(accounts)["accounts"]
     end
 
@@ -29,10 +29,10 @@ module Hungrlr
       end
     end
 
-    def create_tweets_for_user(nickname, tweets_hash)
+    def create_tweets_for_user(user_id, tweets_hash)
       tweets_json = tweets_hash.to_json
       Net::HTTP.post_form( URI("#{base_url}/user_tweets"),
-                           nickname: nickname,
+                           user_id: user_id,
                            tweets: tweets_json,
                            token: "HUNGRLR")
 
@@ -42,7 +42,7 @@ module Hungrlr
       twitter_accounts.each do |account|
         response = get_tweets(account["nickname"], account["last_status_id"])
         tweets_hash = build_tweet_hash(response)
-        create_tweets_for_user(account["nickname"], tweets_hash)
+        create_tweets_for_user(account["user_id"], tweets_hash)
       end
     end
   end
