@@ -132,7 +132,7 @@ body {
 
 @mixin nav-item-links {
       text-decoration: none;
-      color: $trout;
+      color: $trout-main-color;
 }
 
 .nav > li.navigation-item {
@@ -142,11 +142,14 @@ body {
       }
   }
 
-.navigation-item-signup {
-    a:hover {
-      @include nav-item-links;
-      }
+.navigation-item-anon{
+  padding: 0 0 0 75px;
   }
 
 .nav > li > a:hover {
+}
+
+.nav-logo {
+  font-family: $font;
+  font-size: 48px;
 }

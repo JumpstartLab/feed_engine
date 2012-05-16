@@ -1,5 +1,6 @@
 <div class="span7">
 
+  <h1 class="feed-title span7"><%= @feed_owner %>'s stream</h1>
   <% if @items %>
     <!-- Text Item Mocked data -->
     <br/>
@@ -99,19 +100,21 @@
             <span class="item-header-user">Chris Anderson</span>
             <span class="points-container">
               <span class="entypo-icon">8</span>
+              <span class="raphael-icon points">@</span>
               <span class="points">500 </span>
             </span>
 
           </div>
 
           <br/>
-          <span class="text-item-body">
             <%= image_tag "http://theawesomer.com/photos/2011/04/041911_nyan_pop_tart_cat_t.jpg",
               :class => "image-item"%>
               <br/>
               <br/>
+              <div class="text-item-body">
               Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-              Lorem Ipsum has been the industry's</span>
+              Lorem Ipsum has been the industry's
+            </div>
 
             <br/>
             <br/>
@@ -132,7 +135,7 @@
     <% end %>
   </div>
 
-  <div class="feed-meta-container well offset1 span3">
+  <div class="feed-meta-container offset1 span3">
     <table>
       <tr>
         <td>
