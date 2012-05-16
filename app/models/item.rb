@@ -20,7 +20,7 @@ class Item < ActiveRecord::Base
     User.where(id: poster_id)
   end
 
-  # def post
-  #   post_type.constantize.find(post_id)
-  # end
+  def post
+    self.post_type.capitalize.constantize.find(post_id)
+  end
 end
