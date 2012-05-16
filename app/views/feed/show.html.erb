@@ -1,4 +1,4 @@
-<div class="span12">
+<div class="span7">
 
   <% if @items %>
     <!-- Text Item Mocked data -->
@@ -32,41 +32,8 @@
           </div>
         </div>
       </div>
-
-      <div class="well span3">
-        <table>
-          <tr>
-            <td>
-              <div class="post-count-container">
-                <span class="post-count">2000</span>
-                <br/>
-                <span class="post-count-label">posts</span>
-              </div>
-            </td>
-            <td>
-              <div class="following-count-container">
-                <span class="following-count">10</span>
-                <br/>
-                <span class="following-count-label">trouting</span>
-              </div>
-            </td>
-            <td>
-              <div class="follower-count-container">
-                <span class="follower-count">1000</span>
-                <br/>
-                <span class="follower-count-label">trouters</span>
-              </div>
-            </td>
-          </tr>
-        </table>
-        <br/>
-        <br/>
-        <br/>
-        <h1>Linked Services</h1>
-        <span class="raphael-icon linked-twitter-logo">^</span>
-        <span class="raphael-icon linked-post-logo">U</span>
-      </div>
     </div>
+
 
     <!-- Twitter Mocked Data -->
     <div class="item_container"> 
@@ -146,35 +113,68 @@
           <br/>
           <span class="text-item-body">
             <%= image_tag "http://theawesomer.com/photos/2011/04/041911_nyan_pop_tart_cat_t.jpg",
-                :class => "image-item"%>
-            <br/>
-            <br/>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-            Lorem Ipsum has been the industry's</span>
+              :class => "image-item"%>
+              <br/>
+              <br/>
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+              Lorem Ipsum has been the industry's</span>
 
-          <br/>
-          <br/>
-          <div>
-            <span class="item-time">10 minutes ago</span>
-            <span class="raphael-icon post-logo">N</span>
-            <span class="raphael-icon refeed">0</span>
+            <br/>
+            <br/>
+            <div>
+              <span class="item-time">10 minutes ago</span>
+              <span class="raphael-icon post-logo">N</span>
+              <span class="raphael-icon refeed">0</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <% @items.each do |item| %>
-      <div class="item_container"> 
-        <div class="span7 row feed_row">
-
-          <%= render :partial => "item", :locals => {:item => item} %>
+      <% @items.each do |item| %>
+        <div class="item_container"> 
+          <div class="span7 row feed_row">
+            <%= render :partial => "item", :locals => {:item => item} %>
+          </div>
         </div>
-      </div>
-    <% end %>
-    
-  <% end %>
-</div>
+      <% end %>
 
-<div class="span12">
-  <%= paginate @stream_items %>
-</div>
+    <% end %>
+  </div>
+
+  <div class="feed-meta-container well offset1 span3">
+    <table>
+      <tr>
+        <td>
+          <div class="post-count-container">
+            <span class="post-count">2000</span>
+            <br/>
+            <span class="post-count-label">posts</span>
+          </div>
+        </td>
+        <td>
+          <div class="following-count-container">
+            <span class="following-count">10</span>
+            <br/>
+            <span class="following-count-label">trouting</span>
+          </div>
+        </td>
+        <td>
+          <div class="follower-count-container">
+            <span class="follower-count">1000</span>
+            <br/>
+            <span class="follower-count-label">trouters</span>
+          </div>
+        </td>
+      </tr>
+    </table>
+    <br/>
+    <br/>
+    <br/>
+    <h3>Linked Services</h3>
+    <span class="raphael-icon linked-twitter-logo">^</span>
+    <span class="raphael-icon linked-post-logo">U</span>
+  </div>
+
+  <div class="span12">
+    <%= paginate @stream_items %>
+  </div>

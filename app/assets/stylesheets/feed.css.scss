@@ -93,7 +93,10 @@
 }
 
 /*Stats*/
-$stat-count-font-size: 32px;
+.feed-meta-container {
+  margin: 17px 0 0 100px
+}
+$stat-count-font-size: 18px;
 
 @mixin stat-container {
   margin: 0 35px 0 0;
