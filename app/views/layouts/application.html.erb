@@ -32,6 +32,7 @@
       <% end %>
       <ul class="nav nav-section">
         <% if user_signed_in? %>
+          <li><%= current_user.display_name %></li>
           <li class="offset7 pull-left navigation-item">
           <a href="<%= root_url(:subdomain => current_user.display_name) %>"> <span class="raphael-icon">S</span>Stream</a>
           </li>

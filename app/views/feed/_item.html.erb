@@ -1,15 +1,20 @@
-<div class="item-container-body">
+<div class="item-container-body" id="item_<%= item.to_param %>">
   <div class="item-header">
     <span class="item-header-user"><%= item.user.display_name %></span>
     <%= time_ago_in_words(item.created_at) %> ago
   </div>
+  <% unless item.author == current_user || current_user == nil || current_user.display_name == @feed_owner %>
+    <%= link_to "Refeed", stream_items_path(:streamable_type => item.class.name, :streamable_id => item.id), :method => :post %>
+  <% end %>
   <% if item.class == TextItem %>
     <%= item.body %>
+
   <% elsif item.class == ImageItem %>
     <div class="body_image">
       <%= image_tag item.url %>
     </div>
     <%= item.comment %>
+
   <% elsif item.class == LinkItem %>
     <div>
       <div class="item_link">
@@ -20,11 +25,12 @@
         <%= item.comment %>
       </div>
     </div>
-  <% elsif item.class == TwitterItem %> 
-    <div> 
+
+  <% elsif item.class == TwitterItem %>
+    <div>
       <div class="twitter">
-        <%= item.tweet.text %> 
-      </div> 
-    </div> 
+        <%= item.tweet.text %>
+      </div>
+    </div>
   <% end %>
 </div>

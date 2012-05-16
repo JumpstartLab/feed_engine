@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120515011427) do
+ActiveRecord::Schema.define(:version => 20120516013039) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -24,15 +24,15 @@ ActiveRecord::Schema.define(:version => 20120515011427) do
   end
 
   create_table "image_items", :force => true do |t|
-    t.string   "url"
-    t.text     "comment"
+    t.text     "url"
+    t.string   "comment"
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
   create_table "link_items", :force => true do |t|
-    t.string   "url"
+    t.text     "url"
     t.text     "comment"
     t.integer  "user_id"
     t.datetime "created_at", :null => false
@@ -43,12 +43,13 @@ ActiveRecord::Schema.define(:version => 20120515011427) do
     t.integer  "user_id"
     t.integer  "streamable_id"
     t.string   "streamable_type"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.boolean  "refeed",          :default => true
   end
 
   create_table "text_items", :force => true do |t|
-    t.text     "body"
+    t.string   "body"
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false

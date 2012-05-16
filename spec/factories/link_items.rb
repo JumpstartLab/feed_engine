@@ -4,5 +4,6 @@ FactoryGirl.define do
   factory :link_item do
     url "http://myurl.com"
     comment "MyText"
+    user
   end
 end

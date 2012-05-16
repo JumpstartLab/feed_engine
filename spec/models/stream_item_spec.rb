@@ -3,22 +3,45 @@ require 'spec_helper'
 describe StreamItem do
   let(:post_types) { ["ImageItem", "LinkItem", "TextItem"] }
   let!(:user) { FactoryGirl.create(:user) }
+  let!(:user2) { FactoryGirl.create(:user) }
   before do
     10.times do
-      item = FactoryGirl.create(:text_item)
-      user.text_items << item
-      user.add_stream_item(item)
+      item = FactoryGirl.create(:text_item, :user => user)
     end
     10.times do
-      item = FactoryGirl.create(:image_item)
-      user.image_items << item
-      user.add_stream_item(item)
+      item = FactoryGirl.create(:image_item, :user => user)
     end
     10.times do
-      item = FactoryGirl.create(:link_item)
-      user.link_items << item
-      user.add_stream_item(item)
+      item = FactoryGirl.create(:link_item, :user => user)
     end
+  end
+
+  context "when I try to add a stream item" do
+    it "prevents the user from having multiple stream items to the same content" do
+      item = user.stream_items.last.streamable
+
+      stream_item = user.stream_items.new(streamable_id: item.id, streamable_type: item.class.name)
+      stream_item.should_not be_valid
+    end
+
+    it "sets refeed to false for the original stream_item for a piece of content" do
+      item = user.stream_items.last.streamable
+      author_stream_item = item.stream_items.where(:user_id => item.user.id).first
+
+      author_stream_item.refeed.should == false
+    end
+
+    it "prevents a second stream_item with refeed => false for a piece of content" do
+      item = user.stream_items.last.streamable
+      author_stream_item = item.stream_items.where(:user_id => item.user.id).first
+
+      repeat_stream_item = user2.stream_items.new(streamable_id: item.id,
+                                                  streamable_type: item.class.name,
+                                                  refeed: false)
+
+      repeat_stream_item.should_not be_valid
+    end
+
   end
 
   context "#new_stream_item_from_json" do
