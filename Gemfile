@@ -16,6 +16,7 @@ gem 'kaminari'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-github'
+gem 'github_api'
 gem 'twitter'
 gem "ember-rails"
 gem 'jbuilder'
