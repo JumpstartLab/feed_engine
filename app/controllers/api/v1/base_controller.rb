@@ -1,5 +1,5 @@
 class Api::V1::BaseController < ActionController::Base
-  before_filter :authenticate_user
+  # before_filter :authenticate_user
   respond_to :json
 
   private

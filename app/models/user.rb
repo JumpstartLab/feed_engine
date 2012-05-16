@@ -49,8 +49,8 @@ class User < ActiveRecord::Base
     growls.by_type_and_date(type)
   end
 
-  def last_twitter_id
-    self.tweets.order(:external_id).last.external_id if self.tweets.size > 0
+  def has_tweets?
+    tweets.size > 0 if tweets
   end
 
   def avatar
