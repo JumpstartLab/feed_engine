@@ -7,6 +7,8 @@ module ApplicationHelper
       "link_posts/post"
     elsif post.class == TextPost
       "text_posts/post"
+    elsif post.class == TwitterPost
+      "twitter_posts/post"
     else
       "NEED TO ADD A TEMPLATE"
     end

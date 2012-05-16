@@ -11,8 +11,7 @@ module Fetcher
   end
 
   def self.create_post_from_twitter(user_id, status)
-    user = User.find(user_id)
-    user.twitter_posts.create(
+    User.find(user_id).twitter_posts.create(
       twitter_id: status.id,
       text: status.text,
       published_at: status.created_at
@@ -24,12 +23,13 @@ module Fetcher
     statuses.each do |status|
       Fetcher.create_post_from_twitter(user_id, status)
     end
+    Fetcher.delay(run_at: 2.minutes.from_now).fetch_and_import_tweets(uid, user_id)
   end
 
   def self.import_items(provider, uid, user_id)
     case provider
     when "twitter"
-      Fetcher.fetch_and_import_tweets(uid, user_id)
+      Fetcher.delay(run_at: 5.seconds.from_now).fetch_and_import_tweets(uid, user_id)
     end
   end
 

@@ -24,6 +24,8 @@ class Post < ActiveRecord::Base
         :created_at => post.created_at}
     elsif post.class == TextPost
       {title: post.title, :body => post.body, :created_at => post.created_at}
+    elsif post.class == TwitterPost
+      {title: post.twitter_id, :body => post.text, :created_at => post.published_at}
     end
   end
 
