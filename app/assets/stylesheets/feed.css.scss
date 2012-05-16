@@ -105,14 +105,15 @@
 
 /*Stats*/
 .feed-meta-container {
+  @include container;
+  padding: 10px;
   margin: 45px 0 0 100px;
 }
 $stat-count-font-size: 18px;
 
 @mixin stat-container {
-  margin: 0 35px 0 0;
-  font-family: $font;
-  outline: 2px auto $trout;
+  margin: 15px 18px 0 20px;
+  outline: 1px solid $trout-main-color;
   outline-offset: 10px;
 }
 
@@ -157,6 +158,7 @@ $stat-count-font-size: 18px;
 }
 
 .feed-title {
-  font: $font-secondary;
+  font-family: $font-secondary;
+  color: $trout-main-color;
   padding: 0 0 14px 50px;
 }
