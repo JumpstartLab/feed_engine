@@ -8,7 +8,7 @@ class Api::V1::UserTweetsController < Api::V1::BaseController
 
     tweets.each do |tweet|
       @twitter_account.user.tweets.create(link: tweet["link"], comment: tweet["comment"])
-      @twitter_account.update_last_status_id(tweet["status_id"])
+      @twitter_account.update_last_status_id_if_necessary(tweet["status_id"])
     end
     render :json => true, :status => 201
   end

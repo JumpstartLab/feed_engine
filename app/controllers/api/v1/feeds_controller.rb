@@ -1,6 +1,4 @@
 class Api::V1::FeedsController < Api::V1::BaseController
-  # before_filter :authenticate_user
-  # respond_to :json
 
   def show
     @user = User.find_by_display_name(params[:display_name])

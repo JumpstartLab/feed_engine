@@ -7,7 +7,7 @@ class TwitterAccount < ActiveRecord::Base
     user.id
   end
 
-  def update_last_status_id(new_status_id)
+  def update_last_status_id_if_necessary(new_status_id)
     if last_status_id.to_f < new_status_id.to_f
       update_attribute("last_status_id", tweet["status_id"])
     end
