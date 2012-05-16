@@ -71,16 +71,10 @@ describe "Feed" do
   end
 
   context "refeeds" do
-    let(:user_3) { FactoryGirl.create(:user) }
+    let!(:user_3) { FactoryGirl.create(:user) }
     let!(:user_3_domain) { "http://#{user_3.display_name}.example.com" }
     let!(:user_4) { FactoryGirl.create(:user) }
     let!(:user_4_domain) { "http://#{user_4.display_name}.example.com" }
-
-    before(:each) do
-      5.times do
-        text_item = FactoryGirl.create(:text_item, :user => user_3)
-      end
-    end
 
     before(:each) do
       5.times do
@@ -89,25 +83,27 @@ describe "Feed" do
     end
 
     context "when a logged in user views another feed" do
-      before(:each) do
-        login_factory_user(user.email)
-        visit user_3_domain
-      end
-
       it "shows a button to refeed each post" do
-        user_2.text_items.each do |item|
+        login_factory_user(user_3.email)
+        login(user_3)
+        visit user_4_domain
+        user_4.text_items.each do |item|
           within("#item_#{item.id}") do
+            puts item.inspect
             page.should have_link("Refeed")
           end
         end
       end
 
       it "refeeds an item" do
-        sample_item = user_3.text_items.first
-        click_on "Refeed" 
+        login_factory_user(user_3.email)
+        login(user_3)ß
+        visit user_4_domain
+        test_item = user_4.text_items.first
+        within("#item_#{user_4.text_items.first.id}") { click_on "Refeed" }
         page.should have_content("You retrouted")
-        visit "http://#{user.display_name}.example.com"
-        page.should have_content sample_item.body
+        visit "http://#{user_3.display_name}.example.com"
+        page.should have_content test_item.body
       end
     end
   end
