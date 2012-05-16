@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   has_many :messages
   has_many :links
   has_many :tweets
+  has_one :twitter_account, :through => :authentications
 
   def twitter_account
     authentications.twitter.twitter_account if authentications.twitter
@@ -50,7 +51,7 @@ class User < ActiveRecord::Base
   end
 
   def has_tweets?
-    tweets.size > 0 if tweets
+    tweets.size > 0
   end
 
   def avatar
