@@ -1,7 +1,4 @@
 FeedEngine::Application.routes.draw do
-<<<<<<< HEAD
-
-
   get "items/show"
 
   match "/auth/:provider/callback" => "subscriptions#create"
