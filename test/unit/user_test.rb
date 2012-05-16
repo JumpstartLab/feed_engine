@@ -3,41 +3,89 @@ require 'minitest_helper'
 describe User do
   it "creates a User record on create" do
     password = "lispy_woo"
-    user = User.create(:email => "lispy.wahoo@lsqain.in",
-    :display_name => "LispyWahoo",
+    user = User.create(:email => "lispy.woo@lsqain.in",
+    :display_name => "LispyWoo",
     :password => password,
     :password_confirmation => password)
     assert_equal user.valid?, true
-    assert_equal user.email, "lispy.wahoo@lsqain.in"
-    assert_equal user.display_name, "LispyWahoo"
+    assert_equal user.email, "lispy.woo@lsqain.in"
+    assert_equal user.display_name, "LispyWoo"
   end
   
   it "sets a user subdomain on create" do
     password = "lispy_woo"
-    user = User.create(:email => "lispy.wahoo@lsqain.in",
-    :display_name => "LispyWahoo",
+    user = User.create(:email => "lispy.woo.2@lsqain.in",
+    :display_name => "LispyWoo2",
     :password => password,
     :password_confirmation => password)
     assert_equal user.valid?, true
-    assert_equal user.subdomain, "lispywahoo"
+    assert_equal user.subdomain, "lispywoo2"
   end
   
-  # before_create :set_user_subdomain
-  # after_create :set_user_feed
-  # after_create :generate_api_key
-  # after_create :send_welcome_email
-  # devise :database_authenticatable, :recoverable, :validatable
-  # attr_accessible :email, :password, :password_confirmation, :display_name, :subdomain
-  # has_many :authentications
-  # has_many :tweets
-  # has_one :feed
-  # 
-  # 
-  # DISPLAY_NAME_REGEX = /^[\w-]*$/
-  # validates :display_name, 
-  #   format: { with: DISPLAY_NAME_REGEX, message: "must be only letters, numbers, dashes, or underscores" },
-  #   presence: true, 
-  #   uniqueness: true,
-  #   exclusion: { in: %w(www ftp api), message: "can not be www, ftp, or api" }
+  it "automatically creates a feed for a user after create" do
+    password = "lispy_woo"
+    user = User.create(:email => "lispy.woo.3@lsqain.in",
+    :display_name => "LispyWoo3",
+    :password => password,
+    :password_confirmation => password)
+    assert_equal user.valid?, true
+    assert_equal user.feed.present?, true
+  end
+  
+  it "automatically creates an api key for a user after create" do
+    password = "lispy_woo"
+    user = User.create(:email => "lispy.woo.4@lsqain.in",
+    :display_name => "LispyWoo4",
+    :password => password,
+    :password_confirmation => password)
+    assert_equal user.valid?, true
+    assert_equal user.api_key.blank?, false
+  end
 
+  # after_create :send_welcome_email
+
+  it "rejects display names of 'www', 'ftp', and 'api'" do
+    password = "lispy_woo"
+    user = User.create(:email => "lispy.woo.5@lsqain.in",
+    :display_name => "www",
+    :password => password,
+    :password_confirmation => password)
+    assert_equal user.valid?, false
+    ['ftp', 'api'].each do |bad_name|
+      user.display_name = bad_name
+      user.save
+      assert_equal user.valid?, false    
+    end
+  end
+  
+  it "rejects displays names that include any characters other than letters, numbers, dashes, or underscores" do
+    password = "lispy_woo"
+    user = User.create(:email => "lispy.woo.6@lsqain.in",
+    :display_name => "LispyWoo6@",
+    :password => password,
+    :password_confirmation => password)
+    assert_equal user.valid?, false
+    user.display_name = "Lispy Woo6"
+    user.save
+    assert_equal user.valid?, false
+  end
+  
+  it "requires a display name value" do
+    password = "lispy_woo"
+    user = User.create(:email => "lispy.woo.7@lsqain.in",
+    :password => password,
+    :password_confirmation => password)
+    assert_equal user.valid?, false
+  end
+  
+  it "requires a unique display name" do
+    user_one = Fabricate(:user, :display_name => "SoUnique")
+    
+    password = "lispy_woo"
+    user_two = User.create(:email => "lispy.woo.8@lsqain.in",
+    :display_name => "SoUnique",
+    :password => password,
+    :password_confirmation => password)
+    assert_equal user_two.valid?, false
+  end
 end
