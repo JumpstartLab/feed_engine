@@ -17,8 +17,9 @@ gem 'mustache'
 gem 'exceptional'
 gem 'rabl'
 gem 'omniauth-twitter'
-gem 'resque'
 gem 'twitter'
+gem 'delayed_job_active_record'
+gem 'daemon'
 
 group :production do
   gem 'pg'

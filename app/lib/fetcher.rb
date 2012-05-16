@@ -10,12 +10,27 @@ module Fetcher
     end
   end
 
-  def self.create_post_from_twitter(user, status)
+  def self.create_post_from_twitter(user_id, status)
+    user = User.find(user_id)
     user.twitter_posts.create(
       twitter_id: status.id,
       text: status.text,
       published_at: status.created_at
       )
+  end
+
+  def self.fetch_and_import_tweets(uid, user_id)
+    statuses = Twitter.user_timeline(user_id: uid.to_i)
+    statuses.each do |status|
+      Fetcher.create_post_from_twitter(user_id, status)
+    end
+  end
+
+  def self.import_items(provider, uid, user_id)
+    case provider
+    when "twitter"
+      Fetcher.fetch_and_import_tweets(uid, user_id)
+    end
   end
 
 end
