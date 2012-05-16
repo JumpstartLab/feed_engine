@@ -17,17 +17,17 @@ addSubmitHandlers = ->
       type: "POST",
       url: "/posts",
       data: formData
+      success: ->
+        $('#flash').text('Posted successfully')
+        form.clearForm()
+        $("#feed").children().remove()
+        new PostsPager()
+      error: (response, status) ->
+        resp = $.parseJSON(response.responseText)
+        $(".errors", form).show()
+        for error in resp.errors
+          $(".errors_list", form).html "<li>#{error}</li>"
     )
-    request.success ->
-      $('#flash').text('Posted successfully')
-      form.clearForm()
-      $("#feed").children().remove()
-      new PostsPager().render()
-    request.error (response, status) ->
-      resp = $.parseJSON(response.responseText)
-      $(".errors", form).show()
-      for error in resp.errors
-        $(".errors_list", form).html "<li>#{error}</li>"
 
 
 addTabMenuHandler = ->
@@ -52,16 +52,16 @@ jQuery ->
   
   addHandlers()
   $.namespace.activateTab('Text')
-  if $('#feed').length
-    new PostsPager().render()
+  new PostsPager()
 
 class PostsPager
-  contructor: (@page=0)->
+  constructor: (@page=-1)->
     $(window).scroll(@check)
+    @render()
 
   check: =>
     if @nearBottom()
-      @render
+      @render()
 
   render: =>
     @page++
@@ -76,5 +76,5 @@ class PostsPager
     for post in posts
       type = post["type"]
       $("#feed").append Mustache.to_html($("##{type}_template").html(), post)
-    $(window).scroll(@check) if posts.length > 0
+    $(window).scroll(@check) if posts && posts.length > 0
     

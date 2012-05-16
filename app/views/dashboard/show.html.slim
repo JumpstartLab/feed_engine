@@ -3,11 +3,11 @@ h1 Your dashboard
 .tabs
   .tab-bar
     ul
+      li.tab-header
+        a Create a new:
       - INPUT_TYPES.each do |type|
         li.tab-item*{id: "#{type}"}
           a = type.to_s
-  br
-  br
   .tab-body
     ul
       - INPUT_TYPES.each do |type|
@@ -15,7 +15,6 @@ h1 Your dashboard
         li.tab*{id: "#{type_name}-tab"}
           - instance_variable_set("@new_#{type_name}", type.new)
           = render "#{type_name.pluralize}/#{type_name}_form"
-    
     script*{type: "text/html", id: "errors_list_template"}
       = render 'shared/errors_list'  
 br

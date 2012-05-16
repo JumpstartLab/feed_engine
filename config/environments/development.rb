@@ -17,8 +17,9 @@ FeedEngine::Application.configure do
     :password => "hungryfeeder"
   }
 
-
-
+  # load fonts in asset pipeline
+  config.assets.paths << "#{Rails.root}/app/assets/fonts"
+  
   config.cache_classes = false
 
   # Log error messages when you accidentally call methods on nil.

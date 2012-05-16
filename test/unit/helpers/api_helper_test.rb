@@ -1,4 +1,4 @@
-require 'test_helper'
+require 'minitest_helper'
 
 class ApiHelperTest < ActionView::TestCase
 end

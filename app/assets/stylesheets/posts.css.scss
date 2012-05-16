@@ -1,11 +1,11 @@
 @import "./partials/colors.css.scss";
 
 .post {
-  margin: 2em 0em;
+  margin: 1em 0em;
   margin-right: 2.6em;
   .postbody{
     width:100%;
-    background-color: $dolphin;
+    background-color: $berry;
     border-style: solid;
     border-width:.25em;
     border-radius: 4px;
@@ -16,13 +16,12 @@
       border-style: solid;
       border-width:.25em;
       border-radius: 4px;
-      border-color: $berry;
+      border-color: $aloe;
 
     }
     .posted {
-      color: $spice;
+      color: $honeycomb;
       float: right;
-      margin-top: -1em;
     }
 
     img {

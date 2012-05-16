@@ -37,6 +37,8 @@ group :development, :test do
   gem 'minitest'
   gem 'capybara'
   gem 'turn'
+
+  gem 'thin'
 end
 
 gem 'jquery-rails'

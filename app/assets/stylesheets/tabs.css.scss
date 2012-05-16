@@ -15,12 +15,15 @@
 .tabs {
   margin: auto;
   width: 100%;
-
+  @include borders(solid, $honeycomb);
   .tab-bar {
-    @include borders(solid);
-    background-color: $dolphin;
+    font-size: 0px;
+    letter-spacing: 0px;
+    word-spacing: 0px;
+    background-color: $walrus;
     .tab-item {
       display:inline-block;
+      font-size: 16px;
       a {
         padding: 1em;
         font-weight: bold;
@@ -30,6 +33,18 @@
         &:hover{
           @include selected;
         }
+      }
+    }
+    .tab-header {
+      display:inline-block;
+      font-size: 16px;
+      a {
+        padding: 1em;
+        font-weight: bold;
+        font-family: Helvetica;
+        letter-spacing: .1em;
+        float: left;
+        cursor: default;
       }
     }
   }
@@ -43,7 +58,6 @@
   .tab-body {
     background-color: $dolphin;
     .tab {
-      @include borders(solid, $honeycomb);
       margin: auto;
       position:relative;
       p { color: $wasabi; }
