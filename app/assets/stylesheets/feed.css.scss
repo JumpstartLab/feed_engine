@@ -5,14 +5,12 @@
   padding: 0 20px 0 50px;
 }
 
-.item-header {
-  padding: 10px 0;
-}
-
 .item-header-user {
   font-size: 14px;
-  font-weight: 700;
+  font-family: $font;
+  font-weight: 300;
   vertical-align: bottom;
+  color: $trout-secondary;
 }
 
 .item-user-image {
@@ -41,13 +39,15 @@
 }
 
 .item-time {
+  font-family: $font;
   font-size: 14px;
   vertical-align: bottom;
+  color: $trout-secondary;
 }
 
 .item-container-body {
   @include container;
-  padding: 10px 20px 20px 20px;
+  padding: 10px 15px 15px 15px;
 }
 
 .points-container {
