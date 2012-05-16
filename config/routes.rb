@@ -1,4 +1,5 @@
 FeedEngine::Application.routes.draw do
+<<<<<<< HEAD
 
 
   get "items/show"
