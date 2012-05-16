@@ -1,5 +1,5 @@
 class StreamItem < ActiveRecord::Base
-  attr_accessible :streamable_id, :streamable_type
+  attr_accessible :streamable_id, :streamable_type, :refeed
   belongs_to :user
   belongs_to :streamable, :polymorphic => true
 

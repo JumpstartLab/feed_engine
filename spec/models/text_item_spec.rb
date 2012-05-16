@@ -28,6 +28,14 @@ describe TextItem do
     test_item = TextItem.new(body:"hello I am a test", :user => user)
     test_item.save
     user.stream_items.last.streamable.should == test_item
+    user.stream_items.last.refeed.should == false
+  end
+
+  it "adds the item to the author's feed" do
+    test_item = TextItem.new(body:"hello I am a test", :user => user)
+    test_item.save
+    user.stream_items.last.streamable.should == test_item
+    user.stream_items.last.refeed.should == false
   end
 
   context "#to_param" do

@@ -13,7 +13,7 @@ module Streamable
       end
 
       def add_to_author_stream
-        user.add_stream_item(self)
+        user.add_stream_item(self, refeed=false)
       end
 
       def author
