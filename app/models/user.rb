@@ -19,10 +19,11 @@ class User < ActiveRecord::Base
   has_many :messages, :foreign_key => 'poster_id'
   has_many :images, :foreign_key => 'poster_id'
   has_many :links, :foreign_key => 'poster_id'
+  has_many :subscriptions
+  has_many :tweets, :through => :subscriptions, :foreign_key => 'poster_id'
   has_many :items, :foreign_key => 'poster_id'
 
   default_scope order(:created_at)
-  has_many :subscriptions
 
   attr_accessible :email,
                   :password,
@@ -50,12 +51,7 @@ class User < ActiveRecord::Base
   end
 
   def posts
-    posts = []
-    [Message, Link, Image].each do |post_type|
-      post_collection = post_type.find_all_by_poster_id(self.id)
-      posts = posts | post_collection
-    end
-    posts
+    items.map(&:post)
   end
 
   def sorted_posts
