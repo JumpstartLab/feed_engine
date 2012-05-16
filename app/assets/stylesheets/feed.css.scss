@@ -8,7 +8,7 @@
 .item-header-user {
   font-size: 14px;
   font-family: $font;
-  font-weight: 300;
+  font-weight: 500;
   vertical-align: bottom;
   color: $trout-secondary;
 }
@@ -21,6 +21,7 @@
 .text-item-body {
   font-size: 16px; 
   font-family: $font;
+  color: $font-color;
 }
 
 .body_image {
@@ -41,6 +42,7 @@
 .item-time {
   font-family: $font;
   font-size: 14px;
+  font-weight: 500;
   vertical-align: bottom;
   color: $trout-secondary;
 }
@@ -52,6 +54,10 @@
 
 .points-container {
   float: right;
+}
+
+.entypo-icon {
+  font-size: 32px;
 }
 
 .points {
@@ -127,4 +133,19 @@ $stat-count-font-size: 18px;
 
 .follower-count {
   font-size: $stat-count-font-size;
+}
+
+.text-item-body > a {
+  font-weight: 500;
+  color: $trout-secondary;
+}
+.text-item-body > a:visited {
+  font-weight: 500;
+  color: $trout-secondary;
+}
+
+.text-item-body > a:hover {
+  font-weight: 500;
+  color: $trout-secondary;
+  background-color: transparent;
 }

@@ -3,14 +3,13 @@
   <% if @items %>
     <!-- Text Item Mocked data -->
     <br/>
-    <div class="item_container"> 
       <div class="span7 row feed_row">
         <div class=" item-container-body">
           <div class="item-header">
             <%= image_tag"http://bit.ly/KMVVHZ", :class => "item-user-image"%>
             <span class="item-header-user">Horace Williams</span>
             <span class="points-container">
-              <span class="raphael-icon points">@</span>
+              <span class="entypo-icon">8</span>
               <span class="points">12 </span>
             </span>
           </div>
@@ -32,18 +31,16 @@
           </div>
         </div>
       </div>
-    </div>
 
 
     <!-- Twitter Mocked Data -->
-    <div class="item_container"> 
       <div class="span7 row feed_row">
         <div class=" item-container-body">
           <div class="item-header">
             <%= image_tag"http://bit.ly/KMVVHZ", :class => "item-user-image"%>
             <span class="item-header-user">Horace Williams</span>
             <span class="points-container">
-              <span class="raphael-icon points">@</span>
+              <span class="entypo-icon">8</span>
               <span class="points">10 </span>
             </span>
           </div>
@@ -62,17 +59,15 @@
           </div>
         </div>
       </div>
-    </div>
 
     <!-- Link Mocked Data -->
-    <div class="item_container"> 
       <div class="span7 row feed_row">
         <div class=" item-container-body">
           <div class="item-header">
             <%= image_tag"http://bit.ly/KMVVHZ", :class => "item-user-image"%>
             <span class="item-header-user">Chris Anderson</span>
             <span class="points-container">
-              <span class="raphael-icon points">@</span>
+              <span class="entypo-icon">8</span>
               <span class="points">5 </span>
             </span>
 
@@ -81,6 +76,7 @@
           <br/>
           <span class="text-item-body">
             <%= link_to "http://google.com" %>
+            <br/>
             <br/>
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
             Lorem Ipsum has been the industry's</span>
@@ -94,17 +90,15 @@
           </div>
         </div>
       </div>
-    </div>
 
     <!-- Image Mocked Data -->
-    <div class="item_container"> 
       <div class="span7 row feed_row">
         <div class=" item-container-body">
           <div class="item-header">
             <%= image_tag"http://bit.ly/KMVVHZ", :class => "item-user-image"%>
             <span class="item-header-user">Chris Anderson</span>
             <span class="points-container">
-              <span class="raphael-icon points">@</span>
+              <span class="entypo-icon">8</span>
               <span class="points">500 </span>
             </span>
 
@@ -128,13 +122,10 @@
             </div>
           </div>
         </div>
-      </div>
 
       <% @items.each do |item| %>
-        <div class="item_container"> 
           <div class="span7 row feed_row">
             <%= render :partial => "item", :locals => {:item => item} %>
-          </div>
         </div>
       <% end %>
 
