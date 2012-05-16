@@ -50,6 +50,8 @@
 .item-container-body {
   @include container;
   padding: 10px 15px 15px 15px;
+  -webkit-box-shadow: 1px 1px 5px 1px rgba(1, 1, 1, 1);
+  box-shadow: 1px 1px 5px 1px rgba(1, 1, 1, 1);
 }
 
 .points-container {
