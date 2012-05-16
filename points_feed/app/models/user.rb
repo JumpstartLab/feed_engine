@@ -114,6 +114,10 @@ class User < ActiveRecord::Base
     self.authentications.where(:provider => 'github').first
   end
 
+  def already_refeeded?(original_post)
+    posts.where(original_post_id: original_post.original_post_id).any?
+  end
+
   private
 
   def apply_twitter(omniauth)
