@@ -21,6 +21,6 @@ class Item < ActiveRecord::Base
   end
 
   def post  
-    Kernel.const_get(self.post_type.capitalize).find(post_id)  
+    self.post_type.capitalize.constantize.find(post_id)  
   end
 end
