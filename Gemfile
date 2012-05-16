@@ -15,6 +15,7 @@ gem 'twitter'
 gem 'omniauth-twitter'
 gem 'omniauth-github'
 gem 'omniauth'
+gem 'delayed_job_active_record'
 gem 'jbuilder'
 gem 'whenever', require: false
 
