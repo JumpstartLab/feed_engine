@@ -7,7 +7,7 @@ module PageExtension
 
     self.order("created_at DESC").
       limit(PAGE_SIZE).
-      offset(num.to_i * PAGE_SIZE)
+      offset(num * PAGE_SIZE)
   end
 
   def pages
