@@ -10,4 +10,14 @@ class Api::ItemsController < ApplicationController
       format.json
     end
   end
+  def index
+    @user = User.find_by_display_name(params[:display_name])
+    unless @user
+      render :json => { error: "user #{params[:display_name]} not found" }, :status => :not_found
+    end
+    @items = Item.find_all_by_poster_id(@user.id)
+    respond_with do |format|
+      format.json
+    end
+  end
 end
