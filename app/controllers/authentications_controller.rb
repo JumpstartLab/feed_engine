@@ -7,9 +7,9 @@ class AuthenticationsController < ApplicationController
 
   def create
     auth = request.env["omniauth.auth"]
-    current_user.authentications.find_or_create_by_provider_and_uid(auth['provider'], auth['uid'].to_s)
-
-    Resque.enqueue(TwitterFeeder, current_user.id)
+    current_user.authentications.find_or_create_by_provider_and_uid(:provider => auth['provider'], :uid => auth['uid'].to_s, :handle => get_handle(auth))
+    #Githubevent.import_posts(current_user.id)
+    Resque.enqueue(Kernel.const_get("#{auth['provider'].capitalize}Feeder"), current_user.id)
     flash[:notice] = "#{auth['provider'].capitalize} link successful"
     redirect_to user_root_path
   end
@@ -19,5 +19,14 @@ class AuthenticationsController < ApplicationController
     @authentication.destroy
     flash[:notice] = "Successfully destroyed authentication."
     redirect_to user_root_path
+  end
+
+  private
+
+  def get_handle(auth)
+    case auth['provider']
+      when "twitter"  then auth["extra"]["raw_info"]["screen_name"]
+      when "github"   then auth["extra"]["raw_info"]["login"]
+    end
   end
 end

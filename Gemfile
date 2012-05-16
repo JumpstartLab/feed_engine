@@ -17,6 +17,8 @@ gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-github'
 gem 'twitter'
+gem 'github_api'
+
 gem 'slim'
 gem 'slim-rails'
 gem 'resque'
