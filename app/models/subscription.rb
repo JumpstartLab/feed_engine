@@ -27,75 +27,95 @@ class Subscription < ActiveRecord::Base
     end
   end
 
-  def self.get_all_new_github_events
-    github_subscriptions.each do |g_subscription|
-      g_subscription.get_new_github_events
+  def self.get_all_new_service_posts
+    Subscription.all.each do |subscription|
+      new_posts = subscription.get_new_posts
+      subscription.create_records_of_posts(new_posts)
     end
-    self.delay(:run_at => SUBSCRIPTION_FREQ.seconds.from_now).get_all_new_github_events
+    self.delay(:run_at => SUBSCRIPTION_FREQ.seconds.from_now).get_all_new_service_posts
   end
 
-  def get_new_github_events
-    new_events = []
+  def get_new_posts
+    new_posts = []
     i = 0
     while true do
-      event = github_events[i]
-      if event.created_at > (Time.now - SUBSCRIPTION_FREQ)
-        new_events << event
+      post = posts_for(self.provider)[i]
+      break if post.nil?
+      if is_a_new_post?(post)
+        new_posts << post
       else
         break
       end
       i += 1
     end
-    new_events.each do |new_event|
-      g = GithubEvent.create(subscription_id: self.id,
-                       repo: new_event.repo.name,
-                       created_at: new_tweet.created_at,
-                       poster_id: self.user_id,
-                       event_type: new_event.type
-                            )
-    end
+    new_posts
   end
 
-  def self.get_all_new_tweets
-    twitter_subscriptions.each do |t_subscription|
-      t_subscription.get_new_tweets
-    end
-    self.delay(:run_at => SUBSCRIPTION_FREQ.seconds.from_now).get_all_new_tweets
-  end
-
-  def get_new_tweets
-    new_tweets = []
-    i = 0
-    while true do
-      tweet = Twitter.user_timeline(self.user_name)[i]
-      if tweet.created_at > (Time.now - SUBSCRIPTION_FREQ)
-        new_tweets << tweet
-      else
-        break
+  def is_a_new_post?(post)
+    return_value = true
+    if post.created_at.to_time.utc < self.created_at.to_time.utc
+      return_value = false
+    elsif self.provider == "twitter"
+      self.tweets.each do |tweet|
+        if tweet.created_at == post.created_at
+          return_value =  false
+        end
       end
-      i += 1
+    elsif self.provider == "github"
+      self.github_events.each do |event|
+        if event.created_at == post.created_at
+          return_value =  false
+        end
+      end
     end
-    new_tweets.each do |new_tweet|
-      t = Tweet.create(subscription_id: self.id,
-                       body: new_tweet.text,
-                       created_at: new_tweet.created_at,
-                       poster_id: self.user_id
-                      )
+    return_value
+  end
+
+  def posts_for(provider)
+    if provider == "twitter"
+      get_tweets
+    elsif provider == "github"
+      get_github_events
     end
   end
 
-  def github_events
-    events = Octokit.user_events(self.user_name).map do |event|
+  def create_records_of_posts(new_posts)
+    new_posts.each do |new_post|
+      if provider == "twitter"
+        t = Tweet.create!(subscription_id: self.id,
+                         body: new_post.text,
+                         created_at: new_post.created_at,
+                         poster_id: self.user_id
+                        )
+
+      elsif provider == "github"
+        GithubEvent.create!(subscription_id: self.id,
+                               repo: new_post.repo.name,
+                               created_at: new_post.created_at,
+                               poster_id: self.user_id,
+                               event_type: new_post.type
+                              )
+      end
+    end
+  end
+
+  def get_tweets
+    Twitter.user_timeline(self.user_name)
+  end
+
+  def get_github_events
+    events = Octokit.user_events(self.user_name).select do |event|
       event if EVENT_LIST.include?(event.type)
     end
     events
   end
 
-  def self.github_subscriptions
-    Subscription.where(provider: "github")
+  def tweets
+    Tweet.where(subscription_id: self.id)
   end
 
-  def self.twitter_subscriptions
-    Subscription.where(provider: "twitter")
+  def github_events
+    GithubEvent.where(subscription_id: self.id)
   end
+
 end
