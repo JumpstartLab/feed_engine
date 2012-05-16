@@ -1,0 +1,29 @@
+@import "variables";
+
+@mixin container {
+  min-height: 140px; 
+  margin-bottom: 20px;
+  background-color: $trout;
+  border: 1px solid #eee;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  font-family: $font;
+}
+
+.trout-container {
+  @include container;
+  padding: 50px 50px 0 50px;
+}
+
+.item-container {
+  @include container;
+  padding: 50px 0px 10px 50px;
+}
+
+@mixin text-field {
+  font-family: $font;
+  font-size: $input-font-size;
+  height: 30px;
+  width: 250px;
+}

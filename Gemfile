@@ -15,6 +15,7 @@ gem 'resque-scheduler'
 gem 'kaminari'
 gem 'omniauth'
 gem 'omniauth-twitter'
+gem 'omniauth-github'
 gem 'twitter'
 gem "ember-rails"
 gem 'jbuilder'

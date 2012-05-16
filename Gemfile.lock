@@ -86,6 +86,7 @@ GEM
       spork (>= 0.8.4)
     hashie (1.2.0)
     hike (1.2.1)
+    httpauth (0.1)
     i18n (0.6.0)
     jbuilder (0.4.0)
       activesupport (>= 3.0.0)
@@ -118,11 +119,21 @@ GEM
     multipart-post (1.1.5)
     nokogiri (1.5.2)
     oauth (0.4.6)
+    oauth2 (0.6.1)
+      faraday (~> 0.7)
+      httpauth (~> 0.1)
+      multi_json (~> 1.3)
     omniauth (1.1.0)
       hashie (~> 1.2)
       rack
+    omniauth-github (1.0.1)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.0)
     omniauth-oauth (1.0.1)
       oauth
+      omniauth (~> 1.0)
+    omniauth-oauth2 (1.0.2)
+      oauth2 (~> 0.6.0)
       omniauth (~> 1.0)
     omniauth-twitter (0.0.11)
       multi_json (~> 1.3)
@@ -263,6 +274,7 @@ DEPENDENCIES
   kaminari
   launchy
   omniauth
+  omniauth-github
   omniauth-twitter
   pg
   rack-test

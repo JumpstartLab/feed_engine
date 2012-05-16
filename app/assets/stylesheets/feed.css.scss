@@ -1,6 +1,4 @@
-// Place all the styles related to the feed controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "variables";
 
 .feed_row {
   padding: 0 20px 0 50px;
@@ -41,7 +39,7 @@ $body_font: comic sans;
 .item-container-body {
   -webkit-border-radius: 25px;
   border-radius: 5px;
-  background-color: #B1D58B;
+  background-color: $trout; 
   font-size: 16px;
   margin: 30px 0 10px 0;
   padding: 10px;

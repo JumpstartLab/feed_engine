@@ -1,3 +1,4 @@
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -11,6 +12,8 @@
  *= require_self
  *= require_tree .
 */
+
+@import "variables";
 
 .simple_form label {
   float: left;
@@ -71,19 +74,12 @@ body {
   padding: 10px;
 }
 
-.login-container {
-  min-height: 140px; 
-  padding: 20px;
-  margin-bottom: 20px;
-  background-color: #F0F5F2;
-  border: 1px solid #eee;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: 4px;
-}
-
 .navigation-item {
   padding: 0px 10px 10px 0px;
+}
+
+.navigation-item-signup {
+  padding: 0px 0px 0px 70px;
 }
 
 @font-face {
@@ -97,3 +93,50 @@ body {
     font-style: normal;
 }
 
+@font-face {
+  font-family:
+    'RaphaelIcons';
+    src:
+    url('/assets/raphael/raphaelicons-webfont.eot');
+    src:
+    local('☺'), url('/assets/raphael/raphaelicons-webfont.woff') format('woff'), url('/assets/raphael/raphaelicons-webfont.ttf') format('truetype'), url('raphaelicons-webfont.svgwebfontKOf9F4sx') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.raphael-icon {
+    font-weight: normal;
+    font-style: normal;
+    line-height: normal;
+    font-family: 'RaphaelIcons';
+    font-size: 64px;
+    position: relative;
+    top: 0.1em;
+}
+
+.nav a:visited {
+  color: black;
+  text-decoration:underline;
+}
+
+
+@mixin nav-item-links {
+      text-decoration: none;
+      color: $trout;
+}
+
+.nav > li.navigation-item {
+    a:hover {
+      @include nav-item-links;
+      background-color: transparent;
+      }
+  }
+
+.navigation-item-signup {
+    a:hover {
+      @include nav-item-links;
+      }
+  }
+
+.nav > li > a:hover {
+}
