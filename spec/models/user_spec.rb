@@ -24,4 +24,12 @@ describe User do
       end
     end
   end
+
+  context "#has_tweets?" do
+    context "if user has not linked his account with Twitter" do
+      it "should return false" do
+        user.tweets.should == []
+      end
+    end
+  end
 end

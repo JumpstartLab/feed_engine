@@ -7,17 +7,17 @@ Hungrlr::Application.routes.draw do
       get '/feeds/:display_name' => 'feeds#show'
       post '/feeds/:display_name' => 'feeds#create'
       resources :user_tweets, only: [:create, :index]
-      resources :users, only: [:index]
       resources :meta_data, :only => [ :create ]
+      get '/users/twitter' => 'users#twitter'
     end
   end
 
   namespace "api" do
     namespace "v1" do
-      get '/feeds/:display_name' => 'feeds#show'
-      post '/feeds/:display_name' => 'feeds#create'
-      resources :user_tweets, only: [:create]
-      resources :users, only: [:index]
+      # get '/feeds/:display_name' => 'feeds#show'
+      # post '/feeds/:display_name' => 'feeds#create'
+      # resources :user_tweets, only: [:create]
+      # resources :users, only: [:index]
       resources :meta_data, only: [ :create ]
     end
   end

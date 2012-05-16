@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'api/v1/users', type: :api do
   let!(:user)            { FactoryGirl.create(:user) }
   let!(:twitter_account) { TwitterAccount.create(nickname: "test") }
-  let(:url)              { "http://api.hungrlr.dev/v1/users" }
+  let(:url)              { "http://api.hungrlr.dev/v1/users/twitter" }
 
   context "Is not accessible without a user token" do
     before { get "#{url}.json" }
