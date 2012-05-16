@@ -17,20 +17,41 @@ describe Item do
   let(:image) { Fabricate(:image) }
   let(:link) { Fabricate(:link) }
 
-  before(:each) do
-    @posts = [message, image, link]
+  describe "is created when a" do
+    it "message is created" do
+      expect { Fabricate(:message) }.to change { Item.count }.from(0).to(1)
+    end
+
+    it "link is created" do
+      expect { Fabricate(:link) }.to change { Item.count }.from(0).to(1)
+    end
+
+    it "image is created" do
+      expect { Fabricate(:image) }.to change { Item.count }.from(0).to(1)
+    end
   end
 
-  it "is created when a message is created" do
-    expect { Fabricate(:message) }.to change { Item.count }.by(1)
-  end
+  describe "is destroyed when a", :focus => true do
+    before(:all) do
+      message = Fabricate.build(:message)
+      link = Fabricate.build(:link)
+      image = Fabricate.build(:image)
+    end
 
-  it "is created when a link is created" do
-    expect { Fabricate(:link) }.to change { Item.count }.by(1)
-  end
+    it "message is destroyed" do
+      expect { message.save }.to change { Item.count }.from(0).to(1)
+      expect { message.destroy }.to change { Item.count }.from(1).to(0)
+    end
 
-  it "is created when a image is created" do
-    expect { Fabricate(:image) }.to change { Item.count }.by(1)
+    it "link is destroyed" do
+      expect { link.save }.to change { Item.count }.from(0).to(1)
+      expect { link.destroy }.to change { Item.count }.from(1).to(0)
+    end
+
+    it "image is destroyed" do
+      expect { image.save }.to change { Item.count }.from(0).to(1)
+      expect { image.destroy }.to change { Item.count }.from(1).to(0)
+    end
   end
 
   it "can be queried for it's user" do
@@ -38,8 +59,8 @@ describe Item do
   end
 
   it "can be queried for it's post" do
-    @posts.each do |post|
-      post.item.post.should == post
-    end
+    message.item.post.should == message
+    image.item.post.should == image
+    link.item.post.should == link
   end
 end
