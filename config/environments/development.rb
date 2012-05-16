@@ -39,4 +39,31 @@ FeedEngine::Application.configure do
 
   # Pretty print html
   Slim::Engine.set_default_options :pretty => true
+
+  # Use Chainsaw
+  #begin
+  #  require 'dnssd'
+  #  name = "FeedEngine"
+  #  type = "_log4j_xml_udp_appender._udp"
+  #  domain = nil
+  #  port = 3689
+
+  #  Thread.new do
+  #    DNSSD.register!(name, type, domain, port) do
+  #      # NOP
+  #    end
+  #  end
+
+  #  require 'log4r'
+  #  require 'log4r/formatter/log4jxmlformatter'
+  #  require 'log4r/outputter/udpoutputter'
+  #  logger = Log4r::Logger.new("Application Log")
+  #  log4jformat = Log4r::Log4jXmlFormatter.new
+  #  udpout = Log4r::UDPOutputter.new 'udp', hostname: "localhost", port: 3689
+  #  udpout.formatter = log4jformat
+  #  logger.outputters = [udpout]
+
+  #  Rails.logger = logger
+  #rescue Exception => err
+  #end
 end
