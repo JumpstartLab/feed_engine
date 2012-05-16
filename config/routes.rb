@@ -15,8 +15,8 @@ FeedEngine::Application.routes.draw do
 
   scope "", constraints: lambda { |r| r.subdomain.present? &&
     r.subdomain != 'www' && r.subdomain != 'api' } do
-    match "", to: "users#show" 
-    resource "user"
+    match "", to: "feeds#show" 
+    resource "feeds", only: [:show]
   end
 
   devise_for :users

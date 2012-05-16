@@ -1,6 +1,7 @@
 require 'securerandom'
 class User < ActiveRecord::Base
   before_create :set_user_subdomain
+  before_save :ensure_authentication_token
   after_create :set_user_feed
   after_create :generate_api_key
   after_create :send_welcome_email

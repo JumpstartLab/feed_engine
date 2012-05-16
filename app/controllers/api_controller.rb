@@ -1,20 +1,14 @@
 class ApiController < ApplicationController
-  # before_filter :authenticate
+  before_filter :authenticate
 
   attr_accessor :current_user
 
   private
 
-  def construct_link_header(next_url, last_url)
-    "<#{next_url}>; rel=\"next\", <#{last_url}>; rel=\"last\""
-  end
-
   def authenticate
-    if self.current_user = authenticate_or_request_with_http_basic do |username, password|
-        login(username, password)
-      end
-    else
-      request_http_basic_authentication
+    @current_user = User.find_by_authentication_token(params[:token])
+    unless @current_user
+      respond_with({:error => "Token is invalid." })
     end
   end
 end
