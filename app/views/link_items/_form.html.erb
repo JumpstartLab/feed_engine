@@ -1,4 +1,4 @@
-<%= simple_form_for @link_item, :input_html => { :class => "form-horizontal"} do |f| %>
+<%= simple_form_for @link_item do |f| %>
   <%= f.input :url, :placeholder => "Link Url", :label_html => {:class => "text-item-label"}, 
               :input_html => {:class => "dashboard-text-field"} %>
   <%= f.input :comment, :placeholder => "Comment", :label_html => {:class => "text-item-label"}, 
