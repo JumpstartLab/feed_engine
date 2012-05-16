@@ -20,7 +20,8 @@ FeedEngine::Application.routes.draw do
   end
 
   resources "users", as: :user
-  match "/auth/twitter/callback" => "users#twitter"
+  match "/auth/twitter/callback" => "authentications#new"
+  match "/auth/github/callback" => "authentications#new"
   resource "dashboard"
   resources "text_posts"
   resources "image_posts"

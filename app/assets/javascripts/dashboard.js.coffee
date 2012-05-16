@@ -3,7 +3,7 @@ jQuery ->
     new PostsPager()
     
 class PostsPager
-  constructor: (@page = 1) ->
+  constructor: (@page = 2) ->
     $(window).scroll(@check)
   
   check: =>

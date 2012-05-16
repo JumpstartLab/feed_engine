@@ -30,6 +30,7 @@ module Fetcher
     case provider
     when "twitter"
       Fetcher.delay(run_at: 5.seconds.from_now).fetch_and_import_tweets(uid, user_id)
+    when "github"
     end
   end
 
