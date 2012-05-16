@@ -10,6 +10,8 @@ user = User.create(email: 'ed.weng@livingsocial.com',
                    password: 'hungry',
                    display_name: 'wengzilla')
 
+user.update_attribute("authentication_token", "HUNGRLR")
+
 user.growls << FactoryGirl.create(:image)
 user.growls << FactoryGirl.create(:link)
 user.growls << FactoryGirl.create(:message)
