@@ -1,5 +1,9 @@
-<div class="span3 offset3 trout-container">
-  <h1 class="login-title">Troutr</h1>
+<br/>
+<br/>
+<br/>
+<br/>
+<div class="span3 offset4 trout-container">
+  <h1 class="login-title">troutr</h1>
 
   <br/>
   <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
@@ -7,6 +11,6 @@
 
     <%= f.password_field :password, :placeholder => "Password", :class => "login-fields" %>
 
-    <div><%= f.submit "Log In", :class => "offset1 submit-button" %></div>
+    <div><%= f.submit "Log In", :class => "login-button offset1 btn-primary btn-large" %></div>
   <% end %>
 </div>
