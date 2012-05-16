@@ -1,5 +1,6 @@
 FeedEngine::Application.routes.draw do
   match "/auth/:provider/callback" => "subscriptions#create"
+  get "items/show"
 
   resources :subscriptions
   resources :messages
@@ -7,7 +8,6 @@ FeedEngine::Application.routes.draw do
   resources :users
   resources :sessions
   resources :links
-  resources :posts
   resource  :dashboard,
             :controller => "dashboard",
             :only => "show"
@@ -18,7 +18,7 @@ FeedEngine::Application.routes.draw do
 
   constraints :subdomain => 'api', :format => :json do
     match '/feeds/:display_name(.:format)' => 'api/users#show', as: "feed"
-    match '/feeds/:display_name/posts/:id' => 'api/posts#show', as: "user_item"
+    match '/feeds/:display_name/items/:id' => 'api/items#show', as: "feed_item"
   end
 
   constraints(Subdomain) do

@@ -1,0 +1,16 @@
+p
+  = @item.post.type
+p
+  = @item.post.created_at  
+
+- if @item.post.message?
+  p 
+    = @item.post.body 
+
+- elsif @item.post.link? || @item.post.image? 
+  p
+    = @item.post.url 
+  p
+    = @item.post.description  
+  
+
