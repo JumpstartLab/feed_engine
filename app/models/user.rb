@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   has_many :links
   has_many :tweets
   has_one :twitter_account, :through => :authentications
+  has_one :github_account, :through => :authentications
 
   def twitter_account
     authentications.twitter.twitter_account if authentications.twitter

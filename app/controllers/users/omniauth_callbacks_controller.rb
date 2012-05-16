@@ -16,12 +16,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def github
     data = request.env["omniauth.auth"]
     auth = current_user.authentications.create(provider: data["provider"],
-                                        token: data["credentials"]["token"],
-                                        secret: data["credentials"]["secret"])
+                                        token: data["credentials"]["token"])
     
-    puts "***************************************"
-    puts data.inspect
-    puts "***************************************"
+    auth.create_github_account(uid: data["uid"],
+                               nickname: data["info"]["nickname"],
+                               image: data["raw_info"]["avatar_url"],
+                               last_status_id: DateTime.now)
+
     redirect_to new_authentication_path, :notice => "Github account successfully added."
   end
 end
