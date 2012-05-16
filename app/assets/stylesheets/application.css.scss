@@ -132,7 +132,7 @@ body {
 
 @mixin nav-item-links {
       text-decoration: none;
-      color: $trout;
+      color: $trout-main-color;
 }
 
 .nav > li.navigation-item {
@@ -149,4 +149,9 @@ body {
   }
 
 .nav > li > a:hover {
+}
+
+.nav-logo {
+  font-family: $font;
+  font-size: 48px;
 }
