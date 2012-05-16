@@ -40,6 +40,13 @@ describe LinkItem do
     test_item.should_not be_valid
   end
 
+  it "adds the item to the author's feed" do
+    test_item = LinkItem.new(:url => good_url, :user => user)
+    test_item.save
+    user.stream_items.last.streamable.should == test_item
+    user.stream_items.last.refeed.should == false
+  end
+
   context "#to_param" do
     let!(:user) { FactoryGirl.create(:user) }
     let!(:link_item) { FactoryGirl.create(:link_item, :user => user) }
