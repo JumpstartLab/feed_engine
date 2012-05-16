@@ -13,6 +13,7 @@
 
 class Subscription < ActiveRecord::Base
   EVENT_LIST = ["PushEvent", "CreateEvent", "ForkEvent"]
+  PROVIDER_TO_POST_TYPE = { "twitter" => "tweets", "github" => "github_events"}
   attr_accessible :user_name, :provider, :uid, :user_id
 
   belongs_to :user
@@ -45,16 +46,10 @@ class Subscription < ActiveRecord::Base
     return_value = true
     if post.created_at.to_time.utc < self.created_at.to_time.utc
       return_value = false
-    elsif self.provider == "twitter"
-      self.tweets.each do |tweet|
-        if tweet.created_at == post.created_at
-          return_value =  false
-        end
-      end
-    elsif self.provider == "github"
-      self.github_events.each do |event|
-        if event.created_at == post.created_at
-          return_value =  false
+    else
+      self.send(PROVIDER_TO_POST_TYPE[self.provider]).each do |post_type|
+        if post_type.created_at == post.created_at
+          return_value = false
         end
       end
     end
@@ -62,11 +57,7 @@ class Subscription < ActiveRecord::Base
   end
 
   def posts_for(provider)
-    if provider == "twitter"
-      get_tweets
-    elsif provider == "github"
-      get_github_events
-    end
+    self.send("get_#{PROVIDER_TO_POST_TYPE[self.provider]}")
   end
 
   def create_records_of_posts(new_posts)
