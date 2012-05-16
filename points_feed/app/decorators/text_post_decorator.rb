@@ -1,10 +1,6 @@
 class TextPostDecorator < ApplicationDecorator
   decorates :text_post
 
-  def url
-    "http://api.pointsfeed.in/feeds/#{model.user.display_name}"
-  end
-
   def as_json(*params)
     return {} if model.nil?
     
@@ -17,10 +13,12 @@ class TextPostDecorator < ApplicationDecorator
       },
       :created_at => model.created_at,
       :id => model.id,
-      :feed => "#{url}.json",
-      :link => "#{url}/items/#{model.id}.json",
-      :refeed => false,
-      :refeed_link => ""
+      :feed => "#{feed_url}.json",
+      :link => "#{feed_url}/items/#{model.id}.json",
+      :refeed => model.original_post != nil,
+      :refeed_link => "#{refeed_url(model.original_post)}",
+      :refeeder => refeeder,
+      :can_refeed => can_refeed?
     }
   end
 end

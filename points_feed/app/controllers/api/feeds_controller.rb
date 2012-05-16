@@ -11,6 +11,8 @@ class Api::FeedsController < Api::ApiController
     offset = compute_offset(params[:page])
     posts = user_for_page.stream(POSTS_PER_PAGE, offset) || []
     posts = posts.map(&:decorate) if posts
+    posts = posts.map { |post| post.current_user = current_user; post }
+
     render :json => posts
     #respond_with(posts)
   end

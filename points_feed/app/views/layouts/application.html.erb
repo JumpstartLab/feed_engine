@@ -40,6 +40,7 @@
     </div> <!-- /container -->
 
     <% unless current_user.blank? %>
+      <input type='hidden' id='auth_display_name' value='<%= current_user.display_name %>' />
       <input type='hidden' id='access_token' value='<%= current_user.authentication_token %>' />
     <% end %>
 

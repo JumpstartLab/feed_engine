@@ -26,7 +26,7 @@ class Post < ActiveRecord::Base
   end
 
   def original_post
-    Post.find(original_post_id)
+    Post.where(:id => self.original_post_id).first if self.original_post_id != self.id
   end
 
   def attributed_user
