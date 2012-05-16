@@ -18,4 +18,5 @@
           = render :partial => "/links/form"
 
 javascript:
-  api_domain = "#{api_domain.html_safe}"
+  api_path = "#{api_path.html_safe}"
+  authentication_token = "#{current_user.authentication_token}"
