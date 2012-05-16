@@ -58,6 +58,15 @@
   color: $twitter-blue; 
 }
 
+.linked-post-logo {
+  font-size: 100px;
+}
+
+.linked-twitter-logo {
+  font-size: 100px;
+  color: $twitter-blue; 
+}
+
 .points {
   font-size: 48px;
 }
@@ -66,3 +75,37 @@
  max-height: 500px;
  max-width: 500px;
 }
+
+$stat-count-font-size: 32px;
+
+@mixin stat-container {
+  margin: 0 35px 0 0;
+  font-family: $font;
+  outline: 2px auto $trout;
+  outline-offset: 10px;
+}
+
+.post-count-container {
+  @include stat-container;
+}
+
+.post-count {
+  font-size: $stat-count-font-size;
+}
+
+.following-count-container {
+  @include stat-container;
+}
+
+.following-count {
+  font-size: $stat-count-font-size;
+}
+
+.follower-count-container {
+  @include stat-container;
+}
+
+.follower-count {
+  font-size: $stat-count-font-size;
+}
+
