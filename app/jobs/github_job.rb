@@ -2,7 +2,7 @@ class GithubJob
   @queue = :gist
 
   def self.perform(current_user, authentication)
-    github = Github::Event.new({
+    github = Octokit::Client.new ({
     :consumer_key => ENV["GITHUB_DEV_KEY"],
     :consumer_secret => ENV["GITHUB_SECRET"],
     :oauth_token => authentication["token"],
@@ -17,4 +17,4 @@ class GithubJob
   user.save
   end 
 end 
-
+ 

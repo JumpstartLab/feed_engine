@@ -20,6 +20,7 @@ gem 'twitter'
 gem "ember-rails"
 gem 'jbuilder'
 gem 'growl'
+gem 'octokit'
 
 # Gems used only for assets and not required
 # in production environments by default.
