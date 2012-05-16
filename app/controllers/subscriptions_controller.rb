@@ -14,6 +14,15 @@ class SubscriptionsController < ApplicationController
     end
   end
 
+  def destroy
+    @subscription = Subscription.find(params[:id])
+    if @subscription.destroy
+      redirect_to :back, notice: "#{@subscription.provider} has been removed."
+    else
+      redirect_to :back, notice: "#{@subscription.provider} could not be removed."
+    end
+  end
+
   private
 
   def num_subscriptions
