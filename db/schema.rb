@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120516025114) do
+ActiveRecord::Schema.define(:version => 20120516040709) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(:version => 20120516025114) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
-    t.string   "external_id"
   end
 
   create_table "meta_data", :force => true do |t|
@@ -49,10 +48,10 @@ ActiveRecord::Schema.define(:version => 20120516025114) do
     t.integer  "authentication_id"
     t.integer  "uid"
     t.string   "nickname"
-    t.string   "last_status_id"
+    t.string   "last_status_id",    :default => "0", :null => false
     t.string   "image"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
   end
 
   create_table "users", :force => true do |t|

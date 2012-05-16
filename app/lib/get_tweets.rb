@@ -23,34 +23,27 @@ module Hungrlr
     end
 
     def collect_all_tweets
-      fetch_accounts["accounts"].each do |account|
-        tweets = get_tweets(account["nickname"], account["last_status_id"])
-        tweets_hash = prepare_tweets(tweets)
+      twitter_accounts.each do |account|
+        response = get_tweets(account["nickname"], account["last_status_id"])
+        tweets_hash = build_tweet_hash(response)
         create_tweets_for_user(account["nickname"], tweets_hash)
       end
     end
 
-    def fetch_accounts
+    def twitter_accounts
       accounts = Net::HTTP.get(URI("#{base_url}/users.json?token=HUNGRLR"))
-      JSON.parse(accounts)
+      JSON.parse(accounts)["accounts"]
     end
 
     def get_tweets(nickname, last_status_id)
       client.user_timeline(nickname, since_id: last_status_id)
     end
 
-    def prepare_tweets(tweets)
+    def build_tweet_hash(tweets)
       tweets.collect do |tweet|
-        {
-          comment: tweet.text,
-          link: tweet.source,
-          external_id: tweet.id,
-          created_at: tweet.created_at,
-        }
+        { comment: tweet.text, link: tweet.source,
+          status_id: tweet.id, created_at: tweet.created_at }
       end
     end
   end
 end
-
-tc = Hungrlr::TweetProcessor.new
-tc.collect_all_tweets

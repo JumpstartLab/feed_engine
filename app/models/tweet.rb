@@ -1,25 +1,28 @@
 class Tweet < Growl
+
   LINK_GSUB = /(?:http|https):\/\/[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?:(?::[0-9]{1,5})?\/[^\s]*)?/ix
+
   def comment_with_link
-    gsub_links
-    gsub_username
+    add_links.add_username_link
     self.comment
   end
 
-  def gsub_links
+  def add_links
     links = self.comment.scan(LINK_GSUB)
     links.each do |link|
       real_link = "<a href='#{link}'>#{link}</a>"
       self.comment = comment.gsub("#{link}", real_link)
     end
+    self
   end
 
-  def gsub_username
+  def add_username_link
     usernames = self.comment.scan(/@(\w+)\s/)
     usernames.each do |username|
       link = "<a href='http://twitter.com/#{username.first}'>@#{username.first}</a>"
       self.comment = comment.gsub("@#{username.first}", link)
     end
+    self
   end
 
   def icon
