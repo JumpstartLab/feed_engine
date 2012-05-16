@@ -31,7 +31,7 @@ describe Item do
     end
   end
 
-  describe "is destroyed when a", :focus => true do
+  describe "is destroyed when a" do
     before(:all) do
       message = Fabricate.build(:message)
       link = Fabricate.build(:link)
