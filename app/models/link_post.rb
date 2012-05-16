@@ -7,6 +7,7 @@
 #  description :string(255)
 #  created_at  :datetime        not null
 #  updated_at  :datetime        not null
+#  points      :integer         default(0)
 #  refeed_id   :integer
 #
 

@@ -7,6 +7,7 @@
 #  created_at  :datetime        not null
 #  updated_at  :datetime        not null
 #  image       :string(255)
+#  points      :integer         default(0)
 #  refeed_id   :integer
 #
 

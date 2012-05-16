@@ -7,6 +7,7 @@
 #  updated_at :datetime        not null
 #  title      :string(255)
 #  body       :text
+#  points     :integer         default(0)
 #  refeed_id  :integer
 #
 
