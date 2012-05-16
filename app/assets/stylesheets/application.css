@@ -52,7 +52,7 @@ textarea {
   margin-bottom: 20px;
 }
 #main_content{
-  margin-top:120px;
+  margin-top:40px;
   min-height:700px;
 }
 #footer {
@@ -111,4 +111,7 @@ ul.contained.awesome-tabs-content {
 }
 ul.contained.awesome-tabs-content > li {
   border:none !important;
+}
+.pull_down_notice {
+  padding-top:90px;
 }
