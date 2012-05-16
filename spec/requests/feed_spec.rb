@@ -83,13 +83,26 @@ describe "Feed" do
     end
 
     context "when a logged in user views another feed" do
-      it "shows a button to refeed each post" do
+      before(:each) do
+        login_factory_user(user.email)
         visit user_domain
+      end
+
+      it "shows a button to refeed each post" do
         user_2.text_items.each do |item|
           within("#item_#{item.id}") do
             page.should have_link("Refeed")
           end
         end
+      end
+
+      it "refeeds an item" do
+        sample_item = user_2.text_items.first
+        within("#item_#{sample_item.id}") { click_on "Refeed" }
+        page.should have_content("You retrouted")
+        visit "http://#{user.display_name}.example.com"
+        page.should have_content sample_item.body
+        save_and_open_page
       end
     end
   end
