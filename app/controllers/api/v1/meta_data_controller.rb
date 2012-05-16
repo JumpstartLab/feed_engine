@@ -1,4 +1,4 @@
-class Api::V1::MetaDataController < ApplicationController
+class Api::V1::MetaDataController < ActionController::Base
     before_filter :authenticate_user
 
   def create
