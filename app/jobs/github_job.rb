@@ -2,20 +2,19 @@ class GithubJob
   @queue = :gist
 
   def self.perform(current_user, authentication)
-    client = Octokit::Client.new({
-    :consumer_key => ENV[""],
-    :consumer_secret => ENV[""],
+    github = Github::Event.new({
+    :consumer_key => ENV["GITHUB_DEV_KEY"],
+    :consumer_secret => ENV["GITHUB_SECRET"],
     :oauth_token => authentication["token"],
     :oauth_token_secret => authentication["secret"]})
-  uid = authentication["uid"] 
+    uid = authentication["uid"] 
 
   user = User.find(current_user["id"])
-  client.user_timeline(uid.to_i).reverse.each do |tweet| 
-    twitter_item = user.twitter_items.create(:tweet => tweet)
-    user.add_stream_item(twitter_item)
+  client.events(uid.to_i).reverse.each do |gist| 
+    github_item = user.github_items.create(:gist => gist)
+    user.add_stream_item(github_item)
   end 
   user.save
   end 
 end 
-  end
-end
+

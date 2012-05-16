@@ -7,7 +7,7 @@ class TwitterJob
     :consumer_secret => ENV["TWITTER_DEV_SECRET"],
     :oauth_token => authentication["token"],
     :oauth_token_secret => authentication["secret"]})
-  uid = authentication["uid"] 
+   uid = authentication["uid"] 
 
   user = User.find(current_user["id"])
   client.user_timeline(uid.to_i).reverse.each do |tweet| 
