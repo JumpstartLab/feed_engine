@@ -8,11 +8,13 @@
 #  postable_type :string(255)
 #  created_at    :datetime
 #  updated_at    :datetime
+#  refeed_id     :integer
 #
 
 class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :postable, :polymorphic => true, dependent: :destroy
+  attr_accessible :postable, :refeed_id
 
   def as_json(*params)
     post = self.postable
@@ -31,4 +33,7 @@ class Post < ActiveRecord::Base
     self.postable
   end
 
+  def refeed?
+    refeed_id.present?
+  end
 end

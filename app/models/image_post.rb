@@ -7,7 +7,6 @@
 #  created_at  :datetime        not null
 #  updated_at  :datetime        not null
 #  image       :string(255)
-#  refeed_id   :integer
 #
 
 # CCS: Note that CarrierWave sets #remote_image_url to nil...
@@ -53,19 +52,7 @@ class ImagePost < ActiveRecord::Base
     @download_failed
   end
 
-  def refeed?
-    refeed_id.present?
-  end
-
   def link
     api_item_url(user_display_name: user.display_name, id: id)
-  end
-
-  def refeed_link
-    if refeed?
-      api_item_url(user_display_name: user.display_name, id: refeed_id)
-    else
-      ""
-    end
   end
 end

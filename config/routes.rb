@@ -13,7 +13,9 @@ FeedEngine::Application.routes.draw do
     resources "feeds" do
       collection do
         scope ":user_display_name" do
-          resources "items"
+          resources "items" do
+            resources "refeeds"
+          end
         end
       end
     end
