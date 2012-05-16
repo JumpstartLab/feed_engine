@@ -60,6 +60,14 @@ class User < ActiveRecord::Base
     tweets.size > 0
   end
 
+  def subscribed_to?(user)
+    inverse_subscriptions.where(user_id: user.id).size > 0
+  end
+
+  def not_subscribed_to?(user)
+    !subscribed_to?(user)
+  end
+
   def avatar
     require 'digest/md5'
     "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email)}"
