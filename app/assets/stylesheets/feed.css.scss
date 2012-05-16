@@ -1,4 +1,5 @@
 @import "variables";
+@import "containers";
 
 .feed_row {
   padding: 0 20px 0 50px;
@@ -10,15 +11,13 @@
 }
 
 .item-header-user {
-  font-size: 24px;
+  font-size: 32px;
+  font-weight: 700;
 }
 
-$body_font_size: 16px;
-$body_font: comic sans;
-
-.text_item_body {
-  font-size: $body_font_size;
-  font-family: $body_font;
+.text-item-body {
+  font-size: 24px; 
+  font-family: $font;
 }
 
 .body_image {
@@ -37,21 +36,14 @@ $body_font: comic sans;
 }
 
 .item-container-body {
-  -webkit-border-radius: 25px;
-  border-radius: 5px;
-  background-color: $trout; 
-  font-size: 16px;
-  margin: 30px 0 10px 0;
-  padding: 10px;
-  font-family: "museo-slab"
+  @include container;
+  padding: 10px 20px 20px 20px;
 }
 
-.items-container {
-  min-height: 140px; 
-  background-color: #FAFAFA;
-  border: 1px solid #eee;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: 4px;
+.points-container {
+  float: right;
 }
 
+.points {
+  font-size: 48px;
+}
