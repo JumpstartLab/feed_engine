@@ -1,4 +1,5 @@
-require './app/lib/get_tweets'
+require './app/lib/tweet_processor'
+
 class PullTwitterFeed
   @queue = :twitter
 
