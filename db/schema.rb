@@ -11,6 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20120516002105) do
 
   create_table "delayed_jobs", :force => true do |t|
@@ -36,6 +37,9 @@ ActiveRecord::Schema.define(:version => 20120516002105) do
     t.integer  "subscription_id"
     t.string   "repo"
   end
+=======
+ActiveRecord::Schema.define(:version => 20120516024726) do
+>>>>>>> master
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -52,6 +56,14 @@ ActiveRecord::Schema.define(:version => 20120516002105) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
+  create_table "github_events", :force => true do |t|
+    t.string   "event_type"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.integer  "subscription_id"
+    t.string   "repo"
+  end
 
   create_table "images", :force => true do |t|
     t.text     "description"
@@ -111,6 +123,7 @@ ActiveRecord::Schema.define(:version => 20120516002105) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.string   "display_name"
+    t.string   "api_key"
   end
 
 end
