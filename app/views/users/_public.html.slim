@@ -10,6 +10,8 @@ div.span4.offset4
     p
       - if post.message? || post.tweet?
         = post.body
+      - if post.github_event?
+        | #{post.event_type} on #{post.repo}
       - if post.link?
         h3= link_to post.url, post.url
         br/
@@ -22,4 +24,8 @@ div.span4.offset4
       = post.created_at
       br/
       = link_to @user.display_name, user_path(@user)
+      - if post.tweet?
+        |  via Twitter
+      - if post.github_event?
+        |  via  Github
   = paginate @posts
