@@ -18,8 +18,8 @@ FeedEngine::Application.routes.draw do
   match "/auth/:provider/callback" => "subscriptions#create"
 
   constraints :subdomain => 'api', :format => :json do
-    match '/feeds/:display_name(.:format)' => 'api/users#show', as: "feed"
-    match '/feeds/:display_name/items/:id' => 'api/items#show', as: "feed_item"
+    match '/feeds/:display_name(.:format)' => 'api/users#show', as: "feed", :defaults => { :format => 'json' }
+    match '/feeds/:display_name/items/:id' => 'api/items#show', as: "feed_item", :defaults => { :format => 'json' }
   end
 
   constraints(Subdomain) do
