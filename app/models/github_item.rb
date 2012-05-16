@@ -1,5 +1,5 @@
 class GithubItem < ActiveRecord::Base
-  attr_accessible :activity
+  attr_accessible :gist
 
   belongs_to :user 
 
