@@ -71,9 +71,5 @@ describe "Feed" do
         page.should have_content(item.body)
       end
     end
-
-    it "has the user as the title" do
-      find('h1').should have_content user.display_name
-    end
   end
 end

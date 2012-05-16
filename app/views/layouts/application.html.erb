@@ -33,7 +33,7 @@
       <ul class="nav nav-section">
         <% if user_signed_in? %>
           <li class="offset7 pull-left navigation-item">
-          <a href="<%= root_url(:subdomain => current_user.display_name) %>"> <span class="raphael-icon">S</span>Home </a>
+          <a href="<%= root_url(:subdomain => current_user.display_name) %>"> <span class="raphael-icon">S</span>Stream</a>
           </li>
           <li class="pull-left navigation-item">
           <a href="<%= dashboard_url(:subdomain => false) %>"> <span class="raphael-icon">></span>Dashboard</a>
