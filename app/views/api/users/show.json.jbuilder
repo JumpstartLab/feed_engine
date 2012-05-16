@@ -17,6 +17,7 @@ json.items do |json|
       json.link feed_item_url(@user.display_name, item.id)
       json.refeed "false"
       json.refeed_link ""
+
   end
 end
 
