@@ -55,11 +55,12 @@ class Subscription < ActiveRecord::Base
                             )
     end
   end
+
   def self.get_all_new_tweets
     twitter_subscriptions.each do |t_subscription|
       t_subscription.get_new_tweets
     end
-    self.delay(:run_at => GET_TWEET_FREQUENCY.seconds.from_now).get_all_new_tweets
+    self.delay(:run_at => SUBSCRIPTION_FREQ.seconds.from_now).get_all_new_tweets
   end
 
   def get_new_tweets
@@ -67,7 +68,7 @@ class Subscription < ActiveRecord::Base
     i = 0
     while true do
       tweet = Twitter.user_timeline(self.user_name)[i]
-      if tweet.created_at > (Time.now - GET_TWEET_FREQUENCY)
+      if tweet.created_at > (Time.now - SUBSCRIPTION_FREQ)
         new_tweets << tweet
       else
         break
