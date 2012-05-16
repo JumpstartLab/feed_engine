@@ -29,6 +29,5 @@ class Api::V1::Feeds::StreamItemsController < Api::V1::BaseController
       render :json => {errors: ["Token does not match specified feed"]},
                       :status => :unauthorized
     end
-
   end
 end

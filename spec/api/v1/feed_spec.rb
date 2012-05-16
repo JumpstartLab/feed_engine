@@ -80,6 +80,7 @@ describe "API feeds/user/... ", :type => :api do
   end
 
   context "getting a feed item" do
+    default_url_options[:host] = "api.example.com"
     it "returns a json representation for a text post" do
       item = user.text_items.last
       stream_item = user.stream_items.where(:streamable_id => item.id).where(:streamable_type => item.class.name).first
@@ -91,7 +92,7 @@ describe "API feeds/user/... ", :type => :api do
       resp["type"].should == item.class.name
       Date.parse(resp["created_at"]).should == Date.parse(item.created_at.to_s)
       resp["body"].should == item.body
-      resp["link"].should == v1_feeds_user_stream_item_path(item.user, item.stream_items.first)
+      resp["link"].should == api_item_url(item.user, item)
     end
   end
 
@@ -113,9 +114,9 @@ describe "API feeds/user/... ", :type => :api do
       feed["name"].should == user.display_name
       feed["id"].should == user.id
       feed["private"].should == false
-      feed["link"].should == v1_feeds_user_stream_items_path(user)
-      feed["items"]["first_page"].should == v1_feeds_user_stream_items_path(user, :page => 1)
-      feed["items"]["last_page"].should == v1_feeds_user_stream_items_path(user, :page => (user.stream_items.count/12.0).ceil)
+      feed["link"].should == api_feed_url(user)
+      feed["items"]["first_page"].should == api_feed_url(user, :page => 1)
+      feed["items"]["last_page"].should == api_feed_url(user, :page => (user.stream_items.count/12.0).ceil)
     end
 
     it "formats the json response for an image_item " do

@@ -29,18 +29,13 @@ FeedEngine::Application.routes.draw do
 
 
   constraints :subdomain => "api" do
-    match "/v1/feeds/:display_name/items" => "api/v1/feeds/stream_items#create", :as => "new_api_item", :via => :post
-    match "/v1/feeds/:display_name" => "api/v1/feeds/stream_items#index", :as => "api_feed", :via => :get
-    match "/v1/feeds/:display_name/stream_items/:id" => "api/v1/feeds/stream_items#show", :as => "api_item"
+    match "feeds/:display_name/items" => "api/stream_items#create", :as => "new_api_item", :via => :post
+    match "feeds/:display_name" => "api/feeds#show", :as => "api_feed", :via => :get
+    match "feeds/:display_name/stream_items/:id" => "api/stream_items#show", :as => "api_item"
 
     scope :module => 'api' do
-      namespace :v1 do
-        namespace :feeds do
-          resources :users, :only => [:show] do
-            resources :stream_items, :only => [:index, :show, :create]
-          end
-        end
-      end
+      resources :feeds, :only => [:show]
+      resources :stream_items, :only => [:show, :create]
     end
   end
 
