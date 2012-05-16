@@ -14,16 +14,16 @@
 
 class Authentication < ActiveRecord::Base
   attr_accessible :user_id, :provider, :token, :secret, :uid
-  attr_accessor :provider, :uid
 
   belongs_to :user
-  # after_create :import_items
+  after_create :import_items
 
   def create_with_omniauth(auth)
     self.update_attributes(provider: auth["provider"],
                            token: auth["credentials"]["token"],
                            secret: auth["credentials"]["secret"],
                            uid: auth["uid"])
+    save!
   end
 
   def import_items
