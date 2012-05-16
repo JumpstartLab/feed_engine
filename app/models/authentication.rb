@@ -1,6 +1,7 @@
 class Authentication < ActiveRecord::Base
   attr_accessible :user, :token, :secret, :provider
   belongs_to :user
+  has_one :twitter_account
 
   def self.twitter
     where(provider: "twitter").first

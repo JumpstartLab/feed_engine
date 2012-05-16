@@ -1,10 +1,6 @@
 class Api::V1::UserTweetsController < Api::V1::BaseController
   # respond_to :json
 
-  def index
-    @users = User.find_twitter_users
-  end
-
   def create
     tweets = JSON.parse(params["tweets"])
     tweets.each do |tweet|

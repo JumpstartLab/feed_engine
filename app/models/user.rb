@@ -19,6 +19,11 @@ class User < ActiveRecord::Base
   has_many :messages
   has_many :links
   has_many :tweets
+  has_one :twitter_account, :through => :authentications
+
+  def twitter_account
+    authentications.twitter.twitter_account if authentications.twitter
+  end
 
   def relation_for(type)
     self.send(type.downcase.pluralize.to_sym).scoped rescue messages.scoped
@@ -45,8 +50,8 @@ class User < ActiveRecord::Base
     growls.by_type_and_date(type)
   end
 
-  def last_twitter_id
-    self.tweets.order(:external_id).last.external_id if self.tweets.size > 0
+  def has_tweets?
+    tweets.size > 0
   end
 
   def avatar

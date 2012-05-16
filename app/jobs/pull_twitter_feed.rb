@@ -3,8 +3,7 @@ class PullTwitterFeed
   @queue = :twitter
 
   def self.perform
-    tweets = GetTweets::Tweets.new
-    tweets.send
+    tweets = Hungrlr::TweetProcessor.new
+    tweets.create_tweets
   end
-
 end
