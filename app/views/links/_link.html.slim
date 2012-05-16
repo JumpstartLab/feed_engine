@@ -30,5 +30,6 @@
 .row
   .pull_right
     a.small.green.button.radius.points POINTS!
-    = link_to "Regrowl", regrowled_index_path(id: link.id), method: :post, class: "small blue button radius"
+    - if current_user && current_user.can_regrowl?(link)
+      = link_to "Regrowl", regrowled_index_path(id: link.id), method: :post, class: "small blue button radius"
 hr

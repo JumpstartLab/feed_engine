@@ -81,6 +81,10 @@ class User < ActiveRecord::Base
   def github?
     authentications.github?
   end
+
+  def can_regrowl?(original_growl)
+    !growls.where(regrowled_from_id: original_growl.id).any?
+  end
 end
 
 # == Schema Information

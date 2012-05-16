@@ -1,21 +1,27 @@
 require 'spec_helper'
 
 describe "Regrowl" do
-  let!(:user1) { FactoryGirl.create(:user_with_growls) }
-  let!(:user2) { FactoryGirl.create(:user) }
-  before(:each) do
-    Capybara.app_host = "http://#{user2.display_name}.hungrlr.test"
-    login(user2)
-    visit "http://#{user1.display_name}.hungrlr.test"
+  let!(:user) do
+    FactoryGirl.create(:user_with_growls)
+  end
+  let!(:user2) do
+    FactoryGirl.create(:user)
   end
   context "Refeeding an item" do
+    before(:each) do
+      login(user)
+      Capybara.app_host = "http://#{user.display_name}.hungry.dev"
+      visit root_path
+    end
+
     it "regrowls" do
+      save_and_open_page
       click_on "Regrowl"
       page.should have_content "Regrowl Successful"
     end
     it "displays on my feed" do
       click_on "Regrowl"
-      visit "http://#{user2.display_name}.hungrlr.test"
+      visit "http://#{user2.display_name}.hungrlr.dev"
       page.should have_content user2.display_name
     end
   end
