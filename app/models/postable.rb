@@ -13,10 +13,6 @@ module Postable
     self.class.name
   end
 
-  def item
-    Item.find_by_post_id_and_post_type(id, self.class.to_s.downcase)
-  end
-
   def create_item
     Item.create(
       :post_id => id,
