@@ -8,22 +8,41 @@
 
 .dashboard-text-field {
   @include text-field;
-  width: 450px;
+  width: 400px;
 }
 
-.dashboard-text-area {
+@mixin dashboard-text-area {
   width: 450px;
+  height: 100px;
   font-size: $input-font-size;
 }
 
-.text-item-submit-button {
-  @include trout-button;
-  margin: 10px 0 0 330px;
-  padding: $submit-button-padding; 
+.text-item-text-area {
+  @include dashboard-text-area;
+  margin: 0 0 0 65px;
+}
+
+.link-item-text-area {
+  @include dashboard-text-area;
+  width: 400px;
+}
+
+.text-item-label {
+  font-family: $font;
+  font-size: 16px;
+  padding: 0 0 10px 0;
+}
+
+.simple_form div.boolean, .simple_form input[type="submit"] {
+    margin-left: 435px;
 }
 
 .link-item-submit-button {
   @include trout-button;
   margin: 10px 0 0 330px;
   padding: $submit-button-padding; 
+}
+
+.dashboard-title {
+  font-family: $font;
 }
