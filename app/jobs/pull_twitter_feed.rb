@@ -4,7 +4,7 @@ class PullTwitterFeed
   @queue = :twitter
 
   def self.perform
-    tweets = Hungrlr::TweetProcessor.new
-    tweets.create_tweets
+    tweet_processor = Hungrlr::TweetProcessor.new
+    tweet_processor.run
   end
 end
