@@ -19,7 +19,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
                                         token: data["credentials"]["token"],
                                         secret: data["credentials"]["secret"])
     
-     
+    puts "***************************************"
+    puts data.inspect
+    puts "***************************************"
     redirect_to new_authentication_path, :notice => "Github account successfully added."
   end
 end
