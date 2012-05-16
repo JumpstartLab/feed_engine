@@ -11,7 +11,7 @@
 #
 
 class TwitterPost < ActiveRecord::Base
-  attr_accessible :published_at, :text, :twitter_id
+  attr_accessible :published_at, :text, :twitter_id, :created_at
   has_one :post, :as => :postable, dependent: :destroy
   has_one :user, :through => :post
    

@@ -14,7 +14,7 @@ module Fetcher
     User.find(user_id).twitter_posts.create(
       twitter_id: status.id,
       text: status.text,
-      published_at: status.created_at
+      created_at: status.created_at
       )
   end
 

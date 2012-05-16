@@ -19,6 +19,7 @@ gem 'rabl'
 gem 'omniauth-twitter'
 gem 'omniauth-github'
 gem 'twitter'
+gem 'octokit'
 gem 'delayed_job_active_record'
 gem 'daemon'
 
