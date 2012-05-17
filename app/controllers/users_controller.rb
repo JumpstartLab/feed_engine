@@ -52,7 +52,4 @@ class UsersController < ApplicationController
     session[:user_id] = @user.id
     @user.send_welcome_email
   end
-
-  def set_user_from_subdomain
-  end
 end
