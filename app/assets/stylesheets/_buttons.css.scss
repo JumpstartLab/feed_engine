@@ -11,10 +11,6 @@ $submit-button-padding: 10px 40px 10px 40px;
   margin: 5px;
 }
 
-.btn-large {
-  @include trout-button; 
-}
-
 .login-button {
   padding: 10px 40px 10px 40px;
   margin: 10px 0 0 120px;

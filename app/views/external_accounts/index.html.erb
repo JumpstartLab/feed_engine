@@ -1,12 +1,18 @@
-<p><strong>Link Twitter</strong></p>
-<a href="users/auth/twitter" class="auth_provider">
-  Twitter
-</a>
-
-<p><strong>Link Github</strong></p>
-<a href="users/auth/github" class="auth_provider">
-  Github
-</a>
-
 <br/>
-<%= link_to "Skip this Step", external_accounts_skip_path %>
+<div class="span12 external-services-container">
+  <h1>External Services</h1>
+  <br/>
+  <div class="span3">
+    <%= image_tag "../assets/twitter-bird.png" %>
+    <span class="twitter-label">Twitter</span>
+    <%= link_to "Connect", "users/auth/twitter", :class => "btn btn-large" %>
+  </div>
+  <div class="span3">
+    <%= image_tag "../assets/octocat.png" %>
+    <span class="github-label">Github</span>
+    <%= link_to "Connect", "users/auth/github", :class => "btn btn-large" %>
+  </div>
+  <div class="span3 service-continue-container">
+    <%= link_to "Continue", external_accounts_skip_path, :class => "btn-primary btn-large" %>
+  </div>
+</div>
