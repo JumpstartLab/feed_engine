@@ -17,26 +17,6 @@ class Post < ActiveRecord::Base
   belongs_to :postable, :polymorphic => true, dependent: :destroy
   attr_accessible :postable, :refeed_id, :points
 
-  # def as_json(*params)
-  #   post = self.postable
-  #   {id: post.inspect}
-  # end
-
-  # def as_json(*params)
-  #   post = self.postable
-  #   if post.class == ImagePost
-  #     {:photo => post.image.big, :description => post.description,
-  #       :created_at => post.created_at}
-  #   elsif post.class == LinkPost
-  #     {:link => post.url, :description => post.description,
-  #       :created_at => post.created_at}
-  #   elsif post.class == TextPost
-  #     {title: post.title, :body => post.body, :created_at => post.created_at}
-  #   elsif post.class == TwitterPost
-  #     {title: post.twitter_id, :body => post.text, :created_at => post.created_at}
-  #   end
-  # end
-
   def add_point
     self.points += 1
   end
