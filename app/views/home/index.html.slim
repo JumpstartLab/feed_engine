@@ -1,0 +1,9 @@
+- if current_user
+  = "Logged in as #{current_user.email} | "
+  = link_to 'sign out', logout_path
+- else
+  .span5
+    = link_to 'Sign Up', signup_path, class: "btn btn-primary btn-large"
+  .span5
+    h3 Log in
+    = render :partial => "sessions/form"
