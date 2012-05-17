@@ -1,24 +1,30 @@
 @import "variables";
+@import "containers";
 
 .feed_row {
   padding: 0 20px 0 50px;
 }
 
-.item-header {
-  padding: 15px 0;
-  font-size: 14px;
-}
-
 .item-header-user {
-  font-size: 24px;
+  font-size: 14px;
+  font-family: $font;
+  font-weight: 500;
+  vertical-align: bottom;
+  color: $trout-secondary;
+  padding-left: 5px;
 }
 
-$body_font_size: 16px;
-$body_font: comic sans;
+.item-user-image {
+  @include rounded-corners;
+  width: 48px;
+  height: 48px;
+}
 
-.text_item_body {
-  font-size: $body_font_size;
-  font-family: $body_font;
+.text-item-body {
+  font-size: 16px; 
+  font-weight: 200;
+  font-family: $font;
+  color: $font-color;
 }
 
 .body_image {
@@ -36,22 +42,125 @@ $body_font: comic sans;
  word-wrap: break-word;
 }
 
+.item-time {
+  font-family: $font;
+  font-size: 14px;
+  font-weight: 500;
+  vertical-align: bottom;
+  color: $trout-secondary;
+}
+
 .item-container-body {
-  -webkit-border-radius: 25px;
-  border-radius: 5px;
-  background-color: $trout; 
+  @include container;
+  padding: 10px 15px 15px 15px;
+  -webkit-box-shadow: 1px 1px 3px 1px rgba(1, 1, 1, 0.5);
+  box-shadow: 1px 1px 3px 1px rgba(1, 1, 1, 0.5);
+}
+
+.points-container {
+  float: right;
+  color: $trout-main-color; 
+}
+
+.entypo-icon {
+  font-size: 32px;
+}
+
+.points {
   font-size: 16px;
-  margin: 30px 0 10px 0;
+}
+
+.image-item {
+ max-height: 500px;
+ max-width: 500px;
+}
+
+/*Post logos*/
+@mixin item-logo {
+  font-size: 24px;
+  padding: 0 0 0 5px;
+  float: right;
+  color: $trout-main-color;
+}
+
+.post-logo {
+ @include item-logo;
+}
+
+.twitter-logo {
+  @include item-logo;
+  color: $twitter-blue; 
+}
+
+.linked-post-logo {
+  font-size: 100px;
+}
+
+.linked-twitter-logo {
+  font-size: 100px;
+  color: $twitter-blue; 
+}
+
+.refeed {
+  @include item-logo;
+}
+
+/*Stats*/
+.feed-meta-container {
+  @include container;
   padding: 10px;
-  font-family: "museo-slab"
+  margin: 45px 0 0 100px;
+}
+$stat-count-font-size: 18px;
+
+@mixin stat-container {
+  margin: 15px 18px 0 20px;
+  outline: 1px solid $trout-main-color;
+  outline-offset: 10px;
 }
 
-.items-container {
-  min-height: 140px; 
-  background-color: #FAFAFA;
-  border: 1px solid #eee;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: 4px;
+.post-count-container {
+  @include stat-container;
 }
 
+.post-count {
+  font-size: $stat-count-font-size;
+}
+
+.following-count-container {
+  @include stat-container;
+}
+
+.following-count {
+  font-size: $stat-count-font-size;
+}
+
+.follower-count-container {
+  @include stat-container;
+}
+
+.follower-count {
+  font-size: $stat-count-font-size;
+}
+
+.text-item-body > a {
+  font-weight: 500;
+  color: $trout-main-color;
+}
+
+.text-item-body > a:visited {
+  font-weight: 500;
+  color: $trout-main-color;
+}
+
+.text-item-body > a:hover {
+  font-weight: 500;
+  color: $trout-main-color;
+  background-color: transparent;
+}
+
+.feed-title {
+  font-family: $font;
+  color: $trout-main-color;
+  padding: 0 0 14px 50px;
+}

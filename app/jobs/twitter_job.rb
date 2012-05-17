@@ -1,8 +1,7 @@
 class TwitterJob
-  @queue = :tweet 
+  @queue = :tweet
 
   def self.perform(current_user, authentication)
-
     client = twitter_client(authentication["token"],authentication["secret"])
 
     uid = authentication['uid'].to_i
@@ -10,13 +9,12 @@ class TwitterJob
     user = user_for_id(user['id'])
 
     last_tweet_id = users_last_tweet_id(user)
+
     
     # create all the twitter items
     # insert these items into the user's stream
-
     client.user_timeline(uid, :since_id => last_tweet_id).reverse.each do |tweet| 
       twitter_item = user.twitter_items.create(:tweet => tweet, :tweet_time => tweet.created_at)
-      user.add_stream_item(twitter_item)
     end 
 
     user.save

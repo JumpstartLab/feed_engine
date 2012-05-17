@@ -62,7 +62,7 @@ body {
 }
 
 .nav-section {
-  padding: 1px;
+  padding: 10px 0 0 115px
 }
 
 .logo {
@@ -93,6 +93,16 @@ body {
     font-style: normal;
 }
 
+.entypo-icon {
+    font-weight: normal;
+    font-style: normal;
+    line-height: normal;
+    font-family: 'EntypoRegular';
+    position: relative;
+    top: 0.1em;
+    font-size: 32px;
+}
+
 @font-face {
   font-family:
     'RaphaelIcons';
@@ -109,9 +119,9 @@ body {
     font-style: normal;
     line-height: normal;
     font-family: 'RaphaelIcons';
-    font-size: 64px;
     position: relative;
     top: 0.1em;
+    font-size: 32px;
 }
 
 .nav a:visited {
@@ -122,7 +132,7 @@ body {
 
 @mixin nav-item-links {
       text-decoration: none;
-      color: $trout;
+      color: $trout-main-color;
 }
 
 .nav > li.navigation-item {
@@ -132,11 +142,22 @@ body {
       }
   }
 
-.navigation-item-signup {
-    a:hover {
-      @include nav-item-links;
-      }
+.navigation-item-anon{
+  padding: 0 0 0 75px;
   }
 
 .nav > li > a:hover {
+}
+
+.nav-logo {
+  font-family: $font;
+  font-size: 48px;
+}
+
+.user-name {
+  color: $trout-main-color;
+  font-family: $font;
+  font-size: 24px;
+  padding: 14px 0 0 70px;
+  margin-right: 10px;
 }

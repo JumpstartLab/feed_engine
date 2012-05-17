@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :display_name, :password, :password_confirmation, :remember_me
   validates :display_name, :presence => true
   validates :display_name, :format => { :with => /\A[a-zA-Z0-9_-]+\z/,
-            :message => "may only contain letters, numbers, dashes, and underscores." }  
+            :message => "may only contain letters, numbers, dashes, and underscores." }
 
   after_create :send_welcome_mail
   before_save :ensure_authentication_token
@@ -23,9 +23,10 @@ class User < ActiveRecord::Base
   has_many :stream_items
   has_many :authentications
 
-  def add_stream_item(item)
+  def add_stream_item(item, refeed=true)
     stream_items << StreamItem.new(:streamable_id => item.id,
-                                   :streamable_type => item.class.name)
+                                   :streamable_type => item.class.name,
+                                   :refeed => refeed)
   end
 
   def to_param

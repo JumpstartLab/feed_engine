@@ -18,7 +18,7 @@
 
 .item-container {
   @include container;
-  padding: 50px 0px 10px 50px;
+  padding: 0 0 10px 0;
 }
 
 @mixin text-field {
@@ -26,4 +26,17 @@
   font-size: $input-font-size;
   height: 30px;
   width: 250px;
+}
+
+.edit-account-container {
+  padding: 10px 0 0 50px;
+  font-family: $font;
+  font-size: $input-font-size;
+}
+
+@mixin rounded-corners {
+	-webkit-border-radius: 5px;
+	-khtml-border-radius: 5px;	
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 }

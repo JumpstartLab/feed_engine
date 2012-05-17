@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "FeedEngine" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "troutr" %></title>
     <%= csrf_meta_tags %>
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -32,14 +32,15 @@
       <% end %>
       <ul class="nav nav-section">
         <% if user_signed_in? %>
-          <li class="offset7 pull-left navigation-item">
-          <a href="<%= root_url(:subdomain => current_user.display_name) %>"> <span class="raphael-icon">S</span>Home </a>
+          <li class="user-name offset5 pull-left"><%= current_user.display_name %></li>
+          <li class="pull-left navigation-item">
+          <a href="<%= root_url(:subdomain => current_user.display_name) %>"> <span class="raphael-icon">S</span>Stream</a>
           </li>
           <li class="pull-left navigation-item">
           <a href="<%= dashboard_url(:subdomain => false) %>"> <span class="raphael-icon">></span>Dashboard</a>
           </li>
           <li class="pull-left navigation-item">
-          <a href="<%= destroy_user_session_path %>" data-method="delete"> <span class="raphael-icon">Ï</span>Logout </a>
+          <a href="<%= destroy_user_session_path(:subdomain => false)%>" data-method="delete"> <span class="raphael-icon">Ï</span>Logout </a>
           </li>
         <% else %>
           <% if request.fullpath == new_user_path %>
@@ -47,7 +48,12 @@
             <a href="<%= root_path %>"> <span class="raphael-icon">S</span>Home </a>
             </li>
           <% else %>
-            <li class="offset6 pull-left, navigation-item-signup">
+            <li class="offset7 pull-left navigation-item navigation-item-anon">
+            <a href="<%= login_path(:subdomain => false) %>">
+              <span class="raphael-icon">L</span>Login
+            </a>
+            </li>
+            <li class="pull-left navigation-item">
             <a href="<%= new_user_url(:subdomain => false) %>">
               <span class="raphael-icon">]</span>Sign Up
             </a>
@@ -56,6 +62,8 @@
       <% end %>
     </ul>
 
+    <br/>
+    <br/>
     <div class="content">
       <div class="row">
           <%= yield %>
@@ -63,7 +71,6 @@
     </div><!--/content-->
 
     <footer>
-    <p>&copy; Company 2012</p>
     </footer>
 
   </div> <!-- /container -->

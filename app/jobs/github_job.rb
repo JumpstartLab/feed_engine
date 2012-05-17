@@ -14,11 +14,25 @@ class GithubJob
     
 
     user = User.find(current_user["id"])
-    client.user_events(login).reverse.each do |gist| 
-      github_item = user.github_items.create(:gist => gist)
-      user.add_stream_item(github_item)
-    end 
+
+    # get all events
+    events = client.user_events(login)
+
+    # sort by ascending date (newest at top)
+    events = events.sort_by do |event|
+      DateTime.parse(event.gist.created_at)
+    end
+
+    # reverse to get oldest at top
+    events = events.reverse
+
+    events.each do |event|
+      event_id = event.gist.id
+      item = user.github_items.find_or_create_by_event_id(event_id)
+      item.gist = event.gist
+      item.save
+    end
     user.save
-  end 
-end 
+  end
+end
 

@@ -1,5 +1,7 @@
 <%= simple_form_for @image_item do |f| %>
-  <%= f.input :url, :placeholder => "Image URL", :class => "dashboard-text-field" %>
-  <%= f.input :comment, :placeholder => "Comment", :size => "40x10", :class => "dashboard-text-area" %>
-  <%= f.submit "Imagify", :class => "link-item-submit-button" %>
+  <%= f.input :url, :placeholder => "Image Url", :label_html => {:class => "text-item-label"}, 
+              :input_html => {:class => "dashboard-text-field"} %>
+  <%= f.input :comment, :placeholder => "Comment", :label_html => {:class => "text-item-label"}, 
+              :input_html => {:class => "link-item-text-area"} %>
+  <%= f.button :submit, "Imagify", :class => "btn-primary btn-large text-item-submit" %>
 <% end %>

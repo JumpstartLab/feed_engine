@@ -12,12 +12,10 @@ user = FactoryGirl.create(:user, :display_name => "testuser",
                          :password => "password",
                          :password_confirmation => "password")
 50.times do
-  item = FactoryGirl.create(:text_item)
-  user.text_items << item 
-  user.add_stream_item(item)
+  FactoryGirl.create(:text_item, :user => user)
 end
 
 50.times do
-  user.link_items << FactoryGirl.create(:link_item)
+  FactoryGirl.create(:link_item, :user => user)
 end
 

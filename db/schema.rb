@@ -51,8 +51,9 @@ ActiveRecord::Schema.define(:version => 20120516214456) do
     t.integer  "user_id"
     t.integer  "streamable_id"
     t.string   "streamable_type"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.boolean  "refeed",          :default => true
   end
 
   create_table "text_items", :force => true do |t|
