@@ -13,14 +13,16 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation,
                   :remember_me, :display_name
 
-  has_many :authentications, :dependent => :destroy
+  #has_many :authentications, :dependent => :destroy
+  has_one :authentication
   has_many :growls, :dependent => :destroy
   has_many :images
   has_many :messages
   has_many :links
   has_many :tweets
-  has_one :twitter_account, :through => :authentications
-  has_one :github_account, :through => :authentications
+  has_many :github_events
+  #has_one :twitter_account, :through => :authentications
+  has_one :github_account, :through => :authentication
 
   has_many :regrowls
 

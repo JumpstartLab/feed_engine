@@ -1,11 +1,10 @@
-class API::V1::UserGithubEventsController < API::V1::APIController
+class Api::V1::UserGithubEventsController < Api::V1::ApiController
   before_filter :verify_github_account
 
-  def created
-    events = JSON.parse(params["github_events"])
-
+  def create
+    events = JSON.parse(params["events"])
     events.each do |event|
-      @user.github_events.create(event_type: event["event_type"],
+      @user.github_events.create!(event_type: event["event_type"],
                           link: event["link"],
                           original_created_at: event["created_at"],
                           comment: event["comment"])
