@@ -60,8 +60,8 @@ ActiveRecord::Schema.define(:version => 20120517003558) do
     t.string   "postable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "refeed_id"
     t.integer  "points",        :default => 0
+    t.integer  "refeed_id"
   end
 
   create_table "text_posts", :force => true do |t|
