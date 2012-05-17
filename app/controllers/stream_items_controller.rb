@@ -8,7 +8,6 @@ class StreamItemsController < ApplicationController
     if @stream_item.save
       redirect_to :root, :notice => "You retrouted #{@stream_item.author.display_name}. Nice job!"
     else
-    raise @stream_item.errors.inspect
       redirect_to :root, :alert => "CAST YOUR LINE AGAIN"
     end
   end
