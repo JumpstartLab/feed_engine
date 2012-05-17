@@ -1,3 +1,8 @@
+-content_for(:head) do
+  javascript:
+    $(function(){
+      $('.alert').delay(1600).fadeOut(200);
+    });
 - if current_user.has_subscription?("twitter")
   h3 Connected with Twitter as #{current_user.subscription("twitter").user_name}
 - else
