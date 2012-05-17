@@ -6,6 +6,9 @@ class RefeedsController < ApplicationController
     if post.user == current_user
       flash[:notice] = "Can't refeed your own post"
       redirect_to :back
+    elsif current_user.posts.map(&:refeed_id).compact.include?(post.id)
+      flash[:notice] = "Don't get greedy! You've already refeeded this post"
+      redirect_to :back
     else
       original_post = post
       postable      = post.postable
