@@ -67,7 +67,7 @@ describe Image do
       end
       [".jpg", ".jpeg", ".gif", ".bmp", ".png"].each do |extension|
         it "allows files with #{extension}" do
-          image.url = "http://wow.com/wow.#{extension}"
+          image.url = "http://wow.com/wow#{extension}"
           image.should be_valid
         end
       end
