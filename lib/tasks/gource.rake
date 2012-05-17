@@ -8,7 +8,7 @@ task :gource do
 
   names  = `git log --pretty=format:"%an"`.split("\n")
   emails = `git log --pretty=format:"%ae"`.split("\n")
-  authors = names.zip(emails).each do |name, email|
+  authors = names.zip(emails).uniq.each do |name, email|
     author_file = File.join(avatar_folder, "#{name}.png")
     next if File.exist?(author_file)
 
