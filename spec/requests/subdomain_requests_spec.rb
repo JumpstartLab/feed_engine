@@ -14,8 +14,8 @@ describe User do
 
     it "is redirected to root with a message if subdomain doesn't exist" do
       set_host('foo')
-      visit root_path
-      page.should have_content "User foo not found"
+      visit user_path("foo")
+      page.should have_content "All Posts"
       current_path.should == root_path
     end
 
@@ -24,10 +24,15 @@ describe User do
         login_as(user)
       end
 
-      it "is shown the aggregated feed when visiting root path" do
+      it "is shown their feed when visiting subdomain root" do
         set_host(user.display_name)
         visit root_path
-        save_and_open_page
+        page.should have_content "#{user.display_name}"
+      end
+
+      it "is shown the aggregated feed when visiting root" do
+        set_host(user.display_name)
+        visit root_url(subdomain: false)
         page.should have_content "All Posts"
       end
 
