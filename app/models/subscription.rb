@@ -11,6 +11,7 @@
 #  updated_at :datetime        not null
 #
 
+# The model for any external subscriptions
 class Subscription < ActiveRecord::Base
   EVENT_LIST = ["PushEvent", "CreateEvent", "ForkEvent"]
   PROVIDER_TO_POST_TYPE = { "twitter" => "tweets", "github" => "github_events"}
@@ -33,7 +34,10 @@ class Subscription < ActiveRecord::Base
       new_posts = subscription.get_new_posts
       subscription.create_records_of_posts(new_posts)
     end
-    self.delay(:run_at => SUBSCRIPTION_FREQ.seconds.from_now).get_all_new_service_posts
+    self.delay(
+      :run_at =>
+      SUBSCRIPTION_FREQ.seconds.from_now
+    ).get_all_new_service_posts
   end
 
   def get_new_posts

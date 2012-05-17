@@ -10,6 +10,7 @@
 #  poster_id       :integer
 #
 
+# For tweets on a user who has authorized twitter
 class Tweet < ActiveRecord::Base
   include Postable
   include Service
