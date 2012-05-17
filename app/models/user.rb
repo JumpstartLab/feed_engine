@@ -105,6 +105,15 @@ class User < ActiveRecord::Base
     end.first
   end
 
+  def subscribed_to_all_services?
+    subscriptions.count == num_subscriptions
+  end
+
+
+  def num_subscriptions
+    Subscription.all.map(&:provider).uniq.count
+  end
+
   private
 
   def generate_password_token(column)
@@ -122,4 +131,5 @@ class User < ActiveRecord::Base
     )
     self.update_attributes api_key: key
   end
+
 end

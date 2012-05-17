@@ -1,16 +1,17 @@
+# For dealing with external subscriptions
 class SubscriptionsController < ApplicationController
   def new
 
   end
 
   def create
-    Subscription.create_with_omniauth(request.env["omniauth.auth"], current_user)
-    provider = request.env["omniauth.auth"]["provider"]
-    notice = "Your account has been linked with #{provider}"
-    if current_user.subscriptions.count < num_subscriptions && not_authorized_from_dashboard
-      redirect_to new_subscription_path, notice: notice
-    else
+    auth_response = request.env["omniauth.auth"]
+    Subscription.create_with_omniauth(auth_response, current_user)
+    notice = "Your account has been linked with #{auth_response["provider"]}"
+    if current_user.subscribed_to_all_services? || authorized_from_dashboard
       redirect_to dashboard_path, notice: notice
+    else
+      redirect_to new_subscription_path, notice: notice
     end
   end
 
@@ -19,18 +20,15 @@ class SubscriptionsController < ApplicationController
     if @subscription.destroy
       redirect_to :back, notice: "#{@subscription.provider} has been removed."
     else
-      redirect_to :back, notice: "#{@subscription.provider} could not be removed."
+      notice = "#{@subscription.provider} could not be removed."
+      redirect_to :back, notice: notice
     end
   end
 
   private
 
-  def num_subscriptions
-    2
-  end
-
-  def not_authorized_from_dashboard
-    !request.env["HTTP_REFERER"].include?("dashboard")
+  def authorized_from_dashboard
+    request.env["HTTP_REFERER"].include?("dashboard")
   end
 
 end

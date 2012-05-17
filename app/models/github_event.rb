@@ -11,6 +11,7 @@
 #  poster_id       :integer
 #
 
+# Events on Github that a user does
 class GithubEvent < ActiveRecord::Base
   include Postable
   include Service
