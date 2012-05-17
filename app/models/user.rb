@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   has_many :image_items
   has_many :link_items
   has_many :twitter_items
+  has_many :github_items
   has_many :stream_items
   has_many :authentications
 
@@ -31,6 +32,10 @@ class User < ActiveRecord::Base
   def to_param
     display_name
   end
+
+  def last_twitter_item
+    twitter_items.order("tweet_time DESC").first
+  end 
 
   private
 

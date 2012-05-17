@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120516013039) do
+ActiveRecord::Schema.define(:version => 20120516214456) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -19,6 +19,14 @@ ActiveRecord::Schema.define(:version => 20120516013039) do
     t.string   "uid"
     t.string   "token"
     t.string   "secret"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "login"
+  end
+
+  create_table "github_items", :force => true do |t|
+    t.text     "gist"
+    t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -60,6 +68,7 @@ ActiveRecord::Schema.define(:version => 20120516013039) do
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.datetime "tweet_time"
   end
 
   add_index "twitter_items", ["user_id"], :name => "index_twitter_items_on_user_id"
