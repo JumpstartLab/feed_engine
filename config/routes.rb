@@ -46,10 +46,10 @@ Hungrlr::Application.routes.draw do
     get '/login' => 'devise/sessions#new'
   end
 
-  resources :authentications, :only => [ :new ]
+  resources :authentications, :only => [ :new, :destroy ]
   resource :dashboard, :only => [ :show ]
   resources :growls, :only => [ :show, :create ]
-  resources :images, :links, :messages, :authentications
+  resources :images, :links, :messages
   resource :subscriptions, :only => [:create, :destroy]
 
   root :to => 'pages#home'

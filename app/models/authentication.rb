@@ -12,6 +12,10 @@ class Authentication < ActiveRecord::Base
     where(provider: "twitter").size > 0 ? true : false
   end
 
+  def self.github
+    where(provider: "github").first
+  end
+
   def self.github?
     where(provider: "github").size > 0 ? true : false
   end

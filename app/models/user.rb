@@ -56,7 +56,16 @@ class User < ActiveRecord::Base
   end
 
   def get_growls(type=nil)
-    growls.by_type_and_date(type)
+    # growls.by_type_and_date(type)
+    user_ids = inverse_subscriptions.pluck(:user_id)
+
+    tweets = Growl.where(user_id: id)
+    subscriptions = Growl.where(user_id: user_ids)
+
+    Growl.where do
+      (id.in tweets.select{id}) | 
+      (id.in subscriptions.select{id})
+    end.by_type_and_date(type)
   end
 
   def has_tweets?
@@ -92,6 +101,9 @@ class User < ActiveRecord::Base
     authentications.twitter?
   end
 
+  def github
+    authentications.github
+  end
 
   def github?
     authentications.github?

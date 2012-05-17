@@ -4,7 +4,7 @@
       = "#{@user.display_name}'s Feed"
       .unsubscribe{ style=("display: none" unless current_user.try(:subscribed_to?, @user)) }
         = button_to('UNSUBSCRIBE', subscriptions_path(:user_id => @user.id), :method => "delete", :remote => true, :class => 'small green button radius')
-      .subscribe{ style=("display: none" unless current_user.try(:not_subscribed_to?, @user)) }
+      .subscribe{ style=("display: none" unless current_user.try(:not_subscribed_to?, @user) && current_user != @user) }
         = button_to('SUBSCRIBE', subscriptions_path(:user_id => @user.id), :method => "post", :remote => true, :class => 'small green button radius')
 
     br
