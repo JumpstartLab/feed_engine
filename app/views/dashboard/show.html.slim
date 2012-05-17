@@ -2,18 +2,22 @@
   javascript:
     $(function() {
       $("#forms").html("#{j render :partial => "messages/form"}")
+      $('.actions').children('input:submit').addClass('btn btn-primary btn-large');
     });
     $("#add_message").live('click', function(){
       $("#forms").html("#{j render :partial => "messages/form"}")
       make_active(this);
+      $('.actions').children('input:submit').addClass('btn btn-primary btn-large');
     })
     $("#add_link").live('click', function(){
       $("#forms").html("#{j render :partial => "links/form"}")
       make_active(this);
+      $('.actions').children('input:submit').addClass('btn btn-primary btn-large');
     })
     $("#add_image").live('click', function(){
       $("#forms").html("#{j render :partial => "images/form"}")
       make_active(this);
+      $('.actions').children('input:submit').addClass('btn btn-primary btn-large');
     })
     $(function() {
       $("#posts").show();
@@ -21,12 +25,18 @@
       $("#services").hide();
       $("#subscriptions").hide();
       $("#account").hide();
-      show_div_for_error();
+      show_sidebar_for_error();
     });
     function show_div_for_error() {
       var error_class = $("#error_explanation h2").attr("class");
       if (error_class != null) {
         $("#add_" + error_class).click();
+      }
+    }
+    function show_sidebar_for_error() {
+      var label_text = $("#.field_with_errors label").text();
+      if (label_text == "Password") {
+        $("#account_id").click();
       }
     }
     $("#posts_id").live('click', function() {
@@ -76,6 +86,9 @@
       posts.find('.active').toggleClass('active inactive');
       $(post).toggleClass('inactive active');
     }
+    $(function(){
+      $('.actions').children('input:submit').addClass('btn btn-primary btn-large');
+    });
 br
 br
 div.span3
@@ -87,12 +100,12 @@ div.span3
       li= link_to "Subscriptions", "#", :id => "subscriptions_id", :class => "inactive"
       li= link_to "Account", "#", :id => "account_id", :class => "inactive"
 div.span7
-  div#posts
-    = link_to 'Text', "#", :class => "btn btn-info btn-medium active", :id => "add_message"
+  div#posts.fe-container
+    = link_to 'Text', "#", :class => "btn btn-info btn-medium active post_label", :id => "add_message"
     |&nbsp;&nbsp;&nbsp;&nbsp;
-    = link_to 'Link', "#", :class => "btn btn-info btn-medium inactive", :id => "add_link"
+    = link_to 'Link', "#", :class => "btn btn-info btn-medium inactive post_label", :id => "add_link"
     |&nbsp;&nbsp;&nbsp;&nbsp;
-    = link_to 'Image', "#", :class => "btn btn-info btn-medium inactive", :id => "add_image"
+    = link_to 'Image', "#", :class => "btn btn-info btn-medium inactive post_label", :id => "add_image"
     br
     br
     - [@image, @message, @link].each do |post|
@@ -113,23 +126,10 @@ div.span7
       - else
         = link_to "Make my posts private", nil, :class => "btn btn-primary btn-large"
   div#services
-    div
-      h2 Services
-      br
-      table.table.table-striped
-        tbody
-          tr
-            td Github
-            td
-              = link_to "Add", nil, :class => "btn btn-small btn-info"
-          tr
-            td Twitter
-            td
-              = link_to "Add", nil, :class => "btn btn-small btn-info"
-          tr
-            td Instagram
-            td
-              = link_to "Remove", nil, :class => "btn btn-small btn-info"
+    div.fe-container
+      =render partial: "subscriptions/subscriptions_table" if current_user.subscriptions.any?
+    div.fe-container
+      =render partial: "subscriptions/disconnected_table"
   div#subscriptions
     div
       h2 Subscriptions

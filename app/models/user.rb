@@ -8,20 +8,29 @@
 #  created_at      :datetime        not null
 #  updated_at      :datetime        not null
 #  display_name    :string(255)
+#  api_key         :string(255)
 #
 
 # Users of the site
 class User < ActiveRecord::Base
+  after_create :generate_api_key
+
   has_secure_password
+
   has_many :messages, :foreign_key => 'poster_id'
   has_many :images, :foreign_key => 'poster_id'
   has_many :links, :foreign_key => 'poster_id'
+  has_many :subscriptions
+  has_many :tweets, :through => :subscriptions, :foreign_key => 'poster_id'
   has_many :items, :foreign_key => 'poster_id'
 
   default_scope order(:created_at)
-  has_many :subscriptions
 
-  attr_accessible :email, :password, :password_confirmation, :display_name
+  attr_accessible :email,
+                  :password,
+                  :password_confirmation,
+                  :display_name,
+                  :api_key
 
   validates :email, :uniqueness => true
   validates_presence_of :email, :message => "is required"
@@ -38,17 +47,14 @@ class User < ActiveRecord::Base
     :exclusion => { :in => %w(www api nil) },
     :uniqueness => true
 
+  SERVICES_LIST =  %w(twitter github instagram)
+
   def send_welcome_email
     UserMailer.signup_notification(self).deliver
   end
 
   def posts
-    posts = []
-    [Message, Link, Image].each do |post_type|
-      post_collection = post_type.find_all_by_poster_id(self.id)
-      posts = posts | post_collection
-    end
-    posts
+    items.map(&:post)
   end
 
   def sorted_posts
@@ -61,5 +67,25 @@ class User < ActiveRecord::Base
 
   def subdomain
     display_name
+  end
+
+  def disconnected_services
+    SERVICES_LIST - subscriptions.map(&:provider).uniq
+  end
+
+  def post_page_count
+    (posts.length.to_f / 12).ceil
+  end
+
+  private
+
+  def generate_api_key
+    key = Digest::MD5.hexdigest(
+      'Elise punches puppies' +
+      Time.at(Time.now).nsec.to_s +
+      self.email +
+      rand(424242424242424242).to_s
+    )
+    self.update_attributes api_key: key
   end
 end

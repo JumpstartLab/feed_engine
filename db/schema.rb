@@ -11,7 +11,31 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120515012759) do
+ActiveRecord::Schema.define(:version => 20120516024726) do
+
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
+  create_table "github_events", :force => true do |t|
+    t.string   "event_type"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.integer  "subscription_id"
+    t.string   "repo"
+  end
 
   create_table "images", :force => true do |t|
     t.text     "description"
@@ -57,12 +81,21 @@ ActiveRecord::Schema.define(:version => 20120515012759) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "tweets", :force => true do |t|
+    t.integer  "subscription_id"
+    t.string   "body"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.integer  "poster_id"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "email"
     t.string   "password_digest"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.string   "display_name"
+    t.string   "api_key"
   end
 
 end
