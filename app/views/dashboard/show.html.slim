@@ -1,4 +1,7 @@
 - content_for :head do
+
+  link href="http://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet" type="text/css"
+
   javascript:
     $(function() {
       $("#forms").html("#{j render :partial => "messages/form"}")
@@ -94,7 +97,7 @@
     });
 br
 br
-div.span3
+div.span2
   div#sidebar
     ul
       li= link_to "Posts", "#", :id => "posts_id", :class => "active"
@@ -106,15 +109,15 @@ div.span7
   div#posts.fe-container
     = link_to "#", :class => "active post_label", :id => "add_message" do
       =content_tag(:span, "Text")
-      =image_tag("http://farm9.staticflickr.com/8156/7213395774_ec4daa4367_t.jpg")
+      =image_tag("/assets/pencil.gif")
     |&nbsp;&nbsp;&nbsp;&nbsp;
     = link_to "#", :class => "inactive post_label", :id => "add_link" do
       =content_tag(:span, "Link")
-      =image_tag("http://farm8.staticflickr.com/7234/7213342742_50e10a486c_t.jpg")
+      =image_tag("/assets/link.gif")
     |&nbsp;&nbsp;&nbsp;&nbsp;
     = link_to "#", :class => "inactive post_label", :id => "add_image" do
       =content_tag(:span, "Image")
-      =image_tag("http://farm6.staticflickr.com/5235/7213342782_b808c3b2ab_t.jpg")
+      =image_tag("/assets/photo.png")
     br
     br
     - [@image, @message, @link].each do |post|
