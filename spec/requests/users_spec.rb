@@ -171,6 +171,13 @@ describe "User pages" do
         User.last.encrypted_password.should == previous_password
       end
 
+      it "has a link to provide the user's api token which provides the token" do
+        page.should have_content("Show my Auth Token")
+        click_link_or_button("Show my Auth Token")
+        page.should have_content("#{user.authentication_token}")
+      end
+
     end
   end
+
 end

@@ -9,11 +9,6 @@
     br
     b Posted:
     link_time_ago= "#{time_ago_in_words image.created_at} ago"
-    - unless image.original_growl?
-      .retweet
-        img(src="assets/glyphicons/glyphicons_152_new_window.png")
-        | Regrowled by &nbsp;
-        = link_to image.user.display_name, "http://#{image.user.display_name}.#{request.domain}"
   .ten.columns
     = image.comment
     br
@@ -21,8 +16,15 @@
 .row
   .pull_right
     a.small.green.button.radius.points POINTS!
-    = "CURRENT USER: #{current_user.display_name if current_user}"
+    - unless image.original_growl?
+      .retweet
+        img(src="assets/glyphicons/glyphicons_152_new_window.png")
+        | Regrowled by &nbsp;
+        = link_to image.user.display_name, "http://#{image.user.display_name}.#{request.domain}"
     - if current_user && current_user.can_regrowl?(image)
-      = link_to "Regrowl", regrowled_index_path(id: image.id), method: :post, class: "small blue button radius"
+      = link_to "Regrowl", regrowled_index_path(id: image.id), method: :post, class: "small blue button radius regrowl", remote: true
+    - else
+      .regrowled.black.span.small.button.disabled.radius.button  Regrowled
+    .regrowled.black.span.small.disabled.radius.button(style="display:none;")  Regrowled!
 br
 hr

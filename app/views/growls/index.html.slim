@@ -43,3 +43,6 @@ coffee:
   $(".subscribe").click ->
     $(".unsubscribe").toggle()
     $(".subscribe").toggle()
+  $(".regrowl").click ->
+    $(this).hide()
+    $(this).parent().find(".regrowled").fadeIn()

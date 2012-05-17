@@ -3,11 +3,11 @@ class Api::V1::ApiController < ActionController::Base
   respond_to :json
 
   private
-
+  # current_user needs to become a helper method
   def authenticate_user_token
     @current_user = User.find_by_authentication_token(auth_token)
     unless @current_user
-      render :json => "Token is invalid.".to_json, status: :unauthorized
+      render :json => "Token is invalid.", status: :unauthorized
     end
   end
 
@@ -26,7 +26,7 @@ class Api::V1::ApiController < ActionController::Base
     if Rails.env.development? || Rails.env.test?
       request.env['HTTP_AUTH_TOKEN'] || params[:token]
     else
-      request.env['HTTP_AUTH_TOKEN']
+      request.env['X-HTTP-AUTHTOKEN'] || params[:token]
     end
   end
 end

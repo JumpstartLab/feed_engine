@@ -2,8 +2,9 @@ class RegrowledController < ApplicationController
   before_filter :authenticate_user!
 
   def create
-    Growl.regrowled_new(params[:id], current_user.id)
-    redirect_to root_path, :notice => "Regrowl Successful"
+    growl = Growl.find(params[:id])
+    growl.regrowled(current_user.id)
+    render status: :created, json: "Refeed Successful"
   end
 
 end

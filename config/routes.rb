@@ -2,28 +2,32 @@ Hungrlr::Application.routes.draw do
   require 'resque/server'
   mount Resque::Server.new, :at => "/resque"
 
-  scope module: "api" do
+  namespace "api" do ## Used for Ajax purposes
     namespace "v1" do
       get '/feeds/:display_name' => 'feeds#show'
       post '/feeds/:display_name' => 'feeds#create'
       resources :user_tweets, only: [:create, :index]
+      resources :user_github_events, only: [:create, :index]
       resources :meta_data, :only => [ :create ]
       get '/users/twitter' => 'users#twitter'
+      get '/users/github' => 'users#github'
     end
   end
 
   namespace "api" do
     namespace "v1" do
       resources :meta_data, only: [ :create ]
+      post '/feeds/:display_name/growls/:id/refeed' => 'feeds#refeed'
     end
   end
-
   constraints(Subdomain) do
     constraints :subdomain => 'api' do ## For external use
       scope module: "api" do
         namespace "v1" do
+          get '/users/twitter' => 'users#twitter'
           get '/feeds/:display_name' => 'feeds#show'
           post '/feeds/:display_name/items' => 'feeds#create'
+          post '/feeds/:display_name/growls/:id/refeed' => 'feeds#refeed'
           resources :user_tweets, only: [:create, :index]
           resources :meta_data, :only => [ :create ]
           resources :subscriptions, :only => [:index]
@@ -31,7 +35,6 @@ Hungrlr::Application.routes.draw do
       end
     end
     match '/' => 'growls#index'
-    # match '*' => "growls#index"
   end
   match "/home" => "pages#home"
 

@@ -116,3 +116,6 @@ ul.contained.awesome-tabs-content > li {
 .retweet {
   padding-top:30px;
 }
+.regrowled, .regrowl {
+  margin-left:20px !important;
+}

@@ -13,7 +13,6 @@ describe "Regrowl" do
       login(user2)
       visit root_path
       click_on "Regrowl"
-      page.should have_content "Regrowl Successful"
       visit "http://#{user2.display_name}.hungrlr.dev"
       page.should have_content user.display_name
     end

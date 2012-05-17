@@ -10,7 +10,6 @@ user = User.create(email: 'ed.weng@livingsocial.com',
                    password: 'hungry',
                    display_name: 'wengzilla')
 
-user.update_attribute("authentication_token", "HUNGRLR")
 
 user.growls << FactoryGirl.create(:image)
 user.growls << FactoryGirl.create(:link)
@@ -19,9 +18,10 @@ user.growls << FactoryGirl.create(:message)
 user.growls << FactoryGirl.create(:link)
 user.growls << FactoryGirl.create(:image)
 
-user = User.create(email: 'mike.silvis@livingsocial.com',
+user = User.create(email: 'mikesilvis@gmail.com',
                    password: 'hungry',
                    display_name: 'mikesilvis')
+user.update_attribute("authentication_token", "HUNGRLR")
 
 user.growls << FactoryGirl.create(:image)
 user.growls << FactoryGirl.create(:link)
