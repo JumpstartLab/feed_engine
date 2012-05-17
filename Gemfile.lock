@@ -149,6 +149,9 @@ GEM
     omniauth-github (1.0.1)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.0)
+    omniauth-instagram (1.0.0)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.0)
     omniauth-oauth (1.0.1)
       oauth
       omniauth (~> 1.0)
@@ -280,6 +283,7 @@ DEPENDENCIES
   devise
   fabrication
   faker
+  faraday (= 0.7.6)
   fog
   github_api
   jbuilder
@@ -289,6 +293,7 @@ DEPENDENCIES
   mustache
   omniauth
   omniauth-github
+  omniauth-instagram
   omniauth-twitter
   pg
   rails (= 3.2.3)

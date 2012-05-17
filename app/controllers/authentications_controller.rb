@@ -25,8 +25,9 @@ class AuthenticationsController < ApplicationController
 
   def get_handle(auth)
     case auth['provider']
-      when "twitter"  then auth["extra"]["raw_info"]["screen_name"]
-      when "github"   then auth["extra"]["raw_info"]["login"]
+      when "twitter"   then auth["extra"]["raw_info"]["screen_name"]
+      when "github"    then auth["extra"]["raw_info"]["login"]
+      when "instagram" then auth["info"]["nickname"]
     end
   end
 end
