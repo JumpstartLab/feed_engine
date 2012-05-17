@@ -12,6 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require_tree ./partials
 //= require_tree .
 //= require jquery.form
 //= require mustache
+
+

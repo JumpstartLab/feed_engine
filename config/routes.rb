@@ -1,4 +1,7 @@
 FeedEngine::Application.routes.draw do
+  get "sessions/new"
+  match '/sign_up' => 'users#new', as: 'signup'
+    match 'signin' => 'users#signin', as: 'signin'
   resources :authentications
 
   match '/dashboard' => 'dashboard#show', as: :user_root
@@ -18,16 +21,6 @@ FeedEngine::Application.routes.draw do
     match "", to: "users#show" 
     resource "user"
   end
-
-  devise_for :users
-
-  authenticated :user do
-    root :to => 'dashboard#show'
-  end
-  
-  devise_scope :user do
-    get 'sign_in', :to => 'devise/sessions#new', :as => 'sign_in'
-  end
   
   resources :users
   resources :posts, only: [:create, :index]
@@ -35,9 +28,12 @@ FeedEngine::Application.routes.draw do
   resources :images
   resources :links
 
-  match '/sign_up' => 'users#new', as: 'sign_up'
+
   root :to => 'pages#index'
   match '/twitter' => 'users#twitter', as: 'twitter'
   match '/auth/:provider/callback' => 'authentications#create'
+
+  # html partial fetching
+  match '/footer' => 'pages#footer'
 
 end

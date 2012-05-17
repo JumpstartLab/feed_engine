@@ -1,21 +1,14 @@
 ul.nav-bar
   li#dashboard
-    = link_to "Dashboard", user_root_path
+    a Dashboard
   li#friends
     a Friends
-  li#derp
-    a Derp
+  li#home
+    a Feeds
   li#account
     a Account
-    - if current_user
-      ul
-        li
-          = link_to "Settings", edit_user_path(current_user)
-        li
-          = link_to "Logout", destroy_user_session_url(subdomain: false), :method => :delete
-    - else
-      ul
-        li
-          = link_to "Signin", sign_in_path
-        li
-          = link_to "Signup", sign_up_path
+    ul
+      li
+        a#signin Signin
+      li
+        a#signup Signup

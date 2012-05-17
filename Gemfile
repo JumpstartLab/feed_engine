@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.3'
 
 gem 'pg'
-gem 'devise'
+gem 'sorcery'
 gem 'rmagick'
 gem 'carrierwave'
 gem 'fog'
@@ -43,9 +43,7 @@ end
 
 gem 'jquery-rails'
 
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
+gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'jbuilder'
 gem 'unicorn'
 gem 'capistrano'

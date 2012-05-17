@@ -1,14 +1,15 @@
 require 'securerandom'
 class User < ActiveRecord::Base
+  authenticates_with_sorcery!
   before_create :set_user_subdomain
   after_create :set_user_feed
   after_create :generate_api_key
   after_create :send_welcome_email
-  devise :database_authenticatable, :recoverable, :validatable
   attr_accessible :email, :password, :password_confirmation, :display_name, :subdomain
   has_many :authentications
   has_many :tweets
   has_one :feed
+  validates_confirmation_of :password, :on => :create, :message => "should match confirmation"
 
 
   DISPLAY_NAME_REGEX = /^[\w-]*$/
@@ -47,9 +48,6 @@ class User < ActiveRecord::Base
   end
 
   def import_posts(provider)
-    #for now, just twitter
-    # build import methods off of Tweet model (same for other providers)
-    # make a setup method for params
     params = {:user_id => twitter_id, :count=>200}
     params[:since_id] = self.tweets.last.source_id if self.tweets.any?
     Twitter.user_timeline(params).each do |tweet|

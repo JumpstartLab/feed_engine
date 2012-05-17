@@ -1,0 +1,10 @@
+h2 Signin
+
+= form_for User.new do |f| 
+  = f.label :email
+  = f.email_field :email
+
+  = f.label :password
+  = f.password_field :password
+
+  = f.submit "Sign in"

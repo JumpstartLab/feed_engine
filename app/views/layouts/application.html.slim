@@ -11,5 +11,6 @@ html
       = render "application/nav_bar"
       p#flash
       p#notice= notice
-      = yield
-  = render "application/footer"
+      = render partial: "application/index"
+  
+  footer.footer

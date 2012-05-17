@@ -1,9 +1,11 @@
 @import "partials/colors.css.scss";
+@import "partials/shapes.css.scss";
 
 .footer {
   position: absolute;
   width: 100%;
   background-color: $white;
+  height: 3em;
   .homies {
     margin-bottom: 1em;
     margin-top: 1em;
