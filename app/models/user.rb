@@ -83,4 +83,8 @@ class User < ActiveRecord::Base
     authentications.where(provider: provider).first
   end
 
+  def remove_auth_for(provider)
+    authentications.destroy(auth_for(provider))
+  end
+
 end

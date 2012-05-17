@@ -13,6 +13,13 @@ div class="span8 stream"
           = post.url
         - elsif post.class == TextPost
           = post.body
+        - elsif post.class == TwitterPost
+          = post.twitter_id
+          = post.text
+        - elsif post.class == GithubPost
+          = post.repo_name
+          = post.repo_url
+          = post.github_type
         br
 
   script type="text/html" id="post_template"

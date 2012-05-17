@@ -19,4 +19,11 @@ class AuthenticationsController < ApplicationController
     redirect_to dashboard_url(subdomain: false), 
       notice: "You can link your account at any time by clicking on the buttons to the right!"
   end
+
+  def destroy
+    provider_name = params[:id]
+    current_user.remove_auth_for(provider_name)
+    flash[:notice] = "Successfully Destroyed"
+    redirect_to dashboard_path
+  end
 end

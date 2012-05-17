@@ -27,7 +27,7 @@ FeedEngine::Application.routes.draw do
   resources "image_posts"
   resources "link_posts"
   resources "feed_items"
-  resources "authentications", only: [:show]
+  resources "authentications", only: [:show, :destroy]
   root :to => "static_pages#show"
 
   devise_scope :user do
