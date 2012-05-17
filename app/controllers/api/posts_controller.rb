@@ -17,7 +17,7 @@ class Api::PostsController < ApiController
               :handlers => [:jbuilder]
     else
       render "posts/create",
-              :status => :unprocessable_entity,
+              :status => :not_acceptable,
               :handlers => [:jbuilder]
     end
   end

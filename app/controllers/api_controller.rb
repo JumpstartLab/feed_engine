@@ -1,5 +1,5 @@
 class ApiController < ApplicationController
-  before_filter :authenticate_user, only: [:create, :edit, :destroy]
+  before_filter :authenticate_user
   attr_accessor :current_user
 
   private
