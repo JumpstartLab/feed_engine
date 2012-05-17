@@ -27,8 +27,7 @@ class GithubJob
     events = events.reverse
 
     events.each do |event|
-      event_id = event.id
-      item = user.github_items.find_or_create_by_event_id(event_id)
+      item = user.github_items.find_or_create_by_event_id(event.id)
       item.event = event
       item.save
     end
