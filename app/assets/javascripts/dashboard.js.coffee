@@ -3,9 +3,10 @@ jQuery ->
     new PostsPager()
     
 class PostsPager
-  constructor: (@page = 2) ->
+  constructor: (@page = 1) ->
+    $.getJSON($('#posts').data('json-url'), page: @page, @render)
     $(window).scroll(@check)
-  
+
   check: =>
     if @nearBottom()
       @page++
@@ -18,4 +19,9 @@ class PostsPager
   render: (posts) =>
     for post in posts
       $('#posts').append Mustache.to_html($('#post_template').html(), post)
-    $(window).scroll(@check) if posts.length > 0
+    $(window).scroll(@check) if posts && posts.length > 0
+
+#   render: (posts) =>
+#     for post in posts
+#       $('#posts').append Mustache.to_html($('#post_template').html(), post)
+#     $(window).scroll(@check) if posts.length > 0

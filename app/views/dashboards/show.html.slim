@@ -3,11 +3,16 @@ div class="span8 stream"
   = render 'content_creation_forms'
 
   h1 Your Stream
-  div class="thumbnails" id="posts" data-json-url="#{dashboard_url(format: :json)}"
-    = render 'post'
+  div id="posts" data-json-url="#{dashboard_url(format: :json)}"
+    / - @posts.each do |post|
+    /   = render "stache_post"
 
-    script type="text/html" id="post_template"
-        = render "/dashboards/post"
+script type="text/html" id="post_template"
+  div class="post"
+    h2 {{id}}
+
+  / script type="text/html" id="post_template"
+  /   = render "/dashboards/post"
 
 br
 br
