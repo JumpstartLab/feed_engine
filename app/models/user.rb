@@ -46,8 +46,14 @@ class User < ActiveRecord::Base
       :with => /^[a-zA-Z\d\-]*$/,
       :message => "must contain only letters, numbers or dashes"
     },
-    :exclusion => { :in => %w(www api nil) },
-    :uniqueness => true
+    :exclusion => { :in => %w(www api nil) }
+  validates_uniqueness_of :display_name, :case_sensitive => false
+
+  def self.find_by_subdomain(domain)
+    User.all.select do |user|
+      user if user.display_name.downcase == domain.downcase
+    end.first
+  end
 
   def send_welcome_email
     UserMailer.signup_notification(self).deliver
@@ -66,7 +72,7 @@ class User < ActiveRecord::Base
   end
 
   def subdomain
-    display_name
+    display_name.downcase
   end
 
   def post_page_count
