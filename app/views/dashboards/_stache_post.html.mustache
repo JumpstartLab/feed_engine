@@ -1,7 +1,19 @@
 <div class="post well">
-  {{id}}
-  <img src={{image_url}}>
-  {{comment}}
+  {{#image_url}}
+    <div class="thumbnail">
+      <img src={{image_url}}>
+    </div>
+  {{/image_url}}
+  {{#comment}}
+    {{comment}}
+  {{/comment}}
+  {{#text}}
+    {{text}}
+  {{/text}}
+  {{#link_url}}
+    <br />
+    <a href="{{link_url}}" target="_blank">{{link_url}}</a>
+  {{/link_url}}
+    <br />
   {{type}}
-  {{url}}
 </div>
