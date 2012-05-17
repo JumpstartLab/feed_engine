@@ -13,7 +13,7 @@ class GithubFeedItem < ActiveRecord::Base
     # end
   end
 
-  def self.create_from_event(user, event)   
+  def self.create_from_event(user, event)
     if event.payload.commits
       user.github_feed_items.create(event_type: event.type,
                                     github_id: event.id,

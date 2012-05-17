@@ -13,6 +13,13 @@
         </ul>
         <ul class='nav pull-right'>
           <% if current_user %>
+            <li>
+              <div style='margin-top: 10px; margin-right: 15px;'>
+                <img src="<%= current_user.avatar %>" style='float: left; height: 20px; margin-right: 10px;'></img>
+                <%= link_to "#{current_user.display_name}", "http://#{current_user.display_name}.pointsfeed.in" %>
+              </div>
+            </li>
+            <li class="divider-vertical"></li>
             <li><%= link_to 'Dashboard', dashboard_url(:subdomain => false) %></li>
             <li><%= link_to 'Sign Out', destroy_user_session_url(:subdomain => false), :method => :delete %></li>
           <% else %>
