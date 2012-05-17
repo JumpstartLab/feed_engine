@@ -13,6 +13,7 @@ gem 'draper'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-github'
+gem 'omniauth-instagram'
 gem 'resque'
 gem 'twitter'
 gem 'gravatar-ultimate'
@@ -20,6 +21,9 @@ gem 'puma'
 gem "remotipart", "~> 1.0"
 gem 'whenever', :require => false
 gem 'octokit'
+# gem 'instagram',  :git => 'git://github.com/mrgilman/instagram-ruby-gem.git'
+gem 'faraday'
+gem 'hashie'
 
 group :test, :development do
   gem 'sqlite3'

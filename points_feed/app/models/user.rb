@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
 
   has_many :twitter_feed_items
   has_many :github_feed_items
+  has_many :instagram_feed_items
 
   has_many :friendships
   has_many :friends, :through => :friendships
@@ -115,6 +116,10 @@ class User < ActiveRecord::Base
 
   def already_refeeded?(original_post)
     posts.where(original_post_id: original_post.original_post_id).any?
+  end
+
+ def instagram_authentication
+    self.authentications.where(:provider => 'instagram').first
   end
 
   private
