@@ -1,4 +1,11 @@
-h3= link_to "Connect with Twitter", "/auth/twitter"
-h3= link_to "Connect with Github", "/auth/github"
+- if current_user.has_subscription?("twitter")
+  h3 Connected with Twitter as #{current_user.subscription("twitter").user_name}
+- else
+  h3= link_to "Connect with Twitter", "/auth/twitter"
+
+- if current_user.has_subscription?("github")
+  h3 Connected with Github as #{current_user.subscription("github").user_name}
+- else
+  h3= link_to "Connect with Github", "/auth/github"
 
 h4= link_to "Skip this step", dashboard_path(:notice => "Thanks for signing up! If you would like to link services to your account later, go to the services section of your profile.")

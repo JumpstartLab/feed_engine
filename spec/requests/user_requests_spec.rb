@@ -201,6 +201,13 @@ describe User do
           click_button "Sign Up"
           page.should have_content "Connect with Twitter"
         end
+        it "sees that it is connected with twitter after connecting" do
+          click_button "Sign Up"
+          last_user = User.last
+          Fabricate(:subscription, user_id: last_user.id, provider: "twitter")
+          visit new_subscription_path
+          page.should have_content last_user.subscription("twitter").user_name
+        end
         it "can authorize twitter" do
           pending
           click_button "Sign Up"
@@ -210,6 +217,13 @@ describe User do
         it "sees a page with an option to authorize github" do
           click_button "Sign Up"
           page.should have_content "Connect with Github"
+        end
+        it "sees that it is connected with github after connecting" do
+          click_button "Sign Up"
+          last_user = User.last
+          Fabricate(:subscription, user_id: last_user.id, provider: "github")
+          visit new_subscription_path
+          page.should have_content last_user.subscription("github").user_name
         end
         it "can authorize github" do
           pending

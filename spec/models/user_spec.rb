@@ -16,7 +16,7 @@
 require 'spec_helper'
 
 describe User do
-  let(:user) { Fabricate(:user) }
+  let!(:user) { Fabricate(:user) }
   let(:new_user) { Fabricate.build(:user) }
 
 
@@ -61,7 +61,6 @@ describe User do
   end
 
   describe "#subdomain" do
-    let!(:user) { Fabricate(:user) } 
     it "returns the display name" do
       user.subdomain.should == user.display_name
     end
@@ -88,6 +87,17 @@ describe User do
       it "'nil'" do
         new_user.display_name = 'nil'
         new_user.should_not be_valid
+      end
+    end
+  end
+  context "subscriptions" do
+    let!(:twitter_subscription) {Fabricate(:subscription, provider: "twitter", user_id: user.id) }
+    let!(:github_subscription) {Fabricate(:subscription, provider: "github", user_id: user.id) }
+    describe "#subscription" do
+      it "returns the subscription of the provider type if it exists" do
+        user.subscription("twitter").should == twitter_subscription
+        user.subscription("github").should == github_subscription
+        user.subscription("boo").should == nil
       end
     end
   end
