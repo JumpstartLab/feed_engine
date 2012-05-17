@@ -264,6 +264,7 @@ DEPENDENCIES
   fabrication
   faker
   fog
+  hashie
   jbuilder
   jquery-rails
   kaminari
