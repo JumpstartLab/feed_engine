@@ -17,6 +17,7 @@ describe User do
   let(:user) { Fabricate(:user) }
   let(:new_user) { Fabricate.build(:user) }
 
+
   it "has an api key token after creation" do
     new_user.api_key = nil
     new_user.save
