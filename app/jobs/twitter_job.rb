@@ -6,7 +6,7 @@ class TwitterJob
 
     uid = authentication['uid'].to_i
 
-    user = user_for_id(user['id'])
+    user =  User.find(current_user["id"])
 
     last_tweet_id = users_last_tweet_id(user)
 
@@ -18,10 +18,6 @@ class TwitterJob
     end 
 
     user.save
-  end
-
-  def self.user_for_id(id)
-    User.find(current_user["id"])
   end
 
   def self.users_last_tweet_id(user)
