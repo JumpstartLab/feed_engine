@@ -1,0 +1,11 @@
+h1 Your Authentications
+
+table
+  tr
+
+  - @authentications.each do |authentication|
+    tr
+      td 
+        img src="assets/#{authentication.provider}_64.png"
+      td = link_to ' Remove This Authentication', authentication, confirm: 'Are you sure?', method: :delete
+
