@@ -43,11 +43,7 @@
           <a href="<%= destroy_user_session_path(:subdomain => false)%>" data-method="delete"> <span class="raphael-icon">Ï</span>Logout </a>
           </li>
         <% else %>
-          <% if request.fullpath == new_user_path %>
-            <li class="offset7 pull-left navigation-item">
-            <a href="<%= root_path %>"> <span class="raphael-icon">S</span>Home </a>
-            </li>
-          <% else %>
+          <% if request.fullpath != new_user_path %>
             <li class="offset7 pull-left navigation-item navigation-item-anon">
             <a href="<%= login_path(:subdomain => false) %>">
               <span class="raphael-icon">L</span>Login
