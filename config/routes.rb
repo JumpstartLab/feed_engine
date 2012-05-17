@@ -37,7 +37,7 @@ FeedEngine::Application.routes.draw do
 
   match '/sign_up' => 'users#new', as: 'sign_up'
   root :to => 'pages#index'
-  match '/twitter' => 'users#twitter', as: 'twitter'
+  match '/integrate' => 'users#integrate', as: 'integrate'
 
   match '/auth/:provider/callback' => 'authentications#create'
   #match '/auth/github/callback' => 'authentications#create'
