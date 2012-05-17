@@ -20,16 +20,15 @@ class GithubJob
 
     # sort by ascending date (newest at top)
     events = events.sort_by do |event|
-      DateTime.parse(event.gist.created_at)
+      DateTime.parse(event.created_at)
     end
 
     # reverse to get oldest at top
     events = events.reverse
 
     events.each do |event|
-      event_id = event.gist.id
-      item = user.github_items.find_or_create_by_event_id(event_id)
-      item.gist = event.gist
+      item = user.github_items.find_or_create_by_event_id(event.id)
+      item.event = event
       item.save
     end
     user.save
