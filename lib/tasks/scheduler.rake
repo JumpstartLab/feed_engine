@@ -7,6 +7,8 @@
 
 # task :get_tweets do
 #   Resque.enqueue(PullTwitterFeed)
+#   Resque.enqueue(PullGithubFeed)
 #   sleep(300)
 #   Resque.enqueue(PullTwitterFeed)
+#   Resque.enqueue(PullGithubFeed)
 # end

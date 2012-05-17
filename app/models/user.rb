@@ -19,14 +19,9 @@ class User < ActiveRecord::Base
   has_many :messages
   has_many :links
   has_many :tweets
-  has_one :twitter_account, :through => :authentications
-  has_one :github_account, :through => :authentications
+  has_many :github_events
 
   has_many :regrowls
-
-  def twitter_account
-    authentications.twitter.twitter_account if authentications.twitter
-  end
 
   def relation_for(type)
     self.send(type.downcase.pluralize.to_sym).scoped rescue messages.scoped
@@ -78,9 +73,20 @@ class User < ActiveRecord::Base
     authentications.twitter?
   end
 
+  def twitter_account
+    twitter.twitter_account
+  end
+
+  def github
+    authentications.github
+  end
 
   def github?
     authentications.github?
+  end
+
+  def github_account
+    github.github_account
   end
 
   def can_regrowl?(original_growl)
@@ -92,19 +98,19 @@ end
 #
 # Table name: users
 #
-#  id                     :integer         not null, primary key
+#  id                     :integer         primary key
 #  email                  :string(255)     default(""), not null
 #  encrypted_password     :string(255)     default(""), not null
 #  reset_password_token   :string(255)
-#  reset_password_sent_at :datetime
-#  remember_created_at    :datetime
+#  reset_password_sent_at :timestamp
+#  remember_created_at    :timestamp
 #  sign_in_count          :integer         default(0)
-#  current_sign_in_at     :datetime
-#  last_sign_in_at        :datetime
+#  current_sign_in_at     :timestamp
+#  last_sign_in_at        :timestamp
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
-#  created_at             :datetime        not null
-#  updated_at             :datetime        not null
+#  created_at             :timestamp       not null
+#  updated_at             :timestamp       not null
 #  display_name           :string(255)
 #  authentication_token   :string(255)
 #  private                :boolean         default(FALSE)
