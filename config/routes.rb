@@ -4,11 +4,11 @@ FeedEngine::Application.routes.draw do
   match "/auth/:provider/callback" => "subscriptions#create"
 
   resources :subscriptions
-  resources :messages
-  resources :images
+  resource  :messages
+  resource  :images
+  resource  :links
   resources :users
   resources :sessions
-  resources :links
   resources :password_resets
   resource  :dashboard,
             :controller => "dashboard",
