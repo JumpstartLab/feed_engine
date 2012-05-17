@@ -24,7 +24,6 @@ class InstagramImporter
     media = connection.get("users/#{auth.uid}/media/recent?access_token=#{auth.secret}")
     media = JSON.parse(media.body)
     instagrams = Hashie::Mash.new(media)
-    puts instagrams.pretty_inspect
     instagrams.data.each do |instagram|
       InstagramFeedItem.import(auth.user, instagram)
     end
