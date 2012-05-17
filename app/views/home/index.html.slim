@@ -26,3 +26,4 @@
           = post.description
     p.posted-by
       h5 = "Posted by: #{User.find(post.poster_id).display_name}"
+= paginate @posts    
