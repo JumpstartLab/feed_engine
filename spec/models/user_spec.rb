@@ -8,12 +8,29 @@
 #  created_at      :datetime        not null
 #  updated_at      :datetime        not null
 #  display_name    :string(255)
+#  api_key         :string(255)
 #
 
 require 'spec_helper'
 
 describe User do
   let(:user) { Fabricate(:user) }
+  let(:new_user) { Fabricate.build(:user) }
+
+  it "has an api key token after creation" do
+    new_user.api_key = nil
+    new_user.save
+    new_user.api_key.should_not be_nil
+  end
+
+  it "has a unique api key for the same user reincarnated" do
+    duplicate_user = new_user.dup
+    new_user.save
+    key = new_user.api_key
+    new_user.destroy
+    duplicate_user.save
+    duplicate_user.api_key.should_not == key
+  end
 
   it "can be queried for it's items" do
     Fabricate(:message, :poster_id => user.id)

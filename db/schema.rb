@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(:version => 20120516002105) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.string   "display_name"
+    t.string   "api_key"
   end
 
 end
