@@ -19,6 +19,14 @@ FeedEngine::Application.routes.draw do
     end
   end
 
+  resources "feeds" do
+    collection do
+      scope ":user_display_name" do
+        resources "items"
+      end
+    end
+  end
+
   resources "users", as: :user
   match "/auth/twitter/callback" => "authentications#new"
   match "/auth/github/callback" => "authentications#new"
