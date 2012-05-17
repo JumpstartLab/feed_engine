@@ -48,10 +48,10 @@ class Subscription < ActiveRecord::Base
     end
     new_events.each do |new_event|
       g = GithubEvent.create(subscription_id: self.id,
-                       repo: new_event.repo.name,
-                       created_at: new_tweet.created_at,
-                       poster_id: self.user_id,
-                       event_type: new_event.type
+                             repo: new_event.repo.name,
+                             created_at: new_tweet.created_at,
+                             poster_id: self.user_id,
+                             event_type: new_event.type
                             )
     end
   end
@@ -84,7 +84,6 @@ class Subscription < ActiveRecord::Base
     end
   end
 
-<<<<<<< HEAD
   def github_events
     events = Octokit.user_events(self.user_name).map do |event|
       event if EVENT_LIST.include?(event.type)
@@ -96,8 +95,6 @@ class Subscription < ActiveRecord::Base
     Subscription.where(provider: "github")
   end
 
-=======
->>>>>>> master
   def self.twitter_subscriptions
     Subscription.where(provider: "twitter")
   end

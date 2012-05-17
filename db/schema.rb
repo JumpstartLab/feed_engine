@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120516024726) do
+ActiveRecord::Schema.define(:version => 20120516193322) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20120516024726) do
     t.datetime "updated_at",      :null => false
     t.integer  "subscription_id"
     t.string   "repo"
+    t.integer  "poster_id"
   end
 
   create_table "images", :force => true do |t|
