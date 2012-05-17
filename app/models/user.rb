@@ -2,8 +2,6 @@ require 'securerandom'
 class User < ActiveRecord::Base
   before_create :set_user_subdomain
   before_save :ensure_authentication_token
-  # before_save :set_user_subdomain
-  # before_save :set_user_feed_name
   after_create :set_user_feed
   after_create :generate_api_key
   after_create :send_welcome_email
@@ -30,9 +28,10 @@ class User < ActiveRecord::Base
     self.subdomain = self.display_name.downcase
   end
 
-  def set_user_feed_name
-    self.feed.set_name(self.subdomain)
-  end
+  # Commenting out for now - implemented in the event that we want users to be able to set their subdomain and feed name at will
+  # def set_user_feed_name
+  #   self.feed.set_name(self.subdomain)
+  # end
 
   def set_user_feed
     Feed.create(:user_id => self.id, :name => self.subdomain)
@@ -51,7 +50,7 @@ class User < ActiveRecord::Base
   def generate_api_key
     key = Digest::SHA256.hexdigest("#{SecureRandom.hex(15)}HuNgRyF33d#{Time.now}")
     key = generate_api_key if User.exists?(api_key: key)
-    self.update_attribute(:api_key, key)
+    self.update_attribute(:authentication_token, key)
   end
 
   def twitter_id
