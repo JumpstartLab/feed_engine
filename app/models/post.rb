@@ -9,6 +9,7 @@
 #  created_at    :datetime
 #  updated_at    :datetime
 #  points        :integer         default(0)
+#  refeed_id     :integer
 #
 
 class Post < ActiveRecord::Base
