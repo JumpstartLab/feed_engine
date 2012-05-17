@@ -11,4 +11,8 @@ class Feed < ActiveRecord::Base
     self.name = name
     self.save
   end
+
+  def private?
+    self.private
+  end
 end
