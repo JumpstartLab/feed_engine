@@ -1,6 +1,11 @@
 class Api::FeedsController < Api::ApiController
-  before_filter :can_user_can_view_feed?
+  before_filter :can_user_can_view_feed?, :except => :index
   POSTS_PER_PAGE = 12
+
+  def index
+    posts = Post.page(params[:page]).per(12).map { |post| post.decorate }
+    render :json => posts
+  end
 
   def show
     respond_with(UserDecorator.decorate(@user))

@@ -20,15 +20,21 @@ function render_post(post) {
     post['created_at'] = $.timeago(post['created_at']);
    
     if(auth_display_name != post['feeder']['name'] && post['can_refeed'] == true) {
-      post['refeedable'] = true
+      post['refeedable'] = true;
     }
-
-    console.log(post['refeed']);
 
     return Mustache.render($("#"+post.type+"Template").html(), post);
   }
 
   return "";
+}
+
+function fetch_recent_posts(div) {
+  url = "/api/feeds.json";
+  $.get(url, function(data) {
+    data = data.slice(0, 5);
+    div.html(render_posts(data));
+  });
 }
 
 function fetch_posts(div, page) {
@@ -81,6 +87,7 @@ function fetch_posts(div, page) {
 
 $(document).ready(function() {
   fetch_posts($('#user_posts'));
+  fetch_recent_posts($('#recent_posts'));
 
   $("#load_more").click(function(e) {
     e.preventDefault();

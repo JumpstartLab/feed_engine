@@ -32,7 +32,7 @@
 
       <div class="content">
         <div class="row">
-         <div class="span12">
+          <div class="span12">
             <%= yield %>
           </div>
         </div><!--/row-->
@@ -44,12 +44,9 @@
       <input type='hidden' id='access_token' value='<%= current_user.authentication_token %>' />
     <% end %>
 
-    <br />
-
     <!-- Javascripts
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <%= javascript_include_tag "application" %>
-
   </body>
 </html>
