@@ -25,17 +25,19 @@ ActiveRecord::Schema.define(:version => 20120516233659) do
 
   create_table "image_posts", :force => true do |t|
     t.string   "description"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.string   "image"
+    t.integer  "points",             :default => 0
     t.string   "external_image_url"
   end
 
   create_table "link_posts", :force => true do |t|
     t.string   "url"
     t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.integer  "points",      :default => 0
   end
 
   create_table "posts", :force => true do |t|
@@ -44,14 +46,16 @@ ActiveRecord::Schema.define(:version => 20120516233659) do
     t.string   "postable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "points",        :default => 0
     t.integer  "refeed_id"
   end
 
   create_table "text_posts", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
     t.string   "title"
     t.text     "body"
+    t.integer  "points",     :default => 0
   end
 
   create_table "users", :force => true do |t|
