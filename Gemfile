@@ -35,6 +35,7 @@ group :development, :test do
   gem 'simplecov'
   gem 'launchy'
   gem 'debugger'
+  gem 'awesome_print'
 end
 
 group :production do
