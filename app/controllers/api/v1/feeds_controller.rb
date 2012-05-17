@@ -17,4 +17,13 @@ class Api::V1::FeedsController < Api::V1::ApiController
     end
   end
 
+  def refeed
+    growl = Growl.find(params[:id])
+    if growl.regrowled(@current_user.id)
+      render status: :created, json: "Refeed Successful"
+    else
+      render status: :bad_request, json: "You can't regrowl yourself!"
+    end
+  end
+
 end

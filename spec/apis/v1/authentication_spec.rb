@@ -9,7 +9,7 @@ describe "API errors", :type => :api do
     it "returns the message 'Token is invalid'" do
       get "#{url}.json", :token => ""
       error = "Token is invalid."
-      last_response.body.should eql(error.to_json)
+      last_response.body.should eql(error)
     end
 
     it "returns an error 401" do

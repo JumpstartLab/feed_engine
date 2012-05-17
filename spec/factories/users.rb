@@ -7,9 +7,9 @@ FactoryGirl.define do
 
   factory :user_with_growls, parent: :user do
     after_create do |user, evaluator|
+      FactoryGirl.create(:link, user: user)
       FactoryGirl.create(:image, user: user)
       FactoryGirl.create(:message, user:user)
-      FactoryGirl.create(:link, user: user)
     end
   end
 end
