@@ -84,7 +84,7 @@ class User < ActiveRecord::Base
   end
 
   def can_regrowl?(original_growl)
-    !growls.where(regrowled_from_id: original_growl.id).any?
+    growls.where(regrowled_from_id: original_growl.id).empty? && original_growl.user_id != id
   end
 end
 
