@@ -36,6 +36,22 @@
         <%= item.tweet.text %>
       </div>
     </div>
+  <% elsif item.class == GithubItem %>
+    <div>
+      <div class="text-item-body">
+        <% github_body(item) %>
+        <%= @github_body %> 
+        <br/>
+        <br/>
+          <% @commits.each do |commit| %>
+            <a href="<%= commit.url %>"><%= commit.message %></a> 
+            <br/>
+          <% end %>
+          <% if @fork_url %>
+            <%= link_to @fork_url, @fork_url %>
+          <% end %>
+      </div>
+    </div>
   <% end %>
 
   <br/>
@@ -54,6 +70,8 @@
       <span class="raphael-icon post-logo">È</span>
     <% elsif item.class == TwitterItem %>
       <span class="raphael-icon twitter-logo">^</span>
+    <% elsif item.class == GithubItem %>
+      <span class="raphael-icon github-logo">U</span>
     <% end %>
 
     <span class="raphael-icon refeed">0</span>
