@@ -1,18 +1,3 @@
-- content_for(:head) do
-  javascript:
-    $(function(){
-      $('.actions').children('input:submit').addClass('btn btn-large');
-    });
-- if current_user
-  = "Logged in as #{current_user.email} | "
-  = link_to 'sign out', logout_path
-- else
-  .span5
-    = link_to 'Sign Up', signup_path, class: "btn btn-primary btn-large"
-  .span5
-    h3 Log in
-    = render :partial => "sessions/form"
-
 - @posts.each do |post|
   div.fe-home-container
     p.post-info
@@ -39,10 +24,5 @@
         = image_tag post.url
         p
           = post.description
-    p
-      = link_to @user.display_name, user_path(@user)
-      - if post.tweet?
-        |  via Twitter
-      - if post.github_event?
-        |  via  Github
-  = paginate @posts
+    p.posted-by
+      h5 = "Posted by: #{User.find(post.poster_id).display_name}"

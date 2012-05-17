@@ -26,6 +26,10 @@ class Item < ActiveRecord::Base
     end
   end
 
+  def self.all_items_sorted_posts
+    all_items_sorted.collect { |item| item.post }
+  end
+
   def poster
     User.where(id: poster_id)
   end
