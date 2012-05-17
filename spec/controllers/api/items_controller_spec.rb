@@ -9,18 +9,38 @@ describe Api::V1::ItemsController do
     response.code.should == '401'
   end
 
-  describe "with a valid user token" do
-    before(:all) do
-      Api::V1::ItemsController.any_instance.stub(:authorized?).and_return true
-    end
-
+  describe "with a valid user token", :focus => true do
     it "responds with OK" do
-      post :create, :format => :json
+      post :create,
+           :format => :json,
+           :display_name => user.display_name,
+           :api_key => user.api_key
       response.code.should == '200'
     end
 
     it "creates an item" do
-      post :create, :post => {'body' => 'hi there', 'user_id' => '2'}
+      Item.should_receive :create
+      post :create,
+           :format => :json,
+           :display_name => user.display_name,
+           :api_key => user.api_key,
+           :post => { 'type' => 'message',
+                      'body' => 'Lovebuckets!'}
+    end
+
+    it "persists a message for a user with correct attributes" do
+      Message.should_receive :create
+      expect do
+        post :create,
+           :format => :json,
+           :display_name => user.display_name,
+           :post => { 'type' => 'message',
+                      'body' => 'Lovebuckets!',
+                      'api_key' => user.api_key }
+      end.to change { Message.count }.from(0).to(1)
+      message = Message.first
+      user.posts.should include message
+      message.body.should == 'Lovebuckets!'
     end
   end
 end
