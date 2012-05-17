@@ -1,18 +1,22 @@
 div class="span8 stream"
-    
+
   h1 #{user.display_name} Stream
   div class="thumbnails" id="posts" data-json-url="#{user_url(id: user, format: :json)}"
     - @posts.each do |post|
-      - post = post.postable
+      - postable = post.postable
       div class="post well"
-        - if post.class == ImagePost
-          = image_tag(post.image, class: "thumbnail")
-          = post.description
-        - elsif post.class == LinkPost
-          = post.description
-          = post.url
-        - elsif post.class == TextPost
-          = post.body
+        div class="pull-right"
+          #{link_to "Refeed", refeeds_path(post_id: post), method: :post}
+          #{link_to "Points!", point_path(post), method: :put} #{"(#{post.points})"}
+        - if postable.class == ImagePost
+          = image_tag(postable.image, class: "thumbnail")
+          = postable.description
+        - elsif postable.class == LinkPost
+          = postable.description
+          br
+          = link_to postable.url, postable.url, target: "_blank"
+        - elsif postable.class == TextPost
+          = postable.body
         br
 
   script type="text/html" id="post_template"

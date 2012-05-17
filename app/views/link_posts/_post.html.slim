@@ -1,6 +1,5 @@
 div class="pull-right"
   #{link_to "Remove", link_post_path(postable), method: :delete, confirm: "Are You Sure"}
   #{link_to "Edit", edit_link_post_path(postable)}
-  #{link_to "Points!", point_path(postable.post), method: :put} #{"(#{postable.post.points})"}
 h3 = postable.description
 p = link_to(postable.url, postable.url, target: "_blank")
