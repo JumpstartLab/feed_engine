@@ -23,6 +23,7 @@
         <ul id='nav_tabs' class="nav nav-pills nav-stacked well">
           <li><a href="#posts_tab" data-toggle="tab">Post</a></li>
           <li><a href="#edit_account_tab" data-toggle="tab">Edit Account</a></li>
+          <li><a href="#authentications_tab" data-toggle="tab">Services</a></li>
         </ul>
       </div>
       <div class="span8">
@@ -49,6 +50,30 @@
                 <%= render 'devise/registrations/form', :resource => @current_user %>
               </div>
             </div>
+            <div class='tab-pane' id='authentications_tab'>
+              <div class='grey-box'>
+                <h3>Services</h3>
+                <hr />
+                Current Linked Accounts<br>
+                <table class="table">
+                  <tr>
+                    <th>Provider</th>
+                    <th>Action</th>
+                  </tr>
+                  <% current_user.authentications.each do |authentication| %>
+                    <tr>
+                      <td><%= authentication.provider.capitalize %></td>
+                      <td><%= link_to "Delete", authentication_path(authentication), :confirm => "Are you sure?", :method => :delete %></td>
+                    </tr>
+                  <% end %>
+                </table>
+                <hr />
+                Select Accounts Below to Connect<br>
+                <!-- TODO: MAKE PARTIAL OF LINKS BELOW? -->
+                <%= render :partial => "twitters/authentications" %>
+              </div>
+            </div>
+          </div>
           </div>
 
         </div>
