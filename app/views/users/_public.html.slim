@@ -13,16 +13,15 @@
     p.post-body
       - if post.is_a?(Message) || post.is_a?(Tweet)
         = post.body
-        br/
-        =link_to @user.display_name, user_path(@user)
-        |&nbsp;via #{post.class}
+        p
+          =link_to @user.display_name, user_path(@user)
+          |&nbsp;via #{post.class}
       - if post.is_a?(Link)
         h3= link_to post.url, post.url
-        br/
-        = post.description
+        p
+          = post.description
       - if post.is_a?(Image)
         = image_tag post.url
-        br/
-        = post.description
-      br/
+        p
+          = post.description
 = paginate @posts
