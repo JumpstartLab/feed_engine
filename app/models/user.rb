@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
   has_many :authentications
 
   def send_welcome_email
-    UserMailer.welcome_email(self).deliver
+    UserMailer.delay.welcome_email(self)
   end
 
   def post_of(kind)
