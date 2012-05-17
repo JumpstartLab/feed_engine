@@ -32,7 +32,6 @@ group :development, :test do
   gem 'rack-test'
   gem 'guard'
   gem 'capybara'
-  gem 'capybara-webkit'
   gem 'simplecov'
   gem 'launchy'
   gem 'debugger'
