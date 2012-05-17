@@ -18,10 +18,15 @@ FeedEngine::Application.routes.draw do
   get "logout", to: "sessions#destroy", as: "logout"
 
   constraints :subdomain => 'api', :format => :json do
-    match '/feeds/:display_name(.:format)' => 'api/users#show', as: "feed", :defaults => { :format => 'json' }
-    match '/feeds/:display_name/items/:id' => 'api/items#show', as: "feed_item", :defaults => { :format => 'json' }
-    match '/feeds/:display_name/items' => 'api/items#index', as: "feed_item_index", :defaults => { :format => 'json' }
-
+    namespace :api, :path => '/' do
+      namespace :v1 do
+        scope "/feeds/:display_name" do
+          match "/" => "items#index"
+          match "/profile" => "users#show"
+          resources :items
+        end
+      end
+    end
   end
 
   constraints(Subdomain) do
