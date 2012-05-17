@@ -57,6 +57,10 @@ group :development, :test do
   gem 'simplecov', require: false
   gem 'redis-store', '~>1.0.0'
   #gem 'rack-perftools_profiler', :require => 'rack/perftools_profiler'
+
+  # Chainsaw logging
+  gem 'dnssd'
+  gem 'log4r'
 end
 
 # To use ActiveModel has_secure_password

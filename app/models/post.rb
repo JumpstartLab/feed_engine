@@ -15,7 +15,7 @@
 class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :postable, :polymorphic => true, dependent: :destroy
-  attr_accessible :points
+  attr_accessible :postable, :refeed_id, :points
 
   def as_json(*params)
     post = self.postable
@@ -34,4 +34,7 @@ class Post < ActiveRecord::Base
     self.points += 1
   end
 
+  def refeed?
+    refeed_id.present?
+  end
 end
