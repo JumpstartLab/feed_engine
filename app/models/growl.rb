@@ -18,6 +18,11 @@ class Growl < ActiveRecord::Base
     end
   end
 
+  def self.since(date)
+    # ASK YOHO.
+    where{ created_at.gt Time.at(date+1) }
+  end
+
   def self.by_type(input)
     where(type: input)
   end
@@ -43,24 +48,42 @@ class Growl < ActiveRecord::Base
     end
   end
 
+  def self.build_refeeded(user_id,refeeded_from_user_id)
+    growl = Growl.find(id).dup
+    growl.write_attributes(user_id: user_id,
+                           refeeded_from_user_id: user_id)
+  end
+
   def original_growl?
     regrowled_from_id.nil?
   end
 
-  def get_display_name
-    if original_growl?
-      user.display_name
+  def regrowled?
+    regrowled_from_id.present?
+  end
+
+  def regrowl_link
+    if regrowled?
+      "http://api.hungrlr.com/feeds/#{get_user.slug}/items/#{id}"
     else
-      original_growl.user.display_name
+      ""
     end
   end
 
-  def get_gravatar
+  def get_user
     if original_growl?
-      user.avatar
+      user
     else
-      original_growl.user.avatar
+      original_growl.user
     end
+  end
+
+  def get_display_name
+    get_user.display_name
+  end
+
+  def get_gravatar
+    get_user.display_name
   end
 
   def original_growl

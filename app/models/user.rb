@@ -105,6 +105,10 @@ class User < ActiveRecord::Base
   def can_regrowl?(original_growl)
     growls.where(regrowled_from_id: original_growl.id).empty?
   end
+
+  def slug
+    display_name.downcase
+  end
 end
 
 # == Schema Information

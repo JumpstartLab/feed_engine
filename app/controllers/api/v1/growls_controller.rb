@@ -1,13 +1,4 @@
-class Api::V1::FeedsController < Api::V1::ApiController
-
-  def show
-    @user = User.find_by_display_name(params[:display_name])
-    if params[:since].blank?
-      @recent_growls = @user.growls.by_date.limit(3)
-    else
-      @recent_growls = @user.growls.since(params[:since].to_i).by_date
-    end
-  end
+class Api::V1::GrowlsController < Api::V1::ApiController
 
   def create
     json_hash = JSON.parse(params[:body])
@@ -20,4 +11,5 @@ class Api::V1::FeedsController < Api::V1::ApiController
       render 'create', status: :not_acceptable
     end
   end
+
 end

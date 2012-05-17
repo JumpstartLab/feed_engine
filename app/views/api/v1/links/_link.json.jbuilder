@@ -5,5 +5,5 @@ json.created_at link.created_at
 json.id link.id
 json.feed v1_url(@user.display_name)
 json.link links_url(link)
-json.refeed ""
-json.refeed_link ""
+json.refeed link.regrowled?
+json.refeed_link link.regrowl_link

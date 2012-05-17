@@ -23,9 +23,10 @@ Hungrlr::Application.routes.draw do
       scope module: "api" do
         namespace "v1" do
           get '/feeds/:display_name' => 'feeds#show'
-          post '/feeds/:display_name' => 'feeds#create'
+          post '/feeds/:display_name/items' => 'feeds#create'
           resources :user_tweets, only: [:create, :index]
           resources :meta_data, :only => [ :create ]
+          resources :subscriptions, :only => [:index]
         end
       end
     end
