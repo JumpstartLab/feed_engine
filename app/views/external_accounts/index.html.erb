@@ -7,7 +7,7 @@
     <div class="span3">
       <%= image_tag "/assets/twitter-bird.png" %>
       <span class="twitter-label">Twitter</span>
-      <% if twitter_connected? %>
+      <% if twitter_connected?(current_user) %>
         <%= link_to "Disconnect", "#", :class => "btn btn-large" %>
       <% else %>
         <%= link_to "Connect", "users/auth/twitter", :class => "btn btn-large" %>
@@ -17,7 +17,7 @@
   <div class="span3">
     <%= image_tag "/assets/octocat.png" %>
     <span class="github-label">Github</span>
-    <% if github_connected? %>
+    <% if github_connected?(current_user) %>
       <%= link_to "Disconnect", "#", :class => "btn btn-large" %>
     <% else %>
       <%= link_to "Connect", "users/auth/github", :class => "btn btn-large" %>
