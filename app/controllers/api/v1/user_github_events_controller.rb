@@ -1,4 +1,4 @@
-class API::V1::UserGithubEventsController < API::V1::BaseController
+class API::V1::UserGithubEventsController < API::V1::APIController
   before_filter :verify_github_account
 
   def created
