@@ -11,7 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20120517032202) do
+=======
+ActiveRecord::Schema.define(:version => 20120517003558) do
+>>>>>>> master
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -52,10 +56,10 @@ ActiveRecord::Schema.define(:version => 20120517032202) do
 
   create_table "image_posts", :force => true do |t|
     t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.string   "image"
-    t.integer  "refeed_id"
+    t.string   "external_image_url"
   end
 
   create_table "link_posts", :force => true do |t|
@@ -63,7 +67,6 @@ ActiveRecord::Schema.define(:version => 20120517032202) do
     t.string   "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-    t.integer  "refeed_id"
   end
 
   create_table "posts", :force => true do |t|
@@ -72,6 +75,8 @@ ActiveRecord::Schema.define(:version => 20120517032202) do
     t.string   "postable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "points",        :default => 0
+    t.integer  "refeed_id"
   end
 
   create_table "text_posts", :force => true do |t|
@@ -79,7 +84,6 @@ ActiveRecord::Schema.define(:version => 20120517032202) do
     t.datetime "updated_at", :null => false
     t.string   "title"
     t.text     "body"
-    t.integer  "refeed_id"
   end
 
   create_table "twitter_posts", :force => true do |t|

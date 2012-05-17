@@ -1,16 +1,8 @@
-class Api::ItemsController < Api::BaseController
+class ItemsController < ApplicationController
+  respond_to :xml, :json
+
   def index
-    @posts = current_user.posts
-    page   = (params[:page] || 1).to_i
-    next_page = [page+1, @posts.pages].min
-
-    next_page_url = api_items_url(user_display_name: current_user.display_name, page: next_page)
-    last_page_url = api_items_url(user_display_name: current_user.display_name, page: @posts.pages)
-
-    link_header =
-      "<#{next_page_url}>; rel=\"next\", <#{last_page_url}>; rel=\"last\""
-
-    headers["Link"] = link_header
+    @posts = User.where(display_name: params[:user_display_name]).first.posts.page(params[:page])
   end
 
   def create
@@ -73,7 +65,7 @@ class Api::ItemsController < Api::BaseController
   class ImagePostMapper < Mapper
     association "image_posts"
     type        "ImageItem"
-    mapping  :image_url   => :external_image_url,
+    mapping  :image_url   => :remote_image_url,
              :description => :self
   end
 

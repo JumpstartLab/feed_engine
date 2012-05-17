@@ -7,8 +7,6 @@
 #  description :string(255)
 #  created_at  :datetime        not null
 #  updated_at  :datetime        not null
-#  refeed_id   :integer
-#
 
 class LinkPost < ActiveRecord::Base
   attr_accessible :description, :url, :user_id
@@ -22,8 +20,4 @@ class LinkPost < ActiveRecord::Base
 
   has_one :post, :as => :postable, dependent: :destroy
   has_one :user, :through => :post
-
-  def refeed?
-    refeed_id.present?
-  end
 end

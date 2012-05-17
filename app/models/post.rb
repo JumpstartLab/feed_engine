@@ -8,31 +8,20 @@
 #  postable_type :string(255)
 #  created_at    :datetime
 #  updated_at    :datetime
+#  points        :integer         default(0)
+#  refeed_id     :integer
 #
 
 class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :postable, :polymorphic => true, dependent: :destroy
+  attr_accessible :postable, :refeed_id, :points
 
-  def as_json(*params)
-    post = self.postable
-    if post.class == ImagePost
-      {:photo => post.image.big, :description => post.description,
-        :created_at => post.created_at}
-    elsif post.class == LinkPost
-      {:link => post.url, :description => post.description,
-        :created_at => post.created_at}
-    elsif post.class == TextPost
-      {title: post.title, :body => post.body, :created_at => post.created_at}
-    elsif post.class == TwitterPost
-      {title: post.twitter_id, :body => post.text, :created_at => post.published_at}
-    elsif post.class == GithubPost
-      {title: post.repo_name, :body => post.url, :created_at => post.published_at}
-    end
+  def add_point
+    self.points += 1
   end
 
-  def instance_of_a_particular_post_type
-    self.postable
+  def refeed?
+    refeed_id.present?
   end
-
 end

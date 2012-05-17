@@ -3,9 +3,10 @@ jQuery ->
     new PostsPager()
     
 class PostsPager
-  constructor: (@page = 2) ->
+  constructor: (@page = 1) ->
+    $.getJSON($('#posts').data('json-url'), page: @page, @render)
     $(window).scroll(@check)
-  
+
   check: =>
     if @nearBottom()
       @page++

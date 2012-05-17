@@ -13,8 +13,18 @@ FeedEngine::Application.routes.draw do
     resources "feeds" do
       collection do
         scope ":user_display_name" do
-          resources "items"
+          resources "items" do
+            resources "refeeds"
+          end
         end
+      end
+    end
+  end
+
+  resources "feeds" do
+    collection do
+      scope ":user_display_name" do
+        resources "items"
       end
     end
   end
@@ -28,6 +38,9 @@ FeedEngine::Application.routes.draw do
   resources "link_posts"
   resources "feed_items"
   resources "authentications", only: [:show, :destroy]
+  resources "points", only: [:update]
+  resources "refeeds", only: [:create]
+
   root :to => "static_pages#show"
 
   devise_scope :user do

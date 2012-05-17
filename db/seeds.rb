@@ -15,7 +15,7 @@ user4 = User.create(email: "tom.kiefhaber@livingsocial.com", password: "hungry",
 
 #user 1
 user1.text_posts.create(title: "First Post", body: "Hello World!")
-user1.image_posts.create(remote_image_url: "http://veganvsvegetarian.info/
+user1.image_posts.create(external_image_url: "http://veganvsvegetarian.info/
                                             wp-content/uploads/2011/
                                             11/smoothies.jpg", description: "Cheers to Life!")
 user1.link_posts.create(url: "http://techcrunch.com/2012/05/13/hold
@@ -23,7 +23,7 @@ user1.link_posts.create(url: "http://techcrunch.com/2012/05/13/hold
                             advertising-is-linked-to-the-call/", description: "Very Interesting")
 #user 2
 user1.text_posts.create(title: "First Post", body: "Hello World!")
-user2.image_posts.create(remote_image_url: "http://veganvsvegetarian.info/
+user2.image_posts.create(external_image_url: "http://veganvsvegetarian.info/
                                             wp-content/uploads/2011/
                                             11/smoothies.jpg", description: "Cheers to Life!")
 user2.link_posts.create(url: "http://techcrunch.com/2012/05/13/hold
@@ -31,7 +31,7 @@ user2.link_posts.create(url: "http://techcrunch.com/2012/05/13/hold
                             advertising-is-linked-to-the-call/", description: "Very Interesting")
 #user 3
 user1.text_posts.create(title: "First Post", body: "Hello World!")
-user3.image_posts.create(remote_image_url: "http://veganvsvegetarian.info/
+user3.image_posts.create(external_image_url: "http://veganvsvegetarian.info/
                                             wp-content/uploads/2011/
                                             11/smoothies.jpg", description: "Cheers to Life!")
 user3.link_posts.create(url: "http://techcrunch.com/2012/05/13/hold
@@ -39,7 +39,7 @@ user3.link_posts.create(url: "http://techcrunch.com/2012/05/13/hold
                             advertising-is-linked-to-the-call/", description: "Very Interesting")
 #user 4
 user1.text_posts.create(title: "First Post", body: "Hello World!")
-user4.image_posts.create(remote_image_url: "http://veganvsvegetarian.info/
+user4.image_posts.create(external_image_url: "http://veganvsvegetarian.info/
                                             wp-content/uploads/2011/
                                             11/smoothies.jpg", description: "Cheers to Life!")
 user4.link_posts.create(url: "http://techcrunch.com/2012/05/13/hold
