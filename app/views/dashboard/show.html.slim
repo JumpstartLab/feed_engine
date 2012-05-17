@@ -25,7 +25,6 @@
       $("#services").hide();
       $("#subscriptions").hide();
       $("#account").hide();
-      show_div_for_error();
       show_sidebar_for_error();
     });
     function show_div_for_error() {
@@ -102,17 +101,11 @@ div.span3
       li= link_to "Account", "#", :id => "account_id", :class => "inactive"
 div.span7
   div#posts.fe-container
-    = link_to "#", :class => "active post_label", :id => "add_message" do
-      =content_tag(:span, "Text")
-      =image_tag("http://farm9.staticflickr.com/8156/7213395774_ec4daa4367_t.jpg")
+    = link_to 'Text', "#", :class => "btn btn-info btn-medium active post_label", :id => "add_message"
     |&nbsp;&nbsp;&nbsp;&nbsp;
-    = link_to "#", :class => "inactive post_label", :id => "add_link" do
-      =content_tag(:span, "Link")
-      =image_tag("http://farm8.staticflickr.com/7234/7213342742_50e10a486c_t.jpg")
+    = link_to 'Link', "#", :class => "btn btn-info btn-medium inactive post_label", :id => "add_link"
     |&nbsp;&nbsp;&nbsp;&nbsp;
-    = link_to "#", :class => "inactive post_label", :id => "add_image" do
-      =content_tag(:span, "Image")
-      =image_tag("http://farm6.staticflickr.com/5235/7213342782_b808c3b2ab_t.jpg")
+    = link_to 'Image', "#", :class => "btn btn-info btn-medium inactive post_label", :id => "add_image"
     br
     br
     - [@image, @message, @link].each do |post|
@@ -133,23 +126,10 @@ div.span7
       - else
         = link_to "Make my posts private", nil, :class => "btn btn-primary btn-large"
   div#services
-    div
-      h2 Services
-      br
-      table.table.table-striped
-        tbody
-          tr
-            td Github
-            td
-              = link_to "Add", nil, :class => "btn btn-small btn-info"
-          tr
-            td Twitter
-            td
-              = link_to "Add", nil, :class => "btn btn-small btn-info"
-          tr
-            td Instagram
-            td
-              = link_to "Remove", nil, :class => "btn btn-small btn-info"
+    div.fe-container
+      =render partial: "subscriptions/subscriptions_table" if current_user.subscriptions.any?
+    div.fe-container
+      =render partial: "subscriptions/disconnected_table"
   div#subscriptions
     div
       h2 Subscriptions
