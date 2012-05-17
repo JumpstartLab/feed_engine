@@ -26,7 +26,8 @@ class Githubevent < ActiveRecord::Base
           event_time: event.created_at,
           repo: event.repo.name,
           content: create_content(event.actor.login, event.type, event.repo.name))
-          link_to_poly_post(new_event)
+          
+          new_event.link_to_poly_post(new_event, user.feed)
         end
       end
     end
