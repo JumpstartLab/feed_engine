@@ -51,6 +51,7 @@ class User < ActiveRecord::Base
   has_many :image_posts, through: :posts, source: :postable, source_type: 'ImagePost'
   has_many :link_posts,  through: :posts, source: :postable, source_type: 'LinkPost'
   has_many :twitter_posts, through: :posts, source: :postable, source_type: 'TwitterPost'
+  has_many :github_posts, through: :posts, source: :postable, source_type: 'GithubPost'
 
   has_many :posts, dependent: :destroy, :extend => PageExtension
 
@@ -78,6 +79,10 @@ class User < ActiveRecord::Base
 
   def auth_for(provider)
     authentications.where(provider: provider).first
+  end
+
+  def remove_auth_for(provider)
+    authentications.destroy(auth_for(provider))
   end
 
 end
