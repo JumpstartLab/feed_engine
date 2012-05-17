@@ -1,28 +1,30 @@
-div.span4.offset4
-  h1 = @user.display_name
-  br
-  - if logged_in?
-    = link_to "Subscribe", nil
-  br
-  br
-  br
-  - @posts.each do |post|
-    p
+- @posts.each do |post|
+  div.fe-home-container
+    p.post-info
+      span.post-month
+        = (post.created_at).strftime("%B")
+      br/
+      span.post-day
+        = (post.created_at).strftime("%d")
+      br/
+      span.post-time
+        = (post.created_at).strftime("%l:%M%P")
+    br/
+    p.post-body
       - if post.message? || post.tweet?
-        = post.body
+        =post.body
       - if post.github_event?
         | #{post.event_type} on #{post.repo}
       - if post.link?
-        h3= link_to post.url, post.url
-        br/
-        = post.description
+        h3
+          =link_to post.url, post.url
+        p
+          = post.description
       - if post.image?
         = image_tag post.url
-        br/
-        = post.description
-      br/
-      = post.created_at
-      br/
+        p
+          = post.description
+    p
       = link_to @user.display_name, user_path(@user)
       - if post.tweet?
         |  via Twitter
