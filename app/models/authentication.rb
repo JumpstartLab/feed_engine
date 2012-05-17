@@ -12,6 +12,10 @@ class Authentication < ActiveRecord::Base
     where(provider: "twitter").size > 0 ? true : false
   end
 
+  def self.github
+    where(provider: "github").first
+  end
+
   def self.github?
     where(provider: "github").size > 0 ? true : false
   end
@@ -21,24 +25,12 @@ end
 #
 # Table name: authentications
 #
-#  id         :integer         not null, primary key
+#  id         :integer         primary key
 #  user_id    :integer
 #  provider   :string(255)
 #  token      :string(255)
 #  secret     :string(255)
-#  created_at :datetime        not null
-#  updated_at :datetime        not null
-#
-# == Schema Information
-#
-# Table name: authentications
-#
-#  id         :integer         not null, primary key
-#  user_id    :integer
-#  provider   :string(255)
-#  token      :string(255)
-#  secret     :string(255)
-#  created_at :datetime        not null
-#  updated_at :datetime        not null
+#  created_at :timestamp       not null
+#  updated_at :timestamp       not null
 #
 

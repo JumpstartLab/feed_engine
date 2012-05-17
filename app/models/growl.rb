@@ -2,13 +2,16 @@ require "open-uri"
 
 class Growl < ActiveRecord::Base
   attr_accessible :comment, :link, :user, :type,
-                  :external_id, :created_at, :user_id
+                  :external_id, :original_created_at,
+                  :user_id, :event_type
+                  
   validates_presence_of :type
   belongs_to :user
   has_one :meta_data, :autosave => true, dependent: :destroy
   has_many :regrowls
   include HasUploadedFile
   scope :by_date, order("created_at DESC")
+  after_create :set_original_created_at
 
   def self.by_type_and_date(type=nil)
     if type
@@ -77,6 +80,13 @@ class Growl < ActiveRecord::Base
   def original_growl
     Growl.find(regrowled_from_id)
   end
+  
+  private
+
+  def set_original_created_at
+    self.original_created_at = DateTime.now unless self.original_created_at
+    self.save
+  end
 
 end
 
@@ -84,16 +94,18 @@ end
 #
 # Table name: growls
 #
-#  id                 :integer         not null, primary key
-#  type               :string(255)
-#  comment            :text
-#  link               :text
-#  created_at         :datetime        not null
-#  updated_at         :datetime        not null
-#  user_id            :integer
-#  photo_file_name    :string(255)
-#  photo_content_type :string(255)
-#  photo_file_size    :integer
-#  photo_updated_at   :datetime
+#  id                  :integer         not null, primary key
+#  type                :string(255)
+#  comment             :text
+#  link                :text
+#  created_at          :datetime        not null
+#  updated_at          :datetime        not null
+#  user_id             :integer
+#  photo_file_name     :string(255)
+#  photo_content_type  :string(255)
+#  photo_file_size     :integer
+#  photo_updated_at    :datetime
+#  original_created_at :datetime
+#  event_type          :string(255)
 #
 

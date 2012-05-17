@@ -4,6 +4,22 @@ Hungrlr::Application.routes.draw do
 
   namespace "api" do ## Used for Ajax purposes
     namespace "v1" do
+      get '/feeds/:display_name' => 'feeds#show'
+      post '/feeds/:display_name' => 'feeds#create'
+      resources :user_tweets, only: [:create, :index]
+      resources :user_github_events, only: [:create, :index]
+      resources :meta_data, :only => [ :create ]
+      get '/users/twitter' => 'users#twitter'
+      get '/users/github' => 'users#github'
+    end
+  end
+
+  namespace "api" do
+    namespace "v1" do
+      # get '/feeds/:display_name' => 'feeds#show'
+      # post '/feeds/:display_name' => 'feeds#create'
+      # resources :user_tweets, only: [:create]
+      # resources :users, only: [:index]
       resources :meta_data, only: [ :create ]
       post '/feeds/:display_name/growls/:id/refeed' => 'feeds#refeed'
     end
