@@ -10,7 +10,9 @@ class User < ActiveRecord::Base
   has_many :authentications
   has_many :tweets
   has_many :githubevents
+  has_many :posts
   has_one :feed
+
 
 
   DISPLAY_NAME_REGEX = /^[\w-]*$/

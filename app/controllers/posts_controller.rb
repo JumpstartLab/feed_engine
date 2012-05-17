@@ -1,10 +1,12 @@
 class PostsController < ApplicationController
+  include PostsHelper
+
   def create
     klass_name = params[:type]
-    params[klass_name][:user_id] = current_user.id
     klass = Module.const_get(klass_name.capitalize)
     @post = klass.create(params[klass_name.downcase])
     unless @post.errors.any?
+      link_to_poly_post(@post, current_user.feed)
       render "create",
               :status => :ok,
               :handlers => [:jbuilder]
@@ -17,6 +19,7 @@ class PostsController < ApplicationController
 
   def index
     params[:page] = "0" if params[:page] && params[:page] == "NaN"
-    @posts = current_user.posts.reverse.page(params[:page].to_i || 0)
+    temp_posts = current_user.feed.posts.reverse.page(params[:page].to_i || 0)
+    @posts = temp_posts.collect { |p| p.postable }
   end
 end

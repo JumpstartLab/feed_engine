@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120517132333) do
+ActiveRecord::Schema.define(:version => 20120517141356) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -65,6 +65,12 @@ ActiveRecord::Schema.define(:version => 20120517132333) do
   end
 
   add_index "links", ["user_id"], :name => "index_links_on_user_id"
+
+  create_table "posts", :force => true do |t|
+    t.integer "feed_id"
+    t.integer "postable_id"
+    t.string  "postable_type"
+  end
 
   create_table "texts", :force => true do |t|
     t.text     "content"
