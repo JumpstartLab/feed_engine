@@ -12,6 +12,7 @@ class PasswordResetsController < ApplicationController
 
   def edit
     @user = User.find_by_password_reset_token!(params[:id])
+    # session[:user_id] = @user.id
   end
 
   def update
