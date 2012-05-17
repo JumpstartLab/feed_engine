@@ -9,7 +9,7 @@ FeedEngine::Application.routes.draw do
   scope module: "api", as: "api", constraints: lambda { |r| r.subdomain == 'api' } do
     resources "feeds" do
       collection do
-        scope ":user_display_name" do
+        scope ":feed_name" do
           resources "posts"
         end
       end
@@ -18,8 +18,8 @@ FeedEngine::Application.routes.draw do
 
   scope "", constraints: lambda { |r| r.subdomain.present? &&
     r.subdomain != 'www' && r.subdomain != 'api' } do
-    match "", to: "users#show" 
-    resource "user"
+    match "", to: "feeds#show" 
+    resource "feeds", only: [:show]
   end
   
   resources :users
@@ -30,8 +30,10 @@ FeedEngine::Application.routes.draw do
 
 
   root :to => 'pages#index'
-  match '/twitter' => 'users#twitter', as: 'twitter'
+  match '/integrate' => 'users#integrate', as: 'integrate'
+
   match '/auth/:provider/callback' => 'authentications#create'
+  #match '/auth/github/callback' => 'authentications#create'
 
   # html partial fetching
   match '/footer' => 'pages#footer'

@@ -12,3 +12,11 @@ ul.nav-bar
         a#signin Signin
       li
         a#signup Signup
+    / - if current_user
+    /   ul
+    /     li
+    /       = link_to "Settings", edit_user_path(current_user)
+    /     li
+    /       = link_to "Services", authentications_path
+    /     li
+    /       = link_to "Logout", destroy_user_session_url(subdomain: false), :method => :delete

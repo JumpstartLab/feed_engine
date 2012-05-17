@@ -6,4 +6,13 @@ class Feed < ActiveRecord::Base
   def posts
     user.posts
   end
+
+  def set_name(name)
+    self.name = name
+    self.save
+  end
+
+  def private?
+    self.private
+  end
 end

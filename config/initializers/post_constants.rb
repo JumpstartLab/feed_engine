@@ -1,5 +1,5 @@
 INPUT_TYPES = [Text, Image, Link]
-FEED_TYPES = [Text, Image, Link, Tweet]
+FEED_TYPES = [Text, Image, Link, Tweet, Githubevent]
 
 MAX_TEXT_LENGTH = 512
 MAX_LINK_LENGTH = 2048

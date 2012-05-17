@@ -1,20 +1,17 @@
 class ApiController < ApplicationController
-  # before_filter :authenticate
-
+  before_filter :authenticate_user
   attr_accessor :current_user
 
   private
 
-  def construct_link_header(next_url, last_url)
-    "<#{next_url}>; rel=\"next\", <#{last_url}>; rel=\"last\""
+  def authenticate_user
+    @current_user = User.find_by_authentication_token(auth_token)
+    unless @current_user
+      head status: :unauthorized
+    end
   end
 
-  def authenticate
-    if self.current_user = authenticate_or_request_with_http_basic do |username, password|
-        login(username, password)
-      end
-    else
-      request_http_basic_authentication
-    end
+  def auth_token
+    request.env['HTTP_TOKEN']
   end
 end
