@@ -3,7 +3,18 @@ class SessionsController < ApplicationController
   end
 
   def create
-    login(params[:email], params[:password])
+    json_user = params[:data][:user]
+    @user = login(json_user[:email], json_user[:password])
+    if @user
+      render "create",
+      :status => :ok,
+      :handlers => [:jbuilder]
+    else
+      render "login_failed",
+      :status => :unauthorized,
+      text: "Login unsuccessful. Please check your username and password and try again.",
+      :handlers => [:jbuilder]
+    end
   end
 
   def destroy

@@ -2,7 +2,7 @@
   .errors
       p Oops! Something went wrong.
       ul.errors_list
-  = form_for @user=User.new, remote: true do |f|
+  = form_for @user=User.new, id:"signup_form", remote: true do |f|
     = f.label :email
     br
     = f.email_field :email

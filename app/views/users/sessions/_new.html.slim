@@ -1,10 +1,10 @@
 h2 Signin
-
-= form_for User.new do |f| 
-  = f.label :email
-  = f.email_field :email
-
-  = f.label :password
-  = f.password_field :password
-
-  = f.submit "Sign in"
+.post-form
+  = form_tag('/login', id: "signin_form", remote: true) do
+    = label_tag :email
+    = email_field_tag :email
+    br
+    = label_tag :password
+    = password_field_tag :password
+    br
+    a.button#signin-submit Signin

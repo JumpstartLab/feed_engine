@@ -86,12 +86,12 @@ ActiveRecord::Schema.define(:version => 20120516192740) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",            :null => false
+    t.string   "email",                :null => false
     t.string   "crypted_password"
     t.string   "salt"
-    t.string   "display_name",     :null => false
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.string   "display_name",         :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
     t.string   "subdomain"
     t.string   "api_key"
     t.string   "authentication_token"

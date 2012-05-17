@@ -20,9 +20,15 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(params[:user])
-    if @user.save
-      auto_login @user
+    @user = User.create(params[:user])
+    unless @user.errors.any?
+      render "create",
+      :status => :ok,
+      :handlers => [:jbuilder]
+    else
+      render "create",
+      :status => :unprocessable_entity,
+      :handlers => [:jbuilder]
     end
   end
 
@@ -37,14 +43,6 @@ class UsersController < ApplicationController
         format.html { render action: "edit" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  def signin
-    if @user = User.find(params[:user])
-      sign_in @user
-    else
-      @user.errors << "Login failed, please try again"
     end
   end
 

@@ -7,11 +7,17 @@ ul.nav-bar
     a Feeds
   li#account
     a Account
-    ul
+    ul#unauth
       li
         a#signin Signin
       li
         a#signup Signup
+    / ul#auth
+    /   li
+    /     a#settings Settings
+    /     a#services Services
+    /     a#logout Logout
+
     / - if current_user
     /   ul
     /     li

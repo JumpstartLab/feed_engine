@@ -1,22 +1,22 @@
+setFlash = (message) ->
+  $('#flash').text(message).fadeOut(1500)
+
 class User
   constructor: (@email, @password) ->
     @authenticated = false
     @authenticate()
 
   authenticate: =>
-    # data = @infoToJSON()
-    # $.ajax(
-    #   url: '/users/sign_in',
-    #   method: 'POST',
-    #   dataType: 'json',
-    #   data: data,
-    #   success: (data, status, xhr) =>
-    #     @authenticated = true
-    #     renderDashboard()
-    # )
+    data = @infoToJSON()
+    $.post('/login',
+      data: data,
+      success: (data, status, xhr) =>
+        @authenticated = true
+        renderDashboard()
+    )
 
   infoToJSON: =>
-    { user: { email: @email, password: @password } }
+    { user: { email: @email, password: @password }}
 
 spotlightToBackstage = ->
   $('#backstage').append($('#spotlight').children())
@@ -41,9 +41,6 @@ setCSRFToken = ->
   )
 
 jQuery ->
-  $.feedengine = {
-    current_user: new User('tyre77@gmail.com', 'hungry')
-  }
   setCSRFToken()
   navItems = ['#friends', '#feeds', '#home', '#signin', '#signup']
   pageIDs = (id + '-page' for id in navItems)
@@ -52,7 +49,9 @@ jQuery ->
     navHandler(id)
   addDashboardHandler()
   addHandlers()
-
+  $.feedengine = {
+    current_user: null
+  }
 
 ######################### DASHBOARD ############################
 
@@ -71,7 +70,7 @@ $.namespace = {
 
 addSubmitHandlers = ->
   $(".errors").hide()
-  $(".post-form form .button").click ->
+  $(".post-form form .post-button").click ->
     $(".errors").hide()
     form = $(this).closest('form')
     formData = form.serialize()
@@ -80,7 +79,7 @@ addSubmitHandlers = ->
       url: "/posts",
       data: formData
       success: ->
-        $('#flash').text('Posted successfully')
+        setFlash('Posted successfully')
         form.clearForm()
         $("#feed").children().remove()
         new PostsPager()
@@ -93,20 +92,39 @@ addSubmitHandlers = ->
 
 addSignupHandler = ->
   $(".errors").hide()
-  $('#signup-page .button').click ->
+  $('#signup-submit').click ->
     $(".errors").hide()
     form = $(this).closest('form')
     formData = form.serialize()
-    jqxhr = $.post( "/signup", formData, "json")
+    jqxhr = $.post("/signup", formData, "json")
     jqxhr.success( ->
-      $('#flash').text('Signup successful! Welcome to FeedEngine')
+      setFlash('Signup successful! Welcome to FeedEngine')
+      alert "#{$('#user_email')}"
+      email = $('#user_email').val()
+      alert email.toString()
+      password = $('#user_password').val()
+      alert "#{email} #{password}"
+      $.feedengine['current_user'] = new User(email, password) 
       form.clearForm()
       new PostsPager())
     jqxhr.error((response, status) ->
-        resp = $.parseJSON(response.responseText)
-        $(".errors", form).show()
-        for error in resp.errors
-          $(".errors_list", form).html "<li>#{error}</li>")
+        resp = $.parseJSON(response['responseText'])
+        $('#signup-page .errors').show()
+        for error in resp['errors'] 
+          $('#signup-page .errors ul').append("<li>#{error}</li>")
+        )
+
+addSigninHandler = ->
+  $('#signin-submit').click ->
+    form = $(this).closest('form')
+    formData = form.serialize()
+    setCSRFToken()
+    jqxhr = $.post('/login', formData, 'json')
+    jqxhr.success( ->
+      alert
+      renderDashboard())
+    jqxhr.error( (response, status)->
+      setFlash(response['responseText'])
 
 addTabMenuHandler = ->
   $('.tab-item').click ->
@@ -124,6 +142,7 @@ addHandlers = ->
   addPreviewHandler()
   addTabMenuHandler()
   addSignupHandler()
+  addSigninHandler()
 
 renderDashboard = ->
   $('.tab-body ul').children().hide()
