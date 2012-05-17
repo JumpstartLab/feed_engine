@@ -10,14 +10,15 @@ class AuthenticationsController < ApplicationController
     current_user.authentications.find_or_create_by_provider_and_uid(:provider => auth['provider'], :uid => auth['uid'].to_s, :handle => get_handle(auth))
     Resque.enqueue(Kernel.const_get("#{auth['provider'].capitalize}Feeder"), current_user.id)
     flash[:notice] = "#{auth['provider'].capitalize} link successful"
-    redirect_to user_root_path
+    redirect_to authentications_path
   end
 
   def destroy
     @authentication = current_user.authentications.find(params[:id])
+    provider = @authentication.provider.capitalize
     @authentication.destroy
-    flash[:notice] = "Successfully destroyed authentication."
-    redirect_to user_root_path
+    flash[:notice] = "#{provider} has been removed"
+    redirect_to authentications_path
   end
 
   private
