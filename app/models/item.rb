@@ -16,6 +16,16 @@ class Item < ActiveRecord::Base
 
   belongs_to :post, :polymorphic => true
 
+  def self.all_items
+    User.all.collect { |user| user.items }.flatten(1)
+  end
+
+  def self.all_items_sorted
+    all_items.sort do |comparer, comparee| 
+      comparee.created_at <=> comparer.created_at 
+    end
+  end
+
   def poster
     User.where(id: poster_id)
   end
