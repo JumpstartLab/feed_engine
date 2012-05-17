@@ -6,8 +6,7 @@
   <h3>As a member, you can connect one of your social media accounts to Feed Engine.</h3>
   <hr />
 
-  <a href="/auth/twitter"><img src="/assets/twitter_128.png"></a>
-  <a href="/auth/github"><img src="/assets/github_128.png"></a>
+  <%= render :partial => "authentications" %>
   <hr />
 
   <%= link_to "Skip This Step", skip_twitter_path %>
