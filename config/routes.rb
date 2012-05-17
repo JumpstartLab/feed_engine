@@ -47,9 +47,10 @@ Hungrlr::Application.routes.draw do
   end
 
   resources :growls, :only => [ :show, :create ]
+  resources :regrowled, only: [:create]
   resources :authentications, :only => [ :new ]
   resources :images, :links, :messages, :authentications
   resource :dashboard, :only => [ :show ]
-  
+
   root :to => 'pages#home'
 end

@@ -8,6 +8,7 @@ describe "Subdomains" do
   context "no subdomain" do
     context "logged in" do
       before(:each) do
+        Capybara.app_host = "http://hungrlr.test"
         login(user)
         visit root_path
       end

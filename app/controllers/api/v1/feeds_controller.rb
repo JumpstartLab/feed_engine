@@ -1,4 +1,4 @@
-class Api::V1::FeedsController < Api::V1::BaseController
+class Api::V1::FeedsController < Api::V1::ApiController
 
   def show
     @user = User.find_by_display_name(params[:display_name])
@@ -8,7 +8,7 @@ class Api::V1::FeedsController < Api::V1::BaseController
   def create
     json_hash = JSON.parse(params[:body])
     @growl = current_user.relation_for(json_hash["type"]).new(json_hash)
-  
+
     if @growl.save
       render location: @growl, status: :created
     else

@@ -1,5 +1,4 @@
-class Api::V1::UserTweetsController < Api::V1::BaseController
-  # respond_to :json
+class Api::V1::UserTweetsController < Api::V1::ApiController
 
   before_filter :verify_twitter_account
 
@@ -13,7 +12,7 @@ class Api::V1::UserTweetsController < Api::V1::BaseController
     render :json => true, :status => 201
   end
 
-  private
+private
 
   def verify_twitter_account
     @user = User.where(id: params["user_id"]).first
