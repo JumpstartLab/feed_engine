@@ -25,5 +25,5 @@ task :gource do
   end
 
   # Show gource
-  sh "gource --load-config .gource --user-image-dir .git/avatar/"
+  sh "gource --load-config .gource"
 end
