@@ -5,7 +5,7 @@
 
   <div>
     <div class="span3">
-      <%= image_tag "../assets/twitter-bird.png" %>
+      <%= image_tag "/assets/twitter-bird.png" %>
       <span class="twitter-label">Twitter</span>
       <% if twitter_connected? %>
         <%= link_to "Disconnect", "#", :class => "btn btn-large" %>
@@ -15,7 +15,7 @@
     <% end %>
   </div>
   <div class="span3">
-    <%= image_tag "../assets/octocat.png" %>
+    <%= image_tag "/assets/octocat.png" %>
     <span class="github-label">Github</span>
     <% if github_connected? %>
       <%= link_to "Disconnect", "#", :class => "btn btn-large" %>
