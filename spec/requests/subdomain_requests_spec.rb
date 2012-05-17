@@ -24,16 +24,11 @@ describe User do
         login_as(user)
       end
 
-      it "is redirected to their feed from root with a subdomain" do
+      it "is shown the aggregated feed when visiting root path" do
         set_host(user.display_name)
         visit root_path
-        current_url.should include user.display_name
-        page.should have_content "#{user.display_name}'s feed"
-      end
-
-      it "is redirected to their dashboard from the root without subdomain" do
-        visit root_path
-        current_path.should == dashboard_path
+        save_and_open_page
+        page.should have_content "All Posts"
       end
 
       context "and has made posts" do
