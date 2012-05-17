@@ -5,6 +5,9 @@ div class="span8 stream"
     - @posts.each do |post|
       - postable = post.postable
       div class="post well"
+        div class="pull-right"
+          #{link_to "Refeed", refeeds_path(post_id: post), method: :post}
+          #{link_to "Points!", point_path(post), method: :put} #{"(#{post.points})"}
         - if postable.class == ImagePost
           = image_tag(postable.image, class: "thumbnail")
           = postable.description
@@ -15,9 +18,6 @@ div class="span8 stream"
         - elsif postable.class == TextPost
           = postable.body
         br
-        div class="pull-right"
-          #{link_to "Refeed", refeeds_path(post_id: post), method: :post}
-          #{link_to "Points!", point_path(post), method: :put} #{"(#{post.points})"}
 
   script type="text/html" id="post_template"
       = render "/dashboards/post"
