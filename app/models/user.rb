@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :token_authenticatable, :omniauthable
 
   before_save :ensure_authentication_token
-  validates_uniqueness_of :display_name
+  validates_uniqueness_of :display_name, :case_sensitive => false
   validates_format_of :display_name, :with => /^[A-Za-z\d]+$/, message:
             "Required. Display name must only be letters, numbers, or dashes"
 
@@ -90,7 +90,7 @@ class User < ActiveRecord::Base
   end
 
   def can_regrowl?(original_growl)
-    !growls.where(regrowled_from_id: original_growl.id).any?
+    growls.where(regrowled_from_id: original_growl.id).empty? && original_growl.user_id != id
   end
 end
 

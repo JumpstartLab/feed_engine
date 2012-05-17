@@ -29,3 +29,6 @@ javascript:
 coffee:
   $(".points").click ->
     alert Math.floor((Math.random()*100)+1) + " Points achieved!"
+  $(".regrowl").click ->
+    $(this).hide()
+    $(this).parent().find(".regrowled").fadeIn()

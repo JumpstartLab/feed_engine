@@ -3,11 +3,8 @@ class RegrowledController < ApplicationController
 
   def create
     growl = Growl.find(params[:id])
-    if growl.regrowled(current_user.id)
-      redirect_to root_path, :notice => "Regrowl Successful"
-    else
-      redirect_to root_path, :notice => "You can't regrowl yourself!"
-    end
+    growl.regrowled(current_user.id)
+    render status: :created, json: "Refeed Successful"
   end
 
 end
