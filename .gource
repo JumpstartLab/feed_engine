@@ -2,6 +2,7 @@
 fullscreen=true
 
 [gource]
-key=true
+highlight-dirs=true
+key=false
 user-image-dir=.git/avatar/
 
