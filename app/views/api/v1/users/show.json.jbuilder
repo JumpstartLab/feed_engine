@@ -1,7 +1,7 @@
 json.name @user.display_name
 json.id @user.id
 json.private "false"
-json.link feed_url(@user.display_name)
+json.link api_v1_items_url(@user.display_name)
 
 json.items do |json|
   json.pages @user.post_page_count
@@ -14,8 +14,8 @@ json.items do |json|
       json.(item.post, :url, :description) if item.post.link? || item.post.image?
       json.(item, :created_at)
       json.(item, :id)
-      json.feed feed_url(@user.display_name)
-      json.link feed_item_url(@user.display_name, item.id)
+      json.feed api_v1_items_url(@user.display_name)
+      json.link api_v1_item_url(@user.display_name, item.id)
       json.refeed "false"
       json.refeed_link ""
     end
@@ -25,5 +25,5 @@ end
 
 json.web_url root_url(subdomain: @user.display_name)
 #json.private @user.private
-json.link feed_url(@user.display_name)
+json.link api_v1_items_url(@user.display_name)
 

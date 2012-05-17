@@ -10,7 +10,7 @@ class OtherPostableExample < ActiveRecord::Base
   self.table_name = 'messages'
 end
 
-describe Postable, :focus => true do
+describe Postable do
   let!(:postable_example) { PostableExample.new }
   let!(:other_postable_example) { OtherPostableExample.new }
 
