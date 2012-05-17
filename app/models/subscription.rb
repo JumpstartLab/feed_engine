@@ -55,6 +55,7 @@ class Subscription < ActiveRecord::Base
                             )
     end
   end
+
   def self.get_all_new_tweets
     twitter_subscriptions.each do |t_subscription|
       t_subscription.get_new_tweets
@@ -83,6 +84,7 @@ class Subscription < ActiveRecord::Base
     end
   end
 
+<<<<<<< HEAD
   def github_events
     events = Octokit.user_events(self.user_name).map do |event|
       event if EVENT_LIST.include?(event.type)
@@ -94,6 +96,8 @@ class Subscription < ActiveRecord::Base
     Subscription.where(provider: "github")
   end
 
+=======
+>>>>>>> master
   def self.twitter_subscriptions
     Subscription.where(provider: "twitter")
   end
