@@ -26,6 +26,8 @@ class Post < ActiveRecord::Base
       {title: post.title, :body => post.body, :created_at => post.created_at}
     elsif post.class == TwitterPost
       {title: post.twitter_id, :body => post.text, :created_at => post.published_at}
+    elsif post.class == GithubPost
+      {title: post.repo_name, :body => post.url, :created_at => post.published_at}
     end
   end
 

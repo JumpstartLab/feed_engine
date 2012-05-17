@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120516175503) do
+ActiveRecord::Schema.define(:version => 20120517032202) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20120516175503) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "uid"
+    t.string   "username"
   end
 
   create_table "delayed_jobs", :force => true do |t|
@@ -38,6 +39,16 @@ ActiveRecord::Schema.define(:version => 20120516175503) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
+  create_table "github_posts", :force => true do |t|
+    t.integer  "github_id"
+    t.datetime "published_at"
+    t.string   "repo_name"
+    t.string   "repo_url"
+    t.string   "github_type"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
   create_table "image_posts", :force => true do |t|
     t.string   "description"

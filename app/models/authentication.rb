@@ -10,10 +10,11 @@
 #  created_at :datetime        not null
 #  updated_at :datetime        not null
 #  uid        :string(255)
+#  username   :string(255)
 #
 
 class Authentication < ActiveRecord::Base
-  attr_accessible :user_id, :provider, :token, :secret, :uid
+  attr_accessible :user_id, :provider, :token, :secret, :uid, :username
 
   belongs_to :user
   after_create :import_items
@@ -22,11 +23,12 @@ class Authentication < ActiveRecord::Base
     self.update_attributes(provider: auth["provider"],
                            token: auth["credentials"]["token"],
                            secret: auth["credentials"]["secret"],
-                           uid: auth["uid"])
+                           uid: auth["uid"],
+                           username: auth["info"]["nickname"])
     save!
   end
 
   def import_items
-    Fetcher.import_items(self.provider, self.uid, self.user_id)
+    Fetcher.import_items(self.provider, self.uid, self.user_id, self.username)
   end
 end

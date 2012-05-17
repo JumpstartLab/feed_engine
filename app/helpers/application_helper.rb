@@ -9,6 +9,8 @@ module ApplicationHelper
       "text_posts/post"
     elsif post.class == TwitterPost
       "twitter_posts/post"
+    elsif post.class == GithubPost
+      "github_posts/post"
     else
       "NEED TO ADD A TEMPLATE"
     end
