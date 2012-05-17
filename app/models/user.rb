@@ -13,22 +13,15 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation,
                   :remember_me, :display_name
 
-  #has_many :authentications, :dependent => :destroy
-  has_one :authentication
+  has_many :authentications, :dependent => :destroy
   has_many :growls, :dependent => :destroy
   has_many :images
   has_many :messages
   has_many :links
   has_many :tweets
   has_many :github_events
-  #has_one :twitter_account, :through => :authentications
-  has_one :github_account, :through => :authentication
 
   has_many :regrowls
-
-  def twitter_account
-    authentications.twitter.twitter_account if authentications.twitter
-  end
 
   def relation_for(type)
     self.send(type.downcase.pluralize.to_sym).scoped rescue messages.scoped
@@ -80,9 +73,20 @@ class User < ActiveRecord::Base
     authentications.twitter?
   end
 
+  def twitter_account
+    twitter.twitter_account
+  end
+
+  def github
+    authentications.github
+  end
 
   def github?
     authentications.github?
+  end
+
+  def github_account
+    github.github_account
   end
 
   def can_regrowl?(original_growl)
