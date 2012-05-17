@@ -34,11 +34,22 @@ class Growl < ActiveRecord::Base
     end
   end
 
-  def self.regrowled_new(id,user_id)
-    growl = Growl.find(id).dup
+  def regrowled(new_user_id)
+    new_growl                     = self.dup
+    if user_id != new_user_id
+      new_growl.user_id           = new_user_id
+      new_growl.regrowled_from_id = id
+      new_growl.save
+    else
+      false
+    end
+  end
+
+  def self.regrowled_new(growl_id,user_id)
+    growl = Growl.find(growl_id).dup
     if growl.user_id != user_id
       growl.user_id = user_id
-      growl.regrowled_from_id = id
+      growl.regrowled_from_id = growl_id
       growl.save
     end
   end

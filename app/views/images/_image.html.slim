@@ -21,7 +21,6 @@
 .row
   .pull_right
     a.small.green.button.radius.points POINTS!
-    = "CURRENT USER: #{current_user.display_name if current_user}"
     - if current_user && current_user.can_regrowl?(image)
       = link_to "Regrowl", regrowled_index_path(id: image.id), method: :post, class: "small blue button radius"
 br
