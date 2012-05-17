@@ -2,13 +2,15 @@
 #
 # Table name: users
 #
-#  id              :integer         not null, primary key
-#  email           :string(255)
-#  password_digest :string(255)
-#  created_at      :datetime        not null
-#  updated_at      :datetime        not null
-#  display_name    :string(255)
-#  api_key         :string(255)
+#  id                     :integer         not null, primary key
+#  email                  :string(255)
+#  password_digest        :string(255)
+#  created_at             :datetime        not null
+#  updated_at             :datetime        not null
+#  display_name           :string(255)
+#  api_key                :string(255)
+#  password_reset_token   :string(255)
+#  password_reset_sent_at :datetime
 #
 
 # Users of the site
@@ -44,8 +46,16 @@ class User < ActiveRecord::Base
       :with => /^[a-zA-Z\d\-]*$/,
       :message => "must contain only letters, numbers or dashes"
     },
-    :exclusion => { :in => %w(www api nil) },
-    :uniqueness => true
+    :exclusion => { :in => %w(www api nil) }
+  validates_uniqueness_of :display_name, :case_sensitive => false
+
+  def self.find_by_subdomain(domain)
+    User.all.select do |user|
+      user if user.display_name.downcase == domain.downcase
+    end.first
+  end
+
+  SERVICES_LIST =  %w(twitter github instagram)
 
   def send_welcome_email
     UserMailer.signup_notification(self).deliver
@@ -64,14 +74,44 @@ class User < ActiveRecord::Base
   end
 
   def subdomain
-    display_name
+    display_name.downcase
+  end
+
+  def disconnected_services
+    SERVICES_LIST - subscriptions.map(&:provider).uniq
   end
 
   def post_page_count
     (posts.length.to_f / 12).ceil
   end
 
+  def send_password_reset
+    generate_password_token(:password_reset_token)
+    self.password_reset_sent_at = Time.zone.now
+    save!(validate: false)
+    UserMailer.password_reset(self).deliver
+  end
+
+
+  def has_subscription?(provider)
+    subscription(provider) ? true : false
+  end
+
+  def subscription(provider)
+    subscriptions.select do |subscription|
+      if subscription.user_id == self.id && subscription.provider == provider
+        subscription
+      end
+    end.first
+  end
+
   private
+
+  def generate_password_token(column)
+    begin
+      self[column] = SecureRandom.urlsafe_base64
+    end while User.exists?(column => self[column])
+  end
 
   def generate_api_key
     key = Digest::MD5.hexdigest(

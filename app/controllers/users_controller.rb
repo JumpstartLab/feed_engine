@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by_display_name(request.subdomain)
+    @user = User.find_by_subdomain(request.subdomain)
 
     if @user
       @posts = Kaminari.paginate_array(
@@ -51,8 +51,5 @@ class UsersController < ApplicationController
   def login_and_notify_user
     session[:user_id] = @user.id
     @user.send_welcome_email
-  end
-
-  def set_user_from_subdomain
   end
 end

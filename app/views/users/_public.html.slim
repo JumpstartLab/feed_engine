@@ -26,10 +26,8 @@
           = post.description
     p
       = link_to @user.display_name, user_path(@user)
-    - if post.tweet?
-      | via Twitter
-    - if post.github_event?
-      | via  Github
-    = paginate @posts
-
-
+      - if post.tweet?
+        |  via Twitter
+      - if post.github_event?
+        |  via  Github
+  = paginate @posts
