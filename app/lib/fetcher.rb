@@ -12,7 +12,7 @@ module Fetcher
     statuses.each do |status|
       Fetcher.create_post_from_twitter(user_id, status)
     end
-    Fetcher.delay(run_at: 5.minutes.from_now).fetch_and_import_tweets(uid, user_id)
+    #Fetcher.delay(run_at: 5.minutes.from_now).fetch_and_import_tweets(uid, user_id)
   end
 
 
@@ -36,9 +36,9 @@ module Fetcher
   def self.import_items(provider, uid, user_id, username)
     case provider
     when "twitter"
-      Fetcher.delay(run_at: 5.seconds.from_now).fetch_and_import_tweets(uid, user_id)
+      Fetcher.delay(run_at: 2.seconds.from_now, :queue => 'fetcher').fetch_and_import_tweets(uid, user_id)
     when "github"
-      Fetcher.delay(run_at: 5.seconds.from_now).fetch_and_import_github_activity(username, user_id)
+      Fetcher.delay(run_at: 2.seconds.from_now, :queue => 'fetcher').fetch_and_import_github_activity(username, user_id)
     end
   end
 

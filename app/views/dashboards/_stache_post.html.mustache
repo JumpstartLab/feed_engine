@@ -1,4 +1,5 @@
 <div class="post well">
+  {{type}}
   {{#image_url}}
     <div class="thumbnail">
       <img src={{image_url}}>
@@ -14,6 +15,16 @@
     <br />
     <a href="{{link_url}}" target="_blank">{{link_url}}</a>
   {{/link_url}}
-    <br />
-  {{type}}
+  <br />
+  {{#github_type}}
+    {{github_type}}
+  {{/github_type}}
+  <br />
+  {{#repo_name}}
+    {{repo_name}}
+  {{/repo_name}}
+  <br />
+  {{#repo_url}}
+    {{repo_url}}
+  {{/repo_url}}
 </div>
