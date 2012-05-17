@@ -8,11 +8,15 @@
 #  created_at      :datetime        not null
 #  updated_at      :datetime        not null
 #  display_name    :string(255)
+#  api_key         :string(255)
 #
 
 # Users of the site
 class User < ActiveRecord::Base
+  after_create :generate_api_key
+
   has_secure_password
+
   has_many :messages, :foreign_key => 'poster_id'
   has_many :images, :foreign_key => 'poster_id'
   has_many :links, :foreign_key => 'poster_id'
@@ -22,7 +26,11 @@ class User < ActiveRecord::Base
 
   default_scope order(:created_at)
 
-  attr_accessible :email, :password, :password_confirmation, :display_name
+  attr_accessible :email,
+                  :password,
+                  :password_confirmation,
+                  :display_name,
+                  :api_key
 
   validates :email, :uniqueness => true
   validates_presence_of :email, :message => "is required"
@@ -63,5 +71,21 @@ class User < ActiveRecord::Base
 
   def disconnected_services
     SERVICES_LIST - subscriptions.map(&:provider).uniq
+  end
+
+  def post_page_count
+    (posts.length.to_f / 12).ceil
+  end
+
+  private
+
+  def generate_api_key
+    key = Digest::MD5.hexdigest(
+      'Elise punches puppies' +
+      Time.at(Time.now).nsec.to_s +
+      self.email +
+      rand(424242424242424242).to_s
+    )
+    self.update_attributes api_key: key
   end
 end

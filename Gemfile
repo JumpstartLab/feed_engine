@@ -16,7 +16,6 @@ gem 'octokit'
 gem 'omniauth-twitter'
 gem 'omniauth-github'
 gem 'omniauth'
-gem 'delayed_job_active_record'
 gem 'jbuilder'
 gem 'whenever', require: false
 gem 'delayed_job_active_record'
