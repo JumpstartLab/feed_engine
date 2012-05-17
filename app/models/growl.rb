@@ -84,7 +84,7 @@ class Growl < ActiveRecord::Base
   private
 
   def set_original_created_at
-    self.original_created_at = DateTime.now unless self.original_created_at
+    original_created_at = DateTime.now unless original_created_at
     self.save
   end
 
