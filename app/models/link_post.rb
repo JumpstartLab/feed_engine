@@ -7,7 +7,6 @@
 #  description :string(255)
 #  created_at  :datetime        not null
 #  updated_at  :datetime        not null
-#
 
 class LinkPost < ActiveRecord::Base
   attr_accessible :description, :url, :user_id

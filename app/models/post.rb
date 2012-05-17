@@ -8,13 +8,14 @@
 #  postable_type :string(255)
 #  created_at    :datetime
 #  updated_at    :datetime
+#  points        :integer         default(0)
 #  refeed_id     :integer
 #
 
 class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :postable, :polymorphic => true, dependent: :destroy
-  attr_accessible :postable, :refeed_id
+  attr_accessible :postable, :refeed_id, :points
 
   def as_json(*params)
     post = self.postable
@@ -29,8 +30,8 @@ class Post < ActiveRecord::Base
     end
   end
 
-  def instance_of_a_particular_post_type
-    self.postable
+  def add_point
+    self.points += 1
   end
 
   def refeed?

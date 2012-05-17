@@ -7,7 +7,7 @@
 #  updated_at :datetime        not null
 #  title      :string(255)
 #  body       :text
-#
+
 
 class TextPost < ActiveRecord::Base
   attr_accessible :body, :created_at, :updated_at, :user_id, :title

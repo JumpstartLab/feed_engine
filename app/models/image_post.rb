@@ -8,7 +8,6 @@
 #  updated_at         :datetime        not null
 #  image              :string(255)
 #  external_image_url :string(255)
-#
 
 class ImagePost < ActiveRecord::Base
 
