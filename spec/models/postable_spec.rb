@@ -42,4 +42,12 @@ describe Postable do
     seuss = %w(one fish two fish red fish blue fish)
     seuss.each { |meth| postable_example.should_not respond_to "#{meth}?".to_sym }
   end
+
+  describe "#local_created_at" do
+    it "returns the local time of the post" do
+      random_post_type = ["message", "link", "github_event", "tweet", "image"].sample
+      random_post = Fabricate(random_post_type.to_sym)
+      random_post.local_created_at.should == random_post.created_at.localtime
+    end
+  end
 end

@@ -2,13 +2,13 @@
   div.fe-home-container
     p.post-info
       span.post-month
-        = (post.created_at).strftime("%B")
+        = (post.local_created_at).strftime("%B")
       br/
       span.post-day
-        = (post.created_at).strftime("%d")
+        = (post.local_created_at).strftime("%d")
       br/
       span.post-time
-        = (post.created_at).strftime("%l:%M%P")
+        = (post.local_created_at).strftime("%l:%M%P")
     br/
     p.post-body
       - if post.message? || post.tweet?
