@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by_display_name(request.subdomain)
+    @user = User.find_by_subdomain(request.subdomain)
 
     if @user
       @posts = Kaminari.paginate_array(
