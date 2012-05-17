@@ -17,6 +17,7 @@ class PasswordResetsController < ApplicationController
     if @user.password_reset_sent_at < 12.hours.ago
       redirect_to new_password_reset_path, :alert => "Password reset expired."
     elsif @user.update_attributes(params[:user])
+      session[:user_id] = @user.id
       redirect_to root_url, :notice => "Password has been reset."
     else
       render :edit
