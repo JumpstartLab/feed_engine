@@ -156,7 +156,7 @@ describe "Dashboard" do
     before(:each) { visit "/dashboard" }
     describe "edit" do
       it "displays the form" do
-        page.should have_content "Edit Your Account"
+        page.should have_content "Change your password"
       end
     end
   end
