@@ -26,7 +26,7 @@ class Api::V1::ApiController < ActionController::Base
     if Rails.env.development? || Rails.env.test?
       request.env['HTTP_AUTH_TOKEN'] || params[:token]
     else
-      request.env['HTTP_AUTH_TOKEN']
+      request.env['X-HTTP-AUTHTOKEN'] || params[:token]
     end
   end
 end
