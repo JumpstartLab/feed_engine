@@ -14,10 +14,6 @@ Hungrlr::Application.routes.draw do
 
   namespace "api" do
     namespace "v1" do
-      # get '/feeds/:display_name' => 'feeds#show'
-      # post '/feeds/:display_name' => 'feeds#create'
-      # resources :user_tweets, only: [:create]
-      # resources :users, only: [:index]
       resources :meta_data, only: [ :create ]
     end
   end
@@ -46,10 +42,13 @@ Hungrlr::Application.routes.draw do
     get '/login' => 'devise/sessions#new'
   end
 
-  resources :authentications, :only => [ :new, :destroy ]
-  resource :dashboard, :only => [ :show ]
   resources :growls, :only => [ :show, :create ]
-  resources :images, :links, :messages
+  resources :regrowled, only: [:create]
+  resources :authentications, :only => [ :new, :destroy ]
+  resources :images
+  resources :links
+  resources :messages
+  resource :dashboard, :only => [ :show ]
   resource :subscriptions, :only => [:create, :destroy]
 
   root :to => 'pages#home'
