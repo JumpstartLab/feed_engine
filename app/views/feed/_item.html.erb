@@ -9,7 +9,7 @@
   </div>
 
   <% unless item.author == current_user || current_user == nil || current_user.display_name == @feed_owner %>
-    <%= link_to "Refeed", stream_items_path(:streamable_type => item.class.name, :streamable_id => item.id), :method => :post %>
+    <%= link_to "Refeed", stream_items_path(:streamable_type => item.class.name, :streamable_id => item.id), :id => "#{item.id}_action", :method => :post, :remote => true %>
   <% end %>
 
   <br/>

@@ -6,9 +6,15 @@ class StreamItemsController < ApplicationController
                                                  :streamable_type => params[:streamable_type])
     #raise @stream_item.inspect
     if @stream_item.save
-      redirect_to :root, :notice => "You retrouted #{@stream_item.author.display_name}. Nice job!"
+      respond_to do |format|
+        format.html { redirect_to :root, :notice => "You retrouted #{@stream_item.author.display_name}. Nice job!" }
+        format.js { render :refeed }
+      end
     else
-      redirect_to :root, :alert => "CAST YOUR LINE AGAIN"
+      respond_to do |format|
+        format.html { redirect_to :root, :alert => "CAST YOUR LINE AGAIN" }
+        format.js { render :error }
+      end
     end
   end
 end

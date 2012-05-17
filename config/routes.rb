@@ -23,14 +23,25 @@ FeedEngine::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => "users/registrations" }
 
 
-  namespace :api do
-  end
+  
   devise_for :users
 
 
   constraints :subdomain => "api" do
     match "feeds/:display_name/items" => "api/stream_items#create", :as => "new_api_item", :via => :post
     match "feeds/:display_name" => "api/feeds#show", :as => "api_feed", :via => :get
+    match "feeds/:display_name/stream_items/:id" => "api/stream_items#show", :as => "api_item"
+    match "feeds/:display_name/stream_items/:id/refeeds" => "api/refeeds#create", :as => "api_refeed_item", :via => :post
+
+    scope :module => 'api' do
+      resources :feeds, :only => [:show]
+      resources :stream_items, :only => [:show, :create]
+    end
+  end
+
+  namespace :api do
+    match "feeds/:display_name/items" => "stream_items#create", :as => "new_api_item", :via => :post
+    match "feeds/:display_name" => "feeds#show", :as => "api_feed", :via => :get
     match "feeds/:display_name/stream_items/:id" => "api/stream_items#show", :as => "api_item"
     match "feeds/:display_name/stream_items/:id/refeeds" => "api/refeeds#create", :as => "api_refeed_item", :via => :post
 
