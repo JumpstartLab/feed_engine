@@ -15,6 +15,10 @@ jQuery ->
     $.getScript("http://#{domain}?type=Link")
     $(".active").removeClass("active")
     $("#links").addClass("active")
+  $("#tweets").click ->
+    $.getScript("http://#{domain}?type=Tweet")
+    $(".active").removeClass("active")
+    $("#tweets").addClass("active")
   if $('.pagination').length
     $(window).scroll ->
       url = $('.pagination .next > a').attr('href')

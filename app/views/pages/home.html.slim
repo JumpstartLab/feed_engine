@@ -1,5 +1,5 @@
 .row
-  .five.columns.content_bar
+  .four.columns.content_bar
     h1 Hungrlr
     h5 An easy to use social network aggregator, to manage your Twitter, Facebook, GitHub, MySpace &amp; Instagram
     #login.row(style="display:none;")
@@ -8,6 +8,12 @@
     #signup.row
       = render "shared/signup"
       .user_helper.row= link_to "Already have an account?", "#"
+  .six.columns.content_bar
+    h3 Incoming Growls
+    #growls
+      = render @growls
+    #page
+      = paginate @growls
 coffee:
   jQuery ->
     $('.user_helper').click( ->

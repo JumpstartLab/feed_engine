@@ -4,8 +4,8 @@ class Growl < ActiveRecord::Base
   attr_accessible :comment, :link, :user, :type,
                   :external_id, :original_created_at,
                   :user_id, :event_type
-                  
-  validates_presence_of :type
+
+  validates_presence_of :type, :user_id
   belongs_to :user
   has_one :meta_data, :autosave => true, dependent: :destroy
   has_many :regrowls
@@ -80,7 +80,7 @@ class Growl < ActiveRecord::Base
   def original_growl
     Growl.find(regrowled_from_id)
   end
-  
+
   private
 
   def set_original_created_at
