@@ -3,7 +3,7 @@ div class="span8 stream"
   = render 'content_creation_forms'
 
   h1 Your Stream
-  div id="posts" data-json-url="#{dashboard_url(format: :json)}"
+  div id="posts" data-json-url="#{items_url(user_display_name: current_user.display_name.downcase, format: :json)}"
     / - @posts.each do |post|
     /   = render "stache_post"
 
