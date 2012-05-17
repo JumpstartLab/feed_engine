@@ -18,8 +18,8 @@ module Fetcher
 
   def self.create_post_from_github(username, activity, user_id)
     User.find(user_id).github_posts.create(
-      repo_name: activity.repo_name,
-      repo_url: activity.repo_url,
+      repo_name: activity.repo.name,
+      repo_url: activity.repo.url,
       github_type: activity.type,
       created_at: activity.created_at
       )
