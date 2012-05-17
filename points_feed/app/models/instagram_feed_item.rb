@@ -14,20 +14,14 @@ class InstagramFeedItem < ActiveRecord::Base
   end
 
   def self.create_from_instagram(user, instagram)
-    if instagram.caption
-      caption = instagram.caption.text
-    else
-      caption = ''
-    end
+    caption = instagram.caption ? instagram.caption.text : ''
     user.instagram_feed_items.create(instagram_id: instagram.id,
-                                    posted_at: instagram.created_time,
+                                    posted_at: Time.at(instagram.created_time.to_i),
                                     image_url: instagram.images.standard_resolution.url,
                                     comment: caption)
   end
 
-
-
-  # def decorate
-  #   InstagramFeedItemDecorator.decorate(self)
-  # end
+  def decorate
+    InstagramFeedItemDecorator.decorate(self)
+  end
 end

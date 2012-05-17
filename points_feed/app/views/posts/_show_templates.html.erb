@@ -101,3 +101,26 @@
   </div>
   <hr />
 </script>
+
+<script type="text/template" id='InstagramFeedItemTemplate'>
+  <div class='row'>
+  <div class='span1'>
+    <img src="{{feeder.avatar}}" style='height: 50px'></img>
+  </div>
+  <div style='margin-left: 100px'>
+    
+    {{#refeed}}
+      <span class='light'>Refeeded {{created_at}} from <a href="#">{{refeeder.display_name}}</a></span><br />
+    {{/refeed}}
+    {{^refeed}}
+      <span class='light'>Posted {{created_at}} by <a href="#">{{feeder.name}}</a></span><br />
+    {{/refeed}}
+    <img src='{{image_url}}'></img>
+    {{comment}}<br /><br />
+    {{#refeedable}}
+      <span><a href='#' class='refeed_link' data-id='{{id}}' data-user="{{feeder.name}}">Refeed</a></span>
+    {{/refeedable}}
+    </div>
+  </div>
+  <hr />
+</script>

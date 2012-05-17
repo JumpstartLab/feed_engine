@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
   end
 
   def stream(limit, offset=0)
-    items = self.posts + self.twitter_feed_items + self.github_feed_items
+    items = self.posts + self.twitter_feed_items + self.github_feed_items + self.instagram_feed_items
     items = items.sort_by { |item| item.posted_at }.reverse
     items.slice(offset, offset + limit)
   end
