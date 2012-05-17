@@ -49,6 +49,8 @@ class User < ActiveRecord::Base
     :exclusion => { :in => %w(www api nil) },
     :uniqueness => true
 
+  SERVICES_LIST =  %w(twitter github instagram)
+
   def send_welcome_email
     UserMailer.signup_notification(self).deliver
   end
@@ -67,6 +69,10 @@ class User < ActiveRecord::Base
 
   def subdomain
     display_name
+  end
+
+  def disconnected_services
+    SERVICES_LIST - subscriptions.map(&:provider).uniq
   end
 
   def post_page_count

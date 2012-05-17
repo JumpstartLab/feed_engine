@@ -1,3 +1,8 @@
+- content_for(:head) do
+  javascript:
+    $(function(){
+      $('.actions').children('input:submit').addClass('btn btn-large');
+    });
 - if current_user
   = "Logged in as #{current_user.email} | "
   = link_to 'sign out', logout_path
