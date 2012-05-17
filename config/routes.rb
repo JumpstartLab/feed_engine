@@ -9,9 +9,11 @@ FeedEngine::Application.routes.draw do
   resources :users
   resources :sessions
   resources :links
+  resources :password_resets
   resource  :dashboard,
             :controller => "dashboard",
             :only => "show"
+
 
   get "signup", to: "users#new", as: "signup"
   get "login", to: "sessions#new", as: "login"

@@ -7,4 +7,9 @@ class UserMailer < ActionMailer::Base
     @url = "http://feedengine.heroku.com"
     mail(:to => @user.email, :subject => "Welcome to Feed Engine")
   end
+
+  def password_reset(user)
+    @user = user
+    mail :to => user.email, :subject => "Super Hot Password Reset"
+  end
 end
