@@ -7,6 +7,7 @@ gem 'jbuilder'
 gem 'devise'
 gem 'embedly'
 gem 'twitter'
+gem 'octokit'
 gem 'omniauth-twitter'
 gem 'omniauth-github'
 gem 'paperclip'
@@ -35,6 +36,7 @@ group :development, :test do
   gem 'simplecov'
   gem 'launchy'
   gem 'debugger'
+  gem 'awesome_print'
 end
 
 group :production do

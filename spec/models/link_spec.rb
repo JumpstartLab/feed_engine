@@ -25,6 +25,5 @@ end
 #  photo_content_type :string(255)
 #  photo_file_size    :integer
 #  photo_updated_at   :datetime
-#  external_id        :integer
 #
 

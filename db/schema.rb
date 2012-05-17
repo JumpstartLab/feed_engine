@@ -11,7 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20120516203652) do
+=======
+ActiveRecord::Schema.define(:version => 20120516204210) do
+>>>>>>> 75f7a3633963d7fa0b0e5e480facc3816a43dbdc
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -20,6 +24,17 @@ ActiveRecord::Schema.define(:version => 20120516203652) do
     t.string   "secret"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "github_accounts", :force => true do |t|
+    t.integer  "authentication_id"
+    t.integer  "uid"
+    t.string   "nickname"
+    t.string   "last_status_id",    :default => "0", :null => false
+    t.string   "string",            :default => "0", :null => false
+    t.string   "image"
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
   end
 
   create_table "growls", :force => true do |t|
