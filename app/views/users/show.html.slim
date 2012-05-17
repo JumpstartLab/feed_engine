@@ -10,7 +10,8 @@ div class="span8 stream"
           = postable.description
         - elsif postable.class == LinkPost
           = postable.description
-          = postable.url
+          br
+          = link_to postable.url, postable.url, target: "_blank"
         - elsif postable.class == TextPost
           = postable.body
         br
