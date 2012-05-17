@@ -26,7 +26,9 @@ module Hungrlr
         if event.payload.commits
           event_hash["comment"] = event.payload.commits.last.message
         end
+        event_hash
       end
+
     end
 
     def create_github_events_for_user(user_id, github_hash)

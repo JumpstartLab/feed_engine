@@ -2,6 +2,10 @@ class TwitterAccount < ActiveRecord::Base
   belongs_to :authentication
   attr_accessible :authentication, :uid, :nickname, :last_status_id, :image
 
+  def user
+    authentication.user
+  end
+
   def user_id
     user.id
   end
