@@ -1,6 +1,6 @@
 require 'minitest_helper'
 
-class FeedsControllerTest < ActionController::TestCase
+class GithubeventTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

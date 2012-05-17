@@ -2,8 +2,8 @@ require 'securerandom'
 class User < ActiveRecord::Base
   before_create :set_user_subdomain
   before_save :ensure_authentication_token
-  before_save :set_user_subdomain
-  before_save :set_user_feed_name
+  # before_save :set_user_subdomain
+  # before_save :set_user_feed_name
   after_create :set_user_feed
   after_create :generate_api_key
   after_create :send_welcome_email
@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :display_name, :subdomain
   has_many :authentications
   has_many :tweets
+  has_many :githubevents
   has_one :feed
 
 
@@ -53,18 +54,11 @@ class User < ActiveRecord::Base
     self.update_attribute(:api_key, key)
   end
 
-  # def import_posts(provider)
-  #   #for now, just twitter
-  #   # build import methods off of Tweet model (same for other providers)
-  #   # make a setup method for params
-  #   params = {:user_id => twitter_id, :count=>200}
-  #   params[:since_id] = self.tweets.last.source_id if self.tweets.any?
-  #   Twitter.user_timeline(params).each do |tweet|
-  #     self.tweets.create(content: tweet.text, source_id: tweet.id, handle: tweet.user.screen_name, tweet_time: tweet.created_at)
-  #   end
-  # end
-
   def twitter_id
     authentications.find_by_provider('twitter').uid
+  end
+
+  def github_handle
+    authentications.find_by_provider('github').handle
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120515223433) do
+ActiveRecord::Schema.define(:version => 20120516192740) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20120515223433) do
     t.string   "uid"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "handle"
   end
 
   create_table "feeds", :force => true do |t|
@@ -28,6 +29,18 @@ ActiveRecord::Schema.define(:version => 20120515223433) do
     t.boolean  "private",    :default => false
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
+  end
+
+  create_table "githubevents", :force => true do |t|
+    t.string   "handle"
+    t.string   "repo"
+    t.string   "event_id"
+    t.string   "action"
+    t.datetime "event_time"
+    t.integer  "user_id"
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "images", :force => true do |t|
