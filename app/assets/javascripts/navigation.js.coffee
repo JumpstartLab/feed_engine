@@ -51,7 +51,7 @@ jQuery ->
   for id in navItems
     navHandler(id)
   addDashboardHandler()
-
+  addHandlers()
 
 
 ######################### DASHBOARD ############################
@@ -94,25 +94,19 @@ addSubmitHandlers = ->
 addSignupHandler = ->
   $(".errors").hide()
   $('#signup-page .button').click ->
-    alert "hello"
     $(".errors").hide()
     form = $(this).closest('form')
     formData = form.serialize()
-    $.ajax(
-      type: "POST",
-      url: "/signup",
-      data: formData
-      success: ->
-        $('#flash').text('Signup successful! Welcome to FeedEngine')
-        form.clearForm()
-        new PostsPager()
-      error: (response, status) ->
+    jqxhr = $.post( "/signup", formData, "json")
+    jqxhr.success( ->
+      $('#flash').text('Signup successful! Welcome to FeedEngine')
+      form.clearForm()
+      new PostsPager())
+    jqxhr.error((response, status) ->
         resp = $.parseJSON(response.responseText)
         $(".errors", form).show()
         for error in resp.errors
-          $(".errors_list", form).html "<li>#{error}</li>"
-      )
-
+          $(".errors_list", form).html "<li>#{error}</li>")
 
 addTabMenuHandler = ->
   $('.tab-item').click ->
@@ -134,7 +128,7 @@ addHandlers = ->
 renderDashboard = ->
   $('.tab-body ul').children().hide()
   $('.tab-body ul').children().first().show()
-  addHandlers()
+  $('#feed').children().remove()
   $.namespace.activateTab('Text')
   new PostsPager()
 

@@ -1,7 +1,7 @@
 FeedEngine::Application.routes.draw do
   get "sessions/new"
-  match '/sign_up' => 'users#new', as: 'signup'
-    match 'signin' => 'users#signin', as: 'signin'
+  match '/signup' => 'users#create', as: 'signup'
+  match 'signin' => 'users#signin', as: 'signin'
   resources :authentications
 
   match '/dashboard' => 'dashboard#show', as: :user_root
