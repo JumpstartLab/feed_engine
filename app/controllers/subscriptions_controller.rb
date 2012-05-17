@@ -1,6 +1,7 @@
 class SubscriptionsController < ApplicationController
   def create
-    subscription = current_user.inverse_subscriptions.build(user_id: params["user_id"])
+    subscription = current_user.inverse_subscriptions.build(user_id: params["user_id"],
+                                                            last_status_id: Time.now.to_i)
     if subscription.save
       render :json => true
     else

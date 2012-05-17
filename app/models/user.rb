@@ -58,16 +58,7 @@ class User < ActiveRecord::Base
   end
 
   def get_growls(type=nil)
-    # growls.by_type_and_date(type)
-    user_ids = inverse_subscriptions.pluck(:user_id)
-
-    tweets = Growl.where(user_id: id)
-    subscriptions = Growl.where(user_id: user_ids)
-
-    Growl.where do
-      (id.in tweets.select{id}) | 
-      (id.in subscriptions.select{id})
-    end.by_type_and_date(type)
+    growls.by_type_and_date(type)
   end
 
   def has_tweets?
@@ -112,7 +103,7 @@ class User < ActiveRecord::Base
   end
 
   def can_regrowl?(original_growl)
-    !growls.where(regrowled_from_id: original_growl.id).any?
+    growls.where(regrowled_from_id: original_growl.id).empty?
   end
 end
 

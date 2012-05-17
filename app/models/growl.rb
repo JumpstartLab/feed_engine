@@ -44,7 +44,7 @@ class Growl < ActiveRecord::Base
   end
 
   def original_growl?
-    regrowled_from_id == nil
+    regrowled_from_id.nil?
   end
 
   def get_display_name
