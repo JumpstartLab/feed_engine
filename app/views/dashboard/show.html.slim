@@ -104,11 +104,17 @@ div.span3
       li= link_to "Account", "#", :id => "account_id", :class => "inactive"
 div.span7
   div#posts.fe-container
-    = link_to 'Text', "#", :class => "btn btn-info btn-medium active post_label", :id => "add_message"
+    = link_to "#", :class => "active post_label", :id => "add_message" do
+      =content_tag(:span, "Text")
+      =image_tag("http://farm9.staticflickr.com/8156/7213395774_ec4daa4367_t.jpg")
     |&nbsp;&nbsp;&nbsp;&nbsp;
-    = link_to 'Link', "#", :class => "btn btn-info btn-medium inactive post_label", :id => "add_link"
+    = link_to "#", :class => "inactive post_label", :id => "add_link" do
+      =content_tag(:span, "Link")
+      =image_tag("http://farm8.staticflickr.com/7234/7213342742_50e10a486c_t.jpg")
     |&nbsp;&nbsp;&nbsp;&nbsp;
-    = link_to 'Image', "#", :class => "btn btn-info btn-medium inactive post_label", :id => "add_image"
+    = link_to "#", :class => "inactive post_label", :id => "add_image" do
+      =content_tag(:span, "Image")
+      =image_tag("http://farm6.staticflickr.com/5235/7213342782_b808c3b2ab_t.jpg")
     br
     br
     - [@image, @message, @link].each do |post|
