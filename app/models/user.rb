@@ -91,13 +91,10 @@ class User < ActiveRecord::Base
     authentications.twitter?
   end
 
-<<<<<<< HEAD
-=======
   def twitter_account
     twitter.twitter_account
   end
 
->>>>>>> 970a4cc6f1ee746c1ba16702eb07145e99edfc1a
   def github
     authentications.github
   end
@@ -110,16 +107,12 @@ class User < ActiveRecord::Base
     github.github_account
   end
 
-  def can_regrowl?(original_growl)
-<<<<<<< HEAD
-    growls.where(regrowled_from_id: original_growl.id).empty?
+  def can_regrowl?(growl)
+    growls.where(regrowled_from_id: growl.id).empty? && growl.user_id != id
   end
 
   def slug
     display_name.downcase
-=======
-    growls.where(regrowled_from_id: original_growl.id).empty? && original_growl.user_id != id
->>>>>>> 970a4cc6f1ee746c1ba16702eb07145e99edfc1a
   end
 end
 
@@ -127,19 +120,19 @@ end
 #
 # Table name: users
 #
-#  id                     :integer         primary key
+#  id                     :integer         not null, primary key
 #  email                  :string(255)     default(""), not null
 #  encrypted_password     :string(255)     default(""), not null
 #  reset_password_token   :string(255)
-#  reset_password_sent_at :timestamp
-#  remember_created_at    :timestamp
+#  reset_password_sent_at :datetime
+#  remember_created_at    :datetime
 #  sign_in_count          :integer         default(0)
-#  current_sign_in_at     :timestamp
-#  last_sign_in_at        :timestamp
+#  current_sign_in_at     :datetime
+#  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
-#  created_at             :timestamp       not null
-#  updated_at             :timestamp       not null
+#  created_at             :datetime        not null
+#  updated_at             :datetime        not null
 #  display_name           :string(255)
 #  authentication_token   :string(255)
 #  private                :boolean         default(FALSE)

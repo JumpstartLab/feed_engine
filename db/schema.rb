@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120517135030) do
+ActiveRecord::Schema.define(:version => 20120517203611) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -45,7 +45,6 @@ ActiveRecord::Schema.define(:version => 20120517135030) do
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
     t.integer  "regrowled_from_id"
-    t.integer  "refeeded_from_user_id"
     t.datetime "original_created_at"
     t.string   "event_type"
   end

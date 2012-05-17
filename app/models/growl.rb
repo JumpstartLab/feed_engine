@@ -3,7 +3,7 @@ require "open-uri"
 class Growl < ActiveRecord::Base
   attr_accessible :comment, :link, :user, :type,
                   :external_id, :original_created_at,
-                  :user_id, :event_type
+                  :user_id, :event_type, :regrowled_from_id
                   
   validates_presence_of :type
   belongs_to :user
@@ -42,14 +42,15 @@ class Growl < ActiveRecord::Base
     end
   end
 
-  def regrowled(new_user_id)
-    new_growl                     = self.dup
-    if user_id != new_user_id
-      new_growl.user_id           = new_user_id
-      new_growl.regrowled_from_id = id
-      new_growl.save
-    else
-      false
+  def can_be_regrowled?(user)
+    user.can_regrowl?(self) if user
+  end
+
+  def build_regrowl_for(new_user)
+    if can_be_regrowled?(new_user)
+      new_regrowl = self.dup
+      new_regrowl.attributes = { user_id: new_user.id, regrowled_from_id: id }
+      new_regrowl
     end
   end
 
@@ -60,12 +61,6 @@ class Growl < ActiveRecord::Base
       growl.regrowled_from_id = growl_id
       growl.save
     end
-  end
-
-  def self.build_refeeded(user_id,refeeded_from_user_id)
-    growl = Growl.find(id).dup
-    growl.write_attributes(user_id: user_id,
-                           refeeded_from_user_id: user_id)
   end
 
   def original_growl?
@@ -128,6 +123,7 @@ end
 #  photo_content_type  :string(255)
 #  photo_file_size     :integer
 #  photo_updated_at    :datetime
+#  regrowled_from_id   :integer
 #  original_created_at :datetime
 #  event_type          :string(255)
 #
