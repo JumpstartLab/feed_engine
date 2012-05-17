@@ -1,0 +1,5 @@
+div class="pull-right"
+  #{link_to "Remove", image_post_path(post.id), method: :delete, confirm: "Are You Sure"}
+  #{link_to "Edit", edit_image_post_path(post.id)}
+h3 = post.description
+= image_tag(post.url, class: "thumbnail")

@@ -1,0 +1,5 @@
+h1. CodeClimate
+
+https://codeclimate.com/repos/4fa96de113d6376080000033/dashboard
+
+
