@@ -21,6 +21,10 @@ class Item < ActiveRecord::Base
   end
 
   def post
-    self.post_type.capitalize.constantize.find(post_id)
+    if self.post_type == "GithubEvent"
+      GithubEvent.find(post_id)
+    else
+      self.post_type.capitalize.constantize.find(post_id)
+    end
   end
 end
