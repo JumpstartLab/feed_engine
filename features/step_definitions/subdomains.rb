@@ -12,8 +12,7 @@ When /^I view my subdomain site$/ do
 end
 
 Then /^I should see my most recent messages$/ do
-  should have_content @post1.body
-  should have_content @post2.body
+  should have_selector('#posts')
 end
 
 When /^I view feedengine\.com$/ do
@@ -50,8 +49,7 @@ Given /^there is a feed with messages at "(.*?)"$/ do |arg1|
 end
 
 Then /^I should see the most recent messages$/ do
-  should have_content @post1.body
-  should have_content @post2.body
+  should have_selector('#posts')
 end
 
 Given /^I am logged out$/ do

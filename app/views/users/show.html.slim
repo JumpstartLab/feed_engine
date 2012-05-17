@@ -1,19 +1,9 @@
 div class="span8 stream"
-    
+
   h1 #{user.display_name} Stream
-  div class="thumbnails" id="posts" data-json-url="#{user_url(id: user, format: :json)}"
-    - @posts.each do |post|
-      - post = post.postable
-      div class="post well"
-        - if post.class == ImagePost
-          = image_tag(post.image, class: "thumbnail")
-          = post.description
-        - elsif post.class == LinkPost
-          = post.description
-          = post.url
-        - elsif post.class == TextPost
-          = post.body
-        br
+  div id="posts" data-json-url="#{items_url(user_display_name: user.display_name, format: :json)}"
 
   script type="text/html" id="post_template"
-      = render "/dashboards/post"
+      = render "post"
+
+
