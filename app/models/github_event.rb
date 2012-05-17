@@ -1,14 +1,5 @@
-# require 'active_record_spec_helper'
-# class Growl; end
-# module LinkValidations; end
-# require 'link'
+class GithubEvent < Growl
 
-describe Link do
-  describe "#new" do
-    let(:link) { Link.new(comment: "I love this site!", link: "http://www.hungryacademy.com") }
-    before(:each) { link.stub(:send_photo_to_amazon).and_return(true) }
-
-  end
 end
 # == Schema Information
 #
@@ -28,4 +19,3 @@ end
 #  original_created_at :datetime
 #  event_type          :string(255)
 #
-

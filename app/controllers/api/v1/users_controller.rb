@@ -3,4 +3,7 @@ class Api::V1::UsersController < Api::V1::ApiController
     @accounts = TwitterAccount.all
   end
 
+  def github
+    @accounts = GithubAccount.all
+  end
 end

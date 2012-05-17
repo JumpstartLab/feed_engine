@@ -7,8 +7,10 @@ Hungrlr::Application.routes.draw do
       get '/feeds/:display_name' => 'feeds#show'
       post '/feeds/:display_name' => 'feeds#create'
       resources :user_tweets, only: [:create, :index]
+      resources :user_github_events, only: [:create, :index]
       resources :meta_data, :only => [ :create ]
       get '/users/twitter' => 'users#twitter'
+      get '/users/github' => 'users#github'
     end
   end
 
