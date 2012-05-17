@@ -22,6 +22,8 @@ class User < ActiveRecord::Base
   has_one :twitter_account, :through => :authentications
   has_one :github_account, :through => :authentications
 
+  has_many :regrowls
+
   def twitter_account
     authentications.twitter.twitter_account if authentications.twitter
   end
@@ -79,6 +81,10 @@ class User < ActiveRecord::Base
 
   def github?
     authentications.github?
+  end
+
+  def can_regrowl?(original_growl)
+    !growls.where(regrowled_from_id: original_growl.id).any?
   end
 end
 

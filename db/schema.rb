@@ -11,7 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
+ActiveRecord::Schema.define(:version => 20120516203652) do
+=======
 ActiveRecord::Schema.define(:version => 20120516204210) do
+>>>>>>> 75f7a3633963d7fa0b0e5e480facc3816a43dbdc
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -44,7 +48,10 @@ ActiveRecord::Schema.define(:version => 20120516204210) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.integer  "regrowled_from_id"
   end
+
+  add_index "growls", ["created_at"], :name => "index_growls_on_created_at"
 
   create_table "meta_data", :force => true do |t|
     t.string   "title"
@@ -54,6 +61,16 @@ ActiveRecord::Schema.define(:version => 20120516204210) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
+
+  create_table "regrowls", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "growl_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "regrowls", ["created_at"], :name => "index_regrowls_on_created_at"
+  add_index "regrowls", ["user_id", "growl_id"], :name => "index_regrowls_on_user_id_and_growl_id", :unique => true
 
   create_table "twitter_accounts", :force => true do |t|
     t.integer  "authentication_id"

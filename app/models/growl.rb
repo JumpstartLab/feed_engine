@@ -6,6 +6,7 @@ class Growl < ActiveRecord::Base
   validates_presence_of :type
   belongs_to :user
   has_one :meta_data, :autosave => true, dependent: :destroy
+  has_many :regrowls
   include HasUploadedFile
   scope :by_date, order("created_at DESC")
 
@@ -31,6 +32,39 @@ class Growl < ActiveRecord::Base
      define_method "#{method}?".to_sym do
         self.type == method.capitalize
     end
+  end
+
+  def self.regrowled_new(id,user_id)
+    growl = Growl.find(id).dup
+    if growl.user_id != user_id
+      growl.user_id = user_id
+      growl.regrowled_from_id = id
+      growl.save
+    end
+  end
+
+  def original_growl?
+    regrowled_from_id == nil
+  end
+
+  def get_display_name
+    if original_growl?
+      user.display_name
+    else
+      original_growl.user.display_name
+    end
+  end
+
+  def get_gravatar
+    if original_growl?
+      user.avatar
+    else
+      original_growl.user.avatar
+    end
+  end
+
+  def original_growl
+    Growl.find(regrowled_from_id)
   end
 
 end
