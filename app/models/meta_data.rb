@@ -16,12 +16,12 @@ end
 #
 # Table name: meta_data
 #
-#  id            :integer         primary key
+#  id            :integer         not null, primary key
 #  title         :string(255)
 #  description   :text
 #  thumbnail_url :string(255)
 #  growl_id      :integer
-#  created_at    :timestamp       not null
-#  updated_at    :timestamp       not null
+#  created_at    :datetime        not null
+#  updated_at    :datetime        not null
 #
 

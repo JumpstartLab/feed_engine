@@ -16,10 +16,6 @@ Hungrlr::Application.routes.draw do
 
   namespace "api" do
     namespace "v1" do
-      # get '/feeds/:display_name' => 'feeds#show'
-      # post '/feeds/:display_name' => 'feeds#create'
-      # resources :user_tweets, only: [:create]
-      # resources :users, only: [:index]
       resources :meta_data, only: [ :create ]
       post '/feeds/:display_name/growls/:id/refeed' => 'feeds#refeed'
     end
@@ -30,10 +26,12 @@ Hungrlr::Application.routes.draw do
         namespace "v1" do
           get '/users/twitter' => 'users#twitter'
           get '/feeds/:display_name' => 'feeds#show'
-          post '/feeds/:display_name' => 'feeds#create'
+          post '/feeds/:display_name/items' => 'feeds#create'
           post '/feeds/:display_name/growls/:id/refeed' => 'feeds#refeed'
+          post '/feeds/:display_name/refeeds' => 'feeds#subscriber_refeed'
           resources :user_tweets, only: [:create, :index]
           resources :meta_data, :only => [ :create ]
+          resources :subscriptions, :only => [:index]
         end
       end
     end
@@ -51,9 +49,12 @@ Hungrlr::Application.routes.draw do
 
   resources :growls, :only => [ :show, :create ]
   resources :regrowled, only: [:create]
-  resources :authentications, :only => [ :new ]
-  resources :images, :links, :messages, :authentications
+  resources :authentications, :only => [ :new, :destroy ]
+  resources :images
+  resources :links
+  resources :messages
   resource :dashboard, :only => [ :show ]
+  resource :subscriptions, :only => [:create, :destroy]
 
   root :to => 'pages#home'
 end

@@ -25,6 +25,7 @@ end
 #  photo_content_type  :string(255)
 #  photo_file_size     :integer
 #  photo_updated_at    :datetime
+#  regrowled_from_id   :integer
 #  original_created_at :datetime
 #  event_type          :string(255)
 #

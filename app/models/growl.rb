@@ -3,7 +3,7 @@ require "open-uri"
 class Growl < ActiveRecord::Base
   attr_accessible :comment, :link, :user, :type,
                   :external_id, :original_created_at,
-                  :user_id, :event_type
+                  :user_id, :event_type, :regrowled_from_id
                   
   validates_presence_of :type
   belongs_to :user
@@ -19,6 +19,11 @@ class Growl < ActiveRecord::Base
     else
       by_date.includes(:meta_data).includes(:user)
     end
+  end
+
+  def self.since(date)
+    # ASK YOHO.
+    where{ created_at.gt Time.at(date+1) }
   end
 
   def self.by_type(input)
@@ -37,14 +42,15 @@ class Growl < ActiveRecord::Base
     end
   end
 
-  def regrowled(new_user_id)
-    new_growl                     = self.dup
-    if user_id != new_user_id
-      new_growl.user_id           = new_user_id
-      new_growl.regrowled_from_id = id
-      new_growl.save
-    else
-      false
+  def can_be_regrowled?(user)
+    user.can_regrowl?(self) if user
+  end
+
+  def build_regrowl_for(new_user)
+    if can_be_regrowled?(new_user)
+      new_regrowl = self.dup
+      new_regrowl.attributes = { user_id: new_user.id, regrowled_from_id: id }
+      new_regrowl
     end
   end
 
@@ -58,23 +64,35 @@ class Growl < ActiveRecord::Base
   end
 
   def original_growl?
-    regrowled_from_id == nil
+    regrowled_from_id.nil?
+  end
+
+  def regrowled?
+    regrowled_from_id.present?
+  end
+
+  def regrowl_link
+    if regrowled?
+      "http://api.hungrlr.com/feeds/#{get_user.slug}/items/#{id}"
+    else
+      ""
+    end
+  end
+
+  def get_user
+    if original_growl?
+      user
+    else
+      original_growl.user
+    end
   end
 
   def get_display_name
-    if original_growl?
-      user.display_name
-    else
-      original_growl.user.display_name
-    end
+    get_user.display_name
   end
 
   def get_gravatar
-    if original_growl?
-      user.avatar
-    else
-      original_growl.user.avatar
-    end
+    get_user.display_name
   end
 
   def original_growl
@@ -105,6 +123,7 @@ end
 #  photo_content_type  :string(255)
 #  photo_file_size     :integer
 #  photo_updated_at    :datetime
+#  regrowled_from_id   :integer
 #  original_created_at :datetime
 #  event_type          :string(255)
 #

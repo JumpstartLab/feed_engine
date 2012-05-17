@@ -14,11 +14,21 @@ class User < ActiveRecord::Base
                   :remember_me, :display_name
 
   has_many :authentications, :dependent => :destroy
+  has_one :twitter_account, :through => :authentications
+
   has_many :growls, :dependent => :destroy
   has_many :images
   has_many :messages
   has_many :links
   has_many :tweets
+
+  has_many :subscriptions
+  has_many :subscribers, :through => :subscriptions
+  has_many :inverse_subscriptions, :class_name => "Subscription", :foreign_key => "subscriber_id"
+  has_many :inverse_subscribers, :through => :inverse_subscriptions, :source => :user
+
+  has_one :twitter_account, :through => :authentications
+  has_one :github_account, :through => :authentications
   has_many :github_events
 
   has_many :regrowls
@@ -30,7 +40,7 @@ class User < ActiveRecord::Base
   def github_client
     return nil unless github_oauth = authentications.where(provider: "github").first
 
-    Github::Client.new(:consumer_key => GITHUB_KEY,
+    Github::Client.new( :consumer_key => GITHUB_KEY,
                         :consumer_secret => GITHUB_SECRET,
                         :oauth_token => github_oauth.token,
                         :oauth_token_secret => github_oauth.secret)
@@ -50,6 +60,14 @@ class User < ActiveRecord::Base
 
   def has_tweets?
     tweets.size > 0
+  end
+
+  def subscribed_to?(user)
+    inverse_subscriptions.where(user_id: user.id).size > 0
+  end
+
+  def not_subscribed_to?(user)
+    !subscribed_to?(user)
   end
 
   def avatar
@@ -89,8 +107,12 @@ class User < ActiveRecord::Base
     github.github_account
   end
 
-  def can_regrowl?(original_growl)
-    growls.where(regrowled_from_id: original_growl.id).empty? && original_growl.user_id != id
+  def can_regrowl?(growl)
+    growls.where(regrowled_from_id: growl.id).empty? && growl.user_id != id
+  end
+
+  def slug
+    display_name.downcase
   end
 end
 
@@ -98,19 +120,19 @@ end
 #
 # Table name: users
 #
-#  id                     :integer         primary key
+#  id                     :integer         not null, primary key
 #  email                  :string(255)     default(""), not null
 #  encrypted_password     :string(255)     default(""), not null
 #  reset_password_token   :string(255)
-#  reset_password_sent_at :timestamp
-#  remember_created_at    :timestamp
+#  reset_password_sent_at :datetime
+#  remember_created_at    :datetime
 #  sign_in_count          :integer         default(0)
-#  current_sign_in_at     :timestamp
-#  last_sign_in_at        :timestamp
+#  current_sign_in_at     :datetime
+#  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
-#  created_at             :timestamp       not null
-#  updated_at             :timestamp       not null
+#  created_at             :datetime        not null
+#  updated_at             :datetime        not null
 #  display_name           :string(255)
 #  authentication_token   :string(255)
 #  private                :boolean         default(FALSE)
