@@ -5,9 +5,9 @@
 
   <div>
     <div class="span3">
-      <%= image_tag "../assets/twitter-bird.png" %>
+      <%= image_tag "/assets/twitter-bird.png" %>
       <span class="twitter-label">Twitter</span>
-      <% if twitter_connected? %>
+      <% if twitter_connected?(current_user) %>
         <%= link_to "Disconnect", "#", :class => "btn btn-large" %>
       <% else %>
         <%= link_to "Connect", "users/auth/twitter", :class => "btn btn-large" %>
@@ -15,16 +15,16 @@
     <% end %>
   </div>
   <div class="span3">
-    <%= image_tag "../assets/octocat.png" %>
+    <%= image_tag "/assets/octocat.png" %>
     <span class="github-label">Github</span>
-    <% if github_connected? %>
+    <% if github_connected?(current_user) %>
       <%= link_to "Disconnect", "#", :class => "btn btn-large" %>
     <% else %>
       <%= link_to "Connect", "users/auth/github", :class => "btn btn-large" %>
     <% end %>
   </div>
   <div class="span3 service-continue-container">
-    <%= link_to "Continue", external_accounts_skip_path, :class => "service-btn-primary btn-large" %>
+    <%= link_to "Skip This Step", external_accounts_skip_path, :class => "btn-primary btn-large service-btn" %>
   </div>
 </div>
 

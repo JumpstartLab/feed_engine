@@ -92,6 +92,11 @@
   color: $twitter-blue; 
 }
 
+.github-logo {
+  @include item-logo;
+  color: black;
+}
+
 .linked-post-logo {
   font-size: 100px;
 }

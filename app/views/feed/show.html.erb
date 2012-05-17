@@ -1,5 +1,5 @@
 <div class="span7">
-  <h1 class="feed-title span7"><%= @feed_owner %>'s stream</h1>
+  <h1 class="feed-title span7"><%= @feed_owner.display_name %>'s stream</h1>
   <% if @items %>
       <% @items.each do |item| %>
           <div class="span7 row feed_row">
@@ -14,7 +14,7 @@
       <tr>
         <td>
           <div class="post-count-container">
-            <span class="post-count">2000</span>
+            <span class="post-count"><%= @feed_owner.stream_items.count %></span>
             <br/>
             <span class="post-count-label">posts</span>
           </div>
@@ -38,9 +38,18 @@
     <br/>
     <br/>
     <br/>
+
     <h3>Linked Services</h3>
-    <span class="raphael-icon linked-twitter-logo">^</span>
-    <span class="raphael-icon linked-post-logo">U</span>
+    <% if twitter_connected?(@feed_owner) %>
+      <span class="raphael-icon linked-twitter-logo">^</span>
+    <% end %>
+    <% if github_connected?(@feed_owner) %>
+      <span class="raphael-icon linked-post-logo">U</span>
+    <% end %>
+    <% if !twitter_connected?(@feed_owner) && !github_connected?(@feed_owner) %>
+      <br/>
+      <h4>None</h4>
+    <% end %>
   </div>
 
   <div class="span12">

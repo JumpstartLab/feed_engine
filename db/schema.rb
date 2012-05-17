@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120516214456) do
+ActiveRecord::Schema.define(:version => 20120517180223) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -29,10 +29,11 @@ ActiveRecord::Schema.define(:version => 20120516214456) do
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "event_id"
   end
 
   create_table "image_items", :force => true do |t|
-    t.string   "url"
+    t.text     "url"
     t.text     "comment"
     t.integer  "user_id"
     t.datetime "created_at", :null => false
@@ -40,7 +41,7 @@ ActiveRecord::Schema.define(:version => 20120516214456) do
   end
 
   create_table "link_items", :force => true do |t|
-    t.string   "url"
+    t.text     "url"
     t.text     "comment"
     t.integer  "user_id"
     t.datetime "created_at", :null => false
