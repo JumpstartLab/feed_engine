@@ -20,8 +20,3 @@ class PostsPager
     for post in posts
       $('#posts').append Mustache.to_html($('#post_template').html(), post)
     $(window).scroll(@check) if posts && posts.length > 0
-
-#   render: (posts) =>
-#     for post in posts
-#       $('#posts').append Mustache.to_html($('#post_template').html(), post)
-#     $(window).scroll(@check) if posts.length > 0

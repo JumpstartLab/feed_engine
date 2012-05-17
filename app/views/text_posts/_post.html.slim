@@ -1,5 +1,6 @@
 div class="pull-right"
-  #{link_to "Remove", text_post_path(post.id), method: :delete, confirm: "Are You Sure"}
-  #{link_to "Edit", edit_text_post_path(post.id)}
-h3 = post.title if post.title
-p = post.body
+  #{link_to "Remove", text_post_path(postable), method: :delete, confirm: "Are You Sure"}
+  #{link_to "Edit", edit_text_post_path(postable)}
+  #{link_to "Points!", point_path(postable.post), method: :put} #{"(#{postable.post.points})"}
+h3 = postable.title if postable.title
+p = postable.body
