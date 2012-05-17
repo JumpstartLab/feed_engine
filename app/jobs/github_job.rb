@@ -5,8 +5,8 @@ class GithubJob
     login = authentication["login"]
     client = Octokit::Client.new ({
       :login => login,
-      :consumer_key => ENV["GITHUB_DEV_KEY"],
-      :consumer_secret => ENV["GITHUB_DEV_SECRET"],
+      :consumer_key => ENV["GITHUB_KEY"],
+      :consumer_secret => ENV["GITHUB_SECRET"],
       :oauth_token => authentication["token"],
       :oauth_token_secret => authentication["secret"]})
 

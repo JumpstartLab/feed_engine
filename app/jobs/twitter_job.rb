@@ -30,8 +30,8 @@ class TwitterJob
 
   def self.twitter_client(token,secret)
     Twitter::Client.new({
-      :consumer_key => ENV["TWITTER_DEV_KEY"],
-      :consumer_secret => ENV["TWITTER_DEV_SECRET"],
+      :consumer_key => ENV["TWITTER_KEY"],
+      :consumer_secret => ENV["TWITTER_SECRET"],
       :oauth_token => token,
       :oauth_token_secret => secret})
   end
