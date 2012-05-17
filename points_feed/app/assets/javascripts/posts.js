@@ -1,4 +1,5 @@
 var page_for_content = 1;
+var auth_display_name = $("#auth_display_name").val();
 
 function post_added() {
   fetch_posts($('#user_posts'));
@@ -17,6 +18,13 @@ function render_posts(posts) {
 function render_post(post) {
   if($.isEmptyObject(post) == false) {
     post['created_at'] = $.timeago(post['created_at']);
+   
+    if(auth_display_name != post['feeder']['name'] && post['can_refeed'] == true) {
+      post['refeedable'] = true
+    }
+
+    console.log(post['refeed']);
+
     return Mustache.render($("#"+post.type+"Template").html(), post);
   }
 
@@ -79,6 +87,25 @@ $(document).ready(function() {
     page_for_content++;
     fetch_posts($("#user_posts"), page_for_content);
   }); 
+
+  $(".refeed_link").live('click', function(e) {
+    e.preventDefault();
+    $this = $(this);
+
+    $.ajax({
+      type: 'post',
+      url: "/api/feeds/"+$(this).data('user')+"/items/"+$(this).data('id')+"/refeeds.json",
+      data: {
+        'access_token': access_token
+      },
+      success: function(data) {
+        $this.parent().html('Post has been refeeded').addClass('label label-info');
+      },
+      error: function(evt) {
+        alert('unable to refeed');
+      }
+    });
+  });
 
   // $('#bottom_of_page').waypoint(waypoint_reload, { offset: '100%' });
 });

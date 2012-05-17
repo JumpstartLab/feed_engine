@@ -106,3 +106,8 @@ input[type=text], input[type=password], input[type=email], textarea, select {
 .full_width {
   width: 95%;
 }
+
+.avatar {
+  height: 50px;
+  width: 50px;
+}

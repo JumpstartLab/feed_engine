@@ -19,13 +19,14 @@ class Post < ActiveRecord::Base
   end
 
   def refeed(user)
+    return false if user.already_refeeded?(self)
     refeeded_post = self.dup
     user.posts << refeeded_post
     refeeded_post.update_attribute(:original_post_id, self.original_post_id)
   end
 
   def original_post
-    Post.find(original_post_id)
+    Post.where(:id => self.original_post_id).first if self.original_post_id != self.id
   end
 
   def attributed_user

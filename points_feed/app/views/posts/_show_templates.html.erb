@@ -1,11 +1,20 @@
 <script type="text/template" id='TextItemTemplate'>
   <div class='row'>
     <div class='span1'>
-      <img src="{{feeder.avatar}}"></img>
+      <img src="{{feeder.avatar}}" style='height: 50px'></img>
     </div>
-    <div class='offset1'>
-      <span class='light'>Posted {{created_at}} by <a href="#">{{feeder.name}}</a></span><br />
-      {{text}}
+    <div style='margin-left: 100px'>
+      {{#refeed}}
+        <span class='light'>Refeeded {{created_at}} from <a href="#">{{refeeder.display_name}}</a></span><br />
+      {{/refeed}}
+      {{^refeed}}
+        <span class='light'>Posted {{created_at}} by <a href="#">{{feeder.name}}</a></span><br />
+      {{/refeed}}
+
+      {{text}}<br /><br />
+      {{#refeedable}}
+        <span><a href='#' class='refeed_link' data-id='{{id}}' data-user="{{feeder.name}}">Refeed</a></span>
+      {{/refeedable}}
     </div>
   </div>
   <hr />
@@ -14,9 +23,9 @@
 <script type="text/template" id='TwitterFeedItemTemplate'>
   <div class='row'>
     <div class='span1'>
-      <img src="{{feeder.avatar}}"></img>
+      <img src="{{feeder.avatar}}" style='height: 50px'></img>
     </div>
-    <div class='offset1'>
+    <div>
       <div style='float:right'><img src='/assets/twitter_32.png'></img></div>
       <span class='light'>Posted {{created_at}} by <a href="#">{{feeder.name}}</a> via twitter</span><br />
       {{content}}
@@ -28,9 +37,9 @@
 <script type="text/template" id='GithubFeedItemTemplate'>
   <div class='row'>
     <div class='span1'>
-      <img src="{{feeder.avatar}}"></img>
+      <img src="{{feeder.avatar}}" style='height: 50px'></img>
     </div>
-    <div class='offset1'>
+    <div>
       <div style='float:right'><img src='/assets/github_32.png'></img></div>
       <span class='light'>Posted {{created_at}} by <a href="#">{{feeder.name}}</a> via github</span><br />
       {{content}}
@@ -42,19 +51,28 @@
 <script type="text/template" id='ImageItemTemplate'>
   <div class='row'>
     <div class='span1'>
-      <img src="{{feeder.avatar}}"></img>
+      <img src="{{feeder.avatar}}" style='height: 50px'></img>
     </div>
-    <div class='offset1'>
-      <span class='light'>Posted {{created_at}} by <a href="#">{{feeder.name}}</a></span><br />
+    <div>
+      {{#refeed}}
+        <span class='light'>Refeeded {{created_at}} from <a href="#">{{refeeder.display_name}}</a></span><br />
+      {{/refeed}}
+      
+      {{^refeed}}
+        <span class='light'>Posted {{created_at}} by <a href="#">{{feeder.name}}</a></span><br />
+      {{/refeed}}
       <div class='row' style='margin-top: 20px'>
         <div class='span2'>
         
           <img src="{{image_url}}" rel="popover" class='span2 well popover-img'></img>
         </div>
-        <div class='offset3'>
+        <div class='offset4'>
           {{comment}}
         </div>
       </div>
+      {{#refeedable}}
+        <span style='margin-left: 100px'><a href='#' class='refeed_link' data-id='{{id}}' data-user="{{feeder.name}}">Refeed</a></span>
+      {{/refeedable}}
     </div>
   </div>
 
@@ -64,12 +82,21 @@
 <script type="text/template" id='LinkItemTemplate'>
   <div class='row'>
     <div class='span1'>
-      <img src="{{feeder.avatar}}"></img>
+      <img src="{{feeder.avatar}}" style='height: 50px'></img>
     </div>
-    <div class='offset1'>
-      <a href='{{link_url}}' class='alert alert-info span2' style='float:right; word-wrap: break-word;'>{{link_url}}</a>
-      <span class='light'>Posted {{created_at}} by <a href="#">{{feeder.name}}</a></span><br />
-      {{comment}}
+    <div style='margin-left: 100px'>
+      
+      {{#refeed}}
+        <span class='light'>Refeeded {{created_at}} from <a href="#">{{refeeder.display_name}}</a></span><br />
+      {{/refeed}}
+      {{^refeed}}
+        <span class='light'>Posted {{created_at}} by <a href="#">{{feeder.name}}</a></span><br />
+      {{/refeed}}
+
+      {{comment}}<br /><br />
+      {{#refeedable}}
+        <span><a href='#' class='refeed_link' data-id='{{id}}' data-user="{{feeder.name}}">Refeed</a></span>
+      {{/refeedable}}
     </div>
   </div>
   <hr />
