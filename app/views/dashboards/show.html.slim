@@ -4,15 +4,9 @@ div class="span8 stream"
 
   h1 Your Stream
   div id="posts" data-json-url="#{items_url(user_display_name: current_user.display_name.downcase, format: :json)}"
-    / - @posts.each do |post|
-    /   = render "stache_post"
 
-script type="text/html" id="post_template"
-  div class="post"
-    h2 {{id}}
-
-  / script type="text/html" id="post_template"
-  /   = render "/dashboards/post"
+  script type="text/html" id="post_template"
+    = render "stache_post"
 
 br
 br
