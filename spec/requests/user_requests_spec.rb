@@ -37,12 +37,12 @@ describe User do
 
     context "and navigating the site from the header" do
 
-      it "has the app name with a link to the dashboard" do
+      it "has the app name with a link to the aggregate feed" do
         within ".navbar" do
           page.should have_link "SuperHotFeedEngine"
           click_link_or_button "SuperHotFeedEngine"
         end
-        current_path.should == dashboard_path
+        current_path.should == root_path(subdomain: false)
       end
 
       it "links to log out" do
@@ -79,31 +79,14 @@ describe User do
   context "who is unauthenticated" do
     let(:new_user) { Fabricate.build(:user) }
 
-    it "can sign up from the home page" do
+    it "can sign up from the home page via top nav" do
       visit root_path
-      page.should have_link "Sign Up"
+      page.should have_link "Sign up"
     end
 
-    it "can login using a form on the home page" do
+    it "can see the aggregated posts" do
       visit root_path
-      page.should have_field "Email"
-      page.should have_field "Password"
-      fill_login_form_as(user)
-      click_button "Log In"
-      page.should have_content "Logged in!"
-      current_path.should == dashboard_path
-    end
-
-    it "is shown a signup form when validations fail" do
-      visit root_path
-      page.should have_field "Email"
-      page.should have_field "Password"
-      click_button "Log In"
-      page.should have_content "Email or password is invalid."
-      page.should have_content "Sign Up"
-      page.should have_content "Email"
-      page.should have_content "Password"
-      current_path.should == sessions_path
+      page.should have_content "All Posts"
     end
 
     describe "signing up" do

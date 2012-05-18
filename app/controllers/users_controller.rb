@@ -12,8 +12,7 @@ class UsersController < ApplicationController
                           @user.sorted_posts
                         ).page(params[:page]).per(12)
     else
-      redirect_to root_url(:host => request.domain),
-        :notice => "User #{request.subdomain} not found."
+      redirect_to root_url(:host => request.domain)
     end
   end
 
