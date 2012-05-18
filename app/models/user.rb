@@ -65,6 +65,15 @@ class User < ActiveRecord::Base
     "http://#{display_name}.#{request.domain}"
   end
 
+  # Needs meta'd
+  def instagram
+    authentications.instagram
+  end
+
+  def instagram?
+    authentications.instagram?
+  end
+
   def twitter
     authentications.twitter
   end
@@ -90,7 +99,7 @@ class User < ActiveRecord::Base
   end
 
   def can_regrowl?(original_growl)
-    growls.where(regrowled_from_id: original_growl.id).empty? && original_growl.user_id != id
+    original_growl.user_id != id && growls.where(regrowled_from_id: original_growl.id).empty?
   end
 end
 

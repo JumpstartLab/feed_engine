@@ -20,6 +20,14 @@ class Authentication < ActiveRecord::Base
     where(provider: "github").size > 0 ? true : false
   end
 
+  def self.instagram
+    where(provider: "instagram").first
+  end
+
+  def self.instagram?
+    where(provider: "instagram").size > 0 ? true : false
+  end
+
 end
 # == Schema Information
 #

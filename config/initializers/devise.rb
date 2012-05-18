@@ -214,8 +214,10 @@ Devise.setup do |config|
   config.omniauth :twitter, "IXDAm8E6f0HOHLeJ2uZcTQ", "piDvbV8wfzBklu4d2UOXSKeFRPEecAIzCZJF0JM"
   if Rails.env.production?
     config.omniauth :github, "e7aa2849b1a5a2023e04", "c944f260aebd7995a4647d246895b1c426caf10a"
+    config.omniauth :instagram, "88879dba02804bb7b9b70ba93173414a", "b52d86d8728a45c6bfa5e0b10fe71497"
   else
     config.omniauth :github, "71c432372663f39a9a62", "c944f260aebd7995a4647d246895b1c426caf10a"
+    config.omniauth :instagram, "e8d1e46f126e4b50a0c620f2421083dd", "66d9b35dd0164bd68c9a6c84ef8d1545"
   end
 
   # ==> Warden configuration
