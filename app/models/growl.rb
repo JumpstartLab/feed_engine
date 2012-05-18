@@ -6,28 +6,20 @@ class Growl < ActiveRecord::Base
                   :user_id, :event_type, :regrowled_from_id
                   
   validates_presence_of :type
+
   belongs_to :user
   has_one :meta_data, :autosave => true, dependent: :destroy
   has_many :regrowls
   include HasUploadedFile
+  
   scope :by_date, order("created_at DESC")
+  scope :by_type, lambda { |param| where{ type.like param } unless param.nil? }
+  scope :since, lambda { |date| where{ created_at.gt Time.at(date+1) } unless date.nil? }
+
   after_create :set_original_created_at
 
   def self.by_type_and_date(type=nil)
-    if type
-      by_type(type).by_date.includes(:meta_data).includes(:user)
-    else
-      by_date.includes(:meta_data).includes(:user)
-    end
-  end
-
-  def self.since(date)
-    # ASK YOHO.
-    where{ created_at.gt Time.at(date+1) }
-  end
-
-  def self.by_type(input)
-    where(type: input)
+    by_type(type).by_date.includes(:meta_data).includes(:user)
   end
 
   ["title", "thumbnail_url", "description"].each do |method|
@@ -54,14 +46,14 @@ class Growl < ActiveRecord::Base
     end
   end
 
-  def self.regrowled_new(growl_id,user_id)
-    growl = Growl.find(growl_id).dup
-    if growl.user_id != user_id
-      growl.user_id = user_id
-      growl.regrowled_from_id = growl_id
-      growl.save
-    end
-  end
+  # def self.regrowled_new(growl_id, user_id)
+  #   growl = Growl.find(growl_id).dup
+  #   if growl && growl.user_id != user_id
+  #     growl.user_id = user_id
+  #     growl.regrowled_from_id = growl_id
+  #     growl.save
+  #   end
+  # end
 
   def original_growl?
     regrowled_from_id.nil?
@@ -80,11 +72,7 @@ class Growl < ActiveRecord::Base
   end
 
   def get_user
-    if original_growl?
-      user
-    else
-      original_growl.user
-    end
+    original_growl? ? user : original_growl.user
   end
 
   def get_display_name
@@ -92,11 +80,11 @@ class Growl < ActiveRecord::Base
   end
 
   def get_gravatar
-    get_user.display_name
+    get_user.avatar
   end
 
   def original_growl
-    Growl.find(regrowled_from_id)
+    regrowled? ? Growl.find(regrowled_from_id) : self
   end
   
   private

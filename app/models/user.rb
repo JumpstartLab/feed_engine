@@ -6,7 +6,9 @@ class User < ActiveRecord::Base
          :token_authenticatable, :omniauthable
 
   before_save :ensure_authentication_token
+
   validates_uniqueness_of :display_name, :case_sensitive => false
+  validates_length_of :display_name, :minimum => 4
   validates_format_of :display_name, :with => /^[A-Za-z\d]+$/, message:
             "Required. Display name must only be letters, numbers, or dashes"
 
@@ -14,7 +16,6 @@ class User < ActiveRecord::Base
                   :remember_me, :display_name
 
   has_many :authentications, :dependent => :destroy
-  has_one :twitter_account, :through => :authentications
 
   has_many :growls, :dependent => :destroy
   has_many :images
@@ -27,11 +28,7 @@ class User < ActiveRecord::Base
   has_many :inverse_subscriptions, :class_name => "Subscription", :foreign_key => "subscriber_id"
   has_many :inverse_subscribers, :through => :inverse_subscriptions, :source => :user
 
-  has_one :twitter_account, :through => :authentications
-  has_one :github_account, :through => :authentications
   has_many :github_events
-
-  has_many :regrowls
 
   def relation_for(type)
     self.send(type.downcase.pluralize.to_sym).scoped rescue messages.scoped
@@ -50,9 +47,9 @@ class User < ActiveRecord::Base
     mail = UserMailer.welcome_message(email).deliver
   end
 
-  def self.find_twitter_users
-    includes(:authentications).where("authentications.provider" => "twitter")
-  end
+  # def self.find_twitter_users
+  #   includes(:authentications).where("authentications.provider" => "twitter")
+  # end
 
   def get_growls(type=nil)
     growls.by_type_and_date(type)
@@ -76,35 +73,25 @@ class User < ActiveRecord::Base
   end
 
   def api_link(request)
-    "http://api.#{request.domain}/feeds/#{display_name}"
+    "http://api.#{request.domain}/feeds/#{slug}"
   end
 
   def web_url(request)
-    "http://#{display_name}.#{request.domain}"
+    "http://#{slug}.#{request.domain}"
   end
 
-  def twitter
-    authentications.twitter
-  end
+  Authentication::SERVICES.each do |service|
+    define_method "#{service}".to_sym do
+      authentications.send("#{service}".to_sym)
+    end
+  
+    define_method "#{service}?".to_sym do
+      authentications.send("#{service}?".to_sym)
+    end
 
-  def twitter?
-    authentications.twitter?
-  end
-
-  def twitter_account
-    twitter.twitter_account
-  end
-
-  def github
-    authentications.github
-  end
-
-  def github?
-    authentications.github?
-  end
-
-  def github_account
-    github.github_account
+    define_method "#{service}_account".to_sym do
+      send(service.to_sym).send("#{service}_account".to_sym)
+    end   
   end
 
   def can_regrowl?(growl)
