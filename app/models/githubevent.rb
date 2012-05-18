@@ -9,7 +9,7 @@ class Githubevent < ActiveRecord::Base
     github = Github.new
     events = github.events.performed(user.github_handle)
     existing_events = user.githubevents
-
+    sign_up_time = user.authentications.find_by_provider('github').created_at
     events.reverse.each do |event|
       if VALID_TYPES.include?(event.type)
       # user.githubevents.find_or_create_by_event_id(action: event.type,
@@ -19,7 +19,7 @@ class Githubevent < ActiveRecord::Base
       #   repo: event.repo.name,
       #   content: create_content(event.actor.login, event.type, event.repo.name))
       # end
-        unless existing_events.find_by_event_id(event.id)
+        unless existing_events.find_by_event_id(event.id) || Time.zone.parse(event.created_at) < sign_up_time
           new_event = existing_events.create(action: event.type,
           event_id: event.id,
           handle: event.actor.login,
