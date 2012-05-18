@@ -9,8 +9,8 @@ class UsersController < ApplicationController
 
     if @user
       @posts = Kaminari.paginate_array(
-                          @user.sorted_posts
-                        ).page(params[:page]).per(12)
+        @user.sorted_posts
+      ).page(params[:page]).per(12)
     else
       redirect_to root_url(:host => request.domain)
     end
@@ -20,6 +20,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save
       login_and_notify_user
+      add_point(session[:point_pending_for]) if session[:point_pending_for]
       redirect_to new_subscription_path
     else
       retain_password

@@ -9,6 +9,7 @@
 #  subscription_id :integer
 #  repo            :string(255)
 #  poster_id       :integer
+#  points          :integer         default(0)
 #
 
 require 'spec_helper'

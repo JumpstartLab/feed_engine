@@ -1,8 +1,9 @@
-.span5
+- if session[:point_pending_for]
+  .alert You must be logged in to give Points! #{link_to "No thanks, take me back", session[:return_to]}
+.span5#login
   h1 Log In
   = render :partial => "form"
 
-- if @user
-  .span5
-    h1 Sign Up
-    = render :partial => "users/form"
+.span5#signup
+  h1 Sign Up
+  = render :partial => "users/form"

@@ -29,4 +29,11 @@ class ApplicationController < ActionController::Base
       redirect_to login_url, alert: "Please login to continue."
     end
   end
+
+  def add_point(item_id)
+    item = Item.find(item_id)
+    Item.give_point_to(item_id) if item.poster_id != current_user.id
+    session[:point_pending_for] = nil
+    session[:return_to] = nil
+  end
 end
