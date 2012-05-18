@@ -26,7 +26,7 @@ class Tweet < Growl
   end
 
   def icon
-    "glyphicons_392_twitter.png"
+    "glyphicons/glyphicons_392_twitter.png"
   end
 end
 # == Schema Information

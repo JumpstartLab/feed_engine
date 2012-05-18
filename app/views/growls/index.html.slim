@@ -1,8 +1,6 @@
 .row
   .content_bar
     h1= "#{@user.display_name}'s Feed"
-    br
-
     -if @growls.empty?
       p
         | You currently have no growls. Add some in your
@@ -19,13 +17,13 @@
           a(href="#") Messages
         dd#links
           a#links(href="#") Links
+        dd#tweets
+          a#tweets(href="#") Tweets
       #growls
         = render @growls
       #page
         = paginate @growls
 
-javascript:
-  domain = "#{request.subdomain}.#{request.domain}"
 coffee:
   $(".points").click ->
     alert Math.floor((Math.random()*100)+1) + " Points achieved!"

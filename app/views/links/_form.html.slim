@@ -2,21 +2,21 @@
 / USED FOR LINKS
 /
 .row
-  .six.columns
-    = simple_form_for @growl, :url => growls_path, :html => { :id => 'link_form' } do |f|
-      = f.input :type, :as => :hidden, :input_html => { :value => "Link" }
-      = f.input :link, :maxlength => "2048", label: "&nbsp;", as: :string, input_html: { id: "link_link", placeholder: "Link URL"}
-      = f.input :comment, input_html: { id: "link_comment" }, label: "&nbsp;", placeholder: "Comment"
-      p
-        | You have&nbsp;
-        span#charsLeftLink
-        |  chars left.
-      = simple_fields_for :meta_data do |m|
-        = m.input :title, as: :hidden, :input_html => { id: "link_title"}
-        = m.input :description, as: :hidden, :input_html => { id: "link_description"}
-        = m.input :thumbnail_url, as: :hidden, :input_html => { id: "link_thumbnail_url"}
-      = f.button :submit, "Create Link"
-  .six.columns#link_show(style="display:none;")
+  = simple_form_for @growl, :url => growls_path, :html => { :id => 'link_form' } do |f|
+    = f.input :type, :as => :hidden, :input_html => { :value => "Link" }
+    = f.input :link, :maxlength => "2048", label: "&nbsp;", as: :string, input_html: { id: "link_link", placeholder: "Link URL"}
+    = f.input :comment, input_html: { id: "link_comment" }, label: "&nbsp;", placeholder: "Comment"
+    p
+      | You have&nbsp;
+      span#charsLeftLink
+      |  chars left.
+    = simple_fields_for :meta_data do |m|
+      = m.input :title, as: :hidden, :input_html => { id: "link_title"}
+      = m.input :description, as: :hidden, :input_html => { id: "link_description"}
+      = m.input :thumbnail_url, as: :hidden, :input_html => { id: "link_thumbnail_url"}
+    = f.button :submit, "Create Link"
+.row
+  #link_show(style="display:none;")
     #loading= image_tag "loading_big.gif"
     h3#image_helper Preview your Link Contents:
     .comments

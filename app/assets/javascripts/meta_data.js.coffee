@@ -1,6 +1,5 @@
 jQuery ->
   $("#link_link").focusout( ->
-    $("#loading").toggle()
     $.post api_path + "/meta_data", url: $("#link_link").val(), token: (authentication_token), dataType: 'json', ((data) ->
        # Setting up the form
        $("#link_title").val(data.title)
@@ -12,7 +11,7 @@ jQuery ->
        $("#title").html(data.title)
        $("#description").html(data.description)
        $("#thumbnail").attr(src:data.thumbnail_url)
-       $("#loading").toggle()
+       $("#loading").hide()
     ), "json"
   )
   $("#image_url").focusout( ->
