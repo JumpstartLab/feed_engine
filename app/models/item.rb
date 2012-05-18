@@ -16,11 +16,29 @@ class Item < ActiveRecord::Base
 
   belongs_to :post, :polymorphic => true
 
+  def self.all_items
+    User.all.collect { |user| user.items }.flatten(1)
+  end
+
+  def self.all_items_sorted
+    all_items.sort do |comparer, comparee|
+      comparee.created_at <=> comparer.created_at
+    end
+  end
+
+  def self.all_items_sorted_posts
+    all_items_sorted.collect { |item| item.post }
+  end
+
   def poster
     User.where(id: poster_id)
   end
 
   def post
-    self.post_type.capitalize.constantize.find(post_id)
+    if self.post_type == "GithubEvent"
+      GithubEvent.find(post_id)
+    else
+      self.post_type.capitalize.constantize.find(post_id)
+    end
   end
 end

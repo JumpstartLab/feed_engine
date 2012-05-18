@@ -1,5 +1,12 @@
-h1 = "#{@user.display_name}'s feed"
-- if public?
-  = render :partial => "users/public"
-- else
-  = render :partial => "users/private"
+div.offset3
+  h1 = "#{@user.display_name}'s feed"
+  br
+  - if logged_in?
+    = link_to "Subscribe", nil
+  br
+  br
+  br
+  - if public?
+    = render :partial => "users/public"
+  - else
+    = render :partial => "users/private"

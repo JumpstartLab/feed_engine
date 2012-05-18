@@ -5,15 +5,14 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by_display_name(request.subdomain)
+    @user = User.find_by_subdomain(request.subdomain)
 
     if @user
       @posts = Kaminari.paginate_array(
                           @user.sorted_posts
                         ).page(params[:page]).per(12)
     else
-      redirect_to root_url(:host => request.domain),
-        :notice => "User #{request.subdomain} not found."
+      redirect_to root_url(:host => request.domain)
     end
   end
 

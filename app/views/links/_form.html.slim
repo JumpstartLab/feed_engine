@@ -7,4 +7,5 @@
     = f.text_area :description, :rows => "5"
   .field
     = f.hidden_field :poster_id, value: current_user.id
-  .actions = f.submit
+  .actions
+    = f.submit

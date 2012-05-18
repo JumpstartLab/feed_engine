@@ -1,3 +1,4 @@
+# For resetting passwords
 class PasswordResetsController < ApplicationController
   def new
   end
@@ -5,11 +6,13 @@ class PasswordResetsController < ApplicationController
   def create
     user = User.find_by_email(params[:email])
     user.send_password_reset if user
-    redirect_to root_url, :notice => "Email sent with password reset instructions."
+    notice = "Email sent with password reset instructions."
+    redirect_to root_url, :notice => notice
   end
 
   def edit
     @user = User.find_by_password_reset_token!(params[:id])
+    # session[:user_id] = @user.id
   end
 
   def update

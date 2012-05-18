@@ -16,7 +16,7 @@
 require 'spec_helper'
 
 describe User do
-  let(:user) { Fabricate(:user) }
+  let!(:user) { Fabricate(:user) }
   let(:new_user) { Fabricate.build(:user) }
 
 
@@ -61,7 +61,6 @@ describe User do
   end
 
   describe "#subdomain" do
-    let!(:user) { Fabricate(:user) } 
     it "returns the display name" do
       user.subdomain.should == user.display_name
     end
@@ -88,6 +87,35 @@ describe User do
       it "'nil'" do
         new_user.display_name = 'nil'
         new_user.should_not be_valid
+      end
+    end
+  end
+  context "subscriptions" do
+    describe "#subscription" do
+      let!(:twitter_subscription) {Fabricate(:subscription, provider: "twitter", user_id: user.id) }
+      let!(:github_subscription) {Fabricate(:subscription, provider: "github", user_id: user.id) }
+      it "returns the subscription of the provider type if it exists" do
+        user.subscription("twitter").should == twitter_subscription
+        user.subscription("github").should == github_subscription
+        user.subscription("boo").should == nil
+      end
+    end
+    describe "#num_subscriptions" do
+      let!(:twitter_subscription) {Fabricate(:subscription, provider: "twitter", user_id: user.id) }
+      let!(:github_subscription) {Fabricate(:subscription, provider: "github", user_id: user.id) }
+      it "returns the number of subscriptions that exist" do
+        user.num_subscriptions.should == 2
+      end
+    end
+    describe "#subscribed_to_all_services?" do
+      let!(:twitter_subscription) {Fabricate(:subscription, provider: "twitter", user_id: user.id) }
+      it "returns false when not subscribed to all services" do
+        github_subscription = Fabricate(:subscription, provider: "github", user_id: new_user.id)
+        user.subscribed_to_all_services?.should == false
+      end
+      it "returns true when subscribed to all services" do
+        github_subscription = Fabricate(:subscription, provider: "github", user_id: user.id)
+        user.subscribed_to_all_services?.should == true
       end
     end
   end
