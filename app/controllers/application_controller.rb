@@ -36,4 +36,12 @@ class ApplicationController < ActionController::Base
     session[:point_pending_for] = nil
     session[:return_to] = nil
   end
+
+  def create_user_session
+    session[:user_id] = @user.id
+  end
+
+  def set_return_session
+    session[:return_to] = request.referrer
+  end
 end

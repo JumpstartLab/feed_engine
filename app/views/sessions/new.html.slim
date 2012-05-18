@@ -1,5 +1,10 @@
+coffee:
+  $ ->
+    if $('.alert-alert')
+     $('#points_notice').hide()
+
 - if session[:point_pending_for]
-  .alert You must be logged in to give Points! #{link_to "No thanks, take me back", session[:return_to]}
+  .alert#points_notice You must be logged in to give Points! #{link_to "No thanks, take me back", session[:return_to]}
 .span5#login
   h1 Log In
   = render :partial => "form"

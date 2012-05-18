@@ -1,5 +1,6 @@
 # The controller for logging in and out
 class SessionsController < ApplicationController
+
   def new
     @user = User.new
   end
@@ -7,7 +8,7 @@ class SessionsController < ApplicationController
   def create
     @user = User.find_by_email(params[:email]) || User.new
     if @user.id && @user.authenticate(params[:password])
-      session[:user_id] = @user.id
+      create_user_session
       add_point(session[:point_pending_for]) if session[:point_pending_for]
       redirect_to dashboard_path, notice: "Logged in!"
     else
