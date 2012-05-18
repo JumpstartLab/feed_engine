@@ -4,20 +4,16 @@ class Authentication < ActiveRecord::Base
   has_one :twitter_account
   has_one :github_account
 
-  def self.twitter
-    where(provider: "twitter").first
-  end
+  SERVICES = ["twitter", "github"]
 
-  def self.twitter?
-    where(provider: "twitter").size > 0 ? true : false
-  end
-
-  def self.github
-    where(provider: "github").first
-  end
-
-  def self.github?
-    where(provider: "github").size > 0 ? true : false
+  SERVICES.each do |service|
+    define_singleton_method "#{service}".to_sym do
+      where(provider: service).first
+    end
+  
+    define_singleton_method "#{service}?".to_sym do
+      where(provider: service).size > 0 ? true : false
+    end   
   end
 
 end

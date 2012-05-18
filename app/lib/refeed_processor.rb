@@ -18,22 +18,27 @@ module Hungrlr
 
     def get_growls(user_slug, last_status_id)
       growls = Net::HTTP.get(URI("#{base_url}/feeds/#{user_slug}.json?token=HUNGRLR&since=#{last_status_id}"))
-      JSON.parse(growls)["items"]["most_recent"].to_json
+      JSON.parse(growls)["items"]["most_recent"]
       # puts JSON.parse(growls)["items"]["most_recent"].inspect
     end
 
-    def create_regrowls_for(subscriber_slug, growls_json)
-      Net::HTTP.post_form(URI("#{base_url}/feeds/#{subscriber_slug}/refeeds?token=HUNGRLR"), growls: growls_json)      
+    def create_regrowls_for(user_slug, subscriber_token, growls)
+      growls.each do |growl|
+        uri_path = URI("#{base_url}/feeds/#{user_slug}/growls/#{growl["id"] }/refeed")
+        Net::HTTP.post_form(uri_path, token: subscriber_token)
+      end
     end
 
     def run
       subscriptions.each do |subscription|
-        growls_json = get_growls(subscription["user_slug"], subscription["last_status_id"])
-        create_regrowls_for(subscription["subscriber_slug"], growls_json)
+        growls = get_growls(subscription["user_slug"], subscription["last_status_id"])
+        create_regrowls_for(subscription["user_slug"], subscription["subscriber_token"], growls)
       end
     end
   end
 end
 
-processor = Hungrlr::RefeedProcessor.new
-processor.run
+# processor = Hungrlr::RefeedProcessor.new
+# raise processor.subscriptions.inspect
+# raise processor.get_growls("wengzilla", "1").inspect
+# processor.run
