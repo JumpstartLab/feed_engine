@@ -31,7 +31,7 @@
       - else
         p#points = link_to "Points! (#{post.points})", item_path(post.item, :subdomain => false, :points => true), :method => :put
     p
-      = link_to @user.display_name, user_path(@user)
+      = link_to post.user.display_name, root_url(:subdomain => post.user.subdomain)
       - if post.tweet?
         |  via Twitter
       - if post.github_event?

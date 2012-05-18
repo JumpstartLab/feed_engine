@@ -1,14 +1,2 @@
-- content_for(:head) do
-  javascript:
-    $(function(){
-      $('.actions').children('input:submit').addClass('btn btn-large');
-    });
-- if current_user
-  = "Logged in as #{current_user.email} | "
-  = link_to 'sign out', logout_path
-- else
-  .span5
-    = link_to 'Sign Up', signup_path, class: "btn btn-primary btn-large"
-  .span5
-    h3 Log in
-    = render :partial => "sessions/form"
+h1 All Posts
+p = render :partial => "users/public"
