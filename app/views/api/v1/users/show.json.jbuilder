@@ -22,8 +22,6 @@ json.items do |json|
   end
 end
 
-
 json.web_url root_url(subdomain: @user.display_name)
 #json.private @user.private
 json.link api_v1_items_url(@user.display_name)
-

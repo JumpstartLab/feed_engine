@@ -20,8 +20,9 @@ class ApplicationController < ActionController::Base
   private
 
   def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
-    @current_user ||= User.find_by_display_name(request.subdomain) if request.subdomain
+    id, subdomain = session[:user_id], request.subdomain
+    @current_user ||= User.find(id) if id
+    @current_user ||= User.find_by_display_name(subdomain) if subdomain
   end
   helper_method :current_user
 

@@ -2,7 +2,7 @@
 class Api::V1::ItemsController < ApplicationController
   respond_to :json
 
-  before_filter :valid_request?
+  before_filter :validate_request!
 
   def index
     unless @user = User.find_by_display_name(params[:display_name])
@@ -36,30 +36,49 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def create
-    key, name = params[:api_key], params[:display_name]
-    post_type = params[:post][:type].camelcase.safe_constantize if params[:post]
+    if authorized?(params) && post_type = extract_post_class_from(params)
+      @post = build_post_from(params, post_type)
 
-    if authorized?(key, name) && post_type
-      @post = post_type.create(params[:post])
+      if @post.save
+        success(:created, "#{post_type} created successfully")
+      else
+        error(:unprocessable_entity, "#{post_type} could not be created")
+      end
     else
       error(:unauthorized)
-      #{"post"=>{
-      #"type"=>"message", "body"=>"Lovebuckets!", "api_key"=>"5f359492d94a630cab93941b7762b137"}, 
-      #"format"=>"json", "display_name"=>"voluptate-numquam-411909", "controller"=>"api/v1/items", "action"=>"create"}
     end
   end
 
   private
 
-  def error(type)
-    respond_with({ :error => type.to_s }.to_json,
-                 :status => type,
-                 :location => '')
+  def extract_post_class_from(params)
+    params[:post][:type].camelcase.safe_constantize if params[:post]
   end
 
-  def authorized?(key, name)
+  def build_post_from(params, post_type)
+    post_attributes = params[:post].tap { |param| param.delete(:type) }
+    display_name = params[:display_name]
+    post_attributes[:poster_id] = User.find_by_display_name(display_name).id
+
+    post_type.new(post_attributes)
+  end
+
+  def error(type, msg = nil)
+    respond_with({ :error    => "#{ msg || type }" }.to_json,
+                   :status   => type,
+                   :location => '')
+  end
+
+  def success(type, msg = nil)
+    respond_with({ :success  => "#{ msg || type }" }.to_json,
+                   :status   => type,
+                   :location => '')
+  end
+
+  def authorized?(params)
+    key, display_name = params[:api_key], params[:display_name]
     user = User.find_by_api_key(key)
-    user && user.display_name == name
+    user && user.display_name == display_name
   end
 
   def validate_request!
