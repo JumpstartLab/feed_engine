@@ -1,4 +1,0 @@
-<b>FeedEngine</b>
-
-<b>Live Preview</b>
-http://polutropos.com
