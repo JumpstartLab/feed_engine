@@ -7,6 +7,22 @@ class InstagramJob
      uid = authentication["uid"].to_i
 
      user = User.find(current_user["id"])
+
+     unless user.instagram_items.any?
+      #Get all imahes, publish 5 newest? 
+      
+      end
+    else
+      # SUBSEQUENT RUNS - only get images since last post
+      
+      # create all the instagrams
+      # insert these items into the user's stream
+      
+      end
+    end
+    user.save
+  end
+
   end 
 
   def self.instagram_client
