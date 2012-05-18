@@ -1,7 +1,8 @@
 class Api::V1::FeedsController < Api::V1::ApiController
 
   def show
-    @user = User.where{display_name.matches params[:display_name]}.first
+    # @user = User.where{display_name.matches "#{params[:display_name]}"}.first
+    @user = User.where(display_name: params[:display_name]).first
     if params[:since].blank?
       @recent_growls = @user.growls.by_date.limit(3)
     else
@@ -31,7 +32,8 @@ class Api::V1::FeedsController < Api::V1::ApiController
   end
 
   def subscriber_refeed
-    user = User.where{display_name.matches params[:display_name]}.first
+    user = User.where(display_name: params[:display_name]).first
+    # user = User.where{display_name.matches "#{ params[:display_name] }" }.first
     growls = JSON.parse(params[:growls])
     growls.each do |growl|
       Growl.where(id: growl["id"]).first.build_regrowl_for(user).try(:save)
