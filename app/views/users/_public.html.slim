@@ -12,12 +12,12 @@
     br/
     p.post-body
       - if post.message? || post.tweet?
-        =post.body
+        = post.body
       - if post.github_event?
         | #{post.event_type} on #{post.repo}
       - if post.link?
         h3
-          =link_to post.url, post.url
+          = link_to post.url, post.url
         p
           = post.description
       - if post.image?
@@ -25,7 +25,7 @@
         p
           = post.description
     p
-      = link_to @user.display_name, user_path(@user)
+      = link_to post.user.display_name, root_url(:subdomain => post.user.subdomain)
       - if post.tweet?
         |  via Twitter
       - if post.github_event?
