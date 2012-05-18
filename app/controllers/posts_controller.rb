@@ -18,8 +18,12 @@ class PostsController < ApplicationController
   end
 
   def index
+    user = User.find_by_subdomain(request.subdomain)
+    if (current_user && user && current_user == user) || (user.nil? && current_user)
+      user = current_user
+    end
     params[:page] = "0" if params[:page] && params[:page] == "NaN"
-    temp_posts = current_user.feed.posts.reverse.page(params[:page].to_i || 0)
+    temp_posts = user.feed.posts.reverse.page(params[:page].to_i || 0)
     @posts = temp_posts.collect { |p| p.postable }
   end
 end
