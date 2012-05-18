@@ -80,7 +80,7 @@ class AuthenticationsController < ApplicationController
   def destroy
     @authentication = current_user.authentications.find(params[:id])
     @authentication.destroy
-    flash[:notice] = "Successfully destroyed authentication."
+    flash[:notice] = "You are no longer connected to this external service."
     redirect_to authentications_url
     respond_to do |format|
       format.html { redirect_to authentications_url }
