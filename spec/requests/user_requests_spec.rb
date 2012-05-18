@@ -73,6 +73,31 @@ describe User do
       end
 
     end
+    context "adds points" do
+      let!(:other_user) { Fabricate(:user) }
+      let(:random_post_type) { ["message", "link", "github_event", "tweet", "image"].sample }
+      it "add points to a post" do
+        random_post = Fabricate(random_post_type.to_sym, poster_id: other_user.id)
+        set_host(other_user.subdomain)
+        visit root_path
+        page.should have_content "Points!"
+        click_link_or_button "Points! (#{random_post.points})"
+        updated_post = random_post.class.find(random_post.id)
+        updated_post.points.should == 1
+        current_path.should == root_path
+        within "#points" do
+          page.should have_content updated_post.points
+        end
+      end
+      it "cannot give it's own post points" do
+        random_post = Fabricate(random_post_type.to_sym, poster_id: user.id)
+        set_host(user.subdomain)
+        visit root_path
+        page.should have_content "Points!"
+        page.should_not have_link "Points! (#{random_post.points})"
+      end
+
+    end
 
   end
 
