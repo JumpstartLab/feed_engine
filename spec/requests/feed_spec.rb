@@ -12,7 +12,7 @@ describe "Feed" do
 
     context "and there is less than 12 posts" do
       before(:each) do
-        5.times do 
+        5.times do
           text_item = FactoryGirl.create(:text_item, :user => user)
         end
         visit site_domain

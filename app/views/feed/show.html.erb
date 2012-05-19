@@ -46,6 +46,9 @@
     <% if github_connected?(@feed_owner) %>
       <span class="raphael-icon linked-post-logo">U</span>
     <% end %>
+    <% if current_user && (current_user != @feed_owner) %>
+      <%= link_to "TackleBox this Troutr", subscriptions_path, :method => :post%>
+    <% end %>
     <% if !twitter_connected?(@feed_owner) && !github_connected?(@feed_owner) %>
       <br/>
       <h4>None</h4>
