@@ -30,7 +30,7 @@ class Authentication < ActiveRecord::Base
 
   def connected?
     if Authentication.where("user_id = ? and provider = ?", user_id, provider).any?
-      errors[:base] = "#{provider} is already linked."
+      errors[:base] = "#{provider.capitalize} is already linked."
     end
   end
 end

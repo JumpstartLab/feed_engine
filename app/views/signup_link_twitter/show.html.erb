@@ -1,21 +1,16 @@
 <br/>
 <div class="span12 external-services-container">
-  <h1>External Services</h1>
+  <h1>Link Twitter Account</h1>
   <br/>
 
   <div>
     <div class="span3">
       <%= image_tag "/assets/twitter.png" %>
       <span class="twitter-label">Twitter</span>
-      <% if twitter_connected?(current_user) %>
-        <%= link_to "Disconnect", "#", :class => "btn btn-large" %>
-      <% else %>
-        <%= link_to "Connect", "users/auth/twitter", :class => "btn btn-large" %>
-      </div>
-    <% end %>
+      <%= link_to "Connect", "users/auth/twitter", :class => "btn btn-large" %>
   </div>
   <div class="span3 service-continue-container">
-    <%= link_to "Skip This Step", external_accounts_skip_path, :class => "btn-primary btn-large service-btn" %>
+    <%= link_to "Skip This Step", signup_twitter_skip_path, :class => "btn-primary btn-large service-btn" %>
   </div>
 </div>
 
