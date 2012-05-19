@@ -11,15 +11,17 @@ FeedEngine::Application.routes.draw do
     delete "/logout" => "devise/sessions#destroy"
   end
 
-  resources :authentications
+  resources :authentications, :only => [:new, :create, :destroy]
   resource :dashboard, :controller => 'dashboard'
+  resource :signup_link_twitter, :only => :show, :controller => :signup_link_twitter
+  resource :signup_link_github, :only => :show, :controller => :signup_link_github
+  get 'signup_twitter_skip' => 'signup_link_twitter#skip', :as => :signup_twitter_skip
+  get 'signup_github_skip' => 'signup_link_github#skip', :as => :signup_github_skip
 
   resources :text_items
   resources :link_items
   resources :image_items
-  resources :external_accounts
   resources :stream_items, :only => [:create]
-  get 'external_accounts_skip' => 'external_accounts#skip_link', :as => :external_accounts_skip
   devise_for :users, :controllers => { :registrations => "users/registrations" }
 
 

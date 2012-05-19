@@ -40,3 +40,14 @@
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 }
+
+.service-continue-container {
+  padding: 220px 0 0 25px;
+}
+
+.service-continue-container > a:visited {
+  color: white;
+}
+.external-services-container {
+  font-family: $font;
+}
