@@ -4,6 +4,7 @@ class DashboardController < ApplicationController
     @text_item = TextItem.new
     @link_item = LinkItem.new
     @image_item = ImageItem.new
+    @authentications = current_user.authentications
   end
   
   private
