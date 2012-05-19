@@ -1,4 +1,13 @@
-<div class="span7">
+<script src="http://js.pusherapp.com/1.9/pusher.min.js"></script>
+ <script type="text/javascript">
+ var pusher = new Pusher('<%= Pusher.key %>'); // uses your API KEY
+ var channel = pusher.subscribe('test_channel');
+ channel.bind('greet', function(data) {
+     alert("A new item has been posted.\n" + data.greeting + "\nMUAHAHAHA.")
+});
+
+ </script>
+<div class="span7 feed-list">
   <h1 class="feed-title span7"><%= @feed_owner.display_name %>'s stream</h1>
   <% if @items %>
       <% @items.each do |item| %>
