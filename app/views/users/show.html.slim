@@ -1,6 +1,6 @@
 div class="span8 stream"
 
-  h1 #{user.display_name} Stream
+  h1 #{user.display_name || user.email} Stream
   div id="posts" data-json-url="#{items_url(user_display_name: user.display_name, format: :json)}"
 
   script type="text/html" id="post_template"
