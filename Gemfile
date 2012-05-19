@@ -22,6 +22,7 @@ gem 'twitter'
 gem 'octokit'
 gem 'delayed_job_active_record'
 gem 'daemon'
+gem 'wicked'
 
 group :production do
   gem 'pg'
