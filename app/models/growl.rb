@@ -16,7 +16,7 @@ class Growl < ActiveRecord::Base
   scope :by_type, lambda { |param| where{ type.like param } unless param.nil? }
   scope :since, lambda { |date| where{ created_at.gt Time.at(date+1) } unless date.nil? }
 
-  after_create :set_original_created_at
+  before_save :set_original_created_at
 
   def self.by_type_and_date(type=nil)
     by_type(type).by_date.includes(:meta_data).includes(:user)
@@ -90,8 +90,7 @@ class Growl < ActiveRecord::Base
   private
 
   def set_original_created_at
-    original_created_at = DateTime.now unless original_created_at
-    self.save
+   self.original_created_at = DateTime.now unless original_created_at
   end
 
 end
