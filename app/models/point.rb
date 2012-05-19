@@ -1,9 +1,9 @@
 class Point < ActiveRecord::Base
-  attr_accessible :streamable_id, :user_id, :streamable, :user
+  attr_accessible :pointable_id, :user_id, :pointable, :user
 
   belongs_to :user
-  belongs_to :streamable, :polymorphic => true
+  belongs_to :pointable, :polymorphic => true
 
-  validates_presence_of :streamable_id, :user_id
-  validates_uniqueness_of :streamable_id, :scope => [:user_id]
+  validates_presence_of :pointable_id, :user_id
+  validates_uniqueness_of :pointable_id, :scope => [:user_id]
 end

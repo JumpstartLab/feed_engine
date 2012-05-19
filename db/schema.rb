@@ -50,9 +50,10 @@ ActiveRecord::Schema.define(:version => 20120519185439) do
 
   create_table "points", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "streamable_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.integer  "pointable_id"
+    t.string   "pointable_type"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "stream_items", :force => true do |t|
