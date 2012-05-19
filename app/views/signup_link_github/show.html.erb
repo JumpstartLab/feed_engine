@@ -5,9 +5,8 @@
 
   <div>
   <div class="span3">
-    <%= image_tag "/assets/octocat.png" %>
+    <%= image_tag "/assets/github.png" %>
     <span class="github-label">Github</span>
-      <%= link_to "Connect", "users/auth/github", :class => "btn btn-large" %>
     <% if github_connected?(current_user) %>
       <%= link_to "Disconnect", "#", :class => "btn btn-large" %>
     <% else %>

@@ -5,7 +5,7 @@ class ExternalAccountsController < ApplicationController
   end
 
   def skip_link
-    redirect_to dashboard_url
+    redirect_to session[:next_auth_path]
     flash[:notice] = "You can link your account later!"
   end
 end

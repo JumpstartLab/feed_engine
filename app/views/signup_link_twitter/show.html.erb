@@ -5,12 +5,12 @@
 
   <div>
     <div class="span3">
-      <%= image_tag "/assets/twitter-bird.png" %>
+      <%= image_tag "/assets/twitter.png" %>
       <span class="twitter-label">Twitter</span>
-        <%= link_to "Connect", "users/auth/twitter", :class => "btn btn-large" %>
       <% if twitter_connected?(current_user) %>
         <%= link_to "Disconnect", "#", :class => "btn btn-large" %>
       <% else %>
+        <%= link_to "Connect", "users/auth/twitter", :class => "btn btn-large" %>
       </div>
     <% end %>
   </div>
