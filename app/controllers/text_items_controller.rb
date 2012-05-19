@@ -1,4 +1,6 @@
 class TextItemsController < ApplicationController
+  include DashboardControllerHelper
+  before_filter :create_feed_items, :only => [:new, :create]
 
   def new
     @text_item = TextItem.new

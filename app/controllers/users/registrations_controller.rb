@@ -1,4 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+  include DashboardControllerHelper
+  before_filter :create_feed_items, :only => [:update]
 
   def update 
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
