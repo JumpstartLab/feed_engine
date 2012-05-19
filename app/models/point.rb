@@ -4,5 +4,6 @@ class Point < ActiveRecord::Base
   belongs_to :user
   belongs_to :streamable, :polymorphic => true
 
+  validates_presence_of :streamable_id, :user_id
   validates_uniqueness_of :streamable_id, :scope => [:user_id]
 end
