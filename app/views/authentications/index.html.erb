@@ -1,41 +1,45 @@
 <div class="edit-account-container">
 
-<% if @authentications %>
-  <% unless @authentications.empty? %>
-    <p>You have signed in with these services:</p>
-    <div class="authentications">
-      <% for authentication in @authentications %>
-        <div class="authentication">
-          <%= image_tag "/assets/#{authentication.provider}.png", :size => "32x32" %>
-          <%= authentication.provider.capitalize %>
-          <%= link_to "Remove", authentication, :confirm => 'Are you sure you want to unlink your account with this provider?', :method => :delete, :class => "btn btn-danger" %>
-        </div>
-      <% end %>
-      <div class="clear"></div>
-    </div>
+  <% if @authentications %>
+    <% unless @authentications.empty? %>
+      <p>You have signed in with these services:</p>
+      <div class="authentications">
+        <% for authentication in @authentications %>
+          <div class="authentication">
+            <%= image_tag "/assets/#{authentication.provider}.png", :size => "32x32" %>
+            <%= authentication.provider.capitalize %>
+            <%= link_to "Remove", authentication, :confirm => 'Are you sure you want to unlink your account with this provider?', :method => :delete, :class => "btn btn-danger" %>
+          </div>
+        <% end %>
+        <div class="clear"></div>
+      </div>
+    <% end %>
+    <br />
+    <h3>Connect your account with:</h3>
+  <% else %>
+    <p><strong>Sign in through one of these services:</strong></p>
   <% end %>
-  <br />
-  <h3>Connect your account with:</h3>
-<% else %>
-  <p><strong>Sign in through one of these services:</strong></p>
-<% end %>
 
-<a href="users/auth/twitter" class="auth_provider">
-  <%= image_tag "/assets/twitter.png", :size => "64x64", :alt => "Twitter" %>
-  Twitter
-</a>
-<a href="users/auth/github" class="auth_provider">
-  <%= image_tag "/assets/github.png", :size => "64x64", :alt => "Github" %>
-  Github
-</a>
-<div class="clear"></div>
+  <% unless twitter_connected?(current_user) %>
+    <a href="users/auth/twitter" class="auth_provider">
+      <%= image_tag "/assets/twitter.png", :size => "64x64", :alt => "Twitter" %>
+      Twitter
+    </a>
+  <% end %>
+  <% unless github_connected?(current_user) %>
+    <a href="users/auth/github" class="auth_provider">
+      <%= image_tag "/assets/github.png", :size => "64x64", :alt => "Github" %>
+      Github
+    </a>
+  <% end %>
+  <div class="clear"></div>
 
-<% unless user_signed_in? %>
-  <p>
+  <% unless user_signed_in? %>
+    <p>
     <strong>Don't use these services?</strong>
     <%= link_to "Sign up", new_user_registration_path %> or
     <%= link_to "sign in", new_user_session_path %> with a password.
-  </p>
-<% end %>
+    </p>
+  <% end %>
 
 </div>

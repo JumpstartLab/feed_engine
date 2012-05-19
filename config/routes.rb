@@ -11,7 +11,7 @@ FeedEngine::Application.routes.draw do
     delete "/logout" => "devise/sessions#destroy"
   end
 
-  resources :authentications
+  resources :authentications, :only => [:new, :create, :destroy]
   resource :dashboard, :controller => 'dashboard'
   resource :signup_link_twitter, :only => :show, :controller => :signup_link_twitter
   resource :signup_link_github, :only => :show, :controller => :signup_link_github
