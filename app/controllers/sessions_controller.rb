@@ -3,8 +3,8 @@ class SessionsController < ApplicationController
   end
 
   def create
-    json_user = params[:data][:user]
-    @user = login(json_user[:email], json_user[:password])
+    #json_user = params[:data][:user]
+    @user = login(params[:email], params[:password])
     if @user
       render "create",
       :status => :ok,

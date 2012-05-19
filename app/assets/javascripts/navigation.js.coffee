@@ -1,5 +1,5 @@
 setFlash = (message) ->
-  $('#flash').text(message).fadeOut(1500)
+  $('#flash').show().text(message).fadeOut(4500)
 
 class User
   constructor: (@email, @password) ->
@@ -74,6 +74,7 @@ addSubmitHandlers = ->
     $(".errors").hide()
     form = $(this).closest('form')
     formData = form.serialize()
+    setCSRFToken()
     $.ajax(
       type: "POST",
       url: "/posts",
@@ -125,6 +126,7 @@ addSigninHandler = ->
       renderDashboard())
     jqxhr.error( (response, status)->
       setFlash(response['responseText'])
+    )
 
 addTabMenuHandler = ->
   $('.tab-item').click ->

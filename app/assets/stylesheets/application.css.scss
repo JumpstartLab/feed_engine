@@ -19,7 +19,9 @@
   font-family: "Gotham Rounded";
   src: url(GothamRnd-Medium.otf);
 }
-
+body {
+    background-color: $white;
+}
 .page {
   min-height: 96%;
   margin: 0px 5em;
