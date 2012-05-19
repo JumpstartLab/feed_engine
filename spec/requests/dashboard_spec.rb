@@ -51,7 +51,7 @@ describe "Dashboard" do
         it "prevents posting an invalid url" do
           fill_in "link_item[url]", :with => "adbc"
           click_on "Linkify"
-          page.should have_content "http/https"
+          page.should have_content "enter a valid url"
         end
 
         it "prevents posting of a super long url" do
@@ -156,7 +156,7 @@ describe "Dashboard" do
     before(:each) { visit "/dashboard" }
     describe "edit" do
       it "displays the form" do
-        page.should have_content "Edit Your Account"
+        page.should have_content "Change your password"
       end
     end
   end
