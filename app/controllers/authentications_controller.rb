@@ -24,7 +24,11 @@ class AuthenticationsController < ApplicationController
       redirect_to session[:next_auth_path]
     else
       flash[:error] = authentication.errors[:base].first
-      redirect_to dashboard_url
+      if session[:next_auth_path]
+        redirect_to session[:next_auth_path]
+      else
+        redirect_to dashboard_url
+      end
     end
     
   end
