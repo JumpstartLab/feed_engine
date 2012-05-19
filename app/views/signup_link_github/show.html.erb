@@ -1,0 +1,21 @@
+<br/>
+<div class="span12 external-services-container">
+  <h1>External Services</h1>
+  <br/>
+
+  <div>
+  <div class="span3">
+    <%= image_tag "/assets/octocat.png" %>
+    <span class="github-label">Github</span>
+      <%= link_to "Connect", "users/auth/github", :class => "btn btn-large" %>
+    <% if github_connected?(current_user) %>
+      <%= link_to "Disconnect", "#", :class => "btn btn-large" %>
+    <% else %>
+      <%= link_to "Connect", "users/auth/github", :class => "btn btn-large" %>
+    <% end %>
+  </div>
+  <div class="span3 service-continue-container">
+    <%= link_to "Skip This Step", external_accounts_skip_path, :class => "btn-primary btn-large service-btn" %>
+  </div>
+</div>
+

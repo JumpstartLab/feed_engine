@@ -13,6 +13,8 @@ FeedEngine::Application.routes.draw do
 
   resources :authentications
   resource :dashboard, :controller => 'dashboard'
+  resource :signup_link_twitter, :only => :show, :controller => :signup_link_twitter
+  resource :signup_link_github, :only => :show, :controller => :signup_link_github
 
   resources :text_items
   resources :link_items

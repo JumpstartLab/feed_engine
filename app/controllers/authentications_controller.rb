@@ -48,15 +48,16 @@ class AuthenticationsController < ApplicationController
     login = auth["extra"]["raw_info"]["login"]
 
 
-    current_user.authentications.build(:provider => auth['provider'], :uid => uid, 
+    provider = auth[:provider]
+    current_user.authentications.build(:provider => provider, :uid => uid, 
      :token => token, :secret => secret, :login => login)
     if current_user.save
-
       flash[:notice] = "Authentication successful."
+      redirect_to session[:next_auth_path]
     else
       flash[:notice] = "Authentication failed."
     end
-    redirect_to dashboard_url
+    
   end
 
   # PUT /authentications/1
