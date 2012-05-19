@@ -10,6 +10,7 @@
   <li><a href="#link" data-toggle="tab">Link</a></li>
   <li><a href="#image" data-toggle="tab">Image</a></li>
   <li><a href="#account" data-toggle="tab">Account</a></li>
+  <li><a href="#services" data-toggle="tab">Services</a></li>
 </ul>
 
 <div class="tab-content" >
@@ -25,6 +26,10 @@
   <div class="tab-pane" id="account">
     <%= render :partial => 'devise/registrations/edit_form' %>
   </div>
+  <div class="tab-pane" id="services">
+    <%= render :template => 'authentications/index'  %>
+  </div>
+  
 </div>
 </ul>
 </div>

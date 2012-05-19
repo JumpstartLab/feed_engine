@@ -81,9 +81,8 @@ class AuthenticationsController < ApplicationController
     @authentication = current_user.authentications.find(params[:id])
     @authentication.destroy
     flash[:notice] = "Successfully destroyed authentication."
-    redirect_to authentications_url
     respond_to do |format|
-      format.html { redirect_to authentications_url }
+      format.html { redirect_to dashboard_url }
       format.json { head :no_content }
     end
   end

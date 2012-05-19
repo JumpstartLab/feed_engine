@@ -1,33 +1,41 @@
-<h1>Listing authentications</h1>
+<div class="edit-account-container">
 
-<table>
-  <tr>
-    <th>User</th>
-    <th>Provider</th>
-    <th>Uid</th>
-    <th>Index</th>
-    <th>Create</th>
-    <th>Destroy</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @authentications.each do |authentication| %>
-  <tr>
-    <td><%= authentication.user_id %></td>
-    <td><%= authentication.provider %></td>
-    <td><%= authentication.uid %></td>
-    <td><%= authentication.index %></td>
-    <td><%= authentication.create %></td>
-    <td><%= authentication.destroy %></td>
-    <td><%= link_to 'Show', authentication %></td>
-    <td><%= link_to 'Edit', edit_authentication_path(authentication) %></td>
-    <td><%= link_to 'Destroy', authentication, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+<% if @authentications %>
+  <% unless @authentications.empty? %>
+    <p>You have signed in with these services:</p>
+    <div class="authentications">
+      <% for authentication in @authentications %>
+        <div class="authentication">
+          <%= image_tag "/assets/#{authentication.provider}.png", :size => "32x32" %>
+          <%= authentication.provider.capitalize %>
+          <%= link_to "Remove", authentication, :confirm => 'Are you sure you want to unlink your account with this provider?', :method => :delete, :class => "btn btn-danger" %>
+        </div>
+      <% end %>
+      <div class="clear"></div>
+    </div>
+  <% end %>
+  <br />
+  <h3>Connect your account with:</h3>
+<% else %>
+  <p><strong>Sign in through one of these services:</strong></p>
 <% end %>
-</table>
 
-<br />
+<a href="users/auth/twitter" class="auth_provider">
+  <%= image_tag "/assets/twitter.png", :size => "64x64", :alt => "Twitter" %>
+  Twitter
+</a>
+<a href="users/auth/github" class="auth_provider">
+  <%= image_tag "/assets/github.png", :size => "64x64", :alt => "Github" %>
+  Github
+</a>
+<div class="clear"></div>
 
-<%= link_to 'New Authentication', new_authentication_path %>
+<% unless user_signed_in? %>
+  <p>
+    <strong>Don't use these services?</strong>
+    <%= link_to "Sign up", new_user_registration_path %> or
+    <%= link_to "sign in", new_user_session_path %> with a password.
+  </p>
+<% end %>
+
+</div>
