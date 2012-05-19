@@ -1,6 +1,5 @@
 attributes :id, :created_at
 
-node(:text)        { |post| post.body }
-
+node(:body)        { |post| post.body }
+node(:title)       { |post| post.title }
 node(:type)        { |post| post.class.name }
-node(:feed)        { |post| feed_url(post.user.display_name.downcase) }

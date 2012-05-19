@@ -1,3 +1,4 @@
 extends "api/items/post_base"
 
-node(:text) { |post| post.postable.body }
+node(:title) { |post| post.postable.title }
+node(:body)  { |post| post.postable.body }

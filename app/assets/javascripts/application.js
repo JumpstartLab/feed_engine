@@ -17,11 +17,13 @@
 //= require_tree .
 
 $(function() {
-
   $('#content_tabs a').click(function (e) {
     e.preventDefault();
     $(this).tab('show');
   })
-
-
 });
+
+function underscore(string) {
+   string = $.trim(string).toLowerCase();
+   return string.replace(/\s+/g, '_');
+}

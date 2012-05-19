@@ -45,6 +45,6 @@ class ImagePost < ActiveRecord::Base
   end
 
   def url
-    external_image_url || image_url(:big)
+    image_url(:big) || external_image_url
   end
 end

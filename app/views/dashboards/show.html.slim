@@ -5,8 +5,6 @@ div class="span8 stream"
   h1 Your Stream
   div id="posts" data-json-url="#{items_url(user_display_name: current_user.display_name, format: :json)}"
 
-  script type="text/html" id="post_template"
-    = render "stache_post"
 
 br
 br
@@ -20,3 +18,35 @@ div class="span3 pull-right well"
   br
   br
   = github_button
+
+/ Mustache templates
+script type="text/html" id="image_post_template"
+  .post.well
+    .pull-right
+      a href="/image_posts/{{id}}/edit" Edit
+      br/
+      a href="/image_posts/{{id}}" data-confirm="Are You Sure" data-method="delete" rel="nofollow" Remove
+    .thumbnail
+      img src="{{url}}"
+    | {{description}}
+    | {{type}}
+
+script type="text/html" id="text_post_template"
+  .post.well
+    .pull-right
+      a href="/text_posts/{{id}}/edit" Edit
+      br/
+      a href="/text_posts/{{id}}" data-confirm="Are You Sure" data-method="delete" rel="nofollow" Remove
+    | {{title}}
+    | {{body}}
+    | {{type}}
+
+script type="text/html" id="link_post_template"
+  .post.well
+    .pull-right
+      a href="/link_posts/{{id}}/edit" Edit
+      br/
+      a href="/link_posts/{{id}}" data-confirm="Are You Sure" data-method="delete" rel="nofollow" Remove
+    a href="{{url}}" target="_blank" {{url}}
+    | {{description}}
+    | {{type}}
