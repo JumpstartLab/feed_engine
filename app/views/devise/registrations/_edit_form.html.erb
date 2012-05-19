@@ -2,18 +2,15 @@
 <h2>Change your password</h2>
 <h4><%= current_user.email %></h4>
 <br/>
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
-  <%= devise_error_messages! %>
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
 
-  <div><%= f.label :current_password %>
-  <%= f.password_field :current_password %></div>
-  <br />
-  <div><%= f.label "New Password" %>
-  <%= f.password_field :password, :autocomplete => "off" %></div>
+  <%= f.input :current_password, :label_html => {:class => "text-item-label"}, 
+              :input_html => {:class => "dashboard-password-field"} %>
+  <%= f.input :password, :label_html => {:class => "text-item-label"}, 
+              :input_html => {:class => "dashboard-password-field"} %>
+  <%= f.input :password_confirmation, :label_html => {:class => "text-item-label"}, 
+              :input_html => {:class => "dashboard-password-field"} %>
 
-  <div><%= f.label "Confirm your new password" %>
-  <%= f.password_field :password_confirmation %></div>
-
-  <div><%= f.submit "Update", :class => "btn"  %></div>
+  <%= f.button :submit, "Update", :class => "btn btn-primary btn-large password-submit"  %>
 <% end %>
 </div>
