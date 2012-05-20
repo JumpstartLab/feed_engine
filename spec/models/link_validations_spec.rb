@@ -1,15 +1,11 @@
-require 'active_record_spec_helper'
-module S3Config
-  #Credentials = ""
-end
+require 'spec_helper'
+module S3Config; end
 module HasUploadedFile; end
-require 'growl'
-require 'link_validations'
-require 'link'
 
 describe "Link Validations" do
   describe "#new" do
-    let(:link) { Link.new(comment: "I love this site!", link: "http://www.hungryacademy.com") }
+    let(:user) { FactoryGirl.create(:user)}
+    let(:link) { Link.new(comment: "hello", user: user, link: "http://hungryacademy.com") }
     before(:each) { link.stub(:send_photo_to_amazon).and_return(true) }
 
     context "when my link and comment are valid" do

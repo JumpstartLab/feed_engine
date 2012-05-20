@@ -1,5 +1,6 @@
 class Link < Growl
   include LinkValidations
+
   def send_photo_to_amazon
     begin
       self.photo = open(thumbnail_url)

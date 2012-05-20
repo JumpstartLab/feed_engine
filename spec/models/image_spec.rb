@@ -1,9 +1,9 @@
-require 'spec_helper'
-# require 'active_record_spec_helper'
-# module HasUploadedFile; end
-# require 'growl'
-# require 'image_validations'
-# require 'image'
+# require 'spec_helper'
+require 'active_record_spec_helper'
+module HasUploadedFile; end
+require 'growl'
+require 'image_validations'
+require 'image'
 
 ImageValidations.allow_amazon_uploads(false)
 describe Image do
@@ -35,16 +35,16 @@ describe Image do
         let(:link) { "http://www.justanimal.org/images/gorilla-10.jpg" }
         it "works with comment" do
           comment = "abc123"
-          image = Image.new(link: link, comment: comment)
+          image = Image.new(link: link, comment: comment, user: FactoryGirl.create(:user))
           image.should be_valid
         end
         it "works without comment" do
-          image = Image.new(link: link)
+          image = Image.new(link: link, user: FactoryGirl.create(:user))
           image.should be_valid
         end
         it "fails if comment is too long" do
           comment = "a" * 258
-          image = Image.new(link: link, comment: comment)
+          image = Image.new(link: link, comment: comment, user: FactoryGirl.create(:user))
           image.should_not be_valid
         end
       end
