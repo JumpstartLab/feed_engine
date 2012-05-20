@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  before_filter :set_access_control_headers
   protect_from_forgery
 
   def after_sign_in_path_for(resource)
