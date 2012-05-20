@@ -13,7 +13,9 @@ FeedEngine::Application.routes.draw do
     resources "feeds" do
       collection do
         scope ":feed_name" do
-          resources "posts"
+          resources "posts" do
+            match 'refeeds' => "posts#refeed", as: :refeed
+          end
         end
       end
     end

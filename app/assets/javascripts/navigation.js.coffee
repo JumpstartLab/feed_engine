@@ -1,5 +1,5 @@
 setFlash = (message) ->
-  $('#flash').show().text(message).fadeOut(4500)
+  $('#flash').show().text(message).fadeOut(3700)
 
 class User
   constructor: (@email, @password) ->
@@ -42,9 +42,8 @@ addDashboardHandler = ->
 setCSRFToken = ->
   $.ajaxSetup(
     beforeSend: ( xhr ) ->
-      token = $('meta[name="csrf-token"]').attr('content')
-      if token
-        xhr.setRequestHeader('X-CSRF-Token', token) 
+      token = '<%= form_authenticity_token.to_s %>'
+      xhr.setRequestHeader('X-CSRF-Token', token) 
   )
 
 addNavHandlers = ->
@@ -131,11 +130,14 @@ addSigninHandler = ->
     formData = form.serialize()
     setCSRFToken()
     jqxhr = $.post('/login', formData, 'json')
-    jqxhr.success( ->
-      setUsername()
-      renderDashboard()
+    jqxhr.success( (response) ->
+      form.clearForm()
+      $.feedengine.current_user = response.email
+      refreshAccountMenu()
       $('#dashboard').click()
-      setFlash("Login Successful"))
+      setFlash("Login Successful")
+    )
+
     jqxhr.error( (response, status)->
       setFlash(response['responseText'])
     )
@@ -211,7 +213,7 @@ logout = ->
     $('#home').click()
   )
 
-refreshAccountMenu =(email) ->
+refreshAccountMenu =(email = $.feedengine.current_user) ->
   accountMenu = $('#account')
   $('#backstage').append($('#account ul'))
   if email
