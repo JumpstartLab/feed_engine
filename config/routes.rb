@@ -13,11 +13,14 @@ FeedEngine::Application.routes.draw do
 
   resources :authentications, :only => [:new, :create, :destroy]
   resource :dashboard, :controller => 'dashboard'
+
   resource :signup_link_twitter, :only => :show, :controller => :signup_link_twitter
   resource :signup_link_github, :only => :show, :controller => :signup_link_github
   get 'signup_twitter_skip' => 'signup_link_twitter#skip', :as => :signup_twitter_skip
   get 'signup_github_skip' => 'signup_link_github#skip', :as => :signup_github_skip
 
+
+  resources :points, :only => [:create]
   resources :text_items
   resources :link_items
   resources :image_items
