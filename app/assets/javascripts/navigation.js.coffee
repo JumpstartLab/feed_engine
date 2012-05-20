@@ -134,7 +134,9 @@ addSigninHandler = ->
     jqxhr = $.post('/login', formData, 'json')
     jqxhr.success( ->
       setUsername()
-      renderDashboard())
+      renderDashboard()
+      $('#dashboard').click()
+      setFlash("Login Successful"))
     jqxhr.error( (response, status)->
       setFlash(response['responseText'])
     )
@@ -199,7 +201,6 @@ class PostsPager
 logout = ->
   $.getJSON('/logout', (response, status, xhr) ->
     json_string = JSON.stringify(response)
-    alert json_string
     json_hash = JSON.parse(json_string)
     json_hash.text
     setFlash(json_hash.text)
@@ -209,7 +210,6 @@ logout = ->
 refreshAccountMenu =(email) ->
   accountMenu = $('#account')
   $('#backstage').append($('#account ul'))
-  alert email
   if email
     accountMenu.append($('#auth'))
   else
