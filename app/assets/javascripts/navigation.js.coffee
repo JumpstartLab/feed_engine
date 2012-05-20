@@ -16,7 +16,7 @@ class User
     )
 
   infoToJSON: =>
-    { user: { email: @email, password: @password }}
+    { email: @email, password: @password }
 
 spotlightToBackstage = ->
   $('#backstage').append($('#spotlight').children())
@@ -72,6 +72,7 @@ addSubmitHandlers = ->
   $(".errors").hide()
   $(".post-form form .post-button").click ->
     $(".errors").hide()
+    $("#image_preview").hide()
     form = $(this).closest('form')
     formData = form.serialize()
     setCSRFToken()
@@ -100,12 +101,9 @@ addSignupHandler = ->
     jqxhr = $.post("/signup", formData, "json")
     jqxhr.success( ->
       setFlash('Signup successful! Welcome to FeedEngine')
-      alert "#{$('#user_email')}"
       email = $('#user_email').val()
-      alert email.toString()
       password = $('#user_password').val()
-      alert "#{email} #{password}"
-      $.feedengine['current_user'] = new User(email, password) 
+      $.feedengine.current_user = new User(email, password)
       form.clearForm()
       new PostsPager())
     jqxhr.error((response, status) ->

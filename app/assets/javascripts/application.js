@@ -15,6 +15,7 @@
 //= require_tree ./partials
 //= require_tree .
 //= require jquery.form
+//= require jquery.cookie
 //= require mustache
 
 

@@ -3,4 +3,8 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 #feed-body {
   margin-left: 32em;
+  #feed {
+    max-width: 960px;
+    min-width: 600px;
+  }
 }

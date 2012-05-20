@@ -3,8 +3,8 @@ class SessionsController < ApplicationController
   end
 
   def create
-    #json_user = params[:data][:user]
-    @user = login(params[:email], params[:password])
+    user_info = params[:data] || params
+    @user = login(user_info[:email], user_info[:password])
     if @user
       render "create",
       :status => :ok,
@@ -15,6 +15,10 @@ class SessionsController < ApplicationController
       text: "Login unsuccessful. Please check your username and password and try again.",
       :handlers => [:jbuilder]
     end
+  end
+
+  def user
+    @user = current_user
   end
 
   def destroy

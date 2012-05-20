@@ -3,6 +3,7 @@ FeedEngine::Application.routes.draw do
   match '/signup' => 'users#create', as: 'signup'
   match 'signin' => 'sessions#new', as: 'signin'
   match 'login' => 'sessions#create', as: 'login'
+  match 'current_user' => 'sessions#user', as: 'current_user'
   resources :authentications
 
   match '/dashboard' => 'dashboard#show', as: :user_root
