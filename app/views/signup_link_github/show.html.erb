@@ -1,0 +1,16 @@
+<br/>
+<div class="span12 external-services-container">
+  <h1>Link Github Account</h1>
+  <br/>
+
+  <div>
+  <div class="span3">
+    <%= image_tag "/assets/github.png" %>
+    <span class="github-label">Github</span>
+    <%= link_to "Connect", "users/auth/github", :class => "btn btn-large" %>
+  </div>
+  <div class="span3 service-continue-container">
+    <%= link_to "Skip This Step", signup_github_skip_path, :class => "btn-primary btn-large service-btn" %>
+  </div>
+</div>
+

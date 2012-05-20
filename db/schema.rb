@@ -48,6 +48,14 @@ ActiveRecord::Schema.define(:version => 20120519202307) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "points", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "pointable_id"
+    t.string   "pointable_type"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
   create_table "stream_items", :force => true do |t|
     t.integer  "user_id"
     t.integer  "streamable_id"

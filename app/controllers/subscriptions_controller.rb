@@ -9,7 +9,6 @@ class SubscriptionsController < ApplicationController
     sub = current_user.subscriptions.find(params[:id])
     followed_user = sub.followed_user
     sub.destroy
-    flash.keep[:notice]="This message will persist"
     redirect_to :back, :notice => "No longer following #{followed_user.display_name}"
   end
 end
