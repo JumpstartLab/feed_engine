@@ -22,6 +22,4 @@ module Streamable
       end
     end
   end
-
-
 end
