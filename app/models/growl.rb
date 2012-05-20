@@ -41,6 +41,7 @@ class Growl < ActiveRecord::Base
   def build_regrowl_for(new_user)
     if can_be_regrowled?(new_user)
       new_regrowl = self.dup
+      id = regrowled_from_id if regrowled_from_id # Credits original owner
       new_regrowl.attributes = { user_id: new_user.id, regrowled_from_id: id }
       new_regrowl
     end
