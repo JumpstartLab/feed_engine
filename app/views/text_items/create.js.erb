@@ -1,4 +1,23 @@
+<% if @text_item.errors.empty? %>
+$('#flash').text('Posted successfully');
 
-// $('#text > form')[0].reset()
-// $('#flash').text('Posted successfully');
+$("#dashboard-posts").prepend("<%= escape_javascript(render(:partial => "feed/item", 
+                                                            :locals => {:item => @text_item})) %>");
+$("#item_<%=@text_item.id %>").hide();
+$("#item_<%=@text_item.id %>").fadeIn();
+$("#item-input").replaceWith("<%= escape_javascript(render(:partial => "dashboard/item_input")) %>");
+$('#submit_tabs a:first').tab('show');
+$('#text_item_body').val('');
 
+<% else %>
+$("#item-input").replaceWith("<%= escape_javascript(render(:partial => "dashboard/item_input")) %>");
+<%= coffee_script do %>
+  if $('p.form_field_error').length == 0
+    $('#submit_tabs a:first').tab('show')
+  else
+    tab_pane = $(".tab-pane")
+    active_tab = $('p.form_field_error').closest(tab_pane).attr('id')
+    tab_link = '#submit_tabs a[href="#' + active_tab + '"]'
+    $(tab_link).tab('show')
+<% end %>
+<% end %>

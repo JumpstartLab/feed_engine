@@ -37,26 +37,6 @@
   padding: 0 0 10px 0;
 }
 
-@mixin submit_button {
-  margin-left: 435px;
-}
-
-.new_text_item input[type="submit"] {
-  @include submit_button;
-}
-
-.new_link_item input[type="submit"] {
-  @include submit_button;
-}
-
-.new_image_item input[type="submit"] {
-  @include submit_button;
-}
-
-.edit_user input[type="submit"] {
-  margin: 0 0 0 350px;
-}
-
 .link-item-submit-button {
   @include trout-button;
   margin: 10px 0 0 330px;

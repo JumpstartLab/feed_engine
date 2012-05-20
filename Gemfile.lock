@@ -50,6 +50,9 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.3.1)
+    coffeebeans (1.0.1)
+      actionpack (>= 3.0.0)
+      coffee-script
     columnize (0.3.6)
     commonjs (0.2.6)
     daemons (1.1.8)
@@ -279,6 +282,7 @@ DEPENDENCIES
   capybara
   client_side_validations
   coffee-rails (~> 3.2.1)
+  coffeebeans
   debugger
   devise
   ember-rails

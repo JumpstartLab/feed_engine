@@ -23,6 +23,7 @@ gem 'jbuilder'
 gem 'growl'
 gem 'octokit'
 gem 'gravatar-ultimate'
+gem 'coffeebeans'
 
 # Gems used only for assets and not required
 # in production environments by default.

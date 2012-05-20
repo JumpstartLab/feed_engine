@@ -8,13 +8,17 @@ class TextItemsController < ApplicationController
 
   def create
     @text_item = current_user.text_items.new(params[:text_item])
-    if @text_item.save
-      redirect_to dashboard_path, notice: 'Post was successfully created.'
-    else
-      @link_item = LinkItem.new
-      @image_item = ImageItem.new
-      render :template => "dashboard/show"
-    end
+    @link_item = LinkItem.new
+    @image_item = ImageItem.new
+    @text_item.save
+      #redirect_to dashboard_path, notice: 'Post was successfully created.'
+    #else
+      #@link_item = LinkItem.new
+      #@image_item = ImageItem.new
+      #@link_item = LinkItem.new
+      #@image_item = ImageItem.new
+      #render :template => "dashboard/show"
+    #end
   end
 
   def show
