@@ -3,15 +3,16 @@ require "open-uri"
 class Growl < ActiveRecord::Base
   attr_accessible :comment, :link, :user, :type,
                   :external_id, :original_created_at,
-                  :user_id, :event_type, :regrowled_from_id
-                  
-  validates_presence_of :type
+                  :user_id, :event_type
+
+  validates_presence_of :type, :user_id
+                        :user_id, :event_type, :regrowled_from_id
 
   belongs_to :user
   has_one :meta_data, :autosave => true, dependent: :destroy
   has_many :regrowls
   include HasUploadedFile
-  
+
   scope :by_date, order("created_at DESC")
   scope :by_type, lambda { |param| where{ type.like param } unless param.nil? }
   scope :since, lambda { |date| where{ created_at.gt Time.at(date+1) } unless date.nil? }
@@ -86,7 +87,7 @@ class Growl < ActiveRecord::Base
   def original_growl
     regrowled? ? Growl.find(regrowled_from_id) : self
   end
-  
+
   private
 
   def set_original_created_at

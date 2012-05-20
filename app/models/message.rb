@@ -23,7 +23,7 @@ class Message < Growl
   end
 
   def icon
-    "glyphicons_010_envelope.png"
+    "glyphicons/glyphicons_010_envelope.png"
   end
 end
 # == Schema Information

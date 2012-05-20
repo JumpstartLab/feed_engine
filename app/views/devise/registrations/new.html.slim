@@ -5,9 +5,9 @@
       = f.error_notification
       .inputs
         = f.input :display_name, :required => true, label: "Display name"
-        = f.input :email, :required => true
-        = f.input :password, :required => true
-        = f.input :password_confirmation, :required => true
+        = f.input :email
+        = f.input :password
+        = f.input :password_confirmation
       .actions
         = f.button :submit, "Sign up"
     = render "links"

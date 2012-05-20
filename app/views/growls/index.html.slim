@@ -1,5 +1,9 @@
 .row
   .content_bar
+<<<<<<< HEAD
+    h1= "#{@user.display_name}'s Feed"
+    -if @growls.empty?
+=======
     h1
       = "#{@user.display_name}'s Feed"
       .unsubscribe{ style=("display: none" unless current_user.try(:subscribed_to?, @user)) }
@@ -10,6 +14,7 @@
     br
 
     -if @growls.empty? && @user == current_user
+>>>>>>> 46873ff7c2b9cfbf9eb5c563d9e396065d78614b
       p
         | You currently have no growls. Add some in your
         =link_to "dashboard", "http://hungrlr.com/dashboard"
@@ -27,11 +32,12 @@
           a(href="#") Messages
         dd#links
           a#links(href="#") Links
+        dd#tweets
+          a#tweets(href="#") Tweets
       #growls
         = render @growls
       #page
         = paginate @growls
-
 javascript:
   domain = "#{request.subdomain}.#{request.domain}"
 coffee:

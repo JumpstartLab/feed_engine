@@ -1,19 +1,8 @@
 .row#link
-  .six.columns
-    h4= link.get_display_name
-  .six.columns
-    img.pull_right(src="assets/glyphicons/#{link.icon}")
+  = render :partial => "shared/growl_header", :locals => { growl: link }
 .row
   .two.columns
     = image_tag link.get_gravatar
-    br
-    b Posted:
-    link_time_ago= "#{time_ago_in_words link.created_at} ago"
-    - unless link.original_growl?
-      .retweet
-        img(src="assets/glyphicons/glyphicons_152_new_window.png")
-        | Regrowled by &nbsp;
-        = link_to link.user.display_name, "http://#{link.user.display_name}.#{request.domain}"
   .ten.columns
     .row
       = link.comment
@@ -27,13 +16,4 @@
           .row= link.description
         br
         = image_tag link.photo(:medium)
-.row
-  .pull_right
-    a.small.green.button.radius.points POINTS!
-    - if current_user && current_user.can_regrowl?(link)
-      = link_to "Regrowl", regrowled_index_path(id: link.id), method: :post, class: "small blue button radius regrowl", remote: true
-    - else
-      .regrowled.black.span.small.button.disabled.radius  Regrowled
-    regrowled.button.black.span.small.disabled.radius(style="display:none;")  Regrowled!
-br
-hr
+= render partial: "shared/growl_footer", locals: { growl: link}

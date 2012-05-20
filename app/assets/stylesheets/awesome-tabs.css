@@ -83,7 +83,6 @@ dl.awesome-tabs dd a.active {
   border-left: 1px solid #eee;
   border-right: 1px solid #eee;
   border-top: 3px solid #00a6fc;
-  margin: 0 10px;
   position: relative;
   top: -5px;
 }

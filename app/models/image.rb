@@ -16,7 +16,7 @@ class Image < Growl
   end
 
   def icon
-    "glyphicons_011_camera.png"
+    "glyphicons/glyphicons_011_camera.png"
   end
   # def self.new_image(input)
   #   Image.new(

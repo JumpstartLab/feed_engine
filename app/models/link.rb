@@ -9,7 +9,7 @@ class Link < Growl
   end
 
   def icon
-    "glyphicons_036_file.png"
+    "glyphicons/glyphicons_036_file.png"
   end
 
 end

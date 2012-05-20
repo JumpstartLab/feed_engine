@@ -30,3 +30,5 @@ dump.rdb
 # Config/initializers
 /config/devise.rb
 /config/twitter.rb
+
+dbs/schema.rb

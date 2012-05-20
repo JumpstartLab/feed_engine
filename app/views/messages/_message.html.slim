@@ -1,30 +1,10 @@
 .row#message
-  .six.columns
-    h4= message.get_display_name
-  .six.columns
-    img.pull_right(src="assets/glyphicons/#{message.icon}")
+  = render :partial => "shared/growl_header", :locals => { growl: message }
 .row
-  .three.columns
+  .two.columns
     = image_tag message.get_gravatar
-    br
-    b Posted:
-    growl_time_ago= "#{time_ago_in_words message.created_at} ago"
-    - unless message.original_growl?
-      .retweet
-        img(src="assets/glyphicons/glyphicons_152_new_window.png")
-        | Regrowled by &nbsp;
-        = link_to message.user.display_name, "http://#{message.user.display_name}.#{request.domain}"
   .nine.columns
     .growl_post
       = link_to message.title, message.link
       .row= message.comment
-.row
-  .pull_right
-    a.small.green.button.radius.points POINTS!
-    - if current_user && current_user.can_regrowl?(message)
-      = link_to "Regrowl", regrowled_index_path(id: message.id), method: :post, class: "small blue button radius regrowl",  remote: true
-    - else
-      .regrowled.button.black.span.small.disabled.radius  Regrowled
-    .regrowled.black.span.button.small.disabled.radius(style="display:none;")  Regrowled!
-br
-hr
+= render partial: "shared/growl_footer", locals: { growl: message}

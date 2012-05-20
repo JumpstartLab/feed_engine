@@ -77,6 +77,11 @@ class User < ActiveRecord::Base
   end
 
   def web_url(request)
+    "http://#{display_name}.#{request.domain}"
+  end
+
+  def twitter_account
+    twitter.twitter_account
     "http://#{slug}.#{request.domain}"
   end
 
@@ -84,18 +89,18 @@ class User < ActiveRecord::Base
     define_method "#{service}".to_sym do
       authentications.send("#{service}".to_sym)
     end
-  
+
     define_method "#{service}?".to_sym do
       authentications.send("#{service}?".to_sym)
     end
 
     define_method "#{service}_account".to_sym do
       send(service.to_sym).send("#{service}_account".to_sym)
-    end   
+    end
   end
 
-  def can_regrowl?(growl)
-    growls.where(regrowled_from_id: growl.id).empty? && growl.user_id != id
+  def can_regrowl?(original_growl)
+    original_growl.user_id != id && growls.where(regrowled_from_id: original_growl.id).empty?
   end
 
   def slug
