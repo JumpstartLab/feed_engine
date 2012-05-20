@@ -11,11 +11,17 @@ user = FactoryGirl.create(:user, :display_name => "testuser",
                          :email => "user@badger.com",
                          :password => "password",
                          :password_confirmation => "password")
-50.times do
+
+user2 = FactoryGirl.create(:user, :display_name => "chris",
+                         :email => "christopher.anderson@gmail.com",
+                         :password => "password",
+                         :password_confirmation => "password")
+
+20.times do
   FactoryGirl.create(:text_item, :user => user)
 end
 
-50.times do
-  FactoryGirl.create(:link_item, :user => user)
+20.times do
+  FactoryGirl.create(:link_item, :user => user2, :url => "http://#{Faker::Internet.domain_name}" )
 end
 

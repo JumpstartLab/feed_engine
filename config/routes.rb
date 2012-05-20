@@ -13,7 +13,7 @@ FeedEngine::Application.routes.draw do
 
   resources :authentications
   resource :dashboard, :controller => 'dashboard'
-
+  resources :points, :only => [:create]
   resources :text_items
   resources :link_items
   resources :image_items

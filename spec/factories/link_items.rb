@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :link_item do
-    url "http://myurl.com"
+    url "http://#{Faker::Internet.domain_name}"
     comment "MyText"
     user
   end
