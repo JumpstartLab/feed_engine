@@ -18,11 +18,10 @@ FeedEngine::Application.routes.draw do
   resources :link_items
   resources :image_items
   resources :external_accounts
-  resources :subscriptions, :only => [:create]
+  resources :subscriptions, :only => [:create, :destroy]
   resources :stream_items, :only => [:create]
   get 'external_accounts_skip' => 'external_accounts#skip_link', :as => :external_accounts_skip
   devise_for :users, :controllers => { :registrations => "users/registrations" }
-
 
   namespace :api do
   end
