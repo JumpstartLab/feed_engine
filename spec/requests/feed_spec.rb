@@ -132,7 +132,7 @@ describe "Feed" do
         visit user_4_domain
         user_4.text_items.each do |item|
           within("#item_#{item.id}") do
-            page.should have_link("Refeed")
+            page.should have_link("Retrout")
           end
         end
       end
@@ -142,7 +142,7 @@ describe "Feed" do
         login(user_3)
         visit user_4_domain
         test_item = user_4.text_items.first
-        within("#item_#{user_4.text_items.first.id}") { click_on "Refeed" }
+        within("#item_#{user_4.text_items.first.id}") { click_on "Retrout" }
         page.should have_content("You retrouted")
         visit "http://#{user_3.display_name}.example.com"
         page.should have_content test_item.body
