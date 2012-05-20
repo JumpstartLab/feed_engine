@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120517180223) do
+ActiveRecord::Schema.define(:version => 20120519185439) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(:version => 20120517180223) do
   end
 
   create_table "github_items", :force => true do |t|
-    t.text     "gist"
+    t.text     "event"
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -46,6 +46,14 @@ ActiveRecord::Schema.define(:version => 20120517180223) do
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "points", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "pointable_id"
+    t.string   "pointable_type"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "stream_items", :force => true do |t|

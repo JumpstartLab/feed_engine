@@ -11,15 +11,19 @@
   width: 400px;
 }
 
+.dashboard-password-field {
+  @include text-field;
+  width: 300px;
+}
+
 @mixin dashboard-text-area {
-  width: 450px;
+  width: 400px;
   height: 100px;
   font-size: $input-font-size;
 }
 
 .text-item-text-area {
   @include dashboard-text-area;
-  margin: 0 0 0 65px;
 }
 
 .link-item-text-area {
@@ -33,8 +37,24 @@
   padding: 0 0 10px 0;
 }
 
-.simple_form div.boolean, .simple_form input[type="submit"] {
-    margin-left: 435px;
+@mixin submit_button {
+  margin-left: 435px;
+}
+
+.new_text_item input[type="submit"] {
+  @include submit_button;
+}
+
+.new_link_item input[type="submit"] {
+  @include submit_button;
+}
+
+.new_image_item input[type="submit"] {
+  @include submit_button;
+}
+
+.edit_user input[type="submit"] {
+  margin: 0 0 0 350px;
 }
 
 .link-item-submit-button {
@@ -45,4 +65,11 @@
 
 .dashboard-title {
   font-family: $font;
+}
+
+.form_field_error { 
+  color: $error-color;
+  font-size: $error-font-size;
+  padding: 0 0 0 120px;
+  background-color: transparent;
 }
