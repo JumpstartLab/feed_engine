@@ -6,7 +6,9 @@ class User < ActiveRecord::Base
          :token_authenticatable, :omniauthable
 
   before_save :ensure_authentication_token
+
   validates_uniqueness_of :display_name, :case_sensitive => false
+  validates_length_of :display_name, :minimum => 4
   validates_format_of :display_name, :with => /^[A-Za-z\d]+$/, message:
             "Required. Display name must only be letters, numbers, or dashes"
 
@@ -14,14 +16,19 @@ class User < ActiveRecord::Base
                   :remember_me, :display_name
 
   has_many :authentications, :dependent => :destroy
+
   has_many :growls, :dependent => :destroy
   has_many :images
   has_many :messages
   has_many :links
   has_many :tweets
-  has_many :github_events
 
-  has_many :regrowls
+  has_many :subscriptions
+  has_many :subscribers, :through => :subscriptions
+  has_many :inverse_subscriptions, :class_name => "Subscription", :foreign_key => "subscriber_id"
+  has_many :inverse_subscribers, :through => :inverse_subscriptions, :source => :user
+
+  has_many :github_events
 
   def relation_for(type)
     self.send(type.downcase.pluralize.to_sym).scoped rescue messages.scoped
@@ -30,7 +37,7 @@ class User < ActiveRecord::Base
   def github_client
     return nil unless github_oauth = authentications.where(provider: "github").first
 
-    Github::Client.new(:consumer_key => GITHUB_KEY,
+    Github::Client.new( :consumer_key => GITHUB_KEY,
                         :consumer_secret => GITHUB_SECRET,
                         :oauth_token => github_oauth.token,
                         :oauth_token_secret => github_oauth.secret)
@@ -40,9 +47,9 @@ class User < ActiveRecord::Base
     mail = UserMailer.welcome_message(email).deliver
   end
 
-  def self.find_twitter_users
-    includes(:authentications).where("authentications.provider" => "twitter")
-  end
+  # def self.find_twitter_users
+  #   includes(:authentications).where("authentications.provider" => "twitter")
+  # end
 
   def get_growls(type=nil)
     growls.by_type_and_date(type)
@@ -52,54 +59,52 @@ class User < ActiveRecord::Base
     tweets.size > 0
   end
 
+  def subscribed_to?(user)
+    inverse_subscriptions.where(user_id: user.id).size > 0
+  end
+
+  def not_subscribed_to?(user)
+    !subscribed_to?(user)
+  end
+
   def avatar
     require 'digest/md5'
     "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email)}"
   end
 
   def api_link(request)
-    "http://api.#{request.domain}/feeds/#{display_name}"
+    "http://api.#{request.domain}/feeds/#{slug}"
   end
 
   def web_url(request)
     "http://#{display_name}.#{request.domain}"
   end
 
-  # Needs meta'd
-  def instagram
-    authentications.instagram
-  end
-
-  def instagram?
-    authentications.instagram?
-  end
-
-  def twitter
-    authentications.twitter
-  end
-
-  def twitter?
-    authentications.twitter?
-  end
-
   def twitter_account
     twitter.twitter_account
+    "http://#{slug}.#{request.domain}"
   end
 
-  def github
-    authentications.github
-  end
+  Authentication::SERVICES.each do |service|
+    define_method "#{service}".to_sym do
+      authentications.send("#{service}".to_sym)
+    end
 
-  def github?
-    authentications.github?
-  end
+    define_method "#{service}?".to_sym do
+      authentications.send("#{service}?".to_sym)
+    end
 
-  def github_account
-    github.github_account
+    define_method "#{service}_account".to_sym do
+      send(service.to_sym).send("#{service}_account".to_sym)
+    end
   end
 
   def can_regrowl?(original_growl)
     original_growl.user_id != id && growls.where(regrowled_from_id: original_growl.id).empty?
+  end
+
+  def slug
+    display_name.downcase
   end
 end
 
@@ -107,19 +112,19 @@ end
 #
 # Table name: users
 #
-#  id                     :integer         primary key
+#  id                     :integer         not null, primary key
 #  email                  :string(255)     default(""), not null
 #  encrypted_password     :string(255)     default(""), not null
 #  reset_password_token   :string(255)
-#  reset_password_sent_at :timestamp
-#  remember_created_at    :timestamp
+#  reset_password_sent_at :datetime
+#  remember_created_at    :datetime
 #  sign_in_count          :integer         default(0)
-#  current_sign_in_at     :timestamp
-#  last_sign_in_at        :timestamp
+#  current_sign_in_at     :datetime
+#  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
-#  created_at             :timestamp       not null
-#  updated_at             :timestamp       not null
+#  created_at             :datetime        not null
+#  updated_at             :datetime        not null
 #  display_name           :string(255)
 #  authentication_token   :string(255)
 #  private                :boolean         default(FALSE)

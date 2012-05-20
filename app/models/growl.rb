@@ -6,23 +6,21 @@ class Growl < ActiveRecord::Base
                   :user_id, :event_type
 
   validates_presence_of :type, :user_id
+                        :user_id, :event_type, :regrowled_from_id
+
   belongs_to :user
   has_one :meta_data, :autosave => true, dependent: :destroy
   has_many :regrowls
   include HasUploadedFile
+
   scope :by_date, order("created_at DESC")
-  after_create :set_original_created_at
+  scope :by_type, lambda { |param| where{ type.like param } unless param.nil? }
+  scope :since, lambda { |date| where{ created_at.gt Time.at(date+1) } unless date.nil? }
+
+  before_save :set_original_created_at
 
   def self.by_type_and_date(type=nil)
-    if type
-      by_type(type).by_date.includes(:meta_data).includes(:user)
-    else
-      by_date.includes(:meta_data).includes(:user)
-    end
-  end
-
-  def self.by_type(input)
-    where(type: input)
+    by_type(type).by_date.includes(:meta_data).includes(:user)
   end
 
   ["title", "thumbnail_url", "description"].each do |method|
@@ -37,55 +35,63 @@ class Growl < ActiveRecord::Base
     end
   end
 
-  def regrowled(new_user_id)
-    new_growl                     = self.dup
-    if user_id != new_user_id
-      new_growl.user_id           = new_user_id
-      new_growl.regrowled_from_id = id
-      new_growl.save
-    else
-      false
+  def can_be_regrowled?(user)
+    user.can_regrowl?(self) if user
+  end
+
+  def build_regrowl_for(new_user)
+    if can_be_regrowled?(new_user)
+      new_regrowl = self.dup
+      new_regrowl.attributes = { user_id: new_user.id, regrowled_from_id: id }
+      new_regrowl
     end
   end
 
-  def self.regrowled_new(growl_id,user_id)
-    growl = Growl.find(growl_id).dup
-    if growl.user_id != user_id
-      growl.user_id = user_id
-      growl.regrowled_from_id = growl_id
-      growl.save
-    end
-  end
+  # def self.regrowled_new(growl_id, user_id)
+  #   growl = Growl.find(growl_id).dup
+  #   if growl && growl.user_id != user_id
+  #     growl.user_id = user_id
+  #     growl.regrowled_from_id = growl_id
+  #     growl.save
+  #   end
+  # end
 
   def original_growl?
-    regrowled_from_id == nil
+    regrowled_from_id.nil?
+  end
+
+  def regrowled?
+    regrowled_from_id.present?
+  end
+
+  def regrowl_link
+    if regrowled?
+      "http://api.hungrlr.com/feeds/#{get_user.slug}/items/#{id}"
+    else
+      ""
+    end
+  end
+
+  def get_user
+    original_growl? ? user : original_growl.user
   end
 
   def get_display_name
-    if original_growl?
-      user.display_name
-    else
-      original_growl.user.display_name
-    end
+    get_user.display_name
   end
 
   def get_gravatar
-    if original_growl?
-      user.avatar
-    else
-      original_growl.user.avatar
-    end
+    get_user.avatar
   end
 
   def original_growl
-    Growl.find(regrowled_from_id)
+    regrowled? ? Growl.find(regrowled_from_id) : self
   end
 
   private
 
   def set_original_created_at
-    original_created_at = DateTime.now unless original_created_at
-    self.save
+   self.original_created_at = DateTime.now unless original_created_at
   end
 
 end
@@ -105,6 +111,7 @@ end
 #  photo_content_type  :string(255)
 #  photo_file_size     :integer
 #  photo_updated_at    :datetime
+#  regrowled_from_id   :integer
 #  original_created_at :datetime
 #  event_type          :string(255)
 #

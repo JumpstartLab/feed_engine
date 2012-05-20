@@ -1,5 +1,6 @@
 hr
 ul.block-grid.two-up.center_text
+<<<<<<< HEAD
   - unless current_user.twitter?
     .row
       li= link_to "Merge Twitter Feeds", user_omniauth_authorize_path(:twitter), class: "btn-auth btn-twitter large"
@@ -9,6 +10,18 @@ ul.block-grid.two-up.center_text
   - unless current_user.instagram?
     .row
       li= link_to "Merge Instagram Feeds", user_omniauth_authorize_path(:instagram), class: "btn-auth btn-instagram large"
+=======
+  .row
+    - unless current_user.twitter?
+      li= link_to "Link Twitter Account", user_omniauth_authorize_path(:twitter), class: "btn-auth btn-twitter large"
+    - else
+      li= link_to "Unlink Twitter Account", authentication_path(current_user.twitter.id), class: "btn-auth btn-twitter large", :method => :delete
+  .row
+    - unless current_user.github?
+      li= link_to "Link Github Account", user_omniauth_authorize_path(:github), class: "btn-auth btn-github large"
+    - else
+      li= link_to "Unlink Github Account", authentication_path(current_user.github.id), class: "btn-auth btn-github large", :method => :delete    
+>>>>>>> 46873ff7c2b9cfbf9eb5c563d9e396065d78614b
   hr
     .row
-      li= link_to "No thanks, just take me to my dashboard", dashboard_path(message: "Don't worry, you can link these later."), class: "large green nice button radius"
+      li= link_to "No thanks, take me to my dashboard", dashboard_path(message: "Don't worry, you can link these later."), class: "large green nice button radius"

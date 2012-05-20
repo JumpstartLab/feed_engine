@@ -1,11 +1,26 @@
 .row
   .content_bar
+<<<<<<< HEAD
     h1= "#{@user.display_name}'s Feed"
     -if @growls.empty?
+=======
+    h1
+      = "#{@user.display_name}'s Feed"
+      .unsubscribe{ style=("display: none" unless current_user.try(:subscribed_to?, @user)) }
+        = button_to('UNSUBSCRIBE', subscriptions_path(:user_id => @user.id), :method => "delete", :remote => true, :class => 'small green button radius')
+      .subscribe{ style=("display: none" unless current_user.try(:not_subscribed_to?, @user) && current_user != @user) }
+        = button_to('SUBSCRIBE', subscriptions_path(:user_id => @user.id), :method => "post", :remote => true, :class => 'small green button radius')
+
+    br
+
+    -if @growls.empty? && @user == current_user
+>>>>>>> 46873ff7c2b9cfbf9eb5c563d9e396065d78614b
       p
         | You currently have no growls. Add some in your
         =link_to "dashboard", "http://hungrlr.com/dashboard"
         | .
+    -elsif @growls.empty?
+      p There are no growls in this feed.
     -else
       dl.sub-nav
         dt Filter:
@@ -28,6 +43,12 @@ javascript:
 coffee:
   $(".points").click ->
     alert Math.floor((Math.random()*100)+1) + " Points achieved!"
+  $(".unsubscribe").click ->
+    $(".unsubscribe").toggle()
+    $(".subscribe").toggle()
+  $(".subscribe").click ->
+    $(".unsubscribe").toggle()
+    $(".subscribe").toggle()
   $(".regrowl").click ->
     $(this).hide()
     $(this).parent().find(".regrowled").fadeIn()
