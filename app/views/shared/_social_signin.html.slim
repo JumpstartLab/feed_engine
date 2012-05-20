@@ -8,7 +8,7 @@ ul.block-grid.two-up.center_text
       li= link_to "Merge Github Feeds", user_omniauth_authorize_path(:github), class: "btn-auth btn-github large"
   - unless current_user.instagram?
     .row
-      li= link_to "Merge Instagram Feeds", user_omniauth_authorize_path(:github), class: "btn-auth btn-instagram large"      
+      li= link_to "Merge Instagram Feeds", user_omniauth_authorize_path(:instagram), class: "btn-auth btn-instagram large"
   hr
     .row
       li= link_to "No thanks, just take me to my dashboard", dashboard_path(message: "Don't worry, you can link these later."), class: "large green nice button radius"

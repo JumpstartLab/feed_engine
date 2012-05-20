@@ -23,6 +23,7 @@ gem 'resque_mailer'
 gem 'factory_girl_rails', '~> 3.1.0'
 gem 'faker'
 gem 'delayed_job'
+# gem 'faraday', '~> 0.7.6' May need to be added for instagram gem.
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
