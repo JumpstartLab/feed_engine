@@ -1,5 +1,3 @@
-attributes :id, :created_at
+attributes :id, :created_at, :body, :title
 
-node(:body)        { |post| post.body }
-node(:title)       { |post| post.title }
 node(:type)        { |post| post.class.name }

@@ -5,10 +5,6 @@ div class="span8 stream"
   h1 Your Stream
   div id="posts" data-json-url="#{items_url(user_display_name: current_user.display_name, format: :json)}"
 
-
-br
-br
-br
 div class="span3 pull-right well"
   h2 Mini-Dash
   = link_to "View Your Live Stream!", root_url(subdomain: current_user.display_name), class: "btn btn-primary"
@@ -24,7 +20,7 @@ script type="text/html" id="image_post_template"
   .post.well
     .pull-right
       a href="/image_posts/{{id}}/edit" Edit
-      br/
+      br
       a href="/image_posts/{{id}}" data-confirm="Are You Sure" data-method="delete" rel="nofollow" Remove
     .thumbnail
       img src="{{url}}"
@@ -35,7 +31,7 @@ script type="text/html" id="text_post_template"
   .post.well
     .pull-right
       a href="/text_posts/{{id}}/edit" Edit
-      br/
+      br
       a href="/text_posts/{{id}}" data-confirm="Are You Sure" data-method="delete" rel="nofollow" Remove
     | {{title}}
     | {{body}}
@@ -43,10 +39,10 @@ script type="text/html" id="text_post_template"
 
 script type="text/html" id="link_post_template"
   .post.well
-    .pull-right
-      a href="/link_posts/{{id}}/edit" Edit
-      br/
-      a href="/link_posts/{{id}}" data-confirm="Are You Sure" data-method="delete" rel="nofollow" Remove
-    a href="{{url}}" target="_blank" {{url}}
-    | {{description}}
-    | {{type}}
+      .pull-right
+        a href="/link_posts/{{id}}/edit" Edit
+        br
+        a href="/link_posts/{{id}}" data-confirm="Are You Sure" data-method="delete" rel="nofollow" Remove
+      a href="{{link_url}}" target="_blank" {{link_url}}
+      | {{description}}
+      | {{type}}

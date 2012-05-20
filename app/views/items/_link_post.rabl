@@ -1,5 +1,4 @@
-attributes :id, :created_at
+attributes :id, :created_at, :description
 
 node(:link_url)    { |post| post.url }
-node(:comment)     { |post| post.description }
 node(:type)        { |post| post.class.name }

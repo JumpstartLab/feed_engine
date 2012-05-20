@@ -3,7 +3,30 @@ div class="span8 stream"
   h1 #{user.display_name || user.email} Stream
   div id="posts" data-json-url="#{items_url(user_display_name: user.display_name, format: :json)}"
 
-  script type="text/html" id="post_template"
-      = render "post"
+div class="post well"
+  .pull-right
+    a href="/refeeds?post_id={{id}}&post_type={{type}}" data-method="post" rel="nofollow">Refeed
+    br
+    a href="/points/{{id}}?post_type={{type}}" data-method="put" rel="nofollow">Points!
+  | {{#url}}
+      .thumbnail
+        img src={{url}}
+  | {{/url}}
+  | {{#description}}
+      {{description}}
+  | {{/description}}
+  | {{#title}}
+      {{title}}
+  | {{/title}}
+  | {{#body}}
+      {{body}}
+  | {{/body}}
+  | {{link_url}}
+      br
+      a href="{{link_url}}" target="_blank" {{link_url}}
+  | {{/link_url}}
+      br
+  | {{type}}
+
 
 
