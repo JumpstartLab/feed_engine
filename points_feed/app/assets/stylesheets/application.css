@@ -111,3 +111,32 @@ input[type=text], input[type=password], input[type=email], textarea, select {
   height: 50px;
   width: 50px;
 }
+
+/* FOR DROP DOWN MENU*/
+
+#container {
+  position: relative;
+}
+
+#menu, #menu ul {
+  padding: 0;
+  margin: 0;
+  background: black;
+  list-style: none;
+}
+
+#menu a {
+  display: block;
+  padding: 5px;
+  width: 130px;
+}
+
+#menu li ul {
+  position: absolute;
+/*  left: -999em;
+  width: 140px;*/
+}
+
+#menu li:hover ul, #menu li ul:hover {
+  right:auto;
+}
