@@ -1,5 +1,5 @@
 class Point < ActiveRecord::Base
-  attr_accessible :pointable_id, :user_id, :pointable_type, :user
+  attr_accessible :pointable_id, :user_id, :pointable_type, :user, :pointable
 
   belongs_to :user
   belongs_to :pointable, :polymorphic => true
