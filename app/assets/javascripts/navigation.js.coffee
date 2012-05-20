@@ -18,13 +18,12 @@ class User
     { email: @email, password: @password }
 
 setUsername = ->
-  email = null
   $.getJSON('/current_user', (response, status, jqXHR) ->
       json_string = JSON.stringify(response)
-      json_hash = JSON.parse(json_string)
-      refreshAccountMenu json_hash.email
+      email = JSON.parse(json_string).email
+      $.feedengine.current_user = email
+      refreshAccountMenu email
   )
-  email
 
 spotlightToBackstage = ->
   $('#backstage').append($('#spotlight').children())
@@ -165,11 +164,15 @@ addHandlers = ->
   addLogoutHandler()
 
 renderDashboard = ->
-  $('.tab-body ul').children().hide()
-  $('.tab-body ul').children().first().show()
-  $('#feed').children().remove()
-  $.namespace.activateTab('Text')
-  new PostsPager()
+  if $.feedengine.current_user
+    $('.tab-body ul').children().hide()
+    $('.tab-body ul').children().first().show()
+    $('#feed').children().remove()
+    $.namespace.activateTab('Text')
+    new PostsPager()
+  else
+    $('#signin').click()
+    setFlash("Please login first.")
 
 class PostsPager
   constructor: (@page=-1)->
@@ -205,6 +208,7 @@ logout = ->
     json_hash.text
     setFlash(json_hash.text)
     setUsername()
+    $('#home').click()
   )
 
 refreshAccountMenu =(email) ->
