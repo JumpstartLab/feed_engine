@@ -1,3 +1,4 @@
-attributes :id, :created_at, :body, :title
+extends "items/post_base"
 
-node(:type)        { |post| post.class.name }
+node(:body)        { |post| post.postable.body }
+node(:title)       { |post| post.postable.title }

@@ -1,4 +1,4 @@
-attributes :id, :created_at, :description
+extends "items/post_base"
 
-node(:url)         { |post| post.image_url }
-node(:type)        { |post| post.class.name }
+node(:url)         { |post| post.postable.url }
+node(:description) { |post| post.postable.description }
