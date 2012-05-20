@@ -23,8 +23,6 @@ class InstagramJob
     user.save
   end
 
-  end 
-
   def self.instagram_client
     Instagram::Client.new({
       :consumer_key => ENV["INSTAGRAM_DEV_KEY"],
