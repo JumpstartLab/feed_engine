@@ -9,9 +9,15 @@ class PointsController < ApplicationController
         redirect_to :root, :alert => "You've already pointed this item"
       end
     else
-      session[:point_for] = params[:item_id]
-      session[:point_for_type] = params[:item_type]
-      redirect_to login_url(:subdomain => false), :alert => "Please log in or sign up first."
+      prep_for_point_in_session
     end
+  end
+
+  private
+
+  def prep_for_point_in_session
+    session[:point_for] = params[:item_id]
+    session[:point_for_type] = params[:item_type]
+    redirect_to login_url(:subdomain => false), :alert => "Please log in or sign up first."
   end
 end
