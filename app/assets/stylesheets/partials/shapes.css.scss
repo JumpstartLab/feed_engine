@@ -1,6 +1,6 @@
 @import "./colors.css.scss";
 
-@mixin parallelogram($color, $width: 24.1%, $degrees: 160deg) {
+@mixin parallelogram($color, $width: 23.5%, $degrees: 160deg) {
   width: $width;
   height: 2.2em;
   -webkit-transform: skew($degrees);

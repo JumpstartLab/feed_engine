@@ -23,5 +23,6 @@ class SessionsController < ApplicationController
 
   def destroy
     logout
+    render "logout", status: :ok, :handlers => [:jbuilder]
   end
 end

@@ -4,7 +4,6 @@ setFlash = (message) ->
 class User
   constructor: (@email, @password) ->
     @authenticated = false
-    @authenticate()
 
   authenticate: =>
     data = @infoToJSON()
@@ -17,6 +16,15 @@ class User
 
   infoToJSON: =>
     { email: @email, password: @password }
+
+setUsername = ->
+  email = null
+  $.getJSON('/current_user', (response, status, jqXHR) ->
+      json_string = JSON.stringify(response)
+      json_hash = JSON.parse(json_string)
+      refreshAccountMenu json_hash.email
+  )
+  email
 
 spotlightToBackstage = ->
   $('#backstage').append($('#spotlight').children())
@@ -40,18 +48,22 @@ setCSRFToken = ->
         xhr.setRequestHeader('X-CSRF-Token', token) 
   )
 
-jQuery ->
-  setCSRFToken()
+addNavHandlers = ->
   navItems = ['#friends', '#feeds', '#home', '#signin', '#signup']
   pageIDs = (id + '-page' for id in navItems)
   
   for id in navItems
     navHandler(id)
+
+jQuery ->
+  setCSRFToken()
+  addNavHandlers()
   addDashboardHandler()
   addHandlers()
   $.feedengine = {
     current_user: null
   }
+  setUsername()
 
 ######################### DASHBOARD ############################
 
@@ -104,6 +116,7 @@ addSignupHandler = ->
       email = $('#user_email').val()
       password = $('#user_password').val()
       $.feedengine.current_user = new User(email, password)
+      setUsername()
       form.clearForm()
       new PostsPager())
     jqxhr.error((response, status) ->
@@ -120,7 +133,7 @@ addSigninHandler = ->
     setCSRFToken()
     jqxhr = $.post('/login', formData, 'json')
     jqxhr.success( ->
-      alert
+      setUsername()
       renderDashboard())
     jqxhr.error( (response, status)->
       setFlash(response['responseText'])
@@ -137,12 +150,17 @@ addPreviewHandler = ->
   $('#image_url').blur ->
     $('#image_preview').attr('src', $('#image_url').val()).show()
 
+addLogoutHandler = ->
+  $('#logout').parent().click ->
+    logout()
+
 addHandlers = ->
   addSubmitHandlers()
   addPreviewHandler()
   addTabMenuHandler()
   addSignupHandler()
   addSigninHandler()
+  addLogoutHandler()
 
 renderDashboard = ->
   $('.tab-body ul').children().hide()
@@ -175,3 +193,24 @@ class PostsPager
       $("#feed").append Mustache.to_html($("##{type}_template").html(), post)
     $(window).scroll(@check) if posts && posts.length > 0
 
+
+################################ Account Switching ###################
+
+logout = ->
+  $.getJSON('/logout', (response, status, xhr) ->
+    json_string = JSON.stringify(response)
+    alert json_string
+    json_hash = JSON.parse(json_string)
+    json_hash.text
+    setFlash(json_hash.text)
+    setUsername()
+  )
+
+refreshAccountMenu =(email) ->
+  accountMenu = $('#account')
+  $('#backstage').append($('#account ul'))
+  alert email
+  if email
+    accountMenu.append($('#auth'))
+  else
+    accountMenu.append($('#unauth'))
