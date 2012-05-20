@@ -6,7 +6,7 @@ describe Image do
     before(:each) do
       login(user)
       visit dashboard_path
-      click_on "Add an Image"
+      click_on "+ Image"
     end
     it "fails" do
       fill_in "growl[link]", :with => "abc123"
