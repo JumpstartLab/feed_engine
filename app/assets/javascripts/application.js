@@ -23,7 +23,3 @@ $(function() {
   })
 });
 
-function underscore(string) {
-   string = $.trim(string).toLowerCase();
-   return string.replace(/\s+/g, '_');
-}
