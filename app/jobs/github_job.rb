@@ -10,8 +10,7 @@ class GithubJob
       :oauth_token => authentication["token"],
       :oauth_token_secret => authentication["secret"]})
 
-    uid = authentication["uid"] 
-    
+    uid = authentication["uid"]
 
     user = User.find(current_user["id"])
 

@@ -23,10 +23,7 @@ FeedEngine::Application.routes.draw do
   get 'external_accounts_skip' => 'external_accounts#skip_link', :as => :external_accounts_skip
   devise_for :users, :controllers => { :registrations => "users/registrations" }
 
-  namespace :api do
-  end
   devise_for :users
-
 
   constraints :subdomain => "api" do
     match "feeds/:display_name/items" => "api/stream_items#create", :as => "new_api_item", :via => :post
@@ -40,9 +37,7 @@ FeedEngine::Application.routes.draw do
     end
   end
 
-  # if there's a subdomain, send them to feed#show, otherwise treat root as dashboard
+  # if there's a subdomain, send them to feed#show, treat dashboard as root
   match '', to: 'feed#show', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
-  
-  
   root :to => 'dashboard#show'
 end

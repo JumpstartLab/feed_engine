@@ -4,8 +4,8 @@ tweet:
   queue: subscription
   description: "This will gather tweets every 5 min for the user"
 
-gist: 
+gist:
   every: '5m'
   class: SubscriptionJob
-  queue: subscription 
+  queue: subscription
   description: "This will gather new github events every 5 min for the user"
