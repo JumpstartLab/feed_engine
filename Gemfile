@@ -16,13 +16,16 @@ gem 'faker'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-github'
+gem 'omniauth-instagram'
 gem 'twitter'
 gem 'github_api'
-
+gem 'instagram'
+gem 'faraday', '0.7.6'
 gem 'slim'
 gem 'slim-rails'
 gem 'resque'
 gem 'tlsmail'
+gem 'hashie'
 gem 'resque-scheduler', :require => 'resque_scheduler'
 
 # Gems used only for assets and not required

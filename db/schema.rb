@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120517141356) do
+ActiveRecord::Schema.define(:version => 20120521141937) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20120517141356) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "handle"
+    t.string   "token"
   end
 
   create_table "feeds", :force => true do |t|
@@ -55,6 +56,16 @@ ActiveRecord::Schema.define(:version => 20120517141356) do
   end
 
   add_index "images", ["user_id"], :name => "index_images_on_user_id"
+
+  create_table "instagramimages", :force => true do |t|
+    t.string   "content"
+    t.string   "source_id"
+    t.string   "handle"
+    t.string   "post_time"
+    t.string   "caption"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "links", :force => true do |t|
     t.text     "content"

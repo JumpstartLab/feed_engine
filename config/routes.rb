@@ -41,8 +41,6 @@ FeedEngine::Application.routes.draw do
   match '/integrate' => 'users#integrate', as: 'integrate'
 
   match '/auth/:provider/callback' => 'authentications#create'
-  #match '/auth/github/callback' => 'authentications#create'
-
   # html partial fetching
   match '/footer' => 'pages#footer'
 
