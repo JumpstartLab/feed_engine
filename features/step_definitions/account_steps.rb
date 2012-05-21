@@ -40,7 +40,7 @@ When /^I submit the form$/ do
 end
 
 Then /^I should see a confirmation message thanking me for signing up$/ do
-  flash_text.should include "Welcome! You have signed up successfully."
+  page.should_have_content "Welcome! You have signed up successfully."
 end
 
 Then /^I should be viewing the dashboard at '\/dashboard'$/ do
@@ -121,5 +121,7 @@ Then /^I should see an error message that the passwords must match$/ do
 end
 
 Then /^I skip the link accounts page$/ do
-  click_on("Skip this step")
+  click_on("skip this step")
+  click_on("skip this step")
+  click_on("Finish")
 end

@@ -36,8 +36,6 @@ class ImagePostsController < ApplicationController
   private
 
   def lookup_image_post
-    post = Post.find(params[:id])
-    child_post = post.postable
-    @image_post = ImagePost.find(child_post.id)
+    @image_post = ImagePost.find(params[:id])
   end
 end

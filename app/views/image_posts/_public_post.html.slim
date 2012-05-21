@@ -1,0 +1,16 @@
+.post
+  img.post-avatar src="http://www.enn.com/image_for_articles/33228-1.jpg/medium"
+  .well
+    .post-image
+      img src="{{url}}"
+      p.description {{description}}
+    .post-actions
+      li
+        a.btn href="/refeeds?post_id={{id}}" data-method="post" rel="nofollow"
+          i.icon-retweet  Refeed
+      li
+        a.btn href="/points/{{id}}?post_type={{type}}" data-method="put" rel="nofollow"
+          i.icon-heart Points!
+      li
+         span.btn
+          i.icon-camera | {{type}}

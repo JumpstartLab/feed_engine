@@ -37,8 +37,6 @@ class TextPostsController < ApplicationController
   private
 
   def lookup_text_post
-    post = Post.find(params[:id])
-    child_post = post.postable
-    @text_post = TextPost.find(child_post.id)
+    @text_post = TextPost.find(params[:id])
   end
 end
