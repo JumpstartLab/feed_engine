@@ -23,6 +23,12 @@ function render_post(post) {
       post['refeedable'] = true;
     }
 
+    post['avatar'] = post['feeder']['avatar'];
+
+    if(post['refeed'] == true) { 
+      post['avatar'] = post['refeeder']['avatar'];
+    }
+    
     return Mustache.render($("#"+post.type+"Template").html(), post);
   }
 
@@ -75,6 +81,27 @@ function fetch_posts(div, page) {
   }
 }
 
+function positionLightboxImage() {
+  var top = ($(window).height() - $('#lightbox').height()) / 3;
+  var left = ($(window).width() - $('#lightbox').width()) / 2;
+  $('#lightbox')
+    .css({
+      'top': top,
+      'left': left
+    })
+    .fadeIn();
+}
+
+function removeLightbox() {
+  $('#overlay, #lightbox')
+    .fadeOut('slow', function() {
+      $(this).remove();
+      $('body').css('overflow-y', 'auto'); // show scrollbars!
+    });
+}
+
+
+
 // function waypoint_reload() {
 //   console.log('ran');
 //   page_for_content++;
@@ -85,9 +112,12 @@ function fetch_posts(div, page) {
 //   $('#bottom_of_page').waypoint('destroy');
 // }
 
+
+
 $(document).ready(function() {
   fetch_posts($('#user_posts'));
   fetch_recent_posts($('#recent_posts'));
+
 
   $("#load_more").click(function(e) {
     e.preventDefault();
@@ -114,5 +144,35 @@ $(document).ready(function() {
     });
   });
 
+  $("a.lightbox").live('click', function(e) {
+    $('body').css('overflow-y', 'hidden');
+    
+    $('<div id="overlay"></div>')
+      .css('top', 'top')
+      .css('opacity', '0')
+      .animate({'opacity': '0.5'}, 'slow')
+      .appendTo('body');
+      
+    $('<div id="lightbox"></div>')
+      .hide()
+      .appendTo('body');
+      
+    $('<img>')
+      .attr('src', $(this).attr('href'))
+      .load(function() {
+        positionLightboxImage();
+      })
+      .click(function() {
+        removeLightbox();
+      })
+      .appendTo('#lightbox');
+    
+    return false;
+  });
+
+
   // $('#bottom_of_page').waypoint(waypoint_reload, { offset: '100%' });
 });
+
+
+
