@@ -118,6 +118,15 @@ $(document).ready(function() {
   fetch_posts($('#user_posts'));
   fetch_recent_posts($('#recent_posts'));
 
+  $("#subscribe_button").click(function(e) {
+    e.preventDefault();
+    url = "/api/friends";
+    $this = $(this);
+
+    $.post(url, { "access_token": access_token, "friend_id": user_id }, function(data) {
+      $this.addClass('disabled').text('Subscribed');
+    });
+  });
 
   $("#load_more").click(function(e) {
     e.preventDefault();

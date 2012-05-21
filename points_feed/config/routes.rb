@@ -25,6 +25,7 @@ PointsFeed::Application.routes.draw do
       end
     end
 
+    resources :friends
     resources :posts
   end
 
@@ -37,6 +38,7 @@ PointsFeed::Application.routes.draw do
         end
       end
 
+      resources :friends
       resources :posts
     end
   end
