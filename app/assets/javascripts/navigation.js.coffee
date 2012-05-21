@@ -83,7 +83,13 @@ jQuery ->
   addDashboardHandler()
   addHandlers()
   $.feedengine = {
-    current_user: null
+    current_user: null,
+    activeTabId: null,
+    activateTab: (tabId)->
+      if $.feedengine.activateTabId
+        $("##{$.feedengine.activateTabId}").removeClass('selected')
+      $("##{tabId}").addClass('selected')
+      $.feedengine.activateTabId = tabId
   }
   setUsername()
 
@@ -99,6 +105,7 @@ $.namespace = {
     $("##{tabId}").addClass('selected')
     $.namespace.activateTabId = tabId
 }
+
 
 addSubmitHandlers = ->
   $(".errors").hide()
@@ -164,7 +171,7 @@ addSigninHandler = ->
 
 addTabMenuHandler = ->
   $('.tab-item').click ->
-    $.namespace.activateTab(this['id'])
+    $.feedengine.activateTab(this['id'])
     tabId = "#{this['id']}-tab".toLowerCase()
     $('.tab-body ul').children().hide()
     $("##{tabId}").show()
@@ -190,7 +197,7 @@ renderDashboard = ->
     $('.tab-body ul').children().hide()
     $('.tab-body ul').children().first().show()
     $('#feed').children().remove()
-    $.namespace.activateTab('Text')
+    $.feedengine.activateTab('Text')
     new PostsPager()
   else
     $('#signin').click()
