@@ -31,11 +31,23 @@ describe Authentication do
     end
   end
 
+  describe "#create_twitter_auth" do
+    let(:data) { JSON.parse(File.read("#{::Rails.root}/spec/fixtures/service_responses/twitter_response.json")) }
+    it "should create a entry in TwitterAuth token with data returned from the API" do
+      Authentication.create_twitter_auth(user, data)
+      Authentication.count.should == 1
+      Authentication.where(token: data["credentials"]["token"]).count.should == 1
+      Authentication.where(secret: data["credentials"]["secret"]).count.should == 1
+    end
+  end
+
   describe "#create_twitter_details" do
     let(:data) { JSON.parse(File.read("#{::Rails.root}/spec/fixtures/service_responses/twitter_response.json")) }
     it "should create a entry in TwitterAccount with data returned from the API" do
       new_auth.create_twitter_details(data)
       TwitterAccount.count.should == 1
+      TwitterAccount.where(nickname: data["info"]["nickname"]).count.should == 1
+      TwitterAccount.where(uid: data["uid"]).count.should == 1
     end
   end
 

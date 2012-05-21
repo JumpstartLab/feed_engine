@@ -1,8 +1,9 @@
 class Authentication < ActiveRecord::Base
   attr_accessible :user, :token, :secret, :provider
   belongs_to :user
-  has_one :twitter_account
-  has_one :github_account
+  has_one :twitter_account, :dependent => :destroy
+  has_one :github_account, :dependent => :destroy
+  has_one :instagram_account, :dependent => :destroy
 
   SERVICES = ["twitter", "github", "instagram"]
 
@@ -14,9 +15,6 @@ class Authentication < ActiveRecord::Base
     define_singleton_method "#{service}?".to_sym do
       where(provider: service).size > 0 ? true : false
     end
-
-    # define_singleton_method "add_#{service}".to_sym do
-    # end
   end
 
   def self.add_twitter(user, data)
@@ -41,13 +39,13 @@ class Authentication < ActiveRecord::Base
   end
 
   def create_twitter_details(data)
-    create_twitter_account(uid: data["info"]["uid"],
-                          nickname: data["info"]["nickname"],
-                          image: data["info"]["image"],
-                          last_status_id: data["extra"]["raw_info"]["status"]["id_str"])
+    create_twitter_account(uid: data["uid"],
+                           nickname: data["info"]["nickname"],
+                           image: data["info"]["image"],
+                           last_status_id: data["extra"]["raw_info"]["status"]["id_str"])
   end
 
-  def self.create_twitter_auth(user, data)
+  def self.create_github_auth(user, data)
     user.authentications.create(provider: data["provider"],
                                 token: data["credentials"]["token"])
   end
@@ -56,7 +54,7 @@ class Authentication < ActiveRecord::Base
     create_github_account(uid: data["uid"],
                            nickname: data["info"]["nickname"],
                            image: data["extra"]["raw_info"]["avatar_url"],
-                           last_status_id: DateTime.now)
+                           last_status_id: DateTime.now.to_s)
   end
 
   def self.create_instagram_auth(user, data)
@@ -68,7 +66,7 @@ class Authentication < ActiveRecord::Base
     create_instagram_account(uid: data["uid"],
                              nickname: data["info"]["nickname"],
                              image: data["info"]["image"],
-                             last_status_id: DateTime.now)
+                             last_status_id: DateTime.now.to_s)
   end
 end
 # == Schema Information

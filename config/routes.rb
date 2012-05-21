@@ -8,11 +8,7 @@ Hungrlr::Application.routes.draw do
       post '/feeds/:display_name' => 'feeds#create'
       resources :user_tweets, only: [:create, :index]
       resources :user_github_events, only: [:create, :index]
-      resources :user_instagram_photos, only: [:create, :index]
       resources :meta_data, :only => [ :create ]
-      get '/users/twitter' => 'users#twitter'
-      get '/users/github' => 'users#github'
-      get '/users/instagram' => 'users#instagram'
     end
   end
 
@@ -26,7 +22,10 @@ Hungrlr::Application.routes.draw do
     constraints :subdomain => 'api' do ## For external use
       scope module: "api" do
         namespace "v1" do
+          resources :user_instagram_photos, only: [:create, :index]
           get '/users/twitter' => 'users#twitter'
+          get '/users/github' => 'users#github'
+          get '/users/instagram' => 'users#instagram'
           get '/feeds/:display_name' => 'feeds#show'
           post '/feeds/:display_name/items' => 'growls#create'
           post '/feeds/:display_name/growls/:id/refeed' => 'feeds#refeed'
@@ -42,7 +41,6 @@ Hungrlr::Application.routes.draw do
   match "/home" => "pages#home"
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
-  match '/auth/:provider/callback' => 'authentications#create'
 
   devise_scope :user do
     get '/signup' => 'devise/registrations#new'

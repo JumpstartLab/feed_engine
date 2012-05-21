@@ -10,7 +10,7 @@ Devise.setup do |config|
   # config.mailer = "Devise::Mailer"
 
   # Automatically apply schema changes in tableless databases
-  config.apply_schema = false
+  #config.apply_schema = false
 
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
@@ -113,7 +113,7 @@ Devise.setup do |config|
 
   # If true, uses the password salt as remember token. This should be turned
   # to false if you are not using database authenticatable.
-  config.use_salt_as_remember_token = true
+  #config.use_salt_as_remember_token = true
 
   # Options to be passed to the created cookie. For instance, you can set
   # :secure => true in order to force SSL only cookies.
@@ -212,12 +212,12 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
   config.omniauth :twitter, "IXDAm8E6f0HOHLeJ2uZcTQ", "piDvbV8wfzBklu4d2UOXSKeFRPEecAIzCZJF0JM"
-  
+
   if Rails.env.production?
     config.omniauth :github, "e7aa2849b1a5a2023e04", "c944f260aebd7995a4647d246895b1c426caf10a"
     config.omniauth :instagram, "88879dba02804bb7b9b70ba93173414a", "b52d86d8728a45c6bfa5e0b10fe71497"
   else
-    config.omniauth :github, "71c432372663f39a9a62", "c944f260aebd7995a4647d246895b1c426caf10a"
+    config.omniauth :github, "f9d172af3957b1dfb617", "f5f682cae4157a80c9e82e00b8c7ace069b7cae2"
     config.omniauth :instagram, "e8d1e46f126e4b50a0c620f2421083dd", "66d9b35dd0164bd68c9a6c84ef8d1545"
   end
 
