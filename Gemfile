@@ -13,12 +13,15 @@ gem 'sass-rails',   '~> 3.2.3'
 gem 'coffee-rails', '~> 3.2.1'
 gem 'twitter'
 gem 'octokit'
+gem 'instagram', :git => 'git://github.com/Instagram/instagram-ruby-gem.git' 
 gem 'omniauth-twitter'
 gem 'omniauth-github'
+gem 'omniauth-instagram'
 gem 'omniauth'
 gem 'jbuilder'
 gem 'whenever', require: false
 gem 'delayed_job_active_record'
+gem 'faraday', '0.7.6'
 
 group :production do
   gem 'pg'

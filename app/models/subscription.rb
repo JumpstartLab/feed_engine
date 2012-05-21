@@ -2,19 +2,21 @@
 #
 # Table name: subscriptions
 #
-#  id         :integer         not null, primary key
-#  provider   :string(255)
-#  uid        :string(255)
-#  user_name  :string(255)
-#  user_id    :integer
-#  created_at :datetime        not null
-#  updated_at :datetime        not null
+#  id             :integer         not null, primary key
+#  provider       :string(255)
+#  uid            :string(255)
+#  user_name      :string(255)
+#  user_id        :integer
+#  oauth_token    :string
+#  oauth_secret   :string
+#  created_at     :datetime        not null
+#  updated_at     :datetime        not null
 #
 
 # The model for any external subscriptions
 class Subscription < ActiveRecord::Base
   EVENT_LIST = ["PushEvent", "CreateEvent", "ForkEvent"]
-  PROVIDER_TO_POST_TYPE = { "twitter" => "tweets", "github" => "github_events"}
+  PROVIDER_TO_POST_TYPE = { "twitter" => "tweets", "github" => "github_events", "instagram" => "instapounds"}
   attr_accessible :user_name, :provider, :uid, :user_id
 
   belongs_to :user
@@ -26,6 +28,8 @@ class Subscription < ActiveRecord::Base
       subscription.uid = auth["uid"]
       subscription.user_name = auth["info"]["nickname"]
       subscription.user_id = user.id
+      subscription.oauth_token = auth["credentials"]["token"]
+      subscription.oauth_secret = auth["credentials"]["secret"]
     end
   end
 
@@ -70,6 +74,8 @@ class Subscription < ActiveRecord::Base
         create_tweet(new_post)
       elsif provider == "github"
         create_github_event(new_post)
+      elsif provider == "instagram"
+        create_instapound(new_post)
       end
     end
   end
@@ -91,6 +97,15 @@ class Subscription < ActiveRecord::Base
                        )
   end
 
+  def create_instapound(new_post)
+    Instapound.create!(subscription_id: self.id,
+                       body: new_post.text,
+                       image_url: new_post.images.standard_resolution.url,
+                       created_at: new_post.created_at,
+                       poster_id: self.user_id
+                       )
+  end
+
   def get_tweets
     Twitter.user_timeline(self.user_name)
   end
@@ -102,12 +117,20 @@ class Subscription < ActiveRecord::Base
     events
   end
 
+  def get_instapounds
+    Instagram.user_media_feed(self.user_name)
+  end
+
   def tweets
     Tweet.where(subscription_id: self.id)
   end
 
   def github_events
     GithubEvent.where(subscription_id: self.id)
+  end
+
+  def instapounds
+    Instapound.where(subscription_id: self.id)
   end
 
 end
