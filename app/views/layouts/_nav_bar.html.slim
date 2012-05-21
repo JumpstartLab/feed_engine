@@ -16,7 +16,7 @@
           ul.nav.pull-right
             li = link_to "Dashboard", dashboard_url(subdomain: false)
             li
-              = link_to current_user.display_name, edit_user_registration_url(current_user, subdomain: false), id: "account"
+              = link_to current_user.display_name, edit_user_registration_url(subdomain: false), id: "account"
             li class="divider-vertical"
             li
               = link_to "Sign out", destroy_user_session_url(subdomain: false), :method => :delete, id: "sign_out"
