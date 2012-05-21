@@ -11,7 +11,7 @@ gist:
   description: "This will gather new github events every 5 min for the user"
 
 refeed:
-  every: '5m'
+  every: '1m'
   class: SubscriptionJob
   queue: subscription
   description: "This will gather new posts from feeds that a user follows every 5 min"

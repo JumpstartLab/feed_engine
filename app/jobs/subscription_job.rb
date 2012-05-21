@@ -6,7 +6,7 @@ class SubscriptionJob
       Resque.enqueue("#{auth.provider.capitalize}Job".constantize, auth.user, auth)
     end
     Subscription.all.each do |sub|
-      Resque.enqueue(RefeedJob, sub.user, sub)
+      Resque.enqueue(RefeedJob, sub.follower, sub)
     end
   end
 end
