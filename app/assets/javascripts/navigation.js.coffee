@@ -4,15 +4,15 @@ setFlash = (message) ->
 class User
   constructor: (@email, @password) ->
     @authenticated = false
-
+    @authenticate()
   authenticate: =>
     data = @infoToJSON()
     $.post('/login',
       data: data,
       success: (data, status, xhr) =>
         @authenticated = true
-        renderDashboard()
-    )
+        $('#dashboard').click()
+    ) 
 
   infoToJSON: =>
     { email: @email, password: @password }
@@ -113,10 +113,8 @@ addSignupHandler = ->
       setFlash('Signup successful! Welcome to FeedEngine')
       email = $('#user_email').val()
       password = $('#user_password').val()
-      $.feedengine.current_user = new User(email, password)
-      setUsername()
-      form.clearForm()
-      new PostsPager())
+      $.feedengine.current_user = new User(email, password).email
+      form.clearForm())
     jqxhr.error((response, status) ->
         resp = $.parseJSON(response['responseText'])
         $('#signup-page .errors').show()

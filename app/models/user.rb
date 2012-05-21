@@ -2,7 +2,7 @@ require 'securerandom'
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
   before_create :set_user_subdomain
-  after_create :set_user_feed
+  after_create :create_user_feed
   # after_create :generate_api_key
   after_create :send_welcome_email
 
@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
   #   self.feed.set_name(self.subdomain)
   # end
 
-  def set_user_feed
+  def create_user_feed
     Feed.create(:user_id => self.id, :name => self.subdomain)
   end
 
