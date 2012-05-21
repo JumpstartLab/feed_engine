@@ -6,6 +6,7 @@
     <li><a href="#image" id="image-tab" data-toggle="tab">Image</a></li>
     <li><a href="#account" data-toggle="tab">Account</a></li>
     <li><a href="#services" data-toggle="tab">Services</a></li>
+    <li><a href="#subscriptions" data-toggle="tab">TackleBox</a></li>
   </ul>
 
   <div class="tab-content" >
@@ -24,7 +25,9 @@
     <div class="tab-pane" id="services">
       <%= render :template => 'authentications/index'  %>
     </div>
-
+    <div class="tab-pane" id="subscriptions">
+      <%= render :template => 'subscriptions/index'  %>
+    </div>
   </div>
 </ul>
 </div>
