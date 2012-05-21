@@ -11,15 +11,10 @@
       <% else %>
       <span class="entypo-icon">8</span>
       <span class="points"><%= item.points.count %></span>
-      
-      
       <% end %>
     </span>
   </div>
 
-  <% unless item.author == current_user || current_user == nil || current_user.display_name == @feed_owner %>
-    <%= link_to "Refeed", stream_items_path(:streamable_type => item.class.name, :streamable_id => item.id), :method => :post %>
-  <% end %>
   <h1>Item <%= item.id %></h1>
 
   <br/>
@@ -67,7 +62,7 @@
   <br/>
   <br/>
 
-  <div>
+<div>
     <span class="item-time">
       <%= time_ago_in_words(item.created_at) %> ago
     </span>
@@ -83,7 +78,14 @@
     <% elsif item.class == GithubItem %>
       <span class="raphael-icon github-logo">U</span>
     <% end %>
+    <div class="refeed-buttons">
+      <% unless current_user == nil || !current_user.can_retrout?(item) %>
+      <%= link_to("#", 'data-author' => item.author.display_name, 'data-type' => item.class.name, 'data-id' => item.id, :class => "refeed_ajax_link") do  %>
+      <span class="raphael-icon refeed">0</span>
+      <% end %>
+  <% end %>
+    </div>
+</div>
+    
 
-    <span class="raphael-icon refeed">0</span>
-  </div>
 </div>
