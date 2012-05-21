@@ -40,21 +40,20 @@ class Growl < ActiveRecord::Base
 
   def build_regrowl_for(new_user)
     if can_be_regrowled?(new_user)
-      new_regrowl = self.dup
-      id = regrowled_from_id if regrowled_from_id # Credits original owner
-      new_regrowl.attributes = { user_id: new_user.id, regrowled_from_id: id }
-      new_regrowl
+      self.set_regrowl_attributes(new_user)
     end
   end
 
-  # def self.regrowled_new(growl_id, user_id)
-  #   growl = Growl.find(growl_id).dup
-  #   if growl && growl.user_id != user_id
-  #     growl.user_id = user_id
-  #     growl.regrowled_from_id = growl_id
-  #     growl.save
-  #   end
-  # end
+  def set_regrowl_attributes(new_user)
+    new_regrowl = self.dup
+    if regrowled_from_id ## Gives credit to original growler
+      new_id = regrowled_from_id
+    else
+      new_id = id
+    end
+    new_regrowl.attributes = { user_id: new_user.id, regrowled_from_id: new_id }
+    new_regrowl
+  end
 
   def original_growl?
     regrowled_from_id.nil?
