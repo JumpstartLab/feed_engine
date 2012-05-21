@@ -41,11 +41,12 @@ servicesHandler = ->
  $('#services').click ->
    spotlightToBackstage()
    $.getJSON('/authentications', (response, status, jqxhr) ->
-    alert "rtr"
+    
     providers = response['providers']
+    alert providers
     for provider in providers
-      $('##{provider}_false').hide()
-      $('##{provider}_true').show())
+      $("##{provider}_false").hide()
+      $("##{provider}_true").show())
    $('#spotlight').append($("#services-page"))
 
 
@@ -66,11 +67,7 @@ setCSRFToken = ->
   )
 
 addNavHandlers = ->
-<<<<<<< HEAD
-  navItems = ['#friends', '#feeds', '#home']
-=======
-  navItems = ['#friends', '#feeds', '#home', '#signin', '#signup', '#services']
->>>>>>> 4c76f84465ac4af1cd48d60234a703ef7b35d32c
+  navItems = ['#friends', '#feeds', '#home', '#signin', '#signup']
   pageIDs = (id + '-page' for id in navItems)
   
   for id in navItems
@@ -81,6 +78,7 @@ jQuery ->
   addNavHandlers()
   addDashboardHandler()
   addHandlers()
+  servicesHandler()
   $.feedengine = {
     current_user: null,
     activeTabId: null,

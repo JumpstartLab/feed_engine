@@ -1,1 +1,1 @@
-json.providers @authentications.map(|a| a.provider.downcase)
+json.providers @authentications.map{|a| a.provider.downcase}
