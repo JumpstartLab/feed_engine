@@ -9,18 +9,6 @@ class Api::V1::FeedsController < Api::V1::ApiController
     end
   end
 
-  def create
-    json_hash = JSON.parse(params[:body])
-    @growl = current_user.relation_for(json_hash["type"]).new(json_hash)
-
-    if @growl.save
-      render location: @growl, status: :created
-    else
-      @errors = @growl.errors.collect { |k,v| v }
-      render 'create', status: :not_acceptable
-    end
-  end
-
   def refeed
     growl = Growl.find(params[:id])
     if growl && growl.build_regrowl_for(@current_user).try(:save)
