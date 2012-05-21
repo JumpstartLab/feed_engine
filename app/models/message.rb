@@ -7,6 +7,7 @@
 #  poster_id  :integer
 #  created_at :datetime        not null
 #  updated_at :datetime        not null
+#  points     :integer         default(0)
 #
 
 # Posts that only have text

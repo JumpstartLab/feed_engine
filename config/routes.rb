@@ -8,6 +8,7 @@ FeedEngine::Application.routes.draw do
   resource  :images
   resource  :links
   resources :users
+  resources :items
   resources :sessions
   resources :password_resets
   resource  :dashboard,

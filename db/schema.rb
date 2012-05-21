@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120516204651) do
+ActiveRecord::Schema.define(:version => 20120517220731) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -31,19 +31,21 @@ ActiveRecord::Schema.define(:version => 20120516204651) do
 
   create_table "github_events", :force => true do |t|
     t.string   "event_type"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.integer  "subscription_id"
     t.string   "repo"
     t.integer  "poster_id"
+    t.integer  "points",          :default => 0
   end
 
   create_table "images", :force => true do |t|
     t.text     "description"
     t.text     "url"
     t.integer  "poster_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.integer  "points",      :default => 0
   end
 
   add_index "images", ["poster_id"], :name => "index_images_on_poster_id"
@@ -60,8 +62,9 @@ ActiveRecord::Schema.define(:version => 20120516204651) do
     t.text     "description"
     t.text     "url"
     t.integer  "poster_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.integer  "points",      :default => 0
   end
 
   add_index "links", ["poster_id"], :name => "index_links_on_poster_id"
@@ -69,6 +72,14 @@ ActiveRecord::Schema.define(:version => 20120516204651) do
   create_table "messages", :force => true do |t|
     t.text     "body"
     t.integer  "poster_id"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.integer  "points",     :default => 0
+  end
+
+  create_table "points", :force => true do |t|
+    t.integer  "item_id"
+    t.integer  "quantity"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -85,9 +96,10 @@ ActiveRecord::Schema.define(:version => 20120516204651) do
   create_table "tweets", :force => true do |t|
     t.integer  "subscription_id"
     t.string   "body"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.integer  "poster_id"
+    t.integer  "points",          :default => 0
   end
 
   create_table "users", :force => true do |t|

@@ -1,5 +1,6 @@
 # The controller for a user - creating and editing accounts and showing posts
 class UsersController < ApplicationController
+  after_filter :send_welcome_email, only: :create
   def new
     @user = User.new
   end
@@ -9,8 +10,8 @@ class UsersController < ApplicationController
 
     if @user
       @posts = Kaminari.paginate_array(
-                          @user.sorted_posts
-                        ).page(params[:page]).per(12)
+        @user.sorted_posts
+      ).page(params[:page]).per(12)
     else
       redirect_to root_url(:host => request.domain)
     end
@@ -19,7 +20,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      login_and_notify_user
+      create_user_session
+      add_point(session[:point_pending_for]) if session[:point_pending_for]
       redirect_to new_subscription_path
     else
       retain_password
@@ -47,8 +49,7 @@ class UsersController < ApplicationController
     @password_confirmation = params[:user][:password_confirmation]
   end
 
-  def login_and_notify_user
-    session[:user_id] = @user.id
+  def send_welcome_email
     @user.send_welcome_email
   end
 end

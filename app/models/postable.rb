@@ -41,6 +41,11 @@ module Postable
     end
   end
 
+  def increase_point_count
+    new_point_count = points + 1
+    update_attribute(:points, new_point_count)
+  end
+
   private
 
   def predicate?(method_name)
