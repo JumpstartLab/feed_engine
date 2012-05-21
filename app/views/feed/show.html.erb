@@ -1,13 +1,13 @@
 <script src="http://js.pusherapp.com/1.9/pusher.min.js"></script>
  <script type="text/javascript">
- var pusher = new Pusher('<%= Pusher.key %>'); // uses your API KEY
- var channel = pusher.subscribe('test_channel');
- channel.bind('greet', function(data) {
-      var user = '<%= current_user.display_name unless current_user == nil %>'
-      if (data.author == user) {
-        alert("You have been refeeded!")
-      }
-});
+//  var pusher = new Pusher('<%= Pusher.key %>'); // uses your API KEY
+//  var channel = pusher.subscribe('test_channel');
+//  channel.bind('greet', function(data) {
+//       var user = '<%= current_user.display_name unless current_user == nil %>'
+//       if (data.author == user) {
+//         alert("You have been refeeded!")
+//       }
+// });
 
  </script>
 <div class="span7 feed-list">
