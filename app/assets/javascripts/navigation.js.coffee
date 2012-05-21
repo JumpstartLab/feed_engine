@@ -43,7 +43,6 @@ servicesHandler = ->
    $.getJSON('/authentications', (response, status, jqxhr) ->
     
     providers = response['providers']
-    alert providers
     for provider in providers
       $("##{provider}_false").hide()
       $("##{provider}_true").show())
