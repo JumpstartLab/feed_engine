@@ -1,12 +1,18 @@
-<h2>Forgot your password?</h2>
+<br/>
+<br/>
+<br/>
+<br/>
+<div class="span3 offset4 trout-container">
+<h1>Forgot your password?</h1>
+
+<p>Enter your email address below.</p>
+<br>
 
 <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
   <%= devise_error_messages! %>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
+  <%= f.label :email %>
+  <%= f.email_field :email %>
 
-  <div><%= f.submit "Send me reset password instructions" %></div>
+  <div><%= f.submit "Submit", :class => "btn btn-primary btn-large"  %></div>
 <% end %>
-
-<%= render "links" %>
