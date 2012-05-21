@@ -1,0 +1,13 @@
+<% if item.errors.empty? %>
+  $('#flash').text('Posted successfully');
+
+  $("#dashboard-posts").prepend("<%= escape_javascript(render(:partial => "feed/item", 
+                                                              :locals => {:item => item})) %>");
+  $("#item_<%=item.id %>").hide();
+  $("#item_<%=item.id %>").fadeIn();
+  $(".form_field_error").remove();
+<% else %>
+  $("#item-input").replaceWith("<%= escape_javascript(render(:partial => "dashboard/item_input")) %>");
+<% end %>
+
+$('#<%= type %>-tab').tab('show');
