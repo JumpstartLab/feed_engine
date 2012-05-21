@@ -16,8 +16,11 @@ jQuery ->
     url = $('.pagination .next_page a').attr('href')
     if $(window).scrollTop() > $(document).height() - $(window).height() - 25
       if url? && !waiting
+        $('#pagination-div').text("Fishing up more trouts!")
         waiting = true
         #alert url
         $.getScript(url, (data, textStatus, jqxhr) ->
           waiting = false)
+    else if !url? && !waiting
+        $('#pagination-div').text("Looks like this stream is fished dry")
   $(window).scroll
