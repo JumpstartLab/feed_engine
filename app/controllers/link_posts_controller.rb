@@ -33,6 +33,8 @@ class LinkPostsController < ApplicationController
   private
 
   def lookup_link_post
-    @link_post = LinkPost.find(params[:id])
+    post = Post.find(params[:id])
+    child_post = post.postable
+    @link_post = LinkPost.find(child_post.id)
   end
 end

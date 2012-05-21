@@ -24,8 +24,7 @@ class RefeedsController < ApplicationController
   end
 
   def post
-    child = params[:post_type].constantize.find(params[:post_id])
-    post = child.post
+    post = Post.find(params[:post_id])
   end
 
   def refeed_post
