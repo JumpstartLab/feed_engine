@@ -30,7 +30,7 @@ describe User do
           it "should allow me to skip linking to social media" do
             click_button "Create An Account"
             click_link "Skip This Step"
-            page.should have_content("You can sign up with your social media accounts by visiting dashboard")
+            page.should have_content("You can sign up with your social media accounts by visiting the services section under dashboard")
           end
 
           it "should allow me to link to Twitter" do
