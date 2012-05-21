@@ -161,3 +161,18 @@ body {
   padding: 14px 0 0 70px;
   margin-right: 10px;
 }
+
+#alert-bar {
+  background-position: initial initial;
+  background-repeat: initial initial;
+  top: 0;
+  left: 0;
+  position: fixed;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  display: block;
+  font: $font;
+  font-size: 16px;
+  opacity: 0.85;
+}

@@ -20,15 +20,9 @@
     <link href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
   </head>
   <body>
-
+    <div id="alert-bar"></div>
 
     <div class="container">
-      <% flash.each do |name, msg| %>
-        <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
-          <a class="close" data-dismiss="alert">×</a>
-          <%= msg %>
-        </div>
-      <% end %>
       <ul class="nav nav-section">
         <% if user_signed_in? %>
           <li class="user-name offset5 pull-left"><%= current_user.display_name %></li>
@@ -74,6 +68,18 @@
   ================================================== -->
   <!-- Placed at the end of the document so the pages load faster -->
   <%= javascript_include_tag "application" %>
-
+    <% if flash[:notice] %>
+      <%= coffee_script_tag do %>
+        $ ->
+          $("#alert-bar").addClass('alert-success').text('<%= flash[:notice] %>').hide()
+          $("#alert-bar").slideDown().delay(5000).slideUp()
+      <% end %>
+    <% elsif flash[:alert] %>
+      <%= coffee_script_tag do %>
+        $ ->
+          $("#alert-bar").addClass('alert-error').text('<%= flash[:alert] %>').hide()
+          $("#alert-bar").slideDown().delay(5000).slideUp()
+      <% end %>
+    <% end %>
 </body>
 </html>
