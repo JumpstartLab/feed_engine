@@ -64,7 +64,7 @@
   <br/>
   <br/>
 
-  <div>
+<div>
     <span class="item-time">
       <%= time_ago_in_words(item.created_at) %> ago
     </span>
@@ -80,15 +80,14 @@
     <% elsif item.class == GithubItem %>
       <span class="raphael-icon github-logo">U</span>
     <% end %>
-
+    <div class="refeed-buttons">
       <% unless current_user == nil || !current_user.can_retrout?(item) %>
-    <%= link_to(stream_items_path(:streamable_type => item.class.name, :streamable_id => item.id), :id => "#{item.id}_action", :method => :post, :title => "Retrout", :rel => 'tooltip') do %>
+      <%= link_to("#", 'data-author' => item.author.display_name, 'data-type' => item.class.name, 'data-id' => item.id, :class => "refeed_ajax_link") do  %>
       <span class="raphael-icon refeed">0</span>
       <% end %>
-    <%= link_to "Ajax Refeed", "#", 'data-author' => item.author.display_name, 'data-type' => item.class.name, 'data-id' => item.id, :class => "refeed_ajax_link"  %>
   <% end %>
-
-
+    </div>
+</div>
     
-  </div>
+
 </div>

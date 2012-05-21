@@ -83,6 +83,14 @@
   color: $trout-main-color;
 }
 
+.refeed-buttons {
+  display: inline;
+}
+
+.refeed_ajax_link {
+  float: right;
+  line-height: 24px;
+}
 .post-logo {
  @include item-logo;
 }
