@@ -2,6 +2,7 @@ class TwitterFeedItem < ActiveRecord::Base
   attr_accessible :content, :posted_at, :user_id, :tweet_id
 
   belongs_to :user
+  has_many :awards, as: :awardable
 
   def self.import(user, tweet)
     unless user.twitter_feed_items.map(&:tweet_id).include?(tweet.id)

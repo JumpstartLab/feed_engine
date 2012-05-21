@@ -2,6 +2,7 @@ class GithubFeedItem < ActiveRecord::Base
   attr_accessible :content, :posted_at, :user_id, :github_id, :event_type
 
   belongs_to :user
+  has_many :awards, as: :awardable
 
   def self.import(user, event)
     unless user.github_feed_items.map(&:github_id).include?(event.id.to_i)

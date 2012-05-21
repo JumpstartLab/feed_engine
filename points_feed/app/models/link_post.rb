@@ -1,4 +1,5 @@
 class LinkPost < Post
+  has_many :awards, as: :awardable
   validates :content, :length => { :maximum => 2048 }
 
   validate do

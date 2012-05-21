@@ -2,6 +2,7 @@ class InstagramFeedItem < ActiveRecord::Base
   attr_accessible :image_url, :comment, :posted_at, :user_id, :instagram_id
 
   belongs_to :user
+  has_many :awards, as: :awardable
 
   def self.import(user, media_item)
     unless user.instagram_feed_items.map(&:instagram_id).include?(media_item.id)
