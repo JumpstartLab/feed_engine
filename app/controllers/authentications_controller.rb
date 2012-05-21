@@ -11,7 +11,7 @@ class AuthenticationsController < ApplicationController
     # Kernel.const_get("#{auth['provider'].capitalize}Feeder").perform(current_user.id)
     #Resque.enqueue(Kernel.const_get("#{auth['provider'].capitalize}Feeder"), current_user.id)
     flash[:notice] = "#{auth['provider'].capitalize} link successful"
-    redirect_to authentications_path
+    redirect_to root_path
   end
 
   def destroy
@@ -19,7 +19,7 @@ class AuthenticationsController < ApplicationController
     provider = @authentication.provider.capitalize
     @authentication.destroy
     flash[:notice] = "#{provider} has been removed"
-    redirect_to authentications_path
+    redirect_to root_path
   end
 
   private

@@ -2,5 +2,6 @@ h2 Your Authentications
 - ["twitter", "github", "instagram"].each do |service|
   br
   img src="assets/#{service}_64.png"
-    a*{ id:"#{service}_true" } "Remove #{service.capitalize} Authentication"
-    a*{ id:"#{service}_false" } "Integrate Your #{service.capitalize}"
+    a*{ id:"#{service}_true", style: 'display: none;'} "Remove #{service.capitalize} Authentication"
+
+    = link_to "Integrate Your #{service.capitalize}", "auth/twitter/", id: "#{service}_false", target: "_blank"
