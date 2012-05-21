@@ -26,6 +26,10 @@
         = post.body
       - if post.github_event?
         | #{post.event_type} on #{post.repo}
+      - if post.instapound?
+        = image_tag post.image_url
+        p
+          = post.body
       - if post.user == current_user
         p#points Points! (#{post.points})
       - else

@@ -23,6 +23,9 @@ gem 'whenever', require: false
 gem 'delayed_job_active_record'
 gem 'faraday', '0.7.6'
 gem 'httparty'
+gem 'hashie'
+gem 'vcr'
+gem 'fakeweb'
 
 group :production do
   gem 'pg'
