@@ -1,3 +1,6 @@
+setFlash = (message) ->
+  $('#flash').show().text(message).fadeOut(3700)
+
 class User
   constructor: (@email, @password) ->
     @authenticated = false
@@ -208,4 +211,3 @@ refreshAccountMenu =(email = $.feedengine.current_user) ->
     accountMenu.append($('#auth'))
   else
     accountMenu.append($('#unauth'))
->>>>>>> 83cb7ec... namespace to feedengine unity

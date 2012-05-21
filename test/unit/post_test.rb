@@ -9,7 +9,7 @@ describe Post do
         fab_type = "#{type.to_s.downcase}_post".to_sym
         posts << Fabricate(fab_type, :user_id => user.id)
       end
-      assert_equal Post.for_feed(user.display_name), posts
+      assert_equal Post.for_feed(user.feed.name), posts
     end
   end
 end

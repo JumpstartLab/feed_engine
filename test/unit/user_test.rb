@@ -1,4 +1,4 @@
-require 'minitest_helper'
+require 'test_helper'
 
 describe User do
   it "creates a User record on create" do
@@ -32,15 +32,15 @@ describe User do
     assert_equal user.feed.present?, true
   end
   
-  it "automatically creates an api key for a user after create" do
-    password = "lispy_woo"
-    user = User.create(:email => "lispy.woo.4@lsqain.in",
-    :display_name => "LispyWoo4",
-    :password => password,
-    :password_confirmation => password)
-    assert_equal user.valid?, true
-    assert_equal user.api_key.blank?, false
-  end
+  # it "automatically creates an api key for a user after create" do
+  #   password = "lispy_woo"
+  #   user = User.create(:email => "lispy.woo.4@lsqain.in",
+  #   :display_name => "LispyWoo4",
+  #   :password => password,
+  #   :password_confirmation => password)
+  #   assert_equal user.valid?, true
+  #   assert_equal user.api_key.blank?, false
+  # end
 
   # after_create :send_welcome_email
 
@@ -88,4 +88,5 @@ describe User do
     :password_confirmation => password)
     assert_equal user_two.valid?, false
   end
+>>>>>>> 4b396c44e9b8bc1a9a39ded49d6aec8fbc15971a
 end

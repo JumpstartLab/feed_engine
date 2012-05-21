@@ -1,16 +1,19 @@
 require 'securerandom'
 class User < ActiveRecord::Base
+  authenticates_with_sorcery!
   before_create :set_user_subdomain
-  before_save :ensure_authentication_token
-  after_create :set_user_feed
-  after_create :generate_api_key
+  after_create :create_user_feed
+  # after_create :generate_api_key
   after_create :send_welcome_email
-  devise :database_authenticatable, :recoverable, :validatable, :token_authenticatable
+
   attr_accessible :email, :password, :password_confirmation, :display_name, :subdomain
   has_many :authentications
   has_many :tweets
   has_many :githubevents
+  has_many :posts
   has_one :feed
+  validates_confirmation_of :password, :on => :create, :message => "should match confirmation"
+
 
 
   DISPLAY_NAME_REGEX = /^[\w-]*$/
@@ -33,7 +36,7 @@ class User < ActiveRecord::Base
   #   self.feed.set_name(self.subdomain)
   # end
 
-  def set_user_feed
+  def create_user_feed
     Feed.create(:user_id => self.id, :name => self.subdomain)
   end
 
@@ -47,11 +50,11 @@ class User < ActiveRecord::Base
     end.flatten.uniq.compact.sort_by { |post| post.created_at }
   end
   
-  def generate_api_key
-    key = Digest::SHA256.hexdigest("#{SecureRandom.hex(15)}HuNgRyF33d#{Time.now}")
-    key = generate_api_key if User.exists?(api_key: key)
-    self.update_attribute(:authentication_token, key)
-  end
+  # def generate_api_key
+  #   key = Digest::SHA256.hexdigest("#{SecureRandom.hex(15)}HuNgRyF33d#{Time.now}")
+  #   key = generate_api_key if User.exists?(api_key: key)
+  #   self.update_attribute(:authentication_token, key)
+  # end
 
   def twitter_id
     authentications.find_by_provider('twitter').uid
