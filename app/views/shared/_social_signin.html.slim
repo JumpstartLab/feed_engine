@@ -2,13 +2,13 @@ hr
 ul.block-grid.two-up.center_text
   - unless current_user.twitter?
     .row
-      li= link_to "Merge Twitter Feeds", user_omniauth_authorize_path(:twitter), class: "btn-auth btn-twitter large"
+      li= link_to "Link Twitter Feeds", user_omniauth_authorize_path(:twitter), class: "button black large"
   - unless current_user.github?
     .row
-      li= link_to "Merge Github Feeds", user_omniauth_authorize_path(:github), class: "btn-auth btn-github large"
+      li= link_to "Link Github Feeds", user_omniauth_authorize_path(:github), class: "button black large"
   - unless current_user.instagram?
     .row
-      li= link_to "Merge Instagram Feeds", user_omniauth_authorize_path(:instagram), class: "btn-auth btn-instagram large"
+      li= link_to "Link Instagram Feeds", user_omniauth_authorize_path(:instagram), class: "button black large"
   hr
     .row
       li= link_to "No thanks, take me to my dashboard", dashboard_path(message: "Don't worry, you can link these later."), class: "large green nice button radius"

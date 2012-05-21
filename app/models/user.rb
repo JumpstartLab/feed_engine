@@ -77,11 +77,6 @@ class User < ActiveRecord::Base
   end
 
   def web_url(request)
-    "http://#{display_name}.#{request.domain}"
-  end
-
-  def twitter_account
-    twitter.twitter_account
     "http://#{slug}.#{request.domain}"
   end
 

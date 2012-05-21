@@ -1,10 +1,4 @@
-# require 'spec_helper'
-require 'active_record_spec_helper'
-module HasUploadedFile; end
-require 'growl'
-require 'image_validations'
-require 'image'
-
+require 'spec_helper'
 ImageValidations.allow_amazon_uploads(false)
 describe Image do
   describe "#new" do

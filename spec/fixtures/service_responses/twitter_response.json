@@ -1,0 +1,242 @@
+{
+    "credentials": {
+        "secret": "UVx1PfDA4BP7YlNes7kEryLqxkQAFNaMCBMLFqKuk", 
+        "token": "500861259-Rw1uw2TcyjNGQUIVHtGliwG6HwNByHh9GjKsMg83"
+    }, 
+    "extra": {
+        "access_token": {
+            "consumer": {
+                "http": {
+                    "address": "api.twitter.com", 
+                    "ca_file": null, 
+                    "ca_path": null, 
+                    "cert": null, 
+                    "cert_store": null, 
+                    "ciphers": null, 
+                    "close_on_empty_response": false, 
+                    "compression": null, 
+                    "continue_timeout": null, 
+                    "curr_http_version": "1.1", 
+                    "debug_output": null, 
+                    "enable_post_connection_check": true, 
+                    "key": null, 
+                    "no_keepalive_server": false, 
+                    "open_timeout": 30, 
+                    "port": 443, 
+                    "read_timeout": 30, 
+                    "socket": null, 
+                    "ssl_context": {
+                        "ca_file": null, 
+                        "ca_path": null, 
+                        "cert": null, 
+                        "cert_store": null, 
+                        "client_ca": null, 
+                        "client_cert_cb": null, 
+                        "extra_chain_cert": null, 
+                        "key": null, 
+                        "options": 4095, 
+                        "servername_cb": null, 
+                        "session_get_cb": null, 
+                        "session_id_context": null, 
+                        "session_new_cb": null, 
+                        "session_remove_cb": null, 
+                        "timeout": null, 
+                        "tmp_dh_callback": null, 
+                        "verify_callback": null, 
+                        "verify_depth": null, 
+                        "verify_mode": 0
+                    }, 
+                    "ssl_timeout": null, 
+                    "ssl_version": null, 
+                    "sspi_enabled": false, 
+                    "started": false, 
+                    "use_ssl": true, 
+                    "verify_callback": null, 
+                    "verify_depth": null, 
+                    "verify_mode": 0
+                }, 
+                "http_method": "post", 
+                "key": "IXDAm8E6f0HOHLeJ2uZcTQ", 
+                "options": {
+                    "access_token_path": "/oauth/access_token", 
+                    "authorize_path": "/oauth/authenticate", 
+                    "http_method": "post", 
+                    "oauth_version": "1.0", 
+                    "proxy": null, 
+                    "request_token_path": "/oauth/request_token", 
+                    "scheme": "header", 
+                    "signature_method": "HMAC-SHA1", 
+                    "site": "https://api.twitter.com"
+                }, 
+                "secret": "piDvbV8wfzBklu4d2UOXSKeFRPEecAIzCZJF0JM", 
+                "uri": {
+                    "fragment": null, 
+                    "host": "api.twitter.com", 
+                    "opaque": null, 
+                    "parser": null, 
+                    "password": null, 
+                    "path": "", 
+                    "port": 443, 
+                    "query": null, 
+                    "registry": null, 
+                    "scheme": "https", 
+                    "user": null
+                }
+            }, 
+            "params": {
+                "oauth_token": "500861259-Rw1uw2TcyjNGQUIVHtGliwG6HwNByHh9GjKsMg83", 
+                "oauth_token_secret": "UVx1PfDA4BP7YlNes7kEryLqxkQAFNaMCBMLFqKuk", 
+                "screen_name": "wengzilla", 
+                "user_id": "500861259"
+            }, 
+            "response": {
+                "cache-control": [
+                    "no-cache, no-store, must-revalidate, pre-check=0, post-check=0"
+                ], 
+                "content-length": [
+                    "1842"
+                ], 
+                "content-type": [
+                    "application/json; charset=utf-8"
+                ], 
+                "date": [
+                    "Mon, 21 May 2012 02:15:50 GMT"
+                ], 
+                "etag": [
+                    "\"6ccbb78d50a1862d1c7e77d39189a577\""
+                ], 
+                "expires": [
+                    "Tue, 31 Mar 1981 05:00:00 GMT"
+                ], 
+                "last-modified": [
+                    "Mon, 21 May 2012 02:15:50 GMT"
+                ], 
+                "pragma": [
+                    "no-cache"
+                ], 
+                "server": [
+                    "tfe"
+                ], 
+                "set-cookie": [
+                    "k=10.35.36.138.1337566550446573; path=/; expires=Mon, 28-May-12 02:15:50 GMT; domain=.twitter.com", 
+                    "guest_id=v1%3A133756655044960787; domain=.twitter.com; path=/; expires=Wed, 21-May-2014 14:15:50 GMT", 
+                    "dnt=; domain=.twitter.com; path=/; expires=Thu, 01-Jan-1970 00:00:00 GMT", 
+                    "lang=en; path=/", 
+                    "twid=u%3D500861259%7CHiSJJLR1iMVrpQtwKz0gO7nS9aY%3D; domain=.twitter.com; path=/; secure", 
+                    "_twitter_sess=BAh7CToPY3JlYXRlZF9hdGwrCL7ZLW03ASIKZmxhc2hJQzonQWN0aW9uQ29u%250AdHJvbGxlcjo6Rmxhc2g6OkZsYXNoSGFzaHsABjoKQHVzZWR7ADoMY3NyZl9p%250AZCIlOWJiNjBiMDk0NDU5MzdiZDI4N2RmMzU0ODU4NzAxZmU6B2lkIiUxZTk3%250AN2VhM2E1YmYzZWM5OTZhZWUyNjliMWIwYjg3NQ%253D%253D--043d053e12ea5756a7b09c73d9076f68ce982601; domain=.twitter.com; path=/; HttpOnly"
+                ], 
+                "status": [
+                    "200 OK"
+                ], 
+                "vary": [
+                    "Accept-Encoding"
+                ], 
+                "x-access-level": [
+                    "read-write"
+                ], 
+                "x-frame-options": [
+                    "SAMEORIGIN"
+                ], 
+                "x-mid": [
+                    "f546f2bdf975355fc34a98b2f5f8082c8540f657"
+                ], 
+                "x-ratelimit-class": [
+                    "api_identified"
+                ], 
+                "x-ratelimit-limit": [
+                    "350"
+                ], 
+                "x-ratelimit-remaining": [
+                    "348"
+                ], 
+                "x-ratelimit-reset": [
+                    "1337570128"
+                ], 
+                "x-runtime": [
+                    "0.03100"
+                ], 
+                "x-transaction": [
+                    "a993cb65d4a173f1"
+                ], 
+                "x-transaction-mask": [
+                    "a6183ffa5f8ca943ff1b53b5644ef114fdd0c245"
+                ]
+            }, 
+            "secret": "UVx1PfDA4BP7YlNes7kEryLqxkQAFNaMCBMLFqKuk", 
+            "token": "500861259-Rw1uw2TcyjNGQUIVHtGliwG6HwNByHh9GjKsMg83"
+        }, 
+        "raw_info": {
+            "contributors_enabled": false, 
+            "created_at": "Thu Feb 23 15:00:11 +0000 2012", 
+            "default_profile": false, 
+            "default_profile_image": false, 
+            "description": "entrepreneur and rails rockstar-in-training. currently terrorizing the @hungryacademy.", 
+            "favourites_count": 0, 
+            "follow_request_sent": false, 
+            "followers_count": 26, 
+            "following": false, 
+            "friends_count": 23, 
+            "geo_enabled": false, 
+            "id": 500861259, 
+            "id_str": "500861259", 
+            "is_translator": false, 
+            "lang": "en", 
+            "listed_count": 2, 
+            "location": "Washington, DC", 
+            "name": "Ed Weng", 
+            "notifications": false, 
+            "profile_background_color": "022330", 
+            "profile_background_image_url": "http://a0.twimg.com/images/themes/theme15/bg.png", 
+            "profile_background_image_url_https": "https://si0.twimg.com/images/themes/theme15/bg.png", 
+            "profile_background_tile": false, 
+            "profile_image_url": "http://a0.twimg.com/profile_images/1902341992/fabcurator_weng2_normal.jpg", 
+            "profile_image_url_https": "https://si0.twimg.com/profile_images/1902341992/fabcurator_weng2_normal.jpg", 
+            "profile_link_color": "0084B4", 
+            "profile_sidebar_border_color": "a8c7f7", 
+            "profile_sidebar_fill_color": "C0DFEC", 
+            "profile_text_color": "333333", 
+            "profile_use_background_image": true, 
+            "protected": false, 
+            "screen_name": "wengzilla", 
+            "show_all_inline_media": false, 
+            "status": {
+                "contributors": null, 
+                "coordinates": null, 
+                "created_at": "Sat May 19 16:13:36 +0000 2012", 
+                "favorited": false, 
+                "geo": null, 
+                "id": 203881099523395585, 
+                "id_str": "203881099523395585", 
+                "in_reply_to_screen_name": "travisvalentine", 
+                "in_reply_to_status_id": 203879382337593344, 
+                "in_reply_to_status_id_str": "203879382337593344", 
+                "in_reply_to_user_id": 48444221, 
+                "in_reply_to_user_id_str": "48444221", 
+                "place": null, 
+                "retweet_count": 0, 
+                "retweeted": false, 
+                "source": "web", 
+                "text": "@travisvalentine must be nice be on a boat.", 
+                "truncated": false
+            }, 
+            "statuses_count": 32, 
+            "time_zone": null, 
+            "url": "http://edweng.com", 
+            "utc_offset": null, 
+            "verified": false
+        }
+    }, 
+    "info": {
+        "description": "entrepreneur and rails rockstar-in-training. currently terrorizing the @hungryacademy.", 
+        "image": "http://a0.twimg.com/profile_images/1902341992/fabcurator_weng2_normal.jpg", 
+        "location": "Washington, DC", 
+        "name": "Ed Weng", 
+        "nickname": "wengzilla", 
+        "urls": {
+            "Twitter": "http://twitter.com/wengzilla", 
+            "Website": "http://edweng.com"
+        }
+    }, 
+    "provider": "twitter", 
+    "uid": "500861259"
+}
