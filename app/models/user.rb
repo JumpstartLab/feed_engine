@@ -63,4 +63,13 @@ class User < ActiveRecord::Base
   def github_handle
     authentications.find_by_provider('github').handle
   end
+
+  def instagram_id
+    authentications.find_by_provider('instagram').uid
+  end
+
+  def instagram_token
+    authentications.find_by_provider('instagram').token
+  end
+
 end

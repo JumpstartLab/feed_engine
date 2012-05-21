@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  content: 
+  source_id: 
+  handle: 
+  post_time: MyString
+
+two:
+  content: 
+  source_id: 
+  handle: 
+  post_time: MyString

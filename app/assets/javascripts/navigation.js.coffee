@@ -217,6 +217,7 @@ class PostsPager
     posts = response['posts']
     for post in posts
       type = post["type"]
+      console.log $("##{type}_template").html()
       $("#feed").append Mustache.to_html($("##{type}_template").html(), post)
     $(window).scroll(@check) if posts && posts.length > 0
 

@@ -7,3 +7,8 @@ get_latest_gits:
   every: ["30s"]
   class: GetLatestGits
   description: "resuqes!"
+
+get_latest_grams:
+  every: ["30s"]
+  class: GetLatestGrams
+  description: "resuqes!"
