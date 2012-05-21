@@ -25,7 +25,6 @@ FeedEngine::Application.routes.draw do
       namespace :v1 do
         scope "/feeds/:display_name" do
           match "/" => "items#index"
-          match "/profile" => "users#show"
           resources :items
         end
       end

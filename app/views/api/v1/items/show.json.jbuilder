@@ -1,3 +1,8 @@
+json.name @user.display_name
+json.id @user.id
+json.private "false"
+json.link api_v1_items_url(@user.display_name)
+
 json.type @item.post_type
 json.(@item.post, :body) if @item.post.message?
 json.(@item.post, :url, :description) if @item.post.link? || @item.post.image?
