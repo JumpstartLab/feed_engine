@@ -1,3 +1,10 @@
+GIT
+  remote: git@github.com:worace/troutr-client.git
+  revision: f061bd5bb76f83841acec7da72cc7aa694538ca2
+  specs:
+    troutr_client (0.0.1)
+      faraday
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -317,6 +324,7 @@ DEPENDENCIES
   spork
   sqlite3
   thin
+  troutr_client!
   twitter
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)
