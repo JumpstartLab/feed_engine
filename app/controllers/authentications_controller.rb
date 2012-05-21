@@ -1,6 +1,4 @@
 class AuthenticationsController < ApplicationController
-  # GET /authentications
-  # GET /authentications.json
   def index
     @authentications = current_user.authentications if current_user
   end
@@ -8,8 +6,6 @@ class AuthenticationsController < ApplicationController
   def create
     auth = request.env["omniauth.auth"]
     current_user.authentications.find_or_create_by_provider_and_uid(:provider => auth['provider'], :uid => auth['uid'].to_s, :handle => get_handle(auth), :token => auth["credentials"]["token"])
-    # Kernel.const_get("#{auth['provider'].capitalize}Feeder").perform(current_user.id)
-    #Resque.enqueue(Kernel.const_get("#{auth['provider'].capitalize}Feeder"), current_user.id)
     flash[:notice] = "#{auth['provider'].capitalize} link successful"
     render partial:"shared/fuck_this_shit"
   end
