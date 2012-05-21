@@ -9,20 +9,13 @@ class TwitterJob
     user =  User.find(current_user["id"])
 
     auth = user.authentications.find_by_provider("twitter")
-    client.user_timeline(uid).select do |tweet| 
 
-
-
-      end 
-    # if 
-    #   client.user_timeline(uid).reverse.each do |tweet| 
-    #     twitter_item = user.twitter_items.create(:tweet => tweet, :tweet_time => tweet.created_at)
-    #   end
-    # else
-    #   last_tweet_id = users_last_tweet_id(user)
-    #   client.user_timeline(uid, :since_id => last_tweet_id).reverse.each do |tweet| 
-    #     twitter_item = user.twitter_items.create(:tweet => tweet, :tweet_time => tweet.created_at)
-    #   end
+    tweets = client.user_timeline(uid).select do |tweet| 
+      tweet.created_at.utc > auth.created_at && user.twitter_items.find_by_status_id(tweet.attrs["id_str"]).nil?
+    end
+    tweets.reverse.each do |tweet| 
+      user.twitter_items.create(:tweet => tweet, 
+                                :status_id => tweet.attrs["id_str"])
     end
     user.save
   end

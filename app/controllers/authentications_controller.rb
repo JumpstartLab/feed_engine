@@ -21,16 +21,14 @@ class AuthenticationsController < ApplicationController
      :token => token, :secret => secret, :login => login)
     if current_user.save
       flash[:notice] = "Authentication successful."
-      redirect_to session[:next_auth_path]
     else
       flash[:error] = authentication.errors[:base].first
-      if session[:next_auth_path]
-        redirect_to session[:next_auth_path]
-      else
-        redirect_to dashboard_url
-      end
     end
-    
+    if session[:next_auth_path]
+      redirect_to session[:next_auth_path]
+    else
+      redirect_to dashboard_url
+    end
   end
 
   def destroy
