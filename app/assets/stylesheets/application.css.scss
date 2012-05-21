@@ -15,10 +15,58 @@
 @import "bootstrap";
 @import "bootstrap-responsive";
 
+* {@include box-sizing(border-box);}
+
+h1 {margin-bottom: 1em;}
+
 #new_image{
   display:none;
 }
 
 #new_link{
   display:none;
+}
+
+
+.container.feed {
+  .stream {margin-left: 5px;}
+}
+
+.post-content {
+  float: left; width: 92%; position: relative;
+}
+
+.post {
+  @include clearfix;
+  .post-avatar {width: 8%; max-width: 100px; float: left;}
+  .well {width: 90%; float: right;}
+  .post-image,
+  .post-text,
+  .post-link {
+    @extend .post-content;
+    img {
+      display: block; width: 100%;
+      margin: 0 auto 1em auto;
+      border: 1px solid rgba(0,0,0,.2);
+      @include border-radius(5px);
+    }
+    .description {
+        background-color: rgba(0,0,0,.1);
+      margin-bottom: 0; padding: 10px;
+      @include border-radius(4px);
+      @include box-shadow(0 0 5px rgba(0,0,0,.4) inset);
+    }
+  }
+  .main-link {margin-bottom: 1em; display: block;}
+  .post-actions {
+    margin-left: 0;
+    width: 8%;
+    list-style: none;
+    li {margin-bottom: 1em; text-align: right;}
+    @extend .pull-right;
+    .icon-thumbs-up {
+      background-image: url(/assets/glyphicons-halflings.png);
+      background-position: -96px -144px !important;}
+    i { width: 14px; text-indent: -999em; display: block;}
+  }
 }

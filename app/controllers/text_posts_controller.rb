@@ -1,3 +1,4 @@
+
 class TextPostsController < ApplicationController
   before_filter :lookup_text_post, except: [:create, :new]
   respond_to :html, :json
@@ -36,6 +37,8 @@ class TextPostsController < ApplicationController
   private
 
   def lookup_text_post
-    @text_post = TextPost.find(params[:id])
+    post = Post.find(params[:id])
+    child_post = post.postable
+    @text_post = TextPost.find(child_post.id)
   end
 end
