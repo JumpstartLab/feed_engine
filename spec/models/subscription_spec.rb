@@ -17,7 +17,10 @@ describe Subscription do
 
   describe ".create_with_omniauth(auth, user)" do
     it "creates a new subscription with auth info" do
-      auth = {"provider" => "twitter", "uid" => "asdfj3948d", "info" => { "nickname" => "travis" } }
+      auth = { "provider" => "twitter",
+               "uid" => "asdfj3948d",
+               "info" => { "nickname" => "travis" },
+               "credentials" => { "token" => "testtoken", "secret" => "testsecret"} }
       user = Fabricate(:user)
       Subscription.create_with_omniauth(auth, user)
       Subscription.all.count.should == 1
