@@ -114,10 +114,17 @@ div class="container-fluid"
         = link_to "View Your Live Stream!", root_url(subdomain: current_user.display_name), class: "btn btn-primary"
         br
         br
-        = twitter_button
+        h3 Total Posts
+        = current_user.posts.count
         br
+        h3 Total Points
         br
-        = github_button
+        h3 Most Popular Post
+        br
+        h3 Followers
+        br
+        h3 Refeeds
+        br
 
       div id="totop"
         h3 Back to Top
