@@ -17,6 +17,7 @@
 //= require cookies
 //= require mustache
 //= require timeago
+//= require validate
 //= require waypoint
 //= require_tree .
 

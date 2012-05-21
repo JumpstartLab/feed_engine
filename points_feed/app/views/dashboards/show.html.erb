@@ -54,22 +54,25 @@
               <div class='grey-box'>
                 <h3>Services</h3>
                 <hr />
-                Current Linked Accounts<br>
-                <table class="table">
-                  <tr>
-                    <th>Provider</th>
-                    <th>Action</th>
-                  </tr>
-                  <% current_user.authentications.each do |authentication| %>
+                <h4>Current Linked Accounts</h4><br>
+                <% if current_user.authentications.empty? %>
+                There are currently no linked accounts.<br>
+                <% else %>
+                  <table class="table">
                     <tr>
-                      <td><%= authentication.provider.capitalize %></td>
-                      <td><%= link_to "Delete", authentication_path(authentication), :confirm => "Are you sure?", :method => :delete %></td>
+                      <th>Provider</th>
+                      <th>Action</th>
                     </tr>
-                  <% end %>
-                </table>
-                <hr />
-                Select Accounts Below to Connect<br>
-                <!-- TODO: MAKE PARTIAL OF LINKS BELOW? -->
+                    <% current_user.authentications.each do |authentication| %>
+                      <tr>
+                        <td><%= authentication.provider.capitalize %></td>
+                        <td><%= link_to "Delete", authentication_path(authentication), :confirm => "Are you sure?", :method => :delete %></td>
+                      </tr>
+                    <% end %>
+                  </table>
+                <% end %>
+                <br>
+                <h4>Select Accounts Below to Connect</h4>
                 <%= render :partial => "twitters/authentications" %>
               </div>
             </div>
