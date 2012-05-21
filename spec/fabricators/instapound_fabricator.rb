@@ -1,14 +1,14 @@
 # == Schema Information
 #
-# Table name: github_events
+# Table name: instapounds
 #
 #  id              :integer         not null, primary key
-#  event_type      :string(255)
+#  image_url       :string(255)
+#  poster_id       :integer
+#  body            :string(255)
 #  created_at      :datetime        not null
 #  updated_at      :datetime        not null
 #  subscription_id :integer
-#  repo            :string(255)
-#  poster_id       :integer
 #  points          :integer         default(0)
 #
 

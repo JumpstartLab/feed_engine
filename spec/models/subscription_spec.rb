@@ -2,13 +2,15 @@
 #
 # Table name: subscriptions
 #
-#  id         :integer         not null, primary key
-#  provider   :string(255)
-#  uid        :string(255)
-#  user_name  :string(255)
-#  user_id    :integer
-#  created_at :datetime        not null
-#  updated_at :datetime        not null
+#  id           :integer         not null, primary key
+#  provider     :string(255)
+#  uid          :string(255)
+#  user_name    :string(255)
+#  user_id      :integer
+#  created_at   :datetime        not null
+#  updated_at   :datetime        not null
+#  oauth_token  :string(255)
+#  oauth_secret :string(255)
 #
 
 require 'spec_helper'
@@ -64,7 +66,7 @@ describe Subscription do
     describe "#create_records_of_posts(new_posts)" do
       let!(:twitter_new_posts) { [ OpenStruct.new(text: "Random body", created_at: Time.now)] }
       let!(:github_new_posts) { [ OpenStruct.new(repo: OpenStruct.new(name: "repo"), type: "PushEvent", created_at: Time.now)] }
-      let!(:instagram_new_posts) { [ OpenStruct.new(images: OpenStruct.new(standard_resolution: OpenStruct.new(url: "http://travis.com/travis.jpg")), text: "random image", created_at: Time.now)] }
+      let!(:instagram_new_posts) { [ OpenStruct.new(images: { "standard_resolution" => { "url" => "http://travis.com/travis.jpg" } }, caption: { "text" => "random image"}, created_at: Time.now  )] }
 
       it "creates new twitter posts" do
         fabricated_subscriptions[:twitter_subscription].create_records_of_posts(twitter_new_posts)
@@ -82,8 +84,8 @@ describe Subscription do
       it "creates new instagram posts" do
         fabricated_subscriptions[:instagram_subscription].create_records_of_posts(instagram_new_posts)
         Instapound.all.size.should == 1
-        Instapound.first.image_url.should == instagram_new_posts.first.images.standard_resolution.url
-        Instapound.first.body.should == instagram_new_posts.first.text
+        Instapound.first.image_url.should == instagram_new_posts.first.images["standard_resolution"]["url"]
+        Instapound.first.body.should == instagram_new_posts.first.caption["text"]
       end
     end
 

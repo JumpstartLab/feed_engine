@@ -2,22 +2,24 @@
 #
 # Table name: subscriptions
 #
-#  id             :integer         not null, primary key
-#  provider       :string(255)
-#  uid            :string(255)
-#  user_name      :string(255)
-#  user_id        :integer
-#  oauth_token    :string
-#  oauth_secret   :string
-#  created_at     :datetime        not null
-#  updated_at     :datetime        not null
+#  id           :integer         not null, primary key
+#  provider     :string(255)
+#  uid          :string(255)
+#  user_name    :string(255)
+#  user_id      :integer
+#  created_at   :datetime        not null
+#  updated_at   :datetime        not null
+#  oauth_token  :string(255)
+#  oauth_secret :string(255)
 #
 
 # The model for any external subscriptions
 class Subscription < ActiveRecord::Base
   EVENT_LIST = ["PushEvent", "CreateEvent", "ForkEvent"]
-  PROVIDER_TO_POST_TYPE = { "twitter" => "tweets", "github" => "github_events", "instagram" => "instapounds"}
-  attr_accessible :user_name, :provider, :uid, :user_id, :oauth_token, :oauth_secret
+  PROVIDER_TO_POST_TYPE = { "twitter" => "tweets", "github" => "github_events",
+                            "instagram" => "instapounds"}
+  attr_accessible :user_name, :provider, :uid, :user_id, :oauth_token,
+    :oauth_secret
 
   belongs_to :user
 
@@ -117,10 +119,15 @@ class Subscription < ActiveRecord::Base
   end
 
   def get_instapounds
-    all_instaposts = HTTParty.get("https://api.instagram.com/v1/users/#{self.uid}/media/recent/?access_token=#{self.oauth_token}")["data"]
+    all_instaposts = HTTParty.get(
+      "https://api.instagram.com/v1/users/" +
+      "#{self.uid}/media/recent/?access_token=#{self.oauth_token}"
+    )["data"]
     objectified_instaposts = all_instaposts.map do |instapost|
       objectified_instapost = OpenStruct.new instapost
-      objectified_instapost.created_at = Time.at(objectified_instapost.created_time.to_i).to_datetime.utc
+      objectified_instapost.created_at = Time.at(
+        objectified_instapost.created_time.to_i
+      ).to_datetime.utc
       objectified_instapost
     end
   end
