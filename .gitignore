@@ -19,6 +19,7 @@
 # Ignore our secret files
 /config/intializers/fog.rb
 /config/intializers/secret_token.rb
+/config/intializers/sorcery.rb
 
 # Ignore rvm
 .rvmrc

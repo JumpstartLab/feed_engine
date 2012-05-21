@@ -1,0 +1,10 @@
+h2 Signin
+.post-form
+  = form_tag('/login', id: "signin_form", remote: true) do
+    = label_tag :email
+    = email_field_tag :email
+    br
+    = label_tag :password
+    = password_field_tag :password
+    br
+    a.button#signin-submit Signin

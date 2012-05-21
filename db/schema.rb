@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120517132333) do
+ActiveRecord::Schema.define(:version => 20120517141356) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -66,6 +66,12 @@ ActiveRecord::Schema.define(:version => 20120517132333) do
 
   add_index "links", ["user_id"], :name => "index_links_on_user_id"
 
+  create_table "posts", :force => true do |t|
+    t.integer "feed_id"
+    t.integer "postable_id"
+    t.string  "postable_type"
+  end
+
   create_table "texts", :force => true do |t|
     t.text     "content"
     t.integer  "user_id"
@@ -86,18 +92,14 @@ ActiveRecord::Schema.define(:version => 20120517132333) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                                 :default => "", :null => false
-    t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.string   "display_name"
-    t.datetime "created_at",                                            :null => false
-    t.datetime "updated_at",                                            :null => false
+    t.string   "email",                :null => false
+    t.string   "crypted_password"
+    t.string   "salt"
+    t.string   "display_name",         :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
     t.string   "subdomain"
     t.string   "authentication_token"
   end
-
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
-  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end

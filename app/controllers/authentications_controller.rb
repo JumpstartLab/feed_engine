@@ -8,9 +8,10 @@ class AuthenticationsController < ApplicationController
   def create
     auth = request.env["omniauth.auth"]
     current_user.authentications.find_or_create_by_provider_and_uid(:provider => auth['provider'], :uid => auth['uid'].to_s, :handle => get_handle(auth))
-    Resque.enqueue(Kernel.const_get("#{auth['provider'].capitalize}Feeder"), current_user.id)
+    # Kernel.const_get("#{auth['provider'].capitalize}Feeder").perform(current_user.id)
+    #Resque.enqueue(Kernel.const_get("#{auth['provider'].capitalize}Feeder"), current_user.id)
     flash[:notice] = "#{auth['provider'].capitalize} link successful"
-    redirect_to authentications_path
+    redirect_to root_path
   end
 
   def destroy
@@ -18,7 +19,7 @@ class AuthenticationsController < ApplicationController
     provider = @authentication.provider.capitalize
     @authentication.destroy
     flash[:notice] = "#{provider} has been removed"
-    redirect_to authentications_path
+    redirect_to root_path
   end
 
   private

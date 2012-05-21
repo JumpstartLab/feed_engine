@@ -1,4 +1,4 @@
-require 'minitest_helper'
+require 'test_helper'
 
 describe User do
   it "creates a User record on create" do
@@ -88,4 +88,5 @@ describe User do
     :password_confirmation => password)
     assert_equal user_two.valid?, false
   end
+>>>>>>> 4b396c44e9b8bc1a9a39ded49d6aec8fbc15971a
 end

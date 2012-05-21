@@ -1,15 +1,8 @@
 .post-form
-  = form_for @user do |f|
-    - if @user.errors.any?
-      #error_explanation
-        
-        h2 #{pluralize(@user.errors.count, "error")} prohibited this user from being saved:
-
-        ul
-          - @user.errors.full_messages.each do |msg|
-            li
-              = msg
-
+  .errors
+      p Oops! Something went wrong.
+      ul.errors_list
+  = form_for @user=User.new, id:"signup_form", remote: true do |f|
     = f.label :email
     br
     = f.email_field :email
@@ -34,4 +27,4 @@
     br
     br
 
-    = f.submit
+    a.button*{id: "signup-submit"} Signup!

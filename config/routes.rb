@@ -1,4 +1,10 @@
 FeedEngine::Application.routes.draw do
+  get "sessions/new"
+  match '/signup' => 'users#create', as: 'signup'
+  match 'signin' => 'sessions#new', as: 'signin'
+  match 'login' => 'sessions#create', as: 'login'
+  match 'logout' => 'sessions#destroy', as: 'logout'
+  match 'current_user' => 'sessions#user', as: 'current_user'
   resources :authentications
 
   match '/dashboard' => 'dashboard#show', as: :user_root
@@ -7,7 +13,9 @@ FeedEngine::Application.routes.draw do
     resources "feeds" do
       collection do
         scope ":feed_name" do
-          resources "posts"
+          resources "posts" do
+            match 'refeeds' => "posts#refeed", as: :refeed
+          end
         end
       end
     end
@@ -19,27 +27,20 @@ FeedEngine::Application.routes.draw do
     resource "feeds", only: [:show]
   end
 
-  devise_for :users
-
-  authenticated :user do
-    root :to => 'dashboard#show'
-  end
-  
-  devise_scope :user do
-    get 'sign_in', :to => 'devise/sessions#new', :as => 'sign_in'
-  end
-
   resources :users
   resources :posts, only: [:create, :index]
   resources :texts
   resources :images
   resources :links
 
-  match '/sign_up' => 'users#new', as: 'sign_up'
+
   root :to => 'pages#index'
   match '/integrate' => 'users#integrate', as: 'integrate'
 
   match '/auth/:provider/callback' => 'authentications#create'
   #match '/auth/github/callback' => 'authentications#create'
+
+  # html partial fetching
+  match '/footer' => 'pages#footer'
 
 end
