@@ -28,7 +28,7 @@
             <div style='float:left; margin-left: 15px; color: white'>
               <h3><%= @user.display_name %></h3><br />
 
-              <% if current_user != @user %>
+              <% if current_user and current_user != @user %>
                 <% if current_user.friends.exclude?(@user) %>
                   <%= link_to 'Subscribe', '#', :class => 'btn btn-warning', :id => 'subscribe_button' %>
                 <% else %>
