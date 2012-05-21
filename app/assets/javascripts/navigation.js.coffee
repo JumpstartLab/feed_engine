@@ -1,4 +1,8 @@
 setFlash = (message) ->
+  $('#post').show().text(message).fadeOut(3700)
+
+
+setFlash = (message) ->
   $('#flash').show().text(message).fadeOut(3700)
 
 class User
@@ -33,6 +37,26 @@ navHandler = (navItem) ->
     spotlightToBackstage()
     $('#spotlight').append($("#{navItem}-page"))
 
+
+
+
+
+servicesHandler = ->
+  $('#services').click ->
+    spotlightToBackstage()
+    $.getJSON('/authentications', @parseServices)
+    $('#spotlight').append($("#services-page"))
+
+
+parseServices = (response, status, jqxhr) ->
+    auths = response['authentications']
+    for auth in auths
+      provider = auth["provider"]
+
+
+
+
+
 addDashboardHandler = ->
   $('#dashboard').click ->
     spotlightToBackstage()
@@ -47,7 +71,7 @@ setCSRFToken = ->
   )
 
 addNavHandlers = ->
-  navItems = ['#friends', '#feeds', '#home', '#signin', '#signup']
+  navItems = ['#friends', '#feeds', '#home', '#signin', '#signup', '#services']
   pageIDs = (id + '-page' for id in navItems)
   
   for id in navItems
@@ -64,8 +88,6 @@ jQuery ->
   setUsername()
 
 ######################### DASHBOARD ############################
-
-
 
 
 
