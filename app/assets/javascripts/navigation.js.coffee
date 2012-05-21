@@ -47,7 +47,7 @@ setCSRFToken = ->
   )
 
 addNavHandlers = ->
-  navItems = ['#friends', '#feeds', '#home', '#signin', '#signup']
+  navItems = ['#friends', '#feeds', '#home']
   pageIDs = (id + '-page' for id in navItems)
   
   for id in navItems

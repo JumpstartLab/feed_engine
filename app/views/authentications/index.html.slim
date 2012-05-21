@@ -1,5 +1,7 @@
 h2 Your Authentications
- - ["twitter", "github", "instagram"].each do |service|
-  img src="assets/#{service}_64.png"
-    a*{ id="#{service}_true" } 'Remove #{service.capitalize} Authentication'
-    a*{ id="#{service}_false" } "Integrate Your #{service.capitalize}"
+-["twitter", "github", "instagram"].each do |service|
+  img*{ src: "assets/#{service}_64.png" }
+    a*{ id: "#{service}_true" }
+      | "Remove #{service.capitalize} Authentication"
+    a*{ id: "#{service}_false" }
+      | "Integrate Your #{service.capitalize}"
