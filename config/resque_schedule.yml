@@ -15,3 +15,9 @@ refeed:
   class: SubscriptionJob
   queue: subscription
   description: "This will gather new posts from feeds that a user follows every 5 min"
+
+insta: 
+  every: "5m"
+  class: InstagramJob
+  queue: subscription 
+  description: "This will gather new instagram media every 5 min for the user"
