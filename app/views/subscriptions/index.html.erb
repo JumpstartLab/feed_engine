@@ -1,0 +1,21 @@
+<div class="edit-account-container">
+
+  <% if @subscriptions.any? %>
+      <p>Your TackleBox contains these troutrs:</p>
+      <div class="subscriptions">
+        <% for subscription in @subscriptions %>
+          <div class="subscription">
+            <%= subscription.followed_user.display_name %>
+            <%= link_to "Unhook", subscription, :confirm => 'Are you sure you want to stop receiving this user\'s trouts?', :method => :delete, :class => "btn btn-danger" %>
+          </div>
+        <% end %>
+        <div class="clear"></div>
+      </div>
+    <br />
+  <% else %>
+    <h3>Your TackleBox is looking pretty empty ... go find some fellow troutrs!</h3>
+  <% end %>
+
+  <div class="clear"></div>
+</div>
+
