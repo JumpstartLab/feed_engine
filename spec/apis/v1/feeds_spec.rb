@@ -22,7 +22,7 @@ describe 'api/v1/feed', type: :api do
 
   context "creating messages through the api" do
     let(:message) { FactoryGirl.build(:message) }
-    let(:url) { "http://api.hungrlr.dev/v1/feeds/#{user.display_name}/items" }
+    let(:url) { "http://api.hungrlr.dev/v1/feeds/#{user.display_name}/growls" }
 
     describe "when valid parameters are passed in" do
       it "returns a successful response" do
@@ -43,11 +43,11 @@ describe 'api/v1/feed', type: :api do
 
   context "creating images through the api" do
     let(:image) { FactoryGirl.build(:image) }
-    let(:url) { "http://api.hungrlr.dev/v1/feeds/#{user.display_name}/items" }
+    let(:url) { "http://api.hungrlr.dev/v1/feeds/#{user.display_name}/growls" }
 
     describe "when valid parameters are passed in" do
       it "returns a successful response" do
-        post "#{url}.json",  token: user.authentication_token, 
+        post "#{url}.json",  token: user.authentication_token,
                              body: { type: "Image",
                                      link: image.link,
                                      comment: image.comment }.to_json
@@ -58,7 +58,7 @@ describe 'api/v1/feed', type: :api do
 
     describe "when invalid parameters are passed in" do
       it "returns a unsuccessful response" do
-        post "#{url}.json", token: user.authentication_token, 
+        post "#{url}.json", token: user.authentication_token,
                             body: { type: "Image", comment: image.comment }.to_json
         last_response.status.should == 406
         last_response.body.should =~ /"You must provide a link to an image."/
