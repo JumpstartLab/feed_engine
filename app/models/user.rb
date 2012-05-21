@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :display_name, :password, :password_confirmation, :remember_me
+
   validates :display_name, :presence => true
   validates_uniqueness_of :display_name
   validates :display_name, :format => { :with => /\A[a-zA-Z0-9_-]+\z/,
@@ -30,6 +31,10 @@ class User < ActiveRecord::Base
                                    :refeed => refeed)
   end
 
+    #   if StreamItem.where(:streamable_type => self.streamable_type).where(:streamable_id => self.streamable_id).where(:refeed => false).any? && self.refeed == false
+    #   errors.add(:refeed, "Can't have multiple original stream items")
+    # end
+
   def to_param
     display_name
   end
@@ -37,6 +42,14 @@ class User < ActiveRecord::Base
   def last_twitter_item
     twitter_items.order("tweet_time DESC").first
   end 
+
+  def can_retrout?(original_item)
+    original_item.user_id != id && !has_retrouts_for?(original_item)
+  end
+
+  def has_retrouts_for?(item)
+    stream_items.where(:refeed => true).where(:streamable_type => item.class).where(:streamable_id => item.id).where(:refeed => true).any?
+  end
 
   private
 

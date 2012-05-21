@@ -14,45 +14,31 @@
     <%= stylesheet_link_tag "application", :media => "all" %>
     <script type="text/javascript" src="http://use.typekit.com/kfc3ufv.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <% unless current_user.blank? %>
+      <script type="text/javascript">
+        access_token = "<%= current_user.authentication_token %>";
+      </script>
+    <% end %>
     <!-- <link href="images/favicon.ico" rel="shortcut icon"> -->
     <link href="images/apple-touch-icon.png" rel="apple-touch-icon">
     <link href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
     <link href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
   </head>
   <body>
-    <div id="alert-bar"></div>
+
     
-    <div class="container">
-      <ul class="nav nav-section">
-        <% if user_signed_in? %>
-          <li class="user-name offset5 pull-left"><%= current_user.display_name %></li>
-          <li class="pull-left navigation-item">
-          <a href="<%= root_url(:subdomain => current_user.display_name) %>"> <span class="raphael-icon">S</span>Stream</a>
-          </li>
-          <li class="pull-left navigation-item">
-          <a href="<%= dashboard_url(:subdomain => false) %>"> <span class="raphael-icon">></span>Dashboard</a>
-          </li>
-          <li class="pull-left navigation-item">
-          <a href="<%= destroy_user_session_path(:subdomain => false)%>" data-method="delete"> <span class="raphael-icon">Ï</span>Logout </a>
-          </li>
-        <% else %>
-          <% if request.fullpath != new_user_path %>
-            <li class="offset7 pull-left navigation-item navigation-item-anon">
-            <a href="<%= login_path(:subdomain => false) %>">
-              <span class="raphael-icon">L</span>Login
-            </a>
-            </li>
-            <li class="pull-left navigation-item">
-            <a href="<%= new_user_url(:subdomain => false) %>">
-              <span class="raphael-icon">]</span>Sign Up
-            </a>
-          </li>
-        <% end %>
-      <% end %>
-    </ul>
+    <%= render 'layouts/header' %>
+
 
     <br/>
     <br/>
+    <div class="container">
+            <% flash.each do |name, msg| %>
+        <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+          <a class="close" data-dismiss="alert">×</a>
+          <%= msg %>
+        </div>
+      <% end %>
     <div class="content">
       <div class="row">
           <%= yield %>

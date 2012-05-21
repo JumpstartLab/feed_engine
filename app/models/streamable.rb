@@ -5,6 +5,7 @@ module Streamable
       validates_presence_of :user_id, :user
       belongs_to :user
       attr_accessible :user, :user_id
+      has_many :points, :class_name => "Point",  :as => :pointable
 
       after_save :add_to_author_stream
 
@@ -21,6 +22,4 @@ module Streamable
       end
     end
   end
-
-
 end

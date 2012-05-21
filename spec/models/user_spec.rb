@@ -1,10 +1,11 @@
 require 'spec_helper'
 
 describe User do
-  let(:user) { FactoryGirl.create(:user) }
-  let(:link_item) { FactoryGirl.create(:link_item) }
-  let(:text_item) { FactoryGirl.create(:text_item) }
-  let(:image_item) { FactoryGirl.create(:image_item) }
+  let(:user)        { FactoryGirl.create(:user) }
+  let(:user_2)      { FactoryGirl.create(:user) }
+  let(:link_item)   { FactoryGirl.create(:link_item) }
+  let(:text_item)   { FactoryGirl.create(:text_item) }
+  let(:image_item)  { FactoryGirl.create(:image_item) }
 
 
   context "#add_stream_item" do
@@ -87,4 +88,21 @@ describe User do
     end
   end
 
+  context "#can_retrout?(original_item)" do
+    let(:user_item)   { FactoryGirl.create(:text_item, :user => user) }
+    let(:user_2_item)   { FactoryGirl.create(:text_item, :user => user_2) }
+
+    it "returns false if when passed an item created by the user" do
+      user.can_retrout?(user_item).should be_false
+    end
+
+    it "returns true for items created by other users" do
+      user.can_retrout?(user_2_item).should be_true
+    end
+
+    it "returns false if you have already retrouted the item" do
+      user.add_stream_item(user_2_item)
+      user.can_retrout?(user_2_item).should be_false
+    end
+  end
 end
