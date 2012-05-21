@@ -15,7 +15,7 @@ jQuery ->
         $.getScript(url, (data, textStatus, jqxhr) ->
           waiting = false)
     else if !url? && !waiting
-        $('#pagination-div').text("Looks like this stream is fished dry")
+        $('#pagination-div').html('<h2>Looks like this stream is fished dry</h2>')
   $(window).scroll
 
 jQuery ->
