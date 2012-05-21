@@ -17,7 +17,7 @@ private
   def verify_twitter_account
     @user = User.where(id: params["user_id"]).first
     unless @user
-      render :json => "User account can not be found.", :status => 500
+      render :json => "User account cannot be found.", :status => 500
     end
   end
 end

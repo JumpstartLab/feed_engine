@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
   has_many :messages
   has_many :links
   has_many :tweets
+  has_many :photos
 
   has_many :subscriptions
   has_many :subscribers, :through => :subscriptions
