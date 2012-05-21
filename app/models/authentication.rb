@@ -1,9 +1,9 @@
 class Authentication < ActiveRecord::Base
   attr_accessible :user, :token, :secret, :provider
   belongs_to :user
-  has_one :twitter_account
-  has_one :github_account
-  has_one :instagram_account
+  has_one :twitter_account, :dependent => :destroy
+  has_one :github_account, :dependent => :destroy
+  has_one :instagram_account, :dependent => :destroy
 
   SERVICES = ["twitter", "github", "instagram"]
 
@@ -54,7 +54,7 @@ class Authentication < ActiveRecord::Base
     create_github_account(uid: data["uid"],
                            nickname: data["info"]["nickname"],
                            image: data["extra"]["raw_info"]["avatar_url"],
-                           last_status_id: DateTime.now)
+                           last_status_id: DateTime.now.to_s)
   end
 
   def self.create_instagram_auth(user, data)
@@ -66,7 +66,7 @@ class Authentication < ActiveRecord::Base
     create_instagram_account(uid: data["uid"],
                              nickname: data["info"]["nickname"],
                              image: data["info"]["image"],
-                             last_status_id: DateTime.now)
+                             last_status_id: DateTime.now.to_s)
   end
 end
 # == Schema Information

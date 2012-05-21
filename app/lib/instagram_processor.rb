@@ -18,21 +18,24 @@ module Hungrlr
     end
 
     def get_photos(instagram_id, token, last_status_id)
-      # MIN_TIMESTAMP currently does not work
-      url = "https://api.instagram.com/v1/users/#{instagram_id}/media/recent/?access_token=#{token}"
+      # raise last_status_id.inspect
+      #FIX THIS
+      url = "https://api.instagram.com/v1/users/#{instagram_id}/media/recent/?access_token=#{TEST_ACCESS_TOKEN}&min_timestamp=#{last_status_id}"
       JSON.parse(open(url).read)["data"]
     end
 
-    def build_photo_hash(photos)
-      photos.collect do |photo|
-        photo_hash = {}
-        photo_hash["link"] = photo["link"]
-        photo_hash["created_at"] = Time.at(photo["created_time"].to_i).to_date
-        if photo["caption"]
-          photo_hash["comment"] = photo["caption"]["text"]
-        end
-        photo_hash
+    def build_photos_hash(photos)
+      photos.collect do |photo_data|
+        parse_instagram_data(photo_data)
       end
+    end
+
+    def parse_instagram_data(photo_data)
+      photo_hash = { "link"                => photo_data["link"],
+                     "original_created_at" => Time.at(photo_data["created_time"].to_i).to_s }
+                     #created_time => epoch
+      photo_hash["comment"] = photo_data["caption"]["text"] if photo_data["caption"]
+      photo_hash
     end
 
     def create_photos_for_user(user_id, photos_hash)
@@ -46,8 +49,8 @@ module Hungrlr
     def run
       instagram_accounts.each do |account|
         response = get_photos(account["instagram_id"], account["token"],
-                              DateTime.parse(account["last_status_id"]).strftime("%s"))
-        photos_hash = build_photo_hash(response)
+                              Time.parse(account["last_status_id"]).to_i)
+        photos_hash = build_photos_hash(response)
         create_photos_for_user(account["user_id"], photos_hash)
       end
     end

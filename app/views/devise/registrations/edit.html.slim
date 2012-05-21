@@ -21,7 +21,6 @@
         = f.input :current_password, :required => true
       .actions
         = f.button :submit, "Update"
-      = render "shared/social_signin"
       = render "shared/get_auth_token"
     hr
     = link_to "Back", :back

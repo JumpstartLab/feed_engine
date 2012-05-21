@@ -5,13 +5,20 @@ ul.block-grid.two-up.center_text
       li= link_to "Link Twitter Feeds", user_omniauth_authorize_path(:twitter), class: "button black large"
   - else
     .row
-      li= link_to "Unlink Twitter Feeds", user_omniauth_authorize_path(:twitter), class: "button black large disabled"
+      li= link_to "Unlink Twitter Feeds", authentication_path(current_user.twitter), method: :delete, class: "button black large disabled"
   - unless current_user.github?
     .row
       li= link_to "Link Github Feeds", user_omniauth_authorize_path(:github), class: "button black large"
+  - else
+    .row
+      li= link_to "Unlink Github Feeds", authentication_path(current_user.github), method: :delete, class: "button black large disabled"
   - unless current_user.instagram?
     .row
       li= link_to "Link Instagram Feeds", user_omniauth_authorize_path(:instagram), class: "button black large"
+  - else
+    .row
+      li= link_to "Unlink Instagram Feeds", authentication_path(current_user.instagram), method: :delete, class: "button black large disabled"
+
   hr
     .row
       li= link_to "No thanks, take me to my dashboard", dashboard_path(message: "Don't worry, you can link these later."), class: "large green nice button radius"
