@@ -1,0 +1,4 @@
+class InstagramPhoto < Growl
+
+
+end
