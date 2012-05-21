@@ -5,14 +5,14 @@
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      a.brand href="#"
+      a.brand href="/static_pages/show"
         | Feedonkulous
       .nav-collapse
         ul.nav
           / Nav Links
         - if user_signed_in?
           ul.nav.pull-right
-            li = link_to "Dashboard", dashboard_url(subdomain: false), id: "dashboard"
+            li = link_to "Dashboard", dashboard_url(subdomain: false)
             li
               = link_to "Profile", edit_user_registration_url(current_user, subdomain: false), id: "account"
             li class="divider-vertical"
