@@ -1,0 +1,6 @@
+<%= render :partial => "support/create_item", :locals => { :item  => @image_item, :type => "image" } %>
+
+<% if @image_item.errors.empty? %>
+  $('#image_item_url').val('');
+  $('#image_item_comment').val('');
+<%end %>

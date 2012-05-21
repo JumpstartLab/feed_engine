@@ -1,0 +1,53 @@
+@import "variables";
+
+@mixin container {
+  min-height: 140px; 
+  margin-bottom: 20px;
+  background-color: $trout;
+  border: 1px solid #eee;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  font-family: $font;
+}
+
+.trout-container {
+  @include container;
+  padding: 50px 50px 0 50px;
+}
+
+.item-container {
+  @include container;
+  padding: 0 0 10px 0;
+}
+
+@mixin text-field {
+  font-family: $font;
+  font-size: $input-font-size;
+  height: 30px;
+  width: 250px;
+}
+
+.edit-account-container {
+  padding: 10px 0 0 50px;
+  font-family: $font;
+  font-size: $input-font-size;
+}
+
+@mixin rounded-corners {
+	-webkit-border-radius: 5px;
+	-khtml-border-radius: 5px;	
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.service-continue-container {
+  padding: 220px 0 0 25px;
+}
+
+.service-continue-container > a:visited {
+  color: white;
+}
+.external-services-container {
+  font-family: $font;
+}

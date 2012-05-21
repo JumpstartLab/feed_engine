@@ -1,0 +1,7 @@
+<%= simple_form_for @link_item, :remote => true, :id => "link-item" do |f| %>
+  <%= f.input :url, :placeholder => "Link Url", :label_html => {:class => "text-item-label"}, 
+              :input_html => {:class => "dashboard-text-field"} %>
+  <%= f.input :comment, :placeholder => "Comment", :label_html => {:class => "text-item-label"}, 
+              :input_html => {:class => "link-item-text-area"} %>
+  <%= f.button :submit, "Linkify", :id => "link-item-submit", :class => "btn-primary btn-large text-item-submit" %>
+<% end %>

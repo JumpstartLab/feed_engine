@@ -1,0 +1,18 @@
+<br/>
+<div class="row">
+<div class="dashboard-title span3">
+  <h1>Dashboard</h1>
+</div>
+<div class="dashboard-posts-title span3 offset3">
+  <h1>Latest Posts</h1>
+</div>
+</div>
+
+<br/>
+<%= render :partial => 'item_input' %>
+
+<div id="dashboard-posts" class="span5">
+  <% @items.each do |item| %>
+      <%= render :partial => "feed/item", :locals => {:item => item} %>
+  <% end %>
+</div>

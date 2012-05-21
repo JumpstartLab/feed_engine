@@ -1,0 +1,6 @@
+<%= render :partial => "support/create_item", :locals => { :item  => @link_item, :type => "link" } %>
+
+<% if @link_item.errors.empty? %>
+  $('#link_item_url').val('');
+  $('#link_item_comment').val('');
+<%end %>

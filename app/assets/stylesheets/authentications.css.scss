@@ -1,0 +1,16 @@
+// Place all the styles related to the authentications controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "variables";
+@import "links";
+
+.edit-account-container > a:visited {
+  color: black;
+}
+
+.edit-account-container > a:hover {
+  @include nav-item-links;
+  background-color: transparent;
+}
+
