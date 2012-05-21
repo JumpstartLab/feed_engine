@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/cstrahan/feed_engine_api.git
+  revision: 556d9be63521d871da94971648ceb0bf81231a09
+  tag: v0.0.1
+  specs:
+    feed_engine_api (0.0.1)
+      faraday
+
+GIT
   remote: git://github.com/ctran/annotate_models.git
   revision: ff1131daee8c03dbcc4966b7914b77a7e3a62f02
   specs:
@@ -324,6 +332,7 @@ DEPENDENCIES
   exceptional
   factory_girl_rails
   faker
+  feed_engine_api!
   fog
   guard-cucumber
   guard-rspec
