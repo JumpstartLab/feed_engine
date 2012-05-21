@@ -23,7 +23,7 @@ class AuthenticationsController < ApplicationController
   end
 
   def check
-    @authd = current_user.authentications.find_by_provider(params[:provider]).exists?
+    @authd = current_user.authentications.find_by_provider(params[:provider]).nil?
   end
 
   private
