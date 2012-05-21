@@ -1,17 +1,18 @@
 require 'securerandom'
 class User < ActiveRecord::Base
+  authenticates_with_sorcery!
   before_create :set_user_subdomain
-  before_save :ensure_authentication_token
-  after_create :set_user_feed
+  after_create :create_user_feed
   # after_create :generate_api_key
   after_create :send_welcome_email
-  devise :database_authenticatable, :recoverable, :validatable, :token_authenticatable
+
   attr_accessible :email, :password, :password_confirmation, :display_name, :subdomain
   has_many :authentications
   has_many :tweets
   has_many :githubevents
   has_many :posts
   has_one :feed
+  validates_confirmation_of :password, :on => :create, :message => "should match confirmation"
 
 
 
@@ -35,7 +36,7 @@ class User < ActiveRecord::Base
   #   self.feed.set_name(self.subdomain)
   # end
 
-  def set_user_feed
+  def create_user_feed
     Feed.create(:user_id => self.id, :name => self.subdomain)
   end
 
