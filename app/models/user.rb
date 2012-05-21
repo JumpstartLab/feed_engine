@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   authenticates_with_sorcery!
   before_create :set_user_subdomain
   after_create :create_user_feed
-  # after_create :generate_api_key
+  after_create :generate_authentication_token
   after_create :send_welcome_email
 
   attr_accessible :email, :password, :password_confirmation, :display_name, :subdomain
@@ -50,11 +50,11 @@ class User < ActiveRecord::Base
     end.flatten.uniq.compact.sort_by { |post| post.created_at }
   end
   
-  # def generate_api_key
-  #   key = Digest::SHA256.hexdigest("#{SecureRandom.hex(15)}HuNgRyF33d#{Time.now}")
-  #   key = generate_api_key if User.exists?(api_key: key)
-  #   self.update_attribute(:authentication_token, key)
-  # end
+  def generate_authentication_token
+    token = Digest::SHA256.hexdigest("#{SecureRandom.hex(15)}HuNgRyF33d#{Time.now}")
+    token = generate_authentication_token if User.exists?(authentication_token: token)
+    self.update_attribute(:authentication_token, token)
+  end
 
   def twitter_id
     authentications.find_by_provider('twitter').uid
@@ -71,5 +71,4 @@ class User < ActiveRecord::Base
   def instagram_token
     authentications.find_by_provider('instagram').token
   end
-
 end
