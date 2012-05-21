@@ -8,7 +8,6 @@ class RegistrationsController < Devise::RegistrationsController
     if @user.save
       sign_in(@user)
       redirect_to user_signup_steps_path
-      flash[:notice] = "Welcome! You have signed up successfully."
     else
       render :new
     end
