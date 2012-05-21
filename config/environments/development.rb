@@ -1,3 +1,9 @@
+require 'pusher'
+
+Pusher.app_id = '20778'
+Pusher.key    = 'a80590b86d5da228d97d'
+Pusher.secret = '2366821ae661fd2b80c0'
+
 FeedEngine::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
@@ -5,6 +11,7 @@ FeedEngine::Application.configure do
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
+
 
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true
@@ -14,18 +21,18 @@ FeedEngine::Application.configure do
   config.action_controller.perform_caching = false
 
   # mailer configs
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { :host => 'feedengine.dev' }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.default :charset => "utf-8"
   config.action_mailer.smtp_settings = {
   :address        => 'smtp.gmail.com',
-  :port           => '587',
+  :port           => 587,
   :authentication => :plain,
   :user_name      => 'horace.badger@gmail.com',
   :password       => 'hungrybadger',
-  :domain         => 'gmail.com'
+  :domain         => 'feedengine.dev'
   }  
 
   # Print deprecation notices to the Rails logger

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120517180223) do
+ActiveRecord::Schema.define(:version => 20120521184956) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(:version => 20120517180223) do
   end
 
   create_table "github_items", :force => true do |t|
-    t.text     "gist"
+    t.text     "event"
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -48,13 +48,29 @@ ActiveRecord::Schema.define(:version => 20120517180223) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "points", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "pointable_id"
+    t.string   "pointable_type"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
   create_table "stream_items", :force => true do |t|
     t.integer  "user_id"
     t.integer  "streamable_id"
     t.string   "streamable_type"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
-    t.boolean  "refeed",          :default => true
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.boolean  "refeed",            :default => true
+    t.integer  "retrouted_from_id"
+  end
+
+  create_table "subscriptions", :force => true do |t|
+    t.integer  "follower_id"
+    t.integer  "followed_user_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "text_items", :force => true do |t|
@@ -70,6 +86,7 @@ ActiveRecord::Schema.define(:version => 20120517180223) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.datetime "tweet_time"
+    t.string   "status_id"
   end
 
   add_index "twitter_items", ["user_id"], :name => "index_twitter_items_on_user_id"

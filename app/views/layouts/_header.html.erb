@@ -1,0 +1,43 @@
+<div id="alert-bar" style="display: none"></div>
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+           
+      <div class="nav-collapse">
+        <ul class="nav nav-section">
+          <% if user_signed_in? %>
+            <li class="user-name offset5 pull-left"><%= current_user.display_name %></li>
+            <li class="pull-left navigation-item">
+              <a href="<%= root_url(:subdomain => current_user.display_name) %>"> <span class="raphael-icon">S</span>Stream</a>
+            </li>
+            <li class="pull-left navigation-item">
+              <a href="<%= dashboard_url(:subdomain => false) %>"> <span class="raphael-icon">></span>Dashboard</a>
+            </li>
+            <li class="pull-left navigation-item">
+              <a href="<%= destroy_user_session_path(:subdomain => false)%>" data-method="delete"> <span class="raphael-icon">Ï</span>Logout </a>
+            </li>
+          <% else %>
+            <% if request.fullpath != new_user_path %>
+            <li class="offset7 pull-left navigation-item navigation-item-anon">
+              <a href="<%= login_path(:subdomain => false) %>">
+                <span class="raphael-icon">L</span>Login
+              </a>
+            </li>
+            <li class="pull-left navigation-item">
+              <a href="<%= new_user_url(:subdomain => false) %>">
+                <span class="raphael-icon">]</span>Sign Up
+              </a>
+            </li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div><!-- end nav-collapse -->
+    </div><!-- end .container -->
+  </div><!-- end .navbar-inner -->
+</div><!-- end .navbar navbar-fixed-top -->

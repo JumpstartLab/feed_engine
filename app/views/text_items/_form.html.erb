@@ -1,5 +1,5 @@
-<%= simple_form_for @text_item, :id => "text_item" do |f| %>
+<%= simple_form_for @text_item, :id => "text_item", :remote => true do |f| %>
   <%= f.input :body, :label_html => {:class => "text-item-label"}, 
               :input_html => {:class => "text-item-text-area"} %>
-  <%= f.button :submit, "Textify", :class => "btn-primary btn-large text-item-submit" %>
+  <%= f.button :submit, "Textify", :id => "text-item-submit", :class => "btn-primary btn-large" %>
 <% end %>

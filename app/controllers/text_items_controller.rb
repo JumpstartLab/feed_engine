@@ -1,4 +1,6 @@
 class TextItemsController < ApplicationController
+  include DashboardControllerHelper
+  before_filter :create_feed_items, :only => [:new, :create]
 
   def new
     @text_item = TextItem.new
@@ -6,13 +8,9 @@ class TextItemsController < ApplicationController
 
   def create
     @text_item = current_user.text_items.new(params[:text_item])
-    if @text_item.save
-      redirect_to dashboard_path, notice: 'Post was successfully created.'
-    else
-      @link_item = LinkItem.new
-      @image_item = ImageItem.new
-      render :template => "dashboard/show"
-    end
+    @text_item.save
+    @link_item = LinkItem.new
+    @image_item = ImageItem.new
   end
 
   def show

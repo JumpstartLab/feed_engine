@@ -6,6 +6,10 @@ class FeedController < ApplicationController
       @stream_items = user.stream_items.order("created_at DESC").page(params[:page]).per(12)
       @items = @stream_items.collect { |i| i.streamable}
       @feed_owner = user
+      respond_to do |format|
+        format.html
+        format.js
+      end
     elsif current_user
       redirect_to '/dashboard'
     else

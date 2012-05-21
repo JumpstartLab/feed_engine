@@ -14,6 +14,7 @@
 */
 
 @import "variables";
+@import "links";
 
 .simple_form label {
   float: left;
@@ -129,12 +130,6 @@ body {
   text-decoration:underline;
 }
 
-
-@mixin nav-item-links {
-      text-decoration: none;
-      color: $trout-main-color;
-}
-
 .nav > li.navigation-item {
     a:hover {
       @include nav-item-links;
@@ -160,4 +155,29 @@ body {
   font-size: 24px;
   padding: 14px 0 0 70px;
   margin-right: 10px;
+}
+
+#alert-bar {
+  top: 0;
+  left: 0;
+  position: fixed;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  display: block;
+  font: $font;
+  font-size: 16px;
+  opacity: 0.85;
+  z-index:1031;
+}
+
+#alert-close {
+  top: 0;
+  position: fixed;
+  width: 100%;
+  padding: 10px 20px;
+  display: block;
+  font: $font;
+  font-size: 16px;
+  opacity: 0.85;
 }

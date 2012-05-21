@@ -24,6 +24,8 @@ gem 'growl'
 gem 'octokit'
 gem 'gravatar-ultimate'
 gem 'instagram'
+gem 'coffeebeans'
+gem 'pusher'
 
 # Gems used only for assets and not required
 # in production environments by default.
