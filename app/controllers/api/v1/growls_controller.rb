@@ -5,10 +5,10 @@ class Api::V1::GrowlsController < Api::V1::ApiController
     @growl = current_user.relation_for(json_hash["type"]).new(json_hash)
 
     if @growl.save
-      render location: @growl, status: :created
+      render :json => true, status: :created
     else
       @errors = @growl.errors.collect { |k,v| v }
-      render 'create', status: :not_acceptable
+      render 'api/v1/shared/errors', status: :not_acceptable
     end
   end
 

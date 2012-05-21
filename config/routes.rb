@@ -26,7 +26,7 @@ Hungrlr::Application.routes.draw do
         namespace "v1" do
           get '/users/twitter' => 'users#twitter'
           get '/feeds/:display_name' => 'feeds#show'
-          post '/feeds/:display_name/items' => 'feeds#create'
+          post '/feeds/:display_name/items' => 'growls#create'
           post '/feeds/:display_name/growls/:id/refeed' => 'feeds#refeed'
           post '/feeds/:display_name/refeeds' => 'feeds#subscriber_refeed'
           resources :user_tweets, only: [:create, :index]

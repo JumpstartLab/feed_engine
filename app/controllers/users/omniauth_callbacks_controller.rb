@@ -1,41 +1,31 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  before_filter :get_omniauth_data
+
   def twitter
-    data = request.env["omniauth.auth"]
-    auth = current_user.authentications.create(provider: data["provider"],
-                                        token: data["credentials"]["token"],
-                                        secret: data["credentials"]["secret"])
-
-    auth.create_twitter_account(uid: data["info"]["uid"],
-                                nickname: data["info"]["nickname"],
-                                image: data["info"]["image"],
-                                last_status_id: data["extra"]["raw_info"]["status"]["id_str"])
-
+    response = Authentication.add_twitter(current_user, @data)
     redirect_to new_authentication_path, :notice => "Twitter account successfully added."
   end
 
   def github
-    data = request.env["omniauth.auth"]
-    auth = current_user.authentications.create(provider: data["provider"],
-                                        token: data["credentials"]["token"])
-
-    auth.create_github_account(uid: data["uid"],
-                               nickname: data["info"]["nickname"],
-                               image: data["extra"]["raw_info"]["avatar_url"],
-                               last_status_id: DateTime.now)
-
+    response = Authentication.add_github(current_user, @data)
     redirect_to new_authentication_path, :notice => "Github account successfully added."
   end
 
   def instagram
-    data = request.env["omniauth.auth"]
-    auth = current_user.authentications.create(provider: data["provider"],
-                                        token: data["credentials"]["token"])
-
-    auth.create_github_account(uid: data["uid"],
-                               nickname: data["info"]["nickname"],
-                               image: data["info"]["image"],
-                               last_status_id: DateTime.now)
-
-    redirect_to new_authentication_path, :notice => "Instagram account successfully added."
+    response = Authentication.add_instagram(current_user, @data)
+    if response
+      message = "Account successfully added."
+    else
+      message = "There was an error adding your instagram account"
+    end
+    redirect_to new_authentication_path, :notice => message
   end
+
+  private
+
+  def get_omniauth_data
+    @data = request.env["omniauth.auth"]
+  end
+
 end
+
