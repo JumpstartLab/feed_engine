@@ -25,3 +25,25 @@
       = render "shared/get_auth_token"
     hr
     = link_to "Back", :back
+
+coffee:
+  jQuery ->
+
+    number_of_errors = () ->
+      $(".error").length
+
+    validate = () ->
+      user_password = $("#user_password").val()
+      user_password_confirmation = $("#user_password_confirmation").val()
+      if user_password_confirmation == "" || user_password == user_password_confirmation
+        $(".error").hide()
+      else
+        $("#user_password_confirmation").after('<span class="error" style="color:red">Passwords do not match.</span>') unless number_of_errors() > 0
+
+    $("#user_password").blur ->
+      validate()
+
+    $("#user_password_confirmation").blur ->
+      validate()
+
+    true

@@ -41,13 +41,13 @@ class Authentication < ActiveRecord::Base
   end
 
   def create_twitter_details(data)
-    create_twitter_account(uid: data["info"]["uid"],
-                          nickname: data["info"]["nickname"],
-                          image: data["info"]["image"],
-                          last_status_id: data["extra"]["raw_info"]["status"]["id_str"])
+    create_twitter_account(uid: data["uid"],
+                           nickname: data["info"]["nickname"],
+                           image: data["info"]["image"],
+                           last_status_id: data["extra"]["raw_info"]["status"]["id_str"])
   end
 
-  def self.create_twitter_auth(user, data)
+  def self.create_github_auth(user, data)
     user.authentications.create(provider: data["provider"],
                                 token: data["credentials"]["token"])
   end
