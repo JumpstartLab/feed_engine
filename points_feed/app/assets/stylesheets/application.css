@@ -113,10 +113,10 @@ input[type=text], input[type=password], input[type=email], textarea, select {
 }
 
 /* FOR DROP DOWN MENU*/
-
+/*
 #container {
   position: relative;
-}
+}*/
 
 #menu, #menu ul {
   padding: 0;
@@ -129,6 +129,7 @@ input[type=text], input[type=password], input[type=email], textarea, select {
   display: block;
   padding: 5px;
   width: 130px;
+  color: white;
 }
 
 #menu li ul {
