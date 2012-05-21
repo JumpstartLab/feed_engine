@@ -1,3 +1,4 @@
+
 class TextPostsController < ApplicationController
   before_filter :lookup_text_post, except: [:create, :new]
   respond_to :html, :json

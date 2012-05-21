@@ -16,6 +16,8 @@
 //= require mustache
 //= require_tree .
 
+
+
 $(function() {
   $('#content_tabs a').click(function (e) {
     e.preventDefault();
@@ -23,7 +25,15 @@ $(function() {
   })
 });
 
-function underscore(string) {
-   string = $.trim(string).toLowerCase();
-   return string.replace(/\s+/g, '_');
-}
+// $(".post-image a").click(function()){
+//   $("").show();
+// });
+
+// $(".post-image a").colorbox(
+//   {inline:true, href: ".post-image"}
+// );
+
+// $(document).bind("cbox_closed", function() {
+//   $("").hide();
+// });
+

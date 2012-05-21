@@ -1,9 +1,8 @@
 FeedEngine::Application.routes.draw do
   get "static_pages/show"
 
-  devise_for :users, :controllers => {:registrations => "registrations"} do
-    get "signup" => "registrations#new", :as => :new_user
-  end
+  devise_for :users, :controllers => {:registrations => "registrations"}
+  
 
   # User subdomains
   scope "", constraints: Subdomains.user_feeds do
@@ -50,6 +49,7 @@ FeedEngine::Application.routes.draw do
     # get "signup" => "devise/registrations#new", :as => :new_user
     get "login" => "devise/sessions#new", :as => :login
     delete "/logout" => "devise/sessions#destroy"
+    get "signup" => "registrations#new", :as => :new_user
   end
 
   root :to => "dashboards#show"

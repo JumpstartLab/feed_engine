@@ -12,7 +12,8 @@ class AuthenticationsController < ApplicationController
       elsif omniauth["provider"] == "github"
         redirect_to instagram_sign_in_page
       elsif omniauth["provider"] == "instagram"
-        redirect_to dashboard_path
+        redirect_to dashboard_path,
+        notice: "Welcome! You have signed up successfully."
       end
       flash[:notice] = "#{omniauth["provider"].capitalize} account connected!"
     else
