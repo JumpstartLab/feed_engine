@@ -19,7 +19,8 @@ class ImagePostDecorator < ApplicationDecorator
       :refeed => model.original_post != nil,
       :refeed_link => "#{refeed_url(model.original_post)}",
       :refeeder => refeeder,
-      :can_refeed => can_refeed?
+      :can_refeed => can_refeed?,
+      :points => model.points
     }
   end
 end

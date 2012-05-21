@@ -3,6 +3,7 @@ class InstagramFeedItem < ActiveRecord::Base
 
   belongs_to :user
   has_many :awards, as: :awardable
+  include PointAwarder
 
   def self.import(user, media_item)
     unless user.instagram_feed_items.map(&:instagram_id).include?(media_item.id)

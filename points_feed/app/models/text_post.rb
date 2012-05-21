@@ -1,5 +1,7 @@
 class TextPost < Post
   has_many :awards, as: :awardable
+  include PointAwarder
+  
   validates :content, :length => { :maximum => 512 }
 
   validate do

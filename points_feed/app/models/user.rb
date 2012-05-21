@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   has_many :image_posts
   has_many :authentications
 
-  has_many :authentications
+  has_many :awards
 
   has_many :twitter_feed_items
   has_many :github_feed_items

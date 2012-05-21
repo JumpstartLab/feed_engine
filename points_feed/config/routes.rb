@@ -26,6 +26,7 @@ PointsFeed::Application.routes.draw do
     end
 
     resources :posts
+    resources :awards
   end
 
   scope '/', constraints: lambda { |r| r.subdomain == 'api' } do
@@ -38,6 +39,7 @@ PointsFeed::Application.routes.draw do
       end
 
       resources :posts
+      resources :awards
     end
   end
 

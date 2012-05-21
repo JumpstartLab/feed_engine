@@ -3,6 +3,7 @@ class GithubFeedItem < ActiveRecord::Base
 
   belongs_to :user
   has_many :awards, as: :awardable
+  include PointAwarder
 
   def self.import(user, event)
     unless user.github_feed_items.map(&:github_id).include?(event.id.to_i)

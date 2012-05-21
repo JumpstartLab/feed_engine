@@ -3,6 +3,7 @@ class TwitterFeedItem < ActiveRecord::Base
 
   belongs_to :user
   has_many :awards, as: :awardable
+  include PointAwarder
 
   def self.import(user, tweet)
     unless user.twitter_feed_items.map(&:tweet_id).include?(tweet.id)

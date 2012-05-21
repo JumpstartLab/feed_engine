@@ -15,7 +15,8 @@ class TwitterFeedItemDecorator < ApplicationDecorator
       :id => model.id,
       :refeed => false,
       :refeed_link => "",
-      :reeder => {}
+      :reeder => {},
+      :points => model.points
     }
   end
 end

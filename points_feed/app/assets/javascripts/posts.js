@@ -144,6 +144,28 @@ $(document).ready(function() {
     });
   });
 
+  $(".points_link").live('click', function(e) {
+    e.preventDefault();
+    $this = $(this);
+
+    $.ajax({
+      type: 'post',
+      url: "/api/awards/",
+      data: {
+        'id': $(this).data('id'),
+        'type': $(this).data('type'),
+        'access_token': access_token
+      },
+      success: function(data) {
+        $this.parent().html('Post has been refeeded').addClass('label label-info');
+      },
+      error: function(evt) {
+        alert('unable to refeed');
+      }
+    });
+  });
+
+
   $("a.lightbox").live('click', function(e) {
     $('body').css('overflow-y', 'hidden');
     
