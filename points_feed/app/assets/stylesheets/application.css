@@ -145,6 +145,8 @@ input[type=text], input[type=password], input[type=email], textarea, select {
 
 #lightbox {
   position: fixed;
+  max-height: 40%;
+  max-width: 40%;
 }
 
 .icons {
