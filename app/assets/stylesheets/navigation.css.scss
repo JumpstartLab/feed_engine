@@ -1,0 +1,90 @@
+@import "./partials/colors.css.scss";
+@import "./partials/shapes.css.scss";
+
+.nav-bar {
+  list-style: none;
+  width: 100%;
+  display: inline-block;
+  margin-top: 1em;
+  min-width: 1100px;
+  max-width: 1565px;
+  float: middle;
+  a {
+    display: block;
+    padding: .5em;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  li {
+    float: left;
+    margin-left: .75em;
+    postion: relative;
+    &:hover{
+      a{
+        text-shadow: 1px 1px .15em $whale;
+      }
+      ul {
+        background-color: $white;
+        left: 0;
+        li {
+          margin-left: 0em;
+          a {
+            text-shadow: none;
+            color: $whale;
+          }
+        }
+      }
+    }
+    ul {
+      width: 100%;
+      list-style: none;
+      position: absolute;
+      left: -9999px;
+      li {
+        padding-top: .2em;
+        float: none;
+        a {
+          white-space: nowrap;
+        }
+        &:hover{
+          background-color: $dolphin;
+          a {
+            color: $white;
+            text-shadow: none;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+  
+
+  #dashboard {
+    @include parallelogram($slushie);
+  }
+
+  #account {
+    @include parallelogram($frosting);
+  }
+
+  #friends {
+    @include parallelogram($honeycomb);
+  }
+
+  #home {
+    @include parallelogram($clementine);
+  }
+
+}
+
+
+
+
+
+
+
+
+
+

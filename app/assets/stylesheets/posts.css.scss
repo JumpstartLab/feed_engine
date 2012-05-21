@@ -1,0 +1,42 @@
+@import "./partials/colors.css.scss";
+
+@font-face {
+  font-family: "Mercury Display semibold";
+  src: url('mercury-display-semibold.ttf');
+}
+@mixin borders{
+  border-style: solid;
+  border-width:.25em;
+  border-radius: 4px;
+  border-color: $aloe;
+}
+.post {
+  @include borders;
+  font-size: 1em;
+  letter-spacing: .05em;
+  margin: 1em 0em;
+  background-color: $stingray;
+  padding: 1.25em;
+  white-space: normal;
+  width: 100%;
+  &:nth-child(odd){
+    border-color: $berry;
+  }
+  .posted {
+    color: $spice;
+    float: right;
+  }
+
+  img {
+    width: 200px;
+    height:200px;
+  }
+  .service {
+    width: 64px;
+    height: 64px;
+    display: inline;
+  }
+  p {
+    color: $whale;
+  }
+}

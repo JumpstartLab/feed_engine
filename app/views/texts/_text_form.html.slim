@@ -1,0 +1,14 @@
+.post-form
+  .errors
+    p Oops! Something went wrong.
+    ul.errors_list
+  br
+    = form_for @new_text, url: "#", id: "text_form" do |f|
+      = hidden_field_tag :type, "text"
+      = f.label :content
+      br
+      br
+      = f.text_area :content
+      br
+      br
+      a.button.post-button Create Post

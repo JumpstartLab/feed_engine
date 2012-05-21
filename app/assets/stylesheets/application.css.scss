@@ -1,0 +1,67 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require ./reset.css
+ *= require_self
+ *= require_tree .
+ */
+
+@import "./partials/colors.css.scss";
+
+@font-face {
+  font-family: "Gotham Rounded";
+  src: url(GothamRnd-Medium.otf);
+}
+body {
+    background-color: $white;
+}
+.page {
+  min-height: 96%;
+  margin: 0px 5em;
+  color: $white;
+}
+@mixin headers {
+  padding-bottom: .25em;
+  padding-right: .25em;
+  padding-top: .25em;
+  display: inline-block;
+}
+
+h1,h2,h3{
+  font-family:"Gotham Rounded";
+}
+h1 {
+  @include headers;
+  font-size: 3em;
+}
+
+h2 {
+  @include headers;
+  font-size: 2.25em;
+}
+
+h3 {
+  @include headers;
+  font-size: 1.5em;
+}
+
+
+body{
+background-color:rgb(0,0,0);
+background-image:url(http://www.commentnation.com/hotlinks/charcoal_gray_upholstery_fabric_texture_background_seamless.jpg);
+background-position:top left;
+background-repeat:repeat;
+background-attachment:fixed;
+}
+
+a {
+  cursor: pointer;
+  color: $white;
+}

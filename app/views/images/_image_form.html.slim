@@ -1,0 +1,19 @@
+.post-form
+  .errors
+    p Oops! Something went wrong.
+    ul.errors_list
+  = form_for @new_image, url: "#", id: "image_form" do |f|
+    br
+    = hidden_field_tag :type, "image"
+    img#image_preview
+    = f.label :content, "Image URL"
+    br
+    = f.text_field :content, id: "image_url"
+    br
+    br
+    = f.label :comment
+    br
+    = f.text_field :comment
+    br
+    br
+    a.button.post-button Create Post

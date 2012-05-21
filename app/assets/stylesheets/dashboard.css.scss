@@ -1,0 +1,20 @@
+ @import "./partials/colors.css.scss";
+
+p {
+  color: $white;
+}
+
+body {
+  background-color: $whale;
+  h1{
+    color: $frosting;
+  }
+  h2 {
+    color:$clementine;
+  }
+  h3 {
+    color: $white;
+  }
+}
+
+#errors { color: white }

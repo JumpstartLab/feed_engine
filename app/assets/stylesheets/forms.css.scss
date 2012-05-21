@@ -1,0 +1,36 @@
+@import "./partials/colors.css.scss";
+
+.post-form {
+  padding: 1em;
+  label {
+    color: $honeycomb;
+    font-weight: bold;
+  }
+
+  textarea {
+    width: 35em;
+    height: 10em;
+    padding: .25em;
+  }
+
+  .button{
+    background-color: $whale;
+    color: $white;
+    cursor: pointer;
+    border-style: solid;
+    border-color: $honeycomb;
+    border-radius: .25em;
+    border-width: .1em;
+    padding: .5em;
+    display: inline-block;
+  }
+
+  #image_preview {
+    height: 10em;
+    width: 10em;
+    display:none;
+    position: absolute;
+    margin-left: 13em;
+  }
+}
+

@@ -1,0 +1,30 @@
+.post-form
+  .errors
+      p Oops! Something went wrong.
+      ul.errors_list
+  = form_for @user=User.new, id:"signup_form", remote: true do |f|
+    = f.label :email
+    br
+    = f.email_field :email
+    br
+    br
+       
+    = f.label :display_name
+    br
+    = f.text_field :display_name
+    br
+    br
+
+    = f.label :password
+    br
+    = f.password_field :password
+    br
+    br
+
+    = f.label :password_confirmation
+    br
+    = f.password_field :password_confirmation
+    br
+    br
+
+    a.button*{id: "signup-submit"} Signup!
