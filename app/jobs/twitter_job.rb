@@ -8,19 +8,21 @@ class TwitterJob
 
     user =  User.find(current_user["id"])
 
-    unless user.twitter_items.any?
-      # FIRST RUN - Get all tweets
-      client.user_timeline(uid).reverse.each do |tweet| 
-        twitter_item = user.twitter_items.create(:tweet => tweet, :tweet_time => tweet.created_at)
-      end
-    else
-      # SUBSEQUENT RUNS - only get tweets since last tweet
-      last_tweet_id = users_last_tweet_id(user)
-      # create all the twitter items
-      # insert these items into the user's stream
-      client.user_timeline(uid, :since_id => last_tweet_id).reverse.each do |tweet| 
-        twitter_item = user.twitter_items.create(:tweet => tweet, :tweet_time => tweet.created_at)
-      end
+    auth = user.authentications.find_by_provider("twitter")
+    client.user_timeline(uid).select do |tweet| 
+
+
+
+      end 
+    # if 
+    #   client.user_timeline(uid).reverse.each do |tweet| 
+    #     twitter_item = user.twitter_items.create(:tweet => tweet, :tweet_time => tweet.created_at)
+    #   end
+    # else
+    #   last_tweet_id = users_last_tweet_id(user)
+    #   client.user_timeline(uid, :since_id => last_tweet_id).reverse.each do |tweet| 
+    #     twitter_item = user.twitter_items.create(:tweet => tweet, :tweet_time => tweet.created_at)
+    #   end
     end
     user.save
   end
