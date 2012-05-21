@@ -1,4 +1,4 @@
-<div class="span7" id="stream-items">
+<div class="span7" >
 <script src="http://js.pusherapp.com/1.9/pusher.min.js"></script>
  <script type="text/javascript">
  var pusher = new Pusher('<%= Pusher.key %>'); // uses your API KEY
@@ -12,11 +12,12 @@
 });
 
  </script>
-<div class="span7 feed-list">
+<div class="span7 feed-list" id="stream-items">
   <h1 class="feed-title span7"><%= @feed_owner.display_name %>'s stream</h1>
   <% if @items %>
     <%= render :partial => "item", :collection => @items %>
   <% end %>
+</div>
 </div>
 
   <div class="feed-meta-container offset1 span3">
@@ -61,7 +62,6 @@
       <h4>None</h4>
     <% end %>
   </div>
-</div>
   <div class="span12" id="pagination-div">
     <%= paginate @stream_items %>
   </div>
