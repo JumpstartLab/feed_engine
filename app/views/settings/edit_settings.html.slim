@@ -1,12 +1,12 @@
 h2
-  | Edit #{resource_name.to_s.humanize}
+  | Edit #{resource_name.to_s.humanize} TOMOOMOTOMT
 = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
   = f.error_notification
   .inputs
     = f.input :email, :required => true, :autofocus => true
-    = f.input :current_password, :hint => "we need your current password to confirm your changes", :required => true
     = f.input :password, :autocomplete => "off", :hint => "leave it blank if you don't want to change it", :required => false
     = f.input :password_confirmation, :required => false
+    = f.input :current_password, :hint => "we need your current password to confirm your changes", :required => false
   .actions
     = f.button :submit, "Update"
 br

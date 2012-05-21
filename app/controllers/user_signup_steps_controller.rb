@@ -16,7 +16,7 @@ class UserSignupStepsController < ApplicationController
 private
 
   def redirect_to_finish_wizard
-    redirect_to dashboard_path, notice: "Thank you for signing up."
+    redirect_to dashboard_path, notice: "Welcome! You have signed up successfully."
   end
 
 end
