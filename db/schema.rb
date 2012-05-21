@@ -11,7 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120521190458) do
+ActiveRecord::Schema.define(:version => 20120521193556) do
+
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -90,11 +91,11 @@ ActiveRecord::Schema.define(:version => 20120521190458) do
   end
 
   create_table "twitter_posts", :force => true do |t|
-    t.integer  "twitter_id"
+    t.integer  "twitter_id",   :limit => 8
     t.string   "text"
     t.datetime "published_at"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "users", :force => true do |t|
