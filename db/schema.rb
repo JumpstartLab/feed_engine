@@ -13,6 +13,7 @@
 
 ActiveRecord::Schema.define(:version => 20120521193556) do
 
+
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
     t.string   "provider"
@@ -63,6 +64,13 @@ ActiveRecord::Schema.define(:version => 20120521193556) do
     t.string   "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "points", :force => true do |t|
+    t.integer  "post_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "posts", :force => true do |t|
