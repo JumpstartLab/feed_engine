@@ -3,6 +3,9 @@ ul.block-grid.two-up.center_text
   - unless current_user.twitter?
     .row
       li= link_to "Link Twitter Feeds", user_omniauth_authorize_path(:twitter), class: "button black large"
+  - else
+    .row
+      li= link_to "Unlink Twitter Feeds", user_omniauth_authorize_path(:twitter), class: "button black large disabled"
   - unless current_user.github?
     .row
       li= link_to "Link Github Feeds", user_omniauth_authorize_path(:github), class: "button black large"
