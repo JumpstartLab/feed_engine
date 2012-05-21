@@ -14,7 +14,7 @@ describe 'api/v1/user_tweets', type: :api do
 
       it "returns a 500 error" do
         last_response.status.should eq(500)
-        last_response.body.should == "User account can not be found."
+        last_response.body.should == "User account cannot be found."
       end
     end
 

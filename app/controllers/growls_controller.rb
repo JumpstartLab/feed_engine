@@ -18,4 +18,5 @@ class GrowlsController < ApplicationController
       render "dashboards/show"
     end
   end
+
 end

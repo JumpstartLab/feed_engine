@@ -18,6 +18,11 @@ class Api::V1::FeedsController < Api::V1::ApiController
     end
   end
 
+  def destroy_refeed
+    @current_user.growls.where(regrowled_from_id: params[:id]).first.destroy
+    render status: :created, json: "Refeed Destroyed"
+  end
+
   def subscriber_refeed
     user = User.where(display_name: params[:display_name]).first
     growls = JSON.parse(params[:growls])
