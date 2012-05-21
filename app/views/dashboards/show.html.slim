@@ -6,6 +6,7 @@
         dd#message= link_to "+ Message", "#", class: ("active" if @type == 'Message' || @type.nil? )
         dd#image= link_to "+ Image", "#", class: ("active" if @type == 'Image')
         dd#link= link_to "+ Link", "#", class: ("active" if @type == 'Link')
+        dd#service= link_to "Services", "#", class: ("active" if @type == 'Service')
         dd= link_to "Account", edit_user_registration_path
 
       ul.nice.awesome-tabs-content.contained
@@ -16,6 +17,8 @@
           = render :partial => "/images/form"
         li#linkFormTab{ class=("active" if @type == 'Link') }
           = render :partial => "/links/form"
+        li#serviceFormTab{ class=("active" if @type == 'Services') }
+          = render :partial => "shared/social_signin"
 
 javascript:
   api_domain = "#{api_domain.html_safe}"
@@ -24,20 +27,22 @@ javascript:
 coffee:
   jQuery ->
     $("#message").click ->
-      $("#imageFormTab").hide()
-      $("#linkFormTab").hide()
+      $(".awesome-tabs-content > li").hide()
       $("#messageFormTab").fadeIn()
       $(".active").removeClass("active")
       $("#message > a").addClass("active")
     $("#image").click ->
+      $(".awesome-tabs-content > li").hide()
       $("#imageFormTab").fadeIn()
-      $("#linkFormTab").hide()
-      $("#messageFormTab").hide()
       $(".active").removeClass("active")
       $("#image > a").addClass("active")
     $("#link").click ->
-      $("#imageFormTab").hide()
+      $(".awesome-tabs-content > li").hide()
       $("#linkFormTab").fadeIn()
-      $("#messageFormTab").hide()
       $(".active").removeClass("active")
       $("#link > a").addClass("active")
+    $("#service").click ->
+      $(".awesome-tabs-content > li").hide()
+      $("#serviceFormTab").fadeIn()
+      $(".active").removeClass("active")
+      $("#service > a").addClass("active")

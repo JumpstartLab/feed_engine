@@ -20,4 +20,3 @@ end
 #  original_created_at :datetime
 #  event_type          :string(255)
 #
-

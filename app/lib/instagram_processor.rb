@@ -1,40 +1,37 @@
 require 'json'
 require 'open-uri'
+require 'net/http'
 require './config/initializers/instagram'
 
 module Hungrlr
   class InstagramProcessor
     attr_accessor :base_url
-    TEST_ACCESS_TOKEN = "144555019.f59def8.ad06cea44cff4ad3baecc818be18a080"
+    TEST_ACCESS_TOKEN = "8323297.f59def8.2db06c3fdb7b4c659ae12a55ffe2c44d"
 
     def initialize
       self.base_url = ENV["DOMAIN"] == "" ? ENV["DOMAIN"] : "http://api.lvh.me:3000/v1"
     end
 
     def instagram_accounts
-      #Stubbing instagram accounts for now
-      [
-      { "user_id" => 1, "instagram_id" => 8323297,
-        "last_status_id" => DateTime.now + 1, "token" => TEST_ACCESS_TOKEN},
-      { "user_id" => 3, "instagram_id" => 2461644,
-        "last_status_id" => DateTime.now + 1, "token" => TEST_ACCESS_TOKEN},
-      { "user_id" => 8, "instagram_id" => 1241637,
-        "last_status_id" => DateTime.now + 1, "token" => TEST_ACCESS_TOKEN}
-      ]
+      accounts = Net::HTTP.get(URI("#{base_url}/users/instagram.json?token=HUNGRLR"))
+      JSON.parse(accounts)["accounts"]
     end
 
     def get_photos(instagram_id, token, last_status_id)
       # MIN_TIMESTAMP currently does not work
-      url = "https://api.instagram.com/v1/users/#{instagram_id}/media/recent/?access_token=#{TEST_ACCESS_TOKEN}"
-      JSON.parse(open(url, "MIN_TIMESTAMP" => last_status_id).read)["data"]
+      url = "https://api.instagram.com/v1/users/#{instagram_id}/media/recent/?access_token=#{token}"
+      JSON.parse(open(url).read)["data"]
     end
 
     def build_photo_hash(photos)
       photos.collect do |photo|
-        {
-          comment: photo["caption"], link: photo["link"],
-          created_at: Time.at(photo["created_time"].to_i).to_date
-        }
+        photo_hash = {}
+        photo_hash["link"] = photo["link"]
+        photo_hash["created_at"] = Time.at(photo["created_time"].to_i).to_date
+        if photo["caption"]
+          photo_hash["comment"] = photo["caption"]["text"]
+        end
+        photo_hash
       end
     end
 
@@ -49,7 +46,7 @@ module Hungrlr
     def run
       instagram_accounts.each do |account|
         response = get_photos(account["instagram_id"], account["token"],
-                              account["last_status_id"].strftime("%s"))
+                              DateTime.parse(account["last_status_id"]).strftime("%s"))
         photos_hash = build_photo_hash(response)
         create_photos_for_user(account["user_id"], photos_hash)
       end

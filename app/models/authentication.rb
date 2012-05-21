@@ -3,6 +3,7 @@ class Authentication < ActiveRecord::Base
   belongs_to :user
   has_one :twitter_account
   has_one :github_account
+  has_one :instagram_account
 
   SERVICES = ["twitter", "github", "instagram"]
 
@@ -14,9 +15,6 @@ class Authentication < ActiveRecord::Base
     define_singleton_method "#{service}?".to_sym do
       where(provider: service).size > 0 ? true : false
     end
-
-    # define_singleton_method "add_#{service}".to_sym do
-    # end
   end
 
   def self.add_twitter(user, data)

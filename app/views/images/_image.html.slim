@@ -1,5 +1,5 @@
 .row#image
-  = render :partial => "shared/growl_header", :locals => { growl: image }
+  = render :partial => "growls/header", :locals => { growl: image }
 .row
   .two.columns
     = image_tag image.get_gravatar
@@ -7,4 +7,4 @@
     = image.comment
     br
     .comments= image_tag image.photo(:medium)
-= render partial: "shared/growl_footer", locals: { growl: image}
+= render partial: "growls/footer", locals: { growl: image}

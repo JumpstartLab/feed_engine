@@ -1,5 +1,5 @@
 .row#message
-  = render :partial => "shared/growl_header", :locals => { growl: message }
+  = render :partial => "growls/header", :locals => { growl: message }
 .row
   .two.columns
     = image_tag message.get_gravatar
@@ -7,4 +7,4 @@
     .growl_post
       = link_to message.title, message.link
       .row= message.comment
-= render partial: "shared/growl_footer", locals: { growl: message}
+= render partial: "growls/footer", locals: { growl: message}
