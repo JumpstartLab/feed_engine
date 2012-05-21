@@ -132,35 +132,6 @@ class Subscription < ActiveRecord::Base
     end
   end
 
-  # def instagram_last_created_at
-  #   if instapounds
-  #     instapounds.last.created_at
-  #   else
-  #     Time.now
-  #   end
-  # end
-
-  # def collect_instagram_info
-  #   data = get_instagram_data["data"]
-  #   image_info = data.map do |datum|
-  #     {
-  #       # :created_time => data.first["created_time"],
-  #       :url => data.first["images"]["standard_resolution"]["url"]
-  #     }
-  #   end
-  # end
-
-  # def self.get_all_new_instagrams
-  #   Subscription.all.each do |subscription|
-  #     new_posts = subscription.collect_instagram_urls
-  #     subscription.create_records_of_posts(new_posts)
-  #   end
-  #   self.delay(
-  #     :run_at =>
-  #     SUBSCRIPTION_FREQ.seconds.from_now
-  #     ).get_all_new_service_posts
-  # end
-
   def tweets
     Tweet.where(subscription_id: self.id)
   end
