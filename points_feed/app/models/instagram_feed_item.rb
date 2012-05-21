@@ -2,7 +2,8 @@ class InstagramFeedItem < ActiveRecord::Base
   attr_accessible :image_url, :comment, :posted_at, :user_id, :instagram_id
 
   belongs_to :user
-
+  before_create :validates_timeliness_of_post
+  
   def self.import(user, media_item)
     unless user.instagram_feed_items.map(&:instagram_id).include?(media_item.id)
       create_from_instagram(user, media_item)
@@ -23,5 +24,11 @@ class InstagramFeedItem < ActiveRecord::Base
 
   def decorate
     InstagramFeedItemDecorator.decorate(self)
+  end
+
+  def validates_timeliness_of_post
+    if posted_at < user.instagram_authentication.created_at
+      errors.add(:posted_at, "Feed item too early")
+    end
   end
 end

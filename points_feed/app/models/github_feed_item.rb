@@ -25,4 +25,10 @@ class GithubFeedItem < ActiveRecord::Base
   def decorate
     GithubFeedItemDecorator.decorate(self)
   end
+
+  def validates_timeliness_of_post
+    if posted_at < user.github_authentication.created_at
+      errors.add(:posted_at, "Feed item too early")
+    end
+  end
 end
