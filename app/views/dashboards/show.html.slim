@@ -21,14 +21,14 @@ script type="text/html" id="image_post_template"
     img.post-avatar src="http://www.enn.com/image_for_articles/33228-1.jpg/medium"
     .well
       .post-image
-        img src="{{url}}"
+        img src="{{url}}" class="lightbox"
         p.description {{description}}
       .post-actions
         li
-          a.btn href="/image_posts/{{id}}/edit"
+          a.btn href="/image_posts/{{image_post_id}}/edit"
             i.icon-edit Edit
         li
-          a.btn href="/image_posts/{{id}}" data-confirm="Are You Sure" data-method="delete" rel="nofollow"
+          a.btn href="/image_posts/{{image_post_id}}" data-confirm="Are You Sure" data-method="delete" rel="nofollow"
             i.icon-trash Remove
         li
            span.btn
@@ -43,10 +43,10 @@ script type="text/html" id="text_post_template"
         p  {{body}}
       .post-actions
         li
-          a.btn href="/text_posts/{{id}}/edit"
+          a.btn href="/text_posts/{{text_post_id}}/edit"
             i.icon-edit Edit
         li
-          a.btn href="/text_posts/{{id}}" data-confirm="Are You Sure" data-method="delete" rel="nofollow"
+          a.btn href="/text_posts/{{text_post_id}}" data-confirm="Are You Sure" data-method="delete" rel="nofollow"
             i.icon-trash Remove
         li
            span.btn
@@ -61,41 +61,11 @@ script type="text/html" id="link_post_template"
         p.description {{description}}
       .post-actions
         li
-          a.btn href="/link_posts/{{id}}/edit"
+          a.btn href="/link_posts/{{link_post_id}}/edit"
             i.icon-edit Edit
         li
-          a.btn href="/link_posts/{{id}}" data-confirm="Are You Sure" data-method="delete" rel="nofollow"
+          a.btn href="/link_posts/{{link_post_id}}" data-confirm="Are You Sure" data-method="delete" rel="nofollow"
             i.icon-trash Remove
         li
           span.btn
            i.icon-share-alt | {{type}}
-
-
-
-
-
-
-
-
-
-
-
-script type="text/html" id="text_post_template"
-  .post.well
-    .pull-right
-      a href="/text_posts/{{id}}/edit" Edit
-      br
-      a href="/text_posts/{{id}}" data-confirm="Are You Sure" data-method="delete" rel="nofollow" Remove
-    | {{title}}
-    | {{body}}
-    | {{type}}
-
-script type="text/html" id="link_post_template"
-  .post.well
-      .pull-right
-        a href="/link_posts/{{id}}/edit" Edit
-        br
-        a href="/link_posts/{{id}}" data-confirm="Are You Sure" data-method="delete" rel="nofollow" Remove
-      a href="{{link_url}}" target="_blank" {{link_url}}
-      | {{description}}
-      | {{type}}
