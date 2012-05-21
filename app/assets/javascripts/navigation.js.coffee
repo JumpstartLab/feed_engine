@@ -1,22 +1,6 @@
 setFlash = (message) ->
   $('#flash').show().text(message).fadeOut(3700)
 
-class User
-  constructor: (@email, @password) ->
-    @authenticated = false
-    @authenticate()
-  authenticate: =>
-    data = @infoToJSON()
-    $.post('/login',
-      data: data,
-      success: (data, status, xhr) =>
-        @authenticated = true
-        $('#dashboard').click()
-    ) 
-
-  infoToJSON: =>
-    { email: @email, password: @password }
-
 setUsername = ->
   $.getJSON('/current_user', (response, status, jqXHR) ->
       json_string = JSON.stringify(response)
@@ -30,8 +14,7 @@ spotlightToBackstage = ->
 
 navHandler = (navItem) ->
   $(navItem).click ->
-    spotlightToBackstage()
-    $('#spotlight').append($("#{navItem}-page"))
+    pageSwap("#{navItem}-page")
 
 
 
@@ -39,20 +22,18 @@ navHandler = (navItem) ->
 
 servicesHandler = ->
   $('#services').click ->
-    spotlightToBackstage()
     $.getJSON('/authentications', (response, status, jqxhr) ->
       providers = response['providers']
       for provider in providers
         $("##{provider[0]}_false").hide()
         $("##{provider[0]}_true").attr("href","/authentications/#{provider[1]}").show()
     )
-    $('#spotlight').append($("#services-page"))
+    pageSwap("#services-page")
 
 
 addDashboardHandler = ->
   $('#dashboard').click ->
-    spotlightToBackstage()
-    $('#spotlight').append($("#dashboard-page"))
+    pageSwap("#dashboard-page")
     renderDashboard()
 
 setCSRFToken = ->
@@ -132,11 +113,11 @@ addSignupHandler = ->
     formData = form.serialize()
     jqxhr = $.post("/signup", formData, "json")
     jqxhr.success( ->
-      setFlash('Signup successful! Welcome to FeedEngine')
       email = $('#user_email').val()
       password = $('#user_password').val()
-      $.feedengine.current_user = new User(email, password).email
-      form.clearForm())
+      firstLogin(email, password)
+      form.clearForm()
+    )
     jqxhr.error((response, status) ->
         resp = $.parseJSON(response['responseText'])
         $('#signup-page .errors').show()
@@ -184,7 +165,7 @@ addHandlers = ->
   addSignupHandler()
   addSigninHandler()
   addLogoutHandler()
-
+  addIntegrationHandlers()
 renderDashboard = ->
   if $.feedengine.current_user
     $('.tab-body ul').children().hide()
@@ -233,6 +214,41 @@ logout = ->
     setUsername()
     $('#home').click()
   )
+
+firstLogin = (email, password) ->
+  setFlash('Signup successful! Welcome to FeedEngine')
+  $.feedengine.current_user = email
+  jqxhr = login(email, password)
+  jqxhr.success((data, status, jqxhr) ->
+      refreshAccountMenu()
+      integrateTwitter()
+  )
+
+login = (email, password) ->
+  $.post('/login',
+    data: loginDataToJson(email, password)
+  )
+
+loginDataToJson = (email, password) ->
+  { email: email, password: password }
+
+addIntegrationHandlers = ->
+  $('#skip_twitter').click ->
+    pageSwap('#integrate_github')
+  $('#skip_github').click ->
+    pageSwap('#integrate_instagram')
+  $('#skip_instagram').click ->
+    $('#dashboard').click()
+
+integrateTwitter = ->
+  pageSwap('#integrate_twitter')
+
+pageSwap = (id)->
+  spotlightToBackstage()
+  backstageToSpotlight(id)
+
+backstageToSpotlight = (backstageId) ->
+  $('#spotlight').append($(backstageId))
 
 refreshAccountMenu =(email = $.feedengine.current_user) ->
   accountMenu = $('#account')

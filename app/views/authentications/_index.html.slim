@@ -6,3 +6,8 @@ h2 Your Authentications
     = link_to "Integrate Your #{service.capitalize}", "auth/#{service}/", id: "#{service}_false", target: "_blank"
 
     = link_to ' Remove This Authentication', "", confirm: 'Are you sure?', method: :delete, id: "#{service}_true", style: 'display: none;'
+
+br
+= render partial: "tweets/integrate"
+br
+= render partial: "githubevents/integrate"
