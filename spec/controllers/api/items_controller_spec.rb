@@ -1,56 +1,106 @@
 require 'spec_helper'
 
-describe Api::V1::ItemsController do
+describe Api::V1::ItemsController, :focus => true do
+  render_views
+
   let(:user) { Fabricate(:user) }
 
-  # describe "GET requests" do
-  #   context "item index" do
-  #     context "when the user has items" do
-  #       let!(:message) { Fabricate(:message, poster_id: user.id) }
-  #       let!(:link) { Fabricate(:link, poster_id: user.id) }
+  describe "GET requests" do
+    context "to index"
+    let(:params) {
+      {
+      :format       => :json,
+      :display_name => user.display_name
+    }
+    }
 
-  #       it "has the type of items created" do
-  #         visit api_v1_items_path(user.display_name) + '.json'
-  #         page.should have_content("Message")
-  #       end
+    it "have the user's details" do
+      get :index, params
+      response.body.should have_content(user.id)
+      response.body.should have_content(user.display_name)
+      response.body.should have_content(api_v1_items_path(user.display_name))
+    end
 
-  #       it "lists all items ever created" do
-  #         visit api_v1_items_path(user.display_name) + '.json'
-  #         page.should have_content(message.body)
-  #       end
-  #       it "lists all items ever created" do
-  #         visit api_v1_items_path(user.display_name) + '.json'
-  #         page.should have_content(link.url)
-  #       end
-  #     end
-  #   end
+    context "without items" do
+      it "shows page count of 0" do
+        get :index, params
+        response.body.should have_content(user.display_name)
+        response.body.should_not have_content("pages: 0")
+      end
 
-  #   context "item show page" do
-  #     let!(:message) { Fabricate(:message, poster_id: user.id) }
-  #     let!(:link) { Fabricate(:link, poster_id: user.id) }
+      it "do not have paginated links" do
+        get :index, params
+        response.body.should have_content(user.display_name)
+        response.body.should_not have_content("?page=1")
+      end
+    end
 
-  #     context "when it is a message" do
-  #       it "has the type of the item" do
-  #         visit api_v1_item_path(:display_name => user.display_name,
-  #                              :id => message.item.id) + '.json'
-  #         page.should have_content(message.body)
-  #       end
-  #       it "has the item's link" do
-  #         visit api_v1_item_path(:display_name => user.display_name,
-  #                              :id => message.item.id) + '.json'
-  #         page.should have_content("/items/#{message.item.id}")
-  #       end
-  #     end
+    context "with items" do
+      let!(:message1) { Fabricate(:message, poster_id: user.id) }
+      let!(:message2) { Fabricate(:message, poster_id: user.id) }
+      let!(:message3) { Fabricate(:message, poster_id: user.id) }
+      let!(:message4) { Fabricate(:message, poster_id: user.id) }
 
-  #     context "when it is a link" do
-  #       it "has the url of the item" do
-  #         visit api_v1_item_path(:display_name => user.display_name,
-  #                              :id => link.item.id) + '.json'
-  #         page.should have_content(link.url)
-  #       end
-  #     end
-  #   end
-  # end
+      it "the response is paginated" do
+        get :index, params
+        response.body.should have_content(user.post_page_count)
+        response.body.should have_content("?page=1")
+        response.body.should have_content("?page=#{user.post_page_count}")
+      end
+
+      it "have the post_type of the most recent post" do
+        get :index, params
+        response.body.should have_content("Message")
+      end
+
+      it "have the link of the most recent post" do
+        get :index, params
+        response.body.should have_content("/items/#{message4.item.id}")
+      end
+
+      it "do not include information about older posts" do
+        get :index, params
+        response.body.should_not have_content("/items/#{message1.item.id}")
+      end
+
+      it "contains only the most recent three item's details" do
+        get :index, params
+        parsed = JSON.parse(response.body)
+        test_bodies = [message2, message3, message4].map(&:body)
+
+        parsed["items"]["most_recent"].map { |item| item["body"] }.each do |body|
+          test_bodies.should include body
+          body.should_not == message1.body
+        end
+      end
+    end
+
+    context "to show" do
+      let!(:message) { Fabricate(:message) }
+      let(:params) {
+        {
+        :format       => :json,
+        :display_name => user.display_name,
+        :id => message.item.id
+      }
+      }
+
+      it "have the user's details" do
+        get :show, params
+        response.body.should have_content(user.id)
+        response.body.should have_content(user.display_name)
+        response.body.should have_content(api_v1_items_path(user.display_name))
+      end
+
+      it "have all the item details" do
+        get :show, params
+        item = JSON.parse(response.body)
+        item["type"].should == "Message"
+        item["id"].should == message.id
+        item["body"].should == message.body
+      end
+    end
+  end
 
   describe "POST requests" do
     let(:item) {
@@ -85,7 +135,7 @@ describe Api::V1::ItemsController do
                         'body' => 'Lovebuckets!'}
       end
 
-      it "persists a message for a user with correct attributes", :focus => true do
+      it "persists a message for a user with correct attributes" do
         post :create,
              :format => :json,
              :display_name => user.display_name,
