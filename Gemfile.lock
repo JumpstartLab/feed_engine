@@ -111,6 +111,9 @@ GEM
     has_scope (0.5.1)
     hashie (1.2.0)
     hike (1.2.1)
+    httparty (0.8.2)
+      multi_json
+      multi_xml
     httpauth (0.1)
     i18n (0.6.0)
     jbuilder (0.4.0)
@@ -141,6 +144,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.18)
     multi_json (1.0.4)
+    multi_xml (0.4.4)
     multipart-post (1.1.5)
     nokogiri (1.5.2)
     oauth (0.4.6)
@@ -293,6 +297,7 @@ DEPENDENCIES
   growl
   guard-rspec
   has_scope
+  httparty
   instagram!
   jbuilder
   jquery-rails

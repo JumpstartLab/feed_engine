@@ -22,6 +22,7 @@ gem 'jbuilder'
 gem 'whenever', require: false
 gem 'delayed_job_active_record'
 gem 'faraday', '0.7.6'
+gem 'httparty'
 
 group :production do
   gem 'pg'
