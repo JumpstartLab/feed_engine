@@ -1,5 +1,9 @@
-div class="pull-right"
-  #{link_to "Remove", image_post_path(post.id), method: :delete, confirm: "Are You Sure"}
-  #{link_to "Edit", edit_image_post_path(post.id)}
-h3 = post.twitter_id
-p = post.text
+.post
+  img.post-avatar src="http://www.enn.com/image_for_articles/33228-1.jpg/medium"
+  .well
+    .post-activity
+      p.text {{text}}
+    .post-actions
+      li
+        span.btn
+         i.icon-share-alt | {{type}}
