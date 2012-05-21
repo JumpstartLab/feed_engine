@@ -61,7 +61,7 @@ end
 
 Given /^I am signed in$/ do
   visit new_user_session_path
-  fill_in "Email", with: @user1.email
+  fill_in "Login", with: @user1.email
   fill_in "Password", with: "charles"
   within("form") do
     click_link_or_button "Sign in"

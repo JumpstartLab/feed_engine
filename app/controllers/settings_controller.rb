@@ -1,4 +1,4 @@
-class SettingsControllerController < ApplicationController
+class SettingsController < ApplicationController
   def edit
     @user = current_user
   end
