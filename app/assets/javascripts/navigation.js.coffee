@@ -1,8 +1,4 @@
 setFlash = (message) ->
-  $('#post').show().text(message).fadeOut(3700)
-
-
-setFlash = (message) ->
   $('#flash').show().text(message).fadeOut(3700)
 
 class User
@@ -70,7 +66,11 @@ setCSRFToken = ->
   )
 
 addNavHandlers = ->
+<<<<<<< HEAD
+  navItems = ['#friends', '#feeds', '#home']
+=======
   navItems = ['#friends', '#feeds', '#home', '#signin', '#signup', '#services']
+>>>>>>> 4c76f84465ac4af1cd48d60234a703ef7b35d32c
   pageIDs = (id + '-page' for id in navItems)
   
   for id in navItems

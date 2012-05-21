@@ -1,4 +1,4 @@
-class PostsController < ApplicationController
+  class PostsController < ApplicationController
   include PostsHelper
 
   def create
