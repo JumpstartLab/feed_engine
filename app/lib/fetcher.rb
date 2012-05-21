@@ -1,7 +1,7 @@
 module Fetcher
   def self.create_post_from_twitter(user_id, status)
     User.find(user_id).twitter_posts.create(
-      twitter_id: status.id.to_s,
+      twitter_id: status.id,
       text: status.text,
       created_at: status.created_at
       )
