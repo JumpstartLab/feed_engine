@@ -166,6 +166,7 @@ addHandlers = ->
   addSigninHandler()
   addLogoutHandler()
   addIntegrationHandlers()
+
 renderDashboard = ->
   if $.feedengine.current_user
     $('.tab-body ul').children().hide()
@@ -230,15 +231,38 @@ login = (email, password) ->
   )
 
 loginDataToJson = (email, password) ->
-  { email: email, password: password }
+  { 'email': email, 'password': password }
 
 addIntegrationHandlers = ->
+  skipHandlers()
+  $('.integration_handler').click ->
+    service = $(this).data('service')
+    window.open("auth/#{service}")
+    checkForAuthentication(service)
+
+skipHandlers = ->
   $('#skip_twitter').click ->
     pageSwap('#integrate_github')
   $('#skip_github').click ->
     pageSwap('#integrate_instagram')
   $('#skip_instagram').click ->
     $('#dashboard').click()
+
+checkForAuthentication = (provider) ->
+  $(window).focus ->
+    response = $.getJSON("/checkauth/#{provider}")
+    response.success((response, status) ->
+      if response['auth']
+        setFlash("Authentication with #{provider} successful!")
+        $("skip_#{provider}").click
+      else
+        setFlash("Authentication unsuccessful")
+      window.unbind('focus')
+    )
+    response.error( ->
+      setFlash('Something went wrong :(')
+      window.unbind('focus')
+    )
 
 integrateTwitter = ->
   pageSwap('#integrate_twitter')

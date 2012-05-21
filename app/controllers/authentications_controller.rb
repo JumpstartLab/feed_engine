@@ -22,6 +22,10 @@ class AuthenticationsController < ApplicationController
     redirect_to root_path
   end
 
+  def check
+    @authd = current_user.authentications.find_by_provider(params[:provider]).exists?
+  end
+
   private
 
   def get_handle(auth)
