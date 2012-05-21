@@ -16,6 +16,7 @@ PointsFeed::Application.routes.draw do
   end
 
   resource :dashboard
+  resources :friends
 
   namespace :api do
     resources :feeds do

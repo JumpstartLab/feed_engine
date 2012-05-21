@@ -22,6 +22,7 @@
       <div class='span4'>
         <ul id='nav_tabs' class="nav nav-pills nav-stacked well">
           <li><a href="#posts_tab" data-toggle="tab">Post</a></li>
+          <li><a href="#refeeds_tab" data-toggle="tab">Refeeds</a></li>
           <li><a href="#edit_account_tab" data-toggle="tab">Edit Account</a></li>
           <li><a href="#authentications_tab" data-toggle="tab">Services</a></li>
         </ul>
@@ -40,6 +41,24 @@
           <div class="tab-content">
             <div class="tab-pane active" id="posts_tab">
               <%= render 'posts/form' %>
+            </div>
+            <div class='tab-pane' id='refeeds_tab'>
+              <div class='grey-box'>
+                <h3>Your Friends</h3>
+                <hr />
+                <table class="table">
+                  <tr>
+                    <th>User</th>
+                    <th>Action</th>
+                  </tr>
+                  <% current_user.friends.each do |friend| %>
+                    <tr>
+                      <td><%= friend.display_name %></td>
+                      <td><%= link_to "Remove Friend", friend_path(friend), :confirm => "Are you sure?", :method => :delete %>
+                    </tr>
+                  <% end %>
+                </table>
+              </div>
             </div>
             <div class='tab-pane' id='edit_account_tab'>
               <div class='grey-box'>

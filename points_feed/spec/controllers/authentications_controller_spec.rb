@@ -38,7 +38,7 @@ describe AuthenticationsController do
   it "destroy action should destroy model and redirect to index action" do
     authentication = Authentication.first
     delete :destroy, :id => authentication
-    response.should redirect_to(authentications_url)
+    response.should redirect_to(dashboard_path)
     Authentication.exists?(authentication.id).should be_false
   end
 end
