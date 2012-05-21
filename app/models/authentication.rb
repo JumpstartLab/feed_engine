@@ -22,7 +22,7 @@ class Authentication < ActiveRecord::Base
     return user
   end
 
-  private 
+  private
 
   def initial_gathering
     Resque.enqueue("#{provider.capitalize}Job".constantize, user, self)

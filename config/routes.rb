@@ -24,13 +24,12 @@ FeedEngine::Application.routes.draw do
   resources :text_items
   resources :link_items
   resources :image_items
+  resources :external_accounts
+  resources :subscriptions, :only => [:create, :destroy]
   resources :stream_items, :only => [:create]
   devise_for :users, :controllers => { :registrations => "users/registrations" }
 
-
-  
   devise_for :users
-
 
   constraints :subdomain => "api" do
     match "feeds/:display_name/items" => "api/stream_items#create", :as => "new_api_item", :via => :post
@@ -44,6 +43,7 @@ FeedEngine::Application.routes.draw do
     end
   end
 
+  # if there's a subdomain, send them to feed#show, treat dashboard as root
   scope :api do
     match "feeds/:display_name/items" => "api/stream_items#create", :as => "new_api_item", :via => :post
     match "feeds/:display_name" => "api/feeds#show", :as => "api_feed", :via => :get
@@ -58,7 +58,5 @@ FeedEngine::Application.routes.draw do
 
   # if there's a subdomain, send them to feed#show, otherwise treat root as dashboard
   match '', to: 'feed#show', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
-  
-  
   root :to => 'dashboard#show'
 end

@@ -55,7 +55,7 @@ describe "Feed" do
 
     context "and there is less than 12 posts" do
       before(:each) do
-        5.times do 
+        5.times do
           text_item = FactoryGirl.create(:text_item, :user => user)
         end
         visit site_domain
@@ -70,7 +70,7 @@ describe "Feed" do
 
     context "and there are more than 12 posts" do
       before(:each) do
-        15.times do 
+        15.times do
           text_item = FactoryGirl.create(:text_item, :user => user)
         end
         visit site_domain
@@ -90,7 +90,7 @@ describe "Feed" do
     let!(:user_2) { FactoryGirl.create(:user) }
 
     before(:each) do
-      5.times do 
+      5.times do
         text_item = FactoryGirl.create(:text_item, :user => user_2)
       end
     end
@@ -127,6 +127,11 @@ describe "Feed" do
 
     context "when a logged in user views another feed" do
       it "shows a button to refeed each post" do
+        # VoodooDoubleLogin(tm)
+        # login(user) is a devise helper to convince devise u are logged in
+        # login_factory_user makes a post to sessions controller
+        # in order to keep you logged in across subdomains
+        # no one knows.
         login_factory_user(user_3.email)
         login(user_3)
         visit user_4_domain
