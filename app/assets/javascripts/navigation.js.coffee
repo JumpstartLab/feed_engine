@@ -38,18 +38,15 @@ navHandler = (navItem) ->
 
 
 servicesHandler = ->
- $('#services').click ->
-   spotlightToBackstage()
-   $.getJSON('/authentications', (response, status, jqxhr) ->
-    
-    providers = response['providers']
-    for provider in providers
-      $("##{provider}_false").hide()
-      $("##{provider}_true").show())
-   $('#spotlight').append($("#services-page"))
-
-
-
+  $('#services').click ->
+    spotlightToBackstage()
+    $.getJSON('/authentications', (response, status, jqxhr) ->
+      providers = response['providers']
+      for provider in providers
+        $("##{provider[0]}_false").hide()
+        $("##{provider[0]}_true").attr("href","/authentications/#{provider[1]}").show()
+    )
+    $('#spotlight').append($("#services-page"))
 
 
 addDashboardHandler = ->

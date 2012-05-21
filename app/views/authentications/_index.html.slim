@@ -5,4 +5,4 @@ h2 Your Authentications
 
     = link_to "Integrate Your #{service.capitalize}", "auth/twitter/", id: "#{service}_false", target: "_blank"
 
-    = link_to ' Remove This Authentication', current_user.authentications.find_by_provider('twitter'), confirm: 'Are you sure?', method: :delete, id: "#{service}_true", style: 'display: none;'
+    = link_to ' Remove This Authentication', "", confirm: 'Are you sure?', method: :delete, id: "#{service}_true", style: 'display: none;'
