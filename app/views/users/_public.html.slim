@@ -11,10 +11,8 @@
         = (post.local_created_at).strftime("%l:%M%P")
     br/
     p.post-body
-      - if post.message? || post.tweet?
+      - if post.message?
         = post.body
-      - if post.github_event?
-        | #{post.event_type} on #{post.repo}
       - if post.link?
         h3
           = link_to post.url, post.url
@@ -24,10 +22,18 @@
         = image_tag post.url
         p
           = post.description
+      - if post.tweet?
+        = post.body
+      - if post.github_event?
+        | #{post.event_type} on #{post.repo}
+      - if post.user == current_user
+        p#points Points! (#{post.points})
+      - else
+        p#points = link_to "Points! (#{post.points})", item_path(post.item, :subdomain => false, :points => true), :method => :put
     p
       = link_to post.user.display_name, root_url(:subdomain => post.user.subdomain)
       - if post.tweet?
         |  via Twitter
       - if post.github_event?
         |  via  Github
-  = paginate @posts
+= paginate @posts

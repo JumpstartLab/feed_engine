@@ -8,6 +8,7 @@
 #  created_at      :datetime        not null
 #  updated_at      :datetime        not null
 #  poster_id       :integer
+#  points          :integer         default(0)
 #
 
 # For tweets on a user who has authorized twitter

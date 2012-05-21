@@ -30,6 +30,13 @@ class Item < ActiveRecord::Base
     all_items_sorted.collect { |item| item.post }
   end
 
+  def self.give_point_to(item_id)
+    item = Item.find(item_id)
+    post_type = item.post_type.constantize
+    post = post_type.find(item.post_id)
+    post.increase_point_count
+  end
+
   def poster
     User.where(id: poster_id)
   end
