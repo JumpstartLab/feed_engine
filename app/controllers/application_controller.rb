@@ -37,6 +37,10 @@ class ApplicationController < ActionController::Base
     session[:return_to] = nil
   end
 
+  def remove_point_pending
+    session[:point_pending_for] = nil
+  end
+
   def create_user_session
     session[:user_id] = @user.id
   end

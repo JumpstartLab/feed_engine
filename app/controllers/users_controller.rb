@@ -1,6 +1,8 @@
 # The controller for a user - creating and editing accounts and showing posts
 class UsersController < ApplicationController
   after_filter :send_welcome_email, only: :create
+  before_filter :remove_point_pending, only: :show
+
   def new
     @user = User.new
   end
