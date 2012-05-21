@@ -1,0 +1,35 @@
+<div class="dashboard-title offset3">
+  <h1>Dashboard</h1>
+</div>
+
+<br/>
+<div class="item-container offset3 span6">
+<br/>
+<ul class="nav nav-tabs" id="submit_tabs">
+  <li><a href="#text" data-toggle="tab">Text</a></li>
+  <li><a href="#link" data-toggle="tab">Link</a></li>
+  <li><a href="#image" data-toggle="tab">Image</a></li>
+  <li><a href="#account" data-toggle="tab">Account</a></li>
+  <li><a href="#services" data-toggle="tab">Services</a></li>
+</ul>
+
+<div class="tab-content" >
+  <div class="tab-pane" id="text">
+    <%= render 'text_items/form' %>
+  </div>
+  <div class="tab-pane" id="link">
+    <%= render 'link_items/form' %>
+  </div>
+  <div class="tab-pane" id="image">
+     <%= render 'image_items/form' %>
+  </div>
+  <div class="tab-pane" id="account">
+    <%= render :partial => 'devise/registrations/edit_form' %>
+  </div>
+  <div class="tab-pane" id="services">
+    <%= render :template => 'authentications/index'  %>
+  </div>
+  
+</div>
+</ul>
+</div>

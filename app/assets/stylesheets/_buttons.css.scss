@@ -1,0 +1,35 @@
+@import "variables";
+
+$submit-button-padding: 10px 40px 10px 40px;
+
+@mixin trout-button {
+	background-color: $trout-main-color;
+	font-family: $font;
+  font-weight: 500;
+  font-size: 18px;
+  float: center;
+  margin: 5px;
+}
+
+.login-button {
+  padding: 10px 40px 10px 40px;
+  margin: 10px 0 0 120px;
+}
+
+.signup-button {
+  padding: 10px 40px 10px 40px;
+  margin: 10px 0 0 0px;
+}
+
+.signup-cancel-button {
+  padding: 10px 30px 10px 30px;
+  margin: 10px 0 0 5px;
+}
+
+.service-continue-container {
+  padding: 220px 0 0 25px;
+}
+
+.service-btn {
+  padding: 20px 80px 20px 80px;
+}

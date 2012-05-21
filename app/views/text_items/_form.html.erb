@@ -1,0 +1,5 @@
+<%= simple_form_for @text_item, :id => "text_item" do |f| %>
+  <%= f.input :body, :label_html => {:class => "text-item-label"}, 
+              :input_html => {:class => "text-item-text-area"} %>
+  <%= f.button :submit, "Textify", :class => "btn-primary btn-large text-item-submit" %>
+<% end %>

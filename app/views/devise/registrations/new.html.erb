@@ -1,0 +1,26 @@
+<br/>
+<div class="span3 offset4 trout-container">
+  <h1 class="signup-title">Sign up</h1>
+  <br/>
+
+  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+    <%= devise_error_messages! %>
+
+    <%= f.label :email %>
+    <%= f.email_field :email, :class => "signup-input" %>
+
+    <%= f.label :display_name %>
+    <%= f.text_field :display_name, :class => "signup-input" %>
+
+    <%= f.label :password %>
+    <%= f.password_field :password, :class => "signup-input" %>
+
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, :class => "signup-input" %>
+
+    <div>
+      <%= f.submit "Sign up", :class => "signup-button btn-primary btn-large" %>
+      <%= link_to "Cancel", root_path, :class => "signup-cancel-button btn" %>
+  </div>
+    <% end %>
+</div>

@@ -1,0 +1,75 @@
+// Place all the styles related to the Dashboard controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "buttons";
+@import "containers";
+@import "variables";
+
+.dashboard-text-field {
+  @include text-field;
+  width: 400px;
+}
+
+.dashboard-password-field {
+  @include text-field;
+  width: 300px;
+}
+
+@mixin dashboard-text-area {
+  width: 400px;
+  height: 100px;
+  font-size: $input-font-size;
+}
+
+.text-item-text-area {
+  @include dashboard-text-area;
+}
+
+.link-item-text-area {
+  @include dashboard-text-area;
+  width: 400px;
+}
+
+.text-item-label {
+  font-family: $font;
+  font-size: 16px;
+  padding: 0 0 10px 0;
+}
+
+@mixin submit_button {
+  margin-left: 435px;
+}
+
+.new_text_item input[type="submit"] {
+  @include submit_button;
+}
+
+.new_link_item input[type="submit"] {
+  @include submit_button;
+}
+
+.new_image_item input[type="submit"] {
+  @include submit_button;
+}
+
+.edit_user input[type="submit"] {
+  margin: 0 0 0 350px;
+}
+
+.link-item-submit-button {
+  @include trout-button;
+  margin: 10px 0 0 330px;
+  padding: $submit-button-padding; 
+}
+
+.dashboard-title {
+  font-family: $font;
+}
+
+.form_field_error { 
+  color: $error-color;
+  font-size: $error-font-size;
+  padding: 0 0 0 120px;
+  background-color: transparent;
+}
