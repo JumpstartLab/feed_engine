@@ -33,6 +33,26 @@ navHandler = (navItem) ->
     spotlightToBackstage()
     $('#spotlight').append($("#{navItem}-page"))
 
+
+
+
+
+servicesHandler = ->
+  $('#services').click ->
+    spotlightToBackstage()
+    $.getJSON('/authentications', @parseServices)
+    $('#spotlight').append($("#services-page"))
+
+
+parseServices = (response, status, jqxhr) ->
+    auths = response['authentications']
+    for auth in auths
+      provider = auth["provider"]
+
+
+
+
+
 addDashboardHandler = ->
   $('#dashboard').click ->
     spotlightToBackstage()
@@ -47,7 +67,11 @@ setCSRFToken = ->
   )
 
 addNavHandlers = ->
+<<<<<<< HEAD
   navItems = ['#friends', '#feeds', '#home']
+=======
+  navItems = ['#friends', '#feeds', '#home', '#signin', '#signup', '#services']
+>>>>>>> 4c76f84465ac4af1cd48d60234a703ef7b35d32c
   pageIDs = (id + '-page' for id in navItems)
   
   for id in navItems
@@ -70,6 +94,18 @@ jQuery ->
   setUsername()
 
 ######################### DASHBOARD ############################
+
+
+
+$.namespace = {
+  activeTabId: null,
+  activateTab: (tabId)->
+    if $.namespace.activateTabId
+      $("##{$.namespace.activateTabId}").removeClass('selected')
+    $("##{tabId}").addClass('selected')
+    $.namespace.activateTabId = tabId
+}
+
 
 addSubmitHandlers = ->
   $(".errors").hide()
