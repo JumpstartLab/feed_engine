@@ -14,5 +14,4 @@ class Api::FriendsController < Api::ApiController
       validation_error(friendship)
     end
   end
-  
 end
