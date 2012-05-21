@@ -63,4 +63,13 @@ describe Item do
     image.item.post.should == image
     link.item.post.should == link
   end
+
+  pending "doesn't identify as a refeed if it was created by the associated user"
+  pending "deletes any associated refeeds when destroyed"
+
+  describe "that is a refeed" do
+    pending "identifies as a refeed if it was not created by the associated user" do
+      refeed.should be_a refeed
+    end
+  end
 end
