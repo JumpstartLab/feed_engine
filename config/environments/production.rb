@@ -1,3 +1,9 @@
+require 'pusher'
+
+Pusher.app_id = '20778'
+Pusher.key    = 'a80590b86d5da228d97d'
+Pusher.secret = '2366821ae661fd2b80c0'
+
 FeedEngine::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
