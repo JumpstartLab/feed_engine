@@ -22,3 +22,4 @@ class PostsPager
       template = $("##{type}_template").html()
       $('#posts').append Mustache.to_html(template, post)
     $(window).scroll(@check) if posts.length > 0
+
