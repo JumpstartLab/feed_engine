@@ -10,22 +10,22 @@ user = User.create(email: 'ed.weng@livingsocial.com',
                    password: 'hungry',
                    display_name: 'wengzilla')
 
-
-user.growls << FactoryGirl.create(:image)
-user.growls << FactoryGirl.create(:link)
-user.growls << FactoryGirl.create(:message)
-user.growls << FactoryGirl.create(:message)
-user.growls << FactoryGirl.create(:link)
-user.growls << FactoryGirl.create(:image)
+user.update_attribute("authentication_token", "HUNGRLR")
+FactoryGirl.create(:image, user: user)
+FactoryGirl.create(:link, user: user)
+FactoryGirl.create(:message, user: user)
+FactoryGirl.create(:message, user: user)
+FactoryGirl.create(:link, user: user)
+FactoryGirl.create(:image, user: user)
 
 user = User.create(email: 'mikesilvis@gmail.com',
                    password: 'hungry',
                    display_name: 'mikesilvis')
-user.update_attribute("authentication_token", "HUNGRLR")
+user.update_attribute("authentication_token", "HUNGRLRx2")
 
-user.growls << FactoryGirl.create(:image)
-user.growls << FactoryGirl.create(:link)
-user.growls << FactoryGirl.create(:message)
-user.growls << FactoryGirl.create(:message)
-user.growls << FactoryGirl.create(:link)
-user.growls << FactoryGirl.create(:image)
+FactoryGirl.create(:image, user: user)
+FactoryGirl.create(:link, user: user)
+FactoryGirl.create(:message, user: user)
+FactoryGirl.create(:message, user: user)
+FactoryGirl.create(:link, user: user)
+FactoryGirl.create(:image, user: user)
