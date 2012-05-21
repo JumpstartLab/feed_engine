@@ -67,7 +67,7 @@ class Authentication < ActiveRecord::Base
   def create_instagram_details(data)
     create_instagram_account(uid: data["uid"],
                              nickname: data["info"]["nickname"],
-                             image: data["extra"]["raw_info"]["avatar_url"],
+                             image: data["info"]["image"],
                              last_status_id: DateTime.now)
   end
 end

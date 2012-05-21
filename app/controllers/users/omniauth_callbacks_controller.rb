@@ -24,8 +24,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   private
 
   def get_omniauth_data
-    raise @data.inspect
-
     @data = request.env["omniauth.auth"]
   end
 
