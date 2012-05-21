@@ -1,7 +1,12 @@
 class Api::ApiController < ActionController::Base
   respond_to :json, :xml
+  # rescue_from Exception, :with => :validation_exception
 
   private
+
+  # def validation_exception(e)
+  #   render :json => e
+  # end
 
   def validation_error(obj)
     error(406, obj.errors.full_messages)

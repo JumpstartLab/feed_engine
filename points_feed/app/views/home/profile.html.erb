@@ -1,6 +1,7 @@
 <% unless @user.blank? %>
   <script type="text/javascript">
     display_name = "<%= @user.display_name %>";
+    user_id = "<%= @user.id %>";
     access_token = "";
   </script>
 <% end %>
@@ -25,7 +26,15 @@
           <div>
             <img src="<%= @user.avatar %>" style='float:left'></img>
             <div style='float:left; margin-left: 15px; color: white'>
-              <h3><%= @user.display_name %></h3>
+              <h3><%= @user.display_name %></h3><br />
+
+              <% if current_user != @user %>
+                <% if current_user.friends.exclude?(@user) %>
+                  <%= link_to 'Subscribe', '#', :class => 'btn btn-warning', :id => 'subscribe_button' %>
+                <% else %>
+                  <%= link_to 'Subscribed', '#', :class => 'btn btn-warning disabled', :id => 'subscribed_button' %>
+                <% end %>
+              <% end %>
             </div>
           </div>
           <div style='clear:both'></div>

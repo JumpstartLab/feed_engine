@@ -33,14 +33,14 @@ class User < ActiveRecord::Base
   has_many :friends, :through => :friendships
 
   has_many :pending_friends, :through => :friendships, 
-                             :source => :user,
+                             :source => :friend,
                              :conditions => {'friendships.status' => Friendship::PENDING }
   has_many :active_friends,  :through => :friendships, 
-                             :source => :user,
-                           :conditions => {'friendships.status' => Friendship::ACTIVE }
+                             :source => :friend,
+                             :conditions => {'friendships.status' => Friendship::ACTIVE }
   has_many :ignored_friends,  :through => :friendships, 
-                           :source => :user,
-                           :conditions => {'friendships.status' => Friendship::IGNORED }
+                              :source => :friend,
+                              :conditions => {'friendships.status' => Friendship::IGNORED }
 
  
 
@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
   end
 
   def stream(limit, offset=0)
-    items = self.posts + self.twitter_feed_items + self.github_feed_items + self.instagram_feed_items
+    items = self.posts + self.twitter_feed_items + self.github_feed_items + self.instagram_feed_items 
     items = items.sort_by { |item| item.posted_at }.reverse
     items.slice(offset, offset + limit)
   end
@@ -121,6 +121,10 @@ class User < ActiveRecord::Base
  def instagram_authentication
     self.authentications.where(:provider => 'instagram').first
   end
+
+  # def posts_by_friends
+  #   active_friends.map { |friend| friend.posts() }.flatten.uniq
+  # end
 
   private
 
