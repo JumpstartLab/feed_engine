@@ -216,7 +216,7 @@ describe User do
         end
         it "can choose not to authorize a service" do
           click_button "Sign Up"
-          click_link_or_button "Skip this step"
+          click_link_or_button "Connect Later"
           page.should have_content "account later"
         end
       end
