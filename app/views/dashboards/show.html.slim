@@ -95,30 +95,5 @@ script type="text/html" id="twitter_post_template"
           span.btn
            i.icon-share-alt | {{type}}
 
-
-
-
-
-
-script type="text/html" id="text_post_template"
-  .post.well
-    .pull-right
-      a href="/text_posts/{{id}}/edit" Edit
-      br
-      a href="/text_posts/{{id}}" data-confirm="Are You Sure" data-method="delete" rel="nofollow" Remove
-    | {{title}}
-    | {{body}}
-    | {{type}}
-
-script type="text/html" id="link_post_template"
-  .post.well
-      .pull-right
-        a href="/link_posts/{{id}}/edit" Edit
-        br
-        a href="/link_posts/{{id}}" data-confirm="Are You Sure" data-method="delete" rel="nofollow" Remove
-      a href="{{link_url}}" target="_blank" {{link_url}}
-      | {{description}}
-      | {{type}}
-
 div id="totop"
   h3 Back to Top
