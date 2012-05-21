@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(:version => 20120521141937) do
     t.string   "repo"
     t.string   "event_id"
     t.string   "action"
-    t.datetime "event_time"
+    t.datetime "post_time"
     t.integer  "user_id"
     t.text     "content"
     t.datetime "created_at", :null => false
@@ -61,8 +61,9 @@ ActiveRecord::Schema.define(:version => 20120521141937) do
     t.string   "content"
     t.string   "source_id"
     t.string   "handle"
-    t.string   "post_time"
+    t.datetime "post_time"
     t.string   "caption"
+    t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -99,7 +100,7 @@ ActiveRecord::Schema.define(:version => 20120521141937) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "handle"
-    t.datetime "tweet_time"
+    t.datetime "post_time"
   end
 
   create_table "users", :force => true do |t|

@@ -5,7 +5,7 @@ class CreateGithubevents < ActiveRecord::Migration
       t.string :repo
       t.string :event_id
       t.string :action
-      t.datetime :event_time
+      t.datetime :post_time
       t.integer :user_id
       t.text :content
       t.timestamps

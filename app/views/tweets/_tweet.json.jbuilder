@@ -1,4 +1,4 @@
-json.(tweet, :id, :content, :tweet_time, :handle)
+json.(tweet, :id, :content, :post_time, :handle)
 json.type "tweet"
-json.tweet_time time_ago_in_words(tweet.tweet_time)
+json.post_time time_ago_in_words(tweet.post_time)
 json.handle tweet.handle

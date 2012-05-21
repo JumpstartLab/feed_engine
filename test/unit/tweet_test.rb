@@ -7,12 +7,12 @@ describe Tweet do
       :content => "Ima tweet!",
       :source_id => "123456", 
       :handle => "@Omar", 
-      :tweet_time => time)
+      :post_time => time)
     assert_equal tweet.valid?, true
     assert_equal tweet.user_id, 1
     assert_equal tweet.content, "Ima tweet!"
     assert_equal tweet.source_id, "123456"
     assert_equal tweet.handle, "@Omar"
-    assert_equal tweet.tweet_time, time
+    assert_equal tweet.post_time, time
   end
 end

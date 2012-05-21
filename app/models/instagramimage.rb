@@ -1,7 +1,7 @@
 class Instagramimage < ActiveRecord::Base
   include PostsHelper
   has_one :post, :as => :postable
-  attr_accessible :content, :handle, :post_time, :source_id, :post_time, :caption
+  attr_accessible :content, :handle, :post_time, :source_id, :post_time, :caption, :user_id
 
   def self.import_posts(user_id)
     user = User.find(user_id)
@@ -26,8 +26,13 @@ class Instagramimage < ActiveRecord::Base
     
     mash.data.reverse.each do |gram|
       post_time = DateTime.strptime("#{gram.created_time}",'%s')
-      if Instagramimage.find_by_source_id(gram.caption.id).blank?
-        image = Instagramimage.create(content: gram.images.standard_resolution.url, source_id: gram.caption.id, handle: gram.caption.from.username, post_time: post_time, caption: gram.caption.text)
+      if Instagramimage.find_by_source_id(gram.caption.id).blank? && post_time > sign_up_time
+        image = Instagramimage.create(content: gram.images.standard_resolution.url,
+                                      source_id: gram.caption.id,
+                                      handle: gram.caption.from.username,
+                                      post_time: post_time,
+                                      caption: gram.caption.text,
+                                      user_id: user.id)
         image.link_to_poly_post(image, user.feed)
       end
     end
