@@ -14,6 +14,11 @@
     <%= stylesheet_link_tag "application", :media => "all" %>
     <script type="text/javascript" src="http://use.typekit.com/kfc3ufv.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <% unless current_user.blank? %>
+      <script type="text/javascript">
+        access_token = "<%= current_user.authentication_token %>";
+      </script>
+    <% end %>
     <!-- <link href="images/favicon.ico" rel="shortcut icon"> -->
     <link href="images/apple-touch-icon.png" rel="apple-touch-icon">
     <link href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
