@@ -1,0 +1,7 @@
+$('#stream-items').append('<%= j render :partial => 'item', :collection => @items %>');
+<% if @stream_items.last_page? %>
+  $('.pagination').remove();
+<% else %>
+  $('.pagination').replaceWith('<%= j paginate @stream_items %>')
+<% end %>
+

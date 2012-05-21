@@ -1,13 +1,9 @@
-<div class="span7">
+<div class="span7" id="stream-items">
   <h1 class="feed-title span7"><%= @feed_owner.display_name %>'s stream</h1>
   <% if @items %>
-      <% @items.each do |item| %>
-          <div class="span7 row feed_row">
-            <%= render :partial => "item", :locals => {:item => item} %>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
+    <%= render :partial => "item", :collection => @items %>
+  <% end %>
+</div>
 
   <div class="feed-meta-container offset1 span3">
     <table>
