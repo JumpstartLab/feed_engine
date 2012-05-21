@@ -5,10 +5,6 @@ div class="span8 stream"
   h1 Your Stream
   div id="posts" data-json-url="#{items_url(user_display_name: current_user.display_name, format: :json)}"
 
-
-br
-br
-br
 div class="span3 pull-right well"
   h2 Mini-Dash
   = link_to "View Your Live Stream!", root_url(subdomain: current_user.display_name), class: "btn btn-primary"
@@ -21,21 +17,74 @@ div class="span3 pull-right well"
 
 / Mustache templates
 script type="text/html" id="image_post_template"
-  .post.well
-    .pull-right
-      a href="/image_posts/{{id}}/edit" Edit
-      br/
-      a href="/image_posts/{{id}}" data-confirm="Are You Sure" data-method="delete" rel="nofollow" Remove
-    .thumbnail
-      img src="{{url}}"
-    | {{description}}
-    | {{type}}
+  .post
+    img.post-avatar src="http://www.enn.com/image_for_articles/33228-1.jpg/medium"
+    .well
+      .post-image
+        img src="{{url}}"
+        p.description {{description}}
+      .post-actions
+        li
+          a.btn href="/image_posts/{{id}}/edit"
+            i.icon-edit Edit
+        li
+          a.btn href="/image_posts/{{id}}" data-confirm="Are You Sure" data-method="delete" rel="nofollow"
+            i.icon-trash Remove
+        li
+           span.btn
+            i.icon-camera | {{type}}
+
+script type="text/html" id="text_post_template"
+  .post
+    img.post-avatar src="http://www.enn.com/image_for_articles/33228-1.jpg/medium"
+    .well
+      .post-text
+        h2 {{title}}
+        p  {{body}}
+      .post-actions
+        li
+          a.btn href="/text_posts/{{id}}/edit"
+            i.icon-edit Edit
+        li
+          a.btn href="/text_posts/{{id}}" data-confirm="Are You Sure" data-method="delete" rel="nofollow"
+            i.icon-trash Remove
+        li
+           span.btn
+            i.icon-pencil | {{type}}
+
+script type="text/html" id="link_post_template"
+  .post
+    img.post-avatar src="http://www.enn.com/image_for_articles/33228-1.jpg/medium"
+    .well
+      .post-link
+        a.main-link href="{{link_url}}" {{link_url}}
+        p.description {{description}}
+      .post-actions
+        li
+          a.btn href="/link_posts/{{id}}/edit"
+            i.icon-edit Edit
+        li
+          a.btn href="/link_posts/{{id}}" data-confirm="Are You Sure" data-method="delete" rel="nofollow"
+            i.icon-trash Remove
+        li
+          span.btn
+           i.icon-share-alt | {{type}}
+
+
+
+
+
+
+
+
+
+
 
 script type="text/html" id="text_post_template"
   .post.well
     .pull-right
       a href="/text_posts/{{id}}/edit" Edit
-      br/
+      br
       a href="/text_posts/{{id}}" data-confirm="Are You Sure" data-method="delete" rel="nofollow" Remove
     | {{title}}
     | {{body}}
@@ -43,10 +92,10 @@ script type="text/html" id="text_post_template"
 
 script type="text/html" id="link_post_template"
   .post.well
-    .pull-right
-      a href="/link_posts/{{id}}/edit" Edit
-      br/
-      a href="/link_posts/{{id}}" data-confirm="Are You Sure" data-method="delete" rel="nofollow" Remove
-    a href="{{url}}" target="_blank" {{url}}
-    | {{description}}
-    | {{type}}
+      .pull-right
+        a href="/link_posts/{{id}}/edit" Edit
+        br
+        a href="/link_posts/{{id}}" data-confirm="Are You Sure" data-method="delete" rel="nofollow" Remove
+      a href="{{link_url}}" target="_blank" {{link_url}}
+      | {{description}}
+      | {{type}}
