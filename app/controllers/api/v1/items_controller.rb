@@ -32,6 +32,7 @@ class Api::V1::ItemsController < ApplicationController
 
   def create
     if authorized?(params) && post_type = extract_post_class_from(params)
+      @user = User.find_by_display_name(params[:display_name])
       @post = build_post_from(params, post_type)
 
       if @post.save
