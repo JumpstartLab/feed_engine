@@ -52,9 +52,9 @@ class Authentication < ActiveRecord::Base
 
   def create_github_details(data)
     create_github_account(uid: data["uid"],
-                           nickname: data["info"]["nickname"],
-                           image: data["extra"]["raw_info"]["avatar_url"],
-                           last_status_id: DateTime.now.to_s)
+                          nickname: data["info"]["nickname"],
+                          image: data["extra"]["raw_info"]["avatar_url"],
+                          last_status_id: DateTime.now.to_s)
   end
 
   def self.create_instagram_auth(user, data)

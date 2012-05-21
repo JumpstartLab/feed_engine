@@ -52,7 +52,7 @@ describe Authentication do
   end
 
   describe "#create_github_details" do
-    let(:data) { File.read("#{::Rails.root}/spec/fixtures/service_responses/github_response.json") }
+    let(:data) { JSON.parse(File.read("#{::Rails.root}/spec/fixtures/service_responses/github_response.json")) }
     it "should create a entry in GithubAccount with data returned from the API" do
       new_auth.create_github_details(data)
       GithubAccount.count.should == 1

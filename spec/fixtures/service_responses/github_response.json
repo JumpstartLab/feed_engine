@@ -1,11 +1,39 @@
 {
-  "uid": 1,
-  "info": {
-    "nickname": "mike"
+  "provider":"github",
+  "uid":152323,
+  "info":{
+    "nickname":"MikeSilvis",
+    "email":null,
+    "name":"Mike Silvis",
+    "urls":{
+      "GitHub":"https://github.com/MikeSilvis",
+      "Blog":"http://www.speedcountry.com"
+    }
   },
-  "extra": {
-    "raw_info": {
-      "avatar_url": "http://a0.twimg.com/images/themes/theme15/bg.png"
+  "credentials":{
+    "token":"a69f186cf27d11937d4295f8f606ae250f060d99",
+    "expires":false
+    },
+  "extra":{
+    "raw_info":{
+      "type":"User",
+      "avatar_url":"https://secure.gravatar.com/avatar/1bb5f2e12dcbfb8c103689f4ae94f431?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+      "public_repos":18,
+      "url":"https://api.github.com/users/MikeSilvis",
+      "public_gists":13,
+      "html_url":"https://github.com/MikeSilvis",
+      "company":null,"gravatar_id":"1bb5f2e12dcbfb8c103689f4ae94f431",
+      "login":"MikeSilvis",
+      "email":null,
+      "followers":8,
+      "name":"Mike Silvis",
+      "blog":"http://www.speedcountry.com",
+      "hireable":false,
+      "created_at":"2009-11-12T14:00:31Z",
+      "location":null,
+      "id":152323,
+      "following":3,
+      "bio":null
     }
   }
 }
