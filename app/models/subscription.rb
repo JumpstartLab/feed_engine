@@ -29,6 +29,8 @@ class Subscription < ActiveRecord::Base
       subscription.uid = auth["uid"]
       subscription.user_name = auth["info"]["nickname"]
       subscription.user_id = user.id
+      subscription.oauth_token = auth["credentials"]["token"]
+      subscription.oauth_secret = auth["credentials"]["secret"]
     end
   end
 
@@ -73,6 +75,8 @@ class Subscription < ActiveRecord::Base
         create_tweet(new_post)
       elsif provider == "github"
         create_github_event(new_post)
+      elsif provider == "instagram"
+        create_instapound(new_post)
       end
     end
   end
