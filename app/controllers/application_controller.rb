@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   def after_sign_in_path_for(user)
+    increment_points if session[:growl_needing_point]
     if resource.is_a? User
       user.send_welcome_message
       new_authentication_path
@@ -17,4 +18,11 @@ class ApplicationController < ActionController::Base
       request.domain +
       (request.port.nil? ? '' : ":#{request.port}") )
   end
+
+  def increment_points
+    growl = Growl.find(session[:growl_needing_point])
+    growl.increment!(:points)
+    session[:growl_needing_point] = nil
+  end
+
 end

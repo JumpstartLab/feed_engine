@@ -11,23 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(:version => 20120521182828) do
-=======
 ActiveRecord::Schema.define(:version => 20120522014427) do
->>>>>>> f41466e10f626553d23f98222b072bf5842946d5
 
   create_table "authentications", :force => true do |t|
-    t.integer   "user_id"
-    t.string    "provider"
-    t.string    "token"
-    t.string    "secret"
-    t.timestamp "created_at", :null => false
-    t.timestamp "updated_at", :null => false
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "token"
+    t.string   "secret"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "github_accounts", :force => true do |t|
-<<<<<<< HEAD
     t.integer  "authentication_id"
     t.integer  "uid"
     t.string   "nickname"
@@ -35,16 +30,6 @@ ActiveRecord::Schema.define(:version => 20120522014427) do
     t.string   "image"
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
-=======
-    t.integer   "authentication_id"
-    t.integer   "uid"
-    t.string    "nickname"
-    t.string    "last_status_id",    :default => "0", :null => false
-    t.string    "string",            :default => "0", :null => false
-    t.string    "image"
-    t.timestamp "created_at",                         :null => false
-    t.timestamp "updated_at",                         :null => false
->>>>>>> f41466e10f626553d23f98222b072bf5842946d5
   end
 
   create_table "growls", :force => true do |t|
@@ -58,13 +43,12 @@ ActiveRecord::Schema.define(:version => 20120522014427) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.integer  "regrowled_from_id"
     t.datetime "original_created_at"
     t.string   "event_type"
-    t.integer  "regrowled_from_id"
     t.integer  "points",              :default => 0
   end
 
-<<<<<<< HEAD
   create_table "instagram_accounts", :force => true do |t|
     t.string   "uid"
     t.string   "nickname"
@@ -82,15 +66,6 @@ ActiveRecord::Schema.define(:version => 20120522014427) do
     t.integer  "growl_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-=======
-  create_table "meta_data", :force => true do |t|
-    t.string    "title"
-    t.text      "description"
-    t.string    "thumbnail_url"
-    t.integer   "growl_id"
-    t.timestamp "created_at",    :null => false
-    t.timestamp "updated_at",    :null => false
->>>>>>> f41466e10f626553d23f98222b072bf5842946d5
   end
 
   create_table "subscriptions", :force => true do |t|
@@ -105,31 +80,31 @@ ActiveRecord::Schema.define(:version => 20120522014427) do
   add_index "subscriptions", ["user_id"], :name => "index_subscriptions_on_user_id"
 
   create_table "twitter_accounts", :force => true do |t|
-    t.integer   "authentication_id"
-    t.integer   "uid"
-    t.string    "nickname"
-    t.string    "last_status_id",    :default => "0", :null => false
-    t.string    "image"
-    t.timestamp "created_at",                         :null => false
-    t.timestamp "updated_at",                         :null => false
+    t.integer  "authentication_id"
+    t.integer  "uid"
+    t.string   "nickname"
+    t.string   "last_status_id",    :default => "0", :null => false
+    t.string   "image"
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
   end
 
   create_table "users", :force => true do |t|
-    t.string    "email",                  :default => "",    :null => false
-    t.string    "encrypted_password",     :default => "",    :null => false
-    t.string    "reset_password_token"
-    t.timestamp "reset_password_sent_at"
-    t.timestamp "remember_created_at"
-    t.integer   "sign_in_count",          :default => 0
-    t.timestamp "current_sign_in_at"
-    t.timestamp "last_sign_in_at"
-    t.string    "current_sign_in_ip"
-    t.string    "last_sign_in_ip"
-    t.timestamp "created_at",                                :null => false
-    t.timestamp "updated_at",                                :null => false
-    t.string    "display_name"
-    t.string    "authentication_token"
-    t.boolean   "private",                :default => false
+    t.string   "email",                  :default => "",    :null => false
+    t.string   "encrypted_password",     :default => "",    :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+    t.string   "display_name"
+    t.string   "authentication_token"
+    t.boolean  "private",                :default => false
   end
 
   add_index "users", ["display_name"], :name => "index_users_on_display_name"

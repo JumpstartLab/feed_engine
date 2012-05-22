@@ -1,5 +1,5 @@
 class GrowlsController < ApplicationController
-  before_filter:require_sign_in, only: :points
+  before_filter:require_sign_in, only: [:points, :create]
 
   def index
     subdomain = request.subdomain
@@ -29,6 +29,7 @@ class GrowlsController < ApplicationController
   private
 
   def require_sign_in
+    session[:growl_needing_point] = params[:id]
     redirect_to "http://#{request.domain}#{home_path}" unless current_user
   end
 end

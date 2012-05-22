@@ -93,6 +93,7 @@ class Growl < ActiveRecord::Base
    self.original_created_at = DateTime.now unless original_created_at
   end
 
+
 end
 
 # == Schema Information
