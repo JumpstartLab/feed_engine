@@ -8,6 +8,7 @@ describe 'api/v1/feed', type: :api do
   context "growls viewable by this user" do
     let(:url) { "http://api.hungrlr.awesome/v1/feeds/#{user.display_name}" }
     before(:each) do
+      FactoryGirl.create(:link, regrowled_from_id: other_user.growls.first.id, user: user)
       get "#{url}.json", token: user.authentication_token
     end
     describe "json" do
@@ -65,6 +66,13 @@ describe 'api/v1/feed', type: :api do
         last_response.body.should =~ /"URL must start with http and be a .jpg, .gif, or .png"/
         last_response.body.should =~ /"Given URL needs to be less then 2048 characters"/
         last_response.body.should =~ /"Photo does not exist"/
+      end
+    end
+    describe "destroy through the API" do
+      it "Can destroy image" do
+        id = user.growls.first.id
+        delete "http://api.hungrlr.dev/v1/feeds/#{user.display_name}/growls?id=#{id}", token: user.authentication_token
+        last_response.status.should == 201
       end
     end
   end

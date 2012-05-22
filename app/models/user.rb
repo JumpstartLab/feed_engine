@@ -55,10 +55,6 @@ class User < ActiveRecord::Base
     growls.by_type_and_date(type)
   end
 
-  def has_tweets?
-    tweets.size > 0
-  end
-
   def subscribed_to?(user)
     inverse_subscriptions.where(user_id: user.id).size > 0
   end

@@ -3,7 +3,6 @@ class GrowlsController < ApplicationController
   def index
     subdomain = request.subdomain
     @user = User.where{display_name.matches subdomain}.first
-    # @user = User.where(display_name: request.subdomain).first
     @growls = @user.get_growls(params[:type]).page(params[:page])
   end
 

@@ -24,15 +24,8 @@ describe User do
       end
     end
   end
-
-  context "#has_tweets?" do
-    context "if user has not linked his account with Twitter" do
-      it "should return false" do
-        user.tweets.should == []
-      end
-    end
-  end
-end# == Schema Information
+end
+# == Schema Information
 #
 # Table name: users
 #
@@ -49,50 +42,6 @@ end# == Schema Information
 #  last_sign_in_ip        :string(255)
 #  created_at             :datetime        not null
 #  updated_at             :datetime        not null
-#  display_name           :string(255)
-#  authentication_token   :string(255)
-#  private                :boolean         default(FALSE)
-#
-
-# == Schema Information
-#
-# Table name: users
-#
-#  id                     :integer         primary key
-#  email                  :string(255)     default(""), not null
-#  encrypted_password     :string(255)     default(""), not null
-#  reset_password_token   :string(255)
-#  reset_password_sent_at :timestamp
-#  remember_created_at    :timestamp
-#  sign_in_count          :integer         default(0)
-#  current_sign_in_at     :timestamp
-#  last_sign_in_at        :timestamp
-#  current_sign_in_ip     :string(255)
-#  last_sign_in_ip        :string(255)
-#  created_at             :timestamp       not null
-#  updated_at             :timestamp       not null
-#  display_name           :string(255)
-#  authentication_token   :string(255)
-#  private                :boolean         default(FALSE)
-#
-
-# == Schema Information
-#
-# Table name: users
-#
-#  id                     :integer         primary key
-#  email                  :string(255)     default(""), not null
-#  encrypted_password     :string(255)     default(""), not null
-#  reset_password_token   :string(255)
-#  reset_password_sent_at :timestamp
-#  remember_created_at    :timestamp
-#  sign_in_count          :integer         default(0)
-#  current_sign_in_at     :timestamp
-#  last_sign_in_at        :timestamp
-#  current_sign_in_ip     :string(255)
-#  last_sign_in_ip        :string(255)
-#  created_at             :timestamp       not null
-#  updated_at             :timestamp       not null
 #  display_name           :string(255)
 #  authentication_token   :string(255)
 #  private                :boolean         default(FALSE)

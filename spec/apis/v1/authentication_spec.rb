@@ -7,14 +7,12 @@ describe "API errors", :type => :api do
   context "making a request with no token" do
 
     it "returns the message 'Token is invalid'" do
-      get "#{url}.json", :token => ""
-      error = "Token is invalid."
-      last_response.body.should eql(error)
-    end
-
-    it "returns an error 401" do
-      get "#{url}.json", :token => ""
+      get "http://api.hungrlr.dev/v1/validate_token.json", :token => "sdfds"
       last_response.status.should == 401
+    end
+    it "token is valid" do
+      get "http://api.hungrlr.dev/v1/validate_token.json", :token => user.authentication_token
+      last_response.status.should == 200
     end
   end
 
