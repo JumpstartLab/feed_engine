@@ -4,6 +4,7 @@ class CreateStreamItems < ActiveRecord::Migration
       t.references :user
       t.integer :streamable_id 
       t.string :streamable_type 
+      t.integer  :points_count, :default => 0
       t.timestamps
     end
   end

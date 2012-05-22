@@ -19,6 +19,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       @text_item = TextItem.new
       @link_item = LinkItem.new
       @image_item = ImageItem.new
+      @subscriptions = current_user.subscriptions
       render :template => "dashboard/show"
     end
   end
