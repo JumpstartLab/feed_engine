@@ -2,13 +2,9 @@
   img.post-avatar src="{{gravatar_url}}"
   .well
     .post-activity
-      a.repo-url href="{{repo_url}}" {{repo_url}}
-      p.repo-name {{repo_name}}
-      p.github-type {{github_type}}
+      p {{github_type}} on the following repo:
+      a.repo-url href="{{repo_url}}" {{repo_name}}
     .post-actions
       li
-        a.btn href="/github_posts/{{id}}" data-confirm="Are You Sure" data-method="delete" rel="nofollow"
-          i.icon-trash Remove
-      li
-         span.btn
-          i.icon-pencil | {{type}}
+        span.btn
+         i.icon-share-alt | {{type}}
