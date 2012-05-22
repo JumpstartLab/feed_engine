@@ -177,3 +177,16 @@ $stat-count-font-size: 18px;
   color: $trout-main-color;
   padding: 0 0 14px 50px;
 }
+
+.git-commit a{
+  color: $trout-main-color;
+}
+
+.git-commit a:visited{
+  color: $trout-main-color;
+}
+
+.git-commit a:hover {
+  color: $trout-main-color;
+  background-color: transparent;
+}
