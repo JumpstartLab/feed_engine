@@ -22,8 +22,7 @@ jQuery ->
 
 getSubDomain = ->
   host_parts = window.location.host.split('.')
-  alert host_parts[0]
-  unless host_parts == 'simplefeed'
+  unless host_parts[0] == 'simplefeed'
     $.feedengine.subdomain = host_parts[0]
   else
     $.feedengine.subdomain = null
@@ -246,8 +245,8 @@ class FeedPager
   render: =>
     @page++
     $(window).unbind('scroll', @check)
-    url = @feeduser ? '/posts' : '/posts/user'
-    $.getJSON(url, page: @page, @renderPosts)
+    unless @feeduser
+      $.getJSON('/posts', page: @page, @renderPosts)
 
 
   nearBottom: =>

@@ -18,8 +18,7 @@
   end
 
   def index
-    @posts = Post.all.collect {|post| post.postable}.page(params[:page] || 0)
-    render "pages/index"
+    @posts = Post.all.collect {|post| post.postable}.page(params[:page].to_i || 0)
   end
 
   def show
