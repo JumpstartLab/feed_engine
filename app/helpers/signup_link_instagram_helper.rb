@@ -1,0 +1,2 @@
+module SignupLinkInstagramHelper
+end
