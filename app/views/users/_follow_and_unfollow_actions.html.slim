@@ -1,4 +1,4 @@
-- unless current_user == user
+- unless (current_user.nil? || user.nil?) || current_user == user
   - if current_user.following?(user)
     = link_to "unfollow", relationship_path(user), method: :delete, class: "btn btn-danger"
   - else

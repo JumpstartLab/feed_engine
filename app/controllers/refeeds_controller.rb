@@ -1,10 +1,10 @@
 class RefeedsController < ApplicationController
 
   def create
-    if own_post
+    if own_post?
       flash[:notice] = "Can't refeed your own post"
       redirect_to :back
-    elsif already_refeeded
+    elsif already_refeeded?
       flash[:notice] = "Don't get greedy! You've already refeeded this post"
       redirect_to :back
     else refeed_post
@@ -15,11 +15,11 @@ class RefeedsController < ApplicationController
 
   private
 
-  def own_post
+  def own_post?
     post.user == current_user
   end
 
-  def already_refeeded
+  def already_refeeded?
     current_user.posts.map(&:refeed_id).compact.include?(post.id)
   end
 
@@ -30,8 +30,12 @@ class RefeedsController < ApplicationController
   def refeed_post
     original_post = post
     postable      = post.postable
-
     postable_copy = postable.dup
+
+    if postable_copy.is_a?(ImagePost)
+      postable_copy.image.store!
+    end
+
     current_user.posts.create({postable: postable_copy, refeed_id: original_post.id}, validate: false)
   end
 
