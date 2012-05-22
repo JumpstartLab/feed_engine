@@ -100,7 +100,29 @@ function removeLightbox() {
     });
 }
 
+function award_points() {
+  var cookie = $.cookie('award_points_to').split(",");
+  var id = cookie[0];
+  var type = cookie[1];
 
+  $.ajax({
+    type: 'post',
+    url: "/api/awards/",
+    data: {
+      'id': id,
+      'type': type,
+      'access_token': access_token
+    },
+    success: function(data) {
+      $.cookie('award_points_to', null);
+      $(document).find("[data-id="+id+"]").parent().html('Points! awarded.').addClass('label label-info');
+    },
+    error: function(evt) {
+      alert('Unable to award Points!®');
+      $.cookie('award_points_to', null);
+    }
+  });
+}
 
 // function waypoint_reload() {
 //   console.log('ran');
@@ -157,21 +179,16 @@ $(document).ready(function() {
     e.preventDefault();
     $this = $(this);
 
-    $.ajax({
-      type: 'post',
-      url: "/api/awards/",
-      data: {
-        'id': $(this).data('id'),
-        'type': $(this).data('type'),
-        'access_token': access_token
-      },
-      success: function(data) {
-        $this.parent().html('Points! awarded.').addClass('label label-info');
-      },
-      error: function(evt) {
-        alert('Unable to award Points!®');
-      }
-    });
+    var id = $(this).data('id');
+    var type = $(this).data('type');
+    $.cookie('award_points_to', [id, type]);
+
+    if(access_token == "") {
+      location.href = "/signin?award_points=true";
+      return false;
+    }
+
+    award_points();
   });
 
 
@@ -201,6 +218,9 @@ $(document).ready(function() {
     return false;
   });
 
+  if($.cookie('award_points_to') != null) {
+    award_points();
+  }
 
   // $('#bottom_of_page').waypoint(waypoint_reload, { offset: '100%' });
 });
