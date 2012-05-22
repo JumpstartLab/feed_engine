@@ -17,6 +17,14 @@ navHandler = (navItem) ->
     pageSwap("#{navItem}-page")
 
 
+integrationsHandler = ->
+  services = ["github", "twitter", "instagram"]
+  for service in services
+    $("##{service}_false").click ->
+      setFlash("Added your ##{service} account")
+    $("##{service}_true").click ->
+      setFlash("Removed your ##{service} account")  
+
 
 servicesHandler = ->
   $('#services').click ->
@@ -54,6 +62,7 @@ jQuery ->
   addDashboardHandler()
   addHandlers()
   servicesHandler()
+  integrationsHandler()
   $.feedengine = {
     current_user: null,
     activeTabId: null,

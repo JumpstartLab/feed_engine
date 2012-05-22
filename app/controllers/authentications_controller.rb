@@ -6,7 +6,6 @@ class AuthenticationsController < ApplicationController
   def create
     auth = request.env["omniauth.auth"]
     current_user.authentications.find_or_create_by_provider_and_uid(:provider => auth['provider'], :uid => auth['uid'].to_s, :handle => get_handle(auth), :token => auth["credentials"]["token"])
-    flash[:notice] = "#{auth['provider'].capitalize} link successful"
     render partial:"shared/fuck_this_shit"
   end
 
@@ -14,7 +13,6 @@ class AuthenticationsController < ApplicationController
     @authentication = Authentication.find(params[:id])
     provider = @authentication.provider.capitalize
     @authentication.destroy
-    flash[:notice] = "#{provider} has been removed"
     redirect_to root_path
   end
 
