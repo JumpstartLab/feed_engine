@@ -142,11 +142,11 @@ describe User do
             random_description_type = ["image", "link"].sample
             Fabricate(random_description_type.to_sym)
           }
-          let!(:refeeded_body_item) { Refeed.create(refeeder_id: user.id,
+          let!(:refeeded_body_item) { Refeed.create(poster_id: user.id,
                                                   original_poster_id: other_user.id,
                                                   post_id: body_post.id)
           }
-          let!(:refeeded_description_item) { Refeed.create(refeeder_id: user.id,
+          let!(:refeeded_description_item) { Refeed.create(poster_id: user.id,
                                                          original_poster_id: other_user.id,
                                                          post_id: description_post.id)
           }

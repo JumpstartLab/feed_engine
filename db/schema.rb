@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120522031516) do
+ActiveRecord::Schema.define(:version => 20120522043455) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -90,7 +90,6 @@ ActiveRecord::Schema.define(:version => 20120522031516) do
 
   create_table "refeeds", :force => true do |t|
     t.integer  "original_poster_id"
-    t.integer  "refeeder_id"
     t.integer  "post_id"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false

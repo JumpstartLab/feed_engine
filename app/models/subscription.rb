@@ -125,7 +125,7 @@ class Subscription < ActiveRecord::Base
   def create_refeed(new_post)
     Refeed.create!(post_id: new_post.post_id,
                    original_poster_id: self.uid,
-                   refeeder_id: self.id,
+                   poster_id: self.id,
                    post_type: PROVIDER_TO_POST_TYPE[self.provider],
                    subscription_id: self.id
                   )

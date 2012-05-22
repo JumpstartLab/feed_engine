@@ -111,11 +111,11 @@ class User < ActiveRecord::Base
 
 
   def num_subscriptions
-    all_subscription_types = Subscription.all.map(&:provider).uniq
-    all_relevant_subscription_types = all_subscription_types.reject do |sub|
-      sub if sub.provider == "refeed"
+    all_providers = Subscription.all.map(&:provider).uniq
+    all_relevant_providers = all_providers.reject do |provider|
+      provider if provider == "refeed"
     end
-    total_count = all_relevant_subscription_types.count
+    total_count = all_relevant_providers.count
   end
 
   private
