@@ -3,3 +3,6 @@
     h2 Thanks for signing up!
     h5 Would you like to link your account with any of these services?
     = render "shared/social_signin"
+    hr
+      .row(class="center_text")
+        = link_to "No thanks, take me to my dashboard", dashboard_path(message: "Don't worry, you can link these later."), class: "large green nice button radius"

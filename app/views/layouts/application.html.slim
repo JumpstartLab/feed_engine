@@ -8,14 +8,11 @@ html
     = csrf_meta_tags
 
   body
-    =render partial: 'shared/nav_bar'
+    =render partial: 'layouts/nav_bar'
   .header_image
-    =render partial: 'shared/flash_message'
+    =render partial: 'layouts/flash_message'
     .container#main_content
       = yield
 
-    =render partial: 'shared/footer'
-coffee:
-  jQuery ->
-    $('.flash').fadeOut(4000)
+    =render partial: 'layouts/footer'
 

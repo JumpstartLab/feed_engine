@@ -116,3 +116,7 @@ ul.contained.awesome-tabs-content > li {
 .regrowled, .regrowl {
   margin-left:20px !important;
 }
+#user_search {
+  float:left;
+  padding-left:200px;
+}
