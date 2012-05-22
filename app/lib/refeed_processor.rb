@@ -8,7 +8,7 @@ module Hungrlr
     attr_accessor :base_url
 
     def initialize
-      self.base_url = ENV["DOMAIN"] != "" ? ENV["DOMAIN"] : "http://api.lvh.me:3000/v1"
+      self.base_url = ENV["DOMAIN"] != "" ? ENV["DOMAIN"] : "http://api.hungrlr.dev/v1"
     end
 
     def subscriptions
@@ -24,7 +24,7 @@ module Hungrlr
 
     def create_regrowls_for(user_slug, subscriber_token, growls)
       growls.each do |growl|
-        uri_path = URI("#{base_url}/feeds/#{user_slug}/growls/#{growl["id"] }/refeed")
+        uri_path = URI("#{base_url}/feeds/#{user_slug}/growls/#{growl["id"]}/refeed")
         Net::HTTP.post_form(uri_path, token: subscriber_token)
       end
     end
