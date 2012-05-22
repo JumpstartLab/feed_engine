@@ -5,7 +5,7 @@
 #
 # Generated May 22, 2012
 #
-# This configuration file is custom generated for LivingSocial_4
+# This configuration file is custom generated for hungry academy_1
 
 # Here are the settings that are common to all environments:
 common: &default_settings
@@ -14,7 +14,7 @@ common: &default_settings
   # You must specify the license key associated with your New Relic
   # account.  This key binds your Agent's data to your account in the
   # New Relic service.
-  license_key: '3e169bdc873ca6654d8025e01daabb1a218abd7f'
+  license_key: '86af840ac8c7d5251ec7c991ee3ccbea3b83b677'
   
   # Agent Enabled (Ruby/Rails Only)
   # Use this setting to force the agent to run or not run.
