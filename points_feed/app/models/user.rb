@@ -114,8 +114,12 @@ class User < ActiveRecord::Base
     posts.where(original_post_id: original_post.original_post_id).any?
   end
 
- def instagram_authentication
+  def instagram_authentication
     self.authentications.where(:provider => 'instagram').first
+  end
+
+  def get_authentication(provider, uid)
+    authentications.find_or_create_by_provider_and_uid(provider, uid)
   end
 
   # def posts_by_friends
