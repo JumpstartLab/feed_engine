@@ -51,13 +51,13 @@
     <% if flash[:notice] %>
       <%= coffee_script_tag do %>
         $ ->
-          $("#alert-bar").addClass('alert-success').text('<%= flash[:notice] %>').hide()
+          $("#alert-bar").addClass('alert-success').text('<%=j flash[:notice] %>').hide()
           $("#alert-bar").slideDown().delay(5000).slideUp()
       <% end %>
     <% elsif flash[:alert] %>
       <%= coffee_script_tag do %>
         $ ->
-          $("#alert-bar").addClass('alert-error').text('<%= flash[:alert] %>').hide()
+          $("#alert-bar").addClass('alert-error').text('<%=j flash[:alert] %>').hide()
           $("#alert-bar").slideDown().delay(5000).slideUp()
       <% end %>
     <% end %>
