@@ -16,8 +16,10 @@ FeedEngine::Application.routes.draw do
 
   resource :signup_link_twitter, :only => :show, :controller => :signup_link_twitter
   resource :signup_link_github, :only => :show, :controller => :signup_link_github
+  resource :signup_link_instagram, :only => :show, :controller => :signup_link_instagram
   get 'signup_twitter_skip' => 'signup_link_twitter#skip', :as => :signup_twitter_skip
   get 'signup_github_skip' => 'signup_link_github#skip', :as => :signup_github_skip
+  get 'signup_instagram_skip' => 'signup_link_instagram#skip', :as => :signup_instagram_skip
 
 
   resources :points, :only => [:create]
