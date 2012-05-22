@@ -1,5 +1,5 @@
 class GithubFeedItem < ActiveRecord::Base
-  attr_accessible :content, :posted_at, :user_id, :github_id, :event_type
+  attr_accessible :content, :posted_at, :user_id, :github_id, :event_type, :screen_name
 
   belongs_to :user
   has_many :awards, as: :awardable
@@ -20,7 +20,8 @@ class GithubFeedItem < ActiveRecord::Base
       user.github_feed_items.create(event_type: event.type,
                                     github_id: event.id,
                                     posted_at: event.created_at,
-                                    content: event.payload.commits.last.message)
+                                    content: event.payload.commits.last.message,
+                                    screen_name: event.actor.login)
     end
   end
 

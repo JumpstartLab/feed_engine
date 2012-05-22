@@ -1,5 +1,5 @@
 class TwitterFeedItem < ActiveRecord::Base
-  attr_accessible :content, :posted_at, :user_id, :tweet_id
+  attr_accessible :content, :posted_at, :user_id, :tweet_id, :screen_name
 
   belongs_to :user
   before_create :validates_timeliness_of_post
@@ -15,7 +15,8 @@ class TwitterFeedItem < ActiveRecord::Base
   def self.create_from_tweet(user, tweet)
     user.twitter_feed_items.create(content: tweet.text,
                                    posted_at: tweet.created_at,
-                                   tweet_id: tweet.id)
+                                   tweet_id: tweet.id,
+                                   screen_name: tweet.user.screen_name)
   end
 
   def decorate
