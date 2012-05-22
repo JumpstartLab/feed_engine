@@ -60,8 +60,9 @@ jQuery ->
     current_user: null,
     activeTabId: null,
     activateTab: (tabId)->
-      if $.feedengine.activateTabId
-        $("##{$.feedengine.activateTabId}").removeClass('selected')
+      $(".errors").hide()
+      if $.feedengine.activeTabId
+        $("##{$.feedengine.activeTabId}").removeClass('selected')
       $("##{tabId}").addClass('selected')
       $.feedengine.activeTabId = tabId
   }
@@ -89,7 +90,9 @@ addSubmitHandlers = ->
         resp = $.parseJSON(response.responseText)
         errors = $("##{$.feedengine.activeTabId.toLowerCase()}-tab .errors")
         errors.show()
-        errors.closest(".errors_list").html "<li>#{resp["errors"]}</li>"
+        $(".errors_list").html(null)
+        for error in resp["errors"]
+          $(".errors_list").append "<li>#{error}</li>"
     )
 
 addSignupHandler = ->
