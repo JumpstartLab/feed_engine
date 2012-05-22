@@ -32,7 +32,7 @@ FeedEngine::Application.routes.draw do
 
   resources "users", as: :user do
     member do
-      get :following, :followers
+      get :following, :followers, :refeeds
     end
   end
   match "/auth/twitter/callback" => "authentications#new"

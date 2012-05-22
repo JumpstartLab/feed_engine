@@ -1,8 +1,12 @@
 div class="span8 stream"
 
   h1 #{user.display_name || user.email} Stream
-  raise @user.inspect
-  / - if current_user.following?()
+  - unless current_user == user
+    - if current_user.following?(user)
+      = link_to "unfollow", relationship_path(user), method: :delete
+    - else
+      = link_to "follow", relationships_path(followed_id: user.id), method: :post
+
   div id="posts" data-json-url="#{items_url(user_display_name: user.display_name, format: :json)}"
 
 / Mustache templates
