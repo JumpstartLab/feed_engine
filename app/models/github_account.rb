@@ -1,6 +1,6 @@
 class GithubAccount < ActiveRecord::Base
-  belongs_to :authentication
   attr_accessible :authentication, :uid, :nickname, :last_status_id, :image
+  belongs_to :authentication
 
   delegate :user, :to => :authentication
   delegate :id, :to => :user, :prefix => true
@@ -11,6 +11,7 @@ class GithubAccount < ActiveRecord::Base
     end
   end
 end
+
 # == Schema Information
 #
 # Table name: github_accounts
