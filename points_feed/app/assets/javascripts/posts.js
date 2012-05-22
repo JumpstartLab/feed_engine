@@ -157,10 +157,10 @@ $(document).ready(function() {
         'access_token': access_token
       },
       success: function(data) {
-        $this.parent().html('Post has been refeeded').addClass('label label-info');
+        $this.parent().html('Points! awarded.').addClass('label label-info');
       },
       error: function(evt) {
-        alert('unable to refeed');
+        alert('Unable to award Points!®');
       }
     });
   });

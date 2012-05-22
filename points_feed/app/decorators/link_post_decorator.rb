@@ -6,6 +6,7 @@ class LinkPostDecorator < ApplicationDecorator
     
     {
       :type => "LinkItem",
+      :klass => "Post",
       :link_url => model.content,
       :feeder => {
         :avatar => model.user.avatar,

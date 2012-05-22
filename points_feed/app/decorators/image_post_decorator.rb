@@ -7,6 +7,7 @@ class ImagePostDecorator < ApplicationDecorator
     {
       :type => "ImageItem",
       :image_url => model.image_url,
+      :klass => "Post",
       :feeder => {
         :avatar => model.user.avatar,
         :name => model.user.display_name

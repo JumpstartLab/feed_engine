@@ -6,6 +6,7 @@ class GithubFeedItemDecorator < ApplicationDecorator
     
     {
       :type => "GithubFeedItem",
+      :klass => "GithubFeedItem",
       :feeder => {
         :avatar => model.user.avatar,
         :name => model.user.display_name

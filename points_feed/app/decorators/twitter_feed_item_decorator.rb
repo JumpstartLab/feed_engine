@@ -6,6 +6,7 @@ class TwitterFeedItemDecorator < ApplicationDecorator
     
     {
       :type => "TwitterFeedItem",
+      :klass => "TwitterFeedItem",
       :feeder => {
         :avatar => model.user.avatar,
         :name => model.user.display_name
