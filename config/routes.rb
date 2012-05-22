@@ -29,7 +29,7 @@ FeedEngine::Application.routes.draw do
     match "", to: "pages#index"
     match 'posts/:display_name', to: "posts#show"
   end
-
+  match 'ind_posts', to: 'posts#ind'
   resources :users
   resources :posts, only: [:create, :index]
   resources :texts
