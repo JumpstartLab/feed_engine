@@ -9,8 +9,11 @@
         a.btn href="/refeeds?post_id={{id}}" data-method="post" rel="nofollow"
           i.icon-retweet  Refeed
       li
-        a.btn href="/points/{{id}}?post_type={{type}}" data-method="put" rel="nofollow"
+        a.btn href="/points/?post_id={{id}}&user_id=#{user.id}" data-method="post" rel="nofollow"
           i.icon-heart Points!
       li
          span.btn
           i.icon-camera | {{type}}
+      li
+        span.btn
+          p {{total_points}}

@@ -2,7 +2,7 @@ FeedEngine::Application.routes.draw do
   get "static_pages/show"
 
   devise_for :users, :controllers => {:registrations => "registrations"}
-  
+
 
   # User subdomains
   scope "", constraints: Subdomains.user_feeds do
@@ -39,7 +39,7 @@ FeedEngine::Application.routes.draw do
   resources "link_posts"
   resources "feed_items"
   resources "authentications", only: [:show, :destroy]
-  resources "points", only: [:update]
+  resources "points", only: [:update, :create]
   resources "refeeds", only: [:create]
   resources "user_signup_steps"
 

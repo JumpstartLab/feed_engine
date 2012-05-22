@@ -67,6 +67,13 @@ ActiveRecord::Schema.define(:version => 20120522002242) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "points", :force => true do |t|
+    t.integer  "post_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "posts", :force => true do |t|
     t.integer  "user_id"
     t.integer  "postable_id"
