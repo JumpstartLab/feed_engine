@@ -10,9 +10,11 @@ task "jobs:work" => "resque:work"
 task :pull_feeds do
   Resque.enqueue(PullTwitterFeed)
   Resque.enqueue(PullGithubFeed)
+  Resque.enqueue(Refeed)
   Resque.enqueue(PullInstagramFeed)
   sleep(300)
   Resque.enqueue(PullTwitterFeed)
   Resque.enqueue(PullGithubFeed)
+  Resque.enqueue(Refeed)
   Resque.enqueue(PullInstagramFeed)
 end

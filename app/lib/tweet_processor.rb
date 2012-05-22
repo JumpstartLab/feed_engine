@@ -8,7 +8,7 @@ module Hungrlr
     attr_accessor :client, :base_url
 
     def initialize
-      self.base_url = ENV["DOMAIN"] == "" ? ENV["DOMAIN"] : "http://api.lvh.me:3000/v1"
+      self.base_url = ENV["DOMAIN"] != "" ? ENV["DOMAIN"] : "http://api.lvh.me:3000/v1"
       self.client   = Twitter::Client.new(:consumer_key    => TWITTER_KEY,
                                           :consumer_secret => TWITTER_SECRET)
     end
