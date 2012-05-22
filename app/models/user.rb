@@ -73,6 +73,10 @@ class User < ActiveRecord::Base
     UserMailer.delay.welcome_email(self)
   end
 
+  def send_reset_password_instructions
+    Devise::Mailer.delay.reset_password_instructions(self)
+  end
+
   def post_of(kind)
     send(kind.tableize.to_sym)
   end
