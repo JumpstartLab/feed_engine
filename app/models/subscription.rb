@@ -2,15 +2,13 @@
 #
 # Table name: subscriptions
 #
-#  id             :integer         not null, primary key
-#  provider       :string(255)
-#  uid            :string(255)
-#  user_name      :string(255)
-#  user_id        :integer
-#  oauth_token    :string
-#  oauth_secret   :string
-#  created_at     :datetime        not null
-#  updated_at     :datetime        not null
+#  id         :integer         not null, primary key
+#  provider   :string(255)
+#  uid        :string(255)
+#  user_name  :string(255)
+#  user_id    :integer
+#  created_at :datetime        not null
+#  updated_at :datetime        not null
 #
 
 # The model for any external subscriptions
@@ -28,8 +26,6 @@ class Subscription < ActiveRecord::Base
       subscription.uid = auth["uid"]
       subscription.user_name = auth["info"]["nickname"]
       subscription.user_id = user.id
-      subscription.oauth_token = auth["credentials"]["token"]
-      subscription.oauth_secret = auth["credentials"]["secret"]
     end
   end
 
