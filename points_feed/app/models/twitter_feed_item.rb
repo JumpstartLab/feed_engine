@@ -21,7 +21,7 @@ class TwitterFeedItem < ActiveRecord::Base
   end
 
   def validates_timeliness_of_post
-    if posted_at < user.twitter_authentication.created_at
+    if self.posted_at < user.twitter_authentication.created_at
       errors.add(:posted_at, "Feed item too early")
     end
   end
