@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/worace/troutr-client.git
+  remote: https://worace@github.com/worace/troutr-client.git
   revision: f061bd5bb76f83841acec7da72cc7aa694538ca2
   specs:
     troutr_client (0.0.1)

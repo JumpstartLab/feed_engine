@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'ostruct'
 
 describe "API feeds/user/... ", :type => :api do
   let!(:user) { FactoryGirl.create(:user) }
@@ -57,6 +58,18 @@ describe "API feeds/user/... ", :type => :api do
       new_post.comment.should == "This image is cool."
       new_post.url.should == "http://foo.com/cat.jpg"
       new_post.should be_a(ImageItem)
+    end
+
+    it "creates a github_item via the api" do
+      github_response = OpenStruct.new
+      event=YAML::dump({github: "item"})
+      body = '{"type":"GithubItem","event": "#{event}"}'
+      post "#{url}.json", :token => token, :body => body
+
+      last_response.status.should == 201
+
+      new_post = user.stream_items.last.streamable
+      new_post.should be_a(GithubItem)
     end
 
     it "responds with errors for an invalid post" do

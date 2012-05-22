@@ -14,7 +14,6 @@ class GithubJob
 
     user = User.find(current_user["id"])
 
-   
     auth = user.authentications.find_by_provider("github")
 
     events =  client.user_events(login).select do |event|
