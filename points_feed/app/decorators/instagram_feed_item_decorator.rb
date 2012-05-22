@@ -6,6 +6,7 @@ class InstagramFeedItemDecorator < ApplicationDecorator
     
     {
       :type => "InstagramFeedItem",
+      :klass => "InstagramFeedItem",
       :feeder => {
         :avatar => model.user.avatar,
         :name => model.user.display_name
@@ -16,7 +17,8 @@ class InstagramFeedItemDecorator < ApplicationDecorator
       :id => model.id,
       :refeed => false,
       :refeed_link => "",
-      :reeder => {}
+      :reeder => {},
+      :points => model.points
     }
   end
 end

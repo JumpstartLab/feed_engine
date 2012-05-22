@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120517130811) do
+ActiveRecord::Schema.define(:version => 20120521175231) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -25,6 +25,14 @@ ActiveRecord::Schema.define(:version => 20120517130811) do
 
   add_index "authentications", ["id"], :name => "index_authentications_on_id"
   add_index "authentications", ["user_id"], :name => "index_authentications_on_user_id"
+
+  create_table "awards", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "awardable_id"
+    t.string   "awardable_type"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
