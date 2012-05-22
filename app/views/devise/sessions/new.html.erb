@@ -16,3 +16,16 @@
 
   <%=link_to "Forgot password?", new_user_password_path(resource_name) %>
 </div>
+
+
+
+<h1 class="feed-title span7">What's new in the Troutr River</h1>
+
+<div class="span7 feed-list" id="stream-items">
+
+  <% if @items %>
+    <% @items.zip(@stream_items).each do |i, si| %>
+    <%= render :partial => "feed/item", :locals => { :item => i, :stream_item => si } %>
+    <% end %>
+  <% end %>
+</div>

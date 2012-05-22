@@ -12,9 +12,9 @@
 });
 
  </script>
- <h1 class="feed-title span7"><%= @feed_owner.display_name %>'s stream</h1>
+<h1 class="feed-title span7"><%= @feed_owner.display_name %>'s stream</h1>
 <div class="span7 feed-list" id="stream-items">
-  
+
   <% if @items %>
     <% @items.zip(@stream_items).each do |i, si| %>
     <%= render :partial => "item", :locals => { :item => i, :stream_item => si } %>
