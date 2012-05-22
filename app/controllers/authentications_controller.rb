@@ -35,7 +35,6 @@ class AuthenticationsController < ApplicationController
 
   def github
     omniauth = request.env["omniauth.auth"]
-    raise omniauth.to_yaml
     auth = current_user.authentications.find_or_initialize_by_provider(omniauth["provider"])
     if auth.create_github_auth(omniauth)
       redirect_to instagram_sign_in_page

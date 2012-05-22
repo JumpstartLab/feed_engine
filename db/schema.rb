@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120521213827) do
+ActiveRecord::Schema.define(:version => 20120522002242) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(:version => 20120521213827) do
     t.datetime "updated_at",                  :null => false
     t.string   "uid"
     t.string   "username"
-    t.integer  "last_status_id", :limit => 8
+    t.string   "last_status_id", :limit => 8
     t.string   "image"
   end
 

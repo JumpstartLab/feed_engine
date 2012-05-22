@@ -11,7 +11,7 @@
 #  updated_at     :datetime        not null
 #  uid            :string(255)
 #  username       :string(255)
-#  last_status_id :integer(8)
+#  last_status_id :string(8)
 #  image          :string(255)
 #
 
@@ -41,7 +41,6 @@ class Authentication < ActiveRecord::Base
                            last_status_id: omniauth["extra"]["raw_info"]["status"]["id_str"],
                            image: omniauth["info"]["image"]
       )
-    save!
   end
   
   def create_github_auth(omniauth)
@@ -50,18 +49,19 @@ class Authentication < ActiveRecord::Base
                            secret: omniauth["credentials"]["secret"],
                            uid: omniauth["uid"],
                            username: omniauth["info"]["nickname"],
-                           last_status_id: omniauth["extra"]["raw_info"]["status"]["id_str"],
+                           last_status_id: DateTime.now.to_s,
                            image: omniauth["extra"]["raw_info"]["avatar_url"]
       )
-    save!
   end
 
   def import_items
     case self.provider
-    when "twitter"
-      Fetcher.delay.fetch_and_import_tweets(self.uid, self.user_id, self.last_status_id)
+    when 'twitter'
+      Fetcher.delay.import_twitter_activity(self.uid, self.user_id, self.last_status_id)
+    when 'github'
+      Fetcher.delay.import_github_activity(self.username, self.user_id, self.last_status_id)
     else
-    Fetcher.import_items(self.provider, self.uid, self.user_id, self.username, self.last_status_id)
+      Fetcher.import_items(self.provider, self.uid, self.user_id, self.username, self.last_status_id)
     end
   end
 end
