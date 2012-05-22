@@ -2,17 +2,15 @@
 #
 # Table name: authentications
 #
-#  id             :integer         not null, primary key
-#  user_id        :integer
-#  provider       :string(255)
-#  token          :string(255)
-#  secret         :string(255)
-#  created_at     :datetime        not null
-#  updated_at     :datetime        not null
-#  uid            :string(255)
-#  username       :string(255)
-#  last_status_id :string(8)
-#  image          :string(255)
+#  id         :integer         not null, primary key
+#  user_id    :integer
+#  provider   :string(255)
+#  token      :string(255)
+#  secret     :string(255)
+#  created_at :datetime        not null
+#  updated_at :datetime        not null
+#  uid        :string(255)
+#  username   :string(255)
 #
 
 class Authentication < ActiveRecord::Base
