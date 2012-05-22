@@ -1,6 +1,6 @@
 <div class="edit-account-container">
 
-  <% if @subscriptions.any? %>
+  <% if @subscriptions && @subscriptions.any? %>
       <p>Your TackleBox contains these troutrs:</p>
       <div class="subscriptions">
         <% for subscription in @subscriptions %>
