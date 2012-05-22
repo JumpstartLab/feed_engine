@@ -26,7 +26,7 @@ RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = true
   config.global_fixtures = :all
-  
+
   config.include Rails.application.routes.url_helpers
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
@@ -37,5 +37,6 @@ RSpec.configure do |config|
   # automatically. This will be the default behavior in future versions of
   # rspec-rails.
   config.include UserSupport::Login
+  config.include UserSupport::Logout
   config.infer_base_class_for_anonymous_controllers = false
 end

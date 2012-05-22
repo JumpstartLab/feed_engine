@@ -10,4 +10,9 @@ module UserSupport
       end
     end
   end
+  module Logout
+    def logout()
+      click_on "Sign out"
+    end
+  end
 end

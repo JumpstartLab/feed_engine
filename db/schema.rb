@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120521182828) do
+ActiveRecord::Schema.define(:version => 20120522014427) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -36,8 +36,8 @@ ActiveRecord::Schema.define(:version => 20120521182828) do
     t.string   "type"
     t.text     "comment"
     t.text     "link"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
     t.integer  "user_id"
     t.string   "photo_file_name"
     t.string   "photo_content_type"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(:version => 20120521182828) do
     t.integer  "regrowled_from_id"
     t.datetime "original_created_at"
     t.string   "event_type"
+    t.integer  "points",              :default => 0
   end
 
   create_table "instagram_accounts", :force => true do |t|
