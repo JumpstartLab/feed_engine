@@ -1,10 +1,10 @@
-.row#message
-  = render :partial => "growls/header", :locals => { growl: message }
+.row#tweet
+  = render :partial => "growls/header", :locals => { growl: tweet }
 .row
   .two.columns
-    = image_tag message.get_gravatar
+    = image_tag tweet.get_gravatar
   .nine.columns
     .growl_post
-      = link_to message.title, message.link
-      .row= message.comment
-= render partial: "growls/footer", locals: { growl: message}
+      = link_to tweet.title, tweet.link
+      .row= tweet.comment
+= render partial: "growls/footer", locals: { growl: tweet}
