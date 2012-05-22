@@ -13,6 +13,16 @@ class ItemsController < ApplicationController
     end
   end
 
+  def refeed
+    item = Item.find(params[:id])
+
+    if item.refeed_for(current_user)
+      redirect_to :back
+    else
+      render :template => 'home/index'
+    end
+  end
+
   private
 
   def try_to_add_point

@@ -19,6 +19,7 @@ FeedEngine::Application.routes.draw do
   get "signup", to: "users#new", as: "signup"
   get "login", to: "sessions#new", as: "login"
   get "logout", to: "sessions#destroy", as: "logout"
+  put "refeed/:id", to: "items#refeed", as: "refeed"
 
   constraints :subdomain => 'api', :format => :json do
     namespace :api, :path => '/' do

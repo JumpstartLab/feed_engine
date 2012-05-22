@@ -8,6 +8,7 @@
 #  post_type  :string(255)
 #  created_at :datetime        not null
 #  updated_at :datetime        not null
+#  refeed     :boolean
 #
 
 require 'spec_helper'
@@ -65,17 +66,26 @@ describe Item do
     link.item.post.should == link
   end
 
-  it "creates another item when refed" do
-    expect { message.item.refeed_for(user) }.to change { Item.all.count }.from(0).to(2)
+  it "is refeedable if it hasn't been refed" do
+    message.item.refeedable_for?(user).should be true
   end
 
-  it "raises an argument error if refed by the same user that created it" do
-    expect { message.item.refeed_for(message.item.poster) }.to raise_error ArgumentError
+  it "is not refeedable for the same user that created it" do
+    message.item.refeedable_for?(message.item.poster).should_not be true
+  end
+
+  it "creates another item when refed" do
+    expect { message.item.refeed_for(user) }.to change { Item.all.count }.from(0).to(2)
   end
 
   describe "that is a refeed" do
     it "identifies as a refeed" do
       message.item.refeed_for(user).should be_a_refeed
+    end
+
+    it "is no longer refeedable for that user" do
+      message.item.refeed_for(user)
+      message.item.refeedable_for?(user).should be false
     end
 
     describe "is destroyed when the associated post is destroyed" do
