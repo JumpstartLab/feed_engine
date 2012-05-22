@@ -40,7 +40,7 @@ When /^I submit the form$/ do
 end
 
 Then /^I should see a confirmation message thanking me for signing up$/ do
-  page.should_have_content "Welcome! You have signed up successfully."
+  page.should have_content "Welcome to Feedonkulous!"
 end
 
 Then /^I should be viewing the dashboard at '\/dashboard'$/ do
