@@ -60,6 +60,9 @@ Hungrlr::Application.routes.draw do
   resources :messages
   resource :dashboard, :only => [ :show ]
   resource :subscriptions, :only => [:create, :destroy]
+  resource :search do
+    get 'display_names'
+  end
 
   root :to => 'pages#home'
 end

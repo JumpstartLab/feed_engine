@@ -2,6 +2,8 @@
   .attached
     .name
       = link_to "Home", home
+    #user_search
+      = render "layouts/search"
     ul.right
       - main_navigation.each do |title, link| # Populated from nav_bar_helper
         li= link_to title, link

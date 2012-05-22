@@ -1,0 +1,8 @@
+.search
+  = form_tag search_path, method: :get, id: "search-form" do
+    = text_field_tag 'display_name', nil,
+      data: { autocomplete_source: display_names_search_path },
+      autocomplete: "off"
+    = submit_tag "Search", hidden: true, id: "#search-submit"
+
+

@@ -1,11 +1,15 @@
 .row
-  .four.columns
+  .six.columns
       b Posted:
       = " #{time_ago_in_words growl.created_at} ago"
       span.points
-        = link_to "+", points_growl_path(growl), method: :post, class: "points_link"
-        = pluralize(growl.points, "Point")
+        = link_to "+ #{pluralize(growl.points, "Point")}", points_growl_path(growl), method: :post, class: "points_link small green button radius regrowl"
   - if current_user
+    - unless growl.original_growl?
+      .retweet.four.columns
+        img(src="assets/glyphicons/glyphicons_152_new_window.png")
+        | Regrowled by &nbsp;
+        = link_to growl.user.display_name, "http://#{growl.user.display_name}.#{request.domain}"
     .four.columns.pull_right
       - if current_user.can_regrowl?(growl)
         = link_to "Regrowl", regrowled_index_path(id: growl.id), method: :post, class: "small blue button radius regrowl",  remote: true
