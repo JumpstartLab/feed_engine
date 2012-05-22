@@ -36,7 +36,6 @@ FeedEngine::Application.routes.draw do
   resources :images
   resources :links
 
-
   root :to => 'pages#index'
   match '/integrate' => 'users#integrate', as: 'integrate'
 
