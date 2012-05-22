@@ -1,14 +1,14 @@
 get_latest_tweets:
-  every: ["30s"]
+  every: ["300s"]
   class: GetLatestTweets
   description: "resuqes!"
 
 get_latest_gits:
-  every: ["30s"]
+  every: ["300s"]
   class: GetLatestGits
   description: "resuqes!"
 
 get_latest_grams:
-  every: ["30s"]
+  every: ["300s"]
   class: GetLatestGrams
   description: "resuqes!"
