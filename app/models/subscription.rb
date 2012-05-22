@@ -176,14 +176,15 @@ class Subscription < ActiveRecord::Base
   end
 
   def refeeds
-    all_items = JSON.parse(HTTParty.get(
-      "http://api.#{base_url}/v1/feeds/" +
-      "#{user.subdomain}/items.json"
-    ))
-    refeeded_items = all_items.select do |item|
-      OpenStruct.new item unless item.original_poster_id.nil?
-    end
-    refeeded_items
+    # all_items = JSON.parse(HTTParty.get(
+    #   "http://api.#{base_url}/v1/feeds/" +
+    #   "#{user.subdomain}/items.json"
+    # ))
+    # refeeded_items = all_items.select do |item|
+    #   OpenStruct.new item unless item.original_poster_id.nil?
+    # end
+    # refeeded_items
+    Refeed.where(poster_id: self.user_id)
   end
 
 end
