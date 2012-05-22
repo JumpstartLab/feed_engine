@@ -7,8 +7,8 @@ describe "Feed" do
 
   context "points" do
     before(:each) do 
-      login_factory_user(user.email)
-      login(user)
+      login_factory_user(user_2.email)
+      login(user_2)
       5.times do 
         text_item = FactoryGirl.create(:text_item, :user => user)
       end
@@ -40,8 +40,8 @@ describe "Feed" do
       page.should have_selector(t_string)
       find(t_string).click
       page.should have_button('Log In')
-      login_factory_user(user.email)
-      login(user)
+      login_factory_user(user_2.email)
+      login(user_2)
       visit site_domain  
       t.points.count.should == 1
       page.should_not have_selector(t_string)
