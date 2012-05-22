@@ -1,4 +1,5 @@
 class GrowlsController < ApplicationController
+  before_filter:require_sign_in, only: [:points, :create]
 
   # XXX SHOULD BE MOVED TO A FEEDS CONTROLLER
   def index
@@ -19,4 +20,19 @@ class GrowlsController < ApplicationController
     end
   end
 
+  def points
+    growl = Growl.find(params[:id])
+    growl.increment!(:points)
+    redirect_to root_path
+  end
+
+  private
+
+  def require_sign_in
+    unless current_user
+      redirect_to "http://#{request.domain}#{home_path}"
+      session[:growl_needing_point] = params[:id]
+      flash[:notice] = "Login or sign up first please."
+    end
+  end
 end

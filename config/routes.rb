@@ -50,7 +50,9 @@ Hungrlr::Application.routes.draw do
     get '/login' => 'devise/sessions#new'
   end
 
-  resources :growls, :only => [ :show, :create ]
+  resources :growls, :only => [ :show, :create ] do
+    post 'points', on: :member
+  end
   resources :regrowled, only: [:create]
   resources :authentications, :only => [ :new, :destroy ]
   resources :images

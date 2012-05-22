@@ -8,10 +8,12 @@ class SubscriptionsController < ApplicationController
       format.js {render :content_type => 'text/javascript'}
     end
     # render :js => "alert #{subscription.save}", :layout => false
+    render js: "Created"
   end
 
   def destroy
     subscription = current_user.inverse_subscriptions.where(user_id: params["user_id"]).first
-    render :js => "alert #{subscription.destroy}", :layout => false
+    subscription.destroy
+    render json: "Destroyed"
   end
 end
