@@ -36,9 +36,10 @@ class Subscription < ActiveRecord::Base
 
   def self.create_with_refeed(poster_id, refeeder_id)
     create! do |subscription|
-      @original_poster = User.find(uid)
       subscription.uid = poster_id
       subscription.user_id = refeeder_id
+      subscription.provider = "refeed"
+      @original_poster = User.find(poster_id)
     end
   end
 
@@ -51,6 +52,10 @@ class Subscription < ActiveRecord::Base
       :run_at =>
       SUBSCRIPTION_FREQ.seconds.from_now
     ).get_all_new_service_posts
+  end
+
+  def base_url
+    ENV["BASE_URL"]
   end
 
   def get_new_posts
@@ -120,7 +125,9 @@ class Subscription < ActiveRecord::Base
   def create_refeed(new_post)
     Refeed.create!(post_id: new_post.post_id,
                    original_poster_id: self.uid,
-                   refeeder_id: self.id
+                   refeeder_id: self.id,
+                   post_type: PROVIDER_TO_POST_TYPE[self.provider],
+                   subscription_id: self.id
                   )
   end
 
@@ -151,7 +158,7 @@ class Subscription < ActiveRecord::Base
 
   def get_refeeds
     HTTParty.get(
-      "http://api.#{root_url}/v1/feeds/" +
+      "http://api.#{base_url}/v1/feeds/" +
       "#{@original_poster.subdomain}/items.json"
     )
   end
@@ -169,13 +176,14 @@ class Subscription < ActiveRecord::Base
   end
 
   def refeeds
-    all_items = HTTParty.get(
-      "http://api.#{root_url}/v1/feeds/" +
+    all_items = JSON.parse(HTTParty.get(
+      "http://api.#{base_url}/v1/feeds/" +
       "#{user.subdomain}/items.json"
-    )
+    ))
     refeeded_items = all_items.select do |item|
-      OpenStruct.new JSON.parse(item) unless item.original_poster_id.nil?
+      OpenStruct.new item unless item.original_poster_id.nil?
     end
     refeeded_items
   end
+
 end

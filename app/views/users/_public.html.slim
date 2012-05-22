@@ -10,7 +10,9 @@
       span.post-time
         = (post.local_created_at).strftime("%l:%M%P")
     br/
-    p.post-body
+    p.post-body(id="item_#{post.id}")
+      - if post.refeed?
+        = render :partial => "post_partial", locals: {post: post.post}
       - if post.message?
         = post.body
       - if post.link?

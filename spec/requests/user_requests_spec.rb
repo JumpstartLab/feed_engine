@@ -135,21 +135,19 @@ describe User do
       context "given a user has refeeded another user's feed" do
         context "and an item has been refeeded" do
           let!(:body_post) {
-            random_body_type = ["image", "tweet", "instapound"].sample
+            random_body_type = ["message", "tweet", "instapound"].sample
             Fabricate(random_body_type.to_sym)
           }
           let!(:description_post) { 
-            random_description_type = ["message", "link"].sample
+            random_description_type = ["image", "link"].sample
             Fabricate(random_description_type.to_sym)
           }
-          let!(:refeeded_body_item) { Item.create(poster_id: user.id,
+          let!(:refeeded_body_item) { Refeed.create(refeeder_id: user.id,
                                                   original_poster_id: other_user.id,
-                                                  post_type: "refeed",
                                                   post_id: body_post.id)
           }
-          let!(:refeeded_description_item) { Item.create(poster_id: user.id,
+          let!(:refeeded_description_item) { Refeed.create(refeeder_id: user.id,
                                                          original_poster_id: other_user.id,
-                                                         post_type: "refeed",
                                                          post_id: description_post.id)
           }
           before(:each) do
@@ -157,13 +155,13 @@ describe User do
           end
 
           it "shows the item on the user's feed" do
-            page.should have_content body_post.body
+            page.should have_content body_post.body.to_s
             page.should have_content description_post.desription
           end
           it "shows the display name of both the original poster and the refeeder on the item" do
-            [body_post, description_post].each do |refeeded_post|
-              [User.find(refeeded_post.poster_id), User.find(refeeded_post.original_poster_id)].each do |person|
-                within "##{refeeded_post.id}" do
+            [refeeded_body_item, refeeded_description_item].each do |refeeded_post|
+              [User.find(refeeded_post.refeeder_id), User.find(refeeded_post.original_poster_id)].each do |person|
+                within "#item_#{refeeded_post.id}" do
                   page.should have_content person.display_name
                 end
               end

@@ -1,3 +1,9 @@
 class Refeed < ActiveRecord::Base
-  attr_accessible :original_poster_id, :post_id, :refeeder_id
+  include Postable
+  include Service
+  attr_accessible :original_poster_id, :post_id, :refeeder_id, :post_type
+
+  def post
+    post_type.capitalize.constantize.find(post_id)
+  end
 end
