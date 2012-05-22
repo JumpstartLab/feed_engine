@@ -28,6 +28,8 @@
 #  index_users_on_email                 (email) UNIQUE
 #
 
+require 'digest/md5'
+
 class User < ActiveRecord::Base
 
   has_many :text_posts,  through: :posts, source: :postable, source_type: 'TextPost'
@@ -63,6 +65,9 @@ class User < ActiveRecord::Base
 
   after_create :send_welcome_email
 
+  def gravatar_url
+    @gravatar_url ||= "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email.downcase)}?d=mm&size=90"
+  end
 
   def send_welcome_email
     UserMailer.delay.welcome_email(self)
