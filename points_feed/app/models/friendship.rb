@@ -2,7 +2,7 @@ class Friendship < ActiveRecord::Base
   PENDING = 1
   ACTIVE  = 2
   IGNORED = 3
-  
+
   attr_accessible :friend_id, :user_id, :status
 
   validates :friend_id, :presence => true
