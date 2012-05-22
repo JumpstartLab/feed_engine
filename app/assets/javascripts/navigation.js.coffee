@@ -1,6 +1,7 @@
 jQuery ->
   addNavHandlers()
   addDashboardHandler()
+  addHomeHandler()
   addHandlers()
   servicesHandler()
   integrationsHandler()
@@ -17,35 +18,20 @@ jQuery ->
       $.feedengine.activeTabId = tabId
   }
   setUsername()
-  getSubDomain()
-  new FeedPager()
-
+  homeHandler()
 getSubDomain = ->
   host_parts = window.location.host.split('.')
-  unless host_parts[0] == window.location.host
+  unless host_parts[0] == 'simplefeed' || host_parts[0] == 'feedeng'
     $.feedengine.subdomain = host_parts[0]
   else
-    $.feedengine.subdomain = null
+      $.feedengine.subdomain = null
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+addHomeHandler = ->
+  $('#home').click(homeHandler)
+homeHandler = ->
+  pageSwap('#home-page')
+  getSubDomain()
+  new FeedPager()
 
 setFlash = (message) ->
   $('#flash_message').text(message)
@@ -92,7 +78,7 @@ addDashboardHandler = ->
     renderDashboard()
 
 addNavHandlers = ->
-  navItems = ['#friends', '#feeds', '#home', '#signin', '#signup']
+  navItems = ['#friends', '#home', '#signin', '#signup']
   pageIDs = (id + '-page' for id in navItems)
   
   for id in navItems
