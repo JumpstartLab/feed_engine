@@ -1,5 +1,6 @@
 @import "variables";
 @import "containers";
+@import "text";
 
 .feed_row {
   padding: 0 20px 0 50px;
@@ -20,12 +21,16 @@
   height: 48px;
 }
 
-.text-item-body {
-  @include word-wrap;
+@mixin item-body {
   font-size: 16px; 
   font-weight: 200;
   font-family: $font;
   color: $font-color;
+}
+
+.text-item-body {
+  @include item-body;
+  @include word-wrap;
 }
 
 .body_image {
@@ -174,8 +179,7 @@ $stat-count-font-size: 18px;
 }
 
 .feed-title {
-  font-family: $font;
-  color: $trout-main-color;
+  @include troutr-title;
   padding: 0 0 14px 50px;
 }
 
@@ -190,4 +194,26 @@ $stat-count-font-size: 18px;
 .git-commit a:hover {
   color: $trout-main-color;
   background-color: transparent;
+}
+
+.item-header-user  a{
+  color: $trout-main-color;
+}
+
+.item-header-user a:visited{
+  color: $trout-main-color;
+}
+
+.item-header-user  a:hover {
+  color: $trout-main-color;
+  background-color: transparent;
+}
+
+.twitter {
+  @include word-wrap;
+  @include item-body;
+}
+
+.github-item-body {
+  @include item-body;
 }

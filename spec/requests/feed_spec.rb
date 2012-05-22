@@ -21,7 +21,6 @@ describe "Feed" do
       page.should have_selector(t_string)
       find(t_string).click
       t.points.count.should == 1
-      page.should_not have_selector(t_string)
     end
 
     it "requres a user to be logged in" do
@@ -44,7 +43,6 @@ describe "Feed" do
       login(user_2)
       visit site_domain  
       t.points.count.should == 1
-      page.should_not have_selector(t_string)
     end
   end
 

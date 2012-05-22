@@ -16,6 +16,8 @@
 /tmp
 .DS_Store
 
+
 # Ignore converage folder
 coverage/*
 
+.sass-cache
