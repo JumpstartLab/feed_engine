@@ -19,7 +19,8 @@ class Subscription < ActiveRecord::Base
   PROVIDER_TO_POST_TYPE = { "twitter" => "tweets", "github" => "github_events",
                             "instagram" => "instapounds", "refeed" => "refeeds" }
   attr_accessible :user_name, :provider, :uid, :user_id, :oauth_token,
-    :oauth_secret
+    :oauth_secret, :original_poster
+  attr_accessor :original_poster
 
   belongs_to :user
 
@@ -39,7 +40,6 @@ class Subscription < ActiveRecord::Base
       subscription.uid = poster_id
       subscription.user_id = refeeder_id
       subscription.provider = "refeed"
-      @original_poster = User.find(poster_id)
     end
   end
 
@@ -54,8 +54,12 @@ class Subscription < ActiveRecord::Base
     ).get_all_new_service_posts
   end
 
+  def original_poster
+    User.find(uid.to_i)
+  end
+
   def base_url
-    ENV["BASE_URL"]
+    BASE_URL
   end
 
   def get_new_posts
@@ -157,10 +161,15 @@ class Subscription < ActiveRecord::Base
   end
 
   def get_refeeds
-    HTTParty.get(
+    all_refeeds = HTTParty.get(
       "http://api.#{base_url}/v1/feeds/" +
-      "#{@original_poster.subdomain}/items.json"
-    )
+      "#{original_poster.subdomain}/items.json"
+    )["items"]["most_recent"]
+    objectified_refeeds = all_refeeds.map do |refeed|
+      objectified_refeed = OpenStruct.new refeed
+      # objectified_refeed.created_at = objectified_refeed.created_at.utc
+      objectified_refeed
+    end
   end
 
   def tweets
