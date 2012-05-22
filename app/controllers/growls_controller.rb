@@ -29,8 +29,10 @@ class GrowlsController < ApplicationController
   private
 
   def require_sign_in
-    session[:growl_needing_point] = params[:id]
-    flash[:notice] = "Login or sign up first please."
-    redirect_to "http://#{request.domain}#{home_path}" unless current_user
+    unless current_user
+      redirect_to "http://#{request.domain}#{home_path}"
+      session[:growl_needing_point] = params[:id]
+      flash[:notice] = "Login or sign up first please."
+    end
   end
 end
