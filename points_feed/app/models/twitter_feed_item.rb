@@ -2,7 +2,7 @@ class TwitterFeedItem < ActiveRecord::Base
   attr_accessible :content, :posted_at, :user_id, :tweet_id
 
   belongs_to :user
-  before_create :validates_timeliness_of_post
+  validate :validates_timeliness_of_post
   has_many :awards, as: :awardable
   include PointAwarder
 
