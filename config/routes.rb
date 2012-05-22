@@ -7,7 +7,6 @@ Hungrlr::Application.routes.draw do
       get '/feeds/:display_name' => 'feeds#show'
       post '/feeds/:display_name' => 'feeds#create'
       resources :user_tweets, only: [:create, :index]
-      resources :user_github_events, only: [:create, :index]
       resources :meta_data, :only => [ :create ]
     end
   end
@@ -22,7 +21,6 @@ Hungrlr::Application.routes.draw do
     constraints :subdomain => 'api' do ## For external use
       scope module: "api" do
         namespace "v1" do
-          resources :user_instagram_photos, only: [:create, :index]
           get '/validate_token' => 'api#validate_token'
           get '/users/twitter' => 'users#twitter'
           get '/users/github' => 'users#github'
@@ -34,6 +32,8 @@ Hungrlr::Application.routes.draw do
           delete '/feeds/:display_name/growls/:id/refeed' => 'feeds#destroy_refeed'
           post '/feeds/:display_name/refeeds' => 'feeds#subscriber_refeed'
           resources :user_tweets, only: [:create, :index]
+          resources :user_github_events, only: [:create, :index]
+          resources :user_instagram_photos, only: [:create, :index]
           resources :meta_data, :only => [ :create ]
           resources :subscriptions, :only => [:index]
         end
