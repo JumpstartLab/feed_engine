@@ -7,6 +7,7 @@ class ImagePostDecorator < ApplicationDecorator
     {
       :type => "ImageItem",
       :image_url => model.image_url,
+      :klass => "Post",
       :feeder => {
         :avatar => model.user.avatar,
         :name => model.user.display_name
@@ -19,7 +20,8 @@ class ImagePostDecorator < ApplicationDecorator
       :refeed => model.original_post != nil,
       :refeed_link => "#{refeed_url(model.original_post)}",
       :refeeder => refeeder,
-      :can_refeed => can_refeed?
+      :can_refeed => can_refeed?,
+      :points => model.points
     }
   end
 end

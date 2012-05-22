@@ -6,6 +6,7 @@ class LinkPostDecorator < ApplicationDecorator
     
     {
       :type => "LinkItem",
+      :klass => "Post",
       :link_url => model.content,
       :feeder => {
         :avatar => model.user.avatar,
@@ -19,7 +20,8 @@ class LinkPostDecorator < ApplicationDecorator
       :refeed => model.original_post != nil,
       :refeed_link => "#{refeed_url(model.original_post)}",
       :refeeder => refeeder,
-      :can_refeed => can_refeed?
+      :can_refeed => can_refeed?,
+      :points => model.points
     }
   end
 end

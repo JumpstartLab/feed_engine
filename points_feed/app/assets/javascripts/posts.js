@@ -153,6 +153,28 @@ $(document).ready(function() {
     });
   });
 
+  $(".points_link").live('click', function(e) {
+    e.preventDefault();
+    $this = $(this);
+
+    $.ajax({
+      type: 'post',
+      url: "/api/awards/",
+      data: {
+        'id': $(this).data('id'),
+        'type': $(this).data('type'),
+        'access_token': access_token
+      },
+      success: function(data) {
+        $this.parent().html('Points! awarded.').addClass('label label-info');
+      },
+      error: function(evt) {
+        alert('Unable to award Points!®');
+      }
+    });
+  });
+
+
   $("a.lightbox").live('click', function(e) {
     $('body').css('overflow-y', 'hidden');
     
