@@ -26,6 +26,8 @@ gem 'httparty'
 gem 'hashie'
 gem 'vcr'
 gem 'fakeweb'
+gem 'unicorn'
+gem 'capistrano'
 
 group :production do
   gem 'pg'
