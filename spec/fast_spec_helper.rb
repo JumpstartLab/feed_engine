@@ -1,0 +1,2 @@
+$:.unshift(".")
+$:.unshift("lib")

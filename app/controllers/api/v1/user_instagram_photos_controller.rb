@@ -13,7 +13,7 @@ class Api::V1::UserInstagramPhotosController < Api::V1::ApiController
     render :json => true, :status => 201
   end
 
-private
+  private
 
   def verify_instagram_account
     @user = User.where(id: params["user_id"]).first

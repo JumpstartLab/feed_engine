@@ -5,7 +5,7 @@ class SubscriptionsController < ApplicationController
     @response = subscription.save
 
     respond_to do |format|
-        format.js {render :content_type => 'text/javascript'}
+      format.js {render :content_type => 'text/javascript'}
     end
     # render :js => "alert #{subscription.save}", :layout => false
   end
