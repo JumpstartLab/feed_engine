@@ -15,3 +15,9 @@
 //= require twitter/bootstrap
 //= require_tree .
 //= require rails.validations
+
+function ImgError(source){
+    source.src = "/assets/missing-trout.jpg";
+    source.onerror = "";
+    return true;
+}
