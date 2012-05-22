@@ -19,6 +19,7 @@
 
   def index
     @posts = Post.all.collect {|post| post.postable}.page(params[:page] || 0)
+    render "pages/index"
   end
 
   def show

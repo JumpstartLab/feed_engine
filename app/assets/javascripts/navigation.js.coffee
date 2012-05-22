@@ -22,7 +22,8 @@ jQuery ->
 
 getSubDomain = ->
   host_parts = window.location.host.split('.')
-  if host_parts
+  alert host_parts[0]
+  unless host_parts == 'simplefeed'
     $.feedengine.subdomain = host_parts[0]
   else
     $.feedengine.subdomain = null
