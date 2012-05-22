@@ -1,0 +1,49 @@
+-content_for(:head) do
+  javascript:
+    $(document).ready(function(){
+      $('.alert').delay(1600).fadeOut(200);
+      $('#github').hide();
+      $('#showGithubButton').click(function() {
+        $('#github').show();
+        $('#twitter').hide();
+      });
+      $('#showTwitterButton').click(function() {
+        $('#twitter').show();
+        $('#github').hide();
+      });
+    });
+    
+div#twitter
+  p
+    strong Step 1: Connect with Twitter 
+    | > Step 2: Connect with Github > Finish 
+  - if current_user.has_subscription?("twitter")
+    h3 Connected with Twitter as #{current_user.subscription("twitter").user_name}
+  - else
+    h3= link_to "Connect with Twitter", "/auth/twitter" 
+  p  
+  input#showGithubButton type="button" value="Next Step > Connect with Github"  or 
+  = link_to "Connect Later", dashboard_path(:notice => "Thanks for signing up! If you would like to link services to your account later, go to the #{link_to "services section", "#", id: "services_id"} of your profile.")
+
+div#github
+  p
+    |Step 1: Connect with Twitter > 
+    strong Step 2: Connect with Github 
+    | > Finish 
+  - if current_user.has_subscription?("github")
+    h3 Connected with Github as #{current_user.subscription("github").user_name}
+  - else
+    h3= link_to "Connect with Github", "/auth/github"
+  input#showTwitterButton type="button" value="Go Back < Connect with Twitter"  or 
+  = link_to "Connect Later", dashboard_path(:notice => "Thanks for signing up! If you would like to link services to your account later, go to the #{link_to "services section", "#", id: "services_id"} of your profile.")
+div#instagram
+  p
+  |Step 1: Connect with Twitter > 
+  |Step 2: Connect with Github >
+  strong Step 3: Connect with Instagram
+  | > Finish 
+  - if current_user.has_subscription?("instagram")
+  h3 Connected with Instagram as #{current_user.subscription("instagram").user_name}
+  - else
+    h3= link_to "Connect with Instagram", "/auth/instagram"
+
