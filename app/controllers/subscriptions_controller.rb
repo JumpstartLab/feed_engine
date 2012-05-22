@@ -7,7 +7,6 @@ class SubscriptionsController < ApplicationController
   def create
     auth_response = request.env["omniauth.auth"]
     Subscription.create_with_omniauth(auth_response, current_user)
-    raise auth_response["uid"].inspect
     notice = "Your account has been linked with #{auth_response["provider"]}"
     if current_user.subscribed_to_all_services? || authorized_from_dashboard
       redirect_to dashboard_path, notice: notice

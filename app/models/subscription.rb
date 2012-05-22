@@ -70,8 +70,6 @@ class Subscription < ActiveRecord::Base
         create_tweet(new_post)
       elsif provider == "github"
         create_github_event(new_post)
-      elsif provider == "instagram"
-        create_instapound(new_post)
       end
     end
   end
