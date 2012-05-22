@@ -1,26 +1,22 @@
 <br/>
-<div class="span3 offset4 trout-container">
+<div class="span4 offset3 trout-container">
   <h1 class="signup-title">Sign up</h1>
   <br/>
 
-  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-    <%= devise_error_messages! %>
+  <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+    <%= f.input :email, :label_html => {:class => "text-item-label"}, 
+      :input_html => {:class => "signup-text-field"} %>
 
-    <%= f.label :email %>
-    <%= f.email_field :email, :class => "signup-input" %>
+    <%= f.input :display_name, :required => false, :label_html => {:class => "text-item-label"}, 
+    :input_html => {:class => "signup-text-field"} %>
 
-    <%= f.label :display_name %>
-    <%= f.text_field :display_name, :class => "signup-input" %>
+    <%= f.input :password, :label_html => {:class => "text-item-label"}, 
+      :input_html => {:class => "signup-text-field"} %>
 
-    <%= f.label :password %>
-    <%= f.password_field :password, :class => "signup-input" %>
+    <%= f.input :password_confirmation, :label_html => {:class => "text-item-label"}, 
+      :input_html => {:class => "signup-text-field"} %>
 
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation, :class => "signup-input" %>
-
-    <div>
-      <%= f.submit "Sign up", :class => "signup-button btn-primary btn-large" %>
-      <%= link_to "Cancel", root_path, :class => "signup-cancel-button btn" %>
-  </div>
+    <%= f.submit "Sign up", :class => "signup-button btn-primary btn-large" %>
+    <%= link_to "Cancel", root_path, :class => "signup-cancel-button btn" %>
     <% end %>
 </div>
