@@ -4,8 +4,8 @@ class Api::FriendsController < Api::ApiController
   def create
     friend = User.where(:id => params[:friend_id]).first
     friendship = Friendship.new(
-      :user_id => current_user.id, 
-      :friend_id => friend.id, 
+      :user_id => current_user.id,
+      :friend_id => friend.id,
       :status => Friendship::ACTIVE)
 
     if friendship.save

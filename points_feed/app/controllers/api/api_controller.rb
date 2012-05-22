@@ -21,7 +21,8 @@ class Api::ApiController < ActionController::Base
   end
 
   def current_user
-    @current_user ||= User.where(:authentication_token => params[:access_token]).first
+    token = params[:access_token]
+    @current_user ||= User.where(:authentication_token => token).first
   end
 
   def authenticate_user!

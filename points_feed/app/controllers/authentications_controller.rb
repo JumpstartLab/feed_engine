@@ -16,7 +16,7 @@ class AuthenticationsController < ApplicationController
   def destroy
     @authentication = current_user.authentications.find(params[:id])
     @authentication.destroy
-    redirect_to dashboard_path, 
+    redirect_to dashboard_path,
                 :notice => "Successfully destroyed authentication."
   end
 
