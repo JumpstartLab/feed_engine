@@ -43,6 +43,16 @@ class User < ActiveRecord::Base
   #                       :oauth_token_secret => github_oauth.secret)
   # end
 
+  def twitter_client
+    return nil unless twitter_oauth = twitter
+
+    Twitter::Client.new(:consumer_key => TWITTER_KEY,
+                        :consumer_secret => TWITTER_SECRET,
+                        :oauth_token => twitter_oauth.token,
+                        :oauth_token_secret => twitter_oauth.secret)
+  end
+
+
   def send_welcome_message
     mail = UserMailer.welcome_message(email).deliver
   end
