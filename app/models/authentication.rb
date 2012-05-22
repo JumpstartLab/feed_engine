@@ -11,7 +11,7 @@
 #  updated_at     :datetime        not null
 #  uid            :string(255)
 #  username       :string(255)
-#  last_status_id :string(8)
+#  last_status_id :string(255)
 #  image          :string(255)
 #
 
