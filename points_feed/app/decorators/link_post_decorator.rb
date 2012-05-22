@@ -3,7 +3,7 @@ class LinkPostDecorator < ApplicationDecorator
 
   def as_json(*params)
     return {} if model.nil?
-    
+
     {
       :type => "LinkItem",
       :klass => "Post",

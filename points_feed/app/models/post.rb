@@ -2,7 +2,7 @@ class Post < ActiveRecord::Base
   attr_accessible :comment, :content, :type, :file, :original_post_id
   belongs_to :user
   mount_uploader :file, FileUploader
-  
+
   validates_presence_of :user_id
   validates :comment, :length => { :maximum => 256 }
 
@@ -34,7 +34,7 @@ class Post < ActiveRecord::Base
   end
 
   def original_post
-    Post.where(:id => self.original_post_id).first if self.original_post_id != self.id
+    Post.where(:id => original_post_id).first
   end
 
   def attributed_user

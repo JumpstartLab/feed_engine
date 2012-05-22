@@ -2,13 +2,11 @@ class User < ActiveRecord::Base
   validate do
     return self.errors.add(:email, "can't be blank") if email.blank?
     unless email.match(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/)
-      self.errors.add(:email, "must be in the form user@server.com") 
+      self.errors.add(:email, "must be in the form user@server.com")
     end
   end
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, 
+         :recoverable, :rememberable, :trackable, :validatable,
          :token_authenticatable
 
   before_save :ensure_authentication_token
@@ -32,24 +30,17 @@ class User < ActiveRecord::Base
   has_many :friendships
   has_many :friends, :through => :friendships
 
-  has_many :pending_friends, :through => :friendships, 
-                             :source => :friend,
-                             :conditions => {'friendships.status' => Friendship::PENDING }
-  has_many :active_friends,  :through => :friendships, 
-                             :source => :friend,
-                             :conditions => {'friendships.status' => Friendship::ACTIVE }
-  has_many :ignored_friends,  :through => :friendships, 
-                              :source => :friend,
-                              :conditions => {'friendships.status' => Friendship::IGNORED }
+  has_many :active_friends,
+                  :through => :friendships,
+                  :source => :friend,
+                  :conditions => {'friendships.status' => Friendship::ACTIVE }
 
- 
-
-  validates :display_name, :presence => true, 
-                         :format => { 
-                           :message => "Must only be letters, numbers, underscore or dashes", 
-                           :with => /^[a-zA-Z0-9_-]+$/ 
-                         },
-                         :uniqueness => true
+  validates :display_name, :presence => true,
+              :format => {
+              :message => "Must only be letters, numbers, underscore or dashes",
+                          :with => /^[a-zA-Z0-9_-]+$/
+                          },
+              :uniqueness => true
 
   mount_uploader :background, BackgroundUploader
 
@@ -60,9 +51,13 @@ class User < ActiveRecord::Base
   end
 
   def stream(limit, offset=0)
-    items = self.posts + self.twitter_feed_items + self.github_feed_items + self.instagram_feed_items 
+    items = gather_stream_items
     items = items.sort_by { |item| item.posted_at }.reverse
     items.slice(offset, offset + limit)
+  end
+
+  def gather_stream_items
+    posts + twitter_feed_items + github_feed_items + instagram_feed_items
   end
 
   def background_image
@@ -72,7 +67,7 @@ class User < ActiveRecord::Base
   def avatar
     Gravatar.new(self.email).image_url
   end
-  
+
   def can_view_feed?(user)
     return true if user and (self == user or self.is_friend?(user))
     !self.private
@@ -102,7 +97,8 @@ class User < ActiveRecord::Base
   def twitter
     auth = twitter_authentication
     if auth
-      client = Twitter::Client.new(:oauth_token => auth.login, :oauth_token_secret => auth.secret) #rescue nil
+      client = Twitter::Client.new(:oauth_token => auth.login,
+                                   :oauth_token_secret => auth.secret)
     end
   end
 
@@ -118,8 +114,12 @@ class User < ActiveRecord::Base
     posts.where(original_post_id: original_post.original_post_id).any?
   end
 
- def instagram_authentication
+  def instagram_authentication
     self.authentications.where(:provider => 'instagram').first
+  end
+
+  def get_authentication(provider, uid)
+    authentications.find_or_create_by_provider_and_uid(provider, uid)
   end
 
   # def posts_by_friends
@@ -137,8 +137,8 @@ class User < ActiveRecord::Base
 
   def hash_from_omniauth(omniauth)
     {
-      :provider => omniauth['provider'], 
-      :uid => omniauth['uid'], 
+      :provider => omniauth['provider'],
+      :uid => omniauth['uid'],
       :token => (omniauth['credentials']['token'] rescue nil),
       :secret => (omniauth['credentials']['secret'] rescue nil)
     }

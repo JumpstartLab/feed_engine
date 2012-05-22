@@ -3,7 +3,7 @@ class TextPostDecorator < ApplicationDecorator
 
   def as_json(*params)
     return {} if model.nil?
-    
+
     {
       :type => "TextItem",
       :klass => "Post",

@@ -3,7 +3,7 @@ class ImagePostDecorator < ApplicationDecorator
 
   def as_json(*params)
     return {} if model.nil?
-    
+
     {
       :type => "ImageItem",
       :image_url => model.image_url,
