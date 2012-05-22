@@ -124,3 +124,6 @@ ul.contained.awesome-tabs-content > li {
   margin-top:7px;
   width:500px !important;
 }
+.posted {
+  line-height:29px;
+}
