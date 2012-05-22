@@ -60,5 +60,6 @@ FeedEngine::Application.routes.draw do
 
   # if there's a subdomain, send them to feed#show, otherwise treat root as dashboard
   match '', to: 'feed#show', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
+  match 'user_root' => redirect('/dashboard')
   root :to => 'river#show'
 end
