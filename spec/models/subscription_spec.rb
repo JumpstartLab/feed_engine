@@ -28,11 +28,14 @@ describe Subscription do
 
   context "when getting new service posts" do
 
+    let!(:consuming_user) { Fabricate(:user) }
+    let!(:feeding_user) { Fabricate(:user) }
     let!(:old_post) { OpenStruct.new(created_at: Time.now) }
     let!(:fabricated_subscriptions) {{
       :twitter_subscription   => Fabricate(:subscription, provider: "twitter"),
       :github_subscription    => Fabricate(:subscription, provider: "github"),
-      :instagram_subscription => Fabricate(:subscription, provider: "instagram")
+      :instagram_subscription => Fabricate(:subscription, provider: "instagram"),
+      :refeed_subscription    => Fabricate(:subscription, provider: "refeed", uid: feeding_user.id, user_id: consuming_user.id)
     }}
     let!(:new_enough_post) { OpenStruct.new(created_at: Time.now) }
 
@@ -51,7 +54,6 @@ describe Subscription do
       end
 
       it "does not return posts that have already been created" do
-        pending
         Subscription.any_instance.stub(:posts_for).and_return([new_enough_post])
         fabricated_subscriptions.each do |name, subscription|
           subscription.get_new_posts
