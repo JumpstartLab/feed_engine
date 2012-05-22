@@ -33,7 +33,7 @@ class Authentication < ActiveRecord::Base
                            image: omniauth["info"]["image"]
       )
   end
-  
+
   def create_github_auth(omniauth)
     self.update_attributes(provider: omniauth["provider"],
                            token: omniauth["credentials"]["token"],
@@ -48,9 +48,9 @@ class Authentication < ActiveRecord::Base
   def import_items
     case self.provider
     when 'twitter'
-      Fetcher.delay.import_twitter_activity(self.uid, self.user_id, self.last_status_id)
+      Fetcher.delay.import_twitter_activity(self.uid, self.user, self.last_status_id)
     when 'github'
-      Fetcher.delay.import_github_activity(self.username, self.user_id, self.last_status_id)
+      Fetcher.delay.import_github_activity(self.username, self.user, self.last_status_id)
     end
   end
 end

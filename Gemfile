@@ -25,7 +25,7 @@ gem 'daemon'
 gem 'wicked'
 gem 'feed_engine_api',
     :git => "git://github.com/cstrahan/feed_engine_api.git",
-    :tag => "v0.0.1"
+    :tag => "v0.0.4"
 
 group :production do
   gem 'pg'
