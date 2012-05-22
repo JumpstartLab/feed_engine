@@ -11,18 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120522002242) do
+ActiveRecord::Schema.define(:version => 20120522171705) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
     t.string   "provider"
     t.string   "token"
     t.string   "secret"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.string   "uid"
     t.string   "username"
-    t.string   "last_status_id", :limit => 8
+    t.string   "last_status_id"
     t.string   "image"
   end
 
@@ -43,13 +43,13 @@ ActiveRecord::Schema.define(:version => 20120522002242) do
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "github_posts", :force => true do |t|
-    t.integer  "github_id",    :limit => 8
+    t.string   "github_id"
     t.datetime "published_at"
     t.string   "repo_name"
     t.string   "repo_url"
     t.string   "github_type"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "image_posts", :force => true do |t|
@@ -103,11 +103,11 @@ ActiveRecord::Schema.define(:version => 20120522002242) do
   end
 
   create_table "twitter_posts", :force => true do |t|
-    t.integer  "twitter_id",   :limit => 8
+    t.string   "twitter_id"
     t.string   "text"
     t.datetime "published_at"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "users", :force => true do |t|

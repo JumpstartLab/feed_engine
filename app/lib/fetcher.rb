@@ -1,7 +1,7 @@
 module Fetcher
   def self.create_twitter_post(user_id, status)
     User.find(user_id).twitter_posts.create(
-      twitter_id: status.id,
+      twitter_id: status.id.to_s,
       text: status.text,
       created_at: status.created_at
       )
@@ -21,7 +21,7 @@ module Fetcher
       repo_name: event.repo.name,
       repo_url: event.repo.url,
       github_type: event.type,
-      github_id: event.id.to_i,
+      github_id: event.id,
       created_at: event.created_at
       )
   end

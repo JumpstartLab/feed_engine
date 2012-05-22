@@ -3,7 +3,7 @@
 # Table name: twitter_posts
 #
 #  id           :integer         not null, primary key
-#  twitter_id   :integer(8)
+#  twitter_id   :string(255)
 #  text         :string(255)
 #  published_at :datetime
 #  created_at   :datetime        not null
