@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120516204651) do
+ActiveRecord::Schema.define(:version => 20120521224722) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -50,6 +50,16 @@ ActiveRecord::Schema.define(:version => 20120516204651) do
 
   add_index "images", ["poster_id"], :name => "index_images_on_poster_id"
 
+  create_table "instapounds", :force => true do |t|
+    t.string   "image_url"
+    t.integer  "poster_id"
+    t.string   "body"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.integer  "subscription_id"
+    t.integer  "points",          :default => 0
+  end
+
   create_table "items", :force => true do |t|
     t.integer  "poster_id"
     t.integer  "post_id"
@@ -75,6 +85,13 @@ ActiveRecord::Schema.define(:version => 20120516204651) do
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
     t.integer  "points",     :default => 0
+  end
+
+  create_table "points", :force => true do |t|
+    t.integer  "item_id"
+    t.integer  "quantity"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "subscriptions", :force => true do |t|

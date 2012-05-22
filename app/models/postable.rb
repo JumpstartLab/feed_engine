@@ -2,7 +2,7 @@ module Postable
   def self.included(base)
     base.instance_eval do
       attr_accessible :poster_id
-      after_create :create_item
+      after_save :create_item
       validates_presence_of :poster_id
       has_one :item, :as => :post, :dependent => :destroy
       belongs_to :user, :foreign_key => :poster_id
