@@ -1,0 +1,15 @@
+.post
+  img.post-avatar src="{{gravatar_url}}"
+  .well
+    .post-activity
+      p.text {{text}}
+    .post-actions
+      li
+        a.btn href="/refeeds?post_id={{id}}" data-method="post" rel="nofollow"
+          i.icon-retweet  Refeed
+      li
+        a.btn href="/points/{{id}}?post_type={{type}}" data-method="put" rel="nofollow"
+          i.icon-heart Points!
+      li
+         span.btn
+          i.icon-pencil | {{type}}

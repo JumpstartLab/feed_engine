@@ -1,0 +1,15 @@
+.post
+  img.post-avatar src="{{gravatar_url}}"
+  .well
+    .post-activity
+      p.text {{text}}
+    .post-actions
+      li
+        a.btn href="/twitter_posts/{{id}}/edit"
+          i.icon-edit Edit
+      li
+        a.btn href="/text_posts/{{id}}" data-confirm="Are You Sure" data-method="delete" rel="nofollow"
+          i.icon-trash Remove
+      li
+         span.btn
+          i.icon-pencil | {{type}}

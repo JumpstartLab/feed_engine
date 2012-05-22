@@ -1,0 +1,22 @@
+div class="span8 stream"
+  div class="user-display-info"
+    h1 #{user.display_name || user.email} Stream
+    = render "follow_and_unfollow_actions"
+
+  div id="posts" data-json-url="#{items_url(user_display_name: user.display_name, format: :json)}"
+
+/ Mustache templates
+script type="text/html" id="image_post_template"
+ = render '/image_posts/public_post'
+
+script type="text/html" id="text_post_template"
+ = render '/text_posts/public_post'
+
+script type="text/html" id="link_post_template"
+  = render '/link_posts/public_post'
+
+script type="text/html" id="github_post_template"
+  = render '/github_posts/public_post'
+
+script type="text/html" id="twitter_post_template"
+  = render '/twitter_posts/public_post'

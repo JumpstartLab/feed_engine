@@ -1,0 +1,9 @@
+h1 People Following You
+
+ul
+- if current_user.followers.size == 0
+  h3 Your just not putting good content out there, nobody is following you
+- else
+  - current_user.followers.each do |follower|
+    = link_to follower.display_name, root_url(follower.display_name)
+
