@@ -1,5 +1,6 @@
 require 'spec_helper'
 ImageValidations.allow_amazon_uploads(false)
+
 describe Image do
   describe "#new" do
     context "Validations" do

@@ -4,7 +4,7 @@ module HasUploadedFile; end
 
 describe "Link Validations" do
   describe "#new" do
-    let(:user) { FactoryGirl.create(:user)}
+    let(:user) { FactoryGirl.create(:user) }
     let(:link) { Link.new(comment: "hello", user: user, link: "http://hungryacademy.com") }
     before(:each) { link.stub(:send_photo_to_amazon).and_return(true) }
 

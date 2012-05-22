@@ -2,20 +2,14 @@ class GithubAccount < ActiveRecord::Base
   belongs_to :authentication
   attr_accessible :authentication, :uid, :nickname, :last_status_id, :image
 
-  def user
-    authentication.user
-  end
-
-  def user_id
-    user.id
-  end
+  delegate :user, :to => :authentication
+  delegate :id, :to => :user, :prefix => true
 
   def update_last_status_id_if_necessary(new_status_id)
     if DateTime.parse(last_status_id) < DateTime.parse(new_status_id)
       update_attribute("last_status_id", new_status_id)
     end
   end
-
 end
 # == Schema Information
 #

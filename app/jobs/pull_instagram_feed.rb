@@ -5,6 +5,6 @@ class PullInstagramFeed
 
   def self.perform
     instagram_processor = Hungrlr::InstagramProcessor.new
-    tweet_processor.run
+    instagram_processor.run
   end
 end
