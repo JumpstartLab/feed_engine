@@ -24,4 +24,12 @@ FactoryGirl.define do
     type "Tweet"
     comment "http://google.com is super awesome. Thanks @mikesilvis"
   end
+  factory :github, parent: :growl do
+    type "GithubEvent"
+    comment "Merging pull request from Mike"
+  end
+  factory :instagram, parent: :growl do
+    type "InstagramPhoto"
+    link "http://s3.amazonaws.com/hungrlr/instagram_photos/photos/000/000/076/medium/open-uri20120522-87808-12fmq3l?1337700237"
+  end
 end
