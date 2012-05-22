@@ -1,1 +1,10 @@
-h1 Hello
+.row#instagram
+  = render :partial => "growls/header", :locals => { growl: instagram_photo }
+.row
+  .two.columns
+    = image_tag instagram_photo.get_gravatar
+  .nine.columns
+    .growl_post.comments
+      .row= instagram_photo.comment
+      .row= image_tag instagram_photo.photo(:medium)
+= render partial: "growls/footer", locals: { growl: instagram_photo}

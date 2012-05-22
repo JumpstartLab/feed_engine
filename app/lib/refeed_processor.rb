@@ -8,7 +8,7 @@ module Hungrlr
     attr_accessor :base_url
 
     def initialize
-      self.base_url = ENV["DOMAIN"].present? ? ENV["DOMAIN"] : "http://api.lvh.me:3000/v1"
+      self.base_url = ENV["DOMAIN"].present? ? ENV["DOMAIN"] : "http://api.hungrlr.dev/v1"
     end
 
     def subscriptions

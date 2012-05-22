@@ -1,5 +1,7 @@
 class GithubEvent < Growl
-
+  def icon
+    "glyphicons/glyphicons_381_github.png"
+  end
 end
 # == Schema Information
 #

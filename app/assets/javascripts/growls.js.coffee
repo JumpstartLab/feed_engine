@@ -1,24 +1,32 @@
 jQuery ->
   $("#all").click ->
-    $.getScript("http://#{domain}")
     $(".active").removeClass("active")
     $("#all").addClass("active")
+    $.getScript("http://#{domain}")
   $("#images").click ->
-    $.getScript("http://#{domain}?type=Image")
     $(".active").removeClass("active")
     $("#images").addClass("active")
+    $.getScript("http://#{domain}?type=Image")
   $("#messages").click ->
-    $.getScript("http://#{domain}?type=Message")
     $(".active").removeClass("active")
     $("#messages").addClass("active")
+    $.getScript("http://#{domain}?type=Message")
   $("#links").click ->
-    $.getScript("http://#{domain}?type=Link")
     $(".active").removeClass("active")
     $("#links").addClass("active")
+    $.getScript("http://#{domain}?type=Link")
   $("#tweets").click ->
-    $.getScript("http://#{domain}?type=Tweet")
     $(".active").removeClass("active")
     $("#tweets").addClass("active")
+    $.getScript("http://#{domain}?type=Tweet")
+  $("#github").click ->
+    $(".active").removeClass("active")
+    $("#github").addClass("active")
+    $.getScript("http://#{domain}?type=GithubEvent")
+  $("#instagrams").click ->
+    $(".active").removeClass("active")
+    $("#instagrams").addClass("active")
+    $.getScript("http://#{domain}?type=InstagramPhoto")
 
   if $('.pagination').length
     $(window).scroll ->

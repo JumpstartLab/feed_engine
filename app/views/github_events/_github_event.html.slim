@@ -1,1 +1,10 @@
-h1 Hello
+.row#github
+  = render :partial => "growls/header", :locals => { growl: github_event }
+.row
+  .two.columns
+    = image_tag github_event.get_gravatar
+  .nine.columns
+    .growl_post
+      = link_to github_event.title, github_event.link
+      .row= github_event.comment
+= render partial: "growls/footer", locals: { growl: github_event}

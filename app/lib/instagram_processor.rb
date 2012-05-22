@@ -9,7 +9,7 @@ module Hungrlr
     TEST_ACCESS_TOKEN = "8323297.f59def8.2db06c3fdb7b4c659ae12a55ffe2c44d"
 
     def initialize
-      self.base_url = ENV["DOMAIN"] != "" ? ENV["DOMAIN"] : "http://api.lvh.me:3000/v1"
+      self.base_url = ENV["DOMAIN"].present? ? ENV["DOMAIN"] : "http://api.hungrlr.dev/v1"
     end
 
     def instagram_accounts
@@ -18,9 +18,7 @@ module Hungrlr
     end
 
     def get_photos(instagram_id, token, last_status_id)
-      #FIX THIS
-      url = "https://api.instagram.com/v1/users/#{instagram_id}/media/recent/?access_token=#{TEST_ACCESS_TOKEN}&min_timestamp=1"
-      # raise url.inspect
+      url = "https://api.instagram.com/v1/users/#{instagram_id}/media/recent?access_token=#{TEST_ACCESS_TOKEN}&min_timestamp=#{last_status_id}"
       JSON.parse(open(url).read)["data"]
     end
 
@@ -31,9 +29,8 @@ module Hungrlr
     end
 
     def parse_instagram_data(photo_data)
-      photo_hash = { "link"                => photo_data["link"],
-                     "original_created_at" => Time.at(photo_data["created_time"].to_i).to_s }
-                     #created_time => epoch
+      photo_hash = { "link"                => photo_data["images"]["standard_resolution"]["url"],
+                     "original_created_at" => Time.at(photo_data["created_time"].to_i) }
       photo_hash["comment"] = photo_data["caption"]["text"] if photo_data["caption"]
       photo_hash
     end

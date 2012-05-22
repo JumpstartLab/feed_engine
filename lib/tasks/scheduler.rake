@@ -4,17 +4,18 @@ ENV["QUEUE"] = "*"
 require './app/jobs/pull_twitter_feed.rb'
 require './app/jobs/pull_github_feed.rb'
 require './app/jobs/pull_instagram_feed.rb'
+require './app/jobs/refeed.rb'
 require './config/initializers/redis.rb'
 task "jobs:work" => "resque:work"
 
 task :pull_feeds do
   Resque.enqueue(PullTwitterFeed)
   Resque.enqueue(PullGithubFeed)
-  Resque.enqueue(Refeed)
   Resque.enqueue(PullInstagramFeed)
+  Resque.enqueue(Refeed)
   sleep(300)
   Resque.enqueue(PullTwitterFeed)
   Resque.enqueue(PullGithubFeed)
-  Resque.enqueue(Refeed)
   Resque.enqueue(PullInstagramFeed)
+  Resque.enqueue(Refeed)
 end

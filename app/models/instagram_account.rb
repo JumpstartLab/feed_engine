@@ -10,4 +10,5 @@ class InstagramAccount < ActiveRecord::Base
       update_attribute("last_status_id", new_status_id)
     end
   end
+
 end
