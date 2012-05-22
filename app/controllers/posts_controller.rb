@@ -1,4 +1,4 @@
-  class PostsController < ApplicationController
+class PostsController < ApplicationController
   include PostsHelper
 
   def create
@@ -8,22 +8,34 @@
     unless @post.errors.any?
       link_to_poly_post(@post, current_user.feed)
       render "create",
-              :status => :ok,
-              :handlers => [:jbuilder]
+      :status => :ok,
+      :handlers => [:jbuilder]
     else
       render "create",
-              :status => :unprocessable_entity,
-              :handlers => [:jbuilder]
+      :status => :unprocessable_entity,
+      :handlers => [:jbuilder]
     end
   end
 
   def index
+    @posts = Post.all.collect {|post| post.postable}.reverse.page(params[:page].to_i || 0)
+  end
+
+  def show
+    user = User.find_by_display_name(params[:display_name])
+    temp_posts = user.feed.posts.reverse.page(params[:page].to_i || 0)
+    @posts = temp_posts
+    render action: :index
+  end
+
+  def ind
     user = User.find_by_subdomain(request.subdomain)
-    if (current_user && user && current_user == user) || (user.nil? && current_user)
-      user = current_user
+    if (current_user && user && current_user == user) || (user.nil? &&  current_user)     
+      user = current_user     
     end
-    params[:page] = "0" if params[:page] && params[:page] == "NaN"
+    params[:page] = "0" if params[:page] && params[:page] == "NaN" 
     temp_posts = user.feed.posts.reverse.page(params[:page].to_i || 0)
     @posts = temp_posts.collect { |p| p.postable }
+    render "posts/index"
   end
 end

@@ -16,6 +16,11 @@ class PagesController < ApplicationController
   end
 
   def home
+    @posts = Posts.all.collect {|post| post.postable}.page(params[:page])
+    if @users.empty?
+      render "404.html", layout: false
+    end
+
     render layout: false
   end
 

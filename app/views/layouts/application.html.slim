@@ -10,8 +10,10 @@ html
   body
     .page
       = render "application/nav_bar"
-      p#flash
-      p#notice= notice
+      #flash
+        p#flash_message
+        p#dismiss Click to Dismiss
+      p#notice = notice
       = render partial: "application/index"
   
   footer.footer
