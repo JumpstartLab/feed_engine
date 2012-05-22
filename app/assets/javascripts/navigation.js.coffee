@@ -1,3 +1,59 @@
+jQuery ->
+  addNavHandlers()
+  addDashboardHandler()
+  addHandlers()
+  servicesHandler()
+  integrationsHandler()
+  $.feedengine = {
+    subdomain: null,
+    form: null,
+    current_user: null,
+    activeTabId: null,
+    activateTab: (tabId)->
+      $(".errors").hide()
+      if $.feedengine.activeTabId
+        $("##{$.feedengine.activeTabId}").removeClass('selected')
+      $("##{tabId}").addClass('selected')
+      $.feedengine.activeTabId = tabId
+  }
+  setUsername()
+  alertSubdomain()
+
+getSubDomain = ->
+  host_parts = window.location.host.split('.')
+  if host_parts
+    $.feedengine.subdomain = host_parts[0]
+  else
+    $.feedengine.subdomain = null
+
+alertSubdomain = ->
+  getSubDomain()
+  alert $.feedengine.subdomain
+
+getFeeds() = ->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 setFlash = (message) ->
   $('#flash_message').text(message)
   $('#flash').slideDown().delay(2000).slideUp()
@@ -49,24 +105,6 @@ addNavHandlers = ->
   for id in navItems
     navHandler(id)
 
-jQuery ->
-  addNavHandlers()
-  addDashboardHandler()
-  addHandlers()
-  servicesHandler()
-  integrationsHandler()
-  $.feedengine = {
-    form: null,
-    current_user: null,
-    activeTabId: null,
-    activateTab: (tabId)->
-      $(".errors").hide()
-      if $.feedengine.activeTabId
-        $("##{$.feedengine.activeTabId}").removeClass('selected')
-      $("##{tabId}").addClass('selected')
-      $.feedengine.activeTabId = tabId
-  }
-  setUsername()
 
 ######################### DASHBOARD ############################
 
@@ -173,7 +211,8 @@ renderDashboard = ->
     setFlash("Please login first.")
 
 class PostsPager
-  constructor: (@page=-1)->
+  constructor: (@feeduser=null)->
+    @page=-1
     $(window).scroll(@check)
     @render()
 
@@ -184,7 +223,10 @@ class PostsPager
   render: =>
     @page++
     $(window).unbind('scroll', @check)
-    $.getJSON($('#feed').data('json-url'), page: @page, @renderPosts)
+    unless @feeduser
+      $.getJSON($('#feed').data('json-url'), page: @page, @renderPosts)
+    else
+      
 
   nearBottom: =>
     $(window).scrollTop() > $(document).height() - $(window).height() - 50

@@ -18,12 +18,13 @@
   end
 
   def index
-    user = User.find_by_subdomain(request.subdomain)
-    if (current_user && user && current_user == user) || (user.nil? && current_user)
-      user = current_user
-    end
+    @posts = Posts.all.collect {|post| post.postable}.page(params[:page])
     params[:page] = "0" if params[:page] && params[:page] == "NaN"
-    temp_posts = user.feed.posts.reverse.page(params[:page].to_i || 0)
     @posts = temp_posts.collect { |p| p.postable }
+  end
+
+  def show
+    user = User.find_by_display_name(params[:display_name])
+    temp_posts = user.feed.posts.reverse.page(params[:page].to_i || 0)
   end
 end
