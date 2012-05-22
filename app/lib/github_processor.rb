@@ -9,7 +9,7 @@ module Hungrlr
     EVENT_TYPES = ["PushEvent", "CreateEvent"]
 
     def initialize
-      self.base_url = ENV["DOMAIN"] != "" ? ENV["DOMAIN"] : "http://api.lvh.me:3000/v1"
+      self.base_url = ENV["DOMAIN"] != "" ? ENV["DOMAIN"] : "http://api.hungrlr.dev/v1"
     end
 
     def github_accounts
