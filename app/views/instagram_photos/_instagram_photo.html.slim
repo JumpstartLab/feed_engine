@@ -1,11 +1,10 @@
-/ .row#instagram
-/   = render :partial => "growls/header", :locals => { growl: instagram }
-/ .row
-/   .two.columns
-/     = image_tag instagram.get_gravatar
-/   .nine.columns
-/     .growl_post
-/       = link_to instagram.title, instagram.link
-/       .row= instagram.comment
-/ = render partial: "growls/footer", locals: { growl: instagram}
-h1 Instagram Message
+.row#instagram
+  = render :partial => "growls/header", :locals => { growl: instagram }
+.row
+  .two.columns
+    = image_tag instagram.get_gravatar
+  .nine.columns
+    .growl_post
+      .row= instagram.comment
+      .row= instagram.link
+= render partial: "growls/footer", locals: { growl: instagram}
