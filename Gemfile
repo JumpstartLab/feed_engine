@@ -28,6 +28,7 @@ gem 'vcr'
 gem 'fakeweb'
 gem 'unicorn'
 gem 'capistrano'
+gem 'newrelic_rpm'
 
 group :production do
   gem 'pg'
