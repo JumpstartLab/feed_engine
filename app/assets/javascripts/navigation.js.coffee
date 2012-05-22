@@ -53,13 +53,18 @@ navHandler = (navItem) ->
 
 
 integrationsHandler = ->
-  services = ["github", "twitter", "instagram"]
-  for service in services
-    $("##{service}_false").click ->
-      setFlash("Added your ##{service} account")
-    $("##{service}_true").click ->
-      setFlash("Removed your ##{service} account")  
-
+    $("#github_false").click ->
+      setFlash("Added your github account")
+    $("#github_true").click ->
+      setFlash("Removed your github account")  
+    $("#twitter_false").click ->
+      setFlash("Added your twitter account")
+    $("#twitter_true").click ->
+      setFlash("Removed your twitter account") 
+    $("#instagram_false").click ->
+      setFlash("Added your instagram account")
+    $("#instagram_true").click ->
+      setFlash("Removed your instgram account") 
 
 servicesHandler = ->
   $('#services').click ->
