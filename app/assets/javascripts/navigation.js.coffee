@@ -34,13 +34,6 @@ addDashboardHandler = ->
     pageSwap("#dashboard-page")
     renderDashboard()
 
-setCSRFToken = ->
-  $.ajaxSetup(
-    beforeSend: ( xhr ) ->
-      token = '<%= form_authenticity_token.to_s %>'
-      xhr.setRequestHeader('X-CSRF-Token', token) 
-  )
-
 addNavHandlers = ->
   navItems = ['#friends', '#feeds', '#home', '#signin', '#signup']
   pageIDs = (id + '-page' for id in navItems)
@@ -49,7 +42,6 @@ addNavHandlers = ->
     navHandler(id)
 
 jQuery ->
-  setCSRFToken()
   addNavHandlers()
   addDashboardHandler()
   addHandlers()
@@ -86,7 +78,6 @@ addSubmitHandlers = ->
     $("#image_preview").hide()
     form = $(this).closest('form')
     formData = form.serialize()
-    setCSRFToken()
     $.ajax(
       type: "POST",
       url: "/posts",
@@ -127,7 +118,6 @@ addSigninHandler = ->
   $('#signin-submit').click ->
     form = $(this).closest('form')
     formData = form.serialize()
-    setCSRFToken()
     jqxhr = $.post('/login', formData, 'json')
     jqxhr.success( (response) ->
       form.clearForm()
@@ -255,12 +245,11 @@ checkForAuthentication = (provider) ->
         $("#skip_#{provider}").click()
       else
         setFlash("Authentication unsuccessful")
-      $(window).unbind('focus', checkForAuthentication)
     )
     response.error( ->
       setFlash('Something went wrong :(')
-      $(window).unbind('focus', checkForAuthentication)
     )
+    $(window).unbind('focus', checkForAuthentication)
 
 integrateTwitter = ->
   pageSwap('#integrate_twitter')
