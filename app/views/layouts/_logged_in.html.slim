@@ -1,4 +1,0 @@
-ul.nav.pull-right
-  li= link_to "#{current_user.subdomain}'s Feed", root_url(:subdomain => current_user.subdomain)
-  li= link_to "Dashboard", dashboard_url(:subdomain => false)
-  li= link_to "Log out", logout_url(:subdomain => false)
