@@ -46,7 +46,7 @@ input[type=text], input[type=password], input[type=email], textarea, select {
 }
 
 .black-transparent-box label {
-  color: white;
+  color: black;
 }
 
 .black-transparent-box li.active > a {
@@ -160,6 +160,25 @@ input[type=text], input[type=password], input[type=email], textarea, select {
 .avatar {
   height: 50px;
   width: 50px;
+}
+
+#post_tabs{
+  margin-bottom: 0px;
+}
+
+#text_post{
+  padding: 15px;
+  background: #E0F2F7
+}
+
+#link_post{
+  padding: 15px;
+  background: #E0F2F7
+}
+
+#image_post{
+  padding: 15px;
+  background: #E0F2F7
 }
 
 /* FOR DROP DOWN MENU*/
