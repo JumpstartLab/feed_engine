@@ -1,5 +1,14 @@
-h1 Link Your Instagram Account
-= github_button
-= link_to "Finish", user_signup_steps_finish_path
-br
-= link_to "go back", previous_wizard_path
+div class="alert alert-info"
+  h3 class="alert-heading" Do you have a Instagram account?
+  p Start importing your pictures!
+
+div class="container"
+  div class="pull-left"
+    = link_to "Previous Step", previous_wizard_path
+  div class="span2 offset4"
+    table
+      tr
+        = instagram_button
+    br
+  div class="pull-right"
+    = link_to "Skip this step", user_signup_steps_finish_path

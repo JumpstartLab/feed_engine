@@ -121,7 +121,7 @@ Then /^I should see an error message that the passwords must match$/ do
 end
 
 Then /^I skip the link accounts page$/ do
-  click_on("skip this step")
-  click_on("skip this step")
-  click_on("Finish")
+  click_on("Skip this step")
+  click_on("Skip this step")
+  click_on("Skip this step")
 end
