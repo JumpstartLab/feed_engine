@@ -12,7 +12,6 @@ class Api::FeedsController < Api::ApiController
   end
 
   def items
-    #posts = user_for_page.posts.page(params[:page]).per(POSTS_PER_PAGE).map(&:decorate)
     offset = compute_offset(params[:page])
     posts = user_for_page.stream(POSTS_PER_PAGE, offset) || []
     posts = posts.map(&:decorate) if posts
@@ -39,7 +38,11 @@ class Api::FeedsController < Api::ApiController
   end
 
   def can_user_can_view_feed?
-    error(403) unless user_for_page and user_for_page.can_view_feed?(current_user)
+    if user_for_page and user_for_page.can_view_feed?(current_user)
+      true
+    else
+      error(403)
+    end
   end
 
   def user_for_page

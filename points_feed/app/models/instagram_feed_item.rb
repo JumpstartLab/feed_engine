@@ -4,7 +4,7 @@ class InstagramFeedItem < ActiveRecord::Base
   belongs_to :user
 
   validate :validates_timeliness_of_post
-  
+
   has_many :awards, as: :awardable
   include PointAwarder
 
@@ -21,9 +21,9 @@ class InstagramFeedItem < ActiveRecord::Base
   def self.create_from_instagram(user, instagram)
     caption = instagram.caption ? instagram.caption.text : ''
     user.instagram_feed_items.create(instagram_id: instagram.id,
-                                    posted_at: Time.at(instagram.created_time.to_i),
-                                    image_url: instagram.images.standard_resolution.url,
-                                    comment: caption)
+            posted_at: Time.at(instagram.created_time.to_i),
+            image_url: instagram.images.standard_resolution.url,
+            comment: caption)
   end
 
   def decorate

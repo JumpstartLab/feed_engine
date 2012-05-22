@@ -3,7 +3,7 @@ class TwitterFeedItemDecorator < ApplicationDecorator
 
   def as_json(*params)
     return {} if model.nil?
-    
+
     {
       :type => "TwitterFeedItem",
       :klass => "TwitterFeedItem",

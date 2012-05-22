@@ -1,7 +1,7 @@
 class LinkPost < Post
   has_many :awards, as: :awardable
   include PointAwarder
-  
+
   validates :content, :length => { :maximum => 2048 }
 
   validate do

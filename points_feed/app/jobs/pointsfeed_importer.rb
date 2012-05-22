@@ -18,7 +18,8 @@ class PointsfeedImporter
   def self.get_posts_for_friends(user)
     friendships = user.friendships.where(:status => Friendship::ACTIVE)
     posts = friendships.map do |friendship|
-      posts = friendship.friend.posts.where("created_at >= ?", friendship.created_at)
+      earliest = friendship.created_at
+      posts = friendship.friend.posts.where("created_at >= ?", earliest)
     end
     posts.flatten.uniq
   end

@@ -16,19 +16,16 @@ class AuthenticationsController < ApplicationController
   def destroy
     @authentication = current_user.authentications.find(params[:id])
     @authentication.destroy
-    redirect_to dashboard_path, :notice => "Successfully destroyed authentication."
+    redirect_to dashboard_path,
+                :notice => "Successfully destroyed authentication."
   end
 
   private
 
   def add_authentication(auth)
-    provider = auth['provider']
-    uid = auth['uid']
-    token = auth['credentials']['token']
-
-    authentication = current_user.authentications.find_or_create_by_provider_and_uid(provider, uid)
-    authentication.update_attributes(:secret => token)
-
+    provider, uid = auth['provider'], auth['uid']
+    authentication = current_user.get_authentication(provider, uid)
+    authentication.update_attributes(:secret => auth['credentials']['token'])
     github_authentication(authentication, auth) if provider == 'github'
     twitter_authentication(authentication, auth) if provider == 'twitter'
   end

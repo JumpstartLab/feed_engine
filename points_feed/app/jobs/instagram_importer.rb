@@ -19,30 +19,17 @@ class InstagramImporter
     connection = Faraday.new(:url => "https://api.instagram.com/v1")
   end
 
+  def self.con
+    self.connection
+  end
 
   def self.import_instagram(auth)
-    media = connection.get("users/#{auth.uid}/media/recent?access_token=#{auth.secret}")
-    media = JSON.parse(media.body)
-    instagrams = Hashie::Mash.new(media)
+    resp = con.get("users/#{auth.uid}/media/recent?access_token=#{auth.secret}")
+    resp = JSON.parse(resp.body)
+    instagrams = Hashie::Mash.new(resp)
     instagrams.data.each do |instagram|
       InstagramFeedItem.import(auth.user, instagram)
     end
   end
 
-
-
-
-
-  # def self.pretty_hash(hash)
-  #   results = []
-  #   hash.keys.each do |key|
-  #     results << key
-  #     if hash[key].respond_to?(:keys)
-  #       results << pretty_hash(hash[key]).split("\n").map do | line |
-  #         " -- " + line
-  #       end
-  #     end
-  #   end
-  #   results.join("\n")
-  # end
 end
