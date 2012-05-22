@@ -38,7 +38,6 @@ describe "Subscribing to a User's feed" do
       it "shows an option to unsubscribe if i am already subscribed" do
         user_2.subscriptions.create(:followed_user_id => user.id)
         visit site_domain
-
         within(".feed-meta-container") do
           click_link_or_button("Let this Troutr go")
         end
