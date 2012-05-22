@@ -7,7 +7,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def github
-    return render  :json => @data
     response = Authentication.add_github(current_user, @data)
     redirect_to new_authentication_path, :notice => "Github account successfully added."
   end

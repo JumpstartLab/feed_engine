@@ -17,7 +17,7 @@ class Tweet < Growl
   end
 
   def add_username_link
-    usernames = self.comment.scan(/@(\w+)\s/)
+    usernames = self.comment.scan(/@(\w+)/)
     usernames.each do |username|
       link = "<a href='http://twitter.com/#{username.first}'>@#{username.first}</a>"
       self.comment = comment.gsub("@#{username.first}", link)

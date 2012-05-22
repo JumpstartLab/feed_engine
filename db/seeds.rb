@@ -23,6 +23,7 @@ user = User.create(email: 'mikesilvis@gmail.com',
                    display_name: 'mikesilvis')
 user.update_attribute("authentication_token", "HUNGRLRx2")
 
+FactoryGirl.create(:tweet, user: user)
 FactoryGirl.create(:image, user: user)
 FactoryGirl.create(:link, user: user)
 FactoryGirl.create(:message, user: user)
