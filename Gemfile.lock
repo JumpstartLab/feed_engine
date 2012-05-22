@@ -343,6 +343,7 @@ DEPENDENCIES
   guard-rspec
   haml
   haml2slim
+  hashie
   hpricot
   jquery-rails
   launchy

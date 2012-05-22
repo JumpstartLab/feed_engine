@@ -59,9 +59,9 @@ class Authentication < ActiveRecord::Base
   def import_items
     case self.provider
     when 'twitter'
-      Fetcher.delay.import_twitter_activity(self.uid, self.user, self.last_status_id)
+      Fetcher.delay.import_twitter_activity(self.user, self.uid, self.last_status_id)
     when 'github'
-      Fetcher.delay.import_github_activity(self.username, self.user, self.last_status_id)
+      Fetcher.delay.import_github_activity(self.user, self.username, self.last_status_id)
     end
   end
 end
