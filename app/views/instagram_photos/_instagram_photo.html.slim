@@ -4,7 +4,7 @@
   .two.columns
     = image_tag instagram_photo.get_gravatar
   .nine.columns
-    .growl_post
+    .growl_post.comments
       .row= instagram_photo.comment
-      .row= instagram_photo.link
+      .row= image_tag instagram_photo.photo(:medium)
 = render partial: "growls/footer", locals: { growl: instagram_photo}

@@ -62,9 +62,7 @@ describe Authentication do
   describe "#create_instagram_details" do
     let(:data) { JSON.parse(File.read("#{::Rails.root}/spec/fixtures/service_responses/instagram_response.json")) }
     it "should create a entry in InstagramAccount with data returned from the API" do
-      count = InstagramAccount.count
-      new_auth.create_instagram_details(data)
-      InstagramAccount.count.should == (count + 1)
+      expect{ new_auth.create_instagram_details(data) }.should change{ InstagramAccount.count }.by(1)
     end
   end
 

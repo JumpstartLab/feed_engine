@@ -2,6 +2,8 @@ class Message < Growl
   validates_presence_of :comment, message: "You must provide a message."
   validates_length_of :comment, :maximum => 512
 
+  before_save :send_to_services
+
   def parse_for_services
     services = comment.scan(/\B#(\S+)/).uniq
     services.collect { |service| service.first.downcase }
