@@ -247,6 +247,8 @@ class FeedPager
     $(window).unbind('scroll', @check)
     unless @feeduser
       $.getJSON('/posts', page: @page, @renderPosts)
+    else
+      $.getJSON('/posts/'+ @feeduser.toString(), page: @page, @renderPosts)
 
 
   nearBottom: =>

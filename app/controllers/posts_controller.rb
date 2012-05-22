@@ -24,5 +24,7 @@
   def show
     user = User.find_by_display_name(params[:display_name])
     temp_posts = user.feed.posts.reverse.page(params[:page].to_i || 0)
+    @posts = temp_posts
+    render action: :index
   end
 end
