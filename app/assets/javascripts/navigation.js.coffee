@@ -1,6 +1,6 @@
 setFlash = (message) ->
-  $('#flash').show().text(message).fadeOut(3700)
-
+  $('#flash_message').text(message)
+  $('#flash').slideDown().delay(2000).slideUp()
 setUsername = ->
   $.getJSON('/current_user', (response, status, jqXHR) ->
       json_string = JSON.stringify(response)
@@ -56,36 +56,25 @@ jQuery ->
   servicesHandler()
   integrationsHandler()
   $.feedengine = {
+    form: null,
     current_user: null,
     activeTabId: null,
     activateTab: (tabId)->
       if $.feedengine.activateTabId
         $("##{$.feedengine.activateTabId}").removeClass('selected')
       $("##{tabId}").addClass('selected')
-      $.feedengine.activateTabId = tabId
+      $.feedengine.activeTabId = tabId
   }
   setUsername()
 
 ######################### DASHBOARD ############################
-
-
-
-$.namespace = {
-  activeTabId: null,
-  activateTab: (tabId)->
-    if $.namespace.activateTabId
-      $("##{$.namespace.activateTabId}").removeClass('selected')
-    $("##{tabId}").addClass('selected')
-    $.namespace.activateTabId = tabId
-}
-
 
 addSubmitHandlers = ->
   $(".errors").hide()
   $(".post-form form .post-button").click ->
     $(".errors").hide()
     $("#image_preview").hide()
-    form = $(this).closest('form')
+    $.feedengine.form = form = $(this).closest('form')
     formData = form.serialize()
     $.ajax(
       type: "POST",
@@ -93,14 +82,14 @@ addSubmitHandlers = ->
       data: formData
       success: ->
         setFlash('Posted successfully')
-        form.clearForm()
+        $.feedengine.form.clearForm()
         $("#feed").children().remove()
         new PostsPager()
       error: (response, status) ->
         resp = $.parseJSON(response.responseText)
-        $(".errors", form).show()
-        for error in resp.errors
-          $(".errors_list", form).html "<li>#{error}</li>"
+        errors = $("##{$.feedengine.activeTabId.toLowerCase()}-tab .errors")
+        errors.show()
+        errors.closest(".errors_list").html "<li>#{resp["errors"]}</li>"
     )
 
 addSignupHandler = ->
@@ -155,6 +144,10 @@ addLogoutHandler = ->
   $('#logout').parent().click ->
     logout()
 
+addFlashHandler = ->
+  $('#flash').click ->
+    $(this).hide()
+
 addHandlers = ->
   addSubmitHandlers()
   addPreviewHandler()
@@ -163,6 +156,7 @@ addHandlers = ->
   addSigninHandler()
   addLogoutHandler()
   addIntegrationHandlers()
+  addFlashHandler()
 
 renderDashboard = ->
   if $.feedengine.current_user

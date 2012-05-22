@@ -1,13 +1,21 @@
 @import "./partials/colors.css.scss";
 
 #flash{
-  margin: auto;
-  margin-top: 1em;
-  text-size: 1.5em;
-  text-weight: bold;
+  position: fixed;
   padding: .7em;
   background-color: $wasabi;
-  width: 400px;
+  width: 87%;
   border-radius:3px;
   display:none;
+  #flash_message{
+    position: relative;
+    text-align: center;
+    margin: auto;
+    text-size: 2em;
+    text-weight: bold;
+    opacity: 1;
+  }
+  #dismiss {
+    float: right;
+  }
 }
