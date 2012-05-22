@@ -149,14 +149,9 @@ describe User do
       end
 
       describe "when signing up" do
+
         it "is persisted" do
           expect { click_button "Sign Up" }.to change { User.count }.by(1)
-        end
-
-        it "receives an email" do
-          expect { click_button "Sign Up" }.to change {
-            ActionMailer::Base.deliveries.length
-          }.by(1)
         end
 
         it "doesn't need to re-enter their password if validations fail" do

@@ -28,6 +28,7 @@ gem 'vcr'
 gem 'fakeweb'
 gem 'unicorn'
 gem 'capistrano'
+gem 'resque'
 
 group :production do
   gem 'pg'

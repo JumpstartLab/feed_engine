@@ -1,4 +1,6 @@
 FeedEngine::Application.routes.draw do
+  mount Resque::Server, :at => "/resque" 
+   
   get "items/show"
 
   match "/auth/:provider/callback" => "subscriptions#create"

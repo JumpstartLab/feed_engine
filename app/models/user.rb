@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
   SERVICES_LIST =  %w(twitter github instagram)
 
   def send_welcome_email
-    UserMailer.signup_notification(self).deliver
+    Resque.enqueue(SignupMailer, self.id)
   end
 
   def posts
@@ -89,7 +89,7 @@ class User < ActiveRecord::Base
     generate_password_token(:password_reset_token)
     self.password_reset_sent_at = Time.zone.now
     save!(validate: false)
-    UserMailer.password_reset(self).deliver
+    Resque.enqueue(PasswordMailer, self.id)
   end
 
 
