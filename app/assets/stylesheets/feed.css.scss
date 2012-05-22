@@ -21,6 +21,7 @@
 }
 
 .text-item-body {
+  @include word-wrap;
   font-size: 16px; 
   font-weight: 200;
   font-family: $font;
