@@ -20,7 +20,7 @@
     <br/>
     <span class="text-item-body"><%= item.body %></span>
   <% elsif item.class == ImageItem %>
-    <%= image_tag item.url, :class => "image-item" %>
+    <%= image_tag item.url, :class => "image-item", :onerror => "ImgError(this);" %>
     <br/>
     <br/>
     <div class="text-item-body">
