@@ -34,9 +34,8 @@ class PostsController < ApplicationController
       user = current_user     
     end
     params[:page] = "0" if params[:page] && params[:page] == "NaN" 
-    temp_posts = user.feed.posts.reverse.page(params[:page].to_i || 0)
-    @posts = temp_posts.collect { |p| p.postable }
-    render "posts/index"
+    @posts = user.feed.posts.collect { |p| p.postable }.reverse.page(params[:page].to_i || 0)
+    render "posts/index.json.jbuilder"
   end
 
   def refeed

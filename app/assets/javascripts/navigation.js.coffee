@@ -1,6 +1,7 @@
 jQuery ->
   addNavHandlers()
   addDashboardHandler()
+  addHomeHandler()
   addHandlers()
   servicesHandler()
   integrationsHandler()
@@ -17,35 +18,20 @@ jQuery ->
       $.feedengine.activeTabId = tabId
   }
   setUsername()
-  getSubDomain()
-  new FeedPager()
-
+  homeHandler()
 getSubDomain = ->
   host_parts = window.location.host.split('.')
-  unless host_parts[0] == window.location.host
+  unless host_parts[0] == 'simplefeed' || host_parts[0] == 'feedeng'
     $.feedengine.subdomain = host_parts[0]
   else
-    $.feedengine.subdomain = null
+      $.feedengine.subdomain = null
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+addHomeHandler = ->
+  $('#home').click(homeHandler)
+homeHandler = ->
+  pageSwap('#home-page')
+  getSubDomain()
+  new FeedPager()
 
 setFlash = (message) ->
   $('#flash_message').text(message)
@@ -67,13 +53,18 @@ navHandler = (navItem) ->
 
 
 integrationsHandler = ->
-  services = ["github", "twitter", "instagram"]
-  for service in services
-    $("##{service}_false").click ->
-      setFlash("Added your ##{service} account")
-    $("##{service}_true").click ->
-      setFlash("Removed your ##{service} account")  
-
+    $("#github_false").click ->
+      setFlash("Added your github account")
+    $("#github_true").click ->
+      setFlash("Removed your github account")  
+    $("#twitter_false").click ->
+      setFlash("Added your twitter account")
+    $("#twitter_true").click ->
+      setFlash("Removed your twitter account") 
+    $("#instagram_false").click ->
+      setFlash("Added your instagram account")
+    $("#instagram_true").click ->
+      setFlash("Removed your instgram account") 
 
 servicesHandler = ->
   $('#services').click ->
@@ -92,7 +83,7 @@ addDashboardHandler = ->
     renderDashboard()
 
 addNavHandlers = ->
-  navItems = ['#friends', '#feeds', '#home', '#signin', '#signup']
+  navItems = ['#friends', '#home', '#signin', '#signup']
   pageIDs = (id + '-page' for id in navItems)
   
   for id in navItems
