@@ -17,7 +17,8 @@ jQuery ->
       $.feedengine.activeTabId = tabId
   }
   setUsername()
-  alertSubdomain()
+  getSubdomain()
+  newFeedPager()
 
 getSubDomain = ->
   host_parts = window.location.host.split('.')
@@ -25,10 +26,6 @@ getSubDomain = ->
     $.feedengine.subdomain = host_parts[0]
   else
     $.feedengine.subdomain = null
-
-alertSubdomain = ->
-  getSubDomain()
-  alert $.feedengine.subdomain
 
 getFeeds() = ->
 
@@ -223,10 +220,8 @@ class PostsPager
   render: =>
     @page++
     $(window).unbind('scroll', @check)
-    unless @feeduser
-      $.getJSON($('#feed').data('json-url'), page: @page, @renderPosts)
-    else
-      
+    $.getJSON($('#feed').data('json-url'), page: @page, @renderPosts)
+
 
   nearBottom: =>
     $(window).scrollTop() > $(document).height() - $(window).height() - 50
@@ -237,6 +232,35 @@ class PostsPager
       type = post["type"]
       console.log $("##{type}_template").html()
       $("#feed").append Mustache.to_html($("##{type}_template").html(), post)
+    $(window).scroll(@check) if posts && posts.length > 0
+
+
+class FeedPager
+  constructor: ()->
+    @feeduser= $.feedengine.subdomain
+    @page=-1
+    $(window).scroll(@check)
+    @render()
+
+  check: =>
+    if @nearBottom()
+      @render()
+
+  render: =>
+    @page++
+    $(window).unbind('scroll', @check)
+    url = @feeduser ? '/posts' : '/posts/user'
+    $.getJSON(url, page: @page, @renderPosts)
+
+
+  nearBottom: =>
+    $(window).scrollTop() > $(document).height() - $(window).height() - 50
+
+  renderPosts: (response, status, jqXHR) =>
+    posts = response['posts']
+    for post in posts
+      type = post["type"]
+      $('#all_posts').append Mustache.to_html($("##{type}_template").html(), post)
     $(window).scroll(@check) if posts && posts.length > 0
 
 

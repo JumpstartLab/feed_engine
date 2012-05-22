@@ -18,9 +18,7 @@
   end
 
   def index
-    @posts = Posts.all.collect {|post| post.postable}.page(params[:page])
-    params[:page] = "0" if params[:page] && params[:page] == "NaN"
-    @posts = temp_posts.collect { |p| p.postable }
+    @posts = Posts.all.collect {|post| post.postable}.page(params[:page] || 0)
   end
 
   def show
