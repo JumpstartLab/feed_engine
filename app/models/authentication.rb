@@ -23,15 +23,6 @@ class Authentication < ActiveRecord::Base
   belongs_to :user
   after_create :import_items
 
-  def create_with_omniauth(auth)
-    self.update_attributes(provider: auth["provider"],
-                           token: auth["credentials"]["token"],
-                           secret: auth["credentials"]["secret"],
-                           uid: auth["uid"],
-                           username: auth["info"]["nickname"])
-    save!
-  end
-
   def create_twitter_auth(omniauth)
     self.update_attributes(provider: omniauth["provider"],
                            token: omniauth["credentials"]["token"],
@@ -60,8 +51,6 @@ class Authentication < ActiveRecord::Base
       Fetcher.delay.import_twitter_activity(self.uid, self.user_id, self.last_status_id)
     when 'github'
       Fetcher.delay.import_github_activity(self.username, self.user_id, self.last_status_id)
-    else
-      Fetcher.import_items(self.provider, self.uid, self.user_id, self.username, self.last_status_id)
     end
   end
 end

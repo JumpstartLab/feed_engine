@@ -4,22 +4,6 @@ class AuthenticationsController < ApplicationController
   end
 
   def new
-    omniauth = request.env["omniauth.auth"]
-    auth = current_user.authentications.find_or_initialize_by_provider(omniauth["provider"])
-    if auth.create_with_omniauth(omniauth)
-      if omniauth["provider"] == "twitter"
-        redirect_to github_sign_in_page
-      elsif omniauth["provider"] == "github"
-        redirect_to instagram_sign_in_page
-      elsif omniauth["provider"] == "instagram"
-        redirect_to dashboard_path,
-        notice: "Welcome! You have signed up successfully."
-      end
-      flash[:notice] = "#{omniauth["provider"].capitalize} account connected!"
-    else
-      redirect_to dashboard_url(subdomain: false),
-        notice: "Something went wrong connecting to #{omniauth["provider"].capitalize}! Please try again!"
-    end
   end
 
   def twitter

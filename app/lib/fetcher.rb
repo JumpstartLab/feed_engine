@@ -34,13 +34,4 @@ module Fetcher
     Fetcher.delay(run_at: 5.minutes.from_now).import_github_activity(username, user_id, last_status_id)
   end
 
-  def self.import_items(provider, uid, user_id, username, last_status_id)
-    case provider
-    when "twitter"
-      Fetcher.delay(run_at: 2.seconds.from_now, :queue => 'fetcher').import_twitter_activity(uid, user_id, last_status_id)
-    when "github"
-      Fetcher.delay(run_at: 2.seconds.from_now, :queue => 'fetcher').fetch_and_import_github_activity(username, user_id)
-    end
-  end
-
 end
