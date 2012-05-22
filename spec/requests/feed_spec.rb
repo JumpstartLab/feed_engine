@@ -130,7 +130,6 @@ describe "Feed" do
         # login_factory_user makes a post to sessions controller
         # in order to keep you logged in across subdomains
         # no one knows.
-        login_factory_user(user_3.email)
         login(user_3)
         visit user_4_domain
         user_4.text_items.each do |item|
@@ -140,16 +139,19 @@ describe "Feed" do
         end
       end
 
-      # it "refeeds an item", :js => true do
-      #   # login_factory_user(user_3.email)
-      #   login(user_3)
-      #   visit user_4_domain
-      #   test_item = user_4.text_items.first
-      #   within("#item_#{user_4.text_items.first.id}") { find(".refeed_ajax_link").click }
-      #   page.should have_content("You retrouted")
-      #   visit "http://#{user_3.display_name}.example.com"
-      #   page.should have_content test_item.body
-      # end
+      it "refeeds an item", :js => true do
+        # login_factory_user(user_3.email)
+        login(user_3)
+        Capybara.current_session.driver.reset!
+        Capybara.default_host = "lvh.me"
+        Capybara.app_host = "http://#{user_4.display_name}.lvh.me:3003"
+        Capybara.server_port = 3003
+        visit "/"
+        test_item = user_4.text_items.first
+        within("#item_#{user_4.text_items.first.id}") { find(".refeed_ajax_link").click }
+        page.should have_content("Post has been retrouted")
+        Capybara.current_session.driver.reset!
+      end
     end
   end
 end

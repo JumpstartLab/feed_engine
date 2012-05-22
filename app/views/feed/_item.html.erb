@@ -5,7 +5,7 @@
 
     <span class="refeed-buttons">
       <% unless current_user == nil || !current_user.can_retrout?(item) %>
-      <%= link_to("#", 'data-author' => item.author.display_name, 'data-type' => item.class.name, 'data-id' => item.id, :class => "refeed_ajax_link") do  %>
+      <%= link_to("#", 'data-author' => item.author.display_name, 'data-type' => item.class.name, 'data-id' => item.to_param, :class => "refeed_ajax_link") do  %>
       <span class="raphael-icon refeed">0</span>
       <% end %>
   <% end %>

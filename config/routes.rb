@@ -27,6 +27,7 @@ FeedEngine::Application.routes.draw do
   resources :external_accounts
   resources :subscriptions, :only => [:create, :destroy]
   resources :stream_items, :only => [:create]
+  resource :feed
   devise_for :users, :controllers => { :registrations => "users/registrations" }
 
   devise_for :users
