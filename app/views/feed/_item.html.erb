@@ -20,7 +20,7 @@
     <br/>
     <span class="text-item-body"><%= item.body %></span>
   <% elsif item.class == ImageItem %>
-    <%= image_tag item.url, :class => "image-item" %>
+    <%= image_tag item.url, :class => "image-item", :onerror => "ImgError(this);" %>
     <br/>
     <br/>
     <div class="text-item-body">
@@ -42,17 +42,16 @@
   <% elsif item.class == GithubItem %>
     <div>
       <div class="text-item-body">
-        <% github_body(item) %>
-        <%= @github_body %> 
+        <%= github_body(item) %>
         <br/>
         <br/>
-          <% @commits.each do |commit| %>
-            <a href="<%= commit.url %>"><%= commit.message %></a> 
-            <br/>
-          <% end %>
-          <% if @fork_url %>
-            <%= link_to @fork_url, @fork_url %>
-          <% end %>
+        <% if @commits %>
+          <ul>
+            <% @commits.each do |commit| %>
+              <li class="git-commit"><a href="<%= commit.url %>"><%= commit.message %></a></li>
+            <% end %>
+          </ul>
+        <% end %>
       </div>
     </div>
   <% end %>
