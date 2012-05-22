@@ -1,4 +1,5 @@
 class GrowlsController < ApplicationController
+  before_filter:require_sign_in, only: :points
 
   def index
     subdomain = request.subdomain
@@ -19,4 +20,15 @@ class GrowlsController < ApplicationController
     end
   end
 
+  def points
+    growl = Growl.find(params[:id])
+    growl.increment!(:points)
+    redirect_to root_path
+  end
+
+  private
+
+  def require_sign_in
+    redirect_to "http://#{request.domain}#{home_path}" unless current_user
+  end
 end
