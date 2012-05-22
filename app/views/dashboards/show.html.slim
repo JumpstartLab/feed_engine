@@ -6,125 +6,42 @@ div class="container-fluid"
 
       h1 Your Stream
       div id="posts" data-json-url="#{items_url(user_display_name: current_user.display_name, format: :json)}"
+  
+    div class="span4 stream"
+      div id="anchor"
+        div class="span3 pull-right well" id="minidash"
+
+          h2 Mini-Dash
+          = link_to "View Your Live Stream!", root_url(subdomain: current_user.display_name), class: "btn btn-primary"
+          br
+          br
+          h3 Total Posts
+          = current_user.posts.count
+          br
+          h3 Total Points
+          br
+          h3 Most Popular Post
+          br
+          h3 Followers
+          br
+          h3 Refeeds
+          br
+
+        div id="totop"
+          h3 Back to Top
 
     / Mustache templates
     script type="text/html" id="image_post_template"
-      .post
-        img.post-avatar src="http://www.enn.com/image_for_articles/33228-1.jpg/medium"
-        .well
-          .post-image
-            img src="{{url}}"
-            p.description {{description}}
-          .post-actions
-            li
-              a.btn href="/image_posts/{{id}}/edit"
-                i.icon-edit Edit
-            li
-              a.btn href="/image_posts/{{id}}" data-confirm="Are You Sure" data-method="delete" rel="nofollow"
-                i.icon-trash Remove
-            li
-               span.btn
-                i.icon-camera | {{type}}
+     = render '/image_posts/dashboard_post'
 
     script type="text/html" id="text_post_template"
-      .post
-        img.post-avatar src="http://www.enn.com/image_for_articles/33228-1.jpg/medium"
-        .well
-          .post-text
-            h2 {{title}}
-            p  {{body}}
-          .post-actions
-            li
-              a.btn href="/text_posts/{{id}}/edit"
-                i.icon-edit Edit
-            li
-              a.btn href="/text_posts/{{id}}" data-confirm="Are You Sure" data-method="delete" rel="nofollow"
-                i.icon-trash Remove
-            li
-               span.btn
-                i.icon-pencil | {{type}}
+     = render '/text_posts/dashboard_post'
 
     script type="text/html" id="link_post_template"
-      .post
-        img.post-avatar src="http://www.enn.com/image_for_articles/33228-1.jpg/medium"
-        .well
-          .post-link
-            a.main-link href="{{link_url}}" {{link_url}}
-            p.description {{description}}
-          .post-actions
-            li
-              a.btn href="/link_posts/{{id}}/edit"
-                i.icon-edit Edit
-            li
-              a.btn href="/link_posts/{{id}}" data-confirm="Are You Sure" data-method="delete" rel="nofollow"
-                i.icon-trash Remove
-            li
-              span.btn
-               i.icon-share-alt | {{type}}
+      = render '/link_posts/dashboard_post'
 
     script type="text/html" id="github_post_template"
-      .post
-        img.post-avatar src="http://www.enn.com/image_for_articles/33228-1.jpg/medium"
-        .well
-          .post-activity
-            a.repo-url href="{{repo_url}}" {{repo_url}}
-            p.repo-name {{repo_name}}
-            p.github-type {{github_type}}
-          .post-actions
-            li
-              span.btn
-               i.icon-share-alt | {{type}}
+      = render '/github_posts/dashboard_post'
 
     script type="text/html" id="twitter_post_template"
-      .post
-        img.post-avatar src="http://www.enn.com/image_for_articles/33228-1.jpg/medium"
-        .well
-          .post-activity
-            p.text {{text}}
-          .post-actions
-            li
-              span.btn
-               i.icon-share-alt | {{type}}
-
-    script type="text/html" id="text_post_template"
-      .post.well
-        .pull-right
-          a href="/text_posts/{{id}}/edit" Edit
-          br
-          a href="/text_posts/{{id}}" data-confirm="Are You Sure" data-method="delete" rel="nofollow" Remove
-        | {{title}}
-        | {{body}}
-        | {{type}}
-
-    script type="text/html" id="link_post_template"
-      .post.well
-          .pull-right
-            a href="/link_posts/{{id}}/edit" Edit
-            br
-            a href="/link_posts/{{id}}" data-confirm="Are You Sure" data-method="delete" rel="nofollow" Remove
-          a href="{{link_url}}" target="_blank" {{link_url}}
-          | {{description}}
-          | {{type}}
-
-    div class="span4 stream"
-      div id="anchor"
-      div class="span3 pull-right well" id="minidash"
-
-        h2 Mini-Dash
-        = link_to "View Your Live Stream!", root_url(subdomain: current_user.display_name), class: "btn btn-primary"
-        br
-        br
-        h3 Total Posts
-        = current_user.posts.count
-        br
-        h3 Total Points
-        br
-        h3 Most Popular Post
-        br
-        h3 Followers
-        br
-        h3 Refeeds
-        br
-
-      div id="totop"
-        h3 Back to Top
+      = render '/twitter_posts/dashboard_post'

@@ -6,7 +6,7 @@ class UrlValidator < ActiveModel::EachValidator
     begin
       uri = Addressable::URI.parse(value)
 
-      unless ["http","https"].include?(uri.scheme)
+      unless uri.nil? || ["http","https"].include?(uri.scheme)
         raise Addressable::URI::InvalidURIError
       end
     rescue Addressable::URI::InvalidURIError

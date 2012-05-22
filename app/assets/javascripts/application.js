@@ -16,9 +16,24 @@
 //= require mustache
 //= require_tree .
 
+
+
 $(function() {
   $('#content_tabs a').click(function (e) {
     e.preventDefault();
     $(this).tab('show');
   })
 });
+
+// $(".post-image a").click(function()){
+//   $("").show();
+// });
+
+// $(".post-image a").colorbox(
+//   {inline:true, href: ".post-image"}
+// );
+
+// $(document).bind("cbox_closed", function() {
+//   $("").hide();
+// });
+
