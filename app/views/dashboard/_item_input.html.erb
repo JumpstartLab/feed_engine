@@ -7,6 +7,7 @@
     <li><a href="#account" data-toggle="tab">Account</a></li>
     <li><a href="#services" data-toggle="tab">Services</a></li>
     <li><a href="#subscriptions" data-toggle="tab">TackleBox</a></li>
+    <li><a href="#api-token" data-toggle="tab">Troutr API</a></li>
   </ul>
 
   <div class="tab-content" >
@@ -27,6 +28,9 @@
     </div>
     <div class="tab-pane" id="subscriptions">
       <%= render :template => 'subscriptions/index'  %>
+    </div>
+    <div class="tab-pane" id="api-token">
+      <%= render :template => 'dashboard/api_token'  %>
     </div>
   </div>
 </ul>
