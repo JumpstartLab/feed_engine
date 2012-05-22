@@ -3,7 +3,7 @@
       b Posted:
       = " #{time_ago_in_words growl.created_at} ago"
       span.points
-        = link_to "+", points_growl_path(growl), method: :post, class: "points_link", remote: true
+        = link_to "+", points_growl_path(growl), method: :post, class: "points_link"
         = pluralize(growl.points, "Point")
   - if current_user
     .four.columns.pull_right
