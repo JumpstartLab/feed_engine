@@ -1,5 +1,6 @@
 @import "variables";
 @import "containers";
+@import "text";
 
 .feed_row {
   padding: 0 20px 0 50px;
@@ -173,7 +174,6 @@ $stat-count-font-size: 18px;
 }
 
 .feed-title {
-  font-family: $font;
-  color: $trout-main-color;
+  @include troutr-title;
   padding: 0 0 14px 50px;
 }

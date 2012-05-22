@@ -17,7 +17,7 @@
 
   <% if @items %>
     <% @items.zip(@stream_items).each do |i, si| %>
-    <%= render :partial => "item", :locals => { :item => i, :stream_item => si } %>
+      <%= render :partial => "item", :locals => { :item => i, :stream_item => si } %>
     <% end %>
   <% end %>
 </div>
