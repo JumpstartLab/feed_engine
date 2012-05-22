@@ -11,15 +11,15 @@
   <% end %>
     </span>
     <span class="points-container">
-        <% unless current_user && (item.user.display_name == current_user.display_name) %>
-          <%= link_to points_path(:item_type => item.class.name, :item_id => item.id), :method => :post, :id => "item_#{item.id}" do %>
-            <span class="entypo-icon">8</span>
-            <span class="points"><%= item.points.count %></span>
-          <% end %>
-        <% else %>
-          <span class="entypo-icon">8</span>
-          <span class="points"><%= item.points.count %></span>
-        <% end %>
+      <% unless current_user && (item.user.display_name == current_user.display_name) %>     
+      <%= link_to points_path(:item_type => item.class.name, :item_id => item.id), :method => :post, :id => "item_#{item.id}" do %>
+      <span class="entypo-icon">8</span>
+      <span class="points"><%= item.points.size %></span>
+      <% end %>
+      <% else %>
+      <span class="entypo-icon">8</span>
+      <span class="points"><%= item.points.size %></span>
+      <% end %>
     </span>
   </div>
   <br/>
