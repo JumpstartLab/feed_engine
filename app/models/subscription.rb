@@ -29,6 +29,8 @@ class Subscription < ActiveRecord::Base
       subscription.uid = auth["uid"]
       subscription.user_name = auth["info"]["nickname"]
       subscription.user_id = user.id
+      subscription.oauth_token = auth["credentials"]["token"]
+      subscription.oauth_secret = auth["credentials"]["secret"]
     end
   end
 
