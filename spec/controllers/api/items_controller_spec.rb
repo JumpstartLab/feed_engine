@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Api::V1::ItemsController, :focus => true do
+describe Api::V1::ItemsController do
   render_views
   let!(:user) { Fabricate(:user) }
 
@@ -100,15 +100,17 @@ describe Api::V1::ItemsController, :focus => true do
         item["body"].should == message.body
       end
     end
+  end
 
-    describe "POST requests" do
+  describe "POST requests" do
+    describe "to create" do
       let!(:item) {
         {
         :format       => :json,
         :display_name => user.display_name,
         :api_key      => user.api_key,
         :post         => { 'type' => 'message', 'body' => 'Lovebuckets!' }
-      }
+        }
       }
 
       it "without a valid user token responds with unauthorized" do
@@ -145,6 +147,43 @@ describe Api::V1::ItemsController, :focus => true do
           message = Message.first
           user.posts.should include message
           message.body.should == 'Lovebuckets!'
+        end
+      end
+    end
+
+    describe "to refeed", :focus => true do
+      let!(:other_user) { Fabricate(:user_with_posts) }
+      let!(:item) { other_user.items.first }
+      let!(:refeed_params) {
+        {
+        :format       => :json,
+        :display_name => user.display_name,
+        :api_key      => user.api_key,
+        :id           => item.id
+        }
+      }
+
+      it "without a valid user token responds with unauthorized" do
+        refeed_params[:api_key] = nil
+        post :refeed, refeed_params
+        response.code.should == '401'
+      end
+
+      describe "with a valid user token" do
+        it "responds with 404 if the item doesn't exist" do
+          not_id = Item.all.map(&:id).max + 1
+          refeed_params[:id] = not_id
+          post :refeed, refeed_params
+          response.code.should == '404'
+        end
+
+        it "responds with 201 if the item exists" do
+          post :refeed, refeed_params
+          response.code.should == '201'
+        end
+
+        it "create a refeed" do
+          expect { post :refeed, refeed_params }.to change { user.items.count }.by(1)
         end
       end
     end

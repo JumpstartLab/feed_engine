@@ -2,7 +2,7 @@
 class Api::V1::ItemsController < ApplicationController
   respond_to :json
 
-  before_filter :validate_request!, :except => [:index, :show]
+  before_filter :validate_request!, :except => [:index, :show, :refeed]
 
   def index
     if @user = User.find_by_display_name(params[:display_name])
@@ -40,6 +40,19 @@ class Api::V1::ItemsController < ApplicationController
       else
         error(:unprocessable_entity, "#{post_type} could not be created")
       end
+    else
+      error(:unauthorized)
+    end
+  end
+
+  def refeed
+    item = Item.find_by_id(params[:id])
+
+    if authorized?(params) && item
+      item.refeed_for(User.find_by_display_name(params[:display_name]))
+      success(:created, "Refeed created successfully")
+    elsif authorized?(params)
+      error(:not_found, "Item #{params[:id]} does not exist.")
     else
       error(:unauthorized)
     end
