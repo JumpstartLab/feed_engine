@@ -18,7 +18,7 @@
   end
 
   def index
-    @posts = Posts.all.collect {|post| post.postable}.page(params[:page] || 0)
+    @posts = Post.all.collect {|post| post.postable}.page(params[:page] || 0)
   end
 
   def show

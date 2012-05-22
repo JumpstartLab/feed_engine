@@ -17,8 +17,8 @@ jQuery ->
       $.feedengine.activeTabId = tabId
   }
   setUsername()
-  getSubdomain()
-  newFeedPager()
+  getSubDomain()
+  new FeedPager()
 
 getSubDomain = ->
   host_parts = window.location.host.split('.')
@@ -26,10 +26,6 @@ getSubDomain = ->
     $.feedengine.subdomain = host_parts[0]
   else
     $.feedengine.subdomain = null
-
-getFeeds() = ->
-
-
 
 
 
