@@ -34,25 +34,23 @@ describe Item do
   end
 
   describe "is destroyed when a" do
-    before(:all) do
-      message = Fabricate.build(:message)
-      link = Fabricate.build(:link)
-      image = Fabricate.build(:image)
-    end
+    let(:new_message) { Fabricate.build(:message) }
+    let(:new_link) { Fabricate.build(:link) }
+    let(:new_image) { Fabricate.build(:image) }
 
     it "message is destroyed" do
-      expect { message.save }.to change { Item.count }.from(0).to(1)
-      expect { message.destroy }.to change { Item.count }.from(1).to(0)
+      expect { new_message.save }.to change { Item.count }.from(0).to(1)
+      expect { new_message.destroy }.to change { Item.count }.from(1).to(0)
     end
 
     it "link is destroyed" do
-      expect { link.save }.to change { Item.count }.from(0).to(1)
-      expect { link.destroy }.to change { Item.count }.from(1).to(0)
+      expect { new_link.save }.to change { Item.count }.from(0).to(1)
+      expect { new_link.destroy }.to change { Item.count }.from(1).to(0)
     end
 
     it "image is destroyed" do
-      expect { image.save }.to change { Item.count }.from(0).to(1)
-      expect { image.destroy }.to change { Item.count }.from(1).to(0)
+      expect { new_image.save }.to change { Item.count }.from(0).to(1)
+      expect { new_image.destroy }.to change { Item.count }.from(1).to(0)
     end
   end
 

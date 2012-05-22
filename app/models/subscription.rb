@@ -2,23 +2,26 @@
 #
 # Table name: subscriptions
 #
-#  id         :integer         not null, primary key
-#  provider   :string(255)
-#  uid        :string(255)
-#  user_name  :string(255)
-#  user_id    :integer
-#  created_at :datetime        not null
-#  updated_at :datetime        not null
+#  id           :integer         not null, primary key
+#  provider     :string(255)
+#  uid          :string(255)
+#  user_name    :string(255)
+#  user_id      :integer
+#  created_at   :datetime        not null
+#  updated_at   :datetime        not null
+#  oauth_token  :string(255)
+#  oauth_secret :string(255)
 #
 
 # The model for any external subscriptions
 class Subscription < ActiveRecord::Base
   EVENT_LIST = ["PushEvent", "CreateEvent", "ForkEvent"]
-  PROVIDER_TO_POST_TYPE = { "twitter" => "tweets", "github" => "github_events"}
-  attr_accessible :user_name, :provider, :uid, :user_id
+  PROVIDER_TO_POST_TYPE = { "twitter" => "tweets", "github" => "github_events",
+                            "instagram" => "instapounds"}
+  attr_accessible :user_name, :provider, :uid, :user_id, :oauth_token,
+    :oauth_secret
 
   belongs_to :user
-  has_many :tweets
 
   def self.create_with_omniauth(auth, user)
     create! do |subscription|
@@ -26,6 +29,8 @@ class Subscription < ActiveRecord::Base
       subscription.uid = auth["uid"]
       subscription.user_name = auth["info"]["nickname"]
       subscription.user_id = user.id
+      subscription.oauth_token = auth["credentials"]["token"]
+      subscription.oauth_secret = auth["credentials"]["secret"]
     end
   end
 
@@ -70,6 +75,8 @@ class Subscription < ActiveRecord::Base
         create_tweet(new_post)
       elsif provider == "github"
         create_github_event(new_post)
+      elsif provider == "instagram"
+        create_instapound(new_post)
       end
     end
   end
@@ -91,6 +98,15 @@ class Subscription < ActiveRecord::Base
                        )
   end
 
+  def create_instapound(new_post)
+    Instapound.create!(subscription_id: self.id,
+                       body: new_post.caption["text"],
+                       image_url: new_post.images["standard_resolution"]["url"],
+                       created_at: new_post.created_at,
+                       poster_id: self.user_id
+                      )
+  end
+
   def get_tweets
     Twitter.user_timeline(self.user_name)
   end
@@ -102,6 +118,20 @@ class Subscription < ActiveRecord::Base
     events
   end
 
+  def get_instapounds
+    all_instaposts = HTTParty.get(
+      "https://api.instagram.com/v1/users/" +
+      "#{self.uid}/media/recent/?access_token=#{self.oauth_token}"
+    )["data"]
+    objectified_instaposts = all_instaposts.map do |instapost|
+      objectified_instapost = OpenStruct.new instapost
+      objectified_instapost.created_at = Time.at(
+        objectified_instapost.created_time.to_i
+      ).to_datetime.utc
+      objectified_instapost
+    end
+  end
+
   def tweets
     Tweet.where(subscription_id: self.id)
   end
@@ -110,4 +140,7 @@ class Subscription < ActiveRecord::Base
     GithubEvent.where(subscription_id: self.id)
   end
 
+  def instapounds
+    Instapound.where(subscription_id: self.id)
+  end
 end

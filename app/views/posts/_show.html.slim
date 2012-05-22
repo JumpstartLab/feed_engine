@@ -25,7 +25,10 @@ div class="fe-home-container #{post.user.display_name}_post" id="post_#{post.id}
         = post.body
       - if post.github_event?
         | #{post.event_type} on #{post.repo}
-
+      - if post.instapound?
+        = image_tag post.image_url
+        p
+          = post.body
       - if post.user == current_user
         p#points Points! (#{post.points})
       - elsif current_user
@@ -33,7 +36,6 @@ div class="fe-home-container #{post.user.display_name}_post" id="post_#{post.id}
         p#points = link_to "Points! (#{post.points})", item_path(post.item, :subdomain => false, :points => true), :method => :put
       - else
         p#points = link_to "Points! (#{post.points})", item_path(post.item, :subdomain => false, :points => true), :method => :put
-
     p
       = link_to post.user.display_name, root_url(:subdomain => post.user.subdomain)
       - if post.tweet?
