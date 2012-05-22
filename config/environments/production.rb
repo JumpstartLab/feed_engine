@@ -72,6 +72,6 @@ Hungrlr::Application.configure do
     :password  => "3cc04tvdycf8",
     :authentication  => :login
   }
-  config.action_mailer.default_url_options = { :host => 'http://hungrlr.com' }
+  config.action_mailer.default_url_options = { :host => 'http://www.hungrlr.com' }
   ENV["REDISTOGO_URL"] = 'redis://redistogo:6b3900eac2b9d03ecf69a503a771d644@panga.redistogo.com:9579/'
 end
