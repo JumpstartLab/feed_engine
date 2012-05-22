@@ -23,10 +23,11 @@ gem 'jbuilder'
 gem 'growl'
 gem 'octokit'
 gem 'gravatar-ultimate'
-gem 'instagram'
+# gem 'instagram', "0.8.4"
 gem 'coffeebeans'
 gem 'pusher'
-
+gem 'omniauth-instagram'
+gem 'faraday'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

@@ -13,6 +13,7 @@ class Authentication < ActiveRecord::Base
     user.name       = auth['info']['name']
     user.twitter    = auth['info']['nickname']
     user.github     = auth['info']['nickname']
+    user.instagram  = auth['info']['nickname']
     user.url        = auth['info']['urls']['Website']
     user.bio        = auth['info']['description']
     user.avatar_url = auth['info']['image']

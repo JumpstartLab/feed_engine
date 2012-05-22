@@ -9,11 +9,17 @@ class AuthenticationsController < ApplicationController
   end
 
   def create
+
     auth = request.env["omniauth.auth"]
     uid = auth['uid']
     token = auth["credentials"]["token"]
-    secret = auth["credentials"]["secret"]
-    login = auth["extra"]["raw_info"]["login"]
+
+    if auth["credentials"]["secret"]
+      secret = auth["credentials"]["secret"] 
+    end
+    if auth["extra"]["raw_info"]
+      login = auth["extra"]["raw_info"]["login"] 
+    end
 
 
     provider = auth[:provider]
