@@ -29,12 +29,12 @@ FeedEngine::Application.routes.draw do
     match 'posts/:display_name', to: "posts#show"
   end
   match 'posts/ind', to: 'posts#ind'
+  match 'posts/refeeds' => "posts#refeed", as: :refeed
   resources :users
   resources :posts, only: [:create, :index]
   resources :texts
   resources :images
   resources :links
-
 
   root :to => 'pages#index'
   match '/integrate' => 'users#integrate', as: 'integrate'

@@ -24,7 +24,7 @@ class PostsController < ApplicationController
   def show
     user = User.find_by_display_name(params[:display_name])
     temp_posts = user.feed.posts.reverse.page(params[:page].to_i || 0)
-    @posts = temp_posts
+    @posts = temp_posts.collect { |p| p.postable }.reverse.page(params[:page].to_i || 0)
     render action: :index
   end
 
@@ -34,7 +34,8 @@ class PostsController < ApplicationController
       user = current_user     
     end
     params[:page] = "0" if params[:page] && params[:page] == "NaN" 
-    @posts = user.feed.posts.collect { |p| p.postable }.reverse.page(params[:page].to_i || 0)
-    render "posts/index.json.jbuilder"
+    temp_posts = user.feed.posts.reverse.page(params[:page].to_i || 0)
+    @posts = temp_posts.collect { |p| p.postable }
+    render "posts/index"
   end
 end
