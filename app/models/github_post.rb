@@ -3,13 +3,13 @@
 # Table name: github_posts
 #
 #  id           :integer         not null, primary key
-#  github_id    :integer(8)
 #  published_at :datetime
 #  repo_name    :string(255)
 #  repo_url     :string(255)
 #  github_type  :string(255)
 #  created_at   :datetime        not null
 #  updated_at   :datetime        not null
+#  github_id    :string(255)
 #
 
 class GithubPost < ActiveRecord::Base

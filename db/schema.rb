@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(:version => 20120522171705) do
     t.datetime "updated_at",     :null => false
     t.string   "uid"
     t.string   "username"
-    t.string   "last_status_id"
     t.string   "image"
+    t.string   "last_status_id"
   end
 
   create_table "delayed_jobs", :force => true do |t|
@@ -43,13 +43,13 @@ ActiveRecord::Schema.define(:version => 20120522171705) do
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "github_posts", :force => true do |t|
-    t.string   "github_id"
     t.datetime "published_at"
     t.string   "repo_name"
     t.string   "repo_url"
     t.string   "github_type"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.string   "github_id"
   end
 
   create_table "image_posts", :force => true do |t|
@@ -103,11 +103,11 @@ ActiveRecord::Schema.define(:version => 20120522171705) do
   end
 
   create_table "twitter_posts", :force => true do |t|
-    t.string   "twitter_id"
     t.string   "text"
     t.datetime "published_at"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.string   "twitter_id"
   end
 
   create_table "users", :force => true do |t|
