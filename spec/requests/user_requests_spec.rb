@@ -77,45 +77,54 @@ describe User do
       let!(:other_user) { Fabricate(:user) }
       let(:random_post_type) { ["message", "link", "github_event", "tweet", "image"].sample }
       context "from the user show page" do
-        it "add points to a post" do
-          random_post = Fabricate(random_post_type.to_sym, poster_id: other_user.id)
-          set_host(other_user.subdomain)
-          visit root_path
-          page.should have_content "Points!"
-          click_link_or_button "Points! (#{random_post.points})"
-          updated_post = random_post.class.find(random_post.id)
-          updated_post.points.should == 1
-          current_path.should == root_path
-          within "#points" do
-            page.should have_content updated_post.points
+        context "on a different user's post" do
+          let!(:random_post) { Fabricate(random_post_type.to_sym, poster_id: other_user.id) }
+          it "add points to a post" do
+            set_host(other_user.subdomain)
+            visit root_path
+            page.should have_content "Points!"
+            click_link_or_button "Points! (#{random_post.points})"
+            updated_post = random_post.class.find(random_post.id)
+            updated_post.points.should == 1
+            current_path.should == root_path
+            within "#points" do
+              page.should have_content updated_post.points
+            end
           end
         end
-        it "cannot give it's own post points" do
-          random_post = Fabricate(random_post_type.to_sym, poster_id: user.id)
-          set_host(user.subdomain)
-          visit root_path
-          page.should have_content "Points!"
-          page.should_not have_link "Points! (#{random_post.points})"
+        context "on their own post" do
+          let!(:random_post) { Fabricate(random_post_type.to_sym, poster_id: user.id) }
+          it "cannot give it's own post points" do
+            set_host(user.subdomain)
+            visit root_path
+            page.should have_content "Points!"
+            page.should_not have_link "Points! (#{random_post.points})"
+          end
         end
       end
       context "from the root page" do
-        it "add points to a post" do
-          random_post = Fabricate(random_post_type.to_sym, poster_id: other_user.id)
-          visit root_path
-          page.should have_content "Points!"
-          click_link_or_button "Points! (#{random_post.points})"
-          updated_post = random_post.class.find(random_post.id)
-          updated_post.points.should == 1
-          current_path.should == root_path
-          within "#points" do
-            page.should have_content updated_post.points
+        context "on a different user's post" do
+          let!(:random_post) { Fabricate(random_post_type.to_sym, poster_id: other_user.id) }
+          it "add points to a post" do
+            visit root_path
+            page.should have_content "Points!"
+            click_link_or_button "Points! (#{random_post.points})"
+            updated_post = random_post.class.find(random_post.id)
+            updated_post.points.should == 1
+            current_path.should == root_path
+            within "#points" do
+              page.should have_content updated_post.points
+            end
           end
         end
-        it "cannot give it's own post points" do
-          random_post = Fabricate(random_post_type.to_sym, poster_id: user.id)
-          visit root_path
-          page.should have_content "Points!"
-          page.should_not have_link "Points! (#{random_post.points})"
+        context "on their own post" do
+          let!(:random_post) { Fabricate(random_post_type.to_sym, poster_id: user.id) }
+          it "cannot give it's own post points" do
+            random_post = Fabricate(random_post_type.to_sym, poster_id: user.id)
+            visit root_path
+            page.should have_content "Points!"
+            page.should_not have_link "Points! (#{random_post.points})"
+          end
         end
       end
     end
