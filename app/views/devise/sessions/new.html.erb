@@ -20,10 +20,10 @@
 
         <%= f.password_field :password, :placeholder => "Password", :class => "login-fields" %>
 
-        <div><%= f.submit "Log In", :class => "login-button offset1 btn-primary btn-large" %></div>
+        <%= f.submit "Log In", :class => "btn-primary btn-large" %>
+        <%=link_to "Forgot password?", new_user_password_path(resource_name), :id => "forgot-password" %>
       <% end %>
 
-      <%=link_to "Forgot password?", new_user_password_path(resource_name), :id => "forgot-password" %>
     </div>
   <% end %>
 </div>

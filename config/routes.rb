@@ -23,9 +23,7 @@ FeedEngine::Application.routes.draw do
 
 
   resources :points, :only => [:create]
-  resources :text_items
-  resources :link_items
-  resources :image_items
+  resources :text_items, :image_items, :link_items, :only => [:create]
   resources :external_accounts
   resources :subscriptions, :only => [:create, :destroy]
   resources :stream_items, :only => [:create]
@@ -60,5 +58,6 @@ FeedEngine::Application.routes.draw do
 
   # if there's a subdomain, send them to feed#show, otherwise treat root as dashboard
   match '', to: 'feed#show', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
+  match 'user_root' => redirect('/dashboard')
   root :to => 'river#show'
 end

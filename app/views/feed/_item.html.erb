@@ -3,16 +3,23 @@
     <%= image_tag gravatar_url(item.user), :class => "item-user-image" %>
     <span class="item-header-user"><%= link_to item.user.display_name, root_url(:subdomain => item.author.display_name) %></span>
 
+    <span class="refeed-buttons">
+      <% unless current_user == nil || !current_user.can_retrout?(item) %>
+      <%= link_to("#", 'data-author' => item.author.display_name, 'data-type' => item.class.name, 'data-id' => item.id, :class => "refeed_ajax_link") do  %>
+      <span class="raphael-icon refeed">0</span>
+      <% end %>
+  <% end %>
+    </span>
     <span class="points-container">
-        <% unless current_user && (item.user.display_name == current_user.display_name) %>
-          <%= link_to points_path(:item_type => item.class.name, :item_id => item.id), :method => :post, :id => "item_#{item.id}" do %>
-            <span class="entypo-icon">8</span>
-            <span class="points"><%= item.points.count %></span>
-          <% end %>
-        <% else %>
-          <span class="entypo-icon">8</span>
-          <span class="points"><%= item.points.count %></span>
-        <% end %>
+      <% unless current_user && (item.user.display_name == current_user.display_name) %>     
+      <%= link_to points_path(:item_type => item.class.name, :item_id => item.id), :method => :post, :id => "item_#{item.id}" do %>
+      <span class="entypo-icon">8</span>
+      <span class="points"><%= item.points.size %></span>
+      <% end %>
+      <% else %>
+      <span class="entypo-icon">8</span>
+      <span class="points"><%= item.points.size %></span>
+      <% end %>
     </span>
   </div>
   <br/>
@@ -73,13 +80,6 @@
     <% elsif item.class == GithubItem %>
       <span class="raphael-icon github-logo">U</span>
     <% end %>
-    <div class="refeed-buttons">
-      <% unless current_user == nil || !current_user.can_retrout?(item) %>
-      <%= link_to("#", 'data-author' => item.author.display_name, 'data-type' => item.class.name, 'data-id' => item.id, :class => "refeed_ajax_link") do  %>
-      <span class="raphael-icon refeed">0</span>
-      <% end %>
-  <% end %>
-    </div>
 </div>
     
 
