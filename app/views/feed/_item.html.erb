@@ -4,8 +4,7 @@
     <span class="item-header-user"><%= link_to item.user.display_name, root_url(:subdomain => item.user.display_name) %></span>
 
     <span class="points-container">
-      <% if current_user %>
-        <% unless current_user && (item.points.find_by_user_id(current_user.id)) || item.user.display_name == current_user.display_name %>
+        <% unless current_user && (item.user.display_name == current_user.display_name) %>
           <%= link_to points_path(:item_type => item.class.name, :item_id => item.id), :method => :post, :id => "item_#{item.id}" do %>
             <span class="entypo-icon">8</span>
             <span class="points"><%= item.points.count %></span>
@@ -14,7 +13,6 @@
           <span class="entypo-icon">8</span>
           <span class="points"><%= item.points.count %></span>
         <% end %>
-      <% end %>
     </span>
   </div>
   <br/>

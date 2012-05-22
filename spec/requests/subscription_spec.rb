@@ -20,7 +20,6 @@ describe "Subscribing to a User's feed" do
       end
 
       it "gives me the option to subscribe to that user's feed" do
-        save_and_open_page
         within(".feed-meta-container") do
           page.should have_link("TackleBox this Troutr")
         end
