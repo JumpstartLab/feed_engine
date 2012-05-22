@@ -1,8 +1,13 @@
-<h2>Forgot your password?</h2>
+<div class="home-image">
+  <img src="/assets/welcome.jpg">
+</div>
 
-<%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
-  <%= f.input :email %>
-  <%= f.button :submit, "Send me reset password instructions" %>
-<% end %>
+<div class='span6 offset3 grey-box well'>
+  <h3>Forgot your password?</h3>
+  <hr />
 
-<%= render "links" %>
+  <%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
+    <%= f.input :email %>
+    <%= f.button :submit, "Send me reset password instructions" %>
+  <% end %>
+</div>
