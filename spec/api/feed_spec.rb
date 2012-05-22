@@ -61,8 +61,10 @@ describe "API feeds/user/... ", :type => :api do
     end
 
     it "creates a github_item via the api" do
-      github_response = OpenStruct.new
-      event=YAML::dump({github: "item"})
+      # !!!  Possible to parse Octokit responses to json? then proceed with standard json parse creation path
+      #
+      github_response = OpenStruct.new(:event_id => 1, :event => {:github => "item"})
+      event=YAML::dump(github_response)
       body = '{"type":"GithubItem","event": "#{event}"}'
       post "#{url}.json", :token => token, :body => body
 
