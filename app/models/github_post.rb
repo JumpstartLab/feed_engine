@@ -3,7 +3,7 @@
 # Table name: github_posts
 #
 #  id           :integer         not null, primary key
-#  github_id    :integer(8)
+#  github_id    :integer
 #  published_at :datetime
 #  repo_name    :string(255)
 #  repo_url     :string(255)
