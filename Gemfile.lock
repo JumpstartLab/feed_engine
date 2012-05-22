@@ -354,6 +354,7 @@ DEPENDENCIES
   omniauth-twitter
   pg
   rails (= 3.2.3)
+  redis
   reek!
   resque
   rspec-rails
