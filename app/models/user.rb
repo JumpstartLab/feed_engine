@@ -106,7 +106,7 @@ class User < ActiveRecord::Base
   end
 
   def feed
-    Post.from_users_followed_by(self)
+    Post.feed_for_user(self)
   end
 
   def refeeded_posts
