@@ -2,6 +2,8 @@
 
 FactoryGirl.define do
   factory :github_item do
-    activity "MyText"
+    event "hello"
+    user
+    event_id { rand(1..10) }
   end
 end
