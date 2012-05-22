@@ -285,7 +285,6 @@
 #     #     click_link_or_button("Show my Auth Token")
 #     #     page.should have_content("#{user.authentication_token}")
 #     #   end
-=======
 
 #     # Switch for FactoryGirl user login once Mike's api branch is pulled in
 #     let!(:user) do
