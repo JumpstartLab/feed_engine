@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120521175231) do
+ActiveRecord::Schema.define(:version => 20120522190607) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -54,8 +54,9 @@ ActiveRecord::Schema.define(:version => 20120521175231) do
     t.integer  "user_id"
     t.string   "event_type"
     t.integer  "github_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "screen_name"
   end
 
   create_table "instagram_feed_items", :force => true do |t|
@@ -86,9 +87,10 @@ ActiveRecord::Schema.define(:version => 20120521175231) do
     t.text     "content"
     t.datetime "posted_at"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.integer  "tweet_id"
+    t.string   "screen_name"
   end
 
   add_index "twitter_feed_items", ["id"], :name => "index_twitter_feed_items_on_id"

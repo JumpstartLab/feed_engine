@@ -12,6 +12,7 @@ class GithubFeedItemDecorator < ApplicationDecorator
         :name => model.user.display_name
       },
       :content => model.content,
+      :screen_name => model.screen_name,
       :created_at => model.posted_at,
       :id => model.id,
       :refeed => false,
