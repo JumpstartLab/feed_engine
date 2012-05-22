@@ -18,8 +18,6 @@ navHandler = (navItem) ->
 
 
 
-
-
 servicesHandler = ->
   $('#services').click ->
     $.getJSON('/authentications', (response, status, jqxhr) ->
@@ -254,14 +252,14 @@ checkForAuthentication = (provider) ->
     response.success((response, status) ->
       if response['auth']
         setFlash("Authentication with #{provider} successful!")
-        $("skip_#{provider}").click
+        $("#skip_#{provider}").click()
       else
         setFlash("Authentication unsuccessful")
-      window.unbind('focus')
+      $(window).unbind('focus', checkForAuthentication)
     )
     response.error( ->
       setFlash('Something went wrong :(')
-      window.unbind('focus')
+      $(window).unbind('focus', checkForAuthentication)
     )
 
 integrateTwitter = ->
