@@ -49,7 +49,15 @@
           white-space: nowrap;
         }
         &:hover{
-          background-color: $dolphin;
+          background: rgb(84,84,84);
+          background: -moz-linear-gradient(top,  rgba(84,84,84,1) 0%, rgba(94,94,94,1) 50%, rgba(109,109,109,1) 100%);
+          background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(84,84,84,1)), color-stop(50%,rgba(94,94,94,1)), color-stop(100%,rgba(109,109,109,1)));
+          background: -webkit-linear-gradient(top,  rgba(84,84,84,1) 0%,rgba(94,94,94,1) 50%,rgba(109,109,109,1) 100%);
+          background: -o-linear-gradient(top,  rgba(84,84,84,1) 0%,rgba(94,94,94,1) 50%,rgba(109,109,109,1) 100%);
+          background: -ms-linear-gradient(top,  rgba(84,84,84,1) 0%,rgba(94,94,94,1) 50%,rgba(109,109,109,1) 100%);
+          background: linear-gradient(top,  rgba(84,84,84,1) 0%,rgba(94,94,94,1) 50%,rgba(109,109,109,1) 100%);
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#545454', endColorstr='#6d6d6d',GradientType=0 );
+
           a {
             color: $white;
             text-shadow: none;
