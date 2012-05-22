@@ -1,6 +1,8 @@
 div class="span8 stream"
 
   h1 #{user.display_name || user.email} Stream
+  raise @user.inspect
+  / - if current_user.following?()
   div id="posts" data-json-url="#{items_url(user_display_name: user.display_name, format: :json)}"
 
 / Mustache templates
