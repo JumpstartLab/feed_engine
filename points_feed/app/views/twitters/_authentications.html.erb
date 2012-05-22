@@ -2,14 +2,17 @@
   <a href="/auth/github"><img src="/assets/github_128.png"></a>
 <% else %>
   <img src="/assets/github_128.png" class="authorized">
+  <img src="/assets/linked_128.png" class="linked-authorized">
 <% end %>
 <% if current_user.authentications.where(:provider => "instagram").empty? %>
   <a href="/auth/instagram"><img src="/assets/instagram_128.png"></a>
 <% else %>
   <img src="/assets/instagram_128.png" class="authorized">
+  <img src="/assets/linked_128.png" class="linked-authorized">
 <% end %>
 <% if current_user.authentications.where(:provider => "twitter").empty? %>
   <a href="/auth/twitter"><img src="/assets/twitter_128.png"></a>
 <% else %>
   <img src="/assets/twitter_128.png" class="authorized">
+  <img src="/assets/linked_128.png" class="linked-authorized">
 <% end %>
