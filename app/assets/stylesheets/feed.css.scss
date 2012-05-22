@@ -20,12 +20,16 @@
   height: 48px;
 }
 
-.text-item-body {
-  @include word-wrap;
+@mixin item-body {
   font-size: 16px; 
   font-weight: 200;
   font-family: $font;
   color: $font-color;
+}
+
+.text-item-body {
+  @include item-body;
+  @include word-wrap;
 }
 
 .body_image {
@@ -190,4 +194,26 @@ $stat-count-font-size: 18px;
 .git-commit a:hover {
   color: $trout-main-color;
   background-color: transparent;
+}
+
+.item-header-user  a{
+  color: $trout-main-color;
+}
+
+.item-header-user a:visited{
+  color: $trout-main-color;
+}
+
+.item-header-user  a:hover {
+  color: $trout-main-color;
+  background-color: transparent;
+}
+
+.twitter {
+  @include word-wrap;
+  @include item-body;
+}
+
+.github-item-body {
+  @include item-body;
 }
