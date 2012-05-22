@@ -21,9 +21,7 @@ FeedEngine::Application.routes.draw do
 
 
   resources :points, :only => [:create]
-  resources :text_items
-  resources :link_items
-  resources :image_items
+  resources :text_items, :image_items, :link_items, :only => [:create]
   resources :external_accounts
   resources :subscriptions, :only => [:create, :destroy]
   resources :stream_items, :only => [:create]

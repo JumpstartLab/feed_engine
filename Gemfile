@@ -48,6 +48,7 @@ end
 group :test do
   gem "rack-test", require: "rack/test"
   gem 'guard-spork'
+  gem 'capybara-webkit'
   gem 'spork'
   gem 'simplecov', :require => false
   gem 'launchy'

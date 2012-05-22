@@ -14,13 +14,13 @@ module ControllerMacros
     login_user(email, "password")
   end
 
-  def create_logged_in_user
-    user = Factory(:user)
-    login(user)
-    user
-  end
-
   def login(user)
     login_as user, scope: :user
+  end
+
+  def create_logged_in_user
+    user = FactoryGirl.create(:user)
+    login(user)
+    user
   end
 end

@@ -22,6 +22,10 @@ Spork.prefork do
   Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
   RSpec.configure do |config|  
+    config.mock_with :rspec
+    Capybara.default_driver     = :rack_test
+    Capybara.default_selector   = :css
+    Capybara.javascript_driver  = :webkit
     # ## Mock Framework
     #
     # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
@@ -50,7 +54,23 @@ end
 
 
 Spork.each_run do
-  # This code will be run each time you run your specs.
+  if Spork.using_spork?
+    ActiveRecord::Base.instantiate_observers
+  end
+
+  require 'factory_girl_rails'
+
+  # Forces all threads to share the same connection, works on Capybara because it starts the web server in a thread.
+  class ActiveRecord::Base
+    mattr_accessor :shared_connection
+    @@shared_connection = nil
+
+    def self.connection
+      @@shared_connection || retrieve_connection
+    end
+  end
+
+  ActiveRecord::Base.shared_connection = ActiveRecord::Base.connection
 
 end
 
