@@ -122,6 +122,7 @@
 
 .refeed {
   @include item-logo;
+  padding: 5px 0 0 10px
 }
 
 /*Stats*/
@@ -209,6 +210,32 @@ $stat-count-font-size: 18px;
   background-color: transparent;
 }
 
+.points-container  a{
+  color: $trout-main-color;
+}
+
+.points-container a:visited{
+  color: $trout-main-color;
+}
+
+.points-container a:hover {
+  color: $trout-hover-color; 
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.refeed-buttons  a{
+  color: $trout-main-color;
+}
+
+.refeed-buttons a:visited{
+  color: $trout-main-color;
+}
+
+.refeed-buttons a:hover {
+  background-color: transparent;
+  text-decoration: none;
+}
 .twitter {
   @include word-wrap;
   @include item-body;
