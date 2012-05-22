@@ -1,22 +1,21 @@
   json.name            @user.display_name
   json.id              @user.id
-  json.private         false
   json.link            api_feed_url(@user)
 
   json.items do |json|
     json.pages         @stream_items.num_pages
     json.first_page    api_feed_url(@user, :page => 1)
     json.last_page     api_feed_url(@user, :page => @stream_items.num_pages)
-    json.most_recent   @items do |json, item|
-      json.(item, :id, :created_at)
-      json.type        item.class.name
-      json.image_url   item.url if item.is_a?(ImageItem)
-      json.link_url    item.url if item.is_a?(LinkItem)
-      json.body        item.body if item.is_a?(TextItem)
-      json.comment     item.comment if item.is_a?(LinkItem) || item.is_a?(ImageItem)
-      json.feed        api_feed_url(item.user)
-      json.link        api_item_url(item.user, item.stream_items.first)
-      json.refeed      false
-      json.refeed_link ""
+    json.most_recent   @stream_items do |json, stream_item|
+      json.(stream_item, :id, :created_at)
+      json.type        stream_item.streamable.class.name
+      json.image_url   stream_item.streamable.url if stream_item.streamable.is_a?(ImageItem)
+      json.link_url    stream_item.streamable.url if stream_item.streamable.is_a?(LinkItem)
+      json.body        stream_item.streamable.body if stream_item.streamable.is_a?(TextItem)
+      json.comment     stream_item.streamable.comment if stream_item.streamable.is_a?(LinkItem) || stream_item.streamable.is_a?(ImageItem)
+      json.feed        api_feed_url(stream_item.user)
+      json.link        api_item_url(stream_item.streamable.user, stream_item.streamable.stream_items.first)
+      json.refeed      stream_item.refeed
+      json.refeed_link api_refeed_item_url(stream_item.user, stream_item)
     end
   end

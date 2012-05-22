@@ -113,7 +113,6 @@ describe "API feeds/user/... ", :type => :api do
       feed = JSON.parse(last_response.body)
       feed["name"].should == user.display_name
       feed["id"].should == user.id
-      feed["private"].should == false
       feed["link"].should == api_feed_url(user)
       feed["items"]["first_page"].should == api_feed_url(user, :page => 1)
       feed["items"]["last_page"].should == api_feed_url(user, :page => (user.stream_items.count/12.0).ceil)
