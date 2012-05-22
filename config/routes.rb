@@ -5,7 +5,7 @@ FeedEngine::Application.routes.draw do
   match 'users/auth/:provider' => 'authentications#new'
   match 'users/auth/:provider/callback' => 'authentications#create'
 
-  root :to => 'river#show'
+  
 
   devise_scope :user do
     get "signup" => "devise/registrations#new", :as => :new_user
@@ -60,4 +60,5 @@ FeedEngine::Application.routes.draw do
 
   # if there's a subdomain, send them to feed#show, otherwise treat root as dashboard
   match '', to: 'feed#show', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
+  root :to => 'river#show'
 end
