@@ -57,9 +57,11 @@ describe Subscription do
       end
 
       it "does not return posts that have already been created" do
+        pending
         Subscription.any_instance.stub(:posts_for).and_return([new_enough_post])
         fabricated_subscriptions.each do |name, subscription|
-          subscription.get_new_posts
+          new_enough_post.provider = subscription.provider
+          subscription.create_records_of_posts([new_enough_post])
           subscription.get_new_posts.should == []
         end
       end

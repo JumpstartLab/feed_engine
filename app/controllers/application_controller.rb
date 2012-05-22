@@ -17,6 +17,15 @@ class ApplicationController < ActionController::Base
   end
   helper_method :dashboard_posts_private?
 
+  def can_refeed?(feed_user, viewing_user)
+    if logged_in? && !viewing_user.is_or_is_refeeding?(feed_user)
+      true
+    else 
+      false
+    end
+  end
+  helper_method :can_refeed?
+
   private
 
   def current_user
@@ -44,4 +53,5 @@ class ApplicationController < ActionController::Base
   def set_return_session
     session[:return_to] = request.referrer
   end
+
 end
