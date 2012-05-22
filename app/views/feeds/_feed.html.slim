@@ -1,6 +1,6 @@
 #feed-body
   h1= "Your feed"
-  ul#feed data-json-url="#{posts/ind}"
+  ul#feed data-json-url="/posts/ind"
   - FEED_TYPES.each do |type|
       - type_name = type.to_s.downcase
       = render "#{type_name.pluralize}/#{type_name}"
