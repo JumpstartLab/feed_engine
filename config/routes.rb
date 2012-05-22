@@ -21,16 +21,16 @@ Hungrlr::Application.routes.draw do
     constraints :subdomain => 'api' do ## For external use
       scope module: "api" do
         namespace "v1" do
-          get '/validate_token' => 'api#validate_token'
-          get '/users/twitter' => 'users#twitter'
-          get '/users/github' => 'users#github'
-          get '/users/instagram' => 'users#instagram'
-          get '/feeds/:display_name' => 'feeds#show'
-          post '/feeds/:display_name/growls' => 'growls#create'
+          get    '/validate_token' => 'api#validate_token'
+          get    '/users/twitter' => 'users#twitter'
+          get    '/users/github' => 'users#github'
+          get    '/users/instagram' => 'users#instagram'
+          get    '/feeds/:display_name' => 'feeds#show'
+          post   '/feeds/:display_name/growls' => 'growls#create'
           delete '/feeds/:display_name/growls' => 'growls#destroy'
-          post '/feeds/:display_name/growls/:id/refeed' => 'feeds#refeed'
+          post   '/feeds/:display_name/growls/:id/refeed' => 'feeds#refeed'
           delete '/feeds/:display_name/growls/:id/refeed' => 'feeds#destroy_refeed'
-          post '/feeds/:display_name/refeeds' => 'feeds#subscriber_refeed'
+          post   '/feeds/:display_name/refeeds' => 'feeds#subscriber_refeed'
           resources :user_tweets, only: [:create, :index]
           resources :user_github_events, only: [:create, :index]
           resources :user_instagram_photos, only: [:create, :index]
