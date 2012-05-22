@@ -16,7 +16,6 @@ gem 'octokit'
 gem 'instagram', :git => 'git://github.com/Instagram/instagram-ruby-gem.git' 
 gem 'omniauth-twitter'
 gem 'omniauth-github'
-gem 'omniauth-instagram'
 gem 'omniauth'
 gem 'jbuilder'
 gem 'whenever', require: false
