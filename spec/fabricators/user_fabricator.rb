@@ -18,3 +18,11 @@ Fabricator(:user) do
   email        { Faker::Internet.email }
   password     'hungry'
 end
+
+Fabricator(:user_with_posts, :from => :user) do
+  after_create do |user|
+    3.times { Fabricate(:message, :poster_id => user.id) }
+    3.times { Fabricate(:image, :poster_id => user.id) }
+    3.times { Fabricate(:link, :poster_id => user.id) }
+  end
+end

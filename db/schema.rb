@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(:version => 20120521224722) do
     t.string   "post_type"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.boolean  "refeed"
   end
 
   create_table "links", :force => true do |t|
