@@ -12,7 +12,15 @@
   <div class="row">
     <div class="span12">
       <div class="row">
-        <div class='span6 offset1'>
+        <div class='span8'>
+          <div class='grey-box'>
+            <h3>What's Being Posted Right Now!</h3>
+            <hr />
+            <div id='recent_posts'></div>
+          </div>
+        </div>
+
+        <div class='span4'>
           <div class='black-transparent-box'>
             <h3>Welcome to PointsFeed</h3>
             <hr />
@@ -22,37 +30,31 @@
               navigate interface. Check it out!
             </p>
           </div>
-
-          <br />
-          <div class='grey-box'>
-            <h3>Recent Posts</h3>
+          <br>
+          <div class='black-transparent-box'>
+            <h3>Already a member?</h3>
             <hr />
-            <div id='recent_posts'></div>
-          </div>
-        </div>
-
-        <div class='span3' style='margin-left: 40px; width: 260px'>
-          <div class='well'>
             <form method='post' action='<%= new_user_session_path %>'>
               <input type='text' placeholder='Email' name='user[email]' />
               <input type='password' placeholder='Password' name='user[password]' />
-              <div style='float: right;'>
-                <input type='submit' value='Sign In' class='btn btn-info' />
-              </div>
+              <br>
+              <input type='submit' value='Sign In' class='btn btn-info' />
             </form>
           </div>
-
-          <div class='well'>
+          <br>
+          <div class='black-transparent-box'>
+            <h3>Not yet a member?</h3>
+            <hr />
             <form method='post' action='<%= user_registration_path %>'>
               <input type='text' placeholder='Display Name' name='user[display_name]' />
               <input type='text' placeholder='Email' name='user[email]' />
               <input type='password' placeholder='Password' name='user[password]' />
               <input type='password' placeholder='Password Confirmation' name='user[password_confirmation]' />
-              <div style='float:right'>
-                <input type='submit' value='Create An Account' class='btn btn-warning' />
-              </div>
+              <br>
+              <input type='submit' value='Create An Account' class='btn btn-warning' />
             </form>
           </div>
+
         </div>
       </div>
     </div>
