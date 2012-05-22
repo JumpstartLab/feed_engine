@@ -164,6 +164,7 @@ GEM
       jruby-pageant (>= 1.0.2)
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
+    newrelic_rpm (3.3.4)
     nokogiri (1.5.2)
     oauth (0.4.6)
     oauth2 (0.6.0)
@@ -331,6 +332,7 @@ DEPENDENCIES
   kaminari
   launchy
   less-rails
+  newrelic_rpm
   octokit
   omniauth
   omniauth-github
