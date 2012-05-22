@@ -6,7 +6,7 @@ div class="container-fluid"
 
       h1 Your Stream
       div id="posts" data-json-url="#{items_url(user_display_name: current_user.display_name, format: :json)}"
-  
+
     div class="span4 stream"
       div id="anchor"
         div class="span3 pull-right well" id="minidash"
@@ -23,8 +23,12 @@ div class="container-fluid"
           h3 Most Popular Post
           br
           h3 Followers
+          = link_to current_user.followers.size, followers_user_path(current_user)
           br
+          h3 Following
+          = link_to current_user.followed_users.size, following_user_path(current_user)
           h3 Refeeds
+          = link_to current_user.refeeded_posts.size, refeeds_user_path(current_user)
           br
 
         div id="totop"

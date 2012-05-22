@@ -17,4 +17,3 @@ module PageExtension
     pages
   end
 end
-

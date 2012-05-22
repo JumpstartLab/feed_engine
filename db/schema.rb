@@ -11,17 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120521193556) do
+ActiveRecord::Schema.define(:version => 20120522002242) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
     t.string   "provider"
     t.string   "token"
     t.string   "secret"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
     t.string   "uid"
     t.string   "username"
+    t.string   "last_status_id", :limit => 8
+    t.string   "image"
   end
 
   create_table "delayed_jobs", :force => true do |t|
@@ -41,13 +43,13 @@ ActiveRecord::Schema.define(:version => 20120521193556) do
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "github_posts", :force => true do |t|
-    t.integer  "github_id"
+    t.integer  "github_id",    :limit => 8
     t.datetime "published_at"
     t.string   "repo_name"
     t.string   "repo_url"
     t.string   "github_type"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "image_posts", :force => true do |t|
@@ -81,6 +83,17 @@ ActiveRecord::Schema.define(:version => 20120521193556) do
     t.integer  "points",        :default => 0
     t.integer  "refeed_id"
   end
+
+  create_table "relationships", :force => true do |t|
+    t.integer  "follower_id"
+    t.integer  "followed_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "relationships", ["followed_id"], :name => "index_relationships_on_followed_id"
+  add_index "relationships", ["follower_id", "followed_id"], :name => "index_relationships_on_follower_id_and_followed_id", :unique => true
+  add_index "relationships", ["follower_id"], :name => "index_relationships_on_follower_id"
 
   create_table "text_posts", :force => true do |t|
     t.datetime "created_at", :null => false

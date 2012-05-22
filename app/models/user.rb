@@ -29,6 +29,21 @@
 #
 
 class User < ActiveRecord::Base
+
+  has_many :text_posts,  through: :posts, source: :postable, source_type: 'TextPost'
+  has_many :image_posts, through: :posts, source: :postable, source_type: 'ImagePost'
+  has_many :link_posts,  through: :posts, source: :postable, source_type: 'LinkPost'
+  has_many :twitter_posts, through: :posts, source: :postable, source_type: 'TwitterPost'
+  has_many :github_posts, through: :posts, source: :postable, source_type: 'GithubPost'
+
+  has_many :relationships, foreign_key: "follower_id", dependent: :destroy
+  has_many :followed_users, through: :relationships, source: :followed
+  has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationship", dependent: :destroy
+  has_many :followers, through: :reverse_relationships, source: :follower
+
+  has_many :posts, dependent: :destroy, :extend => PageExtension
+
+  has_many :authentications
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -39,7 +54,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me,
                   :display_name, :full_name, :login
   attr_accessor :login
-  
+
   validates_presence_of :display_name, :case_sensitive => false
   validates_uniqueness_of :display_name
   validates_format_of :display_name, :with => /^[^ ]+$/
@@ -48,15 +63,6 @@ class User < ActiveRecord::Base
 
   after_create :send_welcome_email
 
-  has_many :text_posts,  through: :posts, source: :postable, source_type: 'TextPost'
-  has_many :image_posts, through: :posts, source: :postable, source_type: 'ImagePost'
-  has_many :link_posts,  through: :posts, source: :postable, source_type: 'LinkPost'
-  has_many :twitter_posts, through: :posts, source: :postable, source_type: 'TwitterPost'
-  has_many :github_posts, through: :posts, source: :postable, source_type: 'GithubPost'
-
-  has_many :posts, dependent: :destroy, :extend => PageExtension
-
-  has_many :authentications
 
   def send_welcome_email
     UserMailer.delay.welcome_email(self)
@@ -93,6 +99,18 @@ class User < ActiveRecord::Base
     else
       where(conditions).first
     end
+  end
+
+  def following?(other_user)
+    self.relationships.find_by_followed_id(other_user.id)
+  end
+
+  def feed
+    Post.feed_for_user(self)
+  end
+
+  def refeeded_posts
+    self.posts.select { |post| post.refeed? }
   end
 
 end

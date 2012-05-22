@@ -30,7 +30,11 @@ FeedEngine::Application.routes.draw do
     end
   end
 
-  resources "users", as: :user
+  resources "users", as: :user do
+    member do
+      get :following, :followers, :refeeds
+    end
+  end
   match "/auth/twitter/callback" => "authentications#twitter"
   match "/auth/github/callback" => "authentications#github"
   resource "dashboard"
@@ -39,9 +43,10 @@ FeedEngine::Application.routes.draw do
   resources "link_posts"
   resources "feed_items"
   resources "authentications", only: [:show, :destroy]
-  resources "points", only: [:update, :create]
+  resources "points", only: [:create]
   resources "refeeds", only: [:create]
   resources "user_signup_steps"
+  resources "relationships", only: [:create, :destroy]
 
   root :to => "static_pages#show"
 

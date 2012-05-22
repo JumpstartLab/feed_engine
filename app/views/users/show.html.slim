@@ -1,6 +1,8 @@
 div class="span8 stream"
+  div class="user-display-info"
+    h1 #{user.display_name || user.email} Stream
+    = render "follow_and_unfollow_actions"
 
-  h1 #{user.display_name || user.email} Stream
   div id="posts" data-json-url="#{items_url(user_display_name: user.display_name, format: :json)}"
 
 / Mustache templates
