@@ -3,7 +3,7 @@ class InstagramFeedItem < ActiveRecord::Base
 
   belongs_to :user
 
-  before_create :validates_timeliness_of_post
+  validate :validates_timeliness_of_post
   
   has_many :awards, as: :awardable
   include PointAwarder
@@ -32,7 +32,7 @@ class InstagramFeedItem < ActiveRecord::Base
 
   def validates_timeliness_of_post
     if self.posted_at < user.instagram_authentication.created_at
-      errors.add(:posted_at, "Feed item too early")
+      self.errors.add(:posted_at, "Feed item too early")
     end
   end
 end
