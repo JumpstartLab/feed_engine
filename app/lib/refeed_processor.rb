@@ -8,16 +8,17 @@ module Hungrlr
     attr_accessor :base_url
 
     def initialize
+      self.bj_token = ENV["BJ_TOKEN"].present? ? ENV["BJ_TOKEN"] : "HUNGRLR"
       self.base_url = ENV["DOMAIN"].present? ? ENV["DOMAIN"] : "http://api.hungrlr.dev/v1"
     end
 
     def subscriptions
-      subscriptions = Net::HTTP.get(URI("#{base_url}/subscriptions.json?token=HUNGRLR"))
+      subscriptions = Net::HTTP.get(URI("#{base_url}/subscriptions.json?token=#{bj_token}"))
       JSON.parse(subscriptions)["subscriptions"]
     end
 
     def get_growls(user_slug, last_status_id)
-      growls = Net::HTTP.get(URI("#{base_url}/feeds/#{user_slug}.json?token=HUNGRLR&since=#{last_status_id}"))
+      growls = Net::HTTP.get(URI("#{base_url}/feeds/#{user_slug}.json?token=#{bj_token}&since=#{last_status_id}"))
       JSON.parse(growls)["items"]["most_recent"]
       # puts JSON.parse(growls)["items"]["most_recent"].inspect
     end
