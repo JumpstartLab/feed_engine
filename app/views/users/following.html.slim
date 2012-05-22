@@ -1,6 +1,5 @@
-h1 User's I'm Following
+h1 Users You Are Following
 ul
 - current_user.followed_users.each do |following_user|
-  li = link_to following_user.display_name, user_path(following_user)
+  li = link_to following_user.display_name, root_url(subdomain: following_user.display_name)
 
-/ Need to fix the route for user path
