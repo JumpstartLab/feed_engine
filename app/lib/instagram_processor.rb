@@ -28,7 +28,7 @@ module Hungrlr
 
     def get_photos(instagram_id, token, last_status_id)
       url = "https://api.instagram.com/v1/users/#{instagram_id}/media/recent?access_token=#{TEST_ACCESS_TOKEN}&min_timestamp=#{last_status_id}"
-      data = Net::HTTP.get(URI(url))
+      data = open(url)
       JSON.parse(data)["data"]
     end
 
