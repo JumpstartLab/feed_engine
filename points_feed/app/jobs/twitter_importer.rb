@@ -15,9 +15,9 @@ class TwitterImporter
               .includes("user")
   end
 
-  def self.import_tweets(authentication)
-    authentication.user.twitter.user_timeline(authentication.uid.to_i).each do |tweet|
-      TwitterFeedItem.import(authentication.user, tweet)
+  def self.import_tweets(auth)
+    auth.user.twitter.user_timeline(auth.uid.to_i).each do |tweet|
+      TwitterFeedItem.import(auth.user, tweet)
     end
   end
 end
