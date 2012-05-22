@@ -2,6 +2,7 @@ class GithubFeedItem < ActiveRecord::Base
   attr_accessible :content, :posted_at, :user_id, :github_id, :event_type, :screen_name
 
   belongs_to :user
+  validate :validates_timeliness_of_post
   has_many :awards, as: :awardable
   include PointAwarder
 
