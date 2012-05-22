@@ -22,4 +22,5 @@ class Api::V1::ApiController < ActionController::Base
       request.env['X-HTTP-AUTHTOKEN'] || params[:token]
     end
   end
+
 end

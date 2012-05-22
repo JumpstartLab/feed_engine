@@ -2,10 +2,11 @@
   .four.columns
       b Posted:
       = " #{time_ago_in_words growl.created_at} ago"
+      span.points
+        = link_to "+", points_growl_path(growl), method: :post, class: "points_link"
+        = pluralize(growl.points, "Point")
   - if current_user
     .four.columns.pull_right
-      - if current_user.id != growl.user_id
-        a.small.green.button.radius.points POINTS!
       - if current_user.can_regrowl?(growl)
         = link_to "Regrowl", regrowled_index_path(id: growl.id), method: :post, class: "small blue button radius regrowl",  remote: true
       - elsif growl.user_id != current_user.id
