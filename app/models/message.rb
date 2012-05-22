@@ -4,6 +4,10 @@ class Message < Growl
 
   before_save :send_to_services
 
+  def icon
+    "glyphicons/glyphicons_010_envelope.png"
+  end
+
   def parse_for_services
     services = comment.scan(/\B#(\S+)/).uniq
     services.collect { |service| service.first.downcase }
@@ -22,10 +26,6 @@ class Message < Growl
     return if comment.length > 180
     client = user.twitter_client
     client.update(comment) if client
-  end
-
-  def icon
-    "glyphicons/glyphicons_010_envelope.png"
   end
 end
 # == Schema Information

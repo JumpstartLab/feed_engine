@@ -15,4 +15,11 @@ FactoryGirl.define do
       FactoryGirl.create(:message, user:user)
     end
   end
+
+  factory :user_with_twitter_account, parent: :user do
+    after_create do |user, evaluator|
+      authentication = FactoryGirl.create(:authentication, user: user)
+      FactoryGirl.create(:twitter_account, authentication: authentication)
+    end
+  end
 end

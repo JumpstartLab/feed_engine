@@ -1,49 +1,38 @@
 require 'json'
 require 'net/http'
 require 'twitter'
-require "./config/initializers/twitter"
+require_relative "../../config/initializers/twitter"
+require_relative 'tweet_api_service'
 
 module Hungrlr
   class TweetProcessor
-    attr_accessor :client, :base_url
-
-    def initialize
-      self.base_url = ENV["DOMAIN"].present? ? ENV["DOMAIN"] : "http://api.hungrlr.dev/v1"
-      self.client   = Twitter::Client.new(:consumer_key    => TWITTER_KEY,
-                                          :consumer_secret => TWITTER_SECRET)
+    def run
+      api_service.twitter_accounts.each do |account|
+        response = get_tweets(account["nickname"], account["last_status_id"])
+        tweets_hash = api_service.build_tweet_hash(response)
+        api_service.create_tweets_for_user(account["user_id"], tweets_hash)
+      end
     end
 
-    def twitter_accounts
-      accounts = Net::HTTP.get(URI("#{base_url}/users/twitter.json?token=HUNGRLR"))
-      JSON.parse(accounts)["accounts"]
+    # private
+
+    def client
+      @client ||= Twitter::Client.new(:consumer_key    => TWITTER_KEY,
+                                      :consumer_secret => TWITTER_SECRET)
+    end
+
+    def api_service
+      @api_service ||= begin
+        bj_token = ENV["BJ_TOKEN"].present? ? ENV["BJ_TOKEN"] : "HUNGRLR"
+        base_url = ENV["DOMAIN"].present? ? ENV["DOMAIN"] : "http://api.hungrlr.dev/v1"
+        
+        TweetApiService.new(base_url, bj_token)
+      end
     end
 
     def get_tweets(nickname, last_status_id)
       client.user_timeline(nickname, since_id: last_status_id)
     end
 
-    def build_tweet_hash(tweets)
-      tweets.collect do |tweet|
-        { comment: tweet.text, link: tweet.source,
-          status_id: tweet.id, created_at: tweet.created_at }
-      end
-    end
-
-    def create_tweets_for_user(user_id, tweets_hash)
-      tweets_json = tweets_hash.to_json
-      Net::HTTP.post_form( URI("#{base_url}/user_tweets"),
-                           user_id: user_id,
-                           tweets: tweets_json,
-                           token: "HUNGRLR")
-
-    end
-
-    def run
-      twitter_accounts.each do |account|
-        response = get_tweets(account["nickname"], account["last_status_id"])
-        tweets_hash = build_tweet_hash(response)
-        create_tweets_for_user(account["user_id"], tweets_hash)
-      end
-    end
   end
 end
