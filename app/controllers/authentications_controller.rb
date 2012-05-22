@@ -17,6 +17,18 @@ class AuthenticationsController < ApplicationController
     end
   end
 
+  def instagram
+    omniauth = request.env["omniauth.auth"]
+    auth = current_user.authentications.find_or_initialize_by_provider(omniauth["provider"])
+    if auth.create_instagram_auth(omniauth)
+      redirect_to dashboard_url(subdomain: false), 
+        notice: "Instagram connected!"
+    else
+      redirect_to dashboard_url(subdomain: false),
+        notice: "Something went wrong connecting to Instagram! Please try again!"
+    end
+  end
+
   def github
     omniauth = request.env["omniauth.auth"]
     auth = current_user.authentications.find_or_initialize_by_provider(omniauth["provider"])

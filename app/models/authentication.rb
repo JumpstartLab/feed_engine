@@ -45,6 +45,17 @@ class Authentication < ActiveRecord::Base
       )
   end
 
+  def create_instagram_auth(omniauth)
+    self.update_attributes(provider: omniauth["provider"],
+                           token: omniauth["credentials"]["token"],
+                           secret: omniauth["credentials"]["secret"],
+                           uid: omniauth["uid"],
+                           username: omniauth["info"]["nickname"],
+                           last_status_id: DateTime.now.to_s,
+                           image: omniauth["info"]["image"]
+      )
+  end
+
   def import_items
     case self.provider
     when 'twitter'
