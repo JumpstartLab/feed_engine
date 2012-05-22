@@ -20,4 +20,8 @@ FactoryGirl.define do
     link "http://www.google.com"
     comment Faker::Lorem.sentences(1).join
   end
+  factory :tweet, parent: :growl do
+    type "Tweet"
+    comment "http://google.com is super awesome. Thanks @mikesilvis"
+  end
 end

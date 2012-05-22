@@ -34,14 +34,14 @@ class User < ActiveRecord::Base
     self.send(type.downcase.pluralize.to_sym).scoped rescue messages.scoped
   end
 
-  def github_client
-    return nil unless github_oauth = authentications.where(provider: "github").first
+  # def github_client
+  #   return nil unless github_oauth = authentications.where(provider: "github").first
 
-    Github::Client.new( :consumer_key => GITHUB_KEY,
-                        :consumer_secret => GITHUB_SECRET,
-                        :oauth_token => github_oauth.token,
-                        :oauth_token_secret => github_oauth.secret)
-  end
+  #   Github::Client.new( :consumer_key => GITHUB_KEY,
+  #                       :consumer_secret => GITHUB_SECRET,
+  #                       :oauth_token => github_oauth.token,
+  #                       :oauth_token_secret => github_oauth.secret)
+  # end
 
   def send_welcome_message
     mail = UserMailer.welcome_message(email).deliver
