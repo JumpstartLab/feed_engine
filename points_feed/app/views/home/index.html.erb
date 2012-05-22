@@ -2,7 +2,7 @@
   <% if current_user %>
     <img src="/assets/post.jpg">
   <% else %>
-    <img src="/assets/post.jpg">
+    <img src="/assets/welcome.jpg">
   <% end %>
 </div>
 
@@ -43,7 +43,7 @@
           </div>
           <br>
           <div class='black-transparent-box'>
-            <h3>Not yet a member? Sign up for free!</h3>
+            <h3>Not yet a member?</h3>
             <hr />
             <form method='post' action='<%= user_registration_path %>'>
               <input type='text' placeholder='Display Name' name='user[display_name]' />
