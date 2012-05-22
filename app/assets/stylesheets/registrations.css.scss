@@ -1,14 +1,10 @@
 @import "containers";
 
-.signup-label {
-  font-size: $input-font-size;
-  font-family: $font;
-}
-
-.signup-input {
+.signup-text-field {
   @include text-field;
+  width: 350px;
 }
 
-.signup-button {
-
+.signup-text-field ~ .form_field_error { 
+  padding: 0 0 0 0px;
 }
