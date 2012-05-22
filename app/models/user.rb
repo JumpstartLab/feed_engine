@@ -11,26 +11,45 @@ class User < ActiveRecord::Base
   has_many :tweets
   has_many :githubevents
   has_many :posts
+  has_many :subscriptions
   has_one :feed
   validates_presence_of :email
   validates :password, presence: true, length: {minimum: 6}
   validates_confirmation_of :password, :on => :create, :message => "should match confirmation"
 
-
-
-  DISPLAY_NAME_REGEX = /^[\w-]*$/
+  DISPLAY_NAME_REGEX = /^[a-zA-Z0-9\-]*$/
   validates :display_name, 
-    format: { with: DISPLAY_NAME_REGEX, message: "must be only letters, numbers, dashes, or underscores" },
-    presence: true, 
-    uniqueness: true,
-    exclusion: { in: %w(www ftp api), message: "can not be www, ftp, or api" }
+    format: { with: DISPLAY_NAME_REGEX, message: "must be only letters, numbers, or dashes" }, 
+    uniqueness: true
 
+  BAD_DISPLAY_NAMES = ['ftp', 'api', 'null', 'www']
+  validate :display_name_is_not_bad
+  
+  validates :subdomain, uniqueness: true
+  
+  def display_name_is_not_bad
+    if display_name.nil? || display_name.blank?
+      errors.add(:display_name, "can not be blank")
+    elsif BAD_DISPLAY_NAMES.include?(display_name.downcase)
+      errors.add(:display_name, "can not be www, ftp, api, or null")
+    elsif display_name =~ /^[\-]/
+      errors.add(:display_name, "can not start with a dash")
+    end
+  end
+    
   def send_welcome_email
     UserMailer.welcome_email(self).deliver
   end
 
   def set_user_subdomain
-    self.subdomain = self.display_name.downcase
+    self.subdomain = self.display_name.gsub("_","-").downcase
+  end
+
+  def subscribe(feed_name)
+    sub_feed = Feed.find_by_name(feed_name)
+    unless (self.feed.id == sub_feed.id) || (self.subscriptions.find_by_feed_id(sub_feed.id))
+      self.subscriptions.create(:feed_id => sub_feed.id)
+    end
   end
 
   # Commenting out for now - implemented in the event that we want users to be able to set their subdomain and feed name at will

@@ -1,4 +1,4 @@
-require 'test_helper'
+require 'minitest_helper'
 
 describe User do
   it "creates a User record on create" do
@@ -44,30 +44,45 @@ describe User do
 
   # after_create :send_welcome_email
 
-  it "rejects display names of 'www', 'ftp', and 'api'" do
+  it "rejects display names of 'www', 'ftp', 'api', and 'null'" do
     password = "lispy_woo"
     user = User.create(:email => "lispy.woo.5@lsqain.in",
     :display_name => "www",
     :password => password,
     :password_confirmation => password)
     assert_equal user.valid?, false
-    ['ftp', 'api'].each do |bad_name|
+    ['ftp', 'FTP', 'api', 'API', 'null', 'NULL'].each do |bad_name|
       user.display_name = bad_name
       user.save
       assert_equal user.valid?, false    
     end
   end
   
-  it "rejects displays names that include any characters other than letters, numbers, dashes, or underscores" do
+  it "rejects displays names that include any characters other than letters, numbers, or dashes" do
     password = "lispy_woo"
     user = User.create(:email => "lispy.woo.6@lsqain.in",
     :display_name => "LispyWoo6@",
     :password => password,
     :password_confirmation => password)
     assert_equal user.valid?, false
-    user.display_name = "Lispy Woo6"
-    user.save
+    ["Lispy Woo6","Lispy_Woo6"].each do |name|
+      user.display_name = name
+      user.save
+      assert_equal user.valid?, false
+    end
+  end
+  
+  it "rejects displays names that start with a dash" do
+    password = "lispy_woo"
+    user = User.create(:email => "lispy.woo.6@lsqain.in",
+    :password => password,
+    :password_confirmation => password)
     assert_equal user.valid?, false
+    ["-LispyWoo2010","----"].each do |name|
+      user.display_name = name
+      user.save
+      assert_equal user.valid?, false
+    end
   end
   
   it "requires a display name value" do
@@ -87,6 +102,30 @@ describe User do
     :password => password,
     :password_confirmation => password)
     assert_equal user_two.valid?, false
+    user_two.display_name = "sounique"
+    user_two.save
+    assert_equal user_two.valid?, false
   end
->>>>>>> 4b396c44e9b8bc1a9a39ded49d6aec8fbc15971a
+  
+  describe ".subscribe" do
+    it "subscribes a user to a given feed" do
+      user1 = Fabricate(:user)
+      user2 = Fabricate(:user)
+      user1.subscribe(user2.feed.name)
+      assert_equal user1.subscriptions.first.feed_id, user2.feed.id
+    end
+    
+    it "does not allow a user to subscribe to their own feed" do
+      user = Fabricate(:user)
+      user.subscribe(user.feed.name)
+      assert_equal [], user.subscriptions
+    end
+
+    it "does not allow a user to subscribe to same feed twice" do
+      user1 = Fabricate(:user)
+      user2 = Fabricate(:user)
+      2.times { user1.subscribe(user2.feed.name) }
+      assert_equal 1, user1.subscriptions.count
+    end
+  end
 end
