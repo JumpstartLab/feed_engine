@@ -13,7 +13,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         set_flash_message :notice, flash_key || :updated
       end
       sign_in resource_name, resource, :bypass => true
-      respond_with resource, :location => after_update_path_for(resource)
+      respond_with resource, :location => "/dashboard"
     else
       clean_up_passwords resource
       @text_item = TextItem.new
@@ -28,3 +28,5 @@ class Users::RegistrationsController < Devise::RegistrationsController
     signup_link_twitter_path
   end  
 end
+
+
