@@ -12,21 +12,12 @@ class Friendship < ActiveRecord::Base
   belongs_to :friend, :class_name => "User"
 
   validate do
-    self.errors.add(:friend_id, "Cannot friend yourself") if self.friend_id == self.user_id
-  end
-
-  class << self
-    def pending
-      where(:status => PENDING)
-    end
-
-    def active
-      where(:status => ACTIVE)
-    end
-
-    def ignored
-      where(:status => IGNORED)
+    if self.friend_id == self.user_id
+      self.errors.add(:friend_id, "Cannot friend yourself")
     end
   end
 
+  def self.active
+    where(:status => ACTIVE)
+  end
 end
