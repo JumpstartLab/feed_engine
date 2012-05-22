@@ -2,17 +2,14 @@
 <br/>
 <br/>
 <br/>
-<div class="span3 offset4 trout-container">
+<div class="span4 offset4 trout-container">
 <h1>Forgot your password?</h1>
 
-<p>Enter your email address below.</p>
-<br>
+<br/>
+<br/>
+<%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
+  <%= f.input :email, :label => "Enter your email address below", :label_html => {:class => "password-email-label"}, 
+              :input_html => {:class => "dashboard-password-field"} %>
 
-<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <%= f.label :email %>
-  <%= f.email_field :email %>
-
-  <div><%= f.submit "Submit", :class => "btn btn-primary btn-large"  %></div>
+  <%= f.submit "Submit", :class => "password-change-submit btn btn-primary btn-large"  %>
 <% end %>

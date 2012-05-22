@@ -60,6 +60,14 @@
     <% if github_connected?(@feed_owner) %>
       <span class="raphael-icon linked-post-logo">U</span>
     <% end %>
+    <% if current_user && (current_user != @feed_owner) %>
+      <% if current_user.followed_users.include?(@feed_owner) %>
+        <%= link_to "Let this Troutr go", subscription_path(current_feed_subscription), :method => :delete %>
+      <% else %>
+        <%= link_to "TackleBox this Troutr", subscriptions_path(:followed_user_id => @feed_owner.id), :method => :post %>
+      <% end %>
+    <% end %>
+    
     <% if !twitter_connected?(@feed_owner) && !github_connected?(@feed_owner) %>
       <br/>
       <h4>None</h4>

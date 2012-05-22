@@ -22,6 +22,7 @@
 }
 
 .text-item-body {
+  @include word-wrap;
   font-size: 16px; 
   font-weight: 200;
   font-family: $font;
@@ -176,4 +177,17 @@ $stat-count-font-size: 18px;
 .feed-title {
   @include troutr-title;
   padding: 0 0 14px 50px;
+}
+
+.git-commit a{
+  color: $trout-main-color;
+}
+
+.git-commit a:visited{
+  color: $trout-main-color;
+}
+
+.git-commit a:hover {
+  color: $trout-main-color;
+  background-color: transparent;
 }

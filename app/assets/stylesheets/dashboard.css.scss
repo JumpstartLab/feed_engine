@@ -59,6 +59,10 @@
   background-color: transparent;
 }
 
+.password-email-label ~ .form_field_error { 
+  padding: 0 0 0 0px;
+}
+
 .subscription {
   padding: 10px;
   width: 72%;
@@ -66,6 +70,10 @@
 
 .subscription a.btn {
   float: right;
+}
+
+.dashboard-btn {
+  margin-left: 120px;
 }
 
 .authentication {
