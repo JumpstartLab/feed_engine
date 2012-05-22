@@ -1,11 +1,97 @@
+<%= render 'posts/show_templates' %>
+
 <div class="main-image">
   <%= image_tag current_user.background_image %>
 </div>
 
-<div class='grey-box span8 offset2'>
-  <h3>Edit Your Account</h3>
-  <p>Enter your password to make changes</p>
-  <hr />
+<div class="row">
+  <div class="span12">
+    <div class="row">
+      <div class="header span12">
+        <h1>Dashboard</h1>
+        <br>
+      </div>
 
-  <%= render 'devise/registrations/form', :resource => resource %>
+      <div class='span4'>
+        <ul id='nav_tabs' class="nav nav-pills nav-stacked well">
+          <li><a href="#posts_tab" data-toggle="tab">Post</a></li>
+          <li><a href="#refeeds_tab" data-toggle="tab">Refeeds</a></li>
+          <li><a href="#edit_account_tab" data-toggle="tab">Edit Account</a></li>
+          <li><a href="#authentications_tab" data-toggle="tab">Services</a></li>
+        </ul>
+      </div>
+      <div class="span8">
+        <div class="well black-transparent-box">
+          <div>
+            <img src="<%= current_user.avatar %>" style='float:left'></img>
+            <div style='float:left; margin-left: 15px; color: white'>
+              <h3><%= link_to current_user.display_name, "http://#{current_user.display_name}.pf.dev" %></h3>
+            </div>
+          </div>
+          <div style='clear:both'></div>
+          <br />
+
+          <div class="tab-content">
+            <div class="tab-pane active" id="posts_tab">
+            </div>
+            <div class='tab-pane' id='refeeds_tab'>
+              <div class='grey-box'>
+                <h3>Your Friends</h3>
+                <hr />
+                <table class="table">
+                  <tr>
+                    <th>User</th>
+                    <th>Action</th>
+                  </tr>
+                  <% current_user.friends.each do |friend| %>
+                    <tr>
+                      <td><%= friend.display_name %></td>
+                      <td><%= link_to "Remove Friend", friend_path(friend), :confirm => "Are you sure?", :method => :delete %>
+                    </tr>
+                  <% end %>
+                </table>
+              </div>
+            </div>
+            <div class='tab-pane' id='edit_account_tab'>
+              <div class='grey-box'>
+                <h3>Edit Your Account</h3>
+                <p>Enter your password to make changes</p>
+                <hr />
+
+                <%= render 'devise/registrations/form', :resource => resource %>
+              </div>
+            </div>
+            <div class='tab-pane' id='authentications_tab'>
+              <div class='grey-box'>
+                <h3>Services</h3>
+                <hr />
+                <h4>Current Linked Accounts</h4><br>
+                <% if current_user.authentications.empty? %>
+                There are currently no linked accounts.<br>
+                <% else %>
+                  <table class="table">
+                    <tr>
+                      <th>Provider</th>
+                      <th>Action</th>
+                    </tr>
+                    <% current_user.authentications.each do |authentication| %>
+                      <tr>
+                        <td><%= authentication.provider.capitalize %></td>
+                        <td><%= link_to "Delete", authentication_path(authentication), :confirm => "Are you sure?", :method => :delete %></td>
+                      </tr>
+                    <% end %>
+                  </table>
+                <% end %>
+                <br>
+                <h4>Select Accounts Below to Connect</h4>
+                <%= render :partial => "twitters/authentications" %>
+              </div>
+            </div>
+          </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

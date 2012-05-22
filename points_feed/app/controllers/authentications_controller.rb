@@ -10,7 +10,7 @@ class AuthenticationsController < ApplicationController
     add_authentication(auth)
 
     flash[:notice] = "#{auth['provider'].titlecase} account linked."
-    redirect_to dashboard_path
+    redirect_to session[:authentication_workflow]
   end
 
   def destroy

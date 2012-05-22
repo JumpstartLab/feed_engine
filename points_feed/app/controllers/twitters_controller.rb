@@ -2,6 +2,7 @@ class TwittersController < ApplicationController
   before_filter :authenticate_user!
   
   def show
+    session[:authentication_workflow] = socialmedia_path
   end
 
   def skip_step
