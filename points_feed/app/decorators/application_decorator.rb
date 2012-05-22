@@ -22,11 +22,12 @@ class ApplicationDecorator < Draper::Base
   end
 
   def refeed_url(post)
-    "http://api.pointsfeed.in/feeds/#{model.user.display_name}/items/#{post.id}.json" if post
+    feed = model.user.display_name
+    "http://api.pointsfeed.in/feeds/#{feed}/items/#{post.id}.json" if post
   end
 
   def feed_url
     "http://api.pointsfeed.in/feeds/#{model.user.display_name}"
   end
-  
+
 end

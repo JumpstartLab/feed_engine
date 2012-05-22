@@ -3,7 +3,7 @@ class GithubFeedItemDecorator < ApplicationDecorator
 
   def as_json(*params)
     return {} if model.nil?
-    
+
     {
       :type => "GithubFeedItem",
       :klass => "GithubFeedItem",

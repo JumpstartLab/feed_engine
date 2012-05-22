@@ -22,7 +22,7 @@ class InstagramImporter
   def self.con
     self.connection
   end
-  
+
   def self.import_instagram(auth)
     resp = con.get("users/#{auth.uid}/media/recent?access_token=#{auth.secret}")
     resp = JSON.parse(resp.body)
