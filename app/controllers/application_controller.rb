@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  helper_method :resource, :resource_name
+  helper_method :resource, :resource_name, :river_stream_items, :river_items
 
   def resource
     current_user

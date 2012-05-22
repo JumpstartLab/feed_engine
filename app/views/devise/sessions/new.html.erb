@@ -1,18 +1,29 @@
 <br/>
 <br/>
-<br/>
-<br/>
-<div class="span3 offset4 trout-container">
-  <h1 class="login-title">troutr</h1>
-
-  <br/>
-  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-    <%= f.email_field :email, :placeholder => "Email", :class => "login-fields" %>
-
-    <%= f.password_field :password, :placeholder => "Password", :class => "login-fields" %>
-
-    <div><%= f.submit "Log In", :class => "login-button offset1 btn-primary btn-large" %></div>
+<div class="span12">
+  <% if @items %>
+    <h1 class="feed-title span12" id="river-title" >What's new in the Troutr River</h1>
+    <div class="span7 feed-list" id="stream-items">
+      <% @items.zip(@stream_items).each do |i, si| %>
+      <%= render :partial => "feed/item", :locals => { :item => i, :stream_item => si } %>
+      <% end %>
+    </div>
   <% end %>
 
-  <%=link_to "Forgot password?", new_user_password_path(resource_name) %>
+  <% unless current_user %>
+    <div class="span3 trout-container" id="river-login-box">
+      <h1 class="login-title">troutr</h1>
+
+      <br/>
+      <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+        <%= f.email_field :email, :placeholder => "Email", :class => "login-fields" %>
+
+        <%= f.password_field :password, :placeholder => "Password", :class => "login-fields" %>
+
+        <div><%= f.submit "Log In", :class => "login-button offset1 btn-primary btn-large" %></div>
+      <% end %>
+
+      <%=link_to "Forgot password?", new_user_password_path(resource_name), :id => "forgot-password" %>
+    </div>
+  <% end %>
 </div>
