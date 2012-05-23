@@ -37,8 +37,3 @@ module Hungrlr
     end
   end
 end
-
-# processor = Hungrlr::RefeedProcessor.new
-# raise processor.subscriptions.inspect
-# raise processor.get_growls("wengzilla", "1").inspect
-# processor.run

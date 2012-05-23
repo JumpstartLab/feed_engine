@@ -34,15 +34,6 @@ class User < ActiveRecord::Base
     self.send(type.downcase.pluralize.to_sym).scoped rescue messages.scoped
   end
 
-  # def github_client
-  #   return nil unless github_oauth = authentications.where(provider: "github").first
-
-  #   Github::Client.new( :consumer_key => GITHUB_KEY,
-  #                       :consumer_secret => GITHUB_SECRET,
-  #                       :oauth_token => github_oauth.token,
-  #                       :oauth_token_secret => github_oauth.secret)
-  # end
-
   def twitter_client
     return nil unless twitter_oauth = twitter
 
@@ -56,10 +47,6 @@ class User < ActiveRecord::Base
   def send_welcome_message
     mail = UserMailer.welcome_message(email).deliver
   end
-
-  # def self.find_twitter_users
-  #   includes(:authentications).where("authentications.provider" => "twitter")
-  # end
 
   def get_growls(type=nil)
     growls.by_type_and_date(type)

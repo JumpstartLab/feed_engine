@@ -12,13 +12,6 @@ class Image < Growl
   def icon
     "glyphicons/glyphicons_011_camera.png"
   end
-  # def self.new_image(input)
-  #   Image.new(
-  #             comment: input[:comment],
-  #             link: input[:link],
-  #             )
-  # end
-
 end
 # == Schema Information
 #

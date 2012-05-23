@@ -1,4 +1,13 @@
 jQuery ->
+  $(".unsubscribe").click ->
+    $(".unsubscribe").toggle()
+    $(".subscribe").toggle()
+  $(".subscribe").click ->
+    $(".unsubscribe").toggle()
+    $(".subscribe").toggle()
+  $(".regrowl").click ->
+    $(this).hide()
+    $(this).parent().find(".regrowled").fadeIn()
   $("#all").click ->
     $(".active").removeClass("active")
     $("#all").addClass("active")
