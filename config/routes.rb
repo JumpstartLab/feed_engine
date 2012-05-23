@@ -49,6 +49,7 @@ FeedEngine::Application.routes.draw do
     match "feeds/:display_name" => "api/feeds#show", :as => "api_feed", :via => :get
     match "feeds/:display_name/stream_items/:id" => "api/stream_items#show", :as => "api_item"
     match "feeds/:display_name/stream_items/:id/refeeds" => "api/refeeds#create", :as => "api_refeed_item", :via => :post
+    match "feeds/:display_name/since/:id" => "api/stream_items#recent", :as => "api_recent_stream_items", :via => :get
 
     scope :module => 'api' do
       resources :feeds, :only => [:show]
