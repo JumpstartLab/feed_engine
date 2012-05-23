@@ -18,13 +18,13 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all.collect {|post| post.postable}.reverse.page(params[:page].to_i || 0)
+    @posts = Post.all.collect {|post| [post.postable, post.id] }.reverse.page(params[:page].to_i || 0)
   end
 
   def show
     user = User.find_by_display_name(params[:display_name])
     temp_posts = user.feed.posts.reverse.page(params[:page].to_i || 0)
-    @posts = temp_posts.collect { |p| p.postable }.reverse.page(params[:page].to_i || 0)
+    @posts = temp_posts.collect { |p| [p.postable, p.id] }
     render action: :index
   end
 
@@ -38,4 +38,24 @@ class PostsController < ApplicationController
     @posts = temp_posts.collect { |p| p.postable }
     render "posts/index"
   end
+
+  def points_count
+    @points_count = Post.find(params[:id]).points.count
+  end
+
+  def refeed
+    orig_post = Post.find(params[:id])
+    current_postables = current_user.feed.posts.collect { |p| p.postable }
+    unless orig_post.feed == current_user.feed || 
+      current_user.feed.posts.find_by_postable_id_and_postable_type(orig_post.postable_id, orig_post.postable.class.to_s)
+      cloned_post = current_user.feed.posts.create
+      cloned_post.postable = orig_post.postable
+    end
+    if cloned_post && cloned_post.save
+      head :status => :created
+    else
+      head :status => :not_acceptable
+    end
+  end
+  
 end

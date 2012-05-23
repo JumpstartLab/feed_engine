@@ -26,7 +26,9 @@ class Api::PostsController < ApiController
 
   def refeed
     orig_post = Post.find(params[:post_id])
-    unless orig_post.feed == current_user.feed    
+    current_postables = current_user.feed.posts.collect { |p| p.postable }
+    unless orig_post.feed == current_user.feed || 
+      current_user.feed.posts.find_by_postable_id_and_postable_type(orig_post.postable_id, orig_post.postable.class.to_s)
       cloned_post = current_user.feed.posts.create
       cloned_post.postable = orig_post.postable
     end

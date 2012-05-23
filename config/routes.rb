@@ -9,6 +9,7 @@ FeedEngine::Application.routes.draw do
   match 'current_user' => 'sessions#user', as: 'current_user'
 
   match 'checkauth/:provider' => 'authentications#check'
+  match 'pointscount/:id' => 'posts#points_count'
 
   resources :authentications
 
@@ -36,10 +37,16 @@ FeedEngine::Application.routes.draw do
   resources :subscriptions, only: [:create, :index, :destroy]
 
   resources :users
+  match 'user/update' => 'users#update'
   resources :posts, only: [:create, :index]
   resources :texts
   resources :images
   resources :links
+
+  resources :posts do
+    resources :points, only: [:create]
+  end
+
 
   root :to => 'pages#index'
   match '/integrate' => 'users#integrate', as: 'integrate'

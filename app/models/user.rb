@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :githubevents
   has_many :posts
   has_many :subscriptions
+  has_many :points
   has_one :feed
   
   validates :email, uniqueness: true, presence: true
@@ -20,7 +21,7 @@ class User < ActiveRecord::Base
     confirmation: true, 
     length: {minimum: 6, :message => "must be at least 6 characters long"}
 
-  DISPLAY_NAME_REGEX = /^[a-zA-Z0-9\-]*$/
+  DISPLAY_NAME_REGEX = /^[a-zA-Z0-9\-_]*$/
   validates :display_name, 
     format: { with: DISPLAY_NAME_REGEX, message: "must be only letters, numbers, or dashes" }, 
     uniqueness: true
@@ -55,11 +56,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  # Commenting out for now - implemented in the event that we want users to be able to set their subdomain and feed name at will
-  # def set_user_feed_name
-  #   self.feed.set_name(self.subdomain)
-  # end
-
   def create_user_feed
     Feed.create(:user_id => self.id, :name => self.subdomain)
   end
@@ -68,6 +64,20 @@ class User < ActiveRecord::Base
     has_many type_name.to_s.to_sym
   end
   
+  def reset_password
+    self.change_password!(
+      Digest::SHA512.hexdigest(
+        Digest::SHA384.hexdigest(
+          Digest::SHA256.hexdigest(
+      "#{@user.email}HuNgRyF33d#{FeedEngine::Application.config.secret_token}"
+          ))))
+    send_reset_email
+  end
+
+  def send_reset_email
+    UserMailer.reset_password_email(self).deliver
+  end
+
   def posts
     FEED_TYPES.map do |association|
       self.send(association.to_s.to_sym).all
@@ -78,6 +88,21 @@ class User < ActiveRecord::Base
     token = Digest::SHA256.hexdigest("#{SecureRandom.hex(15)}HuNgRyF33d#{Time.now}")
     token = generate_authentication_token if User.exists?(authentication_token: token)
     self.update_attribute(:authentication_token, token)
+  end
+
+  def update_password(params)
+    current_password = params[:current_password]
+    new_password = params[:new_password]
+    new_password_confirmation = params[:password_confirmation]
+    if User.authenticate(self.email, current_password).present?
+      if new_password == new_password_confirmation
+        self.update_attribute(:password, new_password)
+      else
+        self.errors.add :password_confirmation, "does not match new password"
+      end
+    else
+      self.errors.add :password, "incorrect"
+    end
   end
 
   def twitter_id
