@@ -3,6 +3,7 @@ class FeedController < ApplicationController
     subdomain_username = request.subdomain
     user = User.find_by_display_name("#{subdomain_username}")
     if user
+
       @stream_items = user.stream_items.order("created_at DESC").page(params[:page]).per(12)
       @items = @stream_items.collect { |i| i.streamable}
       @feed_owner = user
@@ -13,7 +14,7 @@ class FeedController < ApplicationController
     elsif current_user
       redirect_to '/dashboard'
     else
-      redirect_to '/login'
+      redirect_to root_url(:subdomain => false)
     end
   end
 end

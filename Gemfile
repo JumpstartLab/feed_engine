@@ -24,8 +24,11 @@ gem 'jbuilder'
 gem 'growl'
 gem 'octokit'
 gem 'gravatar-ultimate'
+gem 'instagram', :git => 'git://github.com/rewritten/instagram-ruby-gem.git'
 gem 'coffeebeans'
 gem 'pusher'
+gem 'omniauth-instagram'
+gem 'faraday', "~>0.7.6"
 gem 'newrelic_rpm'
 
 # Gems used only for assets and not required
@@ -54,6 +57,7 @@ group :test do
   gem 'spork'
   gem 'simplecov', :require => false
   gem 'launchy'
+  gem 'webmock'
 end
 
 group :production do

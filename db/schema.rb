@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120521184956) do
+ActiveRecord::Schema.define(:version => 20120523185748) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -42,6 +42,14 @@ ActiveRecord::Schema.define(:version => 20120521184956) do
     t.datetime "updated_at",                  :null => false
   end
 
+  create_table "instagram_items", :force => true do |t|
+    t.text     "image"
+    t.string   "image_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "user_id"
+  end
+
   create_table "link_items", :force => true do |t|
     t.text     "url"
     t.text     "comment"
@@ -63,11 +71,12 @@ ActiveRecord::Schema.define(:version => 20120521184956) do
     t.integer  "user_id"
     t.integer  "streamable_id"
     t.string   "streamable_type"
-    t.integer  "points_count",      :default => 0
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
-    t.boolean  "refeed",            :default => true
+    t.integer  "points_count",       :default => 0
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.boolean  "refeed",             :default => true
     t.integer  "retrouted_from_id"
+    t.integer  "original_author_id"
   end
 
   create_table "subscriptions", :force => true do |t|

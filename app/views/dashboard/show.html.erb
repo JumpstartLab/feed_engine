@@ -3,16 +3,19 @@
 <div class="dashboard-title span3">
   <h1>Dashboard</h1>
 </div>
-<div class="dashboard-posts-title span3 offset3">
-  <h1>Latest Posts</h1>
-</div>
 </div>
 
 <br/>
+<div class="span6">
 <%= render :partial => 'dashboard/item_input' %>
+<%= render :partial => 'dashboard/dashboard_settings' %>
+</div>
 
 <div id="dashboard-posts" class="span5">
-  <% @items.each do |item| %>
-      <%= render :partial => "feed/item", :locals => {:item => item} %>
+  <% if @stream_items %>
+    <% @stream_items.each do |stream_item| %>
+      <%= render :partial => "feed/item", :locals => { :item => stream_item } %>
+    <% end %>
   <% end %>
 </div>
+

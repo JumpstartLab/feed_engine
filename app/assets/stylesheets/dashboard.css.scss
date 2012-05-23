@@ -8,7 +8,7 @@
 
 .dashboard-text-field {
   @include text-field;
-  width: 400px;
+  width: 515px;
 }
 
 .dashboard-password-field {
@@ -17,7 +17,7 @@
 }
 
 @mixin dashboard-text-area {
-  width: 400px;
+  width: 515px;
   height: 100px;
   font-size: $input-font-size;
 }
@@ -28,19 +28,6 @@
 
 .link-item-text-area {
   @include dashboard-text-area;
-  width: 400px;
-}
-
-.text-item-label {
-  font-family: $font;
-  font-size: 16px;
-  padding: 0 0 10px 0;
-}
-
-.link-item-submit-button {
-  @include trout-button;
-  margin: 10px 0 0 330px;
-  padding: $submit-button-padding; 
 }
 
 .dashboard-title {
@@ -50,12 +37,17 @@
 
 .dashboard-posts-title {
   font-family: $font;
+  padding-left: 65px;
+} 
+
+#dashboard-posts {
+  font-family: $font;
+  width: 550px;
 }
 
 .form_field_error { 
   color: $error-color;
   font-size: $error-font-size;
-  padding: 0 0 0 120px;
   background-color: transparent;
 }
 
@@ -73,7 +65,6 @@
 }
 
 .dashboard-btn {
-  margin-left: 120px;
 }
 
 .authentication {
@@ -83,4 +74,20 @@
 
 .authentication a.btn {
   float: right;
+}
+
+.dashboard-instagram {
+  padding: 0 0 0 5px;
+} 
+
+#text, #link, #image .input {
+  padding: 0 0 0 20px;
+}
+
+.image-item-submit {
+  margin-left: 20px;
+}
+
+.nav-tabs .raphael-icon {
+  font-size: 20px;
 }

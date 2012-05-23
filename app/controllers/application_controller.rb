@@ -11,13 +11,7 @@ class ApplicationController < ActionController::Base
       super
     end
   end
-
-  def after_update_path_for(resource)
-      raise "boom"
-      flash.keep
-      redirect_to "/dashboard"
-    end
-
+  
   helper_method :resource, :resource_name, :river_stream_items, :river_items
 
   def resource

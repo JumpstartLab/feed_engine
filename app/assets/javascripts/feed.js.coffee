@@ -15,7 +15,7 @@ jQuery ->
         $.getScript(url, (data, textStatus, jqxhr) ->
           waiting = false)
     else if !url? && !waiting
-        $('#pagination-div').html('<h2>Looks like this stream is fished dry</h2>')
+        $('#pagination-div').html('<img src="/assets/dry-river.jpg"><span id="dry-river">Looks like this stream is fished dry</span>')
   $(window).scroll
 
 jQuery ->
@@ -24,7 +24,7 @@ jQuery ->
     $(el).data("content", "Click to retrout this item!")
   $('.refeed_ajax_link').popover({ offset: -500,placement: 'left'})
 
-  $(".refeed_ajax_link").live "click", (e) ->
+  $(document).on 'click','.refeed_ajax_link', (e) ->
     e.preventDefault()
     $('.refeed_ajax_link').popover('hide')
     $this = $(this)
@@ -34,7 +34,10 @@ jQuery ->
       url: "/feeds/" + $(this).data('author') + "/stream_items/" + $(this).data('id') + "/refeeds.json?token=" + access_token
 
       success: (data) ->
-        $this.append("Post has been retrouted!").delay(3000).fadeOut(1000)
+        
+        $("#alert-bar").addClass('alert-success').text('You refeeded ' + $(this).data('author') + '. Nice job!').hide()
+        $this.remove()
+        $("#alert-bar").slideDown().delay(5000).slideUp()
 
       error: (evt) ->
         $this.parent().append("You've already retrouted this.").addClass "label label-info"

@@ -1,4 +1,5 @@
-<%= render :partial => "support/create_item", :locals => { :item  => @text_item, :type => "text" } %>
+
+<%= render :partial => "support/create_item", :locals => { :stream_item  => @new_stream_item, :errors => @text_item.errors, :type => "text" } %>
 
 <% if @text_item.errors.empty? %>
   $('#text_item_body').val('');

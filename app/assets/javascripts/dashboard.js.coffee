@@ -4,8 +4,7 @@
 $ -> 
   if $('p.form_field_error').length == 0
     $('#submit_tabs a:first').tab('show')
+    $('#dashboard-settings-tabs a:first').tab('show')
   else
-    tab_pane = $(".tab-pane")
-    active_tab = $('p.form_field_error').closest(tab_pane).attr('id')
-    tab_link = '#submit_tabs a[href="#' + active_tab + '"]'
-    $(tab_link).tab('show')
+    $('#submit_tabs a:first').tab('show')
+    $('#dashboard-settings-tabs a[href="#account"]').tab('show')

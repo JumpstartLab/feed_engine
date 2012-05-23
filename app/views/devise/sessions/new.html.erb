@@ -4,9 +4,11 @@
   <% if @items %>
     <h1 class="feed-title span12" id="river-title" >What's new in the Troutr River</h1>
     <div class="span7 feed-list" id="stream-items">
-      <% @items.zip(@stream_items).each do |i, si| %>
-      <%= render :partial => "feed/item", :locals => { :item => i, :stream_item => si } %>
-      <% end %>
+      <% if @stream_items %>
+    <% @stream_items.each do |stream_item| %>
+      <%= render :partial => "feed/item", :locals => { :item => stream_item } %>
+    <% end %>
+  <% end %>
     </div>
   <% end %>
 
