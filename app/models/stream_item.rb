@@ -1,5 +1,5 @@
 class StreamItem < ActiveRecord::Base
-  attr_accessible :streamable_id, :streamable_type, :refeed
+  attr_accessible :streamable_id, :streamable_type, :refeed, :original_author_id
   belongs_to :user
   belongs_to :streamable, :polymorphic => true
   validates_uniqueness_of :streamable_id, :scope => [:user_id, :streamable_type]
