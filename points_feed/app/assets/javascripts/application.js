@@ -61,3 +61,5 @@ $('.typeahead').typeahead({
     location.href = "http://"+obj.name+".pointsfeed.in";
   }
 });
+
+$('.alert').delay(5000).slideUp('slow');
