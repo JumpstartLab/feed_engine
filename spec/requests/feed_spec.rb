@@ -21,15 +21,14 @@ describe "Feed" do
       t_string = "a#item_#{t.to_param}"
       puts t_string
       page.should have_selector(t_string)
-      find(t_string).click
-      save_and_open_page
+      find(t_string).click  
       t.points.count.should == 1
     end
 
     it "requres a user to be logged in" do
       click_on "Logout"
       t = user.text_items.first
-      t_string = "a#item_#{t.id}"
+      t_string = "a#item_#{t.to_param}"
       page.should have_selector(t_string)
       find(t_string).click
       page.should have_button('Log In')
@@ -38,7 +37,7 @@ describe "Feed" do
     it "adds a point for a user that logs in after clinking points" do
       click_on "Logout"
       t = user.text_items.first
-      t_string = "a#item_#{t.id}"
+      t_string = "a#item_#{t.to_param}"
       page.should have_selector(t_string)
       find(t_string).click
       page.should have_button('Log In')
