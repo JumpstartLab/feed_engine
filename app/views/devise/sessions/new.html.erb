@@ -1,3 +1,12 @@
+ <script src="http://js.pusherapp.com/1.9/pusher.min.js"></script>
+ <script type="text/javascript">
+ var pusher = new Pusher('<%= Pusher.key %>'); // uses your API KEY
+ var channel = pusher.subscribe('new_channel');
+ channel.bind('hello', function(data) {
+      alert("hello");
+});
+
+ </script>
 <br/>
 <br/>
 <div class="span12">
