@@ -67,6 +67,21 @@ renderDashboard = ->
     $('#signin').click()
     setFlash("Please login first.")
 
+setFlash = (message) ->
+  $('#flash_message').text(message)
+  $('#flash').slideDown().delay(2000).slideUp()
+
+addRefeedHandler = ->
+  $('.refeed').click ->
+    post_id = $(this).attr('id')
+    $.ajax(
+      type: 'POST',
+      url: 'posts/refeeds',
+      data: id:post_id,
+      success: ->
+        setFlash('Posted successfully')
+      error: (response, status) ->
+          resp = $.parseJSON(response.responseText))
 
 class FeedPager
   constructor:(feed=$('#all_posts')) ->
@@ -99,3 +114,4 @@ renderPosts = (response, status, jqXHR) ->
       type = post["type"]
       $.feedengine.current_feed.append Mustache.to_html($("##{type}_template").html(), post)
     $(window).scroll(checkForBottom) if posts && posts.length > 0
+    addRefeedHandler()

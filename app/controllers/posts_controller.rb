@@ -38,4 +38,17 @@ class PostsController < ApplicationController
     @posts = temp_posts.collect { |p| p.postable }
     render "posts/index"
   end
+
+  def refeed
+    orig_post = Post.find(params[:id])
+    unless orig_post.feed == current_user.feed    
+      cloned_post = current_user.feed.posts.create
+      cloned_post.postable = orig_post.postable
+    end
+    if cloned_post && cloned_post.save
+      head :status => :created
+    else
+      head :status => :not_acceptable
+    end
+  end
 end
