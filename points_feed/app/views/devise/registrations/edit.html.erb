@@ -14,7 +14,7 @@
 
       <div class='span4'>
         <ul id='nav_tabs' class="nav nav-pills nav-stacked well">
-          <li><a href="#posts_tab" data-toggle="tab">Post</a></li>
+          <li><a href="#posts_tab" data-toggle="tab" onclick='redirect_to_dash()'>Post</a></li>
           <li><a href="#refeeds_tab" data-toggle="tab">Refeeds</a></li>
           <li><a href="#edit_account_tab" data-toggle="tab">Edit Account</a></li>
           <li><a href="#authentications_tab" data-toggle="tab">Services</a></li>
@@ -95,3 +95,9 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  function redirect_to_dash() {
+    location.href = "/dashboard";
+  }
+</script>

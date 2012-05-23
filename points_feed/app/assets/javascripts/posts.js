@@ -1,4 +1,5 @@
 var page_for_content = 1;
+var recent_page = 1;
 var auth_display_name = $("#auth_display_name").val();
 
 function post_added() {
@@ -37,9 +38,19 @@ function render_post(post) {
 
 function fetch_recent_posts(div) {
   url = "/api/feeds.json";
-  $.get(url, function(data) {
-    data = data.slice(0, 5);
-    div.html(render_posts(data));
+  $.get(url, { page: recent_page }, function(data) {
+    if(data.length < 12) {
+      $("#recent_load_more").hide();
+    }
+
+    if(recent_page == 1) {
+      div.html(render_posts(data));
+    }
+    else {
+      div.append(render_posts(data));
+    }
+
+    recent_page++;
   });
 }
 
@@ -258,6 +269,11 @@ $(document).ready(function() {
   if($.cookie('award_points_to') != null) {
     award_points();
   }
+
+  $("#recent_load_more").live('click', function(e) {
+    e.preventDefault();
+    fetch_recent_posts($('#recent_posts'));
+  });
 
   // $('#bottom_of_page').waypoint(waypoint_reload, { offset: '100%' });
 });
