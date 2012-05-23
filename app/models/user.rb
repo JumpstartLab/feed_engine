@@ -112,11 +112,25 @@ class User < ActiveRecord::Base
   end
 
   def following?(other_user)
-    self.relationships.find_by_followed_id(other_user.id)
+    self.followed_user_ids.include?(other_user.id)
   end
 
-  def feed
-    Post.feed_for_user(self)
+  def follow(other_user)
+    if other_user.last_post.blank?
+      self.relationships.create!(followed_id: other_user.id,
+                                 last_post_id: nil)
+    else
+      self.relationships.create!(followed_id: other_user.id,
+                                 last_post_id: other_user.last_post.id)
+    end
+  end
+
+  def unfollow(other_user)
+    self.relationships.find_by_followed_id(other_user.id).destroy
+  end
+
+  def last_post
+    self.posts.last
   end
 
   def refeeded_posts
