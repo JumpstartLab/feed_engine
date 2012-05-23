@@ -1,4 +1,7 @@
-= simple_form_for @text_post, html: {name: "text-message"} do |f|
-  = f.input :title
-  = f.input :body
+= form_for @text_post, html: {name: "text-message"} do |f|
+  = f.label "Title"
+  = f.text_field :title
+  = f.label "Body"
+  = f.text_area :body, size: "60"
+  br
   = f.submit 'Post Message', class: 'btn btn-primary'
