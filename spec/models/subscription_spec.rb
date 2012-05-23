@@ -78,7 +78,7 @@ describe Subscription do
         fabricated_subscriptions[:github_subscription].create_records_of_posts(github_new_posts)
         GithubEvent.all.size.should == 1
         GithubEvent.first.repo.should == github_new_posts.first.repo.name
-        GithubEvent.first.event_type.should == github_new_posts.first.type
+        GithubEvent.first.event_type.should == "Github push!"
       end
 
       it "creates new instagram posts" do

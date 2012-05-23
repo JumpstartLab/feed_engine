@@ -89,12 +89,22 @@ class Subscription < ActiveRecord::Base
                  )
   end
 
+  def fancy_type(event_type)
+    if event_type == "PushEvent"
+      "Github push!"
+    elsif event_type == "ForkEvent"
+      "Github fork!"
+    else
+      "Github created!"
+    end
+  end
+
   def create_github_event(new_post)
     GithubEvent.create!(subscription_id: self.id,
                         repo: new_post.repo.name,
                         created_at: new_post.created_at,
                         poster_id: self.user_id,
-                        event_type: new_post.type
+                        event_type: fancy_type(new_post.type)
                        )
   end
 
