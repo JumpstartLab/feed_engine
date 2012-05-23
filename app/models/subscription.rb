@@ -59,7 +59,7 @@ class Subscription < ActiveRecord::Base
     User.find(uid.to_i)
   end
 
-  def base_url
+  def base
     BASE_URL
   end
 
@@ -102,7 +102,7 @@ class Subscription < ActiveRecord::Base
   end
 
   def create_tweet(new_post)
-    HTTParty.post("http://api.#{base_url}/v1/feeds/"+
+    HTTParty.post("http://api.#{base}/v1/feeds/"+
                   "#{user.subdomain}/items.json",
                   body: {
                     api_key: user.api_key,
@@ -128,7 +128,7 @@ class Subscription < ActiveRecord::Base
   end
 
   def create_github_event(new_post)
-    HTTParty.post("http://api.#{base_url}/v1/feeds/#{user.subdomain}/items.json",
+    HTTParty.post("http://api.#{base}/v1/feeds/#{user.subdomain}/items.json",
                   body: {
       api_key: user.api_key,
       display_name: user.display_name,
@@ -144,7 +144,7 @@ class Subscription < ActiveRecord::Base
   end
 
   def create_instapound(new_post)
-    HTTParty.post("http://api.#{base_url}/v1/feeds/#{user.subdomain}/items.json",
+    HTTParty.post("http://api.#{base}/v1/feeds/#{user.subdomain}/items.json",
                   body: {
       api_key: user.api_key,
       display_name: user.display_name,
@@ -190,13 +190,14 @@ class Subscription < ActiveRecord::Base
   end
 
   def get_refeeds
-    all_refeeds = HTTParty.get("http://api.#{base_url}/v1/feeds/" +
-                               "#{original_poster.subdomain}/items.json")["items"]["most_recent"]
+    all_refeeds = HTTParty.get("http://api.#{base}/v1/feeds/" +
+                               "#{original_poster.subdomain}/items.json"
+                              )["items"]["most_recent"]
 
-                               objectified_refeeds = all_refeeds.map do |refeed|
-                                 objectified_refeed = OpenStruct.new refeed
-                                 objectified_refeed
-                               end
+                              objectified_refeeds = all_refeeds.map do |refeed|
+                                objectified_refeed = OpenStruct.new refeed
+                                objectified_refeed
+                              end
   end
 
   def tweets
@@ -213,7 +214,7 @@ class Subscription < ActiveRecord::Base
 
   def refeeds
     # all_items = JSON.parse(HTTParty.get(
-    #   "http://api.#{base_url}/v1/feeds/" +
+    #   "http://api.#{base}/v1/feeds/" +
     #   "#{user.subdomain}/items.json"
     # ))
     # refeeded_items = all_items.select do |item|
