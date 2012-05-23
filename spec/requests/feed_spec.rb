@@ -5,6 +5,27 @@ describe "Feed" do
   let(:user_2) { FactoryGirl.create(:user, :display_name => "test") }
   let!(:site_domain) { "http://#{user.display_name}.example.com" }
 
+  context "visiting a non existent user" do
+    it "redirects to home when i am not logged in" do
+      visit "http://sdfd.example.com"
+      page.should have_content "River"
+    end
+
+    it "redirects to the dashboard if I am logged in" do
+      login_factory_user(user_2.email)
+      login(user_2)
+      visit "http://sdfd.example.com"
+      page.should have_content "Dashboard"
+    end
+  end
+
+  context "visiting a real user" do
+    it "shows their feed" do
+      visit site_domain
+      page.should have_content user.display_name
+    end
+  end
+
   context "points" do
     before(:each) do 
       login_factory_user(user_2.email)
@@ -17,9 +38,7 @@ describe "Feed" do
     
     it "adds a point for a logged in user" do
       t = user.text_items.first
-      puts "#{t.inspect}"
       t_string = "a#item_#{t.to_param}"
-      puts t_string
       page.should have_selector(t_string)
       find(t_string).click  
       t.points.count.should == 1
@@ -126,25 +145,8 @@ describe "Feed" do
     end
 
     context "when a logged in user views another feed" do
-      before do
-        @client = Pusher::Client.new({
-          :app_id => '20',
-          :key => '12345678900000001',
-          :secret => '12345678900000001',
-          :host => 'api.pusherapp.com',
-          :port => 80,
-        })
-        @client.encrypted = false
 
 
-        @pusher_url_regexp = %r{/apps/20/channels/test_channel/events}
-  end
-
-  before :each do
-      WebMock.stub_request(:post, @pusher_url_regexp).
-        to_return(:status => 202)
-      @channel = @client['test_channel']
-    end
       it "shows a button to refeed each post" do
         # VoodooDoubleLogin(tm)
         # login(user) is a devise helper to convince devise u are logged in
@@ -160,16 +162,18 @@ describe "Feed" do
         end
       end
 
-      it "refeeds an item" do
-        # login_factory_user(user_3.email)
-        login(user_3)
-        visit user_4_domain
-        test_item = user_4.text_items.first
-        within("#item_#{user_4.text_items.first.id}") { find(".refeed_ajax_link").click }
-        page.should have_content("Post has been retrouted")
-      end
+      # it "refeeds an item" do
+      #   # login_factory_user(user_3.email)
+      #   login(user_3)
+      #   visit user_4_domain
+      #   test_item = user_4.text_items.first
+      #   within("#item_#{user_4.stream_items.first.id}") { find(".refeed_ajax_link").click }
+      #   save_and_open_page
+      #   visit user_3_domain
+      #   page.should have_content(user_4.stream_items.first.streamable  )
+      # end
 
-      it "refeeds an item", :js => true do
+      it "refeeds an item with js", :js => true do
         # login_factory_user(user_3.email)
         login(user_3)
         Capybara.current_session.driver.reset!
@@ -178,8 +182,8 @@ describe "Feed" do
         Capybara.server_port = 3003
         visit "/"
         test_item = user_4.text_items.last
-        within("#item_#{user_4.text_items.first.id}") { find(".refeed_ajax_link").click }
-        page.should have_content("Post has been retrouted")
+        within("#item_#{user_4.stream_items.last.id}") { find(".refeed_ajax_link").click }
+        page.should have_content("retrouted")
         Capybara.current_session.driver.reset!
       end
     end

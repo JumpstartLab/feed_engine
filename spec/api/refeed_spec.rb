@@ -44,10 +44,6 @@ describe "When I refeed via the API", :type => :api do
       last_response.status.should == 400
     end
   end
-
-
   end
-
-  
 end
 
