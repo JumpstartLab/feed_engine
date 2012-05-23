@@ -40,6 +40,15 @@
     height: 64px;
     display: inline;
   }
+  .thumb {
+    width: 64px;
+    height: 64px;
+    float: right;
+  }
+  .points {
+    float: right;
+  }
+
   p {
     color: $whale;
   }

@@ -7,6 +7,7 @@ FeedEngine::Application.routes.draw do
   match 'current_user' => 'sessions#user', as: 'current_user'
 
   match 'checkauth/:provider' => 'authentications#check'
+  match 'pointscount/:id' => 'posts#points_count'
 
   resources :authentications
 

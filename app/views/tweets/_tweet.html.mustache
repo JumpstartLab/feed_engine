@@ -1,8 +1,10 @@
 <script id="tweet_template" type="text/html">
   <li class="post">
+    <h2 class="points" id="points_{{post_id}}">{{points}}</h2>
+    <a class="addpoints" id="{{post_id}}" href="{{addpoint}}"><img class="thumb" src="assets/thumb.png"></a>
     <p><img class="service" src="assets/twitter_64.png"> @{{handle}} {{content}} </p>
+    </br>
+    </br>
     <p class="posted">tweeted {{post_time}} ago</p>
-    <p class="points">points: {{points}}</p>
-    <a class="addpoints" href="{{addpoint}}">add point</a>
   </li>
 </script>
