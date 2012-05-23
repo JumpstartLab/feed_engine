@@ -38,7 +38,12 @@ class User < ActiveRecord::Base
   end
 
   def last_retrout_id_for_user(followed_user)
-    stream_items.where(:streamable_type => ["ImageItem","LinkItem","TextItem"]).where(:original_author_id => followed_user.id).last.id
+    items = stream_items.where(:streamable_type => ["ImageItem","LinkItem","TextItem"]).where(:original_author_id => followed_user.id)
+    if items.any?
+      items.last.id
+    else
+      1
+    end
   end
 
   def to_param
