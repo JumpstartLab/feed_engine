@@ -63,15 +63,18 @@ describe "API feeds/user/... ", :type => :api do
     it "creates a github_item via the api" do
       # !!!  Possible to parse Octokit responses to json? then proceed with standard json parse creation path
       #
-      github_response = OpenStruct.new(:event_id => 1, :event => {:github => "item"})
-      event=YAML::dump(github_response)
-      body = '{"type":"GithubItem","event": "#{event}"}'
+      github_response = Hashie::Mash.new
+      github_response.id = 1
+      github_response.event = {:sample => "event"}
+      event=JSON.dump(github_response)
+      body = JSON.dump({type:"GithubItem",event:github_response})
       post "#{url}.json", :token => token, :body => body
 
       last_response.status.should == 201
 
       new_post = user.stream_items.last.streamable
       new_post.should be_a(GithubItem)
+      new_post.event_id.should == "1"
     end
 
     it "responds with errors for an invalid post" do

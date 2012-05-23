@@ -1,3 +1,4 @@
+require 'troutr'
 class GithubJob
   @queue = :gist
 
@@ -20,10 +21,12 @@ class GithubJob
       DateTime.parse(event.created_at) > auth.created_at && user.github_items.find_by_event_id(event.id).nil?
     end
 
+    troutr = Troutr::Client.new(:token => user.authentication_token, :url => "http://api.lvh.me:3000")
+
     events.reverse.each do |event|
-      user.github_items.create(:event => event, :event_id => event.id)
+      troutr.create_github_item(user.display_name, JSON.dump(event))
+      #user.github_items.create(:event => event, :event_id => event.id)
     end
-    user.save
   end
 end
 
