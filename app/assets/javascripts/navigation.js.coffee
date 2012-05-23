@@ -21,7 +21,7 @@ initializeNamespace = ->
   }
 getSubDomain = ->
   host_parts = window.location.host.split('.')
-  unless host_parts[0] == 'simplefeed' || host_parts[0] == 'feedeng'
+  unless host_parts[0] == 'lvh' || host_parts[0] == 'feedeng'
     $.feedengine.subdomain = host_parts[0]
   else
       $.feedengine.subdomain = null
@@ -88,7 +88,6 @@ addNavHandlers = ->
   
   for id in navItems
     navHandler(id)
-
 
 ######################### DASHBOARD ############################
 
@@ -186,6 +185,7 @@ addHandlers = ->
   addNavHandlers()
   addDashboardHandler()
   addHomeHandler()
+  addRefeedHandler()
   integrationsHandler()
 
 renderDashboard = ->
@@ -212,6 +212,9 @@ renderPosts = (response, status, jqXHR) ->
       type = post["type"]
       $.feedengine.current_feed.append Mustache.to_html($("##{type}_template").html(), post)
     $(window).scroll(checkForBottom) if posts && posts.length > 0
+
+addRefeedHandler = ->
+  $('.refeed').append "OH HI"
 
 class FeedPager
   constructor:(feed=$('#all_posts')) ->
