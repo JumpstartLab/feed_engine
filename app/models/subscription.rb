@@ -9,8 +9,7 @@ class Subscription < ActiveRecord::Base
   #epoch time
   def update_last_status_id_if_necessary(new_status_id)
     if last_status_id < new_status_id
-      x = update_attribute("last_status_id", new_status_id)
-      raise x.inspect
+      update_attribute("last_status_id", new_status_id)
     end
   end
 end
