@@ -137,6 +137,7 @@ GEM
       net-ssh (>= 1.99.1)
     net-ssh (2.4.0)
       jruby-pageant (>= 1.0.2)
+    newrelic_rpm (3.3.4.1)
     nifty-generators (0.4.6)
     nokogiri (1.5.2)
     oauth (0.4.6)
@@ -323,6 +324,7 @@ DEPENDENCIES
   lazy_susan
   mocha
   multimap
+  newrelic_rpm
   nifty-generators
   octokit
   omniauth

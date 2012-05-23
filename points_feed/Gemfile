@@ -24,6 +24,7 @@ gem 'octokit'
 gem 'multimap'
 gem 'rest-client'
 gem 'sanitize'
+gem 'newrelic_rpm'
 
 # gem 'instagram',  :git => 'git://github.com/mrgilman/instagram-ruby-gem.git'
 gem 'faraday'
