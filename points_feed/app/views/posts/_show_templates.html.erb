@@ -6,10 +6,10 @@
       </div>
       <div class='span4'>
         {{#refeed}}
-          <span class='display-name'><a href="#">{{refeeder.display_name}}</a></span><br />
+          <span class='display-name'><a href="http://{{refeeder.display_name}}.pointsfeed.in">{{refeeder.display_name}}</a></span><br />
         {{/refeed}}
         {{^refeed}}
-          <span class='display-name'><a href="#">{{feeder.name}}</a></span><br />
+          <span class='display-name'><a href="http://{{feeder.name}}.pointsfeed.in">{{feeder.name}}</a></span><br />
         {{/refeed}}
         <span class='text-message'>{{text}}<br /><br /></span>
         <span class='light'>Posted {{created_at}}</span><br />
@@ -38,12 +38,7 @@
         <img src="{{avatar}}" style='height: 75px'></img> 
       </div>
       <div class='span4'>
-        {{#refeed}}
-          <span class='display-name'><a href="#">{{refeeder.display_name}}</a></span><br />
-        {{/refeed}}
-        {{^refeed}}
-          <span class='display-name'><a href="#">{{feeder.name}}</a></span><br />
-        {{/refeed}}
+        <span class='display-name'><a href="#">{{feeder.name}}</a></span><br />
         <span class='text-message'>{{content}}<br /><br /></span>
         <span class='light'>Posted {{created_at}} by <a href='http://twitter.com/{{screen_name}}'>{{screen_name}}</a> on <a href='http://www.twitter.com'>Twitter</a></span><br />
       </div>
@@ -52,12 +47,6 @@
           <span><img src='/assets/twitter_25.png'></img></span>
       </div>
     </div>
-    
-    {{#refeed}}
-      <div class='span7 refeed_well' style='margin-top: -20px; padding-top: -20px;'>
-      <span class='light'><i class='icon-retweet'></i> Refeeded by <a href="#">{{feeder.name}}</a></span><br />
-      </div>
-    {{/refeed}}
   </div>
 </script>
 
@@ -68,12 +57,7 @@
         <img src="{{avatar}}" style='height: 75px'></img> 
       </div>
       <div class='span4'>
-        {{#refeed}}
-          <span class='display-name'><a href="#">{{refeeder.display_name}}</a></span><br />
-        {{/refeed}}
-        {{^refeed}}
-          <span class='display-name'><a href="#">{{feeder.name}}</a></span><br />
-        {{/refeed}}
+        <span class='display-name'><a href="#">{{feeder.name}}</a></span><br />
         <span class='text-message'>{{content}}<br /><br /></span>
         <span class='light'>Posted {{created_at}} by <a href='http://www.github.com/{{screen_name}}'>{{screen_name}}</a> on <a href='http://www.github.com'>GitHub</a></span><br />
       </div>
@@ -82,11 +66,6 @@
         <span><img style='padding-top:5px;' src='/assets/github_25.png'></img></span>
       </div>
     </div>
-    {{#refeed}}
-      <div class='span7 refeed_well' style='margin-top: -20px; padding-top: -20px;'>
-      <span class='light'><i class='icon-retweet'></i> Refeeded by <a href="#">{{feeder.name}}</a></span><br />
-      </div>
-    {{/refeed}}
   </div>
 </script>
 
@@ -98,10 +77,10 @@
       </div>
       <div class='span5'>
         {{#refeed}}
-          <span class='display-name'><a href="#">{{refeeder.display_name}}</a></span><br />
+          <span class='display-name'><a href="http://{{refeeder.display_name}}.pointsfeed.in">{{refeeder.display_name}}</a></span><br />
         {{/refeed}}
         {{^refeed}}
-          <span class='display-name'><a href="#">{{feeder.name}}</a></span><br />
+          <span class='display-name'><a href="http://{{feeder.name}}.pointsfeed.in">{{feeder.name}}</a></span><br />
         {{/refeed}}
         <span style=''><a href='{{image_url}}' class='lightbox'><img style='padding-top: 10px; padding-bottom: 10px;' src='{{image_url}}'</img></a><br /></span>
         <span class='text-message'>{{comment}}<br /><br /></span>
@@ -130,10 +109,10 @@
       </div>
       <div class='span4'>
         {{#refeed}}
-          <span class='display-name'><a href="#">{{refeeder.display_name}}</a></span><br />
+          <span class='display-name'><a href="http://{{refeeder.display_name}}.pointsfeed.in">{{refeeder.display_name}}</a></span><br />
         {{/refeed}}
         {{^refeed}}
-          <span class='display-name'><a href="#">{{feeder.name}}</a></span><br />
+          <span class='display-name'><a href="http://{{feeder.name}}.pointsfeed.in">{{feeder.name}}</a></span><br />
         {{/refeed}}
         <span class='text-message'><a href='{{link_url}}'>{{link_url}}</a><br /></span>
         <span class='text-message'>{{text}}<br /><br /></span>
@@ -161,12 +140,7 @@
         <img src="{{avatar}}" style='height: 75px'></img> 
       </div>
       <div class='span5'>
-        {{#refeed}}
-          <span class='display-name'><a href="#">{{refeeder.display_name}}</a></span><br />
-        {{/refeed}}
-        {{^refeed}}
-          <span class='display-name'><a href="#">{{feeder.name}}</a></span><br />
-        {{/refeed}}
+        <span class='display-name'><a href="#">{{feeder.name}}</a></span><br />
         <span style=''><a href='{{image_url}}' class='lightbox'><img style='padding-top: 10px; padding-bottom: 10px;' src='{{image_url}}'</img></a><br /></span>
         <span class='text-message'>{{comment}}<br /><br /></span>
         <span class='light'>Posted {{created_at}} via <a href='http://instagr.am/'>Instagram</a></span><br />
@@ -176,10 +150,5 @@
           <span><img style='padding-top:5px;' src='/assets/instagram_25.png'></img></span>
       </div>
     </div>
-    {{#refeed}}
-      <div class='span7 refeed_well' style='margin-top: -20px; padding-top: -20px;'>
-      <span class='light'><i class='icon-retweet'></i> Refeeded by <a href="#">{{feeder.name}}</a></span><br />
-      </div>
-    {{/refeed}}
   </div>
 </script>  

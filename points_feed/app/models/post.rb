@@ -18,6 +18,14 @@ class Post < ActiveRecord::Base
     self.created_at
   end
 
+  # def display_time
+  #   if self.id == self.original_post_id
+  #     self.created_at
+  #   else
+  #     Post.find(self.original_post_id).created_at
+  #   end
+  # end
+
   def refeed(user)
     return false if user.already_refeeded?(self)
     refeeded_post = self.dup

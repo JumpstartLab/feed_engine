@@ -12,7 +12,7 @@ class TextPostDecorator < ApplicationDecorator
         :avatar => model.user.avatar,
         :name => model.user.display_name
       },
-      :created_at => model.created_at,
+      :created_at => (model.original_post || model).created_at,
       :id => model.id,
       :feed => "#{feed_url}.json",
       :link => "#{feed_url}/items/#{model.id}.json",
