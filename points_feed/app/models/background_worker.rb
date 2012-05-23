@@ -8,4 +8,12 @@
     Resque.enqueue(GithubImporter)
   end
 
+  def self.import_from_instagram
+    Resque.enqueue(InstagramImporter)
+  end
+
+  def self.import_from_pointsfeed
+    Resque.enqueue(PointsfeedImporter)
+  end
+
 end
