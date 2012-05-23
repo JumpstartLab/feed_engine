@@ -27,6 +27,10 @@ function success_notify(msg) {
   $(".alert-success").html(msg).slideDown('slow').delay(2000).slideUp('slow');
 }
 
+function points_notify(el, msg) {
+  el.find(".points-success").html(msg).slideDown('slow').delay(2000).slideUp('slow');
+}
+
 function error_notify(msg) {
   $(".alert-error").html(msg).slideDown('slow').delay(2000).slideUp('slow');
 }
