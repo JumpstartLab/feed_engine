@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require initial_load
+//= require an_initial_load
 //= require_tree ./partials
 //= require_tree .
 //= require jquery.form

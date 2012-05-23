@@ -5,51 +5,76 @@ jQuery ->
   addLogoutHandler()
   addIntegrationHandlers()
 
+#### #### #### #### #### #### Spotlight, Backstage, PageSwap #### #### #### 
+
+pageSwap = (id)->
+  spotlightToBackstage()
+  backstageToSpotlight(id)
+
+backstageToSpotlight = (backstageId) ->
+  $('#spotlight').append($(backstageId))
+
+spotlightToBackstage = ->
+  $('#backstage').append($('#spotlight').children())
+
+
+setFlash = (message) ->
+  $('#flash_message').text(message)
+  $('#flash').slideDown().delay(2000).slideUp()
+
+addId = (element, id) ->
+  $(element).attr('id', id)
+
 addSignupHandler = ->
+  addId('#signup-page .button', 'signup-submit')
+  addId('#signup-page form', 'signup_form')
   $(".errors").hide()
   $('#signup-submit').click ->
     $(".errors").hide()
-    form = $(this).closest('form')
+    form = $('#signup_form')
     formData = form.serialize()
     jqxhr = $.post("/signup", formData, "json")
-    jqxhr.success( ->
-      email = $('#user_email').val()
-      password = $('#user_password').val()
-      firstLogin(email, password)
-      form.clearForm()
-    )
-    jqxhr.error((response, status) ->
-        resp = $.parseJSON(response['responseText'])
-        $('#signup-page .errors').show()
-        for error in resp['errors'] 
-          $('#signup-page .errors ul').append("<li>#{error}</li>")
-        )
+    signupResponse(jqxhr, form)
+
+signupResponse = (jqxhr, form) ->
+  jqxhr.success ->
+    email = $('#user_email').val()
+    password = $('#user_password').val()
+    firstLogin(email, password)
+    form.clearForm()
+
+  jqxhr.error (response, status) ->
+    resp = $.parseJSON(response['responseText'])
+    $('#signup-page .errors').show()
+    $('#signup-page .errors ul').children().remove()
+    for error in resp['errors'] 
+      $('#signup-page .errors ul').append("<li>#{error}</li>")
 
 addSigninHandler = ->
   $('#signin-submit').click ->
     form = $(this).closest('form')
     formData = form.serialize()
     jqxhr = $.post('/login', formData, 'json')
-    jqxhr.success( (response) ->
-      form.clearForm()
-      $.feedengine.current_user = response.email
-      refreshAccountMenu()
-      $('#dashboard').click()
-      setFlash("Login Successful")
-    )
+    signinResponse(jqxhr, form)
 
-    jqxhr.error( (response, status)->
-      setFlash(response['responseText'])
-    )
+signinResponse = (jqxhr, form) ->  
+  jqxhr.success( (response) ->
+    form.clearForm()
+    $.feedengine.current_user = response.email
+    refreshAccountMenu()
+    $('#dashboard').click()
+    setFlash("Login Successful"))
 
-
+  jqxhr.error (response, status) ->
+    setFlash(response['responseText'])
 
 addIntegrationHandlers = ->
   addSkipHandlers()
   $('.integration_handler').click ->
     service = $(this).data('service')
     window.open("auth/#{service}")
-    checkForAuthentication(service)
+    $(window).focus checkForAuthentication(service)
+    $(window).unbind('focus')
 
 addSkipHandlers = ->
   $('#skip_twitter').click ->
@@ -60,20 +85,20 @@ addSkipHandlers = ->
     $('#dashboard').click()
 
 checkForAuthentication = (provider) ->
-  $(window).focus ->
-    response = $.getJSON("/checkauth/#{provider}")
-    response.success((response, status) ->
-      if response['auth']
-        setFlash("Authentication with #{provider} successful!")
-        $("#skip_#{provider}").click()
-      else
-        setFlash("Authentication unsuccessful")
-    )
-    response.error( ->
-      setFlash('Something went wrong :(')
-    )
-    $(window).unbind('focus', this)
+  response = $.getJSON("/checkauth/#{provider}")
+  authResponse(response, provider)
 
+authResponse = (response, provider) ->
+  response.success (response, status) ->
+    if response['auth']
+      setFlash("Authentication with #{provider} successful!")
+      $("#skip_#{provider}").click()
+    else
+      setFlash("Authentication unsuccessful")
+
+  response.error( ->
+    setFlash('Something went wrong :(')
+  )
 
 logout = ->
   $.getJSON('/logout', (response, status, xhr) ->
