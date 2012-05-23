@@ -5,7 +5,7 @@ class Link < Growl
     begin
       self.photo = open(thumbnail_url)
     rescue
-      #errors.add(:link, "Photo does not exist")
+      # errors.add(:link, "Photo does not exist")
     end
   end
 

@@ -23,7 +23,6 @@ describe Link do
           fill_in "growl[link]", :with => ""
           fill_in "growl[comment]", :with => "I love this site!"
           click_on "Growl Link"
-          # XXX PROBABLY NOT FILLING OUT THE RIGHT FIELD.
         end
         page.should have_content "You must provide a link."
       end

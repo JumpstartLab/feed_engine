@@ -6,7 +6,7 @@ class InstagramPhoto < Growl
     begin
       self.photo = open(link)
     rescue
-      #errors.add(:link, "Photo does not exist")
+      # errors.add(:link, "Photo does not exist")
     end
   end
 
