@@ -1,7 +1,6 @@
 class GrowlsController < ApplicationController
   before_filter:require_sign_in, only: [:points, :create]
 
-  # XXX SHOULD BE MOVED TO A FEEDS CONTROLLER
   def index
     subdomain = request.subdomain
     @user = User.where{display_name.matches subdomain}.first
