@@ -102,21 +102,19 @@ class Subscription < ActiveRecord::Base
   end
 
   def create_tweet(new_post)
-    puts HTTParty.post("http://api.#{base_url}/v1/feeds/#{user.subdomomain}/items.json",
-                  body: { api_key: user.api_key, display_name: user.display_name,
-                          post: {
-                    type: "tweet",
-                    subscription_id: self.id,
-                    body: new_post.text,
-                    created_at: new_post.created_at
+    HTTParty.post("http://api.#{base_url}/v1/feeds/"+
+                  "#{user.subdomain}/items.json",
+                  body: {
+                    api_key: user.api_key,
+                    display_name: user.display_name,
+                    post: {
+                      type: "tweet",
+                      subscription_id: self.id,
+                      body: new_post.text,
+                      created_at: new_post.created_at
+                    }
                   }
-    }
                  )
-                 # Tweet.create!(subscription_id: self.id,
-                 #               body: new_post.text,
-                 #               created_at: new_post.created_at,
-                 #               poster_id: self.user_id
-                 #              )
   end
 
   def fancy_type(event_type)
@@ -130,12 +128,21 @@ class Subscription < ActiveRecord::Base
   end
 
   def create_github_event(new_post)
-    GithubEvent.create!(subscription_id: self.id,
-                        repo: new_post.repo.name,
-                        created_at: new_post.created_at,
-                        poster_id: self.user_id,
-                        event_type: fancy_type(new_post.type)
-                       )
+    HTTParty.post("http://api.#{base_url}/v1/feeds/"+
+                  "#{user.subdomain}/items.json",
+                  body: {
+                    api_key: user.api_key,
+                    display_name: user.display_name,
+                    post: {
+                      type: "github_event",
+                      subscription_id: self.id,
+                      repo: new_post.repo.name,
+                      body: new_post.text,
+                      created_at: new_post.created_at,
+                      event_type: fancy_type(new_post.type)
+                    }
+                  }
+                 )
   end
 
   def create_instapound(new_post)
@@ -149,7 +156,7 @@ class Subscription < ActiveRecord::Base
 
   def create_refeed(new_post)
     HTTParty.post("#{new_post.link}/refeeds.json",
-      :body => { :api_key => user.api_key } )
+                  :body => { :api_key => user.api_key } )
   end
 
   def get_tweets
@@ -179,12 +186,12 @@ class Subscription < ActiveRecord::Base
 
   def get_refeeds
     all_refeeds = HTTParty.get("http://api.#{base_url}/v1/feeds/" +
-      "#{original_poster.subdomain}/items.json")["items"]["most_recent"]
+                               "#{original_poster.subdomain}/items.json")["items"]["most_recent"]
 
-    objectified_refeeds = all_refeeds.map do |refeed|
-      objectified_refeed = OpenStruct.new refeed
-      objectified_refeed
-    end
+                               objectified_refeeds = all_refeeds.map do |refeed|
+                                 objectified_refeed = OpenStruct.new refeed
+                                 objectified_refeed
+                               end
   end
 
   def tweets
