@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120523232108) do
+ActiveRecord::Schema.define(:version => 20120523234108) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(:version => 20120523232108) do
     t.string   "event_id"
   end
 
+  add_index "github_items", ["user_id"], :name => "index_github_items_on_user_id"
+
   create_table "image_items", :force => true do |t|
     t.text     "url"
     t.text     "comment"
@@ -42,6 +44,8 @@ ActiveRecord::Schema.define(:version => 20120523232108) do
     t.datetime "updated_at",                  :null => false
   end
 
+  add_index "image_items", ["user_id"], :name => "index_image_items_on_user_id"
+
   create_table "instagram_items", :force => true do |t|
     t.text     "image"
     t.string   "image_id"
@@ -49,6 +53,8 @@ ActiveRecord::Schema.define(:version => 20120523232108) do
     t.datetime "updated_at", :null => false
     t.integer  "user_id"
   end
+
+  add_index "instagram_items", ["user_id"], :name => "index_instagram_items_on_user_id"
 
   create_table "link_items", :force => true do |t|
     t.text     "url"
@@ -58,6 +64,8 @@ ActiveRecord::Schema.define(:version => 20120523232108) do
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
   end
+
+  add_index "link_items", ["user_id"], :name => "index_link_items_on_user_id"
 
   create_table "points", :force => true do |t|
     t.integer  "user_id"
@@ -95,6 +103,8 @@ ActiveRecord::Schema.define(:version => 20120523232108) do
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
   end
+
+  add_index "text_items", ["user_id"], :name => "index_text_items_on_user_id"
 
   create_table "twitter_items", :force => true do |t|
     t.text     "tweet"

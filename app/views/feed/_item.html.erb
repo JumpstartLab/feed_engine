@@ -30,15 +30,15 @@
   <div class=" item-footer">
 
 
-    <% if item.streamable.class == TextItem %>
+    <% if item_class == "TextItem" %>
       <span class="raphael-icon post-logo">E</span>
-    <% elsif item.streamable.class == ImageItem %>
+    <% elsif item_class == "ImageItem" %>
       <span class="raphael-icon post-logo">N</span>
-    <% elsif item.streamable.class == LinkItem %>
+    <% elsif item_class == "LinkItem" %>
       <span class="raphael-icon post-logo">È</span>
-    <% elsif item.streamable.class == TwitterItem %>
+    <% elsif item_class == "TwitterItem" %>
       <span class="raphael-icon twitter-logo">^</span>
-    <% elsif item.streamable.class == GithubItem %>
+    <% elsif item_class == "GithubItem" %>
       <span class="raphael-icon github-logo">U</span>
     <% end %>
     <span class="item-time">
