@@ -1,0 +1,11 @@
+.row
+  = link.comment
+.row
+  .comments
+    -if link.title.present?
+      = link_to link.title, link.link
+    -else
+      = link_to link.link
+      .row.comments= link.description
+    br
+    = image_tag link.photo(:thumb)

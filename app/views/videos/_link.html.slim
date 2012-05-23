@@ -1,0 +1,19 @@
+.row#link
+  = render :partial => "growls/header", :locals => { growl: link }
+.row
+  .two.columns
+    = image_tag link.get_gravatar
+  .ten.columns
+    .row
+      = link.comment
+    .row
+      .comments
+        -if link.title.present?
+          = link_to link.title, link.link
+          .row= link.description
+        -else
+          = link_to link.link
+          .row= link.description
+        br
+        = image_tag link.photo(:medium)
+= render partial: "growls/footer", locals: { growl: link}
