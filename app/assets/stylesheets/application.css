@@ -30,8 +30,8 @@ textarea {
   float:left;
   width:100px;
 }
-.growl_post {
-  padding-left:16px;
+.message_padding {
+  padding-bottom:50px;
 }
 .growl_points {
   float:right;
@@ -122,11 +122,11 @@ ul.contained.awesome-tabs-content > li {
 }
 #user_search {
   float:left;
-  padding-left:100px;
+  padding-left:405px;
 }
 .search_box {
   margin-top:7px;
-  width:500px !important;
+  width:300px !important;
 }
 .posted {
   line-height:29px;
@@ -136,4 +136,15 @@ ul.contained.awesome-tabs-content > li {
 }
 .regrowled_icon {
   vertical-align: top;
+}
+.growl_content{
+  float:none !important;
+  margin:0 auto !important;
+}
+.meta_data_body{
+  font-size:12px;
+}
+.growl_image {
+  padding:2px;
+  border:1px solid #021a40;
 }

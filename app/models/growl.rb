@@ -46,11 +46,8 @@ class Growl < ActiveRecord::Base
 
   def set_regrowl_attributes(new_user)
     new_regrowl = self.dup
-    if regrowled_from_id ## Gives credit to original growler
-      new_id = regrowled_from_id
-    else
-      new_id = id
-    end
+    new_regrowl.meta_data = self.meta_data.dup if self.meta_data
+    new_id = regrowled_from_id || id
     new_regrowl.attributes = { user_id: new_user.id, regrowled_from_id: new_id }
     new_regrowl
   end

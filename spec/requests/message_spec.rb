@@ -10,13 +10,13 @@ describe Message do
 
     it "passes" do
       fill_in "growl[comment]", :with => "I love this site!"
-      click_on "Create Message"
+      click_on "Growl Message"
       page.should have_content "Your message has been created."
     end
 
     it "fails" do
       fill_in "growl[comment]", :with => ""
-      click_on "Create Message"
+      click_on "Growl Message"
       page.should have_content "You must provide a message."
     end
   end

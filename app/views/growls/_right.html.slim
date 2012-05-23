@@ -1,0 +1,8 @@
+.two.columns
+  .row
+    .center_text= image_tag growl.icon
+  br
+  br
+  .row
+    span.points
+      = link_to "+#{growl.points}", points_growl_path(growl), method: :post, class: "points_link small black button radius regrowl"
