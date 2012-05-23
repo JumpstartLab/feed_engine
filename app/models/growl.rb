@@ -14,7 +14,7 @@ class Growl < ActiveRecord::Base
 
   scope :by_date, order("created_at DESC")
   scope :by_type, lambda { |param| where{ type.like param } unless param.nil? }
-  scope :since, lambda { |date| where{ created_at.gt Time.at(date+1) } unless date.nil? }
+  scope :since, lambda { |epoch| where{ created_at.gt Time.at(epoch+1) } unless epoch.nil? }
 
   before_save :set_original_created_at
 
