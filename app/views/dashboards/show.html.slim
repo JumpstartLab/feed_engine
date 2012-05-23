@@ -26,30 +26,3 @@ javascript:
   api_domain = "#{api_domain.html_safe}"
   api_path = "#{api_path.html_safe}"
   authentication_token = "#{current_user.authentication_token}"
-coffee:
-  jQuery ->
-    $("#message").click ->
-      $(".awesome-tabs-content > li").hide()
-      $("#messageFormTab").fadeIn()
-      $(".active").removeClass("active")
-      $("#message > a").addClass("active")
-    $("#image").click ->
-      $(".awesome-tabs-content > li").hide()
-      $("#imageFormTab").fadeIn()
-      $(".active").removeClass("active")
-      $("#image > a").addClass("active")
-    $("#link").click ->
-      $(".awesome-tabs-content > li").hide()
-      $("#linkFormTab").fadeIn()
-      $(".active").removeClass("active")
-      $("#link > a").addClass("active")
-    $("#video").click ->
-      $(".awesome-tabs-content > li").hide()
-      $("#videoFormTab").fadeIn()
-      $(".active").removeClass("active")
-      $("#video > a").addClass("active")
-    $("#service").click ->
-      $(".awesome-tabs-content > li").hide()
-      $("#serviceFormTab").fadeIn()
-      $(".active").removeClass("active")
-      $("#service > a").addClass("active")

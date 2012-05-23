@@ -12,7 +12,6 @@ class Image < Growl
   def icon
     "glyphicons/glyphicons_011_camera.png"
   end
-
 end
 # == Schema Information
 #

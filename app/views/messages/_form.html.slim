@@ -8,8 +8,3 @@
     span#charsLeftMessage
     |  chars left.
   = f.button :submit, "Growl Message"
-
-coffee:
-  jQuery ->
-    $("#message_form").validate()
-    $("#message_comment").limit "512", "#charsLeftMessage"
