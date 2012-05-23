@@ -102,11 +102,21 @@ class Subscription < ActiveRecord::Base
   end
 
   def create_tweet(new_post)
-    Tweet.create!(subscription_id: self.id,
-                  body: new_post.text,
-                  created_at: new_post.created_at,
-                  poster_id: self.user_id
+    puts HTTParty.post("http://api.#{base_url}/v1/feeds/#{user.subdomomain}/items.json",
+                  body: { api_key: user.api_key, display_name: user.display_name,
+                          post: {
+                    type: "tweet",
+                    subscription_id: self.id,
+                    body: new_post.text,
+                    created_at: new_post.created_at
+                  }
+    }
                  )
+                 # Tweet.create!(subscription_id: self.id,
+                 #               body: new_post.text,
+                 #               created_at: new_post.created_at,
+                 #               poster_id: self.user_id
+                 #              )
   end
 
   def fancy_type(event_type)
