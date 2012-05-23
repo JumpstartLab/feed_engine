@@ -12,7 +12,7 @@
         ul.nav 
           / Nav Links
         - if user_signed_in?
-          ul.nav.pull-right
+          ul.nav.pull-right id="signed_in"
             li = link_to "Dashboard", dashboard_url(subdomain: false)
             li
               = link_to current_user.display_name, edit_user_registration_url(subdomain: false), id: "account"
@@ -22,7 +22,7 @@
         - else
           ul.nav.pull-right
             li
-              p
+              p id="sign_up_sign_in"
                 = link_to "Sign up", new_user_registration_url(subdomain: false)
                 |  or 
                 = link_to "Sign in", new_user_session_url(subdomain: false), :id => "sign_in"
