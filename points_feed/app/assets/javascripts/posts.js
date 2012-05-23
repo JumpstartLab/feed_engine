@@ -192,7 +192,7 @@ $(document).ready(function() {
     var type = $(this).data('type');
     $.cookie('award_points_to', [id, type]);
 
-    if(access_token == "" || access_token == undefined || access_token == null) {
+    if(access_token == undefined || access_token == "" || access_token == null) {
       location.href = "/signin?award_points=true";
       return false;
     }

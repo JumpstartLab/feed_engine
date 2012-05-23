@@ -19,6 +19,7 @@
 //= require timeago
 //= require validate
 //= require waypoint
+//= require typeahead
 //= require_tree .
 
 //access_token = $("#access_token").val();
@@ -46,3 +47,17 @@ function show_loading(div) {
 function hide_loading(div) {
   div.find('#loading').slideUp('slow').html('');
 }
+
+$('.typeahead').typeahead({
+  source: function (typeahead, query) {
+    $.get("/api/users/", { "q": query }, function(data) {
+      typeahead.process(data);
+    });
+  },
+
+  property: "name",
+
+  onselect: function (obj) {
+    location.href = "http://"+obj.name+".pointsfeed.in";
+  }
+});

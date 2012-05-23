@@ -21,6 +21,10 @@ input[type=text], input[type=password], input[type=email], textarea, select {
   font: 13px/20px "HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
+.search-query {
+  margin-top: -1px;
+}
+
 .current {
   float: left;
   padding: 0 14px;
