@@ -1,8 +1,7 @@
 require 'spec_helper'
-module S3Config; end
-module HasUploadedFile; end
 
 describe "Image Validations" do
+  before(:each) { Image.any_instance.stub(:send_photo_to_amazon) }
   describe "#new" do
     context "Validations" do
       it "When my message is longer then 256 characters" do
@@ -22,7 +21,7 @@ describe "Image Validations" do
           image.should_not be_valid
         end
         it "must be a valid image" do
-          link = "http://poop.com/poop.png"
+          link = "http://image.com/image.png"
           image = Image.create(link: link)
           image.should_not be_valid
         end

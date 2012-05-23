@@ -48,6 +48,7 @@ describe 'api/v1/feed', type: :api do
 
     describe "when valid parameters are passed in" do
       it "returns a successful response" do
+        Image.any_instance.stub(:send_photo_to_amazon)
         post "#{url}.json",  token: user.authentication_token,
                              body: { type: "Image",
                                      link: image.link,
