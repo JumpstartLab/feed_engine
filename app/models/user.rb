@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
   has_many :messages
   has_many :links
   has_many :tweets
+  has_many :videos
   has_many :instagram_photos
   has_many :github_events
 

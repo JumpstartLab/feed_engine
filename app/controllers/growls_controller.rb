@@ -13,6 +13,7 @@ class GrowlsController < ApplicationController
       flash[:notice] = "Your #{@growl.type.downcase} has been created."
       redirect_to dashboard_path
     else
+      @type = params[:growl][:type]
       @growl = @growl.becomes(Growl)
       render "dashboards/show"
     end

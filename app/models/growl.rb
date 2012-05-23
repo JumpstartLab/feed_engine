@@ -28,7 +28,7 @@ class Growl < ActiveRecord::Base
     end
   end
 
-  ["link", "message", "image"].each do |method|
+  ["link", "message", "image", "video"].each do |method|
      define_method "#{method}?".to_sym do
         self.type == method.capitalize
     end

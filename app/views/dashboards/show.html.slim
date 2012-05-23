@@ -6,6 +6,7 @@
         dd#message= link_to "+ Message", "#", class: ("active" if @type == 'Message' || @type.nil? )
         dd#image= link_to "+ Image", "#", class: ("active" if @type == 'Image')
         dd#link= link_to "+ Link", "#", class: ("active" if @type == 'Link')
+        dd#video= link_to "+ Video", "#", class: ("active" if @type == 'Video')
         dd#service= link_to "Services", "#", class: ("active" if @type == 'Service')
 
       ul.nice.awesome-tabs-content.contained
@@ -16,6 +17,8 @@
           = render :partial => "/images/form"
         li#linkFormTab{ class=("active" if @type == 'Link') }
           = render :partial => "/links/form"
+        li#videoFormTab{ class=("active" if @type == 'Video') }
+          = render :partial => "/videos/form"
         li#serviceFormTab{ class=("active" if @type == 'Services') }
           = render :partial => "shared/social_signin"
 
@@ -40,6 +43,11 @@ coffee:
       $("#linkFormTab").fadeIn()
       $(".active").removeClass("active")
       $("#link > a").addClass("active")
+    $("#video").click ->
+      $(".awesome-tabs-content > li").hide()
+      $("#videoFormTab").fadeIn()
+      $(".active").removeClass("active")
+      $("#video > a").addClass("active")
     $("#service").click ->
       $(".awesome-tabs-content > li").hide()
       $("#serviceFormTab").fadeIn()

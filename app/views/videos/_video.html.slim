@@ -1,0 +1,24 @@
+.growl-box
+  .row#video
+    = render :partial => "growls/left", :locals => { growl: video }
+    .eight.columns
+      .row
+        .growl_content
+          strong.speaker= "#{video.get_display_name} said:"
+          br
+          = video.comment
+          br
+          br
+          .row.meta_data_body
+            .twelve.columns
+              .flex-video.widescreen
+                iframe(allowfullscreen="" frameborder="0" height="315" src="http://www.youtube.com/embed/#{video.youtube_urlify}" width="560")
+
+              -if video.title.present?
+                b= link_to video.title, video.link
+                .row= truncate(video.description, length: 200)
+              -else
+                b= link_to "Watch on YouTube", video.link
+                .row= video.description
+    = render :partial => "growls/right", :locals => { growl: video}
+  = render :partial => 'growls/footer', :locals => { growl: video}
