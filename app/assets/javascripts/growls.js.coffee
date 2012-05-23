@@ -36,6 +36,10 @@ jQuery ->
     $(".active").removeClass("active")
     $("#instagrams").addClass("active")
     $.getScript("http://#{domain}?type=InstagramPhoto")
+  $("#videos").click ->
+    $(".active").removeClass("active")
+    $("#videos").addClass("active")
+    $.getScript("http://#{domain}?type=Video")
 
   if $('.pagination').length
     $(window).scroll ->
