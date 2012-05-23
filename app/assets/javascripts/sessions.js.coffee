@@ -22,12 +22,16 @@ setFlash = (message) ->
   $('#flash_message').text(message)
   $('#flash').slideDown().delay(2000).slideUp()
 
+addId = (element, id) ->
+  $(element).attr('id', id)
 
 addSignupHandler = ->
+  addId('#signup-page .button', 'signup-submit')
+  addId('#signup-page form', 'signup_form')
   $(".errors").hide()
   $('#signup-submit').click ->
     $(".errors").hide()
-    form = $(this).closest('form')
+    form = $('#signup_form')
     formData = form.serialize()
     jqxhr = $.post("/signup", formData, "json")
     signupResponse(jqxhr, form)
@@ -42,6 +46,7 @@ signupResponse = (jqxhr, form) ->
   jqxhr.error (response, status) ->
     resp = $.parseJSON(response['responseText'])
     $('#signup-page .errors').show()
+    $('#signup-page .errors ul').children().remove()
     for error in resp['errors'] 
       $('#signup-page .errors ul').append("<li>#{error}</li>")
 
@@ -68,7 +73,8 @@ addIntegrationHandlers = ->
   $('.integration_handler').click ->
     service = $(this).data('service')
     window.open("auth/#{service}")
-    checkForAuthentication(service)
+    $(window).focus checkForAuthentication(service)
+    $(window).unbind('focus')
 
 addSkipHandlers = ->
   $('#skip_twitter').click ->
@@ -79,20 +85,20 @@ addSkipHandlers = ->
     $('#dashboard').click()
 
 checkForAuthentication = (provider) ->
-  $(window).focus ->
-    response = $.getJSON("/checkauth/#{provider}")
-    response.success authResponse
-    response.error( ->
-      setFlash('Something went wrong :(')
-    )
-    $(window).unbind('focus', this)
+  response = $.getJSON("/checkauth/#{provider}")
+  authResponse(response, provider)
 
-authResponse = (response, status) ->
+authResponse = (response, provider) ->
+  response.success (response, status) ->
     if response['auth']
       setFlash("Authentication with #{provider} successful!")
       $("#skip_#{provider}").click()
     else
       setFlash("Authentication unsuccessful")
+
+  response.error( ->
+    setFlash('Something went wrong :(')
+  )
 
 logout = ->
   $.getJSON('/logout', (response, status, xhr) ->
