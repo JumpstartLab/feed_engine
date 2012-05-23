@@ -17,10 +17,10 @@
       </div>
       <div class='icons' style='float: right'>
         {{#awardable}}
-          <div style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> <span class='points'>{{points}}</span></div><br />
+          <div class='awardable' style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> <span class='points'>{{points}}</span></div><br />
         {{/awardable}}
         {{^awardable}}
-          <div style='font-size:20px; margin-top:5px;'><img style='margin-top:-5px; opacity: .5;' src='/assets/exclamation_point_2.png'></img> <span class='points'>{{points}}</span></div><br />
+          <div class='awarded' style='font-size:20px; margin-top:5px;'><img style='margin-top:-5px; opacity: .5;' src='/assets/exclamation_point_2.png'></img> <span class='points'>{{points}}</span></div><br />
         {{/awardable}}
 
         {{#refeedable}}
@@ -52,10 +52,10 @@
       </div>
       <div class='icons' style='float: right'>
         {{#awardable}}
-          <div style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> <span class='points'>{{points}}</span></div><br />
+          <div class='awardable' style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> <span class='points'>{{points}}</span></div><br />
         {{/awardable}}
         {{^awardable}}
-          <div style='font-size:20px; margin-top:5px;'><img style='margin-top:-5px; opacity: .5;' src='/assets/exclamation_point_2.png'></img> <span class='points'>{{points}}</span></div><br />
+          <div class='awarded' style='font-size:20px; margin-top:5px;'><img style='margin-top:-5px; opacity: .5;' src='/assets/exclamation_point_2.png'></img> <span class='points'>{{points}}</span></div><br />
         {{/awardable}}
           <span><img src='/assets/twitter_25.png'></img></span>
       </div>
@@ -77,10 +77,10 @@
       </div>
       <div class='icons' style='float: right'>
         {{#awardable}}
-          <div style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> <span class='points'>{{points}}</span></div><br />
+          <div class='awardable' style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> <span class='points'>{{points}}</span></div><br />
         {{/awardable}}
         {{^awardable}}
-          <div style='font-size:20px; margin-top:5px;'><img style='margin-top:-5px; opacity: .5;' src='/assets/exclamation_point_2.png'></img> <span class='points'>{{points}}</span></div><br />
+          <div class='awarded' style='font-size:20px; margin-top:5px;'><img style='margin-top:-5px; opacity: .5;' src='/assets/exclamation_point_2.png'></img> <span class='points'>{{points}}</span></div><br />
         {{/awardable}}
         <span><img style='padding-top:5px;' src='/assets/github_25.png'></img></span>
       </div>
@@ -108,10 +108,10 @@
       </div>
       <div class='icons' style='float: right'>
         {{#awardable}}
-          <div style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> <span class='points'>{{points}}</span></div><br />
+          <div class='awardable' style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> <span class='points'>{{points}}</span></div><br />
         {{/awardable}}
         {{^awardable}}
-          <div style='font-size:20px; margin-top:5px;'><img style='margin-top:-5px; opacity: .5;' src='/assets/exclamation_point_2.png'></img> <span class='points'>{{points}}</span></div><br />
+          <div class='awarded' style='font-size:20px; margin-top:5px;'><img style='margin-top:-5px; opacity: .5;' src='/assets/exclamation_point_2.png'></img> <span class='points'>{{points}}</span></div><br />
         {{/awardable}}
         {{#refeedable}}
           <div><a href='#' class='refeed_link' data-id='{{id}}' data-user="{{feeder.name}}"><img src='/assets/refeed.png'></img></a></div><br />
@@ -146,10 +146,10 @@
       </div>
       <div class='icons' style='float: right'>
         {{#awardable}}
-          <div style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> <span class='points'>{{points}}</span></div><br />
+          <div class='awardable' style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> <span class='points'>{{points}}</span></div><br />
         {{/awardable}}
         {{^awardable}}
-          <div style='font-size:20px; margin-top:5px;'><img style='margin-top:-5px; opacity: .5;' src='/assets/exclamation_point_2.png'></img> <span class='points'>{{points}}</span></div><br />
+          <div class='awarded' style='font-size:20px; margin-top:5px;'><img style='margin-top:-5px; opacity: .5;' src='/assets/exclamation_point_2.png'></img> <span class='points'>{{points}}</span></div><br />
         {{/awardable}}
         {{#refeedable}}
           <div><a href='#' class='refeed_link' data-id='{{id}}' data-user="{{feeder.name}}"><img src='/assets/refeed.png'></img></a></div><br />
@@ -179,10 +179,10 @@
       </div>
       <div class='icons' style='float: right'>
         {{#awardable}}
-          <div style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> <span class='points'>{{points}}</span></div><br />
+          <div class='awardable' style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> <span class='points'>{{points}}</span></div><br />
         {{/awardable}}
         {{^awardable}}
-          <div style='font-size:20px; margin-top:5px;'><img style='margin-top:-5px; opacity: .5;' src='/assets/exclamation_point_2.png'></img> <span class='points'>{{points}}</span></div><br />
+          <div class='awarded' style='font-size:20px; margin-top:5px;'><img style='margin-top:-5px; opacity: .5;' src='/assets/exclamation_point_2.png'></img> <span class='points'>{{points}}</span></div><br />
         {{/awardable}}
           <span><img style='padding-top:5px;' src='/assets/instagram_25.png'></img></span>
       </div>
