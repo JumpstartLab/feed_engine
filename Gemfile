@@ -32,6 +32,7 @@ gem 'resque'
 gem 'redis'
 gem 'newrelic_rpm'
 gem 'redis-store'
+gem 'temple'
 
 group :production do
   gem 'pg'
