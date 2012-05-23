@@ -18,9 +18,9 @@ module Fetcher
   end
 
   def self.import_instagram_activity(user)
-    images = get_instagram_images(username).select { |e| e.created_at > last_status_id }
-    events.each do |event|
-      Fetcher.create_github_post(user, event)
+    images = get_new_instagram_images(user)
+    images.each do |image|
+      Fetcher.create_instagram_post(user, image)
     end
     Fetcher.delay(run_at: next_time).import_instagram_activity(user)
   end
@@ -40,9 +40,9 @@ module Fetcher
     )
   end
 
-  def self.get_instagram_images(user)
+  def self.get_new_instagram_images(user)
     feed = get_instagram_feed(user)
-    feed.data.map do |data|
+    images = feed.data.map do |data|
       next unless data.type == "image"
 
       url = data.images.standard_resolution.url
@@ -50,21 +50,26 @@ module Fetcher
 
       {url: url, id: id}
     end.compact
+
+    images.delete(user.last_instagram_id)
+
+    images
   end
 
   def self.get_instagram_feed(user)
     token = user.auth_for("instagram").token
     url = "https://api.instagram.com/v1/users/self/feed"
     connection = Faraday.new(:url => url)
+    min_id = user.last_instagram_id
 
     response = connection.get do |req|
       req.url(url)
       req.headers['Accept']     = 'application/json'
       req.params[:access_token] = token
-      req.params[:min_id]       = min_id
+      req.params[:min_id]       = min_id if min_id
     end
 
-    JSON.parse(response.body)
+    json = JSON.parse(response.body)
 
     Hashie::Mash.new(json)
   end
