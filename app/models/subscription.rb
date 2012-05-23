@@ -195,14 +195,21 @@ class Subscription < ActiveRecord::Base
   end
 
   def get_refeeds
-    all_refeeds = HTTParty.get("http://api.#{base}/v1/feeds/" +
-                               "#{original_poster.subdomain}/items.json"
-                              )["items"]["most_recent"]
+    all_refeeds = HTTParty.get("http://api.#{base_url}/v1/feeds/" +
+                               "#{original_poster.subdomain}/items.json?time=#{time_frame(refeeds)}")["items"]["filtered"]
 
-                              objectified_refeeds = all_refeeds.map do |refeed|
-                                objectified_refeed = OpenStruct.new refeed
-                                objectified_refeed
-                              end
+                               objectified_refeeds = all_refeeds.map do |refeed|
+                                 objectified_refeed = OpenStruct.new refeed
+                                 objectified_refeed
+                               end
+  end
+
+  def time_frame(provider)
+    if provider.last
+      time_frame = CGI::escape(provider.last.created_at.to_s)
+    else
+      time_frame = CGI::escape(created_at.to_s)
+    end
   end
 
   def tweets
