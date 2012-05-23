@@ -1,4 +1,6 @@
 FeedEngine::Application.routes.draw do
+  get "subscriptions/create"
+
   get "sessions/new"
   match 'signup' => 'users#create', as: 'signup'
   match 'signin' => 'sessions#new', as: 'signin'
@@ -28,8 +30,11 @@ FeedEngine::Application.routes.draw do
     r.subdomain != 'www' && r.subdomain != 'api' } do
     match 'posts/:display_name', to: "posts#show"
   end
+
   match 'posts/ind', to: 'posts#ind'
   match 'posts/refeeds' => "posts#refeed", as: :refeed
+  resources :subscriptions, only: [:create]
+
   resources :users
   match 'user/update' => 'users#update'
   resources :posts, only: [:create, :index]
