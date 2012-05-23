@@ -47,12 +47,11 @@ FeedEngine::Application.routes.draw do
   resources "points", only: [:create]
   resources "refeeds", only: [:create]
   resources "user_signup_steps"
-  resources "relationships", only: [:create, :destroy]
+  resources "relationships", only: [:create, :destroy, :index]
 
   root :to => "static_pages#show"
 
   devise_scope :user do
-    # get "signup" => "devise/registrations#new", :as => :new_user
     get "login" => "devise/sessions#new", :as => :login
     delete "/logout" => "devise/sessions#destroy"
     get "signup" => "registrations#new", :as => :new_user

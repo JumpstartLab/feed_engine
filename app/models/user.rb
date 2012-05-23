@@ -114,8 +114,8 @@ class User < ActiveRecord::Base
     self.relationships.find_by_followed_id(other_user.id)
   end
 
-  def feed
-    Post.feed_for_user(self)
+  def last_post
+    self.posts.last
   end
 
   def refeeded_posts
