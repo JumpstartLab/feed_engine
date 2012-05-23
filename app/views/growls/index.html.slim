@@ -1,22 +1,19 @@
 .row
-  .content_bar.nine.columns
-    h1= "#{@user.display_name}'s Feed"
-    .unsubscribe{ style=("display: none" unless current_user.try(:subscribed_to?, @user)) }
-      = button_to('UNSUBSCRIBE', subscriptions_path(:user_id => @user.id), :method => "delete", :remote => true, :class => 'small green button radius')
-    .subscribe{ style=("display: none" unless current_user.try(:not_subscribed_to?, @user) && current_user != @user) }
-      = button_to('SUBSCRIBE', subscriptions_path(:user_id => @user.id), :method => "post", :remote => true, :class => 'small green button radius')
-
-    br
-
-    -if @growls.empty? && @user == current_user
-      p
-        | You currently have no growls. Add some in your
-        =link_to "dashboard", "http://hungrlr.com/dashboard"
-        | .
-    -elsif @growls.empty?
-      p There are no growls in this feed.
-    -else
-      .row
+  .nine.columns
+    .feed-title
+      h1= "#{@user.display_name.capitalize}'s Feed"
+      .unsubscribe{ style=("display: none" unless current_user.try(:subscribed_to?, @user)) }
+        = button_to('UNSUBSCRIBE', subscription_path(:id => @user.id), :method => "delete", :remote => true, :class => 'small nice red button radius')
+      .subscribe{ style=("display: none" unless current_user.try(:not_subscribed_to?, @user) && current_user != @user) }
+        = button_to('SUBSCRIBE', subscriptions_path(:id => @user.id), :method => "post", :remote => true, :class => 'small nice green button radius')
+      -if @growls.empty? && @user == current_user
+        p
+          | You currently have no growls. Add some in your
+          =link_to "dashboard", "http://hungrlr.com/dashboard"
+          | .
+      -elsif @growls.empty?
+        p There are no growls in this feed.
+      -else
         dl.sub-nav
           dt Filter:
           dd#all.active
@@ -33,10 +30,12 @@
             a#github(href="#") Github
           dd#instagrams
             a#instagrams(href="#") Instagrams
-        #growls
-          = render @growls
-        #page
-          = paginate @growls
+    br
+    #growls
+      = render @growls
+    #page
+      = paginate @growls
+
 javascript:
   domain = "#{request.subdomain}.#{request.domain}"
 coffee:

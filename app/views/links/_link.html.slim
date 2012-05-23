@@ -1,22 +1,23 @@
-.row#link
-  = render :partial => "growls/left", :locals => { growl: link }
-  .eight.columns
-    h4= link.get_display_name
-    .row(style="padding-bottom:50px;")
-      .growl_content
-        = link.comment
-        br
-        br
-        br
-        .row.meta_data_body
-          .four.columns
-            = image_tag link.photo(:medium)
-          .eight.columns
-              -if link.title.present?
-                b= link_to link.title, link.link
-                .row= truncate(link.description, length: 200)
-              -else
-                b= link_to link.link
-                .row= link.description
-    = render :partial => 'growls/footer', :locals => { growl: link}
-  = render :partial => "growls/right", :locals => { growl: link}
+.growl-box
+  .row#link
+    = render :partial => "growls/left", :locals => { growl: link }
+    .eight.columns
+      .row
+        .growl_content
+          strong.speaker= "#{link.get_display_name} said:"
+          br
+          = link.comment
+          br
+          br
+          .row.meta_data_body
+            .four.columns
+              = image_tag link.photo(:medium), class: "growl_image"
+            .eight.columns
+                -if link.title.present?
+                  b= link_to link.title, link.link
+                  .row= truncate(link.description, length: 200)
+                -else
+                  b= link_to link.link
+                  .row= link.description
+    = render :partial => "growls/right", :locals => { growl: link}
+  = render :partial => 'growls/footer', :locals => { growl: link}

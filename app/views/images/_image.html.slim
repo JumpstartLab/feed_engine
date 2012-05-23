@@ -1,11 +1,12 @@
-.row#image
-  = render :partial => "growls/left", :locals => { growl: image }
-  .eight.columns
-    h4= image.get_display_name
-    .row(style="padding-bottom:50px;")
-      = image.comment
-      br
-      br
-      = image_tag image.photo(:medium), class: "growl_image"
-    = render :partial => 'growls/footer', :locals => { growl: image}
-  = render :partial => "growls/right", :locals => { growl: image}
+.growl-box
+  .row#image
+    = render :partial => "growls/left", :locals => { growl: image }
+    .eight.columns
+      .row
+        strong.speaker= "#{image.get_display_name} said:"
+        br
+        = image.comment
+        br
+        = image_tag image.photo(:medium), class: "growl_image"
+    = render :partial => "growls/right", :locals => { growl: image}
+  = render :partial => 'growls/footer', :locals => { growl: image}

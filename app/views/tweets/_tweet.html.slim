@@ -1,9 +1,10 @@
-.row#tweet
-  = render :partial => "growls/left", :locals => { growl: tweet }
-  .eight.columns
-    h4= tweet.get_display_name
-    .message_padding
+.growl-box
+  .row#tweet
+    = render :partial => "growls/left", :locals => { growl: tweet }
+    .eight.columns
+      strong.speaker= "#{tweet.get_display_name} said:"
+      br
       = link_to tweet.title, tweet.link
       .row= tweet.comment_with_link.html_safe
-    = render :partial => 'growls/footer', :locals => { growl: tweet}
-  = render :partial => "growls/right", :locals => { growl: tweet}
+    = render :partial => "growls/right", :locals => { growl: tweet}
+  = render :partial => 'growls/footer', :locals => { growl: tweet}

@@ -1,0 +1,11 @@
+.container.top-bar.home-border.blue-border
+  .attached
+    .name
+      = link_to "Home", home
+    ul.right
+      - main_navigation.each do |title, link| # Populated from nav_bar_helper
+        li= link_to title, link
+      li
+        p
+          - user_helper.each do |title, link|
+            = link_to title, link[0], method: link[1], class: "small blue nice button src-download merge-down"

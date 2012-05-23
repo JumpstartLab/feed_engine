@@ -73,7 +73,7 @@ class Growl < ActiveRecord::Base
   end
 
   def get_display_name
-    get_user.display_name
+    get_user.display_name.capitalize
   end
 
   def get_gravatar

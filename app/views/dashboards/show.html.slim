@@ -1,13 +1,12 @@
 .row
-  .six.content_bar
-    div.row
+  .nine.columns.content_bar
+    .row
       h2 Dashboard
       dl.nice.contained.awesome-tabs
         dd#message= link_to "+ Message", "#", class: ("active" if @type == 'Message' || @type.nil? )
         dd#image= link_to "+ Image", "#", class: ("active" if @type == 'Image')
         dd#link= link_to "+ Link", "#", class: ("active" if @type == 'Link')
         dd#service= link_to "Services", "#", class: ("active" if @type == 'Service')
-        dd#account= link_to "Account", edit_user_registration_path
 
       ul.nice.awesome-tabs-content.contained
 
