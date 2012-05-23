@@ -47,15 +47,15 @@ class Item < ActiveRecord::Base
   end
 
   def refeed_for(new_poster)
-    if refeedable_for?(new_poster)
-      new_attributes = {
-        poster_id: new_poster.id,
-          post_id: self.post_id,
-        post_type: self.post_type,
-           refeed: true
-      }
-      Item.create(new_attributes)
-    end
+    raise NotRefeedable, "Can't refeed item" unless refeedable_for?(new_poster)
+
+    new_attributes = {
+      poster_id: new_poster.id,
+        post_id: self.post_id,
+      post_type: self.post_type,
+         refeed: true
+    }
+    Item.create(new_attributes)
   end
 
   def refeed?
@@ -63,7 +63,11 @@ class Item < ActiveRecord::Base
   end
 
   def refeedable_for?(user)
+    logger.info('********************************')
+    logger.info(user.inspect)
+    logger.info('********************************')
     refed_item = Item.find_by_poster_id_and_post_id(user.id, post.id)
+    logger.info(refed_item.inspect)
     refed_item.nil? && user.id != poster_id
   end
 
@@ -72,4 +76,8 @@ class Item < ActiveRecord::Base
   def destroy_refeeds!
     Item.find_all_by_post_id(post_id).map(&:destroy)
   end
+
+  # This error is raised when a user refeeds their own item or already refed
+  # the item they are trying to refeed
+  class NotRefeedable < ArgumentError; end
 end

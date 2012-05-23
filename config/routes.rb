@@ -21,12 +21,16 @@ FeedEngine::Application.routes.draw do
   get "logout", to: "sessions#destroy", as: "logout"
   put "refeed/:id", to: "items#refeed", as: "refeed"
 
+  # http://api.feedengine.com/feeds/foobar/items/42/refeeds.json
+
   constraints :subdomain => 'api', :format => :json do
     namespace :api, :path => '/' do
       namespace :v1 do
         scope "/feeds/:display_name" do
           match "/" => "items#index"
-          resources :items
+          resources :items do
+            post "refeeds", to: "items#refeed"
+          end
         end
       end
     end

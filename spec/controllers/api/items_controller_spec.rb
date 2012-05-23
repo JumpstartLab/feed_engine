@@ -113,10 +113,10 @@ describe Api::V1::ItemsController do
         }
       }
 
-      it "without a valid user token responds with unauthorized" do
+      it "without a valid user token responds with forbidden" do
         item[:api_key] = nil
         post :create, item
-        response.code.should == '401'
+        response.code.should == '403'
       end
 
       describe "with a valid user token" do
@@ -151,7 +151,7 @@ describe Api::V1::ItemsController do
       end
     end
 
-    describe "to refeed", :focus => true do
+    describe "to refeed" do
       let!(:other_user) { Fabricate(:user_with_posts) }
       let!(:item) { other_user.items.first }
       let!(:refeed_params) {
@@ -159,20 +159,20 @@ describe Api::V1::ItemsController do
         :format       => :json,
         :display_name => user.display_name,
         :api_key      => user.api_key,
-        :id           => item.id
+        :item_id           => item.id
         }
       }
 
       it "without a valid user token responds with unauthorized" do
         refeed_params[:api_key] = nil
         post :refeed, refeed_params
-        response.code.should == '401'
+        response.code.should == '403'
       end
 
       describe "with a valid user token" do
         it "responds with 404 if the item doesn't exist" do
           not_id = Item.all.map(&:id).max + 1
-          refeed_params[:id] = not_id
+          refeed_params[:item_id] = not_id
           post :refeed, refeed_params
           response.code.should == '404'
         end
@@ -184,6 +184,13 @@ describe Api::V1::ItemsController do
 
         it "create a refeed" do
           expect { post :refeed, refeed_params }.to change { user.items.count }.by(1)
+        end
+
+        it "returns a 409 if the item belongs to the requesting user" do
+          refeed_params[:display_name] = other_user.display_name
+          refeed_params[:api_key] = other_user.api_key
+          post :refeed, refeed_params
+          response.code.should == '409'
         end
       end
     end
