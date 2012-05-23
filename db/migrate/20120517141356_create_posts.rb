@@ -4,6 +4,8 @@ class CreatePosts < ActiveRecord::Migration
       t.integer :feed_id
       t.integer :postable_id
       t.string :postable_type
+      
+      t.timestamps
     end
   end
 end

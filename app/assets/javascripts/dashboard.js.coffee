@@ -50,12 +50,26 @@ addPreviewHandler = ->
   $('#image_url').blur ->
     $('#image_preview').attr('src', $('#image_url').val()).show()
 
+addSubLinkHandler = ->
+  $('#sub_to_feed').click ->
+    $.ajax(
+      type: "POST",
+      url:  "/subscriptions",
+      data: { feed_name: $.feedengine.subdomain }
+      success: ->
+        setFlash('Subscribed successfully')
+        $('a#sub_to_feed').hide()
+      error: ->
+        setError('Subscription failed')
+    )
+
 addHandlers = ->
   addPreviewHandler()
   addTabMenuHandler()
   addDashboardHandler()
   addHomeHandler()
-
+  addSubLinkHandler()
+  
 renderDashboard = ->
   if $.feedengine.current_user
     $('.tab-body ul').children().hide()
@@ -85,7 +99,11 @@ addRefeedHandler = ->
       error: ->
         setFlash('Unsuccessful Refeed.OH NOES!')
       )
-
+  
+setError = (message) ->
+  $('#error_message').text(message)
+  $('#error').slideDown().delay(2000).slideUp()
+  
 class FeedPager
   constructor:(feed=$('#all_posts')) ->
     @feeduser = $.feedengine.subdomain
@@ -94,6 +112,7 @@ class FeedPager
     @page=-1
     $(window).scroll(checkForBottom)
     @render()
+    @setSubscribeLink()
 
   render: =>
     @page++
@@ -104,6 +123,17 @@ class FeedPager
       url = "posts/#{@feeduser.toString()}"
       $.getJSON(url, page: @page, renderPosts)
 
+  setSubscribeLink: =>
+    $.getJSON('/current_user', (response, status, jqXHR) ->
+        json_string = JSON.stringify(response)
+        current_user_subdomain = JSON.parse(json_string).subdomain
+        current_subdomain = getSubDomain()
+        if current_subdomain && current_user_subdomain && current_subdomain != current_user_subdomain
+          $('a#sub_to_feed').show()
+        else
+          $('a#sub_to_feed').hide()
+    )
+    
 checkForBottom = ->
   if nearBottom()
     $.feedengine.current_pager.render()
