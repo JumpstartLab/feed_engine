@@ -153,12 +153,13 @@ body {
   left: 0;
   position: fixed;
   width: 100%;
-  padding: 20px;
+  padding: 25px;
   text-align: center;
   display: block;
   font: $font;
-  font-size: 16px;
-  opacity: 0.85;
+  font-size: 18px;
+  font-weight: 700;
+  opacity: 0.9;
   z-index:1031;
 }
 
@@ -170,7 +171,7 @@ body {
   display: block;
   font: $font;
   font-size: 16px;
-  opacity: 0.85;
+  opacity: 0.9;
 }
 
 .navbar h1 {
