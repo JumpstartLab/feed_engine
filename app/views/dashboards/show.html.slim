@@ -12,9 +12,12 @@ div class="container-fluid"
         div class="minidash" id="minidash"
 
           h2 Mini-Dash
-          = link_to "View Your Live Stream!", root_url(subdomain: current_user.display_name), class: "btn btn-primary"
+          h3 = link_to "View Live Stream!", root_url(subdomain: current_user.display_name), class: "btn btn-primary btn-large"
           br
+          h3 = link_to "Link Yourself!", "#", id: "services_link", class: "btn btn-success btn-large"
           br
+          div id='services_toggle'
+            = render 'services/form', id: "external_links"
           h3 Total Posts
           = current_user.posts.count
           br
