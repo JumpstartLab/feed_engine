@@ -33,7 +33,7 @@ describe "Points" do
           fill_in "user[password]", with: "hungry"
           fill_in "user[password_confirmation]", with: "hungry"
           click_button("Sign up, it's free!")
-          click_link("No thanks, take me to my dashboard")
+          click_link("Take me to my dashboard")
         end
         it "adds the points" do
           visit root_path
