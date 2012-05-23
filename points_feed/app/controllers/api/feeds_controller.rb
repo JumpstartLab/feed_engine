@@ -1,5 +1,6 @@
 class Api::FeedsController < Api::ApiController
   before_filter :can_user_can_view_feed?, :except => :index
+  before_filter :authenticate_user!, :only => :refeed
   POSTS_PER_PAGE = 12
 
   def index
