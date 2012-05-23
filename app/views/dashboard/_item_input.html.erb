@@ -1,13 +1,14 @@
-<div id="item-input" class="item-container span6">
-  <br/>
+<div id="item-input" class="item-container">
   <ul class="nav nav-tabs" id="submit_tabs">
-    <li><a href="#text" id="text-tab" data-toggle="tab">Text</a></li>
-    <li><a href="#link" id="link-tab" data-toggle="tab">Link</a></li>
-    <li><a href="#image" id="image-tab" data-toggle="tab">Image</a></li>
-    <li><a href="#account" data-toggle="tab">Account</a></li>
-    <li><a href="#services" data-toggle="tab">Services</a></li>
-    <li><a href="#subscriptions" data-toggle="tab">TackleBox</a></li>
-    <li><a href="#api-token" data-toggle="tab">Troutr API</a></li>
+    <li><a href="#text" id="text-tab" data-toggle="tab">
+      <span class="raphael-icon">E</span>Text
+    </a></li>
+    <li><a href="#link" id="link-tab" data-toggle="tab">
+      <span class="raphael-icon">È</span>Link
+    </a></li>
+    <li><a href="#image" id="image-tab" data-toggle="tab">
+      <span class="raphael-icon">N</span>Image
+      </a></li>
   </ul>
 
   <div class="tab-content" >
@@ -20,18 +21,5 @@
     <div class="tab-pane" id="image">
       <%= render 'image_items/form' %>
     </div>
-    <div class="tab-pane" id="account">
-      <%= render :partial => 'devise/registrations/edit_form' %>
-    </div>
-    <div class="tab-pane" id="services">
-      <%= render :template => 'authentications/index'  %>
-    </div>
-    <div class="tab-pane" id="subscriptions">
-      <%= render :template => 'subscriptions/index'  %>
-    </div>
-    <div class="tab-pane" id="api-token">
-      <%= render :template => 'dashboard/api_token'  %>
-    </div>
   </div>
-</ul>
 </div>

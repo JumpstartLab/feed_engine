@@ -1,0 +1,22 @@
+<div id="dashboard-settings" class="item-container">
+  <ul class="nav nav-tabs" id="dashboard-settings-tabs">
+    <li><a href="#subscriptions" data-toggle="tab">TackleBox</a></li>
+    <li><a href="#services" data-toggle="tab">Services</a></li>
+    <li><a href="#account" data-toggle="tab">Account</a></li>
+    <li><a href="#api-token" data-toggle="tab">Troutr API</a></li>
+  </ul>
+  <div class="tab-content" >
+    <div class="tab-pane" id="account">
+      <%= render :partial => 'devise/registrations/edit_form' %>
+    </div>
+    <div class="tab-pane" id="services">
+      <%= render :template => 'authentications/index'  %>
+    </div>
+    <div class="tab-pane" id="subscriptions">
+      <%= render :template => 'subscriptions/index'  %>
+    </div>
+    <div class="tab-pane" id="api-token">
+      <%= render :template => 'dashboard/api_token'  %>
+    </div>
+  </div>
+</div>

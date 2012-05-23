@@ -1,4 +1,4 @@
-<div class="span7" >
+<div class="span6" >
 <script src="http://js.pusherapp.com/1.9/pusher.min.js"></script>
  <script type="text/javascript">
  var pusher = new Pusher('<%= Pusher.key %>'); // uses your API KEY
@@ -12,7 +12,7 @@
 });
 
  </script>
-<div class="span7 feed-list" id="stream-items">
+<div class="feed-list" id="stream-items">
 
   <% if @stream_items %>
     <% @stream_items.each do |stream_item| %>
