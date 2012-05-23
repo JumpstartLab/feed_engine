@@ -116,11 +116,7 @@ class User < ActiveRecord::Base
 
 
   def num_subscriptions
-    all_providers = Subscription.all.map(&:provider).uniq
-    all_relevant_providers = all_providers.reject do |provider|
-      provider if provider == "refeed"
-    end
-    total_count = all_relevant_providers.count
+    Subscription.number_of_services
   end
 
   def is_or_is_refeeding?(original_poster)

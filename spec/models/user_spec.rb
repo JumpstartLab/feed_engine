@@ -86,13 +86,6 @@ describe User do
         user.subscription("boo").should == nil
       end
     end
-    describe "#num_subscriptions" do
-      let!(:twitter_subscription) {Fabricate(:subscription, provider: "twitter", user_id: user.id) }
-      let!(:github_subscription) {Fabricate(:subscription, provider: "github", user_id: user.id) }
-      it "returns the number of subscriptions that exist" do
-        user.num_subscriptions.should == 2
-      end
-    end
     describe "#subscribed_to_all_services?" do
       let!(:twitter_subscription) {Fabricate(:subscription, provider: "twitter", user_id: user.id) }
       it "returns false when not subscribed to all services" do
@@ -101,6 +94,7 @@ describe User do
       end
       it "returns true when subscribed to all services" do
         github_subscription = Fabricate(:subscription, provider: "github", user_id: user.id)
+        github_subscription = Fabricate(:subscription, provider: "instagram", user_id: user.id)
         user.subscribed_to_all_services?.should == true
       end
     end
