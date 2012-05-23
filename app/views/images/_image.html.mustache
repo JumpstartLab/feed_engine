@@ -1,9 +1,9 @@
 <script id="image_template" type="text/html">
   <li class="post">
-    <img src='{{content}}' />
-    </br>
-    </br>
-    <p> {{comment}}</p>
+    <h2 class="points" id="points_{{post_id}}">{{points}}</h2>
+    <a class="addpoints" id="{{post_id}}" href="{{addpoint}}"><img class="thumb" src="assets/thumb.png"></a>
+    <img src='{{content}}'/>
+    <p>{{comment}}</p>
     <p class="posted"> posted {{created_at}} ago </p>
     <a class="refeed">Refeed me!</a>
   </li>

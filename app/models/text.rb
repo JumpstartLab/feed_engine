@@ -3,4 +3,5 @@ class Text < ActiveRecord::Base
   attr_accessible :content
   validates :content, length: { maximum: 512 }, presence: true
   has_one :post, :as => :postable
+  has_many :points, :through => :post
 end

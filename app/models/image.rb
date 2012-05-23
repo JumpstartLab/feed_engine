@@ -7,5 +7,6 @@ class Image < ActiveRecord::Base
   #mount_uploader :picture, PictureUploader
   validates :comment, length: { maximum: 256 }
   has_one :post, :as => :postable
+  has_many :points, :through => :post
 
 end

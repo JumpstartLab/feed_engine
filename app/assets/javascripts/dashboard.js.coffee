@@ -89,6 +89,25 @@ setError = (message) ->
   $('#error_message').text(message)
   $('#error').slideDown().delay(2000).slideUp()
   
+addPointsHandler = ->
+  $(".addpoints").click ->
+    postlink = $(this).attr('href')
+    postid = $(this).attr('id')
+    $.ajax(
+      type: 'POST'
+      url: postlink
+      success:->
+        changePoints(postid)
+    )
+    return false
+
+changePoints = (postid) ->
+  json = $.getJSON("/pointscount/#{postid}")
+  json.success( (response) ->
+    new_points = response.points_count
+    $("#points_#{postid}").text("#{new_points}")
+  )
+
 class FeedPager
   constructor:(feed=$('#all_posts')) ->
     @feeduser = $.feedengine.subdomain
@@ -132,3 +151,5 @@ renderPosts = (response, status, jqXHR) ->
       type = post["type"]
       $.feedengine.current_feed.append Mustache.to_html($("##{type}_template").html(), post)
     $(window).scroll(checkForBottom) if posts && posts.length > 0
+    addPointsHandler()
+

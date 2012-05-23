@@ -6,21 +6,25 @@ class UsersController < ApplicationController
     @posts = @user.posts
   end
 
-  def new
-    @user = User.new
+  def create
+    @user = User.create(params[:user])
+    render_create
+  end
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @user }
+  def update
+    @user = current_user
+    @user.update_password(params[:user])
+    render_create
+  end
+
+  def reset_password
+    if user = User.find_by_email(params[:email])
+      user.reset_password
     end
   end
 
-  def edit
-    @user = current_user
-  end
-
-  def create
-    @user = User.create(params[:user])
+  private
+  def render_create
     unless @user.errors.any?
       render "create",
       :status => :ok,
@@ -30,23 +34,5 @@ class UsersController < ApplicationController
       :status => :unprocessable_entity,
       :handlers => [:jbuilder]
     end
-  end
-
-  def update
-    @user = current_user
-
-    respond_to do |format|
-      if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def signout
-    sign_out current_user
   end
 end
