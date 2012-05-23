@@ -1,5 +1,8 @@
 .post
   img.post-avatar src="{{gravatar_url}}"
+  | {{#refeed}}
+      {{refeed}}
+  | {{/refeed}}
   .well
     .post-image
       img src="{{url}}"
