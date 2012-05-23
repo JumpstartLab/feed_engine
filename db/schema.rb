@@ -89,6 +89,13 @@ ActiveRecord::Schema.define(:version => 20120523160405) do
     t.integer  "points",     :default => 0
   end
 
+  create_table "point_gifts", :force => true do |t|
+    t.integer  "item_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "subscriptions", :force => true do |t|
     t.string   "provider"
     t.string   "uid"

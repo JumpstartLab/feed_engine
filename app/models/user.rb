@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
   has_many :subscriptions
   has_many :tweets, :through => :subscriptions, :foreign_key => 'poster_id'
   has_many :items, :foreign_key => 'poster_id'
+  has_many :point_gifts
 
   default_scope order(:created_at)
 

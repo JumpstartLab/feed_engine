@@ -123,6 +123,20 @@ describe User do
             page.should_not have_link "Points! (#{random_post.points})"
           end
         end
+        context "on a post they have already added points to" do
+          let!(:random_post) { Fabricate(random_post_type.to_sym, poster_id: other_user.id) }
+          it "cannot give it's own post points" do
+            set_host(other_user.subdomain)
+            visit root_path
+            click_link_or_button "Points! (#{random_post.points})"
+            updated_post = Item.find(random_post.item.id).post
+            updated_post.points.should == 1
+            page.should have_link "Points! (#{updated_post.points})"
+            click_link_or_button "Points! (#{updated_post.points})"
+            same_post = Item.find(updated_post.item.id).post
+            same_post.points.should == 1
+          end
+        end
       end
       context "from the root page" do
         context "on a different user's post" do
@@ -148,8 +162,21 @@ describe User do
             page.should_not have_link "Points! (#{random_post.points})"
           end
         end
+        context "on a post they have already added points to" do
+          let!(:random_post) { Fabricate(random_post_type.to_sym, poster_id: other_user.id) }
+          it "cannot give it's own post points" do
+            set_host(other_user.subdomain)
+            visit root_path
+            click_link_or_button "Points! (#{random_post.points})"
+            updated_post = Item.find(random_post.item.id).post
+            updated_post.points.should == 1
+            page.should have_link "Points! (#{updated_post.points})"
+            click_link_or_button "Points! (#{updated_post.points})"
+            same_post = Item.find(updated_post.item.id).post
+            same_post.points.should == 1
+          end
+        end
       end
     end
   end
 end
-
