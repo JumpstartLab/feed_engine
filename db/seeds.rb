@@ -5,3 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+Fabricate(:user_with_posts, :email => 'jonanscheffler@gmail.com', :display_name => '1337807')
+Fabricate(:user_with_posts, :email => 'elise.worthy@livingsocial.com', :display_name => 'elise')
+Fabricate(:user_with_posts, :email => 'andrew.thal@livingsocial.com', :display_name => 'athal7')
+Fabricate(:user_with_posts, :email => 'travis.valentine@livingsocial.com', :display_name => 'travis')

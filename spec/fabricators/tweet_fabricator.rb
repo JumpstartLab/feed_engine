@@ -13,6 +13,6 @@
 
 Fabricator(:tweet) do
   subscription_id 1
-  body { Faker::Lorem.words(5) }
+  body { Faker::Lorem.words(5).join(" ") }
   poster_id 1
 end

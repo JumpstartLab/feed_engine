@@ -29,10 +29,10 @@ class User < ActiveRecord::Base
   default_scope order(:created_at)
 
   attr_accessible :email,
-                  :password,
-                  :password_confirmation,
-                  :display_name,
-                  :api_key
+    :password,
+    :password_confirmation,
+    :display_name,
+    :api_key
 
   validates :email, :uniqueness => true
   validates_presence_of :email, :message => "is required"
@@ -47,6 +47,7 @@ class User < ActiveRecord::Base
       :message => "must contain only letters, numbers or dashes"
     },
     :exclusion => { :in => %w(www api nil) }
+
   validates_uniqueness_of :display_name, :case_sensitive => false
 
   def self.find_by_subdomain(domain)
@@ -66,11 +67,11 @@ class User < ActiveRecord::Base
   end
 
   def sorted_posts
-    posts.sort_by(&:created_at).reverse
+    items.order("created_at desc").includes(:post => [:user, :item]).map(&:post)
   end
 
   def items
-    Item.find_all_by_poster_id(id)
+    Item.where(poster_id: self.id)
   end
 
   def subdomain
@@ -111,7 +112,27 @@ class User < ActiveRecord::Base
 
 
   def num_subscriptions
-    Subscription.all.map(&:provider).uniq.count
+    all_providers = Subscription.all.map(&:provider).uniq
+    all_relevant_providers = all_providers.reject do |provider|
+      provider if provider == "refeed"
+    end
+    total_count = all_relevant_providers.count
+  end
+
+  def is_or_is_refeeding?(original_poster)
+    if original_poster == self
+      true
+    elsif refeed_subscriptions(original_poster)
+      true
+    else
+      false
+    end
+  end
+
+  def refeed_subscriptions(original_poster)
+    subscriptions.select do |sub|
+      sub if sub.uid.to_i == original_poster.id
+    end.first
   end
 
   private

@@ -7,38 +7,23 @@ module PostablesController
   end
 
   def show
-    set_instance(item_class.send(:find, params[:id]))
+    set_instance(item_class.find(params[:id]))
     respond_with get_instance
   end
 
   def new
-    set_instance(item_class.send(:new))
+    set_instance(item_class.new)
     respond_with get_instance
   end
 
   def create
     initialize_post_types
-    respond_to do |format|
-      if get_instance.send(:save)
-        format.html do
-          redirect_to dashboard_path,
-            notice: "#{item_class.to_s} was successfully created."
-        end
-        format.json do
-          render json: dashboard_path,
-            status: :created,
-            location: get_instance
-        end
-      else
-        format.html do
-          render template: "dashboard/show",
-            notice: "Something went wrong."
-        end
-        format.json do
-          render json: get_instance.send(:errors),
-            status: :unprocessable_entity
-        end
-      end
+    if get_instance.send(:save)
+      redirect_to dashboard_path,
+        notice: "#{item_class.to_s} was successfully created."
+    else
+      render template: "dashboard/show",
+        notice: "Something went wrong."
     end
   end
 
@@ -49,7 +34,7 @@ module PostablesController
     @link = Link.new
     @image = Image.new
     @message = Message.new
-    set_instance(item_class.send(:new, params[item_class.to_s.downcase.to_sym]))
+    set_instance(item_class.new(params[item_class.to_s.downcase.to_sym]))
   end
 
   def set_instance(eval_to)
