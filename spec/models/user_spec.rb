@@ -7,6 +7,14 @@ describe User do
   let(:text_item)   { FactoryGirl.create(:text_item) }
   let(:image_item)  { FactoryGirl.create(:image_item) }
 
+  context ".new" do
+    it "validates case-insensitive uniqueness for user display names" do
+      test1 = FactoryGirl.create(:user, :display_name => "chris")
+      test2 = FactoryGirl.build(:user, :display_name => "Chris")
+
+      test2.should_not be_valid
+    end
+  end
 
   context "#add_stream_item" do
     it "adds a link item" do
