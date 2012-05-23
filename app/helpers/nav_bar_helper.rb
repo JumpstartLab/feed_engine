@@ -2,7 +2,8 @@ module NavBarHelper
   def main_navigation
     if current_user
       {
-        "Your Feed" => "http://#{current_user.display_name}.#{request.domain}"
+        "Feed" => "http://#{current_user.display_name}.#{request.domain}",
+        "Account" => edit_user_registration_path
       }
     else
       {
