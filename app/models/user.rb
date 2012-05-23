@@ -79,7 +79,7 @@ class User < ActiveRecord::Base
   end
 
   def api_link(request)
-    "http://api.#{request.domain}/feeds/#{slug}"
+    "http://api.#{request.domain}/v1/feeds/#{slug}"
   end
 
   def web_url(request)

@@ -5,6 +5,11 @@ class Api::V1::GrowlsController < Api::V1::ApiController
     render :json => growl
   end
 
+  def index
+    @user = User.where(display_name: params[:display_name]).first
+    @growls = @user.growls.by_date.page(params[:page]).per(10)
+  end
+
   def create
     json_hash = JSON.parse(params[:body])
     @growl = current_user.relation_for(json_hash["type"]).new(json_hash)

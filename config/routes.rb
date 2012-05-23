@@ -26,6 +26,8 @@ Hungrlr::Application.routes.draw do
           get    '/users/github' => 'users#github'
           get    '/users/instagram' => 'users#instagram'
           get    '/feeds/:display_name' => 'feeds#show'
+          get    '/feeds/:display_name/growls/:id' => 'growls#show', as: :growl
+          get    '/feeds/:display_name/growls' => 'growls#index'
           post   '/feeds/:display_name/growls' => 'growls#create'
           delete '/feeds/:display_name/growls' => 'growls#destroy'
           post   '/feeds/:display_name/growls/:id/refeed' => 'feeds#refeed'
@@ -39,7 +41,7 @@ Hungrlr::Application.routes.draw do
         end
       end
     end
-    match '/' => 'growls#index'
+    match '/' => 'growls#index', as: :user_feed
   end
   match "/home" => "pages#home"
 

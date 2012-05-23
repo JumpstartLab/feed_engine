@@ -60,9 +60,9 @@ class Growl < ActiveRecord::Base
     regrowled_from_id.present?
   end
 
-  def regrowl_link
+  def regrowl_link(request)
     if regrowled?
-      "http://api.hungrlr.com/feeds/#{get_user.slug}/items/#{id}"
+      "http://api.#{request.domain}/feeds/#{get_user.slug}/growls/#{original_growl.id}"
     else
       ""
     end

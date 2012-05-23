@@ -2,6 +2,7 @@ class Api::V1::FeedsController < Api::V1::ApiController
 
   def show
     @user = User.where(display_name: params[:display_name]).first
+    @growls = @user.growls.page(params[:page]).per(10)
     if params[:since].blank?
       @recent_growls = @user.growls.by_date.limit(3)
     else
