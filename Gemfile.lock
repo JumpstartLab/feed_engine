@@ -1,8 +1,18 @@
 GIT
-  remote: https://worace@github.com/worace/troutr-client.git
-  revision: 81785e4fc752d9092fdf42bee79f9828667db182
+  remote: git://github.com/rewritten/instagram-ruby-gem.git
+  revision: 2cd30fd086d0322a00b835d434abe432c53d2663
   specs:
-    troutr_client (0.0.5)
+    instagram (0.8.3)
+      faraday (~> 0.7)
+      faraday_middleware (~> 0.8)
+      hashie (>= 0.4.0)
+      multi_json (~> 1.0.3)
+
+GIT
+  remote: git://github.com/worace/troutr-client.git
+  revision: f3c84bbbb0efb481ff0970f6b25dc9a6c8cfc559
+  specs:
+    troutr_client (0.0.6)
       faraday
 
 GEM
@@ -94,8 +104,10 @@ GEM
       railties (>= 3.0.0)
     faker (1.0.1)
       i18n (~> 0.4)
-    faraday (0.8.0)
+    faraday (0.7.6)
+      addressable (~> 2.2)
       multipart-post (~> 1.1)
+      rack (~> 1.1)
     faraday_middleware (0.8.7)
       faraday (>= 0.7.4, < 0.9)
     ffi (1.0.11)
@@ -140,25 +152,28 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.18)
-    multi_json (1.3.5)
+    multi_json (1.0.4)
     multipart-post (1.1.5)
     newrelic_rpm (3.3.4.1)
     nokogiri (1.5.2)
     oauth (0.4.6)
-    oauth2 (0.6.1)
+    oauth2 (0.6.0)
       faraday (~> 0.7)
       httpauth (~> 0.1)
-      multi_json (~> 1.3)
-    octokit (1.2.1)
+      multi_json (~> 1.0)
+    octokit (1.0.2)
       addressable (~> 2.2)
-      faraday (~> 0.8)
+      faraday (~> 0.7)
       faraday_middleware (~> 0.8)
       hashie (~> 1.2)
-      multi_json (~> 1.3)
+      multi_json (~> 1.0)
     omniauth (1.1.0)
       hashie (~> 1.2)
       rack
     omniauth-github (1.0.1)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.0)
+    omniauth-instagram (1.0.0)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.0)
     omniauth-oauth (1.0.1)
@@ -167,8 +182,7 @@ GEM
     omniauth-oauth2 (1.0.2)
       oauth2 (~> 0.6.0)
       omniauth (~> 1.0)
-    omniauth-twitter (0.0.11)
-      multi_json (~> 1.3)
+    omniauth-twitter (0.0.9)
       omniauth-oauth (~> 1.0)
     orm_adapter (0.0.7)
     pg (0.13.2)
@@ -274,12 +288,12 @@ GEM
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
-    twitter (2.4.0)
+    twitter (2.2.0)
       activesupport (>= 2.3.9, < 4)
-      faraday (~> 0.8)
-      multi_json (~> 1.3)
-      simple_oauth (~> 0.1.6)
-    twitter-bootstrap-rails (2.0.7)
+      faraday (~> 0.7)
+      multi_json (~> 1.0)
+      simple_oauth (~> 0.1)
+    twitter-bootstrap-rails (2.0.8)
       actionpack (>= 3.1)
       less-rails (~> 2.2.2)
       railties (>= 3.1)
@@ -312,10 +326,12 @@ DEPENDENCIES
   ember-rails
   factory_girl_rails
   faker
+  faraday (~> 0.7.6)
   gravatar-ultimate
   growl
   guard-rspec
   guard-spork
+  instagram!
   jbuilder
   jquery-rails
   kaminari
@@ -324,6 +340,7 @@ DEPENDENCIES
   octokit
   omniauth
   omniauth-github
+  omniauth-instagram
   omniauth-twitter
   pg
   pusher

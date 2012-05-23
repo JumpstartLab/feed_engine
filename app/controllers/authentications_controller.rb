@@ -9,11 +9,17 @@ class AuthenticationsController < ApplicationController
   end
 
   def create
+
     auth = request.env["omniauth.auth"]
     uid = auth['uid']
     token = auth["credentials"]["token"]
-    secret = auth["credentials"]["secret"]
-    login = auth["extra"]["raw_info"]["login"]
+
+    if auth["credentials"]["secret"]
+      secret = auth["credentials"]["secret"] 
+    end
+    if auth["extra"]["raw_info"]
+      login = auth["extra"]["raw_info"]["login"] 
+    end
 
 
     provider = auth[:provider]
@@ -34,7 +40,9 @@ class AuthenticationsController < ApplicationController
   def destroy
     @authentication = current_user.authentications.find(params[:id])
     @authentication.destroy
-    flash[:notice] = "Successfully destroyed authentication."
+    flash[:notice] = "You are no longer connected to this external service."
+    redirect_to authentications_url
+
     respond_to do |format|
       format.html { redirect_to dashboard_url }
       format.json { head :no_content }
