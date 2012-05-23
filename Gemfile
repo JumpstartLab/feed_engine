@@ -28,6 +28,8 @@ gem 'vcr'
 gem 'fakeweb'
 gem 'unicorn'
 gem 'capistrano'
+gem 'resque'
+gem 'redis'
 gem 'newrelic_rpm'
 gem 'redis-store'
 
