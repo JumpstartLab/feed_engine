@@ -102,6 +102,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def can_award?(post, klass)
+    award = self.awards.where(
+      :awardable_id => post.id, 
+      :awardable_type => klass).first
+
+    award == nil
+  end
+
   def twitter_authentication
     self.authentications.where(:provider => 'twitter').first
   end

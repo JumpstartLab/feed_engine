@@ -17,6 +17,7 @@ class TwitterFeedItemDecorator < ApplicationDecorator
       :id => model.id,
       :refeed => false,
       :refeed_link => "",
+      :awardable => can_award?("TwitterFeedItem"),
       :reeder => {},
       :points => model.points
     }

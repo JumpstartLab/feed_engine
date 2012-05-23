@@ -21,6 +21,11 @@ class ApplicationDecorator < Draper::Base
     false
   end
 
+  def can_award?(type)
+    return @current_user.can_award?(model, type) if @current_user
+    true
+  end
+
   def refeed_url(post)
     feed = model.user.display_name
     "http://api.pointsfeed.in/feeds/#{feed}/items/#{post.id}.json" if post

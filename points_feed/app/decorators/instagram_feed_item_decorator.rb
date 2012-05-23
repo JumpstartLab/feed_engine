@@ -18,6 +18,7 @@ class InstagramFeedItemDecorator < ApplicationDecorator
       :refeed => false,
       :refeed_link => "",
       :reeder => {},
+      :awardable => can_award?("InstagramFeedItem"),
       :points => model.points
     }
   end

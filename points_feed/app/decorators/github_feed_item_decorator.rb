@@ -18,6 +18,7 @@ class GithubFeedItemDecorator < ApplicationDecorator
       :refeed => false,
       :refeed_link => "",
       :reeder => {},
+      :awardable => can_award?("GithubFeedItem"),
       :points => model.points
     }
   end

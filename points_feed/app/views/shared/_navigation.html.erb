@@ -10,12 +10,14 @@
       <div class="container nav-collapse">
         <ul class="nav">
           <!-- <li><%= link_to "Link1", "/path1"  %></li> -->
-          <form class="navbar-search pull-left" action="">
-            <input type="text" class="search-query span2 typeahead" placeholder="Search for Users">
-          </form>
         </ul>
           <% if current_user %>
             <ul class='nav pull-right' id="menu">
+              <!--
+                <form class="navbar-search pull-left" action="" style='margin-right: 20px'>
+                  <input type="text" class="search-query span2 typeahead" placeholder="Search for Users">
+                </form>
+              -->
               <li>
                 <div style='margin-top: 10px'>
                   <img src="<%= current_user.avatar %>" style='float: left; height: 20px; margin-right: 10px;'></img>
