@@ -59,7 +59,7 @@ class Subscription < ActiveRecord::Base
     User.find(uid.to_i)
   end
 
-  def base_url
+  def base
     BASE_URL
   end
 
@@ -102,10 +102,18 @@ class Subscription < ActiveRecord::Base
   end
 
   def create_tweet(new_post)
-    Tweet.create!(subscription_id: self.id,
-                  body: new_post.text,
-                  created_at: new_post.created_at,
-                  poster_id: self.user_id
+    HTTParty.post("http://api.#{base}/v1/feeds/"+
+                  "#{user.subdomain}/items.json",
+                  body: {
+                    api_key: user.api_key,
+                    display_name: user.display_name,
+                    post: {
+                      type: "tweet",
+                      subscription_id: self.id,
+                      body: new_post.text,
+                      created_at: new_post.created_at
+                    }
+                  }
                  )
   end
 
@@ -120,26 +128,40 @@ class Subscription < ActiveRecord::Base
   end
 
   def create_github_event(new_post)
-    GithubEvent.create!(subscription_id: self.id,
-                        repo: new_post.repo.name,
-                        created_at: new_post.created_at,
-                        poster_id: self.user_id,
-                        event_type: fancy_type(new_post.type)
-                       )
+    HTTParty.post("http://api.#{base}/v1/feeds/#{user.subdomain}/items.json",
+                  body: {
+      api_key: user.api_key,
+      display_name: user.display_name,
+      post: {
+        type: "github_event",
+        subscription_id: self.id,
+        repo: new_post.repo.name,
+        created_at: new_post.created_at,
+        event_type: fancy_type(new_post.type)
+      }
+    }
+                 )
   end
 
   def create_instapound(new_post)
-    Instapound.create!(subscription_id: self.id,
-                       body: new_post.caption["text"],
-                       image_url: new_post.images["standard_resolution"]["url"],
-                       created_at: new_post.created_at,
-                       poster_id: self.user_id
-                      )
+    HTTParty.post("http://api.#{base}/v1/feeds/#{user.subdomain}/items.json",
+                  body: {
+      api_key: user.api_key,
+      display_name: user.display_name,
+      post: {
+        body: new_post.caption["text"],
+        image_url: new_post.images["standard_resolution"]["url"],
+        subscription_id: self.id,
+        created_at: new_post.created_at,
+        event_type: fancy_type(new_post.type)
+      }
+    }
+                 )
   end
 
   def create_refeed(new_post)
     HTTParty.post("#{new_post.link}/refeeds.json",
-      :body => { :api_key => user.api_key } )
+                  :body => { :api_key => user.api_key } )
   end
 
   def get_tweets
@@ -168,13 +190,14 @@ class Subscription < ActiveRecord::Base
   end
 
   def get_refeeds
-    all_refeeds = HTTParty.get("http://api.#{base_url}/v1/feeds/" +
-      "#{original_poster.subdomain}/items.json")["items"]["most_recent"]
+    all_refeeds = HTTParty.get("http://api.#{base}/v1/feeds/" +
+                               "#{original_poster.subdomain}/items.json"
+                              )["items"]["most_recent"]
 
-    objectified_refeeds = all_refeeds.map do |refeed|
-      objectified_refeed = OpenStruct.new refeed
-      objectified_refeed
-    end
+                              objectified_refeeds = all_refeeds.map do |refeed|
+                                objectified_refeed = OpenStruct.new refeed
+                                objectified_refeed
+                              end
   end
 
   def tweets
@@ -191,7 +214,7 @@ class Subscription < ActiveRecord::Base
 
   def refeeds
     # all_items = JSON.parse(HTTParty.get(
-    #   "http://api.#{base_url}/v1/feeds/" +
+    #   "http://api.#{base}/v1/feeds/" +
     #   "#{user.subdomain}/items.json"
     # ))
     # refeeded_items = all_items.select do |item|
