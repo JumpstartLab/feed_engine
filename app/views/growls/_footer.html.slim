@@ -1,12 +1,17 @@
 .row
-  .four.columns
+  .six.columns.posted
       b Posted:
       = " #{time_ago_in_words growl.created_at} ago"
-      span.points
-        = link_to "+", points_growl_path(growl), method: :post, class: "points_link"
-        = pluralize(growl.points, "Point")
+  .retweet.two.columns.pull_right
+    span.points
+      = link_to "+#{growl.points}", points_growl_path(growl), method: :post, class: "points_link small black button radius regrowl"
   - if current_user
-    .four.columns.pull_right
+    - unless growl.original_growl?
+      .three.columns.regrowled_text
+          img.regrowled_icon(src="assets/glyphicons/glyphicons_152_new_window.png")
+          | Regrowled by &nbsp;
+          = link_to growl.user.display_name, "http://#{growl.user.display_name}.#{request.domain}"
+    .two.columns.pull_right
       - if current_user.can_regrowl?(growl)
         = link_to "Regrowl", regrowled_index_path(id: growl.id), method: :post, class: "small blue button radius regrowl",  remote: true
       - elsif growl.user_id != current_user.id

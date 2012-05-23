@@ -12,6 +12,10 @@
  *= require foundation
  *= require_tree .
 */
+body {
+  color:#333 !important;
+  font-size:14px !important;
+}
 textarea {
   height:100px !important;
 }
@@ -45,7 +49,7 @@ textarea {
   font-weight:bold; font-size:11px;
 }
 .comments {
-  background-color: rgba(127, 174, 0, .4);
+  background-color: rgba(255, 255, 255, .9);
   padding: 10px;
   margin-bottom: 20px;
 }
@@ -115,4 +119,21 @@ ul.contained.awesome-tabs-content > li {
 }
 .regrowled, .regrowl {
   margin-left:20px !important;
+}
+#user_search {
+  float:left;
+  padding-left:100px;
+}
+.search_box {
+  margin-top:7px;
+  width:500px !important;
+}
+.posted {
+  line-height:29px;
+}
+.regrowled_text {
+  line-height:26px;
+}
+.regrowled_icon {
+  vertical-align: top;
 }

@@ -1,6 +1,5 @@
 class Api::V1::ApiController < ActionController::Base
   before_filter :authenticate_user_token
-  before_filter :log_headers
   respond_to :json
 
   def validate_token
@@ -22,10 +21,6 @@ class Api::V1::ApiController < ActionController::Base
     else
       request.env['HTTP_X_AUTHTOKEN'] || params[:token]
     end
-  end
-
-  def log_headers
-    Rails.logger.error(request.headers.inspect)
   end
 
 end
