@@ -44,7 +44,7 @@ group :development, :test do
   gem 'minitest-rails'
   gem 'capybara'
   gem 'turn'
-
+  gem 'simplecov'
   gem 'thin'
 end
 
