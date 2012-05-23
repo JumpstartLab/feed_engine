@@ -14,6 +14,6 @@ get_latest_grams:
   description: "resuqes!"
 
 get_latest_subscription_posts:
-  every: ["10s"]
+  every: ["60s"]
   class: GetLatestSubscriptionPosts
   description: "zoot!"

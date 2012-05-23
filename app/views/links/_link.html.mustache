@@ -1,8 +1,13 @@
 <script id="link_template" type="text/html">
   <li class="post" href="{{content}}" target='_blank'>
+    <h2 class="points" id="points_{{post_id}}">{{points}}</h2>
+    <a class="addpoints" id="{{post_id}}" href="{{addpoint}}"><img class="thumb" src="assets/thumb.png"></a>
     <p><a href="{{content}}" class="link_post">{{content}}</a></p>
     </br>
     <p>{{comment}}</p>
+    </br>
+    </br>
     <p class='posted'>posted {{created_at}} ago</p>
+    <a class="refeed" id="{{id}}">Refeed me!</a>
   </li>
 </script>

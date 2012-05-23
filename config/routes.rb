@@ -9,6 +9,7 @@ FeedEngine::Application.routes.draw do
   match 'current_user' => 'sessions#user', as: 'current_user'
   post 'reset_password' => 'users#reset_password'
   match 'checkauth/:provider' => 'authentications#check'
+  match 'pointscount/:id' => 'posts#points_count'
 
   resources :authentications
 
@@ -33,7 +34,7 @@ FeedEngine::Application.routes.draw do
 
   match 'posts/ind', to: 'posts#ind'
   match 'posts/refeeds' => "posts#refeed", as: :refeed
-  resources :subscriptions, only: [:create]
+  resources :subscriptions, only: [:create, :index, :destroy]
 
   resources :users
   match 'user/update' => 'users#update'
@@ -41,6 +42,11 @@ FeedEngine::Application.routes.draw do
   resources :texts
   resources :images
   resources :links
+
+  resources :posts do
+    resources :points, only: [:create]
+  end
+
 
   root :to => 'pages#index'
   match '/integrate' => 'users#integrate', as: 'integrate'
