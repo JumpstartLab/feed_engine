@@ -46,12 +46,14 @@
               <div class='grey-box'>
                 <h3>Your Feeds</h3>
                 <hr />
-                <div class="all-feeds clearfix">
+                <div class="all-feeds clearfix" align="center">
                   <% current_user.friends.each do |friend| %>
                     <div class="feed">
-                      <img src = <%=friend.avatar%> class="feed-avatar">
-                      <%= link_to friend.display_name, "http://#{friend.display_name}.pointsfeed.in", :class => "feed-name" %>
-                      <%= link_to image_tag("x.png", :class=>"feed-delete"), friend_path(friend), :confirm => "Are you sure you want to remove this feed?", :method => :delete %>
+                      <img src = <%=friend.avatar%> class="feed-avatar" >
+                      <div class="feed-info">
+                        <h3><%= link_to friend.display_name, "http://#{friend.display_name}.pointsfeed.in", :class => "feed-name" %></h2>
+                        <%= link_to "Remove", friend_path(friend), :confirm => "Are you sure you want to remove this feed?", :method => :delete, :class=> "feed-delete"%>
+                      </div>
                     </div>
                   <% end %>
                 </div>
