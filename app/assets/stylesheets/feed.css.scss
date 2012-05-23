@@ -58,6 +58,7 @@
 
 .item-container-body {
   @include container;
+  width: 610px;
   padding: 10px 15px 15px 15px;
   -webkit-box-shadow: 1px 1px 3px 1px rgba(1, 1, 1, 0.5);
   box-shadow: 1px 1px 3px 1px rgba(1, 1, 1, 0.5);
@@ -112,11 +113,11 @@
 }
 
 .linked-post-logo {
-  font-size: 100px;
+  font-size: 60px;
 }
 
 .linked-twitter-logo {
-  font-size: 100px;
+  font-size: 60px;
   color: $twitter-blue; 
 }
 
@@ -128,8 +129,12 @@
 /*Stats*/
 .feed-meta-container {
   @include container;
+  width: 350px;
   padding: 10px;
   margin: 20px 0 0 100px;
+  background-color: white;
+-webkit-box-shadow: 1px 1px 1px 1px rgba(242, 242, 242, 1);
+box-shadow: 1px 1px 1px 1px rgba(242, 242, 242, 1);
 }
 $stat-count-font-size: 18px;
 
@@ -200,4 +205,14 @@ $stat-count-font-size: 18px;
   padding-left: 20px;
   font-family: $font;
   color: $trout-main-color;
+}
+
+.tacklebox-btn {
+  vertical-align: bottom;
+}
+
+.feed-meta-container {
+  a, a:visited {
+    color: white;
+  }
 }
