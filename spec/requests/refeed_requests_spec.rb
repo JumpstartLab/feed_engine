@@ -53,6 +53,16 @@ describe User do
       visit root_path
       page.should have_content message.body
     end
+
+    it "clicks refeed and does not see a duplicate item in the root feed" do
+      message = Message.find_by_poster_id(other_user.id)
+      set_host(other_user.display_name)
+      visit root_path
+      find("#refeed_item_#{message.item.id}").click
+      reset_host
+      visit root_path
+      page.should_not have_selector("#item_#{message.item.id}", :count => 2)
+    end
     context "refeeds another feed from another user's feed" do
       let!(:other_user) { Fabricate(:user) }
       before(:each) do
@@ -68,12 +78,10 @@ describe User do
         user.subscriptions.last.uid.should == other_user.id.to_s
       end
       context "and a refeed subscription has already been created" do
-        let!(:refeed_subscription) { Fabricate(:subscription,
-                                               :provider => "refeed",
-                                               :user_id => user.id,
-                                               :uid => other_user.id
-                                              )
-        }
+        before(:each) do
+          click_link_or_button "Refeed"
+        end
+
         it "does not show a link to refeed" do
           set_host other_user.subdomain
           visit root_path
@@ -81,47 +89,22 @@ describe User do
         end
       end
       context "and an item has been refeeded" do
-        let!(:body_post) {
-          random_body_type = ["message", "tweet", "instapound"].sample
-          Fabricate(random_body_type.to_sym, :poster_id => other_user.id)
-        }
-        let!(:description_post) {
-          random_description_type = ["image", "link"].sample
-          Fabricate(random_description_type.to_sym, :poster_id => other_user.id)
-        }
-        let!(:refeeded_body_item) { Refeed.create(poster_id: user.id,
-                                                  original_poster_id: other_user.id,
-                                                  post_id: body_post.id,
-                                                  post_type: body_post.type
-                                                 )
-        }
-        let!(:refeeded_description_item) { Refeed.create(poster_id: user.id,
-                                                         original_poster_id: other_user.id,
-                                                         post_id: description_post.id,
-                                                         post_type: description_post.type
-                                                        )
-        }
-        before(:each) do
-          set_host(user.subdomain)
-          visit root_path
-        end
 
         it "shows the item on the user's feed" do
-          within "#item_#{refeeded_body_item.item.id}" do
-            page.should have_content body_post.body
-          end
-          within "#item_#{refeeded_description_item.item.id}" do
-            page.should have_content description_post.description
-          end
-        end
-        it "shows the display name of both the original poster and the refeeder on the item" do
-          [refeeded_body_item, refeeded_description_item].each do |refeeded_post|
-            [User.find(refeeded_post.poster_id), User.find(refeeded_post.original_poster_id)].each do |person|
-              within "#item_#{refeeded_post.item.id}" do
-                page.should have_content person.display_name
-              end
-            end
-          end
+          random_body_type = ["message", "tweet", "instapound"].sample
+          body_post = Fabricate(random_body_type.to_sym, :poster_id => other_user.id)
+
+          random_description_type = ["image", "link"].sample
+          description_post = Fabricate(random_description_type.to_sym, :poster_id => other_user.id)
+
+          body_post.item.refeed_for(user)
+          description_post.item.refeed_for(user)
+
+          set_host(user.subdomain)
+          visit root_path
+
+          page.should have_content body_post.body
+          page.should have_content description_post.description
         end
       end
     end

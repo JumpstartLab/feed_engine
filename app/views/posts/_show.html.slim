@@ -1,4 +1,4 @@
-div class="fe-home-container #{post.user.display_name}_post" id="post_#{post.id}"
+div class="fe-home-container #{post.user.display_name}_post" id="item_#{post.item.id}"
   p.post-info
     span.post-month
       = (post.local_created_at).strftime("%B")

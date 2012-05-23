@@ -206,7 +206,7 @@ class Subscription < ActiveRecord::Base
     #   OpenStruct.new item unless item.original_poster_id.nil?
     # end
     # refeeded_items
-    Refeed.where(poster_id: self.user_id)
+    Item.where(poster_id: self.user_id).select(&:refeed?)
   end
 
 end
