@@ -137,3 +137,7 @@ ul.contained.awesome-tabs-content > li {
 .regrowled_icon {
   vertical-align: top;
 }
+.growl_content{
+  float:none !important;
+  margin:0 auto !important;
+}

@@ -3,17 +3,17 @@
 .row
   .two.columns
     = image_tag link.get_gravatar
-  .ten.columns
+  .growl_content.seven.columns
     .row
       = link.comment
-    .row
-      .comments
-        -if link.title.present?
-          = link_to link.title, link.link
-          .row= link.description
-        -else
-          = link_to link.link
-          .row= link.description
-        br
-        = image_tag link.photo(:medium)
+      .comments(style="float:left;")
+        .four.columns
+          = image_tag link.photo(:medium)
+        .eight.columns
+            -if link.title.present?
+              = link_to link.title, link.link
+              .row= truncate(link.description, length: 200)
+            -else
+              = link_to link.link
+              .row= link.description
 = render partial: "growls/footer", locals: { growl: link}

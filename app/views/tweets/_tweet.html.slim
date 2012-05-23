@@ -3,7 +3,7 @@
 .row
   .two.columns
     = image_tag tweet.get_gravatar
-  .nine.columns
+  .growl_content.seven.columns
     .growl_post
       = link_to tweet.title, tweet.link
       .row= tweet.comment_with_link.html_safe
