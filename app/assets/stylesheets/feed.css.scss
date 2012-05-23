@@ -44,8 +44,8 @@
 }
 
 .item_link {
- font-size: 16px;
- word-wrap: break-word;
+  font-size: 16px;
+  word-wrap: break-word;
 }
 
 .item-time {
@@ -82,15 +82,14 @@
 }
 
 .image-item {
- max-height: 500px;
- max-width: 500px;
+  max-height: 500px;
+  max-width: 500px;
 }
 
 /*Post logos*/
 @mixin item-logo {
   font-size: 24px;
-  padding: 0 0 0 5px;
-  float: right;
+  padding: 0 5px 0 0px;
   color: $trout-main-color;
 }
 
@@ -102,18 +101,23 @@
   float: right;
   line-height: 24px;
 }
+
+$post-font-size: 32px;
 .post-logo {
- @include item-logo;
+  @include item-logo;
+  font-size: $post-font-size;
 }
 
 .twitter-logo {
   @include item-logo;
   color: $twitter-blue; 
+  font-size: $post-font-size;
 }
 
 .github-logo {
   @include item-logo;
   color: black;
+  font-size: $post-font-size;
 }
 
 .linked-post-logo {
@@ -144,8 +148,8 @@
   padding: 10px;
   margin: 20px 0 0 100px;
   background-color: white;
--webkit-box-shadow: 1px 1px 1px 1px rgba(242, 242, 242, 1);
-box-shadow: 1px 1px 1px 1px rgba(242, 242, 242, 1);
+  -webkit-box-shadow: 1px 1px 1px 1px rgba(242, 242, 242, 1);
+  box-shadow: 1px 1px 1px 1px rgba(242, 242, 242, 1);
 }
 $stat-count-font-size: 18px;
 
@@ -205,7 +209,7 @@ $stat-count-font-size: 18px;
 }
 
 .feed-list {
- margin-top: 20px;
+  margin-top: 20px;
 }
 
 #pagination-div {
@@ -230,4 +234,8 @@ $stat-count-font-size: 18px;
 
 .linked-services {
   padding-left: 10px;
+}
+
+.item-footer {
+  padding-top: 50px;
 }
