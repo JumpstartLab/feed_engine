@@ -9,8 +9,26 @@ div class="container"
     div class="span4 stream"
       div id="anchor"
         div class="minidash" id="minidash"
-          h2 Mini-Dash
-          h3 = link_to "View Live Stream!", root_url(subdomain: current_user.display_name), class: "btn btn-primary btn-large"
+          table class="span2"
+            th 
+                img src="#{current_user.gravatar_url}" width="50"
+            th 
+              h2 #{current_user.display_name}
+
+          table class="span2"
+            th 
+              p Posts
+            th
+              p Following
+            th
+              p Followers
+            tr
+              td
+                p class="center" = current_user.posts.count
+              td
+                p class="center" = link_to current_user.followed_users.size, following_user_path(current_user)
+              td
+                p = link_to current_user.followers.size, followers_user_path(current_user)
           br
           div id="sliding_toggle"
             h3 = link_to "Link Yourself!", "#", id: "services_link", class: "btn btn-success btn-large"
@@ -31,6 +49,7 @@ div class="container"
             = link_to current_user.followed_users.size, following_user_path(current_user)
             h3 Refeeds
             = link_to current_user.refeeded_posts.size, refeeds_user_path(current_user)
+            h3 = link_to "View Live Stream!", root_url(subdomain: current_user.display_name), class: "btn btn-primary btn-large"
 
           div class="minidash" id="lower-dash"
             h2 accounts
