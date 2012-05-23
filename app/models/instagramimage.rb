@@ -1,6 +1,6 @@
 class Instagramimage < ActiveRecord::Base
   include PostsHelper
-  has_one :post, :as => :postable
+  has_many :posts, :as => :postable
   attr_accessible :content, :handle, :post_time, :source_id, :post_time, :caption, :user_id
 
   def self.import_posts(user_id)

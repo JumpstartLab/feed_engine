@@ -18,13 +18,13 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all.collect {|post| post.postable}.reverse.page(params[:page].to_i || 0)
+    @posts = Post.all.collect {|post| [post.postable, post.id] }.reverse.page(params[:page].to_i || 0)
   end
 
   def show
     user = User.find_by_display_name(params[:display_name])
     temp_posts = user.feed.posts.reverse.page(params[:page].to_i || 0)
-    @posts = temp_posts.collect { |p| p.postable }.reverse.page(params[:page].to_i || 0)
+    @posts = temp_posts.collect { |p| [p.postable, p.id] }.reverse.page(params[:page].to_i || 0)
     render action: :index
   end
 
@@ -41,7 +41,7 @@ class PostsController < ApplicationController
 
   def refeed
     orig_post = Post.find(params[:id])
-    unless orig_post.feed == current_user.feed    
+    unless orig_post.feed == current_user.feed || current_user.feed.posts.include?(orig_post)
       cloned_post = current_user.feed.posts.create
       cloned_post.postable = orig_post.postable
     end

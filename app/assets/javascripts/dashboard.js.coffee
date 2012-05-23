@@ -72,6 +72,8 @@ setFlash = (message) ->
   $('#flash').slideDown().delay(2000).slideUp()
 
 addRefeedHandler = ->
+  unless $.feedengine.current_user
+    $('.refeed').hide()
   $('.refeed').click ->
     post_id = $(this).attr('id')
     $.ajax(
@@ -79,9 +81,10 @@ addRefeedHandler = ->
       url: 'posts/refeeds',
       data: id:post_id,
       success: ->
-        setFlash('Posted successfully')
-      error: (response, status) ->
-          resp = $.parseJSON(response.responseText))
+        setFlash('Refed Successfully!')
+      error: ->
+        setFlash('Unsuccessful Refeed.OH NOES!')
+      )
 
 class FeedPager
   constructor:(feed=$('#all_posts')) ->
