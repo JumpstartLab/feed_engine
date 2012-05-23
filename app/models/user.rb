@@ -13,9 +13,12 @@ class User < ActiveRecord::Base
   has_many :posts
   has_many :subscriptions
   has_one :feed
-  validates_presence_of :email
-  validates :password, presence: true, length: {minimum: 6}
-  validates_confirmation_of :password, :on => :create, :message => "should match confirmation"
+  
+  validates :email, uniqueness: true, presence: true
+  validates :password, 
+    presence: true,
+    confirmation: true, 
+    length: {minimum: 6, :message => "must be at least 6 characters long"}
 
   DISPLAY_NAME_REGEX = /^[a-zA-Z0-9\-]*$/
   validates :display_name, 
