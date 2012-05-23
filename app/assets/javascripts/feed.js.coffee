@@ -24,17 +24,21 @@ jQuery ->
     $(el).data("content", "Click to retrout this item!")
   $('.refeed_ajax_link').popover({ offset: -500,placement: 'left'})
 
-  $(".refeed_ajax_link").live "click", (e) ->
+  $(document).on 'click','.refeed_ajax_link', (e) ->
     e.preventDefault()
     $('.refeed_ajax_link').popover('hide')
     $this = $(this)
+    author = $this.data('author')
 
     $.ajax
       type: "post"
       url: "/feeds/" + $(this).data('author') + "/stream_items/" + $(this).data('id') + "/refeeds.json?token=" + access_token
 
       success: (data) ->
-        $this.append("Post has been retrouted!").delay(3000).fadeOut(1000)
+        
+        $("#alert-bar").addClass('alert-success').text('You refeeded ' + author + '. Nice job!').hide()
+        $this.remove()
+        $("#alert-bar").slideDown().delay(5000).slideUp()
 
       error: (evt) ->
         $this.parent().append("You've already retrouted this.").addClass "label label-info"
