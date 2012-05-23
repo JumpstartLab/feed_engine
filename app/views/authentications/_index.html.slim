@@ -1,8 +1,9 @@
-h2 Your Authentications
-- ["twitter", "github", "instagram"].each do |service|
-  br
-  img src="assets/#{service}_64.png"
+#authentications
+  h2 Your Authentications
+  - ["twitter", "github", "instagram"].each do |service|
+    br
+    img src="assets/#{service}_64.png"
 
-    = link_to "Integrate Your #{service.capitalize}", "auth/#{service}/", id: "#{service}_false", target: "_blank"
+      = link_to "Integrate Your #{service.capitalize}", "auth/#{service}/", id: "#{service}_false", target: "_blank"
 
-    = link_to ' Remove This Authentication', "", confirm: 'Are you sure?', method: :delete, id: "#{service}_true", style: 'display: none;'
+      = link_to ' Remove This Authentication', "", confirm: 'Are you sure?', method: :delete, id: "#{service}_true", style: 'display: none;'

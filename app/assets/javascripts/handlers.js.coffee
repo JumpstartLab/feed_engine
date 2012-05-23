@@ -41,7 +41,34 @@ addServicesHandler = ->
         $("##{provider[0]}_false").hide()
         $("##{provider[0]}_true").attr("href","/authentications/#{provider[1]}").show()
     )
+    $.getJSON('/subscriptions', (response, status, jqxhr) ->
+      renderRefeeds(response['subscriptions'])
+    )
     pageSwap("#services-page")
+
+renderRefeeds = (subscriptions) ->
+  if subscriptions[0]
+    $('#refeeds').html("<ul>")
+    for subscription in subscriptions
+      $('#refeeds').append("<li><a class='unfeed' data-feed-id='#{subscription['feed_id']}'>X</a>&nbsp;&nbsp;#{subscription['feed_name']}</li>")
+    $('#refeeds').append("</ul>")
+    addUnfeedHandlers()
+  else
+    $('#refeeds').text("None")
+
+addUnfeedHandlers = ->
+  $('a.unfeed').click ->
+    id = $(this).attr('data-feed-id') 
+    $.ajax(
+      type: "DELETE",
+      url:  "/subscriptions/"+id,
+      data: { feed_id: id }
+      success: (data) ->
+        setFlash('Unsubscribe successful')
+        renderRefeeds(data['subscriptions'])
+      error: ->
+        setError('Unsubscribe failed')
+    )
 
 addSubmitHandlers = ->
   $(".errors").hide()
