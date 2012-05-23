@@ -7,6 +7,23 @@ describe User do
   let(:text_item)   { FactoryGirl.create(:text_item) }
   let(:image_item)  { FactoryGirl.create(:image_item) }
 
+  context ".new" do
+    it "validates case-insensitive uniqueness for user display names" do
+      test1 = FactoryGirl.create(:user, :display_name => "chris")
+      test2 = FactoryGirl.build(:user, :display_name => "Chris")
+
+      test2.should_not be_valid
+    end
+  end
+
+  context "#follower_count" do
+    it "returns the number of followers for a user" do
+      user.follower_count.should == 0
+
+      Subscription.stub(:find_all_by_followed_user_id).and_return([1,2,3,4,5])
+      user.follower_count.should == 5
+    end
+  end
 
   context "#add_stream_item" do
     it "adds a link item" do

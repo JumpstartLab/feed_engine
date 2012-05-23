@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 
   validates :display_name, :presence => true
   validates :display_name, :length => { :maximum => 20 }
-  validates_uniqueness_of :display_name
+  validates_uniqueness_of :display_name, :case_sensitive => false
   validates :display_name, :format => { :with => /\A[a-zA-Z0-9_-]+\z/,
             :message => "may only contain letters, numbers, dashes, and underscores." }
 
@@ -38,7 +38,12 @@ class User < ActiveRecord::Base
   end
 
   def last_retrout_id_for_user(followed_user)
-    stream_items.where(:streamable_type => ["ImageItem","LinkItem","TextItem"]).where(:original_author_id => followed_user.id).last.id
+    items = stream_items.where(:streamable_type => ["ImageItem","LinkItem","TextItem"]).where(:original_author_id => followed_user.id)
+    if items.any?
+      items.last.id
+    else
+      1
+    end
   end
 
   def to_param
@@ -55,6 +60,10 @@ class User < ActiveRecord::Base
 
   def has_retrouts_for?(item)
     stream_items.where(:refeed => true).where(:streamable_type => item.class).where(:streamable_id => item.id).where(:refeed => true).any?
+  end
+
+  def follower_count
+    Subscription.find_all_by_followed_user_id(self.id).count
   end
 
   private

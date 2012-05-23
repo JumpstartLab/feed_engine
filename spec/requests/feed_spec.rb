@@ -156,22 +156,11 @@ describe "Feed" do
         login(user_3)
         visit user_4_domain
         user_4.text_items.each do |item|
-          within("#item_#{item.id}") do
+          within("#item_#{item.to_param}") do
             page.should have_css('.refeed_ajax_link')
           end
         end
       end
-
-      # it "refeeds an item" do
-      #   # login_factory_user(user_3.email)
-      #   login(user_3)
-      #   visit user_4_domain
-      #   test_item = user_4.text_items.first
-      #   within("#item_#{user_4.stream_items.first.id}") { find(".refeed_ajax_link").click }
-      #   save_and_open_page
-      #   visit user_3_domain
-      #   page.should have_content(user_4.stream_items.first.streamable  )
-      # end
 
       it "refeeds an item with js", :js => true do
         # login_factory_user(user_3.email)

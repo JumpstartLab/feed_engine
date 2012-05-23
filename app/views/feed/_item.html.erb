@@ -27,10 +27,20 @@
 
   <%= render :partial => "#{item_class.pluralize}/#{item_class}", :locals => { :item => item.streamable} %>
 
-  <br/>
-  <br/>
+  <div class=" item-footer">
 
-  <div>
+
+    <% if item.streamable.class == TextItem %>
+      <span class="raphael-icon post-logo">E</span>
+    <% elsif item.streamable.class == ImageItem %>
+      <span class="raphael-icon post-logo">N</span>
+    <% elsif item.streamable.class == LinkItem %>
+      <span class="raphael-icon post-logo">È</span>
+    <% elsif item.streamable.class == TwitterItem %>
+      <span class="raphael-icon twitter-logo">^</span>
+    <% elsif item.streamable.class == GithubItem %>
+      <span class="raphael-icon github-logo">U</span>
+    <% end %>
     <span class="item-time">
       <%= time_ago_in_words(item.created_at) %> ago
       <span class="refeed-container">
@@ -42,18 +52,6 @@
         </span>
       <% end %>
     </span>
-
-    <% if item.streamable.class == TextItem %>
-      <span class="raphael-icon post-logo">E</span>
-    <% elsif item.class == ImageItem %>
-      <span class="raphael-icon post-logo">N</span>
-    <% elsif item.class == LinkItem %>
-      <span class="raphael-icon post-logo">È</span>
-    <% elsif item.class == TwitterItem %>
-      <span class="raphael-icon twitter-logo">^</span>
-    <% elsif item.class == GithubItem %>
-      <span class="raphael-icon github-logo">U</span>
-    <% end %>
   </div>
 
 

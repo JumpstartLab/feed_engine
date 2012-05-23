@@ -14,7 +14,6 @@
     <div class="row">
       <h2 class="feed-title span2"><%= @feed_owner.display_name %></h2>
     </div>
-    
     <% if current_user && (current_user != @feed_owner) %>
       <%= image_tag "/assets/tackle-box.png" %>
       <% if current_user.followed_users.include?(@feed_owner) %>
@@ -38,14 +37,14 @@
         </td>
         <td>
           <div class="following-count-container">
-            <span class="following-count">10</span>
+            <span class="following-count"><%= @feed_owner.subscriptions.count %></span>
             <br/>
             <span class="following-count-label">tackleboxed</span>
           </div>
         </td>
         <td>
           <div class="follower-count-container">
-            <span class="follower-count">1000</span>
+            <span class="follower-count"><%= @feed_owner.follower_count %></span>
             <br/>
             <span class="follower-count-label">tailing</span>
           </div>
