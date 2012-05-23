@@ -51,6 +51,7 @@ h1 {margin-bottom: 1em;}
 .post {
   @include clearfix;
   .post-avatar {width: 8%; max-width: 100px; float: left;}
+  .post-type-icon {width: 8%; max-width: 50px; float: left; margin-left: 6px; margin-top: 4px;}
   .well {width: 90%; float: right;}
   .post-image,
   .post-text,
