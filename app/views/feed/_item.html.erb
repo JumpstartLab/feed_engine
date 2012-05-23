@@ -40,7 +40,7 @@
       <%= time_ago_in_words(item.created_at) %> ago
     </span>
 
-    <% if item.class == TextItem %>
+    <% if item.streamable.class == TextItem %>
       <span class="raphael-icon post-logo">E</span>
     <% elsif item.class == ImageItem %>
       <span class="raphael-icon post-logo">N</span>
