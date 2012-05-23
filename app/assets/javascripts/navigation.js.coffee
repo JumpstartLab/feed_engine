@@ -14,7 +14,7 @@ spotlightToBackstage = ->
   $('#backstage').append($('#spotlight').children())
 
 addNavHandlers = ->
-  navItems = ['#friends', '#home', '#signin', '#signup']
+  navItems = ['#friends', '#home', '#signin', '#signup', '#settings']
   pageIDs = (id + '-page' for id in navItems)
   for id in navItems
     navHandler(id)
