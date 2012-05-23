@@ -80,6 +80,7 @@ header h2{
 }
 .content_bar {
   border-radius: 5px;
+  background-color:rgba(255, 255, 255, .9); padding:20px;
 }
 .header_image {
   background: url('/assets/background.jpg') center fixed;
@@ -148,7 +149,7 @@ div.alert-box {
 .feed-title {
   background-color: whiteSmoke;
   border-radius: 7px;
-  padding: 5px;
+  padding: 10px;
 }
 
 .filter-box {
@@ -162,4 +163,7 @@ div.alert-box {
 }
 .meta_data_body{
   font-size:12px;
+}
+.growl_footer{
+  padding-top:50px;
 }

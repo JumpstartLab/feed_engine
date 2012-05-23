@@ -1,12 +1,12 @@
 .growl-box
   .row#link
     = render :partial => "growls/left", :locals => { growl: link }
-    .seven.columns
-      h4= link.get_display_name
+    .eight.columns
       .row
-        .growl_content.offset-by-one
-          = link.comment
+        .growl_content
+          strong.speaker= "#{link.get_display_name} said:"
           br
+          = link.comment
           br
           br
           .row.meta_data_body
@@ -19,5 +19,5 @@
                 -else
                   b= link_to link.link
                   .row= link.description
-      = render :partial => 'growls/footer', :locals => { growl: link}
     = render :partial => "growls/right", :locals => { growl: link}
+  = render :partial => 'growls/footer', :locals => { growl: link}

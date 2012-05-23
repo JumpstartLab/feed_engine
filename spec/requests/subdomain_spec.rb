@@ -49,17 +49,6 @@ describe "Subdomains" do
         Capybara.app_host = "http://#{second_user.display_name}.hungry.test"
         visit root_path
       end
-
-      it "can subscribe to the visited user" do
-        click_link_or_button("SUBSCRIBE")
-        second_user.subscribers.include?(user).should == true
-      end
-
-      it "can end the subscription" do
-        pending
-        # Trigger UNSUBSCRIBE which capybara is having trouble finding/triggering
-        second_user.subscribers.include?(user).should == false
-      end
     end
   end
 end

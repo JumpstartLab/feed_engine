@@ -1,6 +1,6 @@
 .row
-  .nine.content_bar
-    div.row
+  .nine.columns.content_bar
+    .row
       h2 Dashboard
       dl.nice.contained.awesome-tabs
         dd#message= link_to "+ Message", "#", class: ("active" if @type == 'Message' || @type.nil? )

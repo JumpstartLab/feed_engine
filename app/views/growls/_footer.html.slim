@@ -1,4 +1,4 @@
-.row
+.row.growl_footer
   - if current_user
     - unless growl.original_growl?
       .six.columns.regrowled_text
@@ -11,4 +11,3 @@
       - elsif growl.user_id != current_user.id
         .regrowled.button.black.span.small.disabled.radius  Regrowled
       .regrowled.black.span.button.small.disabled.radius(style="display:none;")  Regrowled!
-hr

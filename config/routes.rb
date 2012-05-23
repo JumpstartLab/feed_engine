@@ -59,7 +59,7 @@ Hungrlr::Application.routes.draw do
   resources :links
   resources :messages
   resource :dashboard, :only => [ :show ]
-  resource :subscriptions, :only => [:create, :destroy, :index]
+  resources :subscriptions, :only => [:index, :create, :destroy]
   resource :search do
     get 'display_names'
   end

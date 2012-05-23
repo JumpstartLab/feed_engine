@@ -26,9 +26,9 @@ class User < ActiveRecord::Base
   has_many :github_events
 
   has_many :subscriptions
-  has_many :subscribers, :through => :subscriptions
+  has_many :subscribers, :through => :subscriptions # Who is falling you
   has_many :inverse_subscriptions, :class_name => "Subscription", :foreign_key => "subscriber_id"
-  has_many :inverse_subscribers, :through => :inverse_subscriptions, :source => :user
+  has_many :inverse_subscribers, :through => :inverse_subscriptions, :source => :user # Who you are following
 
   def relation_for(type)
     self.send(type.downcase.pluralize.to_sym).scoped rescue messages.scoped

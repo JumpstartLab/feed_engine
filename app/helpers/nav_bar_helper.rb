@@ -3,7 +3,8 @@ module NavBarHelper
     if current_user
       {
         "My Feed" => "http://#{current_user.display_name}.#{request.domain}",
-        "Account" => edit_user_registration_path
+        "Account" => edit_user_registration_path,
+        "Subscribers" => subscriptions_path
       }
     else
       {
