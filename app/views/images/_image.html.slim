@@ -6,5 +6,5 @@
   .growl_content.seven.columns
     = image.comment
     br
-    .comments= image_tag image.photo(:medium)
+    .comments(style='text-align:center;')= image_tag image.photo(:medium)
 = render partial: "growls/footer", locals: { growl: image}
