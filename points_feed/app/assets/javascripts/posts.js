@@ -29,6 +29,10 @@ function render_post(post) {
     if(post['refeed'] == true) { 
       post['avatar'] = post['refeeder']['avatar'];
     }
+
+    if(post['event_type'] == "PushEvent") {
+      post['event_type'] = "pushed to";
+    }
     
     return Mustache.render($("#"+post.type+"Template").html(), post);
   }
