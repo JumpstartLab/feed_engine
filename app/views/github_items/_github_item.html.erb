@@ -6,7 +6,7 @@
     <% if @commits %>
     <ul>
       <% @commits.each do |commit| %>
-      <li class="git-commit"><a href="<%= commit.url %>"><%= commit.message %></a></li>
+      <li class="git-commit"><a href="<%= commit["url"] %>"><%= commit["message"] %></a></li>
       <% end %>
     </ul>
     <% end %>
