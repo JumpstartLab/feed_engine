@@ -25,7 +25,6 @@ class GithubJob
 
     events.reverse.each do |event|
       troutr.create_github_item(user.display_name, JSON.dump(event))
-      #user.github_items.create(:event => event, :event_id => event.id)
     end
   end
 end
