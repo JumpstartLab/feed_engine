@@ -1,7 +1,7 @@
 class Api::StreamItemsController < Api::BaseController
   before_filter :verify_auth_token_match, :only => :create
   def show
-    @user = User.where(:display_name => params[:display_name]).first
+    @user = User.find_by_display_name(:display_name => params[:display_name])
     @stream_item = @user.stream_items.find(params[:id])
     @item = @stream_item.streamable
   end
@@ -14,5 +14,10 @@ class Api::StreamItemsController < Api::BaseController
     else
       render :json => {errors: [@item.errors]}, :status => :not_acceptable
     end
+  end
+
+  def recent
+    @user = User.find_by_display_name(:display_name => params[:display_name])
+    @stream_items = @user.stream_items.where(:refeed => false).where(:id > params[:body]["last_item_id"])
   end
 end
