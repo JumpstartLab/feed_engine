@@ -7,7 +7,12 @@ class Api::V1::GrowlsController < Api::V1::ApiController
 
   def index
     @user = User.where(display_name: params[:display_name]).first
-    @growls = @user.growls.by_date.page(params[:page]).per(10)
+
+    if params[:since].present?
+      @growls = @user.growls.since(params[:since].to_i).by_date
+    else
+      @growls = @user.growls.by_date.page(params[:page]).per(10)
+    end
   end
 
   def create

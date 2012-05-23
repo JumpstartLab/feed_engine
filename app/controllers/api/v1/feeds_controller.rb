@@ -3,11 +3,7 @@ class Api::V1::FeedsController < Api::V1::ApiController
   def show
     @user = User.where(display_name: params[:display_name]).first
     @growls = @user.growls.page(params[:page]).per(10)
-    if params[:since].blank?
-      @recent_growls = @user.growls.by_date.limit(3)
-    else
-      @recent_growls = @user.growls.since(params[:since].to_i).by_date
-    end
+    @recent_growls = @user.growls.by_date.limit(3)
   end
 
   #XXX SHOULD BE MOVED TO A REGROWL CONTROLLER

@@ -1,7 +1,10 @@
 .row
   .nine.columns.content_bar
     h2 Manage Subscriptions
+    - if @subscriptions.empty?
+      h4 You are not subscribed to anyone yet!
     br
+
     - @subscriptions.each do |subscriber|
       .subscriber.row.six.columns
         .six.columns
