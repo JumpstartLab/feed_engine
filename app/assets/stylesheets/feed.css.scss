@@ -165,76 +165,19 @@ $stat-count-font-size: 18px;
 
 .text-item-body > a {
   font-weight: 500;
-  color: $trout-main-color;
 }
 
 .text-item-body > a:visited {
   font-weight: 500;
-  color: $trout-main-color;
 }
 
 .text-item-body > a:hover {
   font-weight: 500;
-  color: $trout-main-color;
-  background-color: transparent;
 }
 
 .feed-title {
   @include troutr-title;
   padding: 0 0 14px 50px;
-}
-
-.git-commit a{
-  color: $trout-main-color;
-}
-
-.git-commit a:visited{
-  color: $trout-main-color;
-}
-
-.git-commit a:hover {
-  color: $trout-main-color;
-  background-color: transparent;
-}
-
-.item-header-user  a{
-  color: $trout-main-color;
-}
-
-.item-header-user a:visited{
-  color: $trout-main-color;
-}
-
-.item-header-user  a:hover {
-  color: $trout-main-color;
-  background-color: transparent;
-}
-
-.points-container  a{
-  color: $trout-main-color;
-}
-
-.points-container a:visited{
-  color: $trout-main-color;
-}
-
-.points-container a:hover {
-  color: $trout-hover-color; 
-  background-color: transparent;
-  text-decoration: none;
-}
-
-.refeed-buttons  a{
-  color: $trout-main-color;
-}
-
-.refeed-buttons a:visited{
-  color: $trout-main-color;
-}
-
-.refeed-buttons a:hover {
-  background-color: transparent;
-  text-decoration: none;
 }
 .twitter {
   @include word-wrap;
