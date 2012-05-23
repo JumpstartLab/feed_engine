@@ -2,19 +2,7 @@
   .six.columns.content_bar
     h2 Thanks for signing up!
     h5 Would you like to link your account with any of these services?
-    .block-grid.two-up.social-icons
-      - unless current_user.twitter?
-         = link_to image_tag('twitter-icon.png'), user_omniauth_authorize_path(:twitter)
-      - else
-         = link_to image_tag('twitter-dark.png'), authentication_path(current_user.twitter), method: :delete, class: "darken"
-      - unless current_user.github?
-         = link_to image_tag('github.png'), user_omniauth_authorize_path(:github)
-      - else
-         = link_to image_tag('github-dark.png'), authentication_path(current_user.github), method: :delete, class: "darken"
-      - unless current_user.instagram?
-         = link_to image_tag('instagram.png'), user_omniauth_authorize_path(:instagram)
-      - else
-        = link_to image_tag('instagram-dark.png'), authentication_path(current_user.instagram), method: :delete, class: "darken"
+    = render "shared/social_signin"
     hr
       .row(class="center_text")
         = link_to "Take me to my dashboard", dashboard_path(message: "Don't worry, you can link these later."), class: "large green nice button radius"

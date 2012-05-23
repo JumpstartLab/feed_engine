@@ -6,7 +6,8 @@ class Authentication < ActiveRecord::Base
   has_one :instagram_account, :dependent => :destroy
 
   SERVICES = ["twitter", "github", "instagram"]
-
+  LAST_STATUS = "205435025360031748"
+  
   SERVICES.each do |service|
     define_singleton_method "#{service}".to_sym do
       where(provider: service).first
@@ -39,10 +40,12 @@ class Authentication < ActiveRecord::Base
   end
 
   def create_twitter_details(data)
+    last_status_id = data.extra.raw_info.try(:status).try(:id_str) || LAST_STATUS
+
     create_twitter_account(uid: data["uid"],
                            nickname: data["info"]["nickname"],
                            image: data["info"]["image"],
-                           last_status_id: data["extra"]["raw_info"]["status"]["id_str"])
+                           last_status_id: last_status_id)
   end
 
   def self.create_github_auth(user, data)
