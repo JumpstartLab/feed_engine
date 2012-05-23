@@ -23,6 +23,7 @@ gem 'whenever', :require => false
 gem 'octokit'
 gem 'multimap'
 gem 'rest-client'
+gem 'sanitize'
 
 # gem 'instagram',  :git => 'git://github.com/mrgilman/instagram-ruby-gem.git'
 gem 'faraday'
