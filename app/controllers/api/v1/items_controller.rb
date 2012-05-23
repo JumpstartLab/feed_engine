@@ -81,7 +81,6 @@ class Api::V1::ItemsController < ApplicationController
 
   def validate_token!
     user = User.find_by_api_key(params[:api_key])
-    logger.info(user.inspect)
     error(:forbidden) unless user
   end
 end

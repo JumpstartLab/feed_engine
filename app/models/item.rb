@@ -63,11 +63,7 @@ class Item < ActiveRecord::Base
   end
 
   def refeedable_for?(user)
-    logger.info('********************************')
-    logger.info(user.inspect)
-    logger.info('********************************')
     refed_item = Item.find_by_poster_id_and_post_id(user.id, post.id)
-    logger.info(refed_item.inspect)
     refed_item.nil? && user.id != poster_id
   end
 
