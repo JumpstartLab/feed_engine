@@ -1,0 +1,2 @@
+module Api::MailsHelper
+end
