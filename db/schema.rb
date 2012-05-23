@@ -27,8 +27,9 @@ ActiveRecord::Schema.define(:version => 20120523151221) do
   create_table "github_items", :force => true do |t|
     t.text     "event"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "points_count", :default => 0
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
     t.string   "event_id"
   end
 
@@ -36,8 +37,9 @@ ActiveRecord::Schema.define(:version => 20120523151221) do
     t.text     "url"
     t.text     "comment"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "points_count", :default => 0
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
   end
 
   create_table "instagram_items", :force => true do |t|
@@ -52,8 +54,9 @@ ActiveRecord::Schema.define(:version => 20120523151221) do
     t.text     "url"
     t.text     "comment"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "points_count", :default => 0
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
   end
 
   create_table "points", :force => true do |t|
@@ -68,6 +71,7 @@ ActiveRecord::Schema.define(:version => 20120523151221) do
     t.integer  "user_id"
     t.integer  "streamable_id"
     t.string   "streamable_type"
+    t.integer  "points_count",      :default => 0
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
     t.boolean  "refeed",            :default => true
@@ -84,15 +88,17 @@ ActiveRecord::Schema.define(:version => 20120523151221) do
   create_table "text_items", :force => true do |t|
     t.text     "body"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "points_count", :default => 0
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
   end
 
   create_table "twitter_items", :force => true do |t|
     t.text     "tweet"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "points_count", :default => 0
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
     t.datetime "tweet_time"
     t.string   "status_id"
   end
