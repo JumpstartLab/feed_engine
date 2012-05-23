@@ -35,9 +35,9 @@ class User < ActiveRecord::Base
                                    :refeed => refeed)
   end
 
-    #   if StreamItem.where(:streamable_type => self.streamable_type).where(:streamable_id => self.streamable_id).where(:refeed => false).any? && self.refeed == false
-    #   errors.add(:refeed, "Can't have multiple original stream items")
-    # end
+  def last_retrouted_troutr_post_id(followed_user)
+    stream_items.where(:streamable_type => ["ImageItem","LinkItem","TextItem"]).where(:original_author_id => followed_user.id).last.id
+  end
 
   def to_param
     display_name
@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
 
   def last_twitter_item
     twitter_items.order("tweet_time DESC").first
-  end 
+  end
 
   def can_retrout?(original_item)
     original_item.user_id != id && !has_retrouts_for?(original_item)

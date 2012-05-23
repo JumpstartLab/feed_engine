@@ -17,7 +17,7 @@ class Api::StreamItemsController < Api::BaseController
   end
 
   def recent
-    @user = User.find_by_display_name(:display_name => params[:display_name])
-    @stream_items = @user.stream_items.where(:refeed => false).where(:id > params[:body]["last_item_id"])
+    @user = User.find_by_display_name(params[:display_name])
+    @stream_items = @user.stream_items.where(:refeed => false).where("id > ?", params[:id].to_i)
   end
 end
