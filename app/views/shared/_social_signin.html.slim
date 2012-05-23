@@ -1,4 +1,3 @@
-hr
 ul.block-grid.two-up.center_text
   - unless current_user.twitter?
     .row
@@ -18,7 +17,3 @@ ul.block-grid.two-up.center_text
   - else
     .row
       li= link_to "Unlink Instagram Feeds", authentication_path(current_user.instagram), method: :delete, class: "button black large disabled"
-
-  hr
-    .row
-      li= link_to "No thanks, take me to my dashboard", dashboard_path(message: "Don't worry, you can link these later."), class: "large green nice button radius"
