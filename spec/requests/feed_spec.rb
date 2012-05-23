@@ -17,9 +17,12 @@ describe "Feed" do
     
     it "adds a point for a logged in user" do
       t = user.text_items.first
-      t_string = "a#item_#{t.id}"
+      puts "#{t.inspect}"
+      t_string = "a#item_#{t.to_param}"
+      puts t_string
       page.should have_selector(t_string)
       find(t_string).click
+      save_and_open_page
       t.points.count.should == 1
     end
 
