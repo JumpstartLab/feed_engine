@@ -1,6 +1,7 @@
 <script type="text/template" id='TextItemTemplate'>
   <div class='row'>
     <div class='span7 well'>
+      <div class='points-success alert alert-success hide'></div>
       <div class='span1' style='margin-left: -3px'>
         <img src="{{avatar}}" style='height: 75px'></img> 
       </div>
@@ -15,7 +16,7 @@
         <span class='light'>Posted {{created_at}}</span><br />
       </div>
       <div class='icons' style='float: right'>
-        <div style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> {{points}}</div><br />
+        <div style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> <span class='points'>{{points}}</span></div><br />
         {{#refeedable}}
           <div><a href='#' class='refeed_link' data-id='{{id}}' data-user="{{feeder.name}}"><img src='/assets/refeed.png'></img></a></div><br />
         {{/refeedable}}
@@ -34,6 +35,7 @@
 <script type="text/template" id='TwitterFeedItemTemplate'>
   <div class='row'>
     <div class='span7 well'>
+      <div class='points-success alert alert-success hide'></div>
       <div class='span1' style='margin-left: -3px'>
         <img src="{{avatar}}" style='height: 75px'></img> 
       </div>
@@ -43,7 +45,7 @@
         <span class='light'>Posted {{created_at}} by <a href='http://twitter.com/{{screen_name}}'>{{screen_name}}</a> on <a href='http://www.twitter.com'>Twitter</a></span><br />
       </div>
       <div class='icons' style='float: right'>
-          <div style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> {{points}}</div><br />
+          <div style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> <span class='points'>{{points}}</span></div><br />
           <span><img src='/assets/twitter_25.png'></img></span>
       </div>
     </div>
@@ -53,6 +55,7 @@
 <script type="text/template" id='GithubFeedItemTemplate'>
   <div class='row'>
     <div class='span7 well'>
+      <div class='points-success alert alert-success hide'></div>
       <div class='span1' style='margin-left: -3px'>
         <img src="{{avatar}}" style='height: 75px'></img> 
       </div>
@@ -62,7 +65,7 @@
         <span class='light'>Posted {{created_at}} by <a href='http://www.github.com/{{screen_name}}'>{{screen_name}}</a> on <a href='http://www.github.com'>GitHub</a></span><br />
       </div>
       <div class='icons' style='float: right'>
-        <div style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> {{points}}</div><br />
+        <div style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> <span class='points'>{{points}}</span></div><br />
         <span><img style='padding-top:5px;' src='/assets/github_25.png'></img></span>
       </div>
     </div>
@@ -72,6 +75,7 @@
 <script type="text/template" id='ImageItemTemplate'>
   <div class='row'>
     <div class='span7 well'>
+      <div class='points-success alert alert-success hide'></div>
       <div class='span1' style='margin-left: -3px'>
         <img src="{{avatar}}" style='height: 75px'></img> 
       </div>
@@ -87,7 +91,7 @@
         <span class='light'>Posted {{created_at}}</span><br />
       </div>
       <div class='icons' style='float: right'>
-        <div style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> {{points}}</div><br />
+        <div style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> <span class='points'>{{points}}</span></div><br />
         {{#refeedable}}
           <div><a href='#' class='refeed_link' data-id='{{id}}' data-user="{{feeder.name}}"><img src='/assets/refeed.png'></img></a></div><br />
         {{/refeedable}}
@@ -104,6 +108,7 @@
 <script type="text/template" id='LinkItemTemplate'>
   <div class='row'>
     <div class='span7 well'>
+      <div class='points-success alert alert-success hide'></div>
       <div class='span1' style='margin-left: -3px'>
         <img src="{{avatar}}" style='height: 75px'></img> 
       </div>
@@ -119,7 +124,7 @@
         <span class='light'>Posted {{created_at}}</span><br />
       </div>
       <div class='icons' style='float: right'>
-        <div style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> {{points}}</div><br />
+        <div style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> <span class='points'>{{points}}</span></div><br />
         {{#refeedable}}
           <div><a href='#' class='refeed_link' data-id='{{id}}' data-user="{{feeder.name}}"><img src='/assets/refeed.png'></img></a></div><br />
         {{/refeedable}}
@@ -136,6 +141,7 @@
 <script type="text/template" id='InstagramFeedItemTemplate'>
   <div class='row'>
     <div class='span7 well'>
+      <div class='points-success alert alert-success hide'></div>
       <div class='span1' style='margin-left: -3px'>
         <img src="{{avatar}}" style='height: 75px'></img> 
       </div>
@@ -146,7 +152,7 @@
         <span class='light'>Posted {{created_at}} via <a href='http://instagr.am/'>Instagram</a></span><br />
       </div>
       <div class='icons' style='float: right'>
-          <div style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> {{points}}</div><br />
+          <div style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> <span class='points'>{{points}}</span></div><br />
           <span><img style='padding-top:5px;' src='/assets/instagram_25.png'></img></span>
       </div>
     </div>

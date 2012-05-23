@@ -115,7 +115,16 @@ function award_points() {
     },
     success: function(data) {
       $.cookie('award_points_to', null);
-      $(document).find("[data-id="+id+"]").parent().html('Points! awarded.').addClass('label label-info');
+      var link = $(document).find("[data-id="+id+"]")
+      var parent = link.parent();
+      var points = parent.find(".points");
+      var img = link.find('img');
+
+      link.hide().parent().prepend(img);
+      img.css('opacity', .5);
+
+      points.html(parseInt(points.html()) + 1);
+      points_notify($(document).find("[data-id="+id+"]").parent().parent().parent(), 'Point! awarded');
     },
     error: function(evt) {
       alert('Unable to award Points!®');
