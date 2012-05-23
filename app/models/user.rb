@@ -143,7 +143,7 @@ class User < ActiveRecord::Base
       false
     end
   end
-  
+
   def subscribed_to_all_services?
     subscriptions.count == num_subscriptions
   end
@@ -151,7 +151,7 @@ class User < ActiveRecord::Base
 
   def num_subscriptions
     Subscription.number_of_services
-  end  
+  end
 
   def refeed_subscription_exists_for?(original_poster)
     refed_subscriptions = subscriptions.select do |sub|
