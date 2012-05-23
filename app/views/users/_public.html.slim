@@ -1,3 +1,4 @@
 - @posts.each do |post|
-  = render :partial => "posts/show", :locals => { :post => post }
+  - cache("post_#{post.item.id}") do
+    = render :partial => "posts/show", :locals => { :post => post }
 = paginate @posts

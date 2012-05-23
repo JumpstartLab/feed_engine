@@ -17,18 +17,8 @@ class Item < ActiveRecord::Base
   after_destroy :destroy_refeeds!
   belongs_to :post, :polymorphic => true
 
-  def self.all_items
-    User.all.collect { |user| user.items }.flatten(1)
-  end
-
-  def self.all_items_sorted
-    all_items.sort do |comparer, comparee|
-      comparee.created_at <=> comparer.created_at
-    end
-  end
-
   def self.all_items_sorted_posts
-    all_items_sorted.collect { |item| item.post }
+    Item.order("created_at desc").includes(:post => [:user, :item]).collect(&:post)
   end
 
   def self.give_point_to(item_id)
@@ -40,10 +30,6 @@ class Item < ActiveRecord::Base
 
   def poster
     User.find(self.poster_id)
-  end
-
-  def post
-    self.post_type.constantize.find(post_id)
   end
 
   def refeed_for(new_poster)
