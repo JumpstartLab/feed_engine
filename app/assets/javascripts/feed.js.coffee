@@ -28,6 +28,7 @@ jQuery ->
     e.preventDefault()
     $('.refeed_ajax_link').popover('hide')
     $this = $(this)
+    author = $this.data('author')
 
     $.ajax
       type: "post"
@@ -35,7 +36,7 @@ jQuery ->
 
       success: (data) ->
         
-        $("#alert-bar").addClass('alert-success').text('You refeeded ' + $(this).data('author') + '. Nice job!').hide()
+        $("#alert-bar").addClass('alert-success').text('You refeeded ' + author + '. Nice job!').hide()
         $this.remove()
         $("#alert-bar").slideDown().delay(5000).slideUp()
 
