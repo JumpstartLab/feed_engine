@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120523185748) do
+ActiveRecord::Schema.define(:version => 20120523232108) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -78,6 +78,8 @@ ActiveRecord::Schema.define(:version => 20120523185748) do
     t.integer  "retrouted_from_id"
     t.integer  "original_author_id"
   end
+
+  add_index "stream_items", ["streamable_type", "streamable_id"], :name => "index_stream_items_on_streamable_type_and_streamable_id"
 
   create_table "subscriptions", :force => true do |t|
     t.integer  "follower_id"
