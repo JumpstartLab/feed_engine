@@ -84,7 +84,6 @@ class FeedPager
       $.getJSON('/posts', page: @page, renderPosts)
     else
       url = "posts/#{@feeduser.toString()}"
-      alert url
       $.getJSON(url, page: @page, renderPosts)
 
 checkForBottom = ->
