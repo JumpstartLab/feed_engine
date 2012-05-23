@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Api::V1::ItemsController do
   render_views
   let!(:user) { Fabricate(:user) }
+  let(:other_user) { Fabricate(:user_with_posts) }
 
   describe "GET requests" do
     context "to index" do
@@ -71,6 +72,43 @@ describe Api::V1::ItemsController do
             test_bodies.should include body
             body.should_not == message1.body
           end
+        end
+
+        it "returns all a user's items if there is a powerup parameter" do
+          params[:all] = "1up"
+          get :index, params
+          parsed = JSON.parse(response.body)
+          parsed["items"]["all"].length.should == 4
+        end
+
+        it "returns all a user's items, including refeeds" do
+          params[:all] = "1up"
+          other_user.items.first.refeed_for(user)
+          get :index, params
+          parsed = JSON.parse(response.body)
+          parsed["items"]["all"].length.should == 5
+        end
+
+        it "returns all items created on or after a specific time" do
+          message5 = Message.create(body: '5', poster_id: user.id)
+          sleep 1
+          message6 = Message.create(body: '6', poster_id: user.id)
+          params[:time] = message6.created_at.to_s
+          get :index, params
+          parsed = JSON.parse(response.body)
+          parsed["items"]["filtered"].length.should == 1
+        end
+
+        it "returns items created on or after time, including refeeds" do
+          message5 = Message.create(body: '5', poster_id: user.id)
+          other_message = Message.create(body: 'X', poster_id: other_user.id)
+          sleep 1
+          message6 = Message.create(body: '6', poster_id: user.id)
+          other_message.item.refeed_for(user)
+          params[:time] = message6.created_at.to_s
+          get :index, params
+          parsed = JSON.parse(response.body)
+          parsed["items"]["filtered"].length.should == 2
         end
       end
     end
