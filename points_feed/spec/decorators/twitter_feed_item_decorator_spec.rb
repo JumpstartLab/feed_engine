@@ -5,9 +5,4 @@ describe TwitterFeedItemDecorator do
     decorator = TwitterFeedItemDecorator.decorate(nil)
     decorator.to_json.should == "{}"
   end
-
-  it 'returns a hash' do
-    pending
-    decorator = TwitterFeedItemDecorator.decorate()
-  end
 end
