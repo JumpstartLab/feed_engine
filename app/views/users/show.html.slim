@@ -1,8 +1,8 @@
 div class="container"
   div class="span8 offset2"
     div class="user-display-info"
-      h1 #{user.display_name || user.email} stream
       = render "follow_and_unfollow_actions"
+      h1 #{user.display_name || user.email} stream
 
     div id="posts" data-json-url="#{items_url(user_display_name: user.display_name, format: :json)}"
 
