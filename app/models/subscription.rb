@@ -15,6 +15,7 @@
 
 # The model for any external subscriptions
 class Subscription < ActiveRecord::Base
+  SERVICES_COUNT = 3
   EVENT_LIST = ["PushEvent", "CreateEvent", "ForkEvent"]
   PROVIDER_TO_POST_TYPE = { "twitter" => "tweets", "github" => "github_events",
                             "instagram" => "instapounds"}
@@ -43,6 +44,10 @@ class Subscription < ActiveRecord::Base
       :run_at =>
       SUBSCRIPTION_FREQ.seconds.from_now
     ).get_all_new_service_posts
+  end
+
+  def self.number_of_services
+    SERVICES_COUNT
   end
 
   def get_new_posts

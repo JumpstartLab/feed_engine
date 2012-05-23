@@ -111,7 +111,7 @@ class User < ActiveRecord::Base
 
 
   def num_subscriptions
-    Subscription.all.map(&:provider).uniq.count
+    Subscription.number_of_services
   end
 
   private
