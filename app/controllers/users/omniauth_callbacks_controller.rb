@@ -5,24 +5,31 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def twitter
     response = Authentication.add_twitter(current_user, @data)
     flash[:notice] = "Twitter account successfully added."
-    render "dashboards/show"
+    if session[:registration].present?
+      redirect_to new_authentication_path
+    else
+      render "dashboards/show"
+    end
   end
 
   def github
     response = Authentication.add_github(current_user, @data)
     flash[:notice] = "Github account successfully added."
-    render "dashboards/show"
+    if session[:registration].present?
+      redirect_to new_authentication_path
+    else
+      render "dashboards/show"
+    end
   end
 
   def instagram
     response = Authentication.add_instagram(current_user, @data)
-
-    if response
-      flash[:notice] = "Account successfully added."
+    flash[:notice] = "Instagram account successfully added."
+    if session[:registration].present?
+      redirect_to new_authentication_path
     else
-      flash[:notice] = "There was an error adding your instagram account"
+      render "dashboards/show"
     end
-    render "dashboards/show"
   end
 
   private
