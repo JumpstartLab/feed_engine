@@ -9,7 +9,7 @@ class Api::RefeedsController < Api::BaseController
                                        original_author_id: item.user.id,
                                        refeed: true)
     if refeed.save
-      Pusher['test_channel'].trigger('greet', {:author => refeed.author.display_name })
+      Pusher["#{refeed.author.display_name}"].trigger('greet', {:author => refeed.author.display_name, :refeed => refeeder.display_name } )
       respond_with(refeed, :status => :created,
                            :location => api_item_path(refeeder, item))
     else

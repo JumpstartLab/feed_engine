@@ -1,17 +1,18 @@
 <div class="span6" >
 <script src="http://js.pusherapp.com/1.9/pusher.min.js"></script>
- <script type="text/javascript">
- var pusher = new Pusher('<%= Pusher.key %>'); // uses your API KEY
- var channel = pusher.subscribe('test_channel');
- channel.bind('greet', function(data) {
-      var user = '<%= current_user.display_name unless current_user == nil %>'
-      if (data.author == user) {
+<script type="text/javascript">
+  var user = '<%= current_user.display_name unless current_user == nil %>'
+  if (user) {
+    var pusher = new Pusher('<%= Pusher.key %>'); // uses your API KEY
+    var channel = pusher.subscribe(user);
+     channel.bind('greet', function(data) {
+        if (data.author == user) {
         $("#alert-bar").addClass('alert-success').text("You have been retrouted!").hide()
-  $("#alert-bar").slideDown().delay(5000).slideUp()
+        $("#alert-bar").slideDown().delay(5000).slideUp()
       }
 });
-
- </script>
+  }
+</script>
 <div class="feed-list" id="stream-items">
 
   <% if @stream_items %>
