@@ -14,8 +14,10 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def index
+    @all = params[:all]
     @user = User.find_by_display_name(params[:display_name])
     @items = Item.find_all_by_poster_id(@user.id)
+    @filtered_items = created_on_or_after(@items) if params[:time]
   end
 
   def show
@@ -82,5 +84,12 @@ class Api::V1::ItemsController < ApplicationController
   def validate_token!
     user = User.find_by_api_key(params[:api_key])
     error(:forbidden) unless user
+  end
+
+  def created_on_or_after(items)
+    items.select do |item|
+      logger.info("#{item.created_at} >= #{params[:time]}")
+      item.created_at.to_s >= Time.parse(params[:time]).to_s
+    end
   end
 end
