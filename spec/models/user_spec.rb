@@ -77,6 +77,9 @@ describe User do
     end
   end
   context "subscriptions" do
+    let(:post) { OpenStruct.new(created_at: Time.now) }
+    before(:each) { Subscription.any_instance.stub(:get_new_service_posts).and_return([post]) }
+      
     describe "#subscription" do
       let!(:twitter_subscription) {Fabricate(:subscription, provider: "twitter", user_id: user.id) }
       let!(:github_subscription) {Fabricate(:subscription, provider: "github", user_id: user.id) }
