@@ -45,7 +45,7 @@ module Hungrlr
     end
 
     def new_event?(event, last_status_id)
-      event.created_at > last_status_id
+      TimeDate.parse(event.created_at).to_i > TimeDate.parse(last_status_id).to_i
     end
   end
 end
