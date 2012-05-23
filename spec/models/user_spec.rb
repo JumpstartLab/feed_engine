@@ -16,6 +16,15 @@ describe User do
     end
   end
 
+  context "#follower_count" do
+    it "returns the number of followers for a user" do
+      user.follower_count.should == 0
+
+      Subscription.stub(:find_all_by_followed_user_id).and_return([1,2,3,4,5])
+      user.follower_count.should == 5
+    end
+  end
+
   context "#add_stream_item" do
     it "adds a link item" do
       user.add_stream_item(link_item)

@@ -62,6 +62,10 @@ class User < ActiveRecord::Base
     stream_items.where(:refeed => true).where(:streamable_type => item.class).where(:streamable_id => item.id).where(:refeed => true).any?
   end
 
+  def follower_count
+    Subscription.find_all_by_followed_user_id(self.id).count
+  end
+
   private
 
   def send_welcome_mail
