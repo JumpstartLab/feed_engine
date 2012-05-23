@@ -11,4 +11,3 @@
      = link_to image_tag('instagram.png'), user_omniauth_authorize_path(:instagram)
   - else
     = link_to image_tag('instagram-dark.png'), authentication_path(current_user.instagram), method: :delete, class: "darken"
-

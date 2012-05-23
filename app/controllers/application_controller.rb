@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
     increment_points if session[:growl_needing_point]
     if resource.is_a? User
       user.send_welcome_message
+      session[:registration] = true
       new_authentication_path
     else
       dashboard_path
