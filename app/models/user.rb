@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :githubevents
   has_many :posts
   has_many :subscriptions
+  has_many :points
   has_one :feed
   
   validates :email, uniqueness: true, presence: true

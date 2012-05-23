@@ -38,4 +38,8 @@ class PostsController < ApplicationController
     @posts = temp_posts.collect { |p| p.postable }
     render "posts/index"
   end
+
+  def points_count
+    @points_count = Post.find(params[:id]).points.count
+  end
 end

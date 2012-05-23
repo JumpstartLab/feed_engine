@@ -1,7 +1,12 @@
 class Instagramimage < ActiveRecord::Base
   include PostsHelper
   has_one :post, :as => :postable
+<<<<<<< HEAD
   attr_accessible :content, :handle, :source_id, :post_time, :caption, :user_id
+=======
+  attr_accessible :content, :handle, :post_time, :source_id, :post_time, :caption, :user_id
+  has_many :points, :through => :post
+>>>>>>> points
 
   def self.import_posts(user_id)
     user = User.find(user_id)

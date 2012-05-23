@@ -43,6 +43,14 @@
   .repo {
     color: $whale;
   }
+  .thumb {
+    width: 64px;
+    height: 64px;
+    float: right;
+  }
+  .points {
+    float: right;
+  }
 
   p {
     color: $whale;
