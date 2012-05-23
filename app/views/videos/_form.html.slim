@@ -4,21 +4,13 @@
 .row
   = simple_form_for @growl, :url => growls_path, :html => { :id => 'video_form' } do |f|
     = f.input :type, :as => :hidden, :input_html => { :value => "Video" }
-    = f.input :link, :maxlength => "2048", label: "&nbsp;", as: :string, input_html: { id: "link_link", placeholder: "Video URL"}
-    = f.input :comment, input_html: { id: "link_comment" }, label: "&nbsp;", placeholder: "Comment"
+    = f.input :link, :maxlength => "2048", label: "&nbsp;", as: :string, input_html: { id: "video_link", placeholder: "Video URL"}
+    = f.input :comment, input_html: { id: "video_comment" }, label: "&nbsp;", placeholder: "Comment"
     p
       | You have&nbsp;
       span#charsLeftLink
       |  chars left.
-    = f.button :submit, "Create Link"
-.row
-  #link_show(style="display:none;")
-    #loading= image_tag "loading_big.gif"
-    h3#image_helper Preview your Link Contents:
-    .comments
-      h4#title
-      #description
-      img#thumbnail(src="")
+    = f.button :submit, "Growl Video"
 
 coffee:
   jQuery ->

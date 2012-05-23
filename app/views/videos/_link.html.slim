@@ -1,19 +1,17 @@
 .row#link
-  = render :partial => "growls/header", :locals => { growl: link }
+  = render :partial => "growls/header", :locals => { growl: video }
 .row
-  .two.columns
-    = image_tag link.get_gravatar
   .ten.columns
     .row
-      = link.comment
+      = video.comment
     .row
       .comments
-        -if link.title.present?
-          = link_to link.title, link.link
-          .row= link.description
+        -if video.title.present?
+          = link_to video.title, video.link
+          .row= video.description
         -else
-          = link_to link.link
-          .row= link.description
+          = link_to video.link
+          .row= video.description
         br
-        = image_tag link.photo(:medium)
-= render partial: "growls/footer", locals: { growl: link}
+        iframe allowfullscreen="" frameborder="0" height="315" src=(video.link)width="560"
+= render partial: "growls/footer", locals: { growl: video}

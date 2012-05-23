@@ -1,4 +1,5 @@
 json.subscriptions @subscriptions do |json, subscription|
+  json.id subscription.id
   json.user_display_name subscription.user.display_name
   json.user_id subscription.user_id
   json.user_slug subscription.user.slug

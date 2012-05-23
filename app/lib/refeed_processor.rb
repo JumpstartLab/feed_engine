@@ -9,7 +9,7 @@ module Hungrlr
 
     def initialize
       self.bj_token = ENV["BJ_TOKEN"].present? ? ENV["BJ_TOKEN"] : "HUNGRLR"
-      self.base_url = ENV["DOMAIN"].present? ? ENV["DOMAIN"] : "http://api.hungrlr.dev/v1"
+      self.base_url = ENV["DOMAIN"].present? ? ENV["DOMAIN"] : "http://api.lvh.me:3000/v1"
     end
 
     def subscriptions
@@ -22,17 +22,21 @@ module Hungrlr
       JSON.parse(growls)["growls"]
     end
 
-    def create_regrowls_for(user_slug, subscriber_token, growls)
+    def create_regrowls_for(subscription, growls)
+      user_slug = subscription["user_slug"]
+      subscriber_token = subscription["subscriber_token"]
+      id = subscription["id"]
+
       growls.each do |growl|
         uri_path = URI("#{base_url}/feeds/#{user_slug}/growls/#{growl["id"]}/refeed")
-        Net::HTTP.post_form(uri_path, token: subscriber_token)
+        Net::HTTP.post_form(uri_path, token: subscriber_token, subscription_id: id)
       end
     end
 
     def run
       subscriptions.each do |subscription|
         growls = get_growls(subscription["user_slug"], subscription["last_status_id"])
-        create_regrowls_for(subscription["user_slug"], subscription["subscriber_token"], growls)
+        create_regrowls_for(subscription, growls)
       end
     end
   end
