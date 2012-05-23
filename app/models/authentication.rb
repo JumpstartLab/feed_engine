@@ -21,7 +21,6 @@ class Authentication < ActiveRecord::Base
                   :image
 
   belongs_to :user
-  after_create :import_items
 
   def create_twitter_auth(omniauth)
     self.update_attributes(provider: omniauth["provider"],
@@ -54,14 +53,5 @@ class Authentication < ActiveRecord::Base
                            last_status_id: DateTime.now.to_s,
                            image: omniauth["info"]["image"]
       )
-  end
-
-  def import_items
-    case self.provider
-    when 'twitter'
-      Fetcher.delay.import_twitter_activity(self.user, self.uid, self.last_status_id)
-    when 'github'
-      Fetcher.delay.import_github_activity(self.user, self.username, self.last_status_id)
-    end
   end
 end
