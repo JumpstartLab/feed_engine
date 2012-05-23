@@ -34,6 +34,6 @@ class Githubevent < ActiveRecord::Base
      when "PushEvent" then "pushed to repo"
     end
 
-    "#{event_handle} #{action_text} "
+    "#{event_handle} #{action_text} #{event_repo.split("/").last}"
   end
 end
