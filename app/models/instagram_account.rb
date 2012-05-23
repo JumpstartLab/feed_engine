@@ -6,7 +6,7 @@ class InstagramAccount < ActiveRecord::Base
   delegate :id, :to => :user, :prefix => true
 
   def update_last_status_id_if_necessary(new_status_id)
-    if DateTime.parse(last_status_id) < DateTime.parse(new_status_id)
+    if DateTime.parse(last_status_id).to_i < DateTime.parse(new_status_id).to_i
       update_attribute("last_status_id", new_status_id)
     end
   end
