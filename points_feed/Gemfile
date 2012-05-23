@@ -21,6 +21,9 @@ gem 'puma'
 gem "remotipart", "~> 1.0"
 gem 'whenever', :require => false
 gem 'octokit'
+gem 'multimap'
+gem 'rest-client'
+
 # gem 'instagram',  :git => 'git://github.com/mrgilman/instagram-ruby-gem.git'
 gem 'faraday'
 gem 'hashie'
