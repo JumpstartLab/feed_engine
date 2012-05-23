@@ -1,5 +1,4 @@
-div class="container-fluid"
-  div class="row"
+div class="container"
     div class="span8 stream"
       = render 'content_creation_nav_bar'
       = render 'content_creation_forms'
@@ -32,7 +31,14 @@ div class="container-fluid"
             = link_to current_user.followed_users.size, following_user_path(current_user)
             h3 Refeeds
             = link_to current_user.refeeded_posts.size, refeeds_user_path(current_user)
-            br
+
+          div class="minidash" id="lower-dash"
+            h2 accounts
+            div id="sliding_toggle"
+              h3 = link_to "Link Yourself!", "#", id: "services_link", class: "btn btn-success btn-large"
+              br
+              div id='services_toggle'
+                = render 'services/form', id: "external_links"
 
         div id="totop"
           h3 Back to Top
