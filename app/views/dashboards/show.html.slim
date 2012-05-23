@@ -11,46 +11,36 @@ div class="container"
         div class="minidash" id="minidash"
           table class="span2"
             th 
-                img src="#{current_user.gravatar_url}" width="50"
+              img src="#{current_user.gravatar_url}" width="50"
             th 
-              h2 #{current_user.display_name}
+              h2 
+                = link_to current_user.display_name, root_url(subdomain: current_user.display_name)
 
-          table class="span2"
+          table id="stats-dash" class="span3"
             th 
-              p Posts
+              p id="stats-header" Posts
             th
-              p Following
+              p id="stats-header" Following
             th
-              p Followers
+              p id="stats-header" Followers
+            th
+              p id="stats-header" Points!
             tr
               td
-                p class="center" = current_user.posts.count
+                p class="stats-numbers" = current_user.posts.count
               td
-                p class="center" = link_to current_user.followed_users.size, following_user_path(current_user)
+                p class="stats-numbers" = link_to current_user.followed_users.size, following_user_path(current_user)
               td
-                p = link_to current_user.followers.size, followers_user_path(current_user)
-          br
-          div id="sliding_toggle"
-            h3 = link_to "Link Yourself!", "#", id: "services_link", class: "btn btn-success btn-large"
-            br
-            div id='services_toggle'
-              = render 'services/form', id: "external_links"
-            h3 Total Posts
-            = current_user.posts.count
-            br
-            h3 Total Points
-            br
-            h3 Most Popular Post
-            br
-            h3 Followers
-            = link_to current_user.followers.size, followers_user_path(current_user)
-            br
-            h3 Following
-            = link_to current_user.followed_users.size, following_user_path(current_user)
-            h3 Refeeds
-            = link_to current_user.refeeded_posts.size, refeeds_user_path(current_user)
-            h3 = link_to "View Live Stream!", root_url(subdomain: current_user.display_name), class: "btn btn-primary btn-large"
+                p class="stats-numbers" = link_to current_user.followers.size, followers_user_path(current_user)
+              td
+                p class="stats-numbers" XX
 
+
+          br
+          br
+          br
+          br
+          br
           div class="minidash" id="lower-dash"
             h2 accounts
             div id="sliding_toggle"
