@@ -127,12 +127,16 @@ class Subscription < ActiveRecord::Base
   end
 
   def create_refeed(new_post)
-    Refeed.create!(post_id: new_post.post_id,
-                   original_poster_id: self.uid,
-                   poster_id: self.id,
-                   post_type: PROVIDER_TO_POST_TYPE[self.provider],
-                   subscription_id: self.id
-                  )
+    HTTParty.post("http://api.#{base_url}/v1/feeds/" +
+      "#{original_poster.subdomain}/items/#{new_post.item_id}/refeeds.json", 
+      :body => { :api_key => new_poster.api_key } )
+
+    # Refeed.create!(post_id: new_post.post_id,
+    #                original_poster_id: self.uid,
+    #                poster_id: self.id,
+    #                post_type: PROVIDER_TO_POST_TYPE[self.provider],
+    #                subscription_id: self.id
+    #               )
   end
 
   def get_tweets
@@ -161,10 +165,9 @@ class Subscription < ActiveRecord::Base
   end
 
   def get_refeeds
-    all_refeeds = HTTParty.get(
-      "http://api.#{base_url}/v1/feeds/" +
-      "#{original_poster.subdomain}/items.json"
-    )["items"]["most_recent"]
+    all_refeeds = HTTParty.get("http://api.#{base_url}/v1/feeds/" +
+      "#{original_poster.subdomain}/items.json")["items"]["most_recent"]
+
     objectified_refeeds = all_refeeds.map do |refeed|
       objectified_refeed = OpenStruct.new refeed
       # objectified_refeed.created_at = objectified_refeed.created_at.utc
