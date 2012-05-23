@@ -113,7 +113,7 @@ class FeedPager
         json_string = JSON.stringify(response)
         current_user_subdomain = JSON.parse(json_string).subdomain
         current_subdomain = getSubDomain()
-        unless current_subdomain == current_user_subdomain
+        if current_subdomain && current_user_subdomain && current_subdomain != current_user_subdomain
           $('a#sub_to_feed').show()
         else
           $('a#sub_to_feed').hide()
