@@ -1,6 +1,7 @@
-div class="follow-button"
-  - unless (current_user.nil? || user.nil?) || current_user == user
-    - if current_user.following?(user)
+- unless (current_user.nil? || user.nil?) || current_user == user
+  - if current_user.following?(user)
+    div class="follow-button"
       = link_to "unfollow", relationship_path(user.id), method: :delete, class: "btn btn-danger"
-    - else
+  - else
+    div class="follow-button"
       = link_to "follow", relationships_path(followed_id: user.id), method: :post, class: "btn btn-success"
