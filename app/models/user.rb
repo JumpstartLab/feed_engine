@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 
   validates :display_name, :presence => true
   validates :display_name, :length => { :maximum => 20 }
-  validates_uniqueness_of :display_name
+  validates_uniqueness_of :display_name, :case_sensitive => false
   validates :display_name, :format => { :with => /\A[a-zA-Z0-9_-]+\z/,
             :message => "may only contain letters, numbers, dashes, and underscores." }
 
