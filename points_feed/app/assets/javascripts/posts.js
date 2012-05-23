@@ -149,6 +149,25 @@ $(document).ready(function() {
   fetch_posts($('#user_posts'));
   fetch_recent_posts($('#recent_posts'));
 
+  $('a[data-toggle="tab"][href="#image_post"]').on('shown', function (e) {
+    $("#tab-background").find(".active").find("#links").show();
+    $("#image-url").hide();
+    $("#image-file").hide();
+    //console.log(content);
+    console.log($(".links"));
+    $(".links").show();
+  });
+
+  $('#upload-url').live('click', function(){
+    $('#image-url').show();
+    $('#links').hide();
+  });
+
+  $('#upload-file').live('click', function(){
+    $('#image-file').show();
+    $('#links').hide();
+  });
+
   $("#subscribe_button").click(function(e) {
     e.preventDefault();
     url = "/api/friends";
