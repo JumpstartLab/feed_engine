@@ -5,7 +5,7 @@ require "./config/initializers/twitter"
 
 module Hungrlr
   class RefeedProcessor
-    attr_accessor :base_url
+    attr_accessor :base_url, :bj_token
 
     def initialize
       self.bj_token = ENV["BJ_TOKEN"].present? ? ENV["BJ_TOKEN"] : "HUNGRLR"
