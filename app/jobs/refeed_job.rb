@@ -19,7 +19,9 @@ class RefeedJob
     new_stream_items = resp_body["recent_items"]
 
     new_stream_items.each do |item|
-      troutr.retrout_item(followed_user.display_name, item["id"])
+      unless EXTERNAL_TYPES.include(item["type"])
+        troutr.retrout_item(followed_user.display_name, item["id"])
+      end
     end
   end
 end
