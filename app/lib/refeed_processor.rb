@@ -18,8 +18,8 @@ module Hungrlr
     end
 
     def get_growls(user_slug, last_status_id)
-      growls = Net::HTTP.get(URI("#{base_url}/feeds/#{user_slug}.json?token=#{bj_token}&since=#{last_status_id}"))
-      JSON.parse(growls)["items"]["most_recent"]
+      growls = Net::HTTP.get(URI("#{base_url}/feeds/#{user_slug}/growls.json?token=#{bj_token}&since=#{last_status_id}"))
+      JSON.parse(growls)["growls"]
     end
 
     def create_regrowls_for(user_slug, subscriber_token, growls)
