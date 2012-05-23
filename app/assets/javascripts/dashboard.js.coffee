@@ -80,11 +80,12 @@ class FeedPager
   render: =>
     @page++
     $(window).unbind('scroll', checkForBottom)
-    $.feedengine.current_feed = $('#all_posts')
     unless @feeduser
       $.getJSON('/posts', page: @page, renderPosts)
     else
-      $.getJSON('/posts/'+ @feeduser, page: @page, renderPosts)
+      url = "posts/#{@feeduser.toString()}"
+      alert url
+      $.getJSON(url, page: @page, renderPosts)
 
 checkForBottom = ->
   if nearBottom()
