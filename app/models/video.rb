@@ -13,7 +13,7 @@ class Video < Growl
     if self.link.scan(youtu).present?
       self.link.gsub(youtu,"")
     else
-      self.link.scan(youtube)
+      self.link.scan(youtube).first
     end
   end
 

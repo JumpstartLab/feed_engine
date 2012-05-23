@@ -41,4 +41,18 @@ describe Video do
       end
     end
   end
+
+  describe "#youtube_urlify" do
+    it "can get the video id from a youtu.be account" do
+      url = "http://youtu.be/DRVvFYppU0w"
+      video = Video.new(link: url)
+      video.youtube_urlify.should == "DRVvFYppU0w"
+    end
+
+    it "can get the video id from a full youtube link" do
+      url = "http://www.youtube.com/watch?v=Cgovv8jWETM&feature=endscreen&NR=1"
+      video = Video.new(link: url)
+      video.youtube_urlify.should == "Cgovv8jWETM"
+    end
+  end
 end
