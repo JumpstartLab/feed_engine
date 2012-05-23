@@ -2,23 +2,25 @@
 #
 # Table name: items
 #
-#  id         :integer         not null, primary key
-#  poster_id  :integer
-#  post_id    :integer
-#  post_type  :string(255)
-#  created_at :datetime        not null
-#  updated_at :datetime        not null
-#  refeed     :boolean
+#  id                 :integer         not null, primary key
+#  poster_id          :integer
+#  post_id            :integer
+#  post_type          :string(255)
+#  created_at         :datetime        not null
+#  updated_at         :datetime        not null
+#  refeed             :boolean
+#  original_poster_id :integer
 #
 
 # An item is a uniquely identifiable post in our system.
 class Item < ActiveRecord::Base
-  attr_accessible :post_id, :post_type, :poster_id, :refeed
+  attr_accessible :post_id, :post_type, :poster_id, :refeed, :original_poster_id
   after_destroy :destroy_refeeds!
   belongs_to :post, :polymorphic => true
 
   def self.all_items_sorted_posts
-    Item.order("created_at desc").includes(:post => [:user, :item]).collect(&:post)
+    items = Item.order("created_at desc").includes(:post => [:user, :item])
+    posts = items.reject(&:refeed?).collect(&:post)
   end
 
   def self.give_point_to(item_id)
@@ -37,9 +39,10 @@ class Item < ActiveRecord::Base
 
     new_attributes = {
       poster_id: new_poster.id,
-        post_id: self.post_id,
+      post_id: self.post_id,
       post_type: self.post_type,
-         refeed: true
+      refeed: true,
+      original_poster_id: self.poster_id
     }
     Item.create(new_attributes)
   end
@@ -49,7 +52,9 @@ class Item < ActiveRecord::Base
   end
 
   def refeedable_for?(user)
-    refed_item = Item.find_by_poster_id_and_post_id(user.id, post.id)
+    refed_item = Item.find_by_poster_id_and_post_id_and_post_type(user.id,
+                                                                  post.id,
+                                                                  post_type)
     refed_item.nil? && user.id != poster_id
   end
 

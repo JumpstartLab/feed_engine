@@ -15,6 +15,6 @@
 Fabricator(:instapound) do
   subscription_id 1
   image_url { "http://travis.com/travis.jpg" }
-  body { Faker::Lorem.words(5) }
+  body { Faker::Lorem.words(5).join(" ") }
   poster_id 1
 end

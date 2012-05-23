@@ -17,9 +17,11 @@
 class Subscription < ActiveRecord::Base
   EVENT_LIST = ["PushEvent", "CreateEvent", "ForkEvent"]
   PROVIDER_TO_POST_TYPE = { "twitter" => "tweets", "github" => "github_events",
-                            "instagram" => "instapounds"}
+                            "instagram" => "instapounds",
+                            "refeed" => "refeeds" }
   attr_accessible :user_name, :provider, :uid, :user_id, :oauth_token,
-    :oauth_secret
+    :oauth_secret, :original_poster
+  attr_accessor :original_poster
 
   belongs_to :user
 
@@ -34,6 +36,14 @@ class Subscription < ActiveRecord::Base
     end
   end
 
+  def self.create_with_refeed(poster_id, refeeder_id)
+    create! do |subscription|
+      subscription.uid = poster_id
+      subscription.user_id = refeeder_id
+      subscription.provider = "refeed"
+    end
+  end
+
   def self.get_all_new_service_posts
     Subscription.all.each do |subscription|
       new_posts = subscription.get_new_posts
@@ -43,6 +53,14 @@ class Subscription < ActiveRecord::Base
       :run_at =>
       SUBSCRIPTION_FREQ.seconds.from_now
     ).get_all_new_service_posts
+  end
+
+  def original_poster
+    User.find(uid.to_i)
+  end
+
+  def base_url
+    BASE_URL
   end
 
   def get_new_posts
@@ -77,6 +95,8 @@ class Subscription < ActiveRecord::Base
         create_github_event(new_post)
       elsif provider == "instagram"
         create_instapound(new_post)
+      elsif provider == "refeed"
+        create_refeed(new_post)
       end
     end
   end
@@ -117,6 +137,11 @@ class Subscription < ActiveRecord::Base
                       )
   end
 
+  def create_refeed(new_post)
+    HTTParty.post("#{new_post.link}/refeeds.json",
+      :body => { :api_key => user.api_key } )
+  end
+
   def get_tweets
     Twitter.user_timeline(self.user_name)
   end
@@ -142,6 +167,16 @@ class Subscription < ActiveRecord::Base
     end
   end
 
+  def get_refeeds
+    all_refeeds = HTTParty.get("http://api.#{base_url}/v1/feeds/" +
+      "#{original_poster.subdomain}/items.json")["items"]["most_recent"]
+
+    objectified_refeeds = all_refeeds.map do |refeed|
+      objectified_refeed = OpenStruct.new refeed
+      objectified_refeed
+    end
+  end
+
   def tweets
     Tweet.where(subscription_id: self.id)
   end
@@ -153,4 +188,17 @@ class Subscription < ActiveRecord::Base
   def instapounds
     Instapound.where(subscription_id: self.id)
   end
+
+  def refeeds
+    # all_items = JSON.parse(HTTParty.get(
+    #   "http://api.#{base_url}/v1/feeds/" +
+    #   "#{user.subdomain}/items.json"
+    # ))
+    # refeeded_items = all_items.select do |item|
+    #   OpenStruct.new item unless item.original_poster_id.nil?
+    # end
+    # refeeded_items
+    Item.where(poster_id: self.user_id).select(&:refeed?)
+  end
+
 end

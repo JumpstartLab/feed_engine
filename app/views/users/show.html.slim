@@ -1,12 +1,9 @@
 div.offset3
   h1 = "#{@user.display_name}'s feed"
   br
-  - if logged_in?
-    = link_to "Subscribe", nil
+  - if can_refeed?(@user, current_user)
+    = link_to "Refeed", subscriptions_path(:subdomain => false, :refeeder_id => current_user.id, :poster_id => @user.id), :method => :post
   br
   br
   br
-  - if public?
-    = render :partial => "users/public"
-  - else
-    = render :partial => "users/private"
+  = render :partial => "users/public"

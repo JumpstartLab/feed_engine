@@ -2,13 +2,14 @@
 #
 # Table name: items
 #
-#  id         :integer         not null, primary key
-#  poster_id  :integer
-#  post_id    :integer
-#  post_type  :string(255)
-#  created_at :datetime        not null
-#  updated_at :datetime        not null
-#  refeed     :boolean
+#  id                 :integer         not null, primary key
+#  poster_id          :integer
+#  post_id            :integer
+#  post_type          :string(255)
+#  created_at         :datetime        not null
+#  updated_at         :datetime        not null
+#  refeed             :boolean
+#  original_poster_id :integer
 #
 
 require 'spec_helper'
