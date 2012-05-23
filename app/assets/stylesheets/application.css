@@ -144,3 +144,7 @@ ul.contained.awesome-tabs-content > li {
 .meta_data_body{
   font-size:12px;
 }
+.growl_image {
+  padding:2px;
+  border:1px solid #021a40;
+}
