@@ -107,7 +107,6 @@ ActiveRecord::Schema.define(:version => 20120523160405) do
     t.datetime "updated_at",                     :null => false
     t.integer  "poster_id"
     t.integer  "points",          :default => 0
-    t.integer  "tweet_id"
   end
 
   create_table "users", :force => true do |t|

@@ -4,6 +4,10 @@ describe User do
   let(:user) { Fabricate(:user_with_posts) }
   let(:other_user) { Fabricate(:user_with_posts) }
   let(:new_user) { Fabricate.build(:user) }
+  before(:each) do
+    User.any_instance.stub(:send_password_reset).and_return true
+    User.any_instance.stub(:send_welcome_email).and_return true
+  end
 
   context "who is not authenticated" do
     before(:all) do

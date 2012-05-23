@@ -2,6 +2,10 @@ require 'spec_helper'
 
 describe "Password Reset" do
   let(:user) { Fabricate(:user) }
+  before(:each) do
+    User.any_instance.stub(:send_password_reset).and_return true
+    User.any_instance.stub(:send_welcome_email).and_return true
+  end
 
   context "when a user tries to reset their password" do
     it "they see a forgot password link" do
@@ -21,7 +25,7 @@ describe "Password Reset" do
   context "when a user updates their password" do
     let!(:user) { Fabricate(:user) }
     it "they can view their unique url and create new password" do
-      user.send_password_reset
+      user.create_password_reset
       visit edit_password_reset_path(user.password_reset_token)
       fill_in 'Password', :with => "123abc"
       fill_in 'Password confirmation', :with => "123abc"
