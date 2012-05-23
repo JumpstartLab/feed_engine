@@ -4,7 +4,7 @@ module NavBarHelper
       {
         "My Feed" => "http://#{current_user.display_name}.#{request.domain}",
         "Account" => edit_user_registration_path,
-        "Subscribers" => subscriptions_path
+        "Subscriptions" => subscriptions_path
       }
     else
       {

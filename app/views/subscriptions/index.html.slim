@@ -7,7 +7,8 @@
 
     - @subscriptions.each do |subscriber|
       .subscriber.row.six.columns
-        .six.columns
-          h4= subscriber.display_name
-        .six.columns
-          = button_to('UNSUBSCRIBE', subscription_path(:id => subscriber.id), :method => "delete", :remote => true, :class => 'small nice red button radius')
+        .row
+          .six.columns
+            h4= subscriber.display_name
+          .six.columns
+            = button_to('UNSUBSCRIBE', subscription_path(:id => subscriber.id), :method => "delete", :remote => true, :class => 'small nice red button radius')
