@@ -10,7 +10,7 @@ class Video < Growl
     youtu = /http:\/\/youtu.be\//
     youtube = /(?<=[?&]v=)[^&$]+/
 
-    if self.link.scan(youtu)
+    if self.link.scan(youtu).present?
       self.link.gsub(youtu,"")
     else
       self.link.scan(youtube)
