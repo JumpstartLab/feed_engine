@@ -1,0 +1,25 @@
+= form_for @user do |f|
+  - if @user.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@user.errors.count, "error")} prohibited this link from being saved:"
+      ul
+        - @user.errors.full_messages.each do |message|
+          li = message
+  .field
+    = f.label :email
+    = f.text_field :email, value: params[:email]
+
+  .field
+    = f.label :display_name
+    = f.text_field :display_name
+
+  .field
+    = f.label :password
+    = f.password_field :password, :value => @password
+
+  .field
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation, :value => @password_confirmation
+
+  .actions
+    = f.submit "Sign Up"
