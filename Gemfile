@@ -40,6 +40,8 @@ group :development, :test do
   gem 'launchy'
   gem 'debugger'
   gem 'awesome_print'
+  gem 'reek', :git => "git://github.com/mvz/reek.git", :branch => "ripper_ruby_parser-2"
+  gem 'tuxedo'
 end
 
 group :production do

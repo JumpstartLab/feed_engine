@@ -26,12 +26,18 @@ class User < ActiveRecord::Base
   has_many :github_events
 
   has_many :subscriptions
-  has_many :subscribers, :through => :subscriptions # Who is falling you
+  has_many :subscribers, :through => :subscriptions # Who is following you
   has_many :inverse_subscriptions, :class_name => "Subscription", :foreign_key => "subscriber_id"
   has_many :inverse_subscribers, :through => :inverse_subscriptions, :source => :user # Who you are following
 
   def relation_for(type)
     self.send(type.downcase.pluralize.to_sym).scoped rescue messages.scoped
+  end
+
+  def build_growl(type, params)
+    growl = relation_for(type).new(params)
+    growl.build_meta_data(params[:meta_data]) if params[:meta_data]
+    growl
   end
 
   # def github_client
@@ -78,14 +84,6 @@ class User < ActiveRecord::Base
     "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email)}"
   end
 
-  def api_link(request)
-    "http://api.#{request.domain}/v1/feeds/#{slug}"
-  end
-
-  def web_url(request)
-    "http://#{slug}.#{request.domain}"
-  end
-
   Authentication::SERVICES.each do |service|
     define_method "#{service}".to_sym do
       authentications.send("#{service}".to_sym)
@@ -100,12 +98,16 @@ class User < ActiveRecord::Base
     end
   end
 
-  def can_regrowl?(original_growl)
-    original_growl.user_id != id && growls.where(regrowled_from_id: original_growl.id).empty?
+  def can_regrowl?(growl)
+    growl.user_id != id && growls.where(regrowled_from_id: growl.id).empty?
   end
 
   def slug
     display_name.downcase
+  end
+
+  def find_subscription(subscription_id)
+    inverse_subscriptions.where(id: subscription_id).first
   end
 end
 

@@ -8,8 +8,7 @@ class GrowlsController < ApplicationController
   end
 
   def create
-    @growl = current_user.relation_for(params[:growl][:type]).new(params[:growl])
-    @growl.build_meta_data(params[:meta_data]) if params[:meta_data]
+    @growl = current_user.build_growl(params[:growl][:type], params[:growl])
     if @growl.save
       flash[:notice] = "Your #{@growl.type.downcase} has been created."
       redirect_to dashboard_path
