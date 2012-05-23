@@ -60,6 +60,33 @@ describe "API feeds/user/... ", :type => :api do
       new_post.should be_a(ImageItem)
     end
 
+#     TWEETJSON
+#     {"status_id":"#{item.tweet.attrs["id_str"]}", "attrs":"#{t.tweet.attrs}"}
+    #     API Format needs: tweet(hash), status_id(string), tweet_time(string)
+    it "creates a twitter item via the api" do
+      twitter_response = Hashie::Mash.new
+      twitter_response.tweet = Hashie::Mash.new
+      twitter_response.tweet.attrs = {id_str:"12345",
+                                      created_at:"2012-05-23 02:58:41 UTC",
+                                      text: "hello world"}
+
+      #send_hash = {created_at: twitter_response.tweet.attrs[:created_at],
+                   #status_id: twitter_response.tweet.attrs["id_str"],
+                   #tweet: JSON.dump(twitter_response.tweet.attrs)}
+
+
+
+      body = JSON.dump({type:"TwitterItem",tweet: twitter_response.tweet.attrs})
+
+      post "#{url}.json", :token => token, :body => body
+
+      last_response.status.should == 201
+
+      new_post = user.stream_items.last.streamable
+      new_post.should be_a(TwitterItem)
+      new_post.status_id.should == "12345"
+    end
+
     it "creates a github_item via the api" do
       github_response = Hashie::Mash.new
       github_response.id = 1
