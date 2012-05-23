@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   def can_refeed?(feed_user, viewing_user)
     if logged_in? && !viewing_user.is_or_is_refeeding?(feed_user)
       true
-    else 
+    else
       false
     end
   end

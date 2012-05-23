@@ -17,7 +17,8 @@
 class Subscription < ActiveRecord::Base
   EVENT_LIST = ["PushEvent", "CreateEvent", "ForkEvent"]
   PROVIDER_TO_POST_TYPE = { "twitter" => "tweets", "github" => "github_events",
-                            "instagram" => "instapounds", "refeed" => "refeeds" }
+                            "instagram" => "instapounds",
+                            "refeed" => "refeeds" }
   attr_accessible :user_name, :provider, :uid, :user_id, :oauth_token,
     :oauth_secret, :original_poster
   attr_accessor :original_poster
@@ -139,13 +140,6 @@ class Subscription < ActiveRecord::Base
   def create_refeed(new_post)
     puts HTTParty.post("#{new_post.link}/refeeds.json",
       :body => { :api_key => user.api_key } )
-
-    # Refeed.create!(post_id: new_post.post_id,
-    #                original_poster_id: self.uid,
-    #                poster_id: self.id,
-    #                post_type: PROVIDER_TO_POST_TYPE[self.provider],
-    #                subscription_id: self.id
-    #               )
   end
 
   def get_tweets
@@ -179,7 +173,6 @@ class Subscription < ActiveRecord::Base
 
     objectified_refeeds = all_refeeds.map do |refeed|
       objectified_refeed = OpenStruct.new refeed
-      # objectified_refeed.created_at = objectified_refeed.created_at.utc
       objectified_refeed
     end
   end
