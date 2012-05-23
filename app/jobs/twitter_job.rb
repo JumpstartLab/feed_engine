@@ -17,8 +17,6 @@ class TwitterJob
     end
     tweets.reverse.each do |tweet|
       troutr.create_twitter_item(user.display_name, JSON.dump(tweet.attrs))
-      #user.twitter_items.create(:tweet => tweet,
-                                #:status_id => tweet.attrs["id_str"])
     end
     user.save
   end

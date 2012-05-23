@@ -1,8 +1,8 @@
 GIT
   remote: https://worace@github.com/worace/troutr-client.git
-  revision: 83556a26c40df2c8df5bd9e86a927e9c43eb1cd9
+  revision: 81785e4fc752d9092fdf42bee79f9828667db182
   specs:
-    troutr_client (0.0.3)
+    troutr_client (0.0.5)
       faraday
 
 GEM
