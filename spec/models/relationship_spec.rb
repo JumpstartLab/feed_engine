@@ -28,8 +28,7 @@ describe Relationship do
   end
 
   describe "when a last_post_id is not present" do
-    before { follower.posts.destroy_all }
-    before { relationship.last_post_id = follower.id }
+    before { relationship.last_post_id = nil }
     it { should be_valid }
   end
 end

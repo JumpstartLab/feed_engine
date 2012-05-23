@@ -6,15 +6,14 @@ class RelationshipsController < ApplicationController
   end
 
   def create
-    current_user.relationships.create(followed_id: user.id,
-                                      follower_id: current_user.id,
-                                      last_post_id: user.last_post.id)
+    @user = User.find(params[:followed_id])
+    current_user.follow(@user)
     redirect_to :back
   end
 
   def destroy
-    relationship = current_user.relationships.find_by_followed_id(user)
-    relationship.destroy
+    @user = User.find(params[:id])
+    current_user.unfollow(@user)
     redirect_to :back
   end
 end
