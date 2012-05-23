@@ -156,9 +156,13 @@ $(document).ready(function() {
     $("#tab-background").find(".active").find("#links").show();
     $("#image-url").hide();
     $("#image-file").hide();
-    //console.log(content);
-    console.log($(".links"));
     $(".links").show();
+  });
+
+  $('#back_image_post').live('click', function(){
+    $('#image-file').hide();
+    $('#image-url').hide();
+    $('#links').show();
   });
 
   $('#upload-url').live('click', function(){
