@@ -4,7 +4,6 @@ require 'ostruct'
 describe Hungrlr::InstagramProcessor do
   context ".run" do
     before(:each) do
-      # FactoryGirl.create(:user_with_twitter_account)
       Kernel.stub!(:open)
     end
 

@@ -1,0 +1,21 @@
+jQuery ->
+  $("#message").click ->
+    $(".awesome-tabs-content > li").hide()
+    $("#messageFormTab").fadeIn()
+    $(".active").removeClass("active")
+    $("#message > a").addClass("active")
+  $("#image").click ->
+    $(".awesome-tabs-content > li").hide()
+    $("#imageFormTab").fadeIn()
+    $(".active").removeClass("active")
+    $("#image > a").addClass("active")
+  $("#link").click ->
+    $(".awesome-tabs-content > li").hide()
+    $("#linkFormTab").fadeIn()
+    $(".active").removeClass("active")
+    $("#link > a").addClass("active")
+  $("#service").click ->
+    $(".awesome-tabs-content > li").hide()
+    $("#serviceFormTab").fadeIn()
+    $(".active").removeClass("active")
+    $("#service > a").addClass("active")

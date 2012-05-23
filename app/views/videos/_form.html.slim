@@ -1,6 +1,3 @@
-/
-/ USED FOR VIDEOS
-/
 .row
   = simple_form_for @growl, :url => growls_path, :html => { :id => 'video_form' } do |f|
     = f.input :type, :as => :hidden, :input_html => { :value => "Video" }
@@ -11,7 +8,3 @@
       span#charsLeftLink
       |  chars left.
     = f.button :submit, "Growl Video"
-
-coffee:
-  jQuery ->
-    $("#link_comment").limit "256", "#charsLeftLink"
