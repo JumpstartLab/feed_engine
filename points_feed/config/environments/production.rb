@@ -79,7 +79,7 @@ PointsFeed::Application.configure do
 
   config.SUBDOMAIN_INDEX = 1
 
-  config.action_controller.asset_host = Proc.new do |source, request|
+  config.action_controller.asset_host = Proc.new do |source|
     "//#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
   end
 end
