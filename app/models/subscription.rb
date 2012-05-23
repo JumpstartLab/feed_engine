@@ -115,11 +115,6 @@ class Subscription < ActiveRecord::Base
                     }
                   }
                  )
-                 # Tweet.create!(subscription_id: self.id,
-                 #               body: new_post.text,
-                 #               created_at: new_post.created_at,
-                 #               poster_id: self.user_id
-                 #              )
   end
 
   def fancy_type(event_type)
@@ -133,30 +128,35 @@ class Subscription < ActiveRecord::Base
   end
 
   def create_github_event(new_post)
-    HTTParty.post("http://api.#{base_url}/v1/feeds/"+
-                  "#{user.subdomain}/items.json",
+    HTTParty.post("http://api.#{base_url}/v1/feeds/#{user.subdomain}/items.json",
                   body: {
-                    api_key: user.api_key,
-                    display_name: user.display_name,
-                    post: {
-                      type: "github_event",
-                      subscription_id: self.id,
-                      repo: new_post.repo.name,
-                      body: new_post.text,
-                      created_at: new_post.created_at,
-                      event_type: fancy_type(new_post.type)
-                    }
-                  }
+      api_key: user.api_key,
+      display_name: user.display_name,
+      post: {
+        type: "github_event",
+        subscription_id: self.id,
+        repo: new_post.repo.name,
+        created_at: new_post.created_at,
+        event_type: fancy_type(new_post.type)
+      }
+    }
                  )
   end
 
   def create_instapound(new_post)
-    Instapound.create!(subscription_id: self.id,
-                       body: new_post.caption["text"],
-                       image_url: new_post.images["standard_resolution"]["url"],
-                       created_at: new_post.created_at,
-                       poster_id: self.user_id
-                      )
+    HTTParty.post("http://api.#{base_url}/v1/feeds/#{user.subdomain}/items.json",
+                  body: {
+      api_key: user.api_key,
+      display_name: user.display_name,
+      post: {
+        body: new_post.caption["text"],
+        image_url: new_post.images["standard_resolution"]["url"],
+        subscription_id: self.id,
+        created_at: new_post.created_at,
+        event_type: fancy_type(new_post.type)
+      }
+    }
+                 )
   end
 
   def create_refeed(new_post)
