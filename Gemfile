@@ -40,7 +40,8 @@ group :assets do
 end
 
 group :development, :test do
-  gem 'minitest'
+  gem 'feedeng', :git => 'git://github.com/JanKoszewski/feedeng.git'
+  gem 'minitest-rails'
   gem 'capybara'
   gem 'turn'
 
