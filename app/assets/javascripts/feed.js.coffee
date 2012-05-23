@@ -9,7 +9,7 @@ jQuery ->
     url = $('.pagination .next_page a').attr('href')
     if $(window).scrollTop() > $(document).height() - $(window).height() - 25
       if url? && !waiting
-        $('#pagination-div').text("Fishing up more trouts!")
+        $('#pagination-div').html("<img src='http://www.aquahabitat.com/images/flyfisherman.gif'>")
         waiting = true
         #alert url
         $.getScript(url, (data, textStatus, jqxhr) ->
