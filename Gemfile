@@ -23,11 +23,11 @@ gem 'jbuilder'
 gem 'growl'
 gem 'octokit'
 gem 'gravatar-ultimate'
-# gem 'instagram', "0.8.4"
+gem 'instagram', :git => 'git://github.com/rewritten/instagram-ruby-gem.git'
 gem 'coffeebeans'
 gem 'pusher'
 gem 'omniauth-instagram'
-gem 'faraday'
+gem 'faraday', "~>0.7.6"
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
