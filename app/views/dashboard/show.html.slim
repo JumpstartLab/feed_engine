@@ -147,22 +147,11 @@ div.span7
       br
       table.table.table-striped
         tbody
-          tr
-            td Elise Worthy
-            td
-              = link_to "Remove", nil, :class => "btn btn-small btn-info"
-          tr
-            td Jonan Scheffler
-            td
-              = link_to "Remove", nil, :class => "btn btn-small btn-info"
-          tr
-            td Andrew Thal
-            td
-              = link_to "Remove", nil, :class => "btn btn-small btn-info"
-          tr
-            td Travis Valentine
-            td
-              = link_to "Remove", nil, :class => "btn btn-small btn-info"
+          - current_user.refeed_subscriptions.each do |refeed_subscription|
+            tr
+              td = refeed_subscription.original_poster.display_name
+              td
+                = link_to "Remove", subscription_path(refeed_subscription, :subdomain => false), :method => :delete, :class => "btn btn-small btn-info"
 
   div#account
     div

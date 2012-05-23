@@ -59,7 +59,7 @@ class User < ActiveRecord::Base
   SERVICES_LIST =  %w(twitter github instagram)
 
   def send_welcome_email
-    Resque.enqueue(SignupMailer, self.id)
+    UserMailer.signup_notification(self).deliver
   end
 
   def posts
@@ -78,23 +78,27 @@ class User < ActiveRecord::Base
     display_name.downcase
   end
 
+  def send_welcome_email
+    Resque.enqueue(SignupMailer, self.id)
+  end
+
   def disconnected_services
     SERVICES_LIST - subscriptions.map(&:provider).uniq
+  end
+
+  def refeed_subscriptions
+    subscriptions.where(provider: "refeed").includes(&:original_poster)
   end
 
   def post_page_count
     (posts.length.to_f / 12).ceil
   end
 
-  def create_password_reset
+  def send_password_reset
     generate_password_token(:password_reset_token)
     self.password_reset_sent_at = Time.zone.now
     save!(validate: false)
-    send_password_reset
-  end
-
-  def send_password_reset
-    Resque.enqueue(PasswordMailer, self.id)
+    UserMailer.password_reset(self).deliver
   end
 
 
@@ -110,6 +114,35 @@ class User < ActiveRecord::Base
     end.first
   end
 
+  def create_password_reset
+    generate_password_token(:password_reset_token)
+    self.password_reset_sent_at = Time.zone.now
+    save!(validate: false)
+    send_password_reset
+  end
+
+  def send_password_reset
+    Resque.enqueue(PasswordMailer, self.id)
+  end
+
+  def num_subscriptions
+    all_providers = Subscription.all.map(&:provider).uniq
+    all_relevant_providers = all_providers.reject do |provider|
+      provider if provider == "refeed"
+    end
+    total_count = all_relevant_providers.count
+  end
+
+  def is_or_is_refeeding?(original_poster)
+    if original_poster == self
+      true
+    elsif refeed_subscription_exists_for?(original_poster)
+      true
+    else
+      false
+    end
+  end
+  
   def subscribed_to_all_services?
     subscriptions.count == num_subscriptions
   end
@@ -117,22 +150,13 @@ class User < ActiveRecord::Base
 
   def num_subscriptions
     Subscription.number_of_services
-  end
+  end  
 
-  def is_or_is_refeeding?(original_poster)
-    if original_poster == self
-      true
-    elsif refeed_subscriptions(original_poster)
-      true
-    else
-      false
-    end
-  end
-
-  def refeed_subscriptions(original_poster)
-    subscriptions.select do |sub|
+  def refeed_subscription_exists_for?(original_poster)
+    refed_subscriptions = subscriptions.select do |sub|
       sub if sub.uid.to_i == original_poster.id
     end.first
+    refed_subscriptions ? true : false
   end
 
   private
@@ -152,5 +176,4 @@ class User < ActiveRecord::Base
     )
     self.update_attributes api_key: key
   end
-
 end
