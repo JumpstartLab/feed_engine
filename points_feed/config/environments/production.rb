@@ -9,7 +9,7 @@ PointsFeed::Application.configure do
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
-  config.serve_static_assets = true
+  config.serve_static_assets = false
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
@@ -19,6 +19,7 @@ PointsFeed::Application.configure do
 
   # Generate digests for assets URLs
   config.assets.digest = true
+  config.assets.enabled = true
 
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
@@ -76,5 +77,8 @@ PointsFeed::Application.configure do
     :authentication  => :login
   }
 
-  config.SUBDOMAIN_INDEX = 2
+  config.SUBDOMAIN_INDEX = 1
+
+  config.action_controller.asset_host = Proc.new do |source, request|
+    request.ssl? ? "https://#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com" : "http://#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
 end
