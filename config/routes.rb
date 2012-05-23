@@ -26,18 +26,20 @@ FeedEngine::Application.routes.draw do
 
   scope "", constraints: lambda { |r| r.subdomain.present? &&
     r.subdomain != 'www' && r.subdomain != 'api' } do
-    match "", to: "pages#index"
     match 'posts/:display_name', to: "posts#show"
   end
   match 'posts/ind', to: 'posts#ind'
+  match 'posts/refeeds' => "posts#refeed", as: :refeed
   resources :users
   resources :posts, only: [:create, :index]
   resources :texts
   resources :images
   resources :links
+
   resources :posts do
     resources :points, only: [:create]
   end
+
 
   root :to => 'pages#index'
   match '/integrate' => 'users#integrate', as: 'integrate'

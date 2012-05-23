@@ -24,7 +24,7 @@ class PostsController < ApplicationController
   def show
     user = User.find_by_display_name(params[:display_name])
     temp_posts = user.feed.posts.reverse.page(params[:page].to_i || 0)
-    @posts = temp_posts
+    @posts = temp_posts.collect { |p| p.postable }.reverse.page(params[:page].to_i || 0)
     render action: :index
   end
 
