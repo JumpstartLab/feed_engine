@@ -57,6 +57,7 @@ group :test do
   gem 'spork'
   gem 'simplecov', :require => false
   gem 'launchy'
+  gem 'webmock'
 end
 
 group :production do

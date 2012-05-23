@@ -3,6 +3,7 @@ SimpleCov.start 'rails'
 
 require 'rubygems'
 require 'spork'
+require 'webmock/rspec'
 #uncomment the following line to use spork with the debugger
 #require 'spork/ext/ruby-debug'
 
@@ -17,11 +18,23 @@ Spork.prefork do
   require 'rspec/autorun'
   require 'capybara/rails'
 
+  
+
   # Requires supporting ruby files with custom matchers and macros, etc,
   # in spec/support/ and its subdirectories.
   Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
   RSpec.configure do |config|  
+
+    config.before(:all, type: :request) do
+      WebMock.allow_net_connect!
+    end  
+
+    config.after(:all, type: :request) do
+      selenium_requests = %r{/((__.+__)|(hub/session.*))$}
+      WebMock.disable_net_connect! :allow => selenium_requests
+    end
+
     config.mock_with :rspec
     Capybara.default_driver     = :rack_test
     Capybara.default_selector   = :css

@@ -16,6 +16,16 @@
 @import "variables";
 @import "links";
 
+a, a:visited {
+  color: $trout-main-color;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #51a351;
+}
+
 .simple_form label {
   float: left;
   width: 100px;
@@ -121,24 +131,18 @@ body {
     font-size: 32px;
 }
 
-.nav a:visited {
-  color: black;
-  text-decoration:underline;
+.global-nav a {
+  font-size: 22px;
 }
 
-.nav > li.navigation-item {
-    a:hover {
-      @include nav-item-links;
-      background-color: transparent;
-      }
-  }
+.nav .raphael-icon {
+  padding-right: 5px; 
+}
 
 .navigation-item-anon{
   padding: 0 0 0 75px;
+  margin-right: 10px;
   }
-
-.nav > li > a:hover {
-}
 
 .nav-logo {
   font-family: $font;
@@ -176,4 +180,21 @@ body {
   font: $font;
   font-size: 16px;
   opacity: 0.85;
+}
+
+.navbar h1 {
+  float: left;
+  font-family: $font;
+  font-size: 52px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.navbar a:hover {
+  color: #51a351;
+}
+
+.accounts-nav {
+  padding-top: 10px;
+  float: right;
 }
