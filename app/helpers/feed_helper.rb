@@ -1,6 +1,5 @@
 module FeedHelper
   def github_body(item)
-    event = item.event
     login = item.actor_login
     event_type = item.event_type
 
