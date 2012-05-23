@@ -19,6 +19,11 @@ jQuery ->
     $("#serviceFormTab").fadeIn()
     $(".active").removeClass("active")
     $("#service > a").addClass("active")
+  $("#video").click ->
+    $(".awesome-tabs-content > li").hide()
+    $("#videoFormTab").fadeIn()
+    $(".active").removeClass("active")
+    $("#video > a").addClass("active")
 
   $("#message_comment").limit "512", "#charsLeftMessage" if $("#message_comment").length
   $("#link_comment").limit "256", "#charsLeftLink" if $("#link_comment").length
