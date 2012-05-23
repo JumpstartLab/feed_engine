@@ -72,6 +72,12 @@ describe Image do
           image.should be_valid
         end
       end
+      it "allows files with numbers in the url" do
+        image.url = "http://wow.com/234.jpg"
+        image.should be_valid
+        image.url = "http://3ow.com/d34.jpg"
+        image.should be_valid
+      end
     end
   end
 end
