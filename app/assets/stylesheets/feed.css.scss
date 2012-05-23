@@ -59,7 +59,7 @@
 .item-container-body {
   @include container;
   width: 610px;
-  padding: 10px 15px 15px 15px;
+  padding: 10px 15px 5px 15px;
   -webkit-box-shadow: 1px 1px 3px 1px rgba(1, 1, 1, 0.5);
   box-shadow: 1px 1px 3px 1px rgba(1, 1, 1, 0.5);
 }
@@ -67,6 +67,10 @@
 .points-container {
   float: right;
   color: $trout-main-color; 
+  a:hover {
+    text-decoration: none; 
+    color: $trout-hover-color; 
+  }
 }
 
 .entypo-icon {
@@ -126,6 +130,13 @@
   padding: 5px 0 0 10px
 }
 
+.refeed-logo {
+  font-size: 20px;
+}
+
+.refeed-container {
+  color: black;
+}
 /*Stats*/
 .feed-meta-container {
   @include container;
