@@ -17,8 +17,9 @@ describe Hungrlr::InstagramProcessor do
 
       data = double
       Time.should_receive(:parse).and_return( "" )
-      Net::HTTP.should_receive(:get).and_return(data)
-      JSON.should_receive(:parse).with(data).and_return( { 'data' => [] } )
+      # Net::HTTP.should_receive(:get).and_return(data)
+      # JSON.should_receive(:parse).with(data).and_return( { 'data' => [] } )
+      subject.should_receive(:get_photos).and_return([])
       api_service.should_receive(:build_photos_hash).with([]).and_return([])
       api_service.should_receive(:create_photos_for_user).with("user_id", [])
 

@@ -4,9 +4,9 @@ class SubscriptionsController < ApplicationController
                                                             last_status_id: DateTime.now.to_i)
     @response = subscription.save
 
-    respond_to do |format|
-      format.js {render :content_type => 'text/javascript'}
-    end
+    # respond_to do |format|
+    #   format.js {render :content_type => 'text/javascript'}
+    # end
     # render :js => "alert #{subscription.save}", :layout => false
     render js: "Created"
   end
