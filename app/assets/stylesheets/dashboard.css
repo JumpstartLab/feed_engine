@@ -1,5 +1,5 @@
 #totop {
-  width:100px;
+        width:100px;
         background:#f7f7f7;
         text-align:center;
         padding:5px;
@@ -10,4 +10,14 @@
         display:none;
         color:#333;
         font-size:11px;
+}
+
+#minidash {
+        width:250px;
+        background:#eee;
+        height:450px;
+        padding:25px;
+        border-width:1px;
+        border-style:solid;
+        border-color:#999;
 }
