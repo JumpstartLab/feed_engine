@@ -32,10 +32,11 @@ class User < ActiveRecord::Base
   def add_stream_item(item, refeed=true)
     stream_items << StreamItem.new(:streamable_id => item.id,
                                    :streamable_type => item.class.name,
+                                   :original_author_id => item.user.id,
                                    :refeed => refeed)
   end
 
-  def last_retrouted_troutr_post_id(followed_user)
+  def last_retrout_id_for_user(followed_user)
     stream_items.where(:streamable_type => ["ImageItem","LinkItem","TextItem"]).where(:original_author_id => followed_user.id).last.id
   end
 

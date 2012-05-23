@@ -6,6 +6,7 @@ class Api::RefeedsController < Api::BaseController
     item = stream_item.streamable
     refeed = refeeder.stream_items.new(streamable_id: item.id,
                                        streamable_type: item.class.name,
+                                       original_author_id: item.user.id,
                                        refeed: true)
     if refeed.save
       Pusher['test_channel'].trigger('greet', {:author => refeed.author.display_name })

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120523151221) do
+ActiveRecord::Schema.define(:version => 20120523185748) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -71,11 +71,12 @@ ActiveRecord::Schema.define(:version => 20120523151221) do
     t.integer  "user_id"
     t.integer  "streamable_id"
     t.string   "streamable_type"
-    t.integer  "points_count",      :default => 0
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
-    t.boolean  "refeed",            :default => true
+    t.integer  "points_count",       :default => 0
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.boolean  "refeed",             :default => true
     t.integer  "retrouted_from_id"
+    t.integer  "original_author_id"
   end
 
   create_table "subscriptions", :force => true do |t|

@@ -38,14 +38,17 @@ class RefeedJob
     subscription = Subscription.find(subscription["id"])
     followed_user = User.find(subscription["followed_user_id"])
     troutr_token = follower.authentication_token
-    last_stream_item_id = follower.last_troutr_post_id(followed_user)
+    last_stream_item_id = follower.last_retrout_id_for_user(followed_user)
 
     troutr = Troutr::Client.new(token: troutr_token, url: TROUTR_API_URL)
 
-    new_stream_items_json = troutr.new_feed_items(followed_user["display_name"], last_stream_item_id)
+    resp = troutr.user_recent_stream_items(followed_user["display_name"], last_stream_item_id)
+    resp_body = JSON.parse(resp[1])
 
-    new_stream_items_json.each do |item|
-      troutr.retrout_item(follower["display_name"], item["id"])
+    new_stream_items = resp_body["recent_items"]
+
+    new_stream_items.each do |item|
+      troutr.retrout_item(followed_user.display_name, item["id"])
     end
   end
 end
