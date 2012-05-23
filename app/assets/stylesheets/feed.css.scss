@@ -129,12 +129,12 @@
 .feed-meta-container {
   @include container;
   padding: 10px;
-  margin: 45px 0 0 100px;
+  margin: 20px 0 0 100px;
 }
 $stat-count-font-size: 18px;
 
 @mixin stat-container {
-  margin: 15px 18px 0 20px;
+  margin: 15px 5px 0 20px;
   outline: 1px solid $trout-main-color;
   outline-offset: 10px;
 }
@@ -177,7 +177,7 @@ $stat-count-font-size: 18px;
 
 .feed-title {
   @include troutr-title;
-  padding: 0 0 14px 50px;
+  padding: 0 0 14px 10px;
 }
 .twitter {
   @include word-wrap;
@@ -186,4 +186,18 @@ $stat-count-font-size: 18px;
 
 .github-item-body {
   @include item-body;
+}
+
+.feed-list {
+ margin-top: 20px;
+}
+
+#pagination-div {
+  padding: 0 0 20px 30px;
+}
+
+#dry-river {
+  padding-left: 20px;
+  font-family: $font;
+  color: $trout-main-color;
 }

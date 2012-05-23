@@ -12,7 +12,6 @@
 });
 
  </script>
-<h1 class="feed-title span7"><%= @feed_owner.display_name %>'s stream</h1>
 <div class="span7 feed-list" id="stream-items">
 
   <% if @stream_items %>
@@ -24,6 +23,9 @@
 </div>
 
   <div class="feed-meta-container offset1 span3">
+    <div class="row">
+      <h2 class="feed-title span2"><%= @feed_owner.display_name %></h2>
+    </div>
     <table>
       <tr>
         <td>
@@ -60,11 +62,13 @@
     <% if github_connected?(@feed_owner) %>
       <span class="raphael-icon linked-post-logo">U</span>
     <% end %>
+    <br/>
+    <br/>
     <% if current_user && (current_user != @feed_owner) %>
       <% if current_user.followed_users.include?(@feed_owner) %>
-        <%= link_to "Let this Troutr go", subscription_path(current_feed_subscription), :method => :delete %>
+        <%= link_to "Remove troutr from Tacklebox", subscription_path(current_feed_subscription), :method => :delete %>
       <% else %>
-        <%= link_to "TackleBox this Troutr", subscriptions_path(:followed_user_id => @feed_owner.id), :method => :post %>
+        <%= link_to "Add troutr to TackleBox", subscriptions_path(:followed_user_id => @feed_owner.id), :method => :post %>
       <% end %>
     <% end %>
     
@@ -73,6 +77,6 @@
       <h4>None</h4>
     <% end %>
   </div>
-  <div class="span12" id="pagination-div">
+  <div class="span7" id="pagination-div">
     <%= paginate @stream_items %>
   </div>
