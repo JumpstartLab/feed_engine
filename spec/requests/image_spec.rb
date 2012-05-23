@@ -10,7 +10,7 @@ describe Image do
     end
     it "fails" do
       fill_in "growl[link]", :with => "abc123"
-      click_on "Create Image"
+      click_on "Growl Image"
       pending "ERROR MESSAGE SHOULD BE MORE SPECIFIC"
       # XXX ERROR MESSAGE SHOULD BE MORE SPECIFIC.
       page.should have_content "There was an error saving this image."
@@ -19,7 +19,7 @@ describe Image do
       fill_in "growl[link]", :with => "http://www.justanimal.org/images/gorilla-10.jpg"
       #XXX NOT FILLING IN THE RIGHT GROWL COMMENT... NEED TO DO WITHIN ACTIVE SCOPE?
       fill_in "growl[comment]", :with => "wooo"
-      click_on "Create Image"
+      click_on "Growl Image"
       page.should have_content "Your image has been created."
     end
   end

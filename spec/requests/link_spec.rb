@@ -12,7 +12,7 @@ describe Link do
       within("#link_form") do
         fill_in "growl[link]", :with => "http://abc.com/"
         fill_in "growl[comment]", :with => "wooo"
-        click_link_or_button "Create Link"
+        click_link_or_button "Growl Link"
       end
       page.should have_content "Your link has been created."
     end
@@ -22,7 +22,7 @@ describe Link do
         within("#link_form") do
           fill_in "growl[link]", :with => ""
           fill_in "growl[comment]", :with => "I love this site!"
-          click_on "Create Link"
+          click_on "Growl Link"
           # XXX PROBABLY NOT FILLING OUT THE RIGHT FIELD.
         end
         page.should have_content "You must provide a link."

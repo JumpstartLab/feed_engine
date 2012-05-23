@@ -3,7 +3,7 @@ class SubscriptionsController < ApplicationController
     subscription = current_user.inverse_subscriptions.build(user_id: params["user_id"],
                                                             last_status_id: DateTime.now.to_i)
     @response = subscription.save
-    render jason: "Created"
+    render json: "Created"
   end
 
   def destroy
