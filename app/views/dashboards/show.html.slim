@@ -35,19 +35,14 @@ div class="container"
               td
                 p class="stats-numbers" XX
 
+          div.stream-link
+            = link_to "View live stream", root_url(subdomain: current_user.display_name), class: "btn btn-primary"
 
-          br
-          br
-          br
-          br
-          br
           div class="minidash" id="lower-dash"
-            h2 accounts
-            div id="sliding_toggle"
-              h3 = link_to "Link Yourself!", "#", id: "services_link", class: "btn btn-success btn-large"
-              br
-              div id='services_toggle'
-                = render 'services/form', id: "external_links"
+            h3 Linked Services
+            = twitter_button
+            = github_button
+            = instagram_button
 
         div id="totop"
           h3 Back to Top
