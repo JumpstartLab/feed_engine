@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
     confirmation: true, 
     length: {minimum: 6, :message => "must be at least 6 characters long"}
 
-  DISPLAY_NAME_REGEX = /^[a-zA-Z0-9\-]*$/
+  DISPLAY_NAME_REGEX = /^[a-zA-Z0-9\-_]*$/
   validates :display_name, 
     format: { with: DISPLAY_NAME_REGEX, message: "must be only letters, numbers, or dashes" }, 
     uniqueness: true
@@ -63,6 +63,20 @@ class User < ActiveRecord::Base
     has_many type_name.to_s.to_sym
   end
   
+  def reset_password
+    self.change_password!(
+      Digest::SHA512.hexdigest(
+        Digest::SHA384.hexdigest(
+          Digest::SHA256.hexdigest(
+      "#{@user.email}HuNgRyF33d#{FeedEngine::Application.config.secret_token}"
+          ))))
+    send_reset_email
+  end
+
+  def send_reset_email
+    UserMailer.reset_password_email(self).deliver
+  end
+
   def posts
     FEED_TYPES.map do |association|
       self.send(association.to_s.to_sym).all

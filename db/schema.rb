@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(:version => 20120522185728) do
     t.string   "repo"
     t.string   "event_id"
     t.string   "action"
-    t.datetime "post_time"
+    t.datetime "event_time"
     t.integer  "user_id"
     t.text     "content"
     t.datetime "created_at", :null => false
@@ -79,11 +79,9 @@ ActiveRecord::Schema.define(:version => 20120522185728) do
   add_index "links", ["user_id"], :name => "index_links_on_user_id"
 
   create_table "posts", :force => true do |t|
-    t.integer  "feed_id"
-    t.integer  "postable_id"
-    t.string   "postable_type"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.integer "feed_id"
+    t.integer "postable_id"
+    t.string  "postable_type"
   end
 
   create_table "subscriptions", :force => true do |t|
@@ -110,7 +108,7 @@ ActiveRecord::Schema.define(:version => 20120522185728) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "handle"
-    t.datetime "post_time"
+    t.datetime "tweet_time"
   end
 
   create_table "users", :force => true do |t|

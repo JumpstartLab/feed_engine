@@ -6,19 +6,6 @@ class UsersController < ApplicationController
     @posts = @user.posts
   end
 
-  def new
-    @user = User.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @user }
-    end
-  end
-
-  def edit
-    @user = current_user
-  end
-
   def create
     @user = User.create(params[:user])
     render_create
@@ -30,8 +17,10 @@ class UsersController < ApplicationController
     render_create
   end
 
-  def signout
-    sign_out current_user
+  def reset_password
+    if user = User.find_by_email(params[:email])
+      user.reset_password
+    end
   end
 
   private
