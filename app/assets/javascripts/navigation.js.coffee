@@ -1,15 +1,17 @@
 jQuery ->
-  addNavHandlers()
-  addDashboardHandler()
-  addHomeHandler()
   addHandlers()
-  servicesHandler()
-  integrationsHandler()
+  initializeNamespace()
+  setUsername()
+  homeHandler()
+
+initializeNamespace = ->
   $.feedengine = {
     subdomain: null,
     form: null,
     current_user: null,
     activeTabId: null,
+    current_feed: $('#all_posts'),
+    current_pager: null,
     activateTab: (tabId)->
       $(".errors").hide()
       if $.feedengine.activeTabId
@@ -17,8 +19,6 @@ jQuery ->
       $("##{tabId}").addClass('selected')
       $.feedengine.activeTabId = tabId
   }
-  setUsername()
-  homeHandler()
 getSubDomain = ->
   host_parts = window.location.host.split('.')
   unless host_parts[0] == 'simplefeed' || host_parts[0] == 'feedeng'
@@ -36,6 +36,7 @@ homeHandler = ->
 setFlash = (message) ->
   $('#flash_message').text(message)
   $('#flash').slideDown().delay(2000).slideUp()
+
 setUsername = ->
   $.getJSON('/current_user', (response, status, jqXHR) ->
       json_string = JSON.stringify(response)
@@ -50,7 +51,6 @@ spotlightToBackstage = ->
 navHandler = (navItem) ->
   $(navItem).click ->
     pageSwap("#{navItem}-page")
-
 
 integrationsHandler = ->
     $("#github_false").click ->
@@ -107,7 +107,7 @@ addSubmitHandlers = ->
         setFlash('Posted successfully')
         $.feedengine.form.clearForm()
         $("#feed").children().remove()
-        new PostsPager()
+        new FeedPager($('#feed'))
       error: (response, status) ->
         resp = $.parseJSON(response.responseText)
         errors = $("##{$.feedengine.activeTabId.toLowerCase()}-tab .errors")
@@ -182,6 +182,11 @@ addHandlers = ->
   addLogoutHandler()
   addIntegrationHandlers()
   addFlashHandler()
+  servicesHandler()
+  addNavHandlers()
+  addDashboardHandler()
+  addHomeHandler()
+  integrationsHandler()
 
 renderDashboard = ->
   if $.feedengine.current_user
@@ -189,69 +194,42 @@ renderDashboard = ->
     $('.tab-body ul').children().first().show()
     $('#feed').children().remove()
     $.feedengine.activateTab('Text')
-    new PostsPager()
+    new FeedPager($('#feed'))
   else
     $('#signin').click()
     setFlash("Please login first.")
 
-class PostsPager
-  constructor: (@feeduser=null)->
-    @page=-1
-    $(window).scroll(@check)
-    @render()
+checkForBottom = ->
+  if nearBottom()
+    $.feedengine.current_pager.render()
 
-  check: =>
-    if @nearBottom()
-      @render()
+nearBottom = ->
+  $(window).scrollTop() > $(document).height() - $(window).height() - 50
 
-  render: =>
-    @page++
-    $(window).unbind('scroll', @check)
-    $.getJSON($('#feed').data('json-url'), page: @page, @renderPosts)
-
-
-  nearBottom: =>
-    $(window).scrollTop() > $(document).height() - $(window).height() - 50
-
-  renderPosts: (response, status, jqXHR) =>
+renderPosts = (response, status, jqXHR) ->
     posts = response['posts']
     for post in posts
       type = post["type"]
-      console.log $("##{type}_template").html()
-      $("#feed").append Mustache.to_html($("##{type}_template").html(), post)
-    $(window).scroll(@check) if posts && posts.length > 0
-
+      $.feedengine.current_feed.append Mustache.to_html($("##{type}_template").html(), post)
+    $(window).scroll(checkForBottom) if posts && posts.length > 0
 
 class FeedPager
-  constructor: ()->
-    @feeduser= $.feedengine.subdomain
+  constructor:(feed=$('#all_posts')) ->
+    @feeduser = $.feedengine.subdomain
+    $.feedengine.current_feed = feed
+    $.feedengine.current_pager = this
     @page=-1
     $(window).scroll(@check)
     @render()
 
-  check: =>
-    if @nearBottom()
-      @render()
-
   render: =>
     @page++
-    $(window).unbind('scroll', @check)
+    $(window).unbind('scroll', checkForBottom)
+    $.feedengine.current_feed = $('#all_posts')
     unless @feeduser
-      $.getJSON('/posts', page: @page, @renderPosts)
+      $.getJSON('/posts', page: @page, renderPosts)
     else
-      $.getJSON('/posts/'+ @feeduser.toString(), page: @page, @renderPosts)
-
-
-  nearBottom: =>
-    $(window).scrollTop() > $(document).height() - $(window).height() - 50
-
-  renderPosts: (response, status, jqXHR) =>
-    posts = response['posts']
-    for post in posts
-      type = post["type"]
-      $('#all_posts').append Mustache.to_html($("##{type}_template").html(), post)
-    $(window).scroll(@check) if posts && posts.length > 0
-
+      $.getJSON('/posts/'+ @feeduser, page: @page, renderPosts)
 
 ################################ Account Switching ###################
 
