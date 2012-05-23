@@ -182,6 +182,21 @@ body {
   margin-bottom: 15px;
 }
 
+.accounts-nav ul li {
+  a, a:visited {
+    color: #E0DCDB;
+  }
+}
+
+.accounts-nav ul.not-logged-in li {
+  a, a:visited {
+    color: $trout-main-color;
+  }
+  a:hover {
+  color: #51a351;
+  }
+}
+
 .navbar a:hover {
   color: #51a351;
 }
@@ -190,4 +205,8 @@ body {
   padding-top: 10px;
   float: right;
   width: 498px;
+}
+
+.active-nav {
+
 }
