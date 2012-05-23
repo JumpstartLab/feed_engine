@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120522171705) do
+ActiveRecord::Schema.define(:version => 20120522214015) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -58,6 +58,14 @@ ActiveRecord::Schema.define(:version => 20120522171705) do
     t.datetime "updated_at",         :null => false
     t.string   "image"
     t.string   "external_image_url"
+  end
+
+  create_table "instagram_posts", :force => true do |t|
+    t.string   "instagram_id", :null => false
+    t.string   "url"
+    t.integer  "refeed_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "link_posts", :force => true do |t|

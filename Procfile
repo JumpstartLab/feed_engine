@@ -1,2 +1,2 @@
-web:  bundle exec rails server -p $PORT
-worker: VERBOSE=TRUE QUEUE=* bundle exec rake environment resque:work
+web:    bundle exec rails server -p $PORT
+worker: bundle exec rake jobs:work
