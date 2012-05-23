@@ -2,6 +2,9 @@ require 'spec_helper'
 
 describe User do
   let(:user) { Fabricate(:user) }
+  before(:each) do
+    User.any_instance.stub(:send_welcome_email).and_return true
+  end
 
   context "who is authenticated" do
     before(:each) do

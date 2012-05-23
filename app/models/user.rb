@@ -86,10 +86,14 @@ class User < ActiveRecord::Base
     (posts.length.to_f / 12).ceil
   end
 
-  def send_password_reset
+  def create_password_reset
     generate_password_token(:password_reset_token)
     self.password_reset_sent_at = Time.zone.now
     save!(validate: false)
+    send_password_reset
+  end
+
+  def send_password_reset
     Resque.enqueue(PasswordMailer, self.id)
   end
 
