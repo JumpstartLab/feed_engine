@@ -84,10 +84,26 @@ renderDashboard = ->
 setFlash = (message) ->
   $('#flash_message').text(message)
   $('#flash').slideDown().delay(2000).slideUp()
-  
+
 setError = (message) ->
   $('#error_message').text(message)
   $('#error').slideDown().delay(2000).slideUp()
+
+addRefeedHandler = ->
+  unless $.feedengine.current_user
+    $('.refeed').hide()
+  $('.refeed').click ->
+    post_id = $(this).attr('id')
+    $.ajax(
+      type: 'POST',
+      url: 'posts/refeeds',
+      data: id:post_id,
+      success: ->
+        setFlash('Refed successfully!')
+      error: ->
+        setError('Unsuccessful refeed.')
+      )
+    $('.posted').append("")
   
 addPointsHandler = ->
   $(".addpoints").click ->
@@ -152,4 +168,4 @@ renderPosts = (response, status, jqXHR) ->
       $.feedengine.current_feed.append Mustache.to_html($("##{type}_template").html(), post)
     $(window).scroll(checkForBottom) if posts && posts.length > 0
     addPointsHandler()
-
+    addRefeedHandler()
