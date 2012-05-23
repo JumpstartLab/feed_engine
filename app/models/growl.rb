@@ -12,7 +12,7 @@ class Growl < ActiveRecord::Base
   has_many :regrowls
   include HasUploadedFile
 
-  scope :by_date, order("created_at DESC")
+  scope :by_date, order("original_created_at DESC")
   scope :by_type, lambda { |param| where{ type.like param } unless param.nil? }
   scope :since, lambda { |date| where{ created_at.gt Time.at(date+1) } unless date.nil? }
 
