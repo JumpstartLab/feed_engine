@@ -22,7 +22,7 @@ $(function() {
   $('#content_tabs a').click(function (e) {
     e.preventDefault();
     $(this).tab('show');
-  })
+  });
 });
 
 // $(".post-image a").click(function()){

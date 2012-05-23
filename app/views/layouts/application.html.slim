@@ -3,7 +3,6 @@ html
   head
     title FeedEngine
     = stylesheet_link_tag    "application", :media => "all"
-    = javascript_include_tag "application"
     = csrf_meta_tags
   body
     .container.feed
@@ -24,3 +23,4 @@ html
       - if Rails.env.development?
         div class="span12"
           = debug(params)
+      = javascript_include_tag "application"

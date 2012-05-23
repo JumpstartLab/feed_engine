@@ -1,0 +1,6 @@
+= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+  .inputs
+    = f.input :login, :required => false, :autofocus => true, :placeholder => "login", :label => false
+    = f.input :password, :required => false, :placeholder => "password", :label => false
+  .actions
+    = f.button :submit, "Log In", :class => "btn btn-success"

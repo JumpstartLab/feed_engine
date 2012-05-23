@@ -31,10 +31,9 @@ end
 
 Then /^my password has changed$/ do
   click_on "Sign out"
-  click_on "sign in"
-  fill_in "Login", with: "foo@bar.com"
-  fill_in "Password", with: "hungry22"
-  click_on "Sign in"
+  fill_in "user_login", with: "foo@bar.com"
+  fill_in "user_password", with: "hungry22"
+  click_on "Log In"
   current_path.should == dashboard_path
 end
 
