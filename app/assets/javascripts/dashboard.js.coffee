@@ -99,6 +99,7 @@ addRefeedHandler = ->
       error: ->
         setFlash('Unsuccessful Refeed.OH NOES!')
       )
+    $('.posted').append("")
   
 setError = (message) ->
   $('#error_message').text(message)
