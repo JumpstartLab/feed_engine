@@ -11,30 +11,49 @@ class User < ActiveRecord::Base
   has_many :tweets
   has_many :githubevents
   has_many :posts
+  has_many :subscriptions
   has_one :feed
-  validates_confirmation_of :password, :on => :create, :message => "should match confirmation"
+  
+  validates :email, uniqueness: true, presence: true
+  validates :password, 
+    presence: true,
+    confirmation: true, 
+    length: {minimum: 6, :message => "must be at least 6 characters long"}
 
-
-
-  DISPLAY_NAME_REGEX = /^[\w-]*$/
+  DISPLAY_NAME_REGEX = /^[a-zA-Z0-9\-_]*$/
   validates :display_name, 
-    format: { with: DISPLAY_NAME_REGEX, message: "must be only letters, numbers, dashes, or underscores" },
-    presence: true, 
-    uniqueness: true,
-    exclusion: { in: %w(www ftp api), message: "can not be www, ftp, or api" }
+    format: { with: DISPLAY_NAME_REGEX, message: "must be only letters, numbers, or dashes" }, 
+    uniqueness: true
 
+  BAD_DISPLAY_NAMES = ['ftp', 'api', 'null', 'www']
+  validate :display_name_is_not_bad
+  
+  validates :subdomain, uniqueness: true
+  
+  def display_name_is_not_bad
+    if display_name.nil? || display_name.blank?
+      errors.add(:display_name, "can not be blank")
+    elsif BAD_DISPLAY_NAMES.include?(display_name.downcase)
+      errors.add(:display_name, "can not be www, ftp, api, or null")
+    elsif display_name =~ /^[\-]/
+      errors.add(:display_name, "can not start with a dash")
+    end
+  end
+    
   def send_welcome_email
     UserMailer.welcome_email(self).deliver
   end
 
   def set_user_subdomain
-    self.subdomain = self.display_name.downcase
+    self.subdomain = self.display_name.gsub("_","-").downcase
   end
 
-  # Commenting out for now - implemented in the event that we want users to be able to set their subdomain and feed name at will
-  # def set_user_feed_name
-  #   self.feed.set_name(self.subdomain)
-  # end
+  def subscribe(feed_name)
+    sub_feed = Feed.find_by_name(feed_name)
+    unless (self.feed.id == sub_feed.id) || (self.subscriptions.find_by_feed_id(sub_feed.id))
+      self.subscriptions.create(:feed_id => sub_feed.id)
+    end
+  end
 
   def create_user_feed
     Feed.create(:user_id => self.id, :name => self.subdomain)
@@ -44,6 +63,20 @@ class User < ActiveRecord::Base
     has_many type_name.to_s.to_sym
   end
   
+  def reset_password
+    self.change_password!(
+      Digest::SHA512.hexdigest(
+        Digest::SHA384.hexdigest(
+          Digest::SHA256.hexdigest(
+      "#{@user.email}HuNgRyF33d#{FeedEngine::Application.config.secret_token}"
+          ))))
+    send_reset_email
+  end
+
+  def send_reset_email
+    UserMailer.reset_password_email(self).deliver
+  end
+
   def posts
     FEED_TYPES.map do |association|
       self.send(association.to_s.to_sym).all
@@ -54,6 +87,21 @@ class User < ActiveRecord::Base
     token = Digest::SHA256.hexdigest("#{SecureRandom.hex(15)}HuNgRyF33d#{Time.now}")
     token = generate_authentication_token if User.exists?(authentication_token: token)
     self.update_attribute(:authentication_token, token)
+  end
+
+  def update_password(params)
+    current_password = params[:current_password]
+    new_password = params[:new_password]
+    new_password_confirmation = params[:password_confirmation]
+    if User.authenticate(self.email, current_password).present?
+      if new_password == new_password_confirmation
+        self.update_attribute(:password, new_password)
+      else
+        self.errors.add :password_confirmation, "does not match new password"
+      end
+    else
+      self.errors.add :password, "incorrect"
+    end
   end
 
   def twitter_id

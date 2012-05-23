@@ -3,13 +3,17 @@ class Feed < ActiveRecord::Base
 
   belongs_to :user
   has_many :posts
+  has_many :subscriptions
 
-  # def set_name(name)
-  #   self.name = name
-  #   self.save
-  # end
-
-  # def private?
-  #   self.private
-  # end
+  def posts_after_time(time)
+    posts_after("created_at", time)
+  end
+  
+  def posts_after_id(id)
+    posts_after("id", id)
+  end
+  
+  def posts_after(type, value)
+    self.posts.where("#{type} > ?", value).order("#{type} DESC")
+  end
 end

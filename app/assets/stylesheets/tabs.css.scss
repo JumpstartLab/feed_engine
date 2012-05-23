@@ -63,11 +63,14 @@
       position:relative;
       p { color: $wasabi; }
       .errors{
+        margin: 1em 0em;
         p{
           color: $spice;
           font-weight: bold;
+          padding: .5em;
         } 
         li {
+          padding: .5em;
           color: $white;
         }
       }
@@ -75,4 +78,13 @@
   }
 }
 
-
+.errors{
+  margin: 1em 0em;
+  p{
+    color: $spice;
+    font-weight: bold;
+  } 
+  li {
+    color: $white;
+  }
+}

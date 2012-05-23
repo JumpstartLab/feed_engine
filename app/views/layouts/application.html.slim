@@ -5,7 +5,6 @@ html
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
-    = javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery?
 
   body
     .page
@@ -13,6 +12,9 @@ html
       #flash
         p#flash_message
         p#dismiss Click to Dismiss
+      #error
+        p#error_message
+        p#error_dismiss Click to Dismiss
       p#notice = notice
       = render partial: "application/index"
   
