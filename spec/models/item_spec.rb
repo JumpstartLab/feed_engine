@@ -72,6 +72,11 @@ describe Item do
     message.item.refeedable_for?(message.item.poster).should_not be true
   end
 
+  it "raises a NotRefeedable error if the user has already refed the item" do
+    message.item.refeed_for(user)
+    expect { message.item.refeed_for(user) }.to raise_error Item::NotRefeedable
+  end
+
   it "creates another item when refed" do
     expect { message.item.refeed_for(user) }.to change { Item.all.count }.from(0).to(2)
   end
