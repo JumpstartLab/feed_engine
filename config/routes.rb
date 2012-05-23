@@ -35,9 +35,13 @@ FeedEngine::Application.routes.draw do
       get :following, :followers, :refeeds
     end
   end
+
+
   match "/auth/twitter/callback" => "authentications#twitter"
   match "/auth/github/callback" => "authentications#github"
   match "/auth/instagram/callback" => "authentications#instagram"
+  match "/user_signup_steps/finish" => "user_signup_steps#finish"
+
   resource "dashboard"
   resources "text_posts"
   resources "image_posts"

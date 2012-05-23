@@ -32,11 +32,12 @@ require 'digest/md5'
 
 class User < ActiveRecord::Base
 
-  has_many :text_posts,  through: :posts, source: :postable, source_type: 'TextPost'
-  has_many :image_posts, through: :posts, source: :postable, source_type: 'ImagePost'
-  has_many :link_posts,  through: :posts, source: :postable, source_type: 'LinkPost'
-  has_many :twitter_posts, through: :posts, source: :postable, source_type: 'TwitterPost'
-  has_many :github_posts, through: :posts, source: :postable, source_type: 'GithubPost'
+  has_many :text_posts,      through: :posts, source: :postable, source_type: 'TextPost'
+  has_many :image_posts,     through: :posts, source: :postable, source_type: 'ImagePost'
+  has_many :link_posts,      through: :posts, source: :postable, source_type: 'LinkPost'
+  has_many :twitter_posts,   through: :posts, source: :postable, source_type: 'TwitterPost'
+  has_many :github_posts,    through: :posts, source: :postable, source_type: 'GithubPost'
+  has_many :instagram_posts, through: :posts, source: :postable, source_type: 'InstagramPost'
 
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :followed_users, through: :relationships, source: :followed
@@ -134,6 +135,11 @@ class User < ActiveRecord::Base
 
   def refeeded_posts
     self.posts.select { |post| post.refeed? }
+  end
+
+  def last_instagram_id
+    last_post = instagram_posts.order("instagram_id DESC").first
+    last_post && last_post.instagram_id
   end
 
 end
