@@ -3,6 +3,7 @@ class Githubevent < ActiveRecord::Base
   VALID_TYPES= ["CreateEvent", "ForkEvent","PushEvent"]
   attr_accessible :content, :action, :event_id, :handle, :post_time, :repo
   has_one :post, :as => :postable
+  has_many :points, :through => :post
 
   def self.import_posts(user_id)
     user = User.find(user_id)

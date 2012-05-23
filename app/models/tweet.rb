@@ -2,6 +2,7 @@ class Tweet < ActiveRecord::Base
   include PostsHelper
   attr_accessible :content, :source_id, :handle, :post_time
   has_one :post, :as => :postable
+  has_many :points, :through => :post
 
   def self.import_posts(user_id)
     user = User.find(user_id)

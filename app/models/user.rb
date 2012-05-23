@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :tweets
   has_many :githubevents
   has_many :posts
+  has_many :points
   has_one :feed
   validates_confirmation_of :password, :on => :create, :message => "should match confirmation"
 

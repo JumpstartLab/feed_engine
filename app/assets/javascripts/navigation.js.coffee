@@ -27,26 +27,6 @@ getSubDomain = ->
   else
     $.feedengine.subdomain = null
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 setFlash = (message) ->
   $('#flash_message').text(message)
   $('#flash').slideDown().delay(2000).slideUp()

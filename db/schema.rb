@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120521141937) do
+ActiveRecord::Schema.define(:version => 20120522204750) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(:version => 20120521141937) do
     t.string   "repo"
     t.string   "event_id"
     t.string   "action"
-    t.datetime "event_time"
+    t.datetime "post_time"
     t.integer  "user_id"
     t.text     "content"
     t.datetime "created_at", :null => false
@@ -78,6 +78,13 @@ ActiveRecord::Schema.define(:version => 20120521141937) do
 
   add_index "links", ["user_id"], :name => "index_links_on_user_id"
 
+  create_table "points", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "posts", :force => true do |t|
     t.integer "feed_id"
     t.integer "postable_id"
@@ -100,7 +107,7 @@ ActiveRecord::Schema.define(:version => 20120521141937) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "handle"
-    t.datetime "tweet_time"
+    t.datetime "post_time"
   end
 
   create_table "users", :force => true do |t|

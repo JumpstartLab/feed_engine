@@ -35,7 +35,9 @@ FeedEngine::Application.routes.draw do
   resources :texts
   resources :images
   resources :links
-
+  resources :posts do
+    resources :points, only: [:create]
+  end
 
   root :to => 'pages#index'
   match '/integrate' => 'users#integrate', as: 'integrate'
