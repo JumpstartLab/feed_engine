@@ -32,6 +32,14 @@
       Github
     </a>
   <% end %>
+  <% unless instagram_connected?(current_user) %>
+    <span class="dashboard-instagram">
+    <a href="users/auth/instagram" class="auth_provider">
+      <%= image_tag "/assets/instagram.png", :size => "50x50", :alt => "Instagram" %>
+      Instagram 
+    </a>
+    </span>
+  <% end %>
   <div class="clear"></div>
 
   <% unless user_signed_in? %>
