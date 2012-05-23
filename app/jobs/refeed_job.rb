@@ -1,9 +1,12 @@
+require 'troutr'
 class RefeedJob
   @queue = :refeed
 
   EXTERNAL_TYPES = ["GithubItem","TwitterItem","InstagramItem"]
   def self.perform(current_user, subscription)
-
+    #Resque.enqueue(RefeedJob, follower, followed_user, subscription)
+    #
+    #
     subscriber = User.find(current_user["id"])
     subscription = Subscription.find(subscription["id"])
     followed_user = User.find(subscription["followed_user_id"])
@@ -20,3 +23,22 @@ class RefeedJob
     end
   end
 end
+
+# for api:
+# Troutr::Client.new(:token => follower_token)
+# need followed_user id
+#
+#
+# NEED: Api => new_feed_items(display_name, stream_item_id)
+
+
+  def self.perform(follower, followed_user, subscription, last_stream_item_id, troutr_token)
+
+    troutr = Troutr::Client.new(token: troutr_token, url: TROUTR_API_URL)
+
+    new_stream_items_json = troutr.new_feed_items(followed_user["display_name"], last_stream_item_id)
+
+    new_stream_items_json.each do |item|
+      troutr.retrout_item(follower["display_name"], item["id"])
+    end
+  end
