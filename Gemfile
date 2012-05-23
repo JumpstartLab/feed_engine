@@ -30,6 +30,8 @@ gem 'unicorn'
 gem 'capistrano'
 gem 'newrelic_rpm'
 gem 'redis-store'
+gem 'fabrication'
+gem 'faker'
 
 group :production do
   gem 'pg'
@@ -42,8 +44,6 @@ end
 group :development, :test do
   gem 'growl'
   gem 'sqlite3'
-  gem 'fabrication'
-  gem 'faker'
   gem 'rspec-rails'
   gem 'capybara'
   gem 'launchy'
