@@ -5,7 +5,7 @@ module Hungrlr
     def initialize(base_url, bj_token)
       @base_url, @bj_token = base_url, bj_token
     end
-    
+
     def instagram_accounts
       accounts = Net::HTTP.get(URI("#{base_url}/users/instagram.json?token=#{bj_token}"))
       JSON.parse(accounts)["accounts"]

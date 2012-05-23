@@ -25,7 +25,7 @@ module Hungrlr
       @api_service ||= begin
         bj_token = ENV["BJ_TOKEN"].present? ? ENV["BJ_TOKEN"] : "HUNGRLR"
         base_url = ENV["DOMAIN"].present? ? ENV["DOMAIN"] : "http://api.hungrlr.dev/v1"
-        
+
         TweetApiService.new(base_url, bj_token)
       end
     end

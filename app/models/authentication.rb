@@ -7,7 +7,7 @@ class Authentication < ActiveRecord::Base
 
   SERVICES = ["twitter", "github", "instagram"]
   LAST_STATUS = "205435025360031748"
-  
+
   SERVICES.each do |service|
     define_singleton_method "#{service}".to_sym do
       where(provider: service).first
