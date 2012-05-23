@@ -50,11 +50,11 @@ input[type=text], input[type=password], input[type=email], textarea, select {
 }
 
 .black-transparent-box label {
-  color: black;
+  color: #555;
 }
 
 .black-transparent-box li.active > a {
-  background-color: #E0F2F7;
+  background-color: rgba(245, 245, 245, .93);
 }
 
 .black-transparent-box li > a {
@@ -172,17 +172,18 @@ input[type=text], input[type=password], input[type=email], textarea, select {
 
 #text_post{
   padding: 15px;
-  background: #E0F2F7
+  background: rgba(245, 245, 245, .93);
+/*  background: #E0F2F7*/
 }
 
 #link_post{
   padding: 15px;
-  background: #E0F2F7
+  background: rgba(245, 245, 245, .93);
 }
 
 #image_post{
   padding: 15px;
-  background: #E0F2F7
+  background: rgba(245, 245, 245, .93);
 }
 
 /* FOR DROP DOWN MENU*/
