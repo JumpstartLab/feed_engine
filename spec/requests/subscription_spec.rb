@@ -21,13 +21,13 @@ describe "Subscribing to a User's feed" do
 
       it "gives me the option to subscribe to that user's feed" do
         within(".feed-meta-container") do
-          page.should have_link("TackleBox this Troutr")
+          page.should have_link("Add troutr to TackleBox")
         end
       end
 
       it "subscribes me to this user's feed and takes me back to their feed page" do
         within(".feed-meta-container") do
-          click_link_or_button("TackleBox this Troutr")
+          click_link_or_button("Add troutr to TackleBox")
         end
 
         user_2.subscriptions.last.followed_user.should == user
@@ -39,7 +39,7 @@ describe "Subscribing to a User's feed" do
         user_2.subscriptions.create(:followed_user_id => user.id)
         visit site_domain
         within(".feed-meta-container") do
-          click_link_or_button("Let this Troutr go")
+          click_link_or_button("Remove troutr from Tacklebox")
         end
       end
     end

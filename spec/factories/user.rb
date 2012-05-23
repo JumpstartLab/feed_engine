@@ -4,5 +4,7 @@ FactoryGirl.define do
     sequence(:email) { |n| "person#{n}@example.com" }
     password "password"
     password_confirmation "password"
+
+    after_build { |user| user.class.skip_callback(:create, :after, :send_welcome_mail) }
   end
 end

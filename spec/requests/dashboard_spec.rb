@@ -2,8 +2,32 @@ require 'spec_helper'
 
 describe "Dashboard" do
 
-  let(:authed_user) { FactoryGirl.create(:user) }
+  let!(:authed_user) { FactoryGirl.create(:user) }
+  let!(:site_domain) { "http://#{authed_user.display_name}.example.com" }
 
+  context "visiting the dashboard" do
+    it "requires login" do
+      visit dashboard_path
+      page.should have_content "You need to sign in"
+    end
+
+    context "when user is logged in" do
+      it "loads when a user is logged in" do
+        login(authed_user)
+        visit dashboard_path
+        page.should have_content "Dashboard"
+      end
+
+      it "exits a subdomain" do
+        visit site_domain
+        login(authed_user)
+        visit dashboard_path
+        uri = URI.parse(current_url)
+        current_url.should == "http://example.com/dashboard"
+      end
+    end
+  end
+  
   context "creating new posts" do
     describe "of text type" do
       it "prevents creation of posts longer than 512 characters", :js => true do
