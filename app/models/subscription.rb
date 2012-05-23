@@ -137,9 +137,8 @@ class Subscription < ActiveRecord::Base
   end
 
   def create_refeed(new_post)
-    HTTParty.post("http://api.#{base_url}/v1/feeds/" +
-      "#{original_poster.subdomain}/items/#{new_post.item_id}/refeeds.json", 
-      :body => { :api_key => new_poster.api_key } )
+    puts HTTParty.post("#{new_post.link}/refeeds.json",
+      :body => { :api_key => user.api_key } )
 
     # Refeed.create!(post_id: new_post.post_id,
     #                original_poster_id: self.uid,
