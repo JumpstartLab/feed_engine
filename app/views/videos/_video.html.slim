@@ -1,6 +1,8 @@
 .row#link
   = render :partial => "growls/header", :locals => { growl: video }
 .row
+  .two.columns
+    = image_tag video.get_gravatar
   .ten.columns
     .row
       = video.comment
@@ -13,5 +15,6 @@
           = link_to video.link
           .row= video.description
         br
-        iframe allowfullscreen="" frameborder="0" height="315" src=(video.link)width="560"
+        .flex-video.widescreen
+          iframe(allowfullscreen="" frameborder="0" height="315" src="http://www.youtube.com/embed/#{video.youtube_urlify}" width="560")
 = render partial: "growls/footer", locals: { growl: video}

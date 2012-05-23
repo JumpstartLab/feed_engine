@@ -10,15 +10,7 @@
       | You have&nbsp;
       span#charsLeftLink
       |  chars left.
-    = f.button :submit, "Create Video"
-.row
-  #link_show(style="display:none;")
-    #loading= image_tag "loading_big.gif"
-    h3#image_helper Preview your Link Contents:
-    .comments
-      h4#title
-      #description
-      img#thumbnail(src="")
+    = f.button :submit, "Growl Video"
 
 coffee:
   jQuery ->
