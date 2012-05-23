@@ -1,6 +1,7 @@
 # handles adding points to posts
 class ItemsController < ApplicationController
   before_filter :set_return_session, only: :update
+  after_filter :expire_fragment_caches, only: [:update, :refeed]
 
   def update
     @item = Item.find(params[:id])
@@ -14,9 +15,9 @@ class ItemsController < ApplicationController
   end
 
   def refeed
-    item = Item.find(params[:id])
+    @item = Item.find(params[:id])
 
-    if item.refeed_for(current_user)
+    if @item.refeed_for(current_user)
       redirect_to :back
     else
       render :template => 'home/index'
@@ -29,5 +30,9 @@ class ItemsController < ApplicationController
     if params[:points] && @item.poster_id != current_user.id
       @item.post.increase_point_count
     end
+  end
+
+  def expire_fragment_caches
+    expire_fragment "post_#{@item.id}"
   end
 end

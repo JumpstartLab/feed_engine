@@ -18,27 +18,12 @@ module PostablesController
 
   def create
     initialize_post_types
-    respond_to do |format|
-      if get_instance.save
-        format.html do
-          redirect_to dashboard_path,
-            notice: "#{item_class.to_s} was successfully created."
-        end
-        format.json do
-          render json: dashboard_path,
-            status: :created,
-            location: get_instance
-        end
-      else
-        format.html do
-          render template: "dashboard/show",
-            notice: "Something went wrong."
-        end
-        format.json do
-          render json: get_instance.errors,
-            status: :unprocessable_entity
-        end
-      end
+    if get_instance.send(:save)
+      redirect_to dashboard_path,
+        notice: "#{item_class.to_s} was successfully created."
+    else
+      render template: "dashboard/show",
+        notice: "Something went wrong."
     end
   end
 

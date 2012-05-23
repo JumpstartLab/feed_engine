@@ -66,11 +66,11 @@ class User < ActiveRecord::Base
   end
 
   def sorted_posts
-    posts.sort_by(&:created_at).reverse
+    items.order("created_at desc").includes(:post => [:user, :item]).map(&:post)
   end
 
   def items
-    Item.find_all_by_poster_id(id)
+    Item.where(poster_id: self.id)
   end
 
   def subdomain
