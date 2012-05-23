@@ -14,4 +14,5 @@ class GithubItem < ActiveRecord::Base
   def self.create_from_json(user_id, parsed_json)
     new(:user_id => user_id, event_id: parsed_json["event"]["id"], event: parsed_json["event"])
   end
+
 end
