@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :githubevents
   has_many :posts
   has_one :feed
+  validates_presence_of :email
   validates_confirmation_of :password, :on => :create, :message => "should match confirmation"
 
 

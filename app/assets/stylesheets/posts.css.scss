@@ -10,6 +10,10 @@
   border-radius: 4px;
   border-color: $aloe;
 }
+#all_posts {
+  width: 60%;
+  margin: auto;
+}
 .post {
   @include borders;
   font-size: 1em;
