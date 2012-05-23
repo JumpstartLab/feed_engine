@@ -80,6 +80,6 @@ PointsFeed::Application.configure do
   config.SUBDOMAIN_INDEX = 1
 
   config.action_controller.asset_host = Proc.new do |source, request|
-    request.ssl? ? "https://#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com" : "http://#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
+    "//#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
   end
 end
