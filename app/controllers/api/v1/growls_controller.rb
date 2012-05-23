@@ -1,5 +1,10 @@
 class Api::V1::GrowlsController < Api::V1::ApiController
 
+  def show
+    growl = Growl.find(params[:id])
+    render :json => growl
+  end
+
   def create
     json_hash = JSON.parse(params[:body])
     @growl = current_user.relation_for(json_hash["type"]).new(json_hash)

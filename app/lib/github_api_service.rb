@@ -15,8 +15,10 @@ module Hungrlr
       events.collect do |event|
         event_hash = {"event_type" => event.type, "link" => event.repo.url,
                       "created_at" => event.created_at }
-        event_hash["comment"] = commits.last.message if commits = event.payload.try(:commits)
-        event_hash
+        if commits = event.payload.try(:commits)
+          event_hash["comment"] = commits.last.message
+        end
+          event_hash
       end
     end
 
