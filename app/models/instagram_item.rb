@@ -2,18 +2,22 @@ class InstagramItem < ActiveRecord::Base
   include Streamable
   attr_accessible :image, :image_id
 
-  belongs_to :user 
+  belongs_to :user
 
   has_many :stream_items, :as => :streamable
 
   serialize :image
 
   def image_url
-    image["images"]["standard_resolution"]["url"]
+    image["images"]["standard_resolution"]["url"] || ""
   end
 
   def caption
-    image["caption"]["text"]
+    if image["caption"]
+      image["caption"]["text"]
+    else
+      ""
+    end
   end
 
   def self.create_from_json(user_id, parsed_json)
