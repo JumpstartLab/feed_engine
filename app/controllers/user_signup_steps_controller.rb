@@ -13,10 +13,8 @@ class UserSignupStepsController < ApplicationController
     render_wizard @user
   end
 
-private
-
-  def redirect_to_finish_wizard
-    redirect_to dashboard_path, notice: "Welcome! You have signed up successfully."
+  def finish
+    redirect_to dashboard_path, notice: "Welcome to Feedonkulous!"
   end
 
 end
