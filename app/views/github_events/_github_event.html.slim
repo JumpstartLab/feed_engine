@@ -1,10 +1,9 @@
 .row#github
-  = render :partial => "growls/header", :locals => { growl: github_event }
-.row
-  .two.columns
-    = image_tag github_event.get_gravatar
-  .growl_content.seven.columns
-    .growl_post
+  = render :partial => "growls/left", :locals => { growl: github_event }
+  .eight.columns
+    h4= github_event.get_display_name
+    .message_padding
       = link_to github_event.title, github_event.link
       .row= github_event.comment
-= render partial: "growls/footer", locals: { growl: github_event}
+    = render :partial => 'growls/footer', :locals => { growl: github_event}
+  = render :partial => "growls/right", :locals => { growl: github_event}

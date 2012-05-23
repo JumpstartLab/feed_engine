@@ -30,8 +30,8 @@ textarea {
   float:left;
   width:100px;
 }
-.growl_post {
-  padding-left:16px;
+.message_padding {
+  padding-bottom:50px;
 }
 .growl_points {
   float:right;
@@ -140,4 +140,7 @@ ul.contained.awesome-tabs-content > li {
 .growl_content{
   float:none !important;
   margin:0 auto !important;
+}
+.meta_data_body{
+  font-size:12px;
 }

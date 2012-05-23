@@ -3,3 +3,24 @@
 
 en:
   hello: "Hello world"
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: 1H
+        other: '%{count}h'
+      half_a_minute: half a minute
+      less_than_x_minutes:
+        one: 1m
+        other: '%{count}m'
+      x_days:
+        one: 1d
+        other: '%{count}d'
+      x_minutes:
+        one: 1m
+        other: '%{count}m'
+      x_months:
+        one: 1m
+        other: '%{count}m'
+      x_seconds:
+        one: 1s
+        other: '%{count}s'

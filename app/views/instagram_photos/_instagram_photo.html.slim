@@ -1,11 +1,10 @@
 .row#instagram
-  = render :partial => "growls/header", :locals => { growl: instagram_photo }
-.row
-  .two.columns
-    = image_tag instagram_photo.get_gravatar
-  .growl_content.seven.columns
+  = render :partial => "growls/left", :locals => { growl: instagram_photo }
+  .eight.columns
+    h4= instagram_photo.get_display_name
     .row
       .comments
         .row= instagram_photo.comment
         .row= image_tag instagram_photo.photo(:medium)
-= render partial: "growls/footer", locals: { growl: instagram_photo}
+    = render :partial => 'growls/footer', :locals => { growl: instagram_photo}
+  = render :partial => "growls/right", :locals => { growl: instagram_photo}

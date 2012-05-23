@@ -1,10 +1,9 @@
 .row#message
-  = render :partial => "growls/header", :locals => { growl: message }
-.row
-  .two.columns
-    = image_tag message.get_gravatar
-  .growl_content.seven.columns
-    .growl_post
+  = render :partial => "growls/left", :locals => { growl: message }
+  .eight.columns
+    h4= message.get_display_name
+    .message_padding
       = link_to message.title, message.link
       .row= message.comment
-= render partial: "growls/footer", locals: { growl: message}
+    = render :partial => 'growls/footer', :locals => { growl: message}
+  = render :partial => "growls/right", :locals => { growl: message}

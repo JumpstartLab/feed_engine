@@ -1,5 +1,5 @@
 .row
-  .content_bar
+  .content_bar.nine.columns
     h1= "#{@user.display_name}'s Feed"
     .unsubscribe{ style=("display: none" unless current_user.try(:subscribed_to?, @user)) }
       = button_to('UNSUBSCRIBE', subscriptions_path(:user_id => @user.id), :method => "delete", :remote => true, :class => 'small green button radius')
@@ -16,27 +16,27 @@
     -elsif @growls.empty?
       p There are no growls in this feed.
     -else
-      dl.sub-nav
-        dt Filter:
-        dd#all.active
-          a(href="#") All
-        dd#images
-          a(href="#") Images
-        dd#messages
-          a(href="#") Messages
-        dd#links
-          a#links(href="#") Links
-        dd#tweets
-          a#tweets(href="#") Tweets
-        dd#github
-          a#github(href="#") Github
-        dd#instagrams
-          a#instagrams(href="#") Instagrams
-      #growls
-        = render @growls
-      #page
-        = paginate @growls
-
+      .row
+        dl.sub-nav
+          dt Filter:
+          dd#all.active
+            a(href="#") All
+          dd#images
+            a(href="#") Images
+          dd#messages
+            a(href="#") Messages
+          dd#links
+            a#links(href="#") Links
+          dd#tweets
+            a#tweets(href="#") Tweets
+          dd#github
+            a#github(href="#") Github
+          dd#instagrams
+            a#instagrams(href="#") Instagrams
+        #growls
+          = render @growls
+        #page
+          = paginate @growls
 javascript:
   domain = "#{request.subdomain}.#{request.domain}"
 coffee:

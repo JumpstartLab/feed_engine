@@ -1,19 +1,22 @@
 .row#link
-  = render :partial => "growls/header", :locals => { growl: link }
-.row
-  .two.columns
-    = image_tag link.get_gravatar
-  .growl_content.seven.columns
-    .row
-      = link.comment
-      .comments(style="float:left;")
-        .four.columns
-          = image_tag link.photo(:medium)
-        .eight.columns
-            -if link.title.present?
-              = link_to link.title, link.link
-              .row= truncate(link.description, length: 200)
-            -else
-              = link_to link.link
-              .row= link.description
-= render partial: "growls/footer", locals: { growl: link}
+  = render :partial => "growls/left", :locals => { growl: link }
+  .eight.columns
+    h4= link.get_display_name
+    .row(style="padding-bottom:50px;")
+      .growl_content
+        = link.comment
+        br
+        br
+        br
+        .row.meta_data_body
+          .four.columns
+            = image_tag link.photo(:medium)
+          .eight.columns
+              -if link.title.present?
+                b= link_to link.title, link.link
+                .row= truncate(link.description, length: 200)
+              -else
+                b= link_to link.link
+                .row= link.description
+    = render :partial => 'growls/footer', :locals => { growl: link}
+  = render :partial => "growls/right", :locals => { growl: link}
