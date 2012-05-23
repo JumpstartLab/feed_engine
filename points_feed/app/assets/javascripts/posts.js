@@ -115,12 +115,15 @@ function award_points() {
     },
     success: function(data) {
       $.cookie('award_points_to', null);
-      var link = $(document).find("[data-id="+id+"]")
-      var parent = link.parent();
+
+      var link = $(document).find("[data-id="+id+"][class=points_link]")
+      //var parent = $(link.parent()[0]);
+      var parent = link.parent().parent().find(".awardable");
       var points = parent.find(".points");
       var img = link.find('img');
 
-      link.hide().parent().prepend(img);
+      link.hide();
+      parent.prepend(img);
       img.css('opacity', .5);
 
       points.html(parseInt(points.html()) + 1);
@@ -168,6 +171,7 @@ $(document).ready(function() {
   $(".refeed_link").live('click', function(e) {
     e.preventDefault();
     $this = $(this);
+    var id = $this.data("id");
 
     $.ajax({
       type: 'post',
@@ -176,7 +180,8 @@ $(document).ready(function() {
         'access_token': access_token
       },
       success: function(data) {
-        $this.parent().html('Post has been refeeded').addClass('label label-info');
+        points_notify($(document).find("[data-id="+id+"]").parent().parent().parent(), 'Post has been refeeded');
+        $this.hide();
       },
       error: function(evt) {
         alert('unable to refeed');
