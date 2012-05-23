@@ -2,32 +2,25 @@
 class Api::V1::ItemsController < ApplicationController
   respond_to :json
 
-  before_filter :validate_request!, :except => [:index, :show]
+  before_filter :validate_request!, :except => [:index, :show, :refeed]
+  before_filter :validate_token!, :except => [:index, :show]
+
+  rescue_from ActiveRecord::RecordNotFound do |exception|
+    error(:not_found, exception.message)
+  end
+
+  rescue_from Item::NotRefeedable do |exception|
+    error(:conflict, exception.message)
+  end
 
   def index
-    if @user = User.find_by_display_name(params[:display_name])
-      @items = Item.find_all_by_poster_id(@user.id)
-    else
-      error(:not_found, "user #{params[:display_name]} does not exist.")
-    end
-
-    respond_with do |format|
-      format.json
-    end
+    @user = User.find_by_display_name(params[:display_name])
+    @items = Item.find_all_by_poster_id(@user.id)
   end
 
   def show
-    unless @user = User.find_by_display_name(params[:display_name])
-      error(:not_found, "user #{params[:display_name]} does not exist.")
-    end
-
-    unless @item = Item.find(params[:id])
-      error(:not_found, "item #{params[:id]} does not exist.")
-    end
-
-    respond_with do |format|
-      format.json
-    end
+    @user = User.find_by_display_name!(params[:display_name])
+    @item = Item.find(params[:id])
   end
 
   def create
@@ -45,6 +38,13 @@ class Api::V1::ItemsController < ApplicationController
     end
   end
 
+  def refeed
+    item = Item.find(params[:item_id])
+    user = User.find_by_api_key!(params[:api_key])
+    item.refeed_for(user)
+    success(:created, "Refeed created successfully")
+  end
+
   private
 
   def extract_post_class_from(params)
@@ -60,17 +60,12 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def error(type, msg = nil)
-    respond_with({ :error    => "#{ msg || type }" }.to_json,
-                   :status   => type,
-                   :location => '')
+    render :json => { :error => "#{ msg || type }"}, :status => type
   end
 
   def success(type, msg = nil, post = nil)
     @item = post
-
-    respond_with({ :success  => "#{ msg || type }" }.to_json,
-                   :status   => type,
-                   :location => '')
+    render :json => { :error => "#{ msg || type }"}, :status => type
   end
 
   def authorized?(params)
@@ -82,5 +77,10 @@ class Api::V1::ItemsController < ApplicationController
   def validate_request!
     post_type = params[:post][:type].camelcase.safe_constantize if params[:post]
     error(:unprocessable_entity) unless post_type
+  end
+
+  def validate_token!
+    user = User.find_by_api_key(params[:api_key])
+    error(:forbidden) unless user
   end
 end

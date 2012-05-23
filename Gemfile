@@ -26,6 +26,10 @@ gem 'httparty'
 gem 'hashie'
 gem 'vcr'
 gem 'fakeweb'
+gem 'unicorn'
+gem 'capistrano'
+gem 'newrelic_rpm'
+gem 'redis-store'
 
 group :production do
   gem 'pg'

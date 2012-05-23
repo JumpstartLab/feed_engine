@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe User do
   context "with a display name" do
-    let(:user) { Fabricate(:user) }
+    let(:user) { Fabricate(:user_with_posts) }
 
     before(:all) do
       logout
@@ -37,14 +37,6 @@ describe User do
       end
 
       context "and has made posts" do
-        before(:each) do
-          3.times do
-            Fabricate(:message, :poster_id => user.id)
-            Fabricate(:image, :poster_id => user.id)
-            Fabricate(:link, :poster_id => user.id)
-          end
-        end
-
         context "visits their feed" do
           before(:each) do
             set_host(user.display_name)

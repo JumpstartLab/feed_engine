@@ -64,9 +64,15 @@ ActiveRecord::Schema.define(:version => 20120522190257) do
     t.integer  "poster_id"
     t.integer  "post_id"
     t.string   "post_type"
+<<<<<<< HEAD
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
     t.integer  "original_poster_id"
+=======
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.boolean  "refeed"
+>>>>>>> c92d62551b504f4f7297b958a3b7c0cc1da4d217
   end
 
   create_table "links", :force => true do |t|
@@ -88,6 +94,7 @@ ActiveRecord::Schema.define(:version => 20120522190257) do
     t.integer  "points",     :default => 0
   end
 
+<<<<<<< HEAD
   create_table "refeeds", :force => true do |t|
     t.integer  "original_poster_id"
     t.integer  "post_id"
@@ -98,6 +105,8 @@ ActiveRecord::Schema.define(:version => 20120522190257) do
     t.integer  "subscription_id"
   end
 
+=======
+>>>>>>> c92d62551b504f4f7297b958a3b7c0cc1da4d217
   create_table "subscriptions", :force => true do |t|
     t.string   "provider"
     t.string   "uid"
