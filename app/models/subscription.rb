@@ -115,6 +115,11 @@ class Subscription < ActiveRecord::Base
                     }
                   }
                  )
+                 # Tweet.create!(subscription_id: self.id,
+                 #               body: new_post.text,
+                 #               created_at: new_post.created_at,
+                 #               poster_id: self.user_id
+                 #              )
   end
 
   def fancy_type(event_type)
