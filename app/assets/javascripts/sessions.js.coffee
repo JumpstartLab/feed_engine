@@ -5,6 +5,7 @@ jQuery ->
   addLogoutHandler()
   addIntegrationHandlers()
   addSettingsHandlers()
+  addResetPasswordHandler()
 
 #### #### #### #### #### #### #### General #### #### #### #### #### #### 
 
@@ -177,9 +178,15 @@ updateResponse = (response, form) ->
     for error in text['errors'] 
       $('#settings-page .errors ul').append("<li>#{error}</li>")
 
+################################ RESET PASSWORD ###############################
 
-
-
+addResetPasswordHandler = ->
+  $('#reset_password').click ->
+    email = $('#signin-page #email').val()
+    unless email
+      setFlash("Please provide an email address to reset password")
+    else
+      $.post('/reset_password', email: email)
 
 
 

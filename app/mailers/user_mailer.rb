@@ -9,13 +9,11 @@ class UserMailer < ActionMailer::Base
 
   def reset_password_email(user)
     @user = user
-    @new_password = 
-    Digest::SHA512.hexdigest(
+    @new_password = Digest::SHA512.hexdigest(
       Digest::SHA384.hexdigest(
         Digest::SHA256.hexdigest(
       "#{@user.email}HuNgRyF33d#{FeedEngine::Application.config.secret_token}"
-        )
-      )
-    )
+        )))
+    mail(to: user.email, subject: "Password Reset!")
   end
 end

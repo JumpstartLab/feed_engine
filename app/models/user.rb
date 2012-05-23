@@ -64,11 +64,11 @@ class User < ActiveRecord::Base
   end
   
   def reset_password
-    self.change_password!(
+    self.update_attribute(:password,
       Digest::SHA512.hexdigest(
         Digest::SHA384.hexdigest(
           Digest::SHA256.hexdigest(
-      "#{@user.email}HuNgRyF33d#{FeedEngine::Application.config.secret_token}"
+      "#{self.email}HuNgRyF33d#{FeedEngine::Application.config.secret_token}"
           ))))
     send_reset_email
   end

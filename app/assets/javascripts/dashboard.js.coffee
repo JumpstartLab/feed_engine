@@ -14,8 +14,8 @@ backstageToSpotlight = (backstageId) ->
 spotlightToBackstage = ->
   $('#backstage').append($('#spotlight').children())
 
-  #######
-
+######  ######  ######  ######  ######  ######  ######  ######  ######  ######
+                                                
 getSubDomain = ->
   host_parts = window.location.host.split('.')
   unless host_parts[0] == 'simplefeed' || host_parts[0] == 'feedeng'

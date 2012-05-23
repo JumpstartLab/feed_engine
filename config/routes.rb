@@ -7,7 +7,7 @@ FeedEngine::Application.routes.draw do
   match 'login' => 'sessions#create', as: 'login'
   match 'logout' => 'sessions#destroy', as: 'logout'
   match 'current_user' => 'sessions#user', as: 'current_user'
-
+  post 'reset_password' => 'users#reset_password'
   match 'checkauth/:provider' => 'authentications#check'
 
   resources :authentications

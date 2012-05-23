@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :require_login, except: [:show, :new, :create]
+  before_filter :require_login, except: [:show, :new, :create, :reset_password]
   
   def show
     @user = User.find_by_subdomain!(request.subdomain)
@@ -18,8 +18,8 @@ class UsersController < ApplicationController
   end
 
   def reset_password
-    if user = User.find_by_email(params[:email])
-      user.reset_password
+    if @user = User.find_by_email(params[:email])
+      @user.reset_password
     end
   end
 
