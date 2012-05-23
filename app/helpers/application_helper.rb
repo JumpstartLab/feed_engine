@@ -12,7 +12,7 @@ module ApplicationHelper
   end
 
   def linked_services?(user)
-    if user.nil? 
+    if user.nil?
       false
     else
       twitter_connected?(user) || github_connected?(user)
