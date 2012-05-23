@@ -4,7 +4,8 @@ jQuery ->
   addSigninHandler()
   addLogoutHandler()
   addIntegrationHandlers()
-  
+  addSettingsHandlers()
+
 #### #### #### #### #### #### #### General #### #### #### #### #### #### 
 
 setUsername = ->
@@ -150,3 +151,37 @@ logout = ->
 addLogoutHandler = ->
   $('#logout').parent().click ->
     logout()
+
+#### #### #### #### #### #### Password Change #### #### #### #### #### ####
+
+addSettingsHandlers = ->
+  $(".errors").hide()
+  $('#settings-page .button').click ->
+    $(".errors").hide()
+    form = $('#settings-page form')
+    formData = form.serialize()
+    jqxhr = $.ajax(
+      type: "PUT",
+      url: "/user/update",
+      data:formData)
+    updateResponse(jqxhr, form)
+
+updateResponse = (response, form) ->
+  response.success ->
+    setFlash("Password update successful")
+
+  response.error (json_response) ->
+    text = $.parseJSON(json_response['responseText'])
+    $('#settings-page .errors').show()
+    $('#settings-page .errors ul').children().remove()
+    for error in text['errors'] 
+      $('#settings-page .errors ul').append("<li>#{error}</li>")
+
+
+
+
+
+
+
+
+

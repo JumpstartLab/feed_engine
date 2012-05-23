@@ -31,6 +31,7 @@ FeedEngine::Application.routes.draw do
   match 'posts/ind', to: 'posts#ind'
   match 'posts/refeeds' => "posts#refeed", as: :refeed
   resources :users
+  match 'user/update' => 'users#update'
   resources :posts, only: [:create, :index]
   resources :texts
   resources :images

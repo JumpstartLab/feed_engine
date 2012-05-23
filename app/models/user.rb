@@ -33,11 +33,6 @@ class User < ActiveRecord::Base
     self.subdomain = self.display_name.downcase
   end
 
-  # Commenting out for now - implemented in the event that we want users to be able to set their subdomain and feed name at will
-  # def set_user_feed_name
-  #   self.feed.set_name(self.subdomain)
-  # end
-
   def create_user_feed
     Feed.create(:user_id => self.id, :name => self.subdomain)
   end
@@ -56,6 +51,21 @@ class User < ActiveRecord::Base
     token = Digest::SHA256.hexdigest("#{SecureRandom.hex(15)}HuNgRyF33d#{Time.now}")
     token = generate_authentication_token if User.exists?(authentication_token: token)
     self.update_attribute(:authentication_token, token)
+  end
+
+  def update_password(params)
+    current_password = params[:current_password]
+    new_password = params[:new_password]
+    new_password_confirmation = params[:password_confirmation]
+    if User.authenticate(self.email, current_password).present?
+      if new_password == new_password_confirmation
+        self.update_attribute(:password, new_password)
+      else
+        self.errors.add :password_confirmation, "does not match new password"
+      end
+    else
+      self.errors.add :password, "incorrect"
+    end
   end
 
   def twitter_id
