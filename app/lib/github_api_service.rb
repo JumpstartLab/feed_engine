@@ -5,7 +5,7 @@ module Hungrlr
     def initialize(base_url, bj_token)
       @base_url, @bj_token = base_url, bj_token
     end
-    
+
     def github_accounts
       accounts = Net::HTTP.get(URI("#{base_url}/users/github.json?token=#{bj_token}"))
       JSON.parse(accounts)["accounts"]
@@ -31,3 +31,4 @@ module Hungrlr
     end
   end
 end
+# I love processor
