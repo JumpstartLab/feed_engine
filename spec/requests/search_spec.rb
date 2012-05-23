@@ -11,6 +11,6 @@ describe "Search" do
   it "takes the user to the specified feed" do
     fill_in"display_name", with: user.display_name
     click_button("Search")
-    page.should have_content "#{user.display_name}'s Feed"
+    page.should have_content "#{user.display_name.capitalize}'s Feed"
   end
 end

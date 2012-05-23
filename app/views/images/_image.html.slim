@@ -1,10 +1,7 @@
-.row#image
-  = render :partial => "growls/header", :locals => { growl: image }
-.row
-  .two.columns
-    = image_tag image.get_gravatar
-  .ten.columns
-    = image.comment
-    br
-    .comments= image_tag image.photo(:medium)
-= render partial: "growls/footer", locals: { growl: image}
+.growl-box
+  .row#image
+    = render :partial => "growls/header", :locals => { growl: image }
+    .row
+      .eight.columns.offset-by-one
+        = image_tag image.photo(:medium)
+    = render partial: "growls/footer", locals: { growl: image}

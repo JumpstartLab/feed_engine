@@ -1,4 +1,11 @@
-.eleven.columns
-  h4= growl.get_display_name
-.one.columns
-  = image_tag growl.icon
+.two.columns
+  = image_tag growl.get_gravatar
+.ten.columns
+  .row
+    .eight.columns
+      p
+        strong.speaker= "#{growl.get_display_name.capitalize} said:"
+        br
+        .comment= growl.comment
+    .two.columns.centered
+      = image_tag growl.icon
