@@ -16,7 +16,7 @@ class TextPostDecorator < ApplicationDecorator
       :id => model.id,
       :feed => "#{feed_url}.json",
       :link => "#{feed_url}/items/#{model.id}.json",
-      :refeed => model.original_post != nil,
+      :refeed => model.original_post != model,
       :refeed_link => "#{refeed_url(model.original_post)}",
       :refeeder => refeeder,
       :can_refeed => can_refeed?,
