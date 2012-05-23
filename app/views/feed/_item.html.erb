@@ -9,7 +9,7 @@
       <h3>I was originally written by <%= item.author.display_name %></h3>
     <% end %>
     <span class="refeed-buttons">
-      <% unless current_user == nil || !current_user.can_retrout?(item) %>
+      <% unless current_user == nil || !current_user.can_retrout?(item.streamable) %>
       <%= link_to("#", 'data-author' => item.author.display_name, 'data-type' => item.class.name, 'data-id' => item.to_param, :class => "refeed_ajax_link") do  %>
       <span class="raphael-icon refeed">0</span>
       <% end %>

@@ -126,6 +126,25 @@ describe "Feed" do
     end
 
     context "when a logged in user views another feed" do
+      before do
+        @client = Pusher::Client.new({
+          :app_id => '20',
+          :key => '12345678900000001',
+          :secret => '12345678900000001',
+          :host => 'api.pusherapp.com',
+          :port => 80,
+        })
+        @client.encrypted = false
+
+
+        @pusher_url_regexp = %r{/apps/20/channels/test_channel/events}
+  end
+
+  before :each do
+      WebMock.stub_request(:post, @pusher_url_regexp).
+        to_return(:status => 202)
+      @channel = @client['test_channel']
+    end
       it "shows a button to refeed each post" do
         # VoodooDoubleLogin(tm)
         # login(user) is a devise helper to convince devise u are logged in
@@ -141,6 +160,15 @@ describe "Feed" do
         end
       end
 
+      it "refeeds an item" do
+        # login_factory_user(user_3.email)
+        login(user_3)
+        visit user_4_domain
+        test_item = user_4.text_items.first
+        within("#item_#{user_4.text_items.first.id}") { find(".refeed_ajax_link").click }
+        page.should have_content("Post has been retrouted")
+      end
+
       it "refeeds an item", :js => true do
         # login_factory_user(user_3.email)
         login(user_3)
@@ -149,7 +177,7 @@ describe "Feed" do
         Capybara.app_host = "http://#{user_4.display_name}.lvh.me:3003"
         Capybara.server_port = 3003
         visit "/"
-        test_item = user_4.text_items.first
+        test_item = user_4.text_items.last
         within("#item_#{user_4.text_items.first.id}") { find(".refeed_ajax_link").click }
         page.should have_content("Post has been retrouted")
         Capybara.current_session.driver.reset!
