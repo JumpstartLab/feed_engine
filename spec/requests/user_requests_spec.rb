@@ -2,6 +2,9 @@ require 'spec_helper'
 
 describe User do
   let(:user) { Fabricate(:user) }
+  before(:each) do
+    User.any_instance.stub(:send_welcome_email).and_return true
+  end
 
   context "who is authenticated" do
     before(:each) do
@@ -100,14 +103,9 @@ describe User do
       end
 
       describe "when signing up" do
+
         it "is persisted" do
           expect { click_button "Sign Up" }.to change { User.count }.by(1)
-        end
-
-        it "receives an email" do
-          expect { click_button "Sign Up" }.to change {
-            ActionMailer::Base.deliveries.length
-          }.by(1)
         end
 
         it "doesn't need to re-enter their password if validations fail" do

@@ -19,3 +19,4 @@
 
 /config/initializers/auth_keys.rb
 /config/database.yml
+/resources/*
