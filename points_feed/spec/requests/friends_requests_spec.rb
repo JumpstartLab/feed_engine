@@ -29,12 +29,13 @@ describe "Friend" do
         end
 
         it "should show all of the user's friends" do
-          page.should have_content("Remove Friend")
+          page.should have_content("#{user2.display_name}")
         end
 
         it "should allow me to delete friends" do
-          click_link "Remove Friend"
-          page.should have_content("That user has been removed")
+          pending
+          find(".feed-delete").click
+          page.should_not have_content("#{user2.display_name}")
         end
       end
     end
