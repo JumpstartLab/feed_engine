@@ -3,6 +3,6 @@ class HomeController < ApplicationController
   def index
     @posts = Kaminari.paginate_array(
                Item.all_items_sorted_posts
-             ).page(params[:page]).per(20)
+             ).page(params[:page]).per(12)
   end
 end
