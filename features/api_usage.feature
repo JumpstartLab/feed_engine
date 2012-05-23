@@ -6,4 +6,4 @@ Feature: API user reads a public feed
 
   Scenario: Reading a public feed via the API
     When I request "http://api.feedengine.com/feeds/charles.json";
-    Then I should receive a JSON array of feed items
+    Then I should see an error for "Token not found"
