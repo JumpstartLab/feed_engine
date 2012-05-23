@@ -6,5 +6,5 @@
   .nine.columns
     .growl_post
       = link_to tweet.title, tweet.link
-      .row= tweet.comment_with_link
+      .row= tweet.comment_with_link.html_safe
 = render partial: "growls/footer", locals: { growl: tweet}
