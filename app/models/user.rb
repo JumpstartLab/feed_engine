@@ -111,6 +111,10 @@ class User < ActiveRecord::Base
   def find_subscription(subscription_id)
     inverse_subscriptions.where(id: subscription_id).first
   end
+
+  # def remaining_services?
+  #   twitter_account && github_account && instagram_account
+  # end
 end
 
 # == Schema Information

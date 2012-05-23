@@ -4,13 +4,16 @@ class AuthenticationsController < ApplicationController
 
   def destroy
     authentication = current_user.authentications.where(id: params[:id]).first
+    @growl = current_user.growls.build
+    @type = "Service"
 
     if authentication.try(:destroy)
-      redirect_to new_authentication_path, notice: "Your
-         #{authentication.provider.capitalize} account has been unlinked."
+      flash[:notice] = "Your #{authentication.provider.capitalize} account
+         has been unlinked."
+      render "dashboards/show"
     else
-      redirect_to new_authentication_path, notice: "There
-         was an issue in unlinking your account."
+      flash[:notice] = "There was an issue in unlinking your account."
+      render "dashboards/show"
     end
   end
 end
