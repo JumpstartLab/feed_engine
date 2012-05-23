@@ -25,9 +25,9 @@
            </li>
           </ul>
         <% else %>
-          <ul class="nav nav-section">
+          <ul class="clearfix nav global-nav ">
             <% if request.fullpath != new_user_path %>
-              <li class="offset7 pull-left navigation-item navigation-item-anon">
+              <li class="navigation-item navigation-item-anon">
               <a href="<%= login_path(:subdomain => false) %>">
                 <span class="raphael-icon">L</span>Login
               </a>
