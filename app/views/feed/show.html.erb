@@ -1,4 +1,4 @@
-<div class="span7" >
+<div class="span6" >
 <script src="http://js.pusherapp.com/1.9/pusher.min.js"></script>
  <script type="text/javascript">
  var pusher = new Pusher('<%= Pusher.key %>'); // uses your API KEY
@@ -12,7 +12,7 @@
 });
 
  </script>
-<div class="span7 feed-list" id="stream-items">
+<div class="feed-list" id="stream-items">
 
   <% if @stream_items %>
     <% @stream_items.each do |stream_item| %>
@@ -26,6 +26,19 @@
     <div class="row">
       <h2 class="feed-title span2"><%= @feed_owner.display_name %></h2>
     </div>
+    
+    <% if current_user && (current_user != @feed_owner) %>
+      <%= image_tag "/assets/tackle-box.png" %>
+      <% if current_user.followed_users.include?(@feed_owner) %>
+        <%= link_to "Let troutr go", subscription_path(current_feed_subscription), 
+          :method => :delete, :class => "tacklebox-btn btn btn-primary btn-small" %>
+      <% else %>
+        <%= link_to "Tacklebox this troutr", subscriptions_path(:followed_user_id => @feed_owner.id), 
+          :method => :post, :class => "tacklebox-btn btn btn-primary btn-small" %>
+      <% end %>
+      <br />
+      <br />
+    <% end %>
     <table>
       <tr>
         <td>
@@ -39,43 +52,33 @@
           <div class="following-count-container">
             <span class="following-count">10</span>
             <br/>
-            <span class="following-count-label">trouting</span>
+            <span class="following-count-label">tackleboxed</span>
           </div>
         </td>
         <td>
           <div class="follower-count-container">
             <span class="follower-count">1000</span>
             <br/>
-            <span class="follower-count-label">trouters</span>
+            <span class="follower-count-label">tailing</span>
           </div>
         </td>
       </tr>
     </table>
     <br/>
-    <br/>
-    <br/>
 
-    <h3>Linked Services</h3>
-    <% if twitter_connected?(@feed_owner) %>
-      <span class="raphael-icon linked-twitter-logo">^</span>
-    <% end %>
-    <% if github_connected?(@feed_owner) %>
-      <span class="raphael-icon linked-post-logo">U</span>
-    <% end %>
-    <br/>
-    <br/>
-    <% if current_user && (current_user != @feed_owner) %>
-      <% if current_user.followed_users.include?(@feed_owner) %>
-        <%= link_to "Remove troutr from Tacklebox", subscription_path(current_feed_subscription), :method => :delete %>
-      <% else %>
-        <%= link_to "Add troutr to TackleBox", subscriptions_path(:followed_user_id => @feed_owner.id), :method => :post %>
+    <div class="linked-services">
+      <% if linked_services?(current_user) %>
+        <br/>
+        <h3>Linked Services</h3>
+        <% if twitter_connected?(@feed_owner) %>
+          <span class="raphael-icon linked-twitter-logo">^</span>
+        <% end %>
+        <% if github_connected?(@feed_owner) %>
+          <span class="raphael-icon linked-post-logo">U</span>
+        <% end %>
+        <br/>
       <% end %>
-    <% end %>
-    
-    <% if !twitter_connected?(@feed_owner) && !github_connected?(@feed_owner) %>
-      <br/>
-      <h4>None</h4>
-    <% end %>
+    </div>
   </div>
   <div class="span7" id="pagination-div">
     <%= paginate @stream_items %>
