@@ -3,6 +3,7 @@ require 'spec_helper'
 describe User do
   let(:user) { Fabricate(:user_with_posts) }
   let(:other_user) { Fabricate(:user_with_posts) }
+  let(:new_user) { Fabricate.build(:user) }
 
   context "who is not authenticated" do
     before(:all) do
