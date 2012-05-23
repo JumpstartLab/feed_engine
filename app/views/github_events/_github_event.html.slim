@@ -1,9 +1,10 @@
-.row#github
-  = render :partial => "growls/left", :locals => { growl: github_event }
-  .eight.columns
-    h4= github_event.get_display_name
-    .message_padding
-      = link_to github_event.title, github_event.link
-      .row= github_event.comment
-    = render :partial => 'growls/footer', :locals => { growl: github_event}
-  = render :partial => "growls/right", :locals => { growl: github_event}
+.growl-box
+  .row#github
+    = render :partial => "growls/left", :locals => { growl: github_event }
+    .seven.columns.offset-by-one
+      h4= github_event.get_display_name
+      .message_padding
+        = link_to github_event.title, github_event.link
+        .row= github_event.comment
+      = render :partial => 'growls/footer', :locals => { growl: github_event}
+    = render :partial => "growls/right", :locals => { growl: github_event}

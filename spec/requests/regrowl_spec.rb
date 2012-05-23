@@ -14,7 +14,7 @@ describe "Regrowl" do
       visit root_path
       click_on "Regrowl"
       visit "http://#{user2.display_name}.hungrlr.dev"
-      page.should have_content user.display_name
+      page.should have_content user.display_name.capitalize
     end
   end
 end
