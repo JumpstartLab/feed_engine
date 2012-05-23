@@ -1,19 +1,26 @@
 module FeedHelper
   def github_body(item)
-    event = item.event
-    login = event.actor.login
-    @event_type = event.type
-    @commits = []
+    login = item.actor_login
+    event_type = item.event_type
 
-    if @event_type == "PushEvent"
-      @github_body = "#{login} pushed the following commits"
-      @commits = event.payload.commits
-    elsif @event_type == "ForkEvent"
-      @fork_url = event.payload.forkee.html_url 
-      @github_body = "#{login} forked"
+    if event_type == "PushEvent"
+      @commits = item.event_payload_commits
+      "#{login} pushed the following commits:"
+    elsif event_type == "ForkEvent"
+      "Forked #{event_link(item.fork_url, item.fork_url)}".html_safe
+    elsif event_type == "CreateEvent"
+      ref_type = item.ref_type
+      "Created #{ref_type}: #{repo_link(item.repo_name)}".html_safe
     else
-     @github_body = "#{login} performed a #{@event_type}"
-     @event_type =  "github_event_unsupported"
+     "#{login} performed a #{event_type}"
     end
    end
+
+  def event_link(url, name)
+    "<a href=\"#{url}\">#{name}</a>"
+  end
+
+  def repo_link(name)
+      "<a href=\"http://github.com/#{name}\">#{name}</a>"
+  end
 end

@@ -5,7 +5,7 @@ class LinkItem < ActiveRecord::Base
 
   validates_presence_of :url
   validates_length_of :url, :maximum => 2048
-  validates_format_of :url, :with => LINK_REGEX, :message => "Please enter a valid url" 
+  validates_format_of :url, :with => LINK_REGEX, :message => "Please enter a valid url that looks like http://example.com" 
   validates_length_of :comment, :maximum => 256
 
   has_many :stream_items, :as => :streamable

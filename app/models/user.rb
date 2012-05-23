@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
   has_many :link_items
   has_many :twitter_items
   has_many :github_items
+  has_many :instagram_items
   has_many :stream_items
   has_many :authentications
   has_many :subscriptions, :foreign_key => :follower_id

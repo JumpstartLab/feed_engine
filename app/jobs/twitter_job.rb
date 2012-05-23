@@ -10,12 +10,13 @@ class TwitterJob
 
     auth = user.authentications.find_by_provider("twitter")
 
-    tweets = client.user_timeline(uid).select do |tweet| 
+    troutr = Troutr::Client.new(:token => user.authentication_token, :url => TROUTR_API_URL)
+
+    tweets = client.user_timeline(uid).select do |tweet|
       tweet.created_at.utc > auth.created_at && user.twitter_items.find_by_status_id(tweet.attrs["id_str"]).nil?
     end
-    tweets.reverse.each do |tweet| 
-      user.twitter_items.create(:tweet => tweet, 
-                                :status_id => tweet.attrs["id_str"])
+    tweets.reverse.each do |tweet|
+      troutr.create_twitter_item(user.display_name, JSON.dump(tweet.attrs))
     end
     user.save
   end
@@ -31,4 +32,25 @@ class TwitterJob
       :oauth_token => token,
       :oauth_token_secret => secret})
   end
-end 
+end
+
+# Tweet:
+#   Status;
+#   Attrs
+#     created_at
+#     id
+#     id_str
+#     text
+#     source
+#     truncated
+#     in_reply_to
+#     in_rep...
+#     etc...
+#
+#     TimeStamp: twitter_item.tweet.created_at
+#
+#     TWEETJSON
+#     {"status_id":"#{item.tweet.attrs["id_str"]}", "attrs":"#{t.tweet.attrs}"}
+#
+#     item.tweet.class == Twitter::Status
+#     item.tweet.attrs.class == Hash --> parse this to json

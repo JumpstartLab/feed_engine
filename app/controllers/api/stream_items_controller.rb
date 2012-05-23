@@ -2,7 +2,8 @@ class Api::StreamItemsController < Api::BaseController
   before_filter :verify_auth_token_match, :only => :create
   def show
     @user = User.where(:display_name => params[:display_name]).first
-    @item = @user.stream_items.find(params[:id]).streamable
+    @stream_item = @user.stream_items.find(params[:id])
+    @item = @stream_item.streamable
   end
 
   def create

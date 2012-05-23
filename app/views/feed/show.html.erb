@@ -12,12 +12,12 @@
 });
 
  </script>
- <h1 class="feed-title span7"><%= @feed_owner.display_name %>'s stream</h1>
+<h1 class="feed-title span7"><%= @feed_owner.display_name %>'s stream</h1>
 <div class="span7 feed-list" id="stream-items">
-  
-  <% if @items %>
-    <% @items.zip(@stream_items).each do |i, si| %>
-    <%= render :partial => "item", :locals => { :item => i, :stream_item => si } %>
+
+  <% if @stream_items %>
+    <% @stream_items.each do |stream_item| %>
+      <%= render :partial => "item", :locals => { :item => stream_item } %>
     <% end %>
   <% end %>
 </div>
@@ -60,6 +60,14 @@
     <% if github_connected?(@feed_owner) %>
       <span class="raphael-icon linked-post-logo">U</span>
     <% end %>
+    <% if current_user && (current_user != @feed_owner) %>
+      <% if current_user.followed_users.include?(@feed_owner) %>
+        <%= link_to "Let this Troutr go", subscription_path(current_feed_subscription), :method => :delete %>
+      <% else %>
+        <%= link_to "TackleBox this Troutr", subscriptions_path(:followed_user_id => @feed_owner.id), :method => :post %>
+      <% end %>
+    <% end %>
+    
     <% if !twitter_connected?(@feed_owner) && !github_connected?(@feed_owner) %>
       <br/>
       <h4>None</h4>

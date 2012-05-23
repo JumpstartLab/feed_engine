@@ -6,5 +6,11 @@ class InstagramItem < ActiveRecord::Base
 
   has_many :stream_items, :as => :streamable
 
-  serialize :image 
+  serialize :image
+
+  def self.create_from_json(user_id, parsed_json)
+    new(user_id: user_id,
+        image_id: parsed_json["image"]["id"],
+        image: parsed_json["image"])
+  end
 end

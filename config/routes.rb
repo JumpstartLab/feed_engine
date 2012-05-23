@@ -5,6 +5,8 @@ FeedEngine::Application.routes.draw do
   match 'users/auth/:provider' => 'authentications#new'
   match 'users/auth/:provider/callback' => 'authentications#create'
 
+  
+
   devise_scope :user do
     get "signup" => "devise/registrations#new", :as => :new_user
     get "login" => "devise/sessions#new", :as => :login
@@ -23,12 +25,11 @@ FeedEngine::Application.routes.draw do
 
 
   resources :points, :only => [:create]
-  resources :text_items
-  resources :link_items
-  resources :image_items
+  resources :text_items, :image_items, :link_items, :only => [:create]
   resources :external_accounts
   resources :subscriptions, :only => [:create, :destroy]
   resources :stream_items, :only => [:create]
+  resource :feed
   devise_for :users, :controllers => { :registrations => "users/registrations" }
 
   devise_for :users
@@ -60,5 +61,6 @@ FeedEngine::Application.routes.draw do
 
   # if there's a subdomain, send them to feed#show, otherwise treat root as dashboard
   match '', to: 'feed#show', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
-  root :to => 'dashboard#show'
+  match 'user_root' => redirect('/dashboard')
+  root :to => 'river#show'
 end

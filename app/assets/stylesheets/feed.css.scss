@@ -1,5 +1,6 @@
 @import "variables";
 @import "containers";
+@import "text";
 
 .feed_row {
   padding: 0 20px 0 50px;
@@ -20,11 +21,16 @@
   height: 48px;
 }
 
-.text-item-body {
+@mixin item-body {
   font-size: 16px; 
   font-weight: 200;
   font-family: $font;
   color: $font-color;
+}
+
+.text-item-body {
+  @include item-body;
+  @include word-wrap;
 }
 
 .body_image {
@@ -116,6 +122,7 @@
 
 .refeed {
   @include item-logo;
+  padding: 5px 0 0 10px
 }
 
 /*Stats*/
@@ -173,7 +180,67 @@ $stat-count-font-size: 18px;
 }
 
 .feed-title {
-  font-family: $font;
-  color: $trout-main-color;
+  @include troutr-title;
   padding: 0 0 14px 50px;
+}
+
+.git-commit a{
+  color: $trout-main-color;
+}
+
+.git-commit a:visited{
+  color: $trout-main-color;
+}
+
+.git-commit a:hover {
+  color: $trout-main-color;
+  background-color: transparent;
+}
+
+.item-header-user  a{
+  color: $trout-main-color;
+}
+
+.item-header-user a:visited{
+  color: $trout-main-color;
+}
+
+.item-header-user  a:hover {
+  color: $trout-main-color;
+  background-color: transparent;
+}
+
+.points-container  a{
+  color: $trout-main-color;
+}
+
+.points-container a:visited{
+  color: $trout-main-color;
+}
+
+.points-container a:hover {
+  color: $trout-hover-color; 
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.refeed-buttons  a{
+  color: $trout-main-color;
+}
+
+.refeed-buttons a:visited{
+  color: $trout-main-color;
+}
+
+.refeed-buttons a:hover {
+  background-color: transparent;
+  text-decoration: none;
+}
+.twitter {
+  @include word-wrap;
+  @include item-body;
+}
+
+.github-item-body {
+  @include item-body;
 }

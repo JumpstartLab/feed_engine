@@ -12,7 +12,9 @@
 <%= render :partial => 'dashboard/item_input' %>
 
 <div id="dashboard-posts" class="span5">
-  <% @items.each do |item| %>
-      <%= render :partial => "feed/item", :locals => {:item => item} %>
+  <% if @stream_items %>
+    <% @stream_items.each do |stream_item| %>
+      <%= render :partial => "feed/item", :locals => { :item => stream_item } %>
+    <% end %>
   <% end %>
 </div>

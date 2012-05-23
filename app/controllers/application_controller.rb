@@ -12,7 +12,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  helper_method :resource, :resource_name
+  def after_update_path_for(resource)
+      raise "boom"
+      flash.keep
+      redirect_to "/dashboard"
+    end
+
+  helper_method :resource, :resource_name, :river_stream_items, :river_items
 
   def resource
     current_user
@@ -26,3 +32,4 @@ class ApplicationController < ActionController::Base
     point = Point.create(user: current_user, pointable_id: session[:point_for], pointable_type: session[:point_for_type])
   end
 end
+

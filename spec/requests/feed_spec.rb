@@ -7,8 +7,8 @@ describe "Feed" do
 
   context "points" do
     before(:each) do 
-      login_factory_user(user.email)
-      login(user)
+      login_factory_user(user_2.email)
+      login(user_2)
       5.times do 
         text_item = FactoryGirl.create(:text_item, :user => user)
       end
@@ -17,11 +17,13 @@ describe "Feed" do
     
     it "adds a point for a logged in user" do
       t = user.text_items.first
-      t_string = "a#item_#{t.id}"
+      puts "#{t.inspect}"
+      t_string = "a#item_#{t.to_param}"
+      puts t_string
       page.should have_selector(t_string)
       find(t_string).click
+      save_and_open_page
       t.points.count.should == 1
-      page.should_not have_selector(t_string)
     end
 
     it "requres a user to be logged in" do
@@ -40,11 +42,10 @@ describe "Feed" do
       page.should have_selector(t_string)
       find(t_string).click
       page.should have_button('Log In')
-      login_factory_user(user.email)
-      login(user)
+      login_factory_user(user_2.email)
+      login(user_2)
       visit site_domain  
       t.points.count.should == 1
-      page.should_not have_selector(t_string)
     end
   end
 
@@ -132,7 +133,6 @@ describe "Feed" do
         # login_factory_user makes a post to sessions controller
         # in order to keep you logged in across subdomains
         # no one knows.
-        login_factory_user(user_3.email)
         login(user_3)
         visit user_4_domain
         user_4.text_items.each do |item|
@@ -142,16 +142,19 @@ describe "Feed" do
         end
       end
 
-      # it "refeeds an item", :js => true do
-      #   # login_factory_user(user_3.email)
-      #   login(user_3)
-      #   visit user_4_domain
-      #   test_item = user_4.text_items.first
-      #   within("#item_#{user_4.text_items.first.id}") { find(".refeed_ajax_link").click }
-      #   page.should have_content("You retrouted")
-      #   visit "http://#{user_3.display_name}.example.com"
-      #   page.should have_content test_item.body
-      # end
+      it "refeeds an item", :js => true do
+        # login_factory_user(user_3.email)
+        login(user_3)
+        Capybara.current_session.driver.reset!
+        Capybara.default_host = "lvh.me"
+        Capybara.app_host = "http://#{user_4.display_name}.lvh.me:3003"
+        Capybara.server_port = 3003
+        visit "/"
+        test_item = user_4.text_items.first
+        within("#item_#{user_4.text_items.first.id}") { find(".refeed_ajax_link").click }
+        page.should have_content("Post has been retrouted")
+        Capybara.current_session.driver.reset!
+      end
     end
   end
 end

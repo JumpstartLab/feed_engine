@@ -1,0 +1,17 @@
+<div class="edit-account-container">
+
+  <% if current_user %>
+    <h4>Troutr loves to see interesting work from the community -- use this token to get started with the API!</h4>
+    <br />
+      <div class="api-token">
+        <span>API Token:</span>
+        <code><%=current_user.authentication_token %></code>
+        <div class="clear"></div>
+      </div>
+    <br />
+  <% end %>
+
+  <div class="clear"></div>
+</div>
+
+
