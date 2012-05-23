@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120523182218) do
+ActiveRecord::Schema.define(:version => 20120523214036) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -77,9 +77,10 @@ ActiveRecord::Schema.define(:version => 20120523182218) do
 
   create_table "points", :force => true do |t|
     t.integer  "post_id"
-    t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "receiver_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "giver_id"
   end
 
   create_table "posts", :force => true do |t|

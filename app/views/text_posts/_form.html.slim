@@ -1,4 +1,4 @@
 = simple_form_for @text_post, html: {name: "text-message"} do |f|
   = f.input :title
-  = f.input :body
+  = f.input :body, :input_html => {:size => "80"}
   = f.submit 'Post Message', class: 'btn btn-primary'

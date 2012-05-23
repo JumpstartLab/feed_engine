@@ -1,13 +1,34 @@
 #totop {
-  width:100px;
-        background:#f7f7f7;
+        width:275px;
+        background:#eee;
         text-align:center;
         padding:5px;
         position:fixed;
         bottom:10px;
-        right:30px;
+        right:155px;
         cursor:pointer;
         display:none;
         color:#333;
-        font-size:11px;
+        font-size:9px;
+        border-width:1px;
+        border-style:solid;
+        border-color:#ccc;
+        border-radius:5px;
+}
+
+#minidash {
+        width:275px;
+        background:#eee;
+        height:675px;
+        padding:45px;
+        border-width:1px;
+        border-style:solid;
+        border-color:#ccc;
+        border-radius:5px;
+        margin-top:35px;
+        margin-left:122px;
+}
+
+#content_tabs {
+        margin-bottom:0px;
 }

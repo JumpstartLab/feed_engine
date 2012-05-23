@@ -28,7 +28,7 @@ Then /^I see a prominent link to sign up for an account$/ do
 end
 
 Then /^I see a log in form$/ do
-  should have_content "sign in"
+  should have_content "Sign In"
 end
 
 When /^I log out$/ do
