@@ -50,6 +50,12 @@
 
 .dashboard-posts-title {
   font-family: $font;
+  padding-left: 65px;
+} 
+
+#dashboard-posts {
+  font-family: $font;
+  padding-left: 50px;
 }
 
 .form_field_error { 
@@ -84,6 +90,8 @@
 .authentication a.btn {
   float: right;
 }
+
+
 
 .dashboard-instagram {
   padding: 0 0 0 5px;
