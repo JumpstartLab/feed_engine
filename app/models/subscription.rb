@@ -138,7 +138,7 @@ class Subscription < ActiveRecord::Base
   end
 
   def create_refeed(new_post)
-    puts HTTParty.post("#{new_post.link}/refeeds.json",
+    HTTParty.post("#{new_post.link}/refeeds.json",
       :body => { :api_key => user.api_key } )
   end
 
