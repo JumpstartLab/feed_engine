@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120522190257) do
+ActiveRecord::Schema.define(:version => 20120523160405) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -89,16 +89,6 @@ ActiveRecord::Schema.define(:version => 20120522190257) do
     t.integer  "points",     :default => 0
   end
 
-  create_table "refeeds", :force => true do |t|
-    t.integer  "original_poster_id"
-    t.integer  "post_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-    t.string   "post_type"
-    t.integer  "poster_id"
-    t.integer  "subscription_id"
-  end
-
   create_table "subscriptions", :force => true do |t|
     t.string   "provider"
     t.string   "uid"
@@ -117,6 +107,7 @@ ActiveRecord::Schema.define(:version => 20120522190257) do
     t.datetime "updated_at",                     :null => false
     t.integer  "poster_id"
     t.integer  "points",          :default => 0
+    t.integer  "tweet_id"
   end
 
   create_table "users", :force => true do |t|
