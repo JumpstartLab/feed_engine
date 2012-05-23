@@ -122,11 +122,11 @@ ul.contained.awesome-tabs-content > li {
 }
 #user_search {
   float:left;
-  padding-left:145px;
+  padding-left:405px;
 }
 .search_box {
   margin-top:7px;
-  width:500px !important;
+  width:300px !important;
 }
 .posted {
   line-height:29px;
