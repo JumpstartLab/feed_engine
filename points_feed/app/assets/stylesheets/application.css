@@ -204,6 +204,7 @@ input[type=text], input[type=password], input[type=email], textarea, select {
   padding: 5px;
   width: 130px;
   color: white;
+  text-align: right;
 }
 
 #menu li ul {

@@ -18,8 +18,10 @@
               </form>
               <li>
                 <div style='margin-top: 10px; font-size: 18px;'>
-                  <img src="<%= current_user.avatar %>" style='float: left; height: 20px; margin-right: 10px; margin-top: 5px;'></img>
-                  <%= link_to "#{current_user.display_name}", "http://#{current_user.display_name}.pointsfeed.in" %>
+                  <%= link_to "http://#{current_user.display_name}.pointsfeed.in" do %>
+                    <img src="<%= current_user.avatar %>" style='height: 20px; margin-right: 5px; margin-top: 0px;'></img>
+                    <%= current_user.display_name %>
+                  <% end %>
                 </div>
                 <ul class="active">
                   <li><%= link_to 'Dashboard', dashboard_url(:subdomain => false) %></li>
