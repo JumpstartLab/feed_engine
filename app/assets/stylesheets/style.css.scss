@@ -78,11 +78,15 @@ header h2{
 }
 .header_image {
   background: url('/assets/background-black.png') center fixed;
-  background: #111;
   background-repeat: no-repeat;
   background-size:cover;
   margin-top:-30px;
   width:100%;
+}
+.home_bg {
+   margin-top:-30px;
+  width:100%;
+  background: #111;
 }
 .center_text{
   text-align:center;
