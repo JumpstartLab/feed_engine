@@ -1,13 +1,13 @@
 .block-grid.two-up.social-icons
   - unless current_user.twitter?
-     = link_to image_tag('twitter-icon.png'), user_omniauth_authorize_path(:twitter)
+    .three.columns#link-twitter= link_to "", user_omniauth_authorize_path(:twitter)
   - else
-     = link_to image_tag('twitter-dark.png'), authentication_path(current_user.twitter), method: :delete, class: "darken"
+     .three.columns#unlink-twitter= link_to "", authentication_path(current_user.twitter), method: :delete
   - unless current_user.github?
-     = link_to image_tag('github.png'), user_omniauth_authorize_path(:github)
+     .three.columns#link-github= link_to "", user_omniauth_authorize_path(:github)
   - else
-     = link_to image_tag('github-dark.png'), authentication_path(current_user.github), method: :delete, class: "darken"
+    .three.columns#unlink-github= link_to "", authentication_path(current_user.github), method: :delete
   - unless current_user.instagram?
-     = link_to image_tag('instagram.png'), user_omniauth_authorize_path(:instagram)
+     .three.columns#link-instagram= link_to "", user_omniauth_authorize_path(:instagram)
   - else
-    = link_to image_tag('instagram-dark.png'), authentication_path(current_user.instagram), method: :delete, class: "darken"
+    .three.columns#unlink-instagram= link_to "", authentication_path(current_user.instagram), method: :delete
