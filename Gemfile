@@ -63,6 +63,7 @@ end
 
 group :production do
   gem 'thin'
+  gem 'dalli'
   gem 'pg'
 end
 
