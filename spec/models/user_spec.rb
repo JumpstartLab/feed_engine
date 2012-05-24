@@ -77,6 +77,9 @@ describe User do
     end
   end
   context "subscriptions" do
+    let(:post) { OpenStruct.new(created_at: Time.now) }
+    before(:each) { Subscription.any_instance.stub(:get_new_service_posts).and_return([post]) }
+      
     describe "#subscription" do
       let!(:twitter_subscription) {Fabricate(:subscription, provider: "twitter", user_id: user.id) }
       let!(:github_subscription) {Fabricate(:subscription, provider: "github", user_id: user.id) }
@@ -84,13 +87,6 @@ describe User do
         user.subscription("twitter").should == twitter_subscription
         user.subscription("github").should == github_subscription
         user.subscription("boo").should == nil
-      end
-    end
-    describe "#num_subscriptions" do
-      let!(:twitter_subscription) {Fabricate(:subscription, provider: "twitter", user_id: user.id) }
-      let!(:github_subscription) {Fabricate(:subscription, provider: "github", user_id: user.id) }
-      it "returns the number of subscriptions that exist" do
-        user.num_subscriptions.should == 2
       end
     end
     describe "#subscribed_to_all_services?" do
@@ -101,6 +97,7 @@ describe User do
       end
       it "returns true when subscribed to all services" do
         github_subscription = Fabricate(:subscription, provider: "github", user_id: user.id)
+        github_subscription = Fabricate(:subscription, provider: "instagram", user_id: user.id)
         user.subscribed_to_all_services?.should == true
       end
     end

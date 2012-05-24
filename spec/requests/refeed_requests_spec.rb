@@ -65,7 +65,10 @@ describe User do
     end
     context "refeeds another feed from another user's feed" do
       let!(:other_user) { Fabricate(:user) }
+      let(:post) { OpenStruct.new(created_at: Time.now) }
+    
       before(:each) do
+        Subscription.any_instance.stub(:get_new_service_posts).and_return([post]) 
         set_host other_user.subdomain
         visit root_path
       end
@@ -87,7 +90,23 @@ describe User do
           visit root_path
           page.should_not have_link "Refeed"
         end
+        context "then stop refeeding that user's feed" do
+          before(:each) do
+            reset_host
+            visit dashboard_path(user)
+            click_link_or_button "Subscriptions"
+          end
+
+          it "has the feeds that the user is refeeding on the dashboard" do
+            page.should have_content other_user.display_name
+          end
+          it "has links to stop refeeding the refed feeds", :focus => true do
+            expect { click_link_or_button "Remove" }.to change { Subscription.all.count}.by(-1)
+          end
+          it "can stop refeeding one the feeds"
+        end
       end
+
       context "and an item has been refeeded" do
 
         it "shows the item on the user's feed" do

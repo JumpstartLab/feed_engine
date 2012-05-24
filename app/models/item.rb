@@ -17,17 +17,17 @@ class Item < ActiveRecord::Base
   attr_accessible :post_id, :post_type, :poster_id, :refeed, :original_poster_id
   after_destroy :destroy_refeeds!
   belongs_to :post, :polymorphic => true
+  has_many :point_gifts
 
   def self.all_items_sorted_posts
     items = Item.order("created_at desc").includes(:post => [:user, :item])
     posts = items.reject(&:refeed?).collect(&:post)
   end
 
-  def self.give_point_to(item_id)
-    item = Item.find(item_id)
-    post_type = item.post_type.constantize
-    post = post_type.find(item.post_id)
-    post.increase_point_count
+  def give_point_from(user)
+    unless PointGift.find_by_user_id_and_item_id(user.id, self.id)
+      PointGift.create( { :user_id => user.id, :item_id => self.id } )
+    end
   end
 
   def poster

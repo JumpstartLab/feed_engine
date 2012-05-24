@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
 
   def add_point(item_id)
     item = Item.find(item_id)
-    Item.give_point_to(item_id) if item.poster_id != current_user.id
+    item.give_point_from(current_user) if item.poster_id != current_user.id
     session[:point_pending_for] = nil
     session[:return_to] = nil
   end

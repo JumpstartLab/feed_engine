@@ -2,7 +2,10 @@ module Postable
   def self.included(base)
     base.instance_eval do
       attr_accessible :poster_id
+
+      attr_accessor :skip_callbacks
       after_save :create_item
+
       validates_presence_of :poster_id
       has_one :item, :as => :post, :dependent => :destroy
       belongs_to :user, :foreign_key => :poster_id
@@ -14,11 +17,14 @@ module Postable
   end
 
   def create_item
-    Item.create(
-      :post_id => id,
-      :post_type => self.class.to_s,
-      :poster_id => poster_id
-    )
+    unless self.skip_callbacks
+      Item.create(
+        :post_id => id,
+        :post_type => self.class.to_s,
+        :poster_id => poster_id
+      )
+    end
+    skip_callbacks = false
   end
 
   def respond_to?(method_name, include_private = false)
@@ -42,6 +48,7 @@ module Postable
   end
 
   def increase_point_count
+    self.skip_callbacks = true
     new_point_count = points + 1
     update_attribute(:points, new_point_count)
   end
