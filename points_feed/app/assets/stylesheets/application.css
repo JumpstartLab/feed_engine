@@ -22,7 +22,8 @@ body, p {
 
 input[type=text], input[type=password], input[type=email], textarea, select {
   color: black;
-  font: 13px/20px "HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font: 13px/20px;
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
 }
 
 #login-links {
