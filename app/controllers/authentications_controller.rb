@@ -1,15 +1,5 @@
 class AuthenticationsController < ApplicationController
-  def new
-    @authentication = Authentication.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @authentication }
-    end
-  end
-
   def create
-
     auth = request.env["omniauth.auth"]
     uid = auth['uid']
     token = auth["credentials"]["token"]
@@ -20,7 +10,6 @@ class AuthenticationsController < ApplicationController
     if auth["extra"]["raw_info"]
       login = auth["extra"]["raw_info"]["login"] 
     end
-
 
     provider = auth[:provider]
     authentication = current_user.authentications.build(:provider => provider, :uid => uid, 
