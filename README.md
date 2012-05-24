@@ -44,28 +44,24 @@ Please be at your appointed times early and take careful notice of who is review
   * 4A reviews 6A in Classroom Low
   * 3B reviews 6B in Fishbowl
   * 4B reviews 5B in Boardroom
-* 1:00 - 1:30
   * Team 1 with Yoho in Yoho's Office
-* 1:30 - 2:00
-  * Team 2 with Yoho in Yoho's Office
+  * Team 2 with Jeff in Jeff's Office
 * 2:00 - 3:00
   * 6A reviews 1A in Classroom High
   * 5A reviews 2A in Classroom Low
   * 5B reviews 1B in Fishbowl
   * 6A reviews 2B in Boardroom
-* 2:00 - 2:30
   * Team 3 with Yoho in Yoho's Office
-* 2:30 - 3:00
-  * Team 4 with Yoho in Yoho's Office
+  * Team 4 with Jeff in Jeff's Office
 * 3:00 - 4:00
   * 1A reviews 3A in Classroom High
   * 2A reviews 4A in Classroom Low
   * 2B reviews 3B in Fishbowl
   * 1B reviews 4B in "the clubhouse" - area outside the boardroom/above workstations
-* 3:00 - 3:30
   * Team 5 with Yoho in Yoho's Office
-* 3:30 - 4:00
-  * Team 6 with Yoho in Yoho's Office
+  * Team 6 with Jeff in Jeff's Office
+* 4:00 - 4:30
+  * Reconvene in classroom
 
 #### Peer Reviews
 
