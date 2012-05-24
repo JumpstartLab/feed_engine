@@ -95,66 +95,67 @@
     });
 br
 br
-div.span3
-  div#sidebar
-    ul
-      li= link_to "Posts", "#", :id => "posts_id", :class => "active"
-      li= link_to "Privacy", "#", :id => "privacy_id", :class => "inactive"
-      li= link_to "Services", "#", :id => "services_id", :class => "inactive"
-      li= link_to "Subscriptions", "#", :id => "subscriptions_id", :class => "inactive"
-      li= link_to "Account", "#", :id => "account_id", :class => "inactive"
-div.span7
-  div#posts.fe-container
-    = link_to "#", :class => "active post_label", :id => "add_message" do
-      =content_tag(:span, "Text")
-      =image_tag("http://farm9.staticflickr.com/8156/7213395774_ec4daa4367_t.jpg")
-    |&nbsp;&nbsp;&nbsp;&nbsp;
-    = link_to "#", :class => "inactive post_label", :id => "add_link" do
-      =content_tag(:span, "Link")
-      =image_tag("http://farm8.staticflickr.com/7234/7213342742_50e10a486c_t.jpg")
-    |&nbsp;&nbsp;&nbsp;&nbsp;
-    = link_to "#", :class => "inactive post_label", :id => "add_image" do
-      =content_tag(:span, "Image")
-      =image_tag("http://farm6.staticflickr.com/5235/7213342782_b808c3b2ab_t.jpg")
-    br
-    br
-    - [@image, @message, @link].each do |post|
-      - if post.errors.any?
-        #error_explanation
-          h2 class="#{post.class.to_s.downcase}" #{pluralize(post.errors.count, "error")} prohibited this #{post.class.to_s.downcase} from being saved:
-          ul
-            - post.errors.full_messages.each do |message|
-              li = message
-    div#forms
-      hr
-  div#privacy
-    div
-      h2 Privacy
+.full_dashboard
+  div.span3
+    div#sidebar.fe-container
+      ul
+        li= link_to "Posts", "#", :id => "posts_id", :class => "active"
+        li= link_to "Privacy", "#", :id => "privacy_id", :class => "inactive"
+        li= link_to "Services", "#", :id => "services_id", :class => "inactive"
+        li= link_to "Subscriptions", "#", :id => "subscriptions_id", :class => "inactive"
+        li= link_to "Account", "#", :id => "account_id", :class => "inactive"
+  div.span6
+    div#posts.fe-container
+      = link_to "#", :class => "active post_label", :id => "add_message" do
+        =content_tag(:span, "Text")
+        =image_tag("message_icon.png")
+      |&nbsp;&nbsp;&nbsp;&nbsp;
+      = link_to "#", :class => "inactive post_label", :id => "add_link" do
+        =content_tag(:span, "Link")
+        =image_tag("link_icon.png")
+      |&nbsp;&nbsp;&nbsp;&nbsp;
+      = link_to "#", :class => "inactive post_label", :id => "add_image" do
+        =content_tag(:span, "Image")
+        =image_tag("image_icon.png")
       br
-      - if dashboard_posts_private?
-        = render :partial => "dashboard/posts_private"
-      - else
-        = link_to "Make my posts private", nil, :class => "btn btn-primary btn-large"
-  div#services
-    - if current_user.subscriptions.any?
+      br
+      - [@image, @message, @link].each do |post|
+        - if post.errors.any?
+          #error_explanation
+            h2 class="#{post.class.to_s.downcase}" #{pluralize(post.errors.count, "error")} prohibited this #{post.class.to_s.downcase} from being saved:
+            ul
+              - post.errors.full_messages.each do |message|
+                li = message
+      div#forms
+        hr
+    div#privacy.fe-container.white_box
+      div
+        h2 Privacy
+        br
+        - if dashboard_posts_private?
+          = render :partial => "dashboard/posts_private"
+        - else
+          = link_to "Make my posts private", nil, :class => "btn btn-primary btn-large"
+    div#services.fe-container.white_box
+      - if current_user.subscriptions.any?
+        div.fe-container
+          =render partial: "subscriptions/subscriptions_table"
       div.fe-container
-        =render partial: "subscriptions/subscriptions_table"
-    div.fe-container
-      =render partial: "subscriptions/disconnected_table"
-  div#subscriptions
-    div
-      h2 Subscriptions
-      br
-      table.table.table-striped
-        tbody
-          - current_user.refeed_subscriptions.each do |refeed_subscription|
-            tr
-              td = refeed_subscription.original_poster.display_name
-              td
-                = link_to "Remove", subscription_path(refeed_subscription, :subdomain => false), :method => :delete, :class => "btn btn-small btn-info"
+        =render partial: "subscriptions/disconnected_table"
+    div#subscriptions.fe-container.white_box
+      div
+        h2 Subscriptions
+        br
+        table.table.table-striped
+          tbody
+            - current_user.refeed_subscriptions.each do |refeed_subscription|
+              tr
+                td = refeed_subscription.original_poster.display_name
+                td
+                  = link_to "Remove", subscription_path(refeed_subscription, :subdomain => false), :method => :delete, :class => "btn btn-small btn-info"
 
-  div#account
-    div
-      h2 Account Settings
-      = render partial: "users/update_password"
-      = link_to "Disable Account", nil, :class => "btn btn-medium"
+    div#account.fe-container.white_box
+      div
+        h2 Account Settings
+        = render partial: "users/update_password"
+        = link_to "Disable Account", nil, :class => "btn btn-medium"

@@ -25,3 +25,30 @@ div#post_forms a.active span {
   color: black;
   text-decoration: underline;
 }
+
+div.full_dashboard div#posts {
+  background: white;
+}
+
+div#sidebar {
+  width: 230px;
+  background: #eee;
+}
+
+div.full_dashboard .white_box {
+  background: white;
+}
+
+div.full_dashboard div#services .fe-container {
+  width: 460px;
+}
+
+div.full_dashboard .fe-container {
+  border: none;
+}
+
+div.full_dashboard div#posts a span {
+  font-weight: bold;
+  font-size: 16px;
+  margin-right: 10px;
+}

@@ -85,15 +85,20 @@ span.post_links {
 }
 
 span.post_links span.poster_info {
-  font-size:13px;
+  font-size:12px;
   float:left;
 }
 span#refeed {
   float:right;
-  margin-left:24px;
+  padding-left: 20px;
+  margin-right:10px;
+  background:url('tiny_fire_arrow.png') center left no-repeat;
 }
 span#points {
   float:right;
+  padding-left: 20px;
+  margin-right:5px;
+  background:url('points.png') center left no-repeat;
 }
 
 span.post_content span.image_container {
