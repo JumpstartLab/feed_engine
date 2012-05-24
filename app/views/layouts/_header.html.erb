@@ -21,7 +21,7 @@
             <li id="nav-dashboard" class="pull-left navigation-item">
             <a href="<%= dashboard_url(:subdomain => false) %>"> <span class="raphael-icon">></span>Dashboard</a>
             </li>
-            <li class="pull-left navigation-item">
+            <li id="nav-logout" class="pull-left navigation-item">
             <a href="<%= destroy_user_session_path(:subdomain => false)%>" data-method="delete"> <span class="raphael-icon">Ï</span>Logout </a>
            </li>
           </ul>
