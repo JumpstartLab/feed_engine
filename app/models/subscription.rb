@@ -47,12 +47,16 @@ class Subscription < ActiveRecord::Base
   end
 
   def get_new_service_posts
-    new_posts = get_new_posts
-    create_records_of_posts(new_posts)
+    get_service_posts
     delay(
       :run_at =>
       SUBSCRIPTION_FREQ.seconds.from_now
     ).get_new_service_posts
+  end
+
+  def get_service_posts
+    new_posts = get_new_posts
+    create_records_of_posts(new_posts)
   end
 
   def original_poster

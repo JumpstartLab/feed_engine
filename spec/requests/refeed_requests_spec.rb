@@ -65,7 +65,10 @@ describe User do
     end
     context "refeeds another feed from another user's feed" do
       let!(:other_user) { Fabricate(:user) }
+      let(:post) { OpenStruct.new(created_at: Time.now) }
+    
       before(:each) do
+        Subscription.any_instance.stub(:get_new_service_posts).and_return([post]) 
         set_host other_user.subdomain
         visit root_path
       end

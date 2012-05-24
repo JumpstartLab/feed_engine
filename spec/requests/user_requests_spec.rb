@@ -176,6 +176,9 @@ describe User do
       end
 
       context "after signing up" do
+        let(:post) { OpenStruct.new(created_at: Time.now) }
+        before(:each) { Subscription.any_instance.stub(:get_new_service_posts).and_return([post]) }
+          
         it "sees a page with an option to authorize twitter" do
           click_button "Sign Up"
           page.should have_content "Connect with Twitter"
