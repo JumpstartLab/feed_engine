@@ -26,13 +26,15 @@ class Relationship < ActiveRecord::Base
   def self.relationship_summary
     ActiveRecord::Base.connection.select_all(<<-SQL)
       select follower.display_name as follower, followed.display_name as followed, 
-      follower.authentication_token as follower_token, max(original_post.id) as last_id
-      from users as follower
+      follower.authentication_token as follower_token, max(refeed_post.refeed_id) as last_id
+           from users as follower
            inner join users as followed
            inner join relationships on follower.id = relationships.follower_id
-                                       and followed.id = relationships.followed_id
-           inner join posts as original_post
-           inner join posts as refeed_post on original_post.id = refeed_post.refeed_id
+                                   and followed.id = relationships.followed_id
+           inner join posts as original_post on original_post.user_id = followed.id
+           left join posts as refeed_post on original_post.id = refeed_post.refeed_id
+           group by follower, followed
     SQL
   end
 end
+

@@ -14,7 +14,7 @@ module Feeder
     def start
       while true
         refeed_authentications
-        refeed_relationships
+        refeed_relationships_posts
         sleep TWO_MINUTES
       end
     end
@@ -42,14 +42,14 @@ module Feeder
       end
     end
 
-    def refeed_relationships
+    def refeed_relationship_posts
       relationships = client(MASTER_TOKEN).relationships
       relationships.each do |relationship|
         followed = User.find_by_display_name(relationship.followed)
         follower = User.find_by_display_name(relationship.follower)
         since_id = relationship.since_id
 
-
+        client(follower.id).refeed_post
       end
     end
 
@@ -100,12 +100,11 @@ module Feeder
     end
 
     def client(token)
-      @client ||=
-        if production?
-          FeedEngineApi::Client.new(host: "http://api.feedonkulous.com", port: 80, token: token)
-        else
-          FeedEngineApi::Client.new(host: "http://api.lvh.me", port: 3000, token: token)
-        end
+      if production?
+        FeedEngineApi::Client.new(host: "http://api.feedonkulous.com", port: 80, token: token)
+      else
+        FeedEngineApi::Client.new(host: "http://api.lvh.me", port: 3000, token: token)
+      end
     end
 
     def production?
