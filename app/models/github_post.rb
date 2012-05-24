@@ -13,7 +13,8 @@
 #
 
 class GithubPost < ActiveRecord::Base
-  attr_accessible :published_at, :repo_name, :repo_url, :github_type, :github_id, :created_at
+  attr_accessible :published_at, :repo_name, :repo_url,
+                  :github_type, :github_id, :created_at
 
   has_one :post, :as => :postable, dependent: :destroy
   has_one :user, :through => :post
