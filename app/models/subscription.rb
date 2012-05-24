@@ -158,8 +158,8 @@ class Subscription < ActiveRecord::Base
   end
 
   def create_refeed(new_post)
-    HTTParty.post("#{new_post.link}/refeeds.json",
-                  :body => { :api_key => user.api_key } )
+    client = SuperHotClient::Client.new(:url => "http://api.lvh.me:3000", :api_key => user.api_key)
+    client.refeed(new_post.link)
   end
 
   def get_tweets
