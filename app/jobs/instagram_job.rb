@@ -15,7 +15,7 @@ class InstagramJob
     uploads_array = inst_response
 
 
-    uploads = uploads_array.select do |upload| 
+    uploads = uploads_array.select do |upload|
       DateTime.strptime(upload.created_time,'%s') > auth.created_at && user.instagram_items.find_by_image_id(upload.id).nil?
     end
 
@@ -31,11 +31,4 @@ class InstagramJob
       :client_secret => INSTAGRAM_SECRET,
       :access_token => token})
   end
-end 
-
-# RESPONSE
-# pagination
-#   data
-#   data
-# meta
-# data?
+end
