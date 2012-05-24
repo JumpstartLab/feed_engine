@@ -1,9 +1,41 @@
 @import "./partials/colors.css.scss";
 @import "./partials/shapes.css.scss";
 
+h2 .center {
+  text-align: center;
+}
+
 #signin_form {
   @include parallelogram($grape, 23.5%, 160deg, 10em);
+  padding: 1em;
+  margin: auto;
+
+
+  background: rgb(142,92,140);
+  background: -moz-linear-gradient(top,  rgba(142,92,140,1) 0%, rgba(146,39,143,1) 50%, rgba(142,92,140,1) 99%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(142,92,140,1)), color-stop(50%,rgba(146,39,143,1)), color-stop(99%,rgba(142,92,140,1)));
+  background: -webkit-linear-gradient(top,  rgba(142,92,140,1) 0%,rgba(146,39,143,1) 50%,rgba(142,92,140,1) 99%);
+  background: -o-linear-gradient(top,  rgba(142,92,140,1) 0%,rgba(146,39,143,1) 50%,rgba(142,92,140,1) 99%);
+  background: -ms-linear-gradient(top,  rgba(142,92,140,1) 0%,rgba(146,39,143,1) 50%,rgba(142,92,140,1) 99%);
+  background: linear-gradient(top,  rgba(142,92,140,1) 0%,rgba(146,39,143,1) 50%,rgba(142,92,140,1) 99%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8e5c8c', endColorstr='#8e5c8c',GradientType=0 );
+
+
   label {
-        
+    color: $white;
+  }
+
+  input {
+    margin: .5em 0em;
+  }
+
+  #signin_submit {
+  }
+  #reset_password {
+    float: right;
+  }
+
+  .box {
+    margin-left: 5em;
   }
 }
