@@ -1,10 +1,11 @@
-div class="span 12"
-  div class="span 6" id="home_page_image"
-    img src="/assets/feedonkulous.gif" alt="feedonkulous"
+div class="span12"
+  div class="span6" id="home_page_image"
+    =link_to image_tag("/assets/feedonkulous.gif", :alt => "feedonkulous"), "#", :id => "target", :remote => true
     br
     br
     br
-    div class="signin" id="signin"
+    div
+  div class="span6" id="signin"
       h2 Sign In
       = render "devise/sessions/new_small"
   div class="span 6" 
@@ -21,4 +22,4 @@ div class="span 12"
     br
     br
     div id="home_page_sign_up_button"
-      h3 = link_to "SIGN UP!", new_user_registration_url, class: "btn btn-success btn-large"
+      h3 = link_to "SIGN UP!", new_user_registration_url, class: "btn btn-primary btn-large", id: "home_sign_up"
