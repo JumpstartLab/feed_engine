@@ -15,6 +15,4 @@ class InstagramPost < ActiveRecord::Base
 
   has_one :post, :as => :postable, dependent: :destroy
   has_one :user, :through => :post
-
-  validates_uniqueness_of :instagram_id
 end

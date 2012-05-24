@@ -14,7 +14,4 @@ class TwitterPost < ActiveRecord::Base
   attr_accessible :published_at, :text, :twitter_id, :created_at
   has_one :post, :as => :postable, dependent: :destroy
   has_one :user, :through => :post
-
-  validates_uniqueness_of :twitter_id
-
 end
