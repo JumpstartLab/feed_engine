@@ -9,5 +9,9 @@
   <%= render :partial => "authentications" %>
   <hr />
 
-  <%= link_to "Skip This Step", skip_twitter_path %>
+  <% if current_user.authentications.count < 3 %>
+    <%= link_to "Skip This Step", skip_twitter_path %>
+  <% else %>
+    <meta http-equiv="REFRESH" content="5;url=/dashboard">
+  <% end %>
 </div>

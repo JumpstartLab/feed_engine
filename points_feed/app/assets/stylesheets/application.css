@@ -12,13 +12,26 @@
  *= require_self
 */
 
+body, p {
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+}
+
 .form-error {
   margin-left: 10px;
 }
 
 input[type=text], input[type=password], input[type=email], textarea, select {
   color: black;
-  font: 13px/20px "HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font: 13px/20px;
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+}
+
+#login-links {
+  padding-top: 9px;
+}
+
+.search-query {
+  margin-top: -1px;
 }
 
 .current {
@@ -46,11 +59,11 @@ input[type=text], input[type=password], input[type=email], textarea, select {
 }
 
 .black-transparent-box label {
-  color: white;
+  color: #555;
 }
 
 .black-transparent-box li.active > a {
-  background-color: #E0F2F7;
+  background-color: rgba(245, 245, 245, .93);
 }
 
 .black-transparent-box li > a {
@@ -78,6 +91,10 @@ input[type=text], input[type=password], input[type=email], textarea, select {
 
 .root {
   margin-top: 30px;
+}
+
+.navbar {
+  z-index: 0;
 }
 
 .navbar_inner {
@@ -162,6 +179,26 @@ input[type=text], input[type=password], input[type=email], textarea, select {
   width: 50px;
 }
 
+#post_tabs{
+  margin-bottom: 0px;
+}
+
+#text_post{
+  padding: 15px;
+  background: rgba(245, 245, 245, .93);
+/*  background: #E0F2F7*/
+}
+
+#link_post{
+  padding: 15px;
+  background: rgba(245, 245, 245, .93);
+}
+
+#image_post{
+  padding: 15px;
+  background: rgba(245, 245, 245, .93);
+}
+
 /* FOR DROP DOWN MENU*/
 /*
 #container {
@@ -180,6 +217,7 @@ input[type=text], input[type=password], input[type=email], textarea, select {
   padding: 5px;
   width: 130px;
   color: white;
+  text-align: right;
 }
 
 #menu li ul {

@@ -13,11 +13,14 @@ class GithubFeedItemDecorator < ApplicationDecorator
       },
       :content => model.content,
       :screen_name => model.screen_name,
+      :event_type => model.event_type,
+      :repo => model.repo,
       :created_at => model.posted_at,
       :id => model.id,
       :refeed => false,
       :refeed_link => "",
       :reeder => {},
+      :awardable => can_award?("GithubFeedItem"),
       :points => model.points
     }
   end

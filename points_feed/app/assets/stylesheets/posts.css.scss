@@ -13,3 +13,13 @@ body {
   overflow: hidden;
   z-index: -4;
 }
+
+#links{
+  position: relative;
+  width: 100%;
+}
+
+.links{
+  border-right: 1px solid gray;
+  height: 50px;
+}

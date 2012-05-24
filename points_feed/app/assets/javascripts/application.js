@@ -19,12 +19,17 @@
 //= require timeago
 //= require validate
 //= require waypoint
+//= require typeahead
 //= require_tree .
 
 //access_token = $("#access_token").val();
 
 function success_notify(msg) {
   $(".alert-success").html(msg).slideDown('slow').delay(2000).slideUp('slow');
+}
+
+function points_notify(el, msg) {
+  el.find(".points-success").html(msg).slideDown('slow').delay(2000).slideUp('slow');
 }
 
 function error_notify(msg) {
@@ -42,3 +47,19 @@ function show_loading(div) {
 function hide_loading(div) {
   div.find('#loading').slideUp('slow').html('');
 }
+
+$('.typeahead').typeahead({
+  source: function (typeahead, query) {
+    $.get("/api/users/", { "q": query }, function(data) {
+      typeahead.process(data);
+    });
+  },
+
+  property: "name",
+
+  onselect: function (obj) {
+    location.href = "http://"+obj.name+".pointsfeed.in";
+  }
+});
+
+$('.alert').delay(5000).slideUp('slow');

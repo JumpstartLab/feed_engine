@@ -1,6 +1,7 @@
 <script type="text/template" id='TextItemTemplate'>
   <div class='row'>
     <div class='span7 well'>
+      <div class='points-success alert alert-success hide'></div>
       <div class='span1' style='margin-left: -3px'>
         <img src="{{avatar}}" style='height: 75px'></img> 
       </div>
@@ -15,7 +16,13 @@
         <span class='light'>Posted {{created_at}}</span><br />
       </div>
       <div class='icons' style='float: right'>
-        <div style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> {{points}}</div><br />
+        {{#awardable}}
+          <div class='awardable' style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> <span class='points'>{{points}}</span></div><br />
+        {{/awardable}}
+        {{^awardable}}
+          <div class='awarded' style='font-size:20px; margin-top:5px;'><img style='margin-top:-5px; opacity: .5;' src='/assets/exclamation_point_2.png'></img> <span class='points'>{{points}}</span></div><br />
+        {{/awardable}}
+
         {{#refeedable}}
           <div><a href='#' class='refeed_link' data-id='{{id}}' data-user="{{feeder.name}}"><img src='/assets/refeed.png'></img></a></div><br />
         {{/refeedable}}
@@ -34,16 +41,22 @@
 <script type="text/template" id='TwitterFeedItemTemplate'>
   <div class='row'>
     <div class='span7 well'>
+      <div class='points-success alert alert-success hide'></div>
       <div class='span1' style='margin-left: -3px'>
         <img src="{{avatar}}" style='height: 75px'></img> 
       </div>
       <div class='span4'>
-        <span class='display-name'><a href="#">{{feeder.name}}</a></span><br />
+        <span class='display-name'><a href="http://{{feeder.name}}.pointsfeed.in">{{feeder.name}}</a></span><br />
         <span class='text-message'>{{content}}<br /><br /></span>
         <span class='light'>Posted {{created_at}} by <a href='http://twitter.com/{{screen_name}}'>{{screen_name}}</a> on <a href='http://www.twitter.com'>Twitter</a></span><br />
       </div>
       <div class='icons' style='float: right'>
-          <div style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> {{points}}</div><br />
+        {{#awardable}}
+          <div class='awardable' style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> <span class='points'>{{points}}</span></div><br />
+        {{/awardable}}
+        {{^awardable}}
+          <div class='awarded' style='font-size:20px; margin-top:5px;'><img style='margin-top:-5px; opacity: .5;' src='/assets/exclamation_point_2.png'></img> <span class='points'>{{points}}</span></div><br />
+        {{/awardable}}
           <span><img src='/assets/twitter_25.png'></img></span>
       </div>
     </div>
@@ -53,16 +66,23 @@
 <script type="text/template" id='GithubFeedItemTemplate'>
   <div class='row'>
     <div class='span7 well'>
+      <div class='points-success alert alert-success hide'></div>
       <div class='span1' style='margin-left: -3px'>
         <img src="{{avatar}}" style='height: 75px'></img> 
       </div>
       <div class='span4'>
-        <span class='display-name'><a href="#">{{feeder.name}}</a></span><br />
+        <span class='display-name'><a href="http://{{feeder.name}}.pointsfeed.in">{{feeder.name}}</a></span><br />
+        <span class='text-message'><a href='http://www.github.com/{{screen_name}}'>{{screen_name}}</a> {{event_type}} <a href='http://www.github.com/{{repo}}'>{{repo}}</a>:<br /></span>
         <span class='text-message'>{{content}}<br /><br /></span>
-        <span class='light'>Posted {{created_at}} by <a href='http://www.github.com/{{screen_name}}'>{{screen_name}}</a> on <a href='http://www.github.com'>GitHub</a></span><br />
+        <span class='light'>Posted {{created_at}} via <a href='http://www.github.com'>GitHub</a></span><br />
       </div>
       <div class='icons' style='float: right'>
-        <div style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> {{points}}</div><br />
+        {{#awardable}}
+          <div class='awardable' style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> <span class='points'>{{points}}</span></div><br />
+        {{/awardable}}
+        {{^awardable}}
+          <div class='awarded' style='font-size:20px; margin-top:5px;'><img style='margin-top:-5px; opacity: .5;' src='/assets/exclamation_point_2.png'></img> <span class='points'>{{points}}</span></div><br />
+        {{/awardable}}
         <span><img style='padding-top:5px;' src='/assets/github_25.png'></img></span>
       </div>
     </div>
@@ -72,6 +92,7 @@
 <script type="text/template" id='ImageItemTemplate'>
   <div class='row'>
     <div class='span7 well'>
+      <div class='points-success alert alert-success hide'></div>
       <div class='span1' style='margin-left: -3px'>
         <img src="{{avatar}}" style='height: 75px'></img> 
       </div>
@@ -87,7 +108,12 @@
         <span class='light'>Posted {{created_at}}</span><br />
       </div>
       <div class='icons' style='float: right'>
-        <div style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> {{points}}</div><br />
+        {{#awardable}}
+          <div class='awardable' style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> <span class='points'>{{points}}</span></div><br />
+        {{/awardable}}
+        {{^awardable}}
+          <div class='awarded' style='font-size:20px; margin-top:5px;'><img style='margin-top:-5px; opacity: .5;' src='/assets/exclamation_point_2.png'></img> <span class='points'>{{points}}</span></div><br />
+        {{/awardable}}
         {{#refeedable}}
           <div><a href='#' class='refeed_link' data-id='{{id}}' data-user="{{feeder.name}}"><img src='/assets/refeed.png'></img></a></div><br />
         {{/refeedable}}
@@ -104,6 +130,7 @@
 <script type="text/template" id='LinkItemTemplate'>
   <div class='row'>
     <div class='span7 well'>
+      <div class='points-success alert alert-success hide'></div>
       <div class='span1' style='margin-left: -3px'>
         <img src="{{avatar}}" style='height: 75px'></img> 
       </div>
@@ -115,11 +142,16 @@
           <span class='display-name'><a href="http://{{feeder.name}}.pointsfeed.in">{{feeder.name}}</a></span><br />
         {{/refeed}}
         <span class='text-message'><a href='{{link_url}}'>{{link_url}}</a><br /></span>
-        <span class='text-message'>{{text}}<br /><br /></span>
+        <span class='text-message'>{{comment}}<br /><br /></span>
         <span class='light'>Posted {{created_at}}</span><br />
       </div>
       <div class='icons' style='float: right'>
-        <div style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> {{points}}</div><br />
+        {{#awardable}}
+          <div class='awardable' style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> <span class='points'>{{points}}</span></div><br />
+        {{/awardable}}
+        {{^awardable}}
+          <div class='awarded' style='font-size:20px; margin-top:5px;'><img style='margin-top:-5px; opacity: .5;' src='/assets/exclamation_point_2.png'></img> <span class='points'>{{points}}</span></div><br />
+        {{/awardable}}
         {{#refeedable}}
           <div><a href='#' class='refeed_link' data-id='{{id}}' data-user="{{feeder.name}}"><img src='/assets/refeed.png'></img></a></div><br />
         {{/refeedable}}
@@ -136,17 +168,23 @@
 <script type="text/template" id='InstagramFeedItemTemplate'>
   <div class='row'>
     <div class='span7 well'>
+      <div class='points-success alert alert-success hide'></div>
       <div class='span1' style='margin-left: -3px'>
         <img src="{{avatar}}" style='height: 75px'></img> 
       </div>
       <div class='span5'>
-        <span class='display-name'><a href="#">{{feeder.name}}</a></span><br />
+        <span class='display-name'><a href="http://{{feeder.name}}.pointsfeed.in">{{feeder.name}}</a></span><br />
         <span style=''><a href='{{image_url}}' class='lightbox'><img style='padding-top: 10px; padding-bottom: 10px;' src='{{image_url}}'</img></a><br /></span>
         <span class='text-message'>{{comment}}<br /><br /></span>
         <span class='light'>Posted {{created_at}} via <a href='http://instagr.am/'>Instagram</a></span><br />
       </div>
       <div class='icons' style='float: right'>
-          <div style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> {{points}}</div><br />
+        {{#awardable}}
+          <div class='awardable' style='font-size:20px; margin-top:5px;'><a href='api/awards/' method="post" class='points_link' data-id='{{id}}' data-user="{{feeder.name}}" data-type='{{klass}}'><img style='margin-top:-5px;' src='/assets/exclamation_point_2.png'></img></a> <span class='points'>{{points}}</span></div><br />
+        {{/awardable}}
+        {{^awardable}}
+          <div class='awarded' style='font-size:20px; margin-top:5px;'><img style='margin-top:-5px; opacity: .5;' src='/assets/exclamation_point_2.png'></img> <span class='points'>{{points}}</span></div><br />
+        {{/awardable}}
           <span><img style='padding-top:5px;' src='/assets/instagram_25.png'></img></span>
       </div>
     </div>

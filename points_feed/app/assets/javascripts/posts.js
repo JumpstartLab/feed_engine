@@ -1,4 +1,5 @@
 var page_for_content = 1;
+var recent_page = 1;
 var auth_display_name = $("#auth_display_name").val();
 
 function post_added() {
@@ -28,6 +29,10 @@ function render_post(post) {
     if(post['refeed'] == true) { 
       post['avatar'] = post['refeeder']['avatar'];
     }
+
+    if(post['event_type'] == "PushEvent") {
+      post['event_type'] = "pushed to";
+    }
     
     return Mustache.render($("#"+post.type+"Template").html(), post);
   }
@@ -37,9 +42,19 @@ function render_post(post) {
 
 function fetch_recent_posts(div) {
   url = "/api/feeds.json";
-  $.get(url, function(data) {
-    data = data.slice(0, 5);
-    div.html(render_posts(data));
+  $.get(url, { page: recent_page }, function(data) {
+    if(data.length < 12) {
+      $("#recent_load_more").hide();
+    }
+
+    if(recent_page == 1) {
+      div.html(render_posts(data));
+    }
+    else {
+      div.append(render_posts(data));
+    }
+
+    recent_page++;
   });
 }
 
@@ -115,7 +130,19 @@ function award_points() {
     },
     success: function(data) {
       $.cookie('award_points_to', null);
-      $(document).find("[data-id="+id+"]").parent().html('Points! awarded.').addClass('label label-info');
+
+      var link = $(document).find("[data-id="+id+"][class=points_link]")
+      //var parent = $(link.parent()[0]);
+      var parent = link.parent().parent().find(".awardable");
+      var points = parent.find(".points");
+      var img = link.find('img');
+
+      link.hide();
+      parent.prepend(img);
+      img.css('opacity', .5);
+
+      points.html(parseInt(points.html()) + 1);
+      points_notify($(document).find("[data-id="+id+"]").parent().parent().parent(), 'Point! awarded');
     },
     error: function(evt) {
       alert('Unable to award Points!®');
@@ -140,6 +167,29 @@ $(document).ready(function() {
   fetch_posts($('#user_posts'));
   fetch_recent_posts($('#recent_posts'));
 
+  $('a[data-toggle="tab"][href="#image_post"]').on('shown', function (e) {
+    $("#tab-background").find(".active").find("#links").show();
+    $("#image-url").hide();
+    $("#image-file").hide();
+    $(".links").show();
+  });
+
+  $('#back_image_post').live('click', function(){
+    $('#image-file').hide();
+    $('#image-url').hide();
+    $('#links').show();
+  });
+
+  $('#upload-url').live('click', function(){
+    $('#image-url').show();
+    $('#links').hide();
+  });
+
+  $('#upload-file').live('click', function(){
+    $('#image-file').show();
+    $('#links').hide();
+  });
+
   $("#subscribe_button").click(function(e) {
     e.preventDefault();
     url = "/api/friends";
@@ -159,6 +209,7 @@ $(document).ready(function() {
   $(".refeed_link").live('click', function(e) {
     e.preventDefault();
     $this = $(this);
+    var id = $this.data("id");
 
     $.ajax({
       type: 'post',
@@ -167,7 +218,8 @@ $(document).ready(function() {
         'access_token': access_token
       },
       success: function(data) {
-        $this.parent().html('Post has been refeeded').addClass('label label-info');
+        points_notify($(document).find("[data-id="+id+"]").parent().parent().parent(), 'Post has been refeeded');
+        $this.hide();
       },
       error: function(evt) {
         alert('unable to refeed');
@@ -183,7 +235,7 @@ $(document).ready(function() {
     var type = $(this).data('type');
     $.cookie('award_points_to', [id, type]);
 
-    if(access_token == "" || access_token == undefined || access_token == null) {
+    if(access_token == undefined || access_token == "" || access_token == null) {
       location.href = "/signin?award_points=true";
       return false;
     }
@@ -221,6 +273,11 @@ $(document).ready(function() {
   if($.cookie('award_points_to') != null) {
     award_points();
   }
+
+  $("#recent_load_more").live('click', function(e) {
+    e.preventDefault();
+    fetch_recent_posts($('#recent_posts'));
+  });
 
   // $('#bottom_of_page').waypoint(waypoint_reload, { offset: '100%' });
 });

@@ -6,6 +6,10 @@
   <% end %>
 </div>
 
+<script type="text/javascript">
+  access_token = null;
+</script>
+
 <%= render 'posts/show_templates' %>
 
 <div class="root">
@@ -17,6 +21,10 @@
             <h3>What's Being Posted Right Now!</h3>
             <hr />
             <div id='recent_posts'></div>
+            <div id='recent_loading_posts' class='hide'></div>
+
+            <a href='#' id='recent_load_more' class='btn offset1 span5'>Load More</a>
+            <br />
           </div>
         </div>
 
