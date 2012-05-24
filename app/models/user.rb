@@ -35,6 +35,10 @@ class User < ActiveRecord::Base
     self.send(type.downcase.pluralize.to_sym).scoped rescue messages.scoped
   end
 
+  def display_name=(name)
+    name.downcase
+  end
+
   def build_growl(type, params)
     growl = relation_for(type).new(params[:growl])
     growl.build_meta_data(params[:meta_data]) if params[:meta_data]
