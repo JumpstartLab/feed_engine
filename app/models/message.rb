@@ -16,9 +16,9 @@ class Message < Growl
   def send_to_services
     services = parse_for_services
     services.each do |service|
-      case service
-        when 'twitter' then send_twitter_update
-      end
+      # case service
+        # when 'twitter' then send_twitter_update
+      # end
     end
   end
 
