@@ -33,24 +33,3 @@ class TwitterJob
       :oauth_token_secret => secret})
   end
 end
-
-# Tweet:
-#   Status;
-#   Attrs
-#     created_at
-#     id
-#     id_str
-#     text
-#     source
-#     truncated
-#     in_reply_to
-#     in_rep...
-#     etc...
-#
-#     TimeStamp: twitter_item.tweet.created_at
-#
-#     TWEETJSON
-#     {"status_id":"#{item.tweet.attrs["id_str"]}", "attrs":"#{t.tweet.attrs}"}
-#
-#     item.tweet.class == Twitter::Status
-#     item.tweet.attrs.class == Hash --> parse this to json

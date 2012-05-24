@@ -13,8 +13,6 @@ class TextItemsController < ApplicationController
       respond_to do |format|
         format.js { render :create }
       end
-
-
     end
     @link_item = LinkItem.new
     @image_item = ImageItem.new

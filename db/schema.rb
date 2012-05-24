@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120523185748) do
+ActiveRecord::Schema.define(:version => 20120524000311) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(:version => 20120523185748) do
     t.string   "event_id"
   end
 
+  add_index "github_items", ["user_id"], :name => "index_github_items_on_user_id"
+
   create_table "image_items", :force => true do |t|
     t.text     "url"
     t.text     "comment"
@@ -41,6 +43,8 @@ ActiveRecord::Schema.define(:version => 20120523185748) do
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
   end
+
+  add_index "image_items", ["user_id"], :name => "index_image_items_on_user_id"
 
   create_table "instagram_items", :force => true do |t|
     t.text     "image"
@@ -51,6 +55,8 @@ ActiveRecord::Schema.define(:version => 20120523185748) do
     t.integer  "user_id"
   end
 
+  add_index "instagram_items", ["user_id"], :name => "index_instagram_items_on_user_id"
+
   create_table "link_items", :force => true do |t|
     t.text     "url"
     t.text     "comment"
@@ -59,6 +65,8 @@ ActiveRecord::Schema.define(:version => 20120523185748) do
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
   end
+
+  add_index "link_items", ["user_id"], :name => "index_link_items_on_user_id"
 
   create_table "points", :force => true do |t|
     t.integer  "user_id"
@@ -80,6 +88,8 @@ ActiveRecord::Schema.define(:version => 20120523185748) do
     t.integer  "original_author_id"
   end
 
+  add_index "stream_items", ["streamable_type", "streamable_id"], :name => "index_stream_items_on_streamable_type_and_streamable_id"
+
   create_table "subscriptions", :force => true do |t|
     t.integer  "follower_id"
     t.integer  "followed_user_id"
@@ -94,6 +104,8 @@ ActiveRecord::Schema.define(:version => 20120523185748) do
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
   end
+
+  add_index "text_items", ["user_id"], :name => "index_text_items_on_user_id"
 
   create_table "twitter_items", :force => true do |t|
     t.text     "tweet"
@@ -124,6 +136,7 @@ ActiveRecord::Schema.define(:version => 20120523185748) do
     t.string   "authentication_token"
   end
 
+  add_index "users", ["display_name"], :name => "index_users_on_display_name"
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 

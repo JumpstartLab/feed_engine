@@ -19,6 +19,27 @@
         access_token = "<%= current_user.authentication_token %>";
       </script>
     <% end %>
+
+    <script src="http://js.pusherapp.com/1.9/pusher.min.js"></script>
+    <script type="text/javascript">
+      var user = '<%= current_user.display_name unless current_user == nil %>'
+      if (user) {
+        var pusher = new Pusher('<%= Pusher.key %>'); // uses your API KEY
+        var channel = pusher.subscribe(user);
+        channel.bind('greet', function(data) {
+          if (data.author == user) {
+            $("#alert-bar").addClass('alert-success').text("You have been retrouted!").hide()
+            $("#alert-bar").slideDown().delay(5000).slideUp()
+          }
+        });
+        channel.bind('refeed', function(data) {
+          if (data.followee == user) {
+            $("#alert-bar").addClass('alert-success').text(data.new_follower + " just added you to their tacklebox!").hide()
+            $("#alert-bar").slideDown().delay(5000).slideUp()
+          }
+        });
+      }
+</script>
     <!-- <link href="images/favicon.ico" rel="shortcut icon"> -->
     <link href="images/apple-touch-icon.png" rel="apple-touch-icon">
     <link href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
