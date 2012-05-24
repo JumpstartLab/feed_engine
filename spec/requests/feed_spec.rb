@@ -8,7 +8,7 @@ describe "Feed" do
   context "visiting a non existent user" do
     it "redirects to home when i am not logged in" do
       visit "http://sdfd.example.com"
-      page.should have_content "River"
+      page.should have_content "new in the troutr river"
     end
 
     it "redirects to the dashboard if I am logged in" do

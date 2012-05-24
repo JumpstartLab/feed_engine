@@ -11,6 +11,10 @@ describe "Authentications" do
     page.should have_content "Welcome! You have signed up successfully." 
     click_on "Skip"
     page.should have_content "You can link your"
+    click_on "Skip"
+    page.should have_content "You can link your"
+    click_on "Skip"
+    page.should have_content "Dashboard"
   end
 
   context "password changes" do

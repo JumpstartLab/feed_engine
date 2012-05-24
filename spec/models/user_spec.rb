@@ -16,6 +16,18 @@ describe User do
     end
   end
 
+  context "last_retrout_id_for_user" do
+    it "returns 1 if the user has no retrouts" do
+      user.last_retrout_id_for_user(user_2).should ==  1
+    end
+
+    it "returns the last id created by the followed user" do
+      i1 = FactoryGirl.create(:image_item, :user => user_2 )
+      i2 = FactoryGirl.create(:image_item, :user => user_2 ) 
+      user.last_retrout_id_for_user(user_2).should ==  i1.to_param
+    end
+  end
+
   context "#follower_count" do
     it "returns the number of followers for a user" do
       user.follower_count.should == 0
