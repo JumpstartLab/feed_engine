@@ -10,8 +10,8 @@ class Api::V1::FeedsController < Api::V1::ApiController
     growl = Growl.find(params[:id])
     subscrip = @current_user.find_subscription(params[:subscription_id])
 
-    if growl && subscrip && growl.build_regrowl_for(@current_user).try(:save)
-      subscrip.update_last_status_id_if_necessary(growl.created_at.to_i)
+    if growl && growl.build_regrowl_for(@current_user).try(:save)
+      subscrip.update_last_status_id_if_necessary(growl.created_at.to_i) if subscrip
       render status: :created, json: "Regrowl successful"
     else
       render status: :bad_request, json: "This item cannot be regrowled."

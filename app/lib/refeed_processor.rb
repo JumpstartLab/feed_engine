@@ -9,7 +9,7 @@ module Hungrlr
 
     def initialize
       self.bj_token = ENV["BJ_TOKEN"].present? ? ENV["BJ_TOKEN"] : "HUNGRLR"
-      self.base_url = ENV["DOMAIN"].present? ? ENV["DOMAIN"] : "http://api.hungrlr.dev/v1"
+      self.base_url = ENV["DOMAIN"].present? ? ENV["DOMAIN"] : "http://api.lvh.me:3000/v1"
     end
 
     def subscriptions
