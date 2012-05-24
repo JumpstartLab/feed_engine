@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: git://github.com/athal7/super_hot_client.git
-  revision: 4c9f1795a52f3bd650a41c607cf8c717a1c6e2a0
+  revision: dfe7bbc4903c6a5b15d6d7160106e6d746953533
   specs:
     super_hot_client (0.0.2)
       faraday
