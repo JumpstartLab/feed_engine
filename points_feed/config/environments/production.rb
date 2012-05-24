@@ -9,7 +9,7 @@ PointsFeed::Application.configure do
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
-  config.serve_static_assets = false
+  config.serve_static_assets = true
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
@@ -19,6 +19,7 @@ PointsFeed::Application.configure do
 
   # Generate digests for assets URLs
   config.assets.digest = true
+  config.assets.enabled = true
 
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
@@ -65,7 +66,7 @@ PointsFeed::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  config.action_mailer.default_url_options = { :host => 'pointsfeedstaging.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'pointsfeed.in' }
   config.action_mailer.delivery_method = :smtp
 
   ActionMailer::Base.smtp_settings = {
@@ -76,5 +77,9 @@ PointsFeed::Application.configure do
     :authentication  => :login
   }
 
-  config.SUBDOMAIN_INDEX = 2
+  config.SUBDOMAIN_INDEX = 1
+
+  config.action_controller.asset_host = Proc.new do |source|
+    "//#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
+  end
 end

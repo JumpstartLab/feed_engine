@@ -24,6 +24,8 @@ gem 'octokit'
 gem 'multimap'
 gem 'rest-client'
 gem 'sanitize'
+gem 'newrelic_rpm'
+gem 'resque-scheduler', :require => 'resque_scheduler'
 
 # gem 'instagram',  :git => 'git://github.com/mrgilman/instagram-ruby-gem.git'
 gem 'faraday'
@@ -46,15 +48,12 @@ group :test, :development do
   gem 'nifty-generators'
 end
 
-group :production do
-  gem 'pg'
-end
-
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
   gem 'jquery-rails'
+  gem "asset_sync"
 end
 
 gem 'jquery-rails'

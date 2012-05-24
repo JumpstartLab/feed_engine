@@ -1,8 +1,8 @@
 <div class="main-image">
   <% if current_user %>
-    <img src="/assets/post.jpg">
+    <%= image_tag('post.jpg') %>
   <% else %>
-    <img src="/assets/welcome.jpg">
+    <%= image_tag('welcome.jpg') %>
   <% end %>
 </div>
 
