@@ -6,7 +6,6 @@ class Subscription < ActiveRecord::Base
    validate :subscription_to_other_user
    validates_uniqueness_of :followed_user_id, :scope => :follower_id
 
-
 private
   def subscription_to_other_user
     if followed_user_id == follower_id

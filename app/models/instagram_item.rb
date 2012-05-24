@@ -9,7 +9,11 @@ class InstagramItem < ActiveRecord::Base
   serialize :image
 
   def image_url
-    image["images"]["standard_resolution"]["url"] || ""
+    if image["images"] && image["images"]["standard_resolution"]["url"]
+      image["images"]["standard_resolution"]["url"]
+    else
+      ""
+    end
   end
 
   def caption
