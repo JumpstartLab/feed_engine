@@ -36,7 +36,27 @@
         <%= f.submit "Log In", :class => "btn-primary btn-large" %>
         <%=link_to "Forgot password?", new_user_password_path(resource_name), :id => "forgot-password" %>
       <% end %>
+    </div> 
+     <div class="span3 trout-container" id="river-signup-box">
+        <h1 class="signup-title">Sign up</h1>
+      <br/>
 
+      <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+    <%= f.input :email, :label_html => {:class => "text-item-label"}, 
+      :input_html => {:class => "river-signup-box-text-field"} %>
+
+    <%= f.input :display_name, :required => false, :label_html => {:class => "text-item-label"}, 
+    :input_html => {:class => "river-signup-box-text-field"} %>
+
+    <%= f.input :password, :label_html => {:class => "text-item-label"}, 
+      :input_html => {:class => "river-signup-box-text-field"} %>
+
+    <%= f.input :password_confirmation, :label_html => {:class => "text-item-label"}, 
+      :input_html => {:class => "river-signup-box-text-field"} %>
+
+    <%= f.submit "Sign up", :class => "signup-button btn-primary btn-large" %>
+    <%= link_to "Cancel", root_path, :class => "signup-cancel-button btn" %>
+    <% end %>
     </div>
   <% end %>
 </div>
