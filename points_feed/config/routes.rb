@@ -1,4 +1,7 @@
+require 'resque/server'
+
 PointsFeed::Application.routes.draw do
+  mount Resque::Server.new, :at => "/resque"
   resources :authentications
 
   match "home/index" => redirect("/")
