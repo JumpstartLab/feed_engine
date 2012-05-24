@@ -1,0 +1,20 @@
+#user_banner.span6.fe-container
+  = gravatar_image_tag(user.email, :alt => user.display_name)
+
+  h1.display_name = user.display_name
+
+  span.stats
+    span.post_count = "Posts: #{user.posts.count} |"
+    span.join_date
+      = " Joined: "
+      span.month
+        = (user.local_created_at).strftime("%B ")
+      span.day
+        = (user.local_created_at).strftime("%d ")
+      span.time
+        = (user.local_created_at).strftime("%l:%M%P")
+
+    - if can_refeed?(user, current_user)
+      span.refeed_link
+        - opt = { subdomain: false, refeeder_id: current_user.id, poster_id: user.id }
+        = link_to "Refeed", subscriptions_path(opt), :method => :post

@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    instantiate_posts
     @user = User.find_by_subdomain(request.subdomain)
 
     if @user

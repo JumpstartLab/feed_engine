@@ -1,3 +1,4 @@
+
 - content_for :head do
   javascript:
     $(function() {
@@ -20,7 +21,7 @@
       $('.actions').children('input:submit').addClass('btn btn-primary btn-large');
     })
     $(function() {
-      $("#posts").show();
+      $("#post_forms").show();
       $("#privacy").hide();
       $("#services").hide();
       $("#subscriptions").hide();
@@ -44,7 +45,7 @@
       }
     }
     $("#posts_id").live('click', function() {
-      $("#posts").show();
+      $("#post_forms").show();
       $("#account").hide();
       $("#privacy").hide();
       $("#services").hide();
@@ -52,28 +53,28 @@
     });
     $("#privacy_id").live('click', function() {
       $("#privacy").show();
-      $("#posts").hide();
+      $("#post_forms").hide();
       $("#services").hide();
       $("#subscriptions").hide();
       $("#account").hide();
     });
     $("#services_id").live('click', function() {
       $("#services").show();
-      $("#posts").hide();
+      $("#post_forms").hide();
       $("#privacy").hide();
       $("#subscriptions").hide();
       $("#account").hide();
     });
     $("#subscriptions_id").live('click', function() {
       $("#subscriptions").show();
-      $("#posts").hide();
+      $("#post_forms").hide();
       $("#privacy").hide();
       $("#services").hide();
       $("#account").hide();
     });
     $("#account_id").live('click', function() {
       $("#account").show();
-      $("#posts").hide();
+      $("#post_forms").hide();
       $("#privacy").hide();
       $("#services").hide();
       $("#subscriptions").hide();
@@ -86,26 +87,19 @@
       });
     });
     function make_active(post) {
-      var posts=$('#posts');
-      posts.find('.active').toggleClass('active inactive');
-      $(post).toggleClass('inactive active');
+      var posts=$('#post_forms');
+      posts.find('.post_label').removeClass('active')
+      posts.find('.post_label').addClass('inactive')
+      $(post).removeClass('inactive')
+      $(post).addClass('active');
     }
     $(function(){
       $('.actions').children('input:submit').addClass('btn btn-primary btn-large');
     });
-br
-br
-.full_dashboard
-  div.span3
-    div#sidebar.fe-container
-      ul
-        li= link_to "Posts", "#", :id => "posts_id", :class => "active"
-        li= link_to "Privacy", "#", :id => "privacy_id", :class => "inactive"
-        li= link_to "Services", "#", :id => "services_id", :class => "inactive"
-        li= link_to "Subscriptions", "#", :id => "subscriptions_id", :class => "inactive"
-        li= link_to "Account", "#", :id => "account_id", :class => "inactive"
-  div.span6
-    div#posts.fe-container
+
+.span2.logged_in_sidebar
+  div.span2
+    div#post_forms.fe-container
       = link_to "#", :class => "active post_label", :id => "add_message" do
         =content_tag(:span, "Text")
         =image_tag("message_icon.png")
@@ -128,7 +122,7 @@ br
                 li = message
       div#forms
         hr
-    div#privacy.fe-container.white_box
+    div#privacy
       div
         h2 Privacy
         br
@@ -136,25 +130,36 @@ br
           = render :partial => "dashboard/posts_private"
         - else
           = link_to "Make my posts private", nil, :class => "btn btn-primary btn-large"
-    div#services.fe-container.white_box
+    div#services
       - if current_user.subscriptions.any?
         div.fe-container
           =render partial: "subscriptions/subscriptions_table"
       div.fe-container
         =render partial: "subscriptions/disconnected_table"
-    div#subscriptions.fe-container.white_box
+    div#subscriptions
       div
         h2 Subscriptions
         br
         table.table.table-striped
           tbody
-            - current_user.refeed_subscriptions.each do |refeed_subscription|
-              tr
-                td = refeed_subscription.original_poster.display_name
-                td
-                  = link_to "Remove", subscription_path(refeed_subscription, :subdomain => false), :method => :delete, :class => "btn btn-small btn-info"
+            tr
+              td Elise Worthy
+              td
+                = link_to "Remove", nil, :class => "btn btn-small btn-info"
+            tr
+              td Jonan Scheffler
+              td
+                = link_to "Remove", nil, :class => "btn btn-small btn-info"
+            tr
+              td Andrew Thal
+              td
+                = link_to "Remove", nil, :class => "btn btn-small btn-info"
+            tr
+              td Travis Valentine
+              td
+                = link_to "Remove", nil, :class => "btn btn-small btn-info"
 
-    div#account.fe-container.white_box
+    div#account
       div
         h2 Account Settings
         = render partial: "users/update_password"

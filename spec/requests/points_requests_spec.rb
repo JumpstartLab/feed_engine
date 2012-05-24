@@ -21,8 +21,8 @@ describe User do
       it "is asked to sign up or sign in" do
         set_host(user.subdomain)
         visit root_path
-        page.should have_content "Points!"
-        click_link_or_button "Points! (#{random_post.points})"
+        page.should have_content "points!"
+        click_link_or_button "#{random_post.points} points!"
         current_path.should == login_path(:subdomain => false)
         within "#main-content" do
           page.should have_content "Email"
@@ -35,7 +35,7 @@ describe User do
         it "increases the point count of that post" do
           set_host(user.subdomain)
           visit root_path
-          click_link_or_button "Points! (#{random_post.points})"
+          click_link_or_button "#{random_post.points} points!"
           within "#signup" do
             fill_signup_form_as(new_user)
             click_link_or_button "Sign Up"
@@ -49,7 +49,7 @@ describe User do
         before(:each) do
           set_host(user.subdomain)
           visit root_path
-          click_link_or_button "Points! (#{random_post.points})"
+          click_link_or_button "#{random_post.points} points!"
         end
         it "increases the point count of that post" do
           within "#login" do
@@ -74,7 +74,7 @@ describe User do
         it "does not increase the point count of that post" do
           set_host(user.subdomain)
           visit root_path
-          click_link_or_button "Points! (#{random_post.points})"
+          click_link_or_button "#{random_post.points} points!"
           click_link_or_button "No thanks, take me back"
           current_path.should == root_path
           updated_post = random_post.class.find(random_post.id)
@@ -104,8 +104,8 @@ describe User do
           it "add points to a post" do
             set_host(other_user.subdomain)
             visit root_path
-            page.should have_content "Points!"
-            click_link_or_button "Points! (#{random_post.points})"
+            page.should have_content "points!"
+            click_link_or_button "#{random_post.points} points!"
             updated_post = random_post.class.find(random_post.id)
             updated_post.points.should == 1
             current_path.should == root_path
@@ -119,8 +119,8 @@ describe User do
           it "cannot give it's own post points" do
             set_host(user.subdomain)
             visit root_path
-            page.should have_content "Points!"
-            page.should_not have_link "Points! (#{random_post.points})"
+            page.should have_content "points!"
+            page.should_not have_link "#{random_post.points} points!"
           end
         end
         context "on a post they have already added points to" do
@@ -128,11 +128,11 @@ describe User do
           it "cannot give it's own post points" do
             set_host(other_user.subdomain)
             visit root_path
-            click_link_or_button "Points! (#{random_post.points})"
+            click_link_or_button "#{random_post.points} points!"
             updated_post = Item.find(random_post.item.id).post
             updated_post.points.should == 1
-            page.should have_link "Points! (#{updated_post.points})"
-            click_link_or_button "Points! (#{updated_post.points})"
+            page.should have_link "#{updated_post.points} points!"
+            click_link_or_button "#{updated_post.points} points!"
             same_post = Item.find(updated_post.item.id).post
             same_post.points.should == 1
           end
@@ -143,8 +143,8 @@ describe User do
           let!(:random_post) { Fabricate(random_post_type.to_sym, poster_id: other_user.id) }
           it "add points to a post" do
             visit root_path
-            page.should have_content "Points!"
-            click_link_or_button "Points! (#{random_post.points})"
+            page.should have_content "points!"
+            click_link_or_button "#{random_post.points} points!"
             updated_post = random_post.class.find(random_post.id)
             updated_post.points.should == 1
             current_path.should == root_path
@@ -158,8 +158,8 @@ describe User do
           it "cannot give it's own post points" do
             random_post = Fabricate(random_post_type.to_sym, poster_id: user.id)
             visit root_path
-            page.should have_content "Points!"
-            page.should_not have_link "Points! (#{random_post.points})"
+            page.should have_content "points!"
+            page.should_not have_link "#{random_post.points} points!"
           end
         end
         context "on a post they have already added points to" do
@@ -167,11 +167,11 @@ describe User do
           it "cannot give it's own post points" do
             set_host(other_user.subdomain)
             visit root_path
-            click_link_or_button "Points! (#{random_post.points})"
+            click_link_or_button "#{random_post.points} points!"
             updated_post = Item.find(random_post.item.id).post
             updated_post.points.should == 1
-            page.should have_link "Points! (#{updated_post.points})"
-            click_link_or_button "Points! (#{updated_post.points})"
+            page.should have_link "#{updated_post.points} points!"
+            click_link_or_button "#{updated_post.points} points!"
             same_post = Item.find(updated_post.item.id).post
             same_post.points.should == 1
           end

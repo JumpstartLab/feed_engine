@@ -34,6 +34,7 @@ gem 'newrelic_rpm'
 gem 'redis-store'
 gem 'fabrication'
 gem 'faker'
+gem 'gravatar_image_tag'
 gem 'temple'
 gem 'super_hot_client', :git => 'git://github.com/athal7/super_hot_client.git'
 
