@@ -1,3 +1,4 @@
+<% if @new_spawns %>
 <div class="span3 trout-container" id="river-spawning-box">
   <h1 class="spawning title">newly spawned</h1>
     <% @new_spawns.each do |spawn| %>
@@ -8,3 +9,4 @@
   </div> 
   <% end %> 
 </div> 
+<% end %>
