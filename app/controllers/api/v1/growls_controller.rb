@@ -6,7 +6,7 @@ class Api::V1::GrowlsController < Api::V1::ApiController
   end
 
   def index
-    @user = User.where(display_name: params[:display_name]).first
+    @user = User.where{display_name.matches params[:display_name]}.first
 
     if params[:since].present?
       @growls = @user.growls.since(params[:since].to_i).by_date
