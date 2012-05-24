@@ -77,7 +77,8 @@ header h2{
   background-color:rgba(255, 255, 255, .9); padding:20px;
 }
 .header_image {
-  background: url('/assets/background.jpg') center fixed;
+  background: url('/assets/background-black.png') center fixed;
+  background: #111;
   background-repeat: no-repeat;
   background-size:cover;
   margin-top:-30px;
@@ -100,7 +101,7 @@ ul.contained.awesome-tabs-content > li {
   padding-top:90px;
 }
 .regrowled, .regrowl {
-  margin-left:20px !important;
+  // margin-left:20px !important;
 }
 #user_search {
   float:left;
@@ -135,7 +136,8 @@ div.alert-box {
 
 .growl-box {
   margin-bottom: 10px;
-  background-color:rgba(255, 255, 255, .9); padding:20px;
+  background-color:rgba(255, 255, 255, .9);
+  padding: 20px 20px 5px 20px;
   border-radius: 7px;
 }
 
@@ -158,5 +160,6 @@ div.alert-box {
   font-size:12px;
 }
 .growl_footer{
-  padding-top:50px;
+  color: #999;
+  font-size: 12px;
 }

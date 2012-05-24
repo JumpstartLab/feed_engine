@@ -1,17 +1,20 @@
 .row
   .four.columns.content_bar
-    h1 Hungrlr
-    h5 The dead-simple way to check your Twitter, Facebook, GitHub, &amp; Instagram activity with just one-click.
-      
+    h3 Welcome to Hungrlr.
+    h5 The dead-simple way to check your Twitter, Facebook, GitHub, &amp; Instagram activity with just one click.
+    br
     #login.row(style="display:none;")
       = render "shared/login"
-      .user_helper.row= link_to "Whoops, I do need to signup", "#"
+      .user_helper.row= link_to "I need to signup.", "#"
     #signup.row
       = render "shared/signup"
       .user_helper.row= link_to "Already have an account?", "#"
-  .seven.columns.content_bar
-    h3 Incoming Growls
-    #growls
-      = render @growls
-    #page
-      = paginate @growls
+  .seven.columns
+    img(src="/assets/hungrlr_splash_trans.png")
+.row
+  br
+  h4(style="color:#aaa") Incoming Growls
+  #growls
+    = render @growls
+  #page
+    = paginate @growls
