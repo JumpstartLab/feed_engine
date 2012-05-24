@@ -3,9 +3,9 @@ $ ->
     $(this).stop()
   
   full_path = window.location.host
-  subdomain = full_path.split('.')[0]
+  subdomain = full_path.split('.')
   current_path = window.location.pathname
-  if subdomain == null 
+  if subdomain.length == 2 && current_path != '/dashboard' 
     $('title').text("troutr river")
     $('#nav-stream').removeClass("active")
     $('#nav-dashboard').removeClass("active")
