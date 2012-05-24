@@ -1,8 +1,8 @@
 module Feeder
   module GithubFetcher
-    def self.fetch(username, last_event_time)
+    def self.fetch(username, last_id)
       Octokit.user_events(username).
-        select { |e| e.created_at > last_event_time }
+        select { |e| e.id > last_id }
     end
   end
 end

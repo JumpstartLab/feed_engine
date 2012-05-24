@@ -25,12 +25,36 @@
   width:250px;
 }
 
+#home_sign_up{
+  font-size:36px;
+  margin-left:-60px;
+  padding:25px;
+}
+
+#target:hover{
+  opacity:0.4;
+}
+
 #sign_up_sign_in{
   margin-top:22px;
   font-size: 16px;
   font-color: black;
 }
 
+#signin{
+  margin-right:0px;
+}
+
+.new_user input { 
+  padding: 40px 5px;
+  font-size:30px;
+  font-weight:bold;
+  width: 400px;
+}
+
+.follow-button {
+  float: right;
+}
 
 #signed_in{
   margin-top:18px;
@@ -51,6 +75,7 @@ h1 {margin-bottom: 1em;}
 .post {
   @include clearfix;
   .post-avatar {width: 8%; max-width: 100px; float: left;}
+  .post-type-icon {width: 35px; float: left; margin-left: 17px; margin-top: 90%;}
   .well {width: 90%; float: right;}
   .post-image,
   .post-text,

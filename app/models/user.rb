@@ -142,6 +142,16 @@ class User < ActiveRecord::Base
     last_post && last_post.instagram_id
   end
 
+  def last_github_id
+    last_post = github_posts.order("github_id DESC").first
+    last_post && last_post.github_id
+  end
+
+  def last_twitter_id
+    last_post = twitter_posts.order("twitter_id DESC").first
+    last_post && last_post.twitter_id
+  end
+
   def total_points
     total = 0
     self.posts.each do |post|
