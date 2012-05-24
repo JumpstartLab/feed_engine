@@ -12,9 +12,11 @@ module Hungrlr
 
     def run
       github_accounts.each do |account|
-        response = get_github_events_for_user(account["nickname"], account["last_status_id"])
+        response = get_github_events_for_user(account["nickname"],
+                                              account["last_status_id"])
         github_hash = api_service.build_event_hash(response)
-        api_service.create_github_events_for_user(account["user_id"], github_hash)
+        api_service.create_github_events_for_user(account["user_id"],
+                                                  github_hash)
       end
     end
 
@@ -51,7 +53,8 @@ module Hungrlr
     end
 
     def new_event?(event, last_status_id)
-      DateTime.parse(event.created_at).to_i > DateTime.parse(last_status_id).to_i
+      DateTime.parse(event.created_at).to_i >
+        DateTime.parse(last_status_id).to_i
     end
   end
 end

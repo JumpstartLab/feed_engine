@@ -6,7 +6,8 @@ class Growl < ActiveRecord::Base
                   :user_id, :event_type, :regrowled_from_id
 
   validates_presence_of :type, :user_id, :user_id
-  validates_uniqueness_of :regrowled_from_id, :allow_nil => true, :scope => :user_id
+  validates_uniqueness_of :regrowled_from_id, :allow_nil => true,
+                          :scope => :user_id
 
   belongs_to :user
   has_one :meta_data, :autosave => true, dependent: :destroy
@@ -15,9 +16,12 @@ class Growl < ActiveRecord::Base
 
   scope :by_date, order("original_created_at DESC")
   scope :by_type, lambda { |param| where{ type.like param } unless param.nil? }
-  scope :since, lambda { |epoch| where{ created_at.gt Time.at(epoch) } unless epoch.nil? }
 
   before_save :set_original_created_at
+
+  def self.Since
+    where{ created_at.gt Time.at(epoch) } unless epoch.nil?
+  end
 
   def self.by_type_and_date(type=nil)
     by_type(type).by_date.includes(:meta_data).includes(:user)
@@ -75,7 +79,8 @@ class Growl < ActiveRecord::Base
 
   def regrowl_link(request)
     if regrowled?
-      "http://api.#{request.domain}/feeds/#{get_original_user.slug}/growls/#{original_growl.id}"
+      "http://api.#{request.domain}/feeds/#{get_original_user.slug}/growls/"
+      + "#{original_growl.id}"
     else
       ""
     end

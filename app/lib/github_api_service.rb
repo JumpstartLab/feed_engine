@@ -7,7 +7,8 @@ module Hungrlr
     end
 
     def github_accounts
-      accounts = Net::HTTP.get(URI("#{base_url}/users/github.json?token=#{bj_token}"))
+      url = "#{base_url}/users/github.json?token=#{bj_token}"
+      accounts = Net::HTTP.get(URI(url))
       JSON.parse(accounts)["accounts"]
     end
 

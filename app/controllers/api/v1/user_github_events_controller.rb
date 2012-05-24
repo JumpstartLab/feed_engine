@@ -8,7 +8,7 @@ class Api::V1::UserGithubEventsController < Api::V1::ApiController
                           link: event["link"],
                           original_created_at: event["created_at"],
                           comment: event["comment"])
-      @user.github_account.update_last_status_id_if_necessary(event["created_at"])
+    @user.github_account.update_last_status_id_if_necessary(event["created_at"])
     end
     render :json => true, :status => 201
   end
