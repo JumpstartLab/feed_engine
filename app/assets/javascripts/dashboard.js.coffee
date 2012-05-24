@@ -1,3 +1,9 @@
+# Function to fix broken images
+@imgError = (img) ->
+  img.onerror = "";
+  img.src = "http://placehold.it/600x600/09f/fff.png&text=Image%20No%20Longer%20Available!";
+  true
+
 jQuery ->
   if $('#posts').length
     new PostsPager()

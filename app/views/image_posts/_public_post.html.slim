@@ -2,7 +2,7 @@
   img.post-avatar src="{{gravatar_url}}"
   .well
     .post-image
-      img src="{{url}}"
+      img src="{{url}}" onerror="imgError(this)"
       p.description {{description}}
     .post-actions
       li
