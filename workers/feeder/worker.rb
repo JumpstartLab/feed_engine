@@ -81,7 +81,7 @@ module Feeder
             user.display_name,
             type:         "InstagramPost",
             instagram_id: image[:id],
-            url:          image[:url],
+            url:          image[:url]
           )
         end
       end
