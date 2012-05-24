@@ -21,17 +21,23 @@ setFlash = (message) ->
 
 integrationsHandler = ->
     $("#github_false").click ->
+      $("#services").click
       setFlash("Added your github account")
     $("#github_true").click ->
+      $("#services").click
       setFlash("Removed your github account")  
     $("#twitter_false").click ->
+      $("#services").click
       setFlash("Added your twitter account")
     $("#twitter_true").click ->
+      $("#services").click
       setFlash("Removed your twitter account") 
     $("#instagram_false").click ->
+      $("#services").click
       setFlash("Added your instagram account")
     $("#instagram_true").click ->
-      setFlash("Removed your instgram account") 
+      $("#services").click
+      setFlash("Removed your instagram account") 
 
 addServicesHandler = ->
   $('#services').click ->
