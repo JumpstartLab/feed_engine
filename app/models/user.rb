@@ -28,7 +28,6 @@ class User < ActiveRecord::Base
   has_many :authentications
   has_many :subscriptions, :foreign_key => :follower_id
   has_many :followed_users, :through => :subscriptions, :source => :followed_user
-  #has_many :followers, :through => :subscriptions, :source => :follower
 
   def add_stream_item(item, refeed=true)
     stream_items << StreamItem.new(:streamable_id => item.id,

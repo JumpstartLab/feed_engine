@@ -19,7 +19,7 @@ class RefeedJob
     new_stream_items = resp_body["recent_items"]
 
     new_stream_items.each do |item|
-      unless EXTERNAL_TYPES.include(item["type"])
+      unless EXTERNAL_TYPES.include?(item["type"]) || DateTime.parse(item["created_at"].to_s) < DateTime.parse(subscription["created_at"].to_s)
         troutr.retrout_item(followed_user.display_name, item["id"])
       end
     end
