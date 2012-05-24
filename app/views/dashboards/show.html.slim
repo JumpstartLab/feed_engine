@@ -13,8 +13,8 @@ div class="container"
             th 
               img src="#{current_user.gravatar_url}" width="50"
             th 
-              h2 
-                = link_to current_user.display_name, root_url(subdomain: current_user.display_name)
+              h4 
+                = link_to truncate(current_user.display_name, length: 20), root_url(subdomain: current_user.display_name)
 
           table id="stats-dash" class="span3"
             th 
