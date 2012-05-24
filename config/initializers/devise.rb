@@ -1,4 +1,5 @@
 Devise.setup do |config|
+  config.mailer = "Devise::Async::Proxy"
   config.mailer_sender = "horace.badger@gmail.com"
 
   config.apply_schema = false
@@ -13,6 +14,7 @@ Devise.setup do |config|
   config.use_salt_as_remember_token = true
   config.reset_password_within = 6.hours
   config.sign_out_via = :delete
+
 
 
 
