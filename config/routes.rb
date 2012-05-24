@@ -29,7 +29,7 @@ FeedEngine::Application.routes.draw do
 
   scope "", constraints: lambda { |r| r.subdomain.present? &&
     r.subdomain != 'www' && r.subdomain != 'api' } do
-    match 'posts/:display_name', to: "posts#show"
+    match 'posts/:id', to: "posts#show"
   end
 
   match 'posts/ind', to: 'posts#ind'
