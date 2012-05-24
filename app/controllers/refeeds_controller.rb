@@ -33,7 +33,7 @@ class RefeedsController < ApplicationController
     postable_copy = postable.dup
 
     if postable_copy.is_a?(ImagePost)
-      postable_copy.image.store!
+      postable_copy.image = postable.image
     end
 
     current_user.posts.create({postable: postable_copy, refeed_id: original_post.id}, validate: false)
