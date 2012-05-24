@@ -139,7 +139,6 @@ class FeedPager
       responseHandler(response))
     @feeduser = $.feedengine.subdomain
     @currentuser = $.feedengine.current_user_name
-    alert @currentuser
     $.feedengine.current_feed = feed
     $.feedengine.current_pager = this
     @page=-1
