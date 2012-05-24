@@ -20,8 +20,8 @@
       li(style="display:inline")
         - if current_user.can_regrowl?(growl)
           = link_to "REGROWL", regrowled_index_path(id: growl.id), method: :post, class: "regrowl",  remote: true
-        / - elsif growl.user_id != current_user.id
-        /   .regrowled.span.disabled  REGROWLED
+        - elsif !growl.belongs_to?(current_user) && !growl.original_poster?(current_user)
+          .regrowled.span.disabled  YOU'VE REGROWLED
       - if current_user.can_regrowl?(growl) && growl.regrowled?  
         li(style="display:inline; padding-left: 20px; padding-right: 20px") |
         .regrowled.span.disabled(style="display:none;")

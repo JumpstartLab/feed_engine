@@ -24,7 +24,7 @@ describe "Points" do
         first("a.points_link").click
       end
       it "invites the user to log in or sign up" do
-        page.should have_content "Signup"
+        page.should have_content "Sign up"
       end
       context "the user signs up" do
         before(:each) do

@@ -18,7 +18,7 @@ module Hungrlr
     end
 
     def get_growls(user_slug, last_status_id)
-      growls = Net::HTTP.get(URI("#{base_url}/feeds/#{user_slug}/growls.json?token=#{bj_token}&since=#{last_status_id}"))
+      growls = Net::HTTP.get(URI("#{base_url}/feeds/#{user_slug}/growls.json?token=#{bj_token}&since=#{last_status_id + 1}"))
       JSON.parse(growls)["growls"]
     end
 

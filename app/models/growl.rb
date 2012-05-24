@@ -14,7 +14,7 @@ class Growl < ActiveRecord::Base
 
   scope :by_date, order("original_created_at DESC")
   scope :by_type, lambda { |param| where{ type.like param } unless param.nil? }
-  scope :since, lambda { |epoch| where{ created_at.gt Time.at(epoch+1) } unless epoch.nil? }
+  scope :since, lambda { |epoch| where{ created_at.gt Time.at(epoch) } unless epoch.nil? }
 
   before_save :set_original_created_at
 
@@ -32,6 +32,14 @@ class Growl < ActiveRecord::Base
      define_method "#{method}?".to_sym do
         self.type == method.capitalize
     end
+  end
+
+  def belongs_to?(user)
+    user_id == user.id
+  end
+
+  def original_poster?(user)
+    get_original_user.id == user.id
   end
 
   def can_be_regrowled?(user)
@@ -62,22 +70,22 @@ class Growl < ActiveRecord::Base
 
   def regrowl_link(request)
     if regrowled?
-      "http://api.#{request.domain}/feeds/#{get_user.slug}/growls/#{original_growl.id}"
+      "http://api.#{request.domain}/feeds/#{get_original_user.slug}/growls/#{original_growl.id}"
     else
       ""
     end
   end
 
-  def get_user
+  def get_original_user
     original_growl? ? user : original_growl.user
   end
 
   def get_display_name
-    get_user.display_name.capitalize
+    get_original_user.display_name.capitalize
   end
 
   def get_gravatar
-    get_user.avatar
+    get_original_user.avatar
   end
 
   def original_growl
