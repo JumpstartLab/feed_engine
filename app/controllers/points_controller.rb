@@ -8,6 +8,6 @@ class PointsController < ApplicationController
       post_id = params[:id]
       session[:visitor_post] = post_id
       render :json => {"value"=>"foo"}
-    end 
+    end
   end
 end

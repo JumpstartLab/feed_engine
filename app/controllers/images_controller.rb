@@ -14,8 +14,10 @@ class ImagesController < ApplicationController
 
     respond_to do |format|
       if @image.save
-        format.html { redirect_to @image, notice: 'User was successfully created.' }
-        format.json { render json: @image, status: :created, location: @image }
+        format.html { redirect_to @image,
+                      notice: 'Image was successfully created.' }
+        format.json { render json: @image,
+                      status: :created, location: @image }
       else
         format.html { render action: "new" }
         format.json { render json: @image.errors, status: :unprocessable_entity }
