@@ -36,7 +36,7 @@ jQuery ->
 
       success: (data) ->
         
-        $("#alert-bar").addClass('alert-success').text('You refeeded ' + author + '. Nice job!').hide()
+        $("#alert-bar").addClass('alert-success').text('You retrouted ' + author + '. Nice job!').hide()
         $this.remove()
         $("#alert-bar").slideDown().delay(5000).slideUp()
 
