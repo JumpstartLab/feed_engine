@@ -13,6 +13,8 @@ FactoryGirl.define do
       FactoryGirl.create(:link, user: user)
       FactoryGirl.create(:image, user: user)
       FactoryGirl.create(:message, user:user)
+      FactoryGirl.create(:video, user:user)
+
     end
   end
 

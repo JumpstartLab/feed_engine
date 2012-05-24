@@ -34,4 +34,9 @@ FactoryGirl.define do
     link "http://s3.amazonaws.com/hungrlr/instagram_photos/photos/000/000/076/medium/open-uri20120522-87808-12fmq3l?1337700237"
     comment "Hello World"
   end
+  factory :video, parent: :growl do
+    type "Video"
+    link "http://www.youtube.com/watch?v=0HVLtYFaYys&feature=g-all-u"
+    comment "Hello World"
+  end
 end

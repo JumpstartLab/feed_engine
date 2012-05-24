@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'api/v1/users', type: :api do
-  let!(:user)            { FactoryGirl.create(:user) }
+  let!(:user)            { FactoryGirl.create(:user_with_growls) }
   let!(:twitter_account) { TwitterAccount.create(nickname: "test") }
   let!(:github_account) { GithubAccount.create(nickname: "test") }
   let!(:authentication) { user.authentications.create(user: user, provider: "Instagram", token: "hello")}
