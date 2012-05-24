@@ -43,11 +43,13 @@ module Feeder
     end
 
     def refeed_relationship_posts
-      relationships = client(MASTER_TOKEN).relationships
-      relationships.each do |r|
-        feed = client(r.follower_token).feed_for(r.followed)
-        feed.items.most_recent.map(&:id).select{ |p| p > (r.since_id||0) }.each do |id|
-          client(r.follower_token).refeed(r.followed, id)
+      log_exceptions do
+        relationships = client(MASTER_TOKEN).relationships
+        relationships.each do |r|
+          feed = client(r.follower_token).feed_for(r.followed)
+          feed.items.most_recent.map(&:id).select{ |p| p > (r.since_id||0) }.each do |id|
+            client(r.follower_token).refeed(r.followed, id)
+          end
         end
       end
     end
