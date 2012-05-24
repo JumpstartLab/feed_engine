@@ -110,19 +110,15 @@ class Subscription < ActiveRecord::Base
   end
 
   def create_tweet(new_post)
-    HTTParty.post("http://api.#{base}/v1/feeds/"+
-                  "#{user.subdomain}/items.json",
-                  body: {
-                    api_key: user.api_key,
-                    display_name: user.display_name,
-                    post: {
-                      type: "tweet",
-                      subscription_id: self.id,
-                      body: new_post.text,
-                      created_at: new_post.created_at
-                    }
-                  }
-                 )
+    client = SuperHotClient::Client.new(:url => "http://api.lvh.me:3000", :api_key => user.api_key)
+    client.create_feed_item(user.subdomain, 
+                            {
+      type: "tweet",
+      subscription_id: self.id,
+      body: new_post.text,
+      created_at: new_post.created_at
+    }
+                           )
   end
 
   def fancy_type(event_type)
@@ -136,44 +132,29 @@ class Subscription < ActiveRecord::Base
   end
 
   def create_github_event(new_post)
-    HTTParty.post("http://api.#{base}/v1/feeds/#{user.subdomain}/items.json",
-                  body: {
-      api_key: user.api_key,
-      display_name: user.display_name,
-      post: {
-        type: "github_event",
-        subscription_id: self.id,
-        repo: new_post.repo.name,
-        created_at: new_post.created_at,
-        event_type: fancy_type(new_post.type)
-      }
+    client = SuperHotClient::Client.new(:url => "http://api.lvh.me:3000", :api_key => user.api_key)
+    client.create_feed_item(user.subdomain, 
+                            {
+      type: "github_event",
+      subscription_id: self.id,
+      repo: new_post.repo.name,
+      created_at: new_post.created_at,
+      event_type: fancy_type(new_post.type)
     }
-                 )
+                           )
   end
 
   def create_instapound(new_post)
     client = SuperHotClient::Client.new(:url => "http://api.lvh.me:3000", :api_key => user.api_key)
     client.create_feed_item(user.subdomain, 
                             {
-        type: "instapound",
-        body: new_post.caption["text"],
-        image_url: new_post.images["standard_resolution"]["url"],
-        subscription_id: self.id,
-        created_at: new_post.created_at,
+      type: "instapound",
+      body: new_post.caption["text"],
+      image_url: new_post.images["standard_resolution"]["url"],
+      subscription_id: self.id,
+      created_at: new_post.created_at,
     }
                            )
-    # HTTParty.post("http://api.#{base}/v1/feeds/#{user.subdomain}/items.json",
-    #               body: {
-    #   api_key: user.api_key,
-    #   display_name: user.display_name,
-    #   post: {
-    #     body: new_post.caption["text"],
-    #     image_url: new_post.images["standard_resolution"]["url"],
-    #     subscription_id: self.id,
-    #     created_at: new_post.created_at,
-    #   }
-    # }
-    #              )
   end
 
   def create_refeed(new_post)
