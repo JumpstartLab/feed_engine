@@ -1,7 +1,7 @@
 class Api::RefeedsController < Api::BaseController
   def create
     refeeder = User.find_by_authentication_token(params[:token])
-    author = User.find_by_display_name(params[:display_name])
+    author = User.where("display_name LIKE ?", params[:display_name]).first
     stream_item = author.stream_items.find(params[:id])
     item = stream_item.streamable
     refeed = refeeder.stream_items.new(streamable_id: item.id,

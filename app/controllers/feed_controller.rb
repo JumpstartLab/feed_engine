@@ -1,9 +1,9 @@
 class FeedController < ApplicationController
   def show
     subdomain_username = request.subdomain
-    user = User.find_by_display_name("#{subdomain_username}")
-    if user
+    user = User.where("display_name LIKE ?", subdomain_username).first
 
+    if user
       @stream_items = user.stream_items.includes(:user, :streamable).includes(:user).order("created_at DESC").page(params[:page]).per(12)
       @feed_owner = user
       respond_to do |format|
