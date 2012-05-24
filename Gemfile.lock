@@ -179,6 +179,7 @@ GEM
       net-ssh (>= 1.99.1)
     net-ssh (2.4.0)
       jruby-pageant (>= 1.0.2)
+    newrelic_rpm (3.3.4)
     nokogiri (1.5.2)
     oauth (0.4.6)
     oauth2 (0.6.1)
@@ -371,6 +372,7 @@ DEPENDENCIES
   launchy
   log4r
   mustache
+  newrelic_rpm
   octokit
   omniauth-github
   omniauth-instagram

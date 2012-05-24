@@ -60,6 +60,7 @@ group :development, :test do
   gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'newrelic_rpm'
   gem 'launchy'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
