@@ -143,8 +143,13 @@ class User < ActiveRecord::Base
   end
 
   def last_github_id
-    last_post = github_posts.order("github_id DESC").first
-    last_post && last_post.github_id
+    unless
+      auth_for("github").last_status_id
+    else
+      auth_for("github").last_status_id
+      # last_post = github_posts.order("github_id DESC").first
+      # last_post && last_post.github_id  
+    end
   end
 
   def last_twitter_id

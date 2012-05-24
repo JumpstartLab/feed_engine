@@ -14,7 +14,7 @@ module Feeder
     def start
       while true
         refeed_authentications
-        refeed_relationships_posts
+        refeed_relationship_posts
         sleep TWO_MINUTES
       end
     end
