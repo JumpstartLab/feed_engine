@@ -44,6 +44,8 @@ class User < ActiveRecord::Base
 
   mount_uploader :background, BackgroundUploader
 
+  MAX_PROVIDERS = 3
+
   def relation_for(type)
     # child_type_for_name (pass type and get a symbol)
     type = type.gsub(/Item/i, "Post").underscore.pluralize.to_sym
@@ -104,7 +106,7 @@ class User < ActiveRecord::Base
 
   def can_award?(post, klass)
     award = self.awards.where(
-      :awardable_id => post.id, 
+      :awardable_id => post.id,
       :awardable_type => klass).first
 
     award == nil
@@ -150,5 +152,9 @@ class User < ActiveRecord::Base
       :token => (omniauth['credentials']['token'] rescue nil),
       :secret => (omniauth['credentials']['secret'] rescue nil)
     }
+  end
+
+  def all_providers?
+    authentications.count >= MAX_PROVIDERS
   end
 end

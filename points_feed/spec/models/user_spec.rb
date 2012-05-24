@@ -15,4 +15,11 @@ describe User do
       user.relation_for("foo bar baz quux").count.should == 1
     end
   end
+
+  context "default values" do
+    it "returns nil for a new user's Twitter (before linking)" do
+      user = Fabricate(:user)
+      user.twitter.should be_nil
+    end
+  end
 end
