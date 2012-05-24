@@ -5,10 +5,10 @@
     br
     #login.row(style="display:none;")
       = render "shared/login"
-      .user_helper.row= link_to "I need to signup.", "#"
+      .user_helper.row#need_to_signup= link_to "I need to signup.", "#"
     #signup.row
       = render "shared/signup"
-      .user_helper.row= link_to "Already have an account?", "#"
+      .user_helper.row#have_an_account= link_to "Already have an account?", "#"
   .seven.columns
     img(src="/assets/hungrlr_splash_trans.png")
 .row
