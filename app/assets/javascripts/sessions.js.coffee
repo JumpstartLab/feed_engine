@@ -182,7 +182,7 @@ updateResponse = (response, form) ->
 
 addResetPasswordHandler = ->
   $('#reset_password').click ->
-    email = $('#signin-page #email').val()
+    email = $('#signin-page #data_email').val()
     unless email
       setFlash("Please provide an email address to reset password")
     else
