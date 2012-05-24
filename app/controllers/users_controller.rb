@@ -20,8 +20,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      create_user_session
-      add_point(session[:point_pending_for]) if session[:point_pending_for]
+      create_session_with_points_check
       redirect_to new_subscription_path
     else
       retain_password
@@ -43,6 +42,11 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def create_session_with_points_check
+    create_user_session
+    add_point(session[:point_pending_for]) if session[:point_pending_for]
+  end
 
   def retain_password
     @password = params[:user][:password]
