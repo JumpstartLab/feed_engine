@@ -12,13 +12,22 @@
  *= require_self
 */
 
+body, p {
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+}
+
 .form-error {
   margin-left: 10px;
 }
 
 input[type=text], input[type=password], input[type=email], textarea, select {
   color: black;
-  font: 13px/20px "HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font: 13px/20px;
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+}
+
+#login-links {
+  padding-top: 9px;
 }
 
 .search-query {
@@ -82,6 +91,10 @@ input[type=text], input[type=password], input[type=email], textarea, select {
 
 .root {
   margin-top: 30px;
+}
+
+.navbar {
+  z-index: 0;
 }
 
 .navbar_inner {
