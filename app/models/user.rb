@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
   end
 
   def build_growl(type, params)
-    growl = relation_for(type).new(params)
+    growl = relation_for(type).new(params[:growl])
     growl.build_meta_data(params[:meta_data]) if params[:meta_data]
     growl
   end

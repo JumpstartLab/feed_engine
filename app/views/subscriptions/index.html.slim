@@ -12,3 +12,5 @@
             h4= link_to subscriber.display_name, user_feed_url(subdomain: subscriber.display_name)
           .six.columns
             = button_to('UNSUBSCRIBE', subscription_path(:id => subscriber.id), :method => "delete", :remote => true, :class => 'small nice red button radius unsubscribe_button')
+          br
+          br
