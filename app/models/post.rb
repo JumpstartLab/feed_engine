@@ -27,4 +27,20 @@ class Post < ActiveRecord::Base
     where("user_id IN (#{followed_user_ids}) OR user_id = :user_id",
           user_id: user.id).extend(PageExtension)
   end
+
+  def self.refeed_post(post, user)
+    original_post = post
+    postable      = post.postable
+    postable_copy = postable.dup
+
+    if postable.is_a?(ImagePost) && postable.image.blank?
+      postable_copy.external_image_url = postable.image
+    end
+
+    # if postable_copy.is_a?(ImagePost)
+    #   postable_copy.image = postable.image
+    # end
+
+    user.posts.create({postable: postable_copy, refeed_id: original_post.id}, validate: false)
+  end
 end
