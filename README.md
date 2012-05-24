@@ -71,7 +71,7 @@ Please be at your appointed times early and take careful notice of who is review
 
 Follow the protocol at http://tutorials.jumpstartlab.com/projects/feed_engine_peer_review.html
 
-#### Pro Reviews
+#### Code Reviews
 
 Code reviews will utilize the rubric at http://tutorials.jumpstartlab.com/projects/feed_engine_code_review_rubric.html
 
