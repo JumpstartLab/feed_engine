@@ -13,14 +13,15 @@ module Feeder
 
     def start
       while true
-        refeed
+        refeed_authentications
+        refeed_relationships_posts
         sleep TWO_MINUTES
       end
     end
 
     private
 
-    def refeed
+    def refeed_authentications
       users = client(MASTER_TOKEN).users
       users.each do |user|
         twitter   = user.auth.twitter
@@ -37,6 +38,16 @@ module Feeder
 
         if instagram
           refeed_instagram(user, instagram)
+        end
+      end
+    end
+
+    def refeed_relationship_posts
+      relationships = client(MASTER_TOKEN).relationships
+      relationships.each do |r|
+        feed = client(r.follower_token).feed_for(r.followed)
+        feed.items.most_recent.map(&:id).select{ |p| p > r.since_id }.each do |id|
+          client(r.follower_token).refeed(r.followed, id)
         end
       end
     end
@@ -88,12 +99,11 @@ module Feeder
     end
 
     def client(token)
-      @client ||=
-        if production?
-          FeedEngineApi::Client.new(host: "http://api.feedonkulous.com", port: 80, token: token)
-        else
-          FeedEngineApi::Client.new(host: "http://api.lvh.me", port: 3000, token: token)
-        end
+      if production?
+        FeedEngineApi::Client.new(host: "http://api.feedonkulous.com", port: 80, token: token)
+      else
+        FeedEngineApi::Client.new(host: "http://api.lvh.me", port: 3000, token: token)
+      end
     end
 
     def production?
