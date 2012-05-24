@@ -3,3 +3,8 @@
 
 en:
   hello: "Hello world"
+  account_linked: "%{provider} account linked."
+  all_accounts_linked: "%{provider} account linked. All accounts have been linked. You will be redirected to your dashboard shortly."
+  invalid_image_file_or_uri: "Image must contain a link to an image of type png, jpg, jpeg, gif, or bmp."
+  invalid_uri: "Invalid URL; link must be in the format http://www.example.com/"
+  social_media_invitation: "You can sign up with your social media accounts by visiting the services section under dashboard"

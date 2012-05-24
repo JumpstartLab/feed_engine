@@ -9,12 +9,14 @@ class AuthenticationsController < ApplicationController
     auth = request.env['omniauth.auth']
     add_authentication(auth)
 
-    if current_user.authentications.count < 3
-      flash[:notice] = "#{auth['provider'].titlecase} account linked."
+    message_type = if current_user.all_providers?
+      :all_accounts_linked
     else
-      flash[:notice] = "#{auth['provider'].titlecase} account linked. All accounts have been linked. You will be redirected to your dashboard shortly."
+      :account_linked
     end
-      redirect_to session[:authentication_workflow]
+
+    flash[:notice] = t(message_type, :provider => auth['provider'].titlecase)
+    redirect_to session[:authentication_workflow]
   end
 
   def destroy

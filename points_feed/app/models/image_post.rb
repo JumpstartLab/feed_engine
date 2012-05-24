@@ -7,8 +7,9 @@ class ImagePost < Post
 
   def has_valid_image
     return true if file.present?
-    unless content.match(/\.(png|jpg|jpeg|gif|bmp)$/) && content.match(/^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix)
-      self.errors[:base] << "Image must contain a link to an image of type png, jpg, jpeg, gif, or bmp."
+    unless content.match(ImageValidator::FILENAME) &&
+           content.match(ImageValidator::URI)
+      self.errors[:base] << t(:invalid_image_file_or_uri)
     end
   end
 

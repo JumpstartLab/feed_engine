@@ -7,6 +7,6 @@ class TwittersController < ApplicationController
 
   def skip_step
     redirect_to dashboard_path,
-    :notice => "You can sign up with your social media accounts by visiting the services section under dashboard"
+    :notice => t(:social_media_invitation)
   end
 end
