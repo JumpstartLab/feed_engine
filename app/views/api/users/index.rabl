@@ -16,21 +16,21 @@ node(:auth) { |user|
   if twitter
     auth[:twitter] = {
       user_id: twitter.uid,
-      since_id: user.last_twitter_id,
+      since_id: user.last_twitter_id
     }
   end
 
   if github
     auth[:github] = {
       username: github.username,
-      since_id: github.last_github_id,
+      since_id: user.last_github_id
     }
   end
 
   if instagram
     auth[:instagram] = {
       token:    instagram.token,
-      since_id: user.last_instagram_id,
+      since_id: user.last_instagram_id
     }
   end
 
@@ -40,7 +40,7 @@ node(:auth) { |user|
 node(:follows) { |user|
   user.followed_users.map do |user|
     {
-      display_name: user.display_name,
+      display_name: user.display_name
     }
   end
 }
