@@ -28,13 +28,11 @@ class Subscription < ActiveRecord::Base
   # after_create :get_new_service_posts
 
   def self.create_with_omniauth(auth, user)
-    create! do |subscription|
-      subscription.provider = auth["provider"]
-      subscription.uid = auth["uid"]
-      subscription.user_name = auth["info"]["nickname"]
-      subscription.user_id = user.id
-      subscription.oauth_token = auth["credentials"]["token"]
-      subscription.oauth_secret = auth["credentials"]["secret"]
+    create! do |sub|
+      sub.provider, sub.uid = auth["provider"], auth["uid"]
+      sub.user_name, sub.user_id = auth["info"]["nickname"], user.id
+      sub.oauth_token = auth["credentials"]["token"]
+      sub.oauth_secret = auth["credentials"]["secret"]
     end
   end
 
@@ -188,8 +186,9 @@ class Subscription < ActiveRecord::Base
   end
 
   def get_refeeds
+    sub = original_poster.subdomain
     all_refeeds = HTTParty.get("http://api.#{base}/v1/feeds/" +
-                               "#{original_poster.subdomain}/items.json?time=#{time_frame(refeeds)}")["items"]["filtered"]
+   "#{sub}/items.json?time=#{time_frame(refeeds)}")["items"]["filtered"]
 
                                objectified_refeeds = all_refeeds.map do |refeed|
                                  objectified_refeed = OpenStruct.new refeed
