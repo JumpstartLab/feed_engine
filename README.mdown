@@ -7,6 +7,6 @@
 
 We use capybara-webkit in our testing. To use, please 
 
-  brew install qt
+    brew install qt
 
 before running rspec.
