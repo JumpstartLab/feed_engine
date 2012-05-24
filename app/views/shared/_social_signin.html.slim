@@ -1,13 +1,13 @@
 .block-grid.two-up.social-icons
   - unless current_user.twitter?
-    .three.columns#link-twitter= link_to "", user_omniauth_authorize_path(:twitter)
+    .four.columns= link_to "", user_omniauth_authorize_path(:twitter), id: "link-twitter"
   - else
-     .three.columns#unlink-twitter= link_to "", authentication_path(current_user.twitter), method: :delete
+    .four.columns= link_to "", authentication_path(current_user.twitter), method: :delete, id: "unlink-twitter"
   - unless current_user.github?
-     .three.columns#link-github= link_to "", user_omniauth_authorize_path(:github)
+    .four.columns= link_to "", user_omniauth_authorize_path(:github), id: "link-github"
   - else
-    .three.columns#unlink-github= link_to "", authentication_path(current_user.github), method: :delete
+    .four.columns= link_to "", authentication_path(current_user.github), method: :delete, id: "unlink-github"
   - unless current_user.instagram?
-     .three.columns#link-instagram= link_to "", user_omniauth_authorize_path(:instagram)
+    .four.columns= link_to "", user_omniauth_authorize_path(:instagram), id: "link-instagram"
   - else
-    .three.columns#unlink-instagram= link_to "", authentication_path(current_user.instagram), method: :delete
+    .four.columns= link_to "", authentication_path(current_user.instagram), method: :delete, id: "unlink-instagram"
