@@ -112,10 +112,6 @@ class User < ActiveRecord::Base
     subscription(provider) ? true : false
   end
 
-  # def subscriptions
-  #   Subscription.where("user_id is ? and provider is not ?", self.id, "refeed")
-  # end
-
   def current_subscriptions
     Subscription.where(
       :user_id => self.id,
