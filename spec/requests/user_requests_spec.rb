@@ -63,7 +63,7 @@ describe User do
           click_link_or_button "#{user.display_name}'s Feed"
         end
         within "#main-content" do
-          page.should have_content "#{user.display_name}'s feed"
+          page.should have_content "#{user.display_name}"
         end
       end
 
@@ -83,11 +83,6 @@ describe User do
     it "can sign up from the home page via top nav" do
       visit root_path
       page.should have_link "Sign up"
-    end
-
-    it "can see the aggregated posts" do
-      visit root_path
-      page.should have_content "All Posts"
     end
 
     describe "signing up" do

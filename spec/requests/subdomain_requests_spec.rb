@@ -15,7 +15,6 @@ describe User do
     it "is redirected to root with a message if subdomain doesn't exist" do
       set_host('foo')
       visit user_path("foo")
-      page.should have_content "All Posts"
       current_path.should == root_path
     end
 
@@ -31,9 +30,8 @@ describe User do
       end
 
       it "is shown the aggregated feed when visiting root" do
-        set_host(user.display_name)
         visit root_url(subdomain: false)
-        page.should have_content "All Posts"
+        current_path.should == root_path
       end
 
       context "and has made posts" do
@@ -45,7 +43,7 @@ describe User do
 
           it "and sees their posts" do
             current_url.should include user.display_name
-            page.should have_content "#{user.display_name}'s feed"
+            page.should have_content "#{user.display_name}"
 
             user.messages.each do |message|
               page.should have_content message.body
