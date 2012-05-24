@@ -198,7 +198,7 @@ class Subscription < ActiveRecord::Base
   end
 
   def get_refeeds
-    all_refeeds = HTTParty.get("http://api.#{base_url}/v1/feeds/" +
+    all_refeeds = HTTParty.get("http://api.#{base}/v1/feeds/" +
                                "#{original_poster.subdomain}/items.json?time=#{time_frame(refeeds)}")["items"]["filtered"]
 
                                objectified_refeeds = all_refeeds.map do |refeed|
