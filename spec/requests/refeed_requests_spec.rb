@@ -94,7 +94,6 @@ describe User do
           before(:each) do
             reset_host
             visit dashboard_path(user)
-            save_and_open_page
             click_link_or_button "Refeeds"
           end
 
