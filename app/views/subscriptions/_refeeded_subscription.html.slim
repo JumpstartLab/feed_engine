@@ -1,0 +1,4 @@
+tr
+  td = refeeded_subscription.original_poster.display_name
+  td
+    = link_to "Remove", subscription_path(refeeded_subscription, :subdomain => false), :method => :delete, :class => "btn btn-small btn-info"

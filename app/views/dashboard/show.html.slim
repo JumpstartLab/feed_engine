@@ -102,7 +102,7 @@ br
         li= link_to "Posts", "#", :id => "posts_id", :class => "active"
         li= link_to "Privacy", "#", :id => "privacy_id", :class => "inactive"
         li= link_to "Services", "#", :id => "services_id", :class => "inactive"
-        li= link_to "Subscriptions", "#", :id => "subscriptions_id", :class => "inactive"
+        li= link_to "Refeeds", "#", :id => "subscriptions_id", :class => "inactive"
         li= link_to "Account", "#", :id => "account_id", :class => "inactive"
   div.span6
     div#posts.fe-container
@@ -137,23 +137,18 @@ br
         - else
           = link_to "Make my posts private", nil, :class => "btn btn-primary btn-large"
     div#services.fe-container.white_box
-      - if current_user.subscriptions.any?
+      - if current_user.current_subscriptions.any?
         div.fe-container
           =render partial: "subscriptions/subscriptions_table"
       div.fe-container
         =render partial: "subscriptions/disconnected_table"
     div#subscriptions.fe-container.white_box
-      div
-        h2 Subscriptions
-        br
-        table.table.table-striped
-          tbody
-            - current_user.refeed_subscriptions.each do |refeed_subscription|
-              tr
-                td = refeed_subscription.original_poster.display_name
-                td
-                  = link_to "Remove", subscription_path(refeed_subscription, :subdomain => false), :method => :delete, :class => "btn btn-small btn-info"
-
+      - if current_user.refeed_subscriptions.any?
+        div.fe-container
+          =render partial: "subscriptions/refeed_table"
+      - else
+        div.fe-container
+          =render partial: "subscriptions/no_refeed_table"
     div#account.fe-container.white_box
       div
         h2 Account Settings
