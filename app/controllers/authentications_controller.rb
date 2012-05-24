@@ -7,14 +7,9 @@ class AuthenticationsController < ApplicationController
     authentication = current_user.authentications.where(id: params[:id]).first
     @growl = current_user.growls.build
     @type = "Service"
-
-    if authentication.try(:destroy)
-      flash[:notice] = "Your #{authentication.provider.capitalize} account
-         has been unlinked."
-      render "dashboards/show"
-    else
-      flash[:notice] = "There was an issue in unlinking your account."
-      render "dashboards/show"
-    end
+    flash[:notice] = "Your #{authentication.provider.capitalize} account
+         has been unlinked." if authentication.try(:destroy)
+    render "dashboards/show"
   end
+
 end

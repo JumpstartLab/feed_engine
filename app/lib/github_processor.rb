@@ -26,10 +26,16 @@ module Hungrlr
 
     def api_service
       @api_service ||= begin
-        bj_token = ENV["BJ_TOKEN"].present? ? ENV["BJ_TOKEN"] : "HUNGRLR"
-        base_url = ENV["DOMAIN"].present? ? ENV["DOMAIN"] : "http://api.hungrlr.dev/v1"
         GithubApiService.new(base_url, bj_token)
       end
+    end
+
+    def bj_token
+      ENV["BJ_TOKEN"].present? ? ENV["BJ_TOKEN"] : "HUNGRLR"
+    end
+
+    def base_url
+      ENV["DOMAIN"].present? ? ENV["DOMAIN"] : "http://api.hungrlr.dev/v1"
     end
 
     def github_accounts

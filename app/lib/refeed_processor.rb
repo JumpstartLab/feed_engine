@@ -23,14 +23,24 @@ module Hungrlr
     end
 
     def create_regrowls_for(subscription, growls)
-      user_slug = subscription["user_slug"]
-      subscriber_token = subscription["subscriber_token"]
-      id = subscription["id"]
-
       growls.each do |growl|
-        uri_path = URI("#{base_url}/feeds/#{user_slug}/growls/#{growl["id"]}/refeed")
-        Net::HTTP.post_form(uri_path, token: subscriber_token, subscription_id: id)
+        url = "#{base_url}/feeds/#{user_slug(subscription)}/growls/#{growl["id"]}/refeed"
+        uri_path = URI(url)
+        Net::HTTP.post_form(uri_path, token: subscriber_token(subscription),
+                            subscription_id: id(subscription))
       end
+    end
+
+    def user_slug(subscription)
+      subscription["user_slug"]
+    end
+
+    def subscriber_token(subscription)
+      subscription["subscriber_token"]
+    end
+
+    def id(subscription)
+      subscription["id"]
     end
 
     def run

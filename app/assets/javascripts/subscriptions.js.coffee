@@ -1,3 +1,3 @@
 jQuery ->
   $('.unsubscribe_button').click ->
-    $(this).parent().fadeOut()
+    $('.unsubscribe_button').parent("div").parent().parent().parent().fadeOut()
