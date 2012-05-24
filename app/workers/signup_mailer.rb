@@ -1,3 +1,4 @@
+# Mailer for signing up
 class SignupMailer
   @queue = :mailer
 

@@ -1,3 +1,4 @@
+# Mailer for reset password email
 class PasswordMailer
   @queue = :mailer
 
@@ -5,7 +6,4 @@ class PasswordMailer
     @user = User.find(user_id)
     UserMailer.password_reset(@user.id).deliver
   end
-end   
-
-
-    
+end
