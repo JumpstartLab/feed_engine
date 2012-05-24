@@ -39,11 +39,11 @@ div class="post_container #{post.user.display_name}_post" id="item_#{post.item.i
       - if current_user && current_user != post.user
         span#refeed = link_to("Refeed", refeed_path(post.item, :subdomain => false), :method => :put, :id => "refeed_item_#{post.item.id}") if post.item.refeedable_for?(current_user)
       - if post.user == current_user
-        span#points Points! (#{post.points})
+        span#points = "#{post.points} points!"
       - elsif current_user
-        span#points = link_to "Points! (#{post.points})", item_path(post.item, :subdomain => false, :points => true), :method => :put
+        span#points = link_to "#{post.points} points!", item_path(post.item, :subdomain => false, :points => true), :method => :put
       - else
-        span#points = link_to "Points! (#{post.points})", item_path(post.item, :subdomain => false, :points => true), :method => :put
+        span#points = link_to "#{post.points} points!", item_path(post.item, :subdomain => false, :points => true), :method => :put
       span.poster_info
         = "posted by "
         = link_to post.user.display_name, root_url(:subdomain => post.user.subdomain)

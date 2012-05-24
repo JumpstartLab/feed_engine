@@ -110,7 +110,7 @@ class Subscription < ActiveRecord::Base
   end
 
   def create_tweet(new_post)
-    client = SuperHotClient::Client.new(:url => "http://api.lvh.me:3000", :api_key => user.api_key)
+    client = SuperHotClient::Client.new(:api_key => user.api_key)
     client.create_feed_item(user.subdomain, 
                             {
       type: "tweet",
@@ -132,7 +132,7 @@ class Subscription < ActiveRecord::Base
   end
 
   def create_github_event(new_post)
-    client = SuperHotClient::Client.new(:url => "http://api.lvh.me:3000", :api_key => user.api_key)
+    client = SuperHotClient::Client.new(:api_key => user.api_key)
     client.create_feed_item(user.subdomain, 
                             {
       type: "github_event",
@@ -145,7 +145,7 @@ class Subscription < ActiveRecord::Base
   end
 
   def create_instapound(new_post)
-    client = SuperHotClient::Client.new(:url => "http://api.lvh.me:3000", :api_key => user.api_key)
+    client = SuperHotClient::Client.new(:api_key => user.api_key)
     client.create_feed_item(user.subdomain, 
                             {
       type: "instapound",
@@ -158,8 +158,8 @@ class Subscription < ActiveRecord::Base
   end
 
   def create_refeed(new_post)
-    HTTParty.post("#{new_post.link}/refeeds.json",
-                  :body => { :api_key => user.api_key } )
+    client = SuperHotClient::Client.new(:api_key => user.api_key)
+    client.refeed(new_post.link)
   end
 
   def get_tweets
