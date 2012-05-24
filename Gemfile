@@ -27,7 +27,7 @@ gem 'wicked'
 gem 'hashie'
 gem 'feed_engine_api',
     :git => "git://github.com/cstrahan/feed_engine_api.git",
-    :tag => "v0.0.7"
+    :tag => "v0.0.8"
 
 group :production do
   gem 'pg'
