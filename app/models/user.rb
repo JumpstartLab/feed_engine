@@ -142,4 +142,12 @@ class User < ActiveRecord::Base
     last_post && last_post.instagram_id
   end
 
+  def total_points
+    total = 0
+    self.posts.each do |post|
+      total += post.points.size
+    end
+    total
+  end
+
 end

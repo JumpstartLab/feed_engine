@@ -8,6 +8,6 @@
         a.btn href="/refeeds?post_id={{id}}" data-method="post" rel="nofollow"
           i.icon-retweet  Refeed
       li
-        a.btn href="/points/{{id}}?post_type={{type}}" data-method="put" rel="nofollow"
+        a.btn href="/points/?post_id={{id}}&receiver_id=#{user.id}&giver_id=#{current_user.id if current_user}&page_before_sign_in=#{request.original_url}" data-method="post" rel="nofollow"
           i.icon-heart Points!
   img.post-type-icon src="/assets/twitter.png"
