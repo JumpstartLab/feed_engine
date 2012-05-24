@@ -25,6 +25,7 @@ class Subscription < ActiveRecord::Base
   attr_accessor :original_poster
 
   belongs_to :user
+  after_create :get_new_service_posts
 
   def self.create_with_omniauth(auth, user)
     create! do |subscription|
@@ -45,15 +46,17 @@ class Subscription < ActiveRecord::Base
     end
   end
 
-  def self.get_all_new_service_posts
-    Subscription.all.each do |subscription|
-      new_posts = subscription.get_new_posts
-      subscription.create_records_of_posts(new_posts)
-    end
-    self.delay(
+  def get_new_service_posts
+    get_service_posts
+    delay(
       :run_at =>
       SUBSCRIPTION_FREQ.seconds.from_now
-    ).get_all_new_service_posts
+    ).get_new_service_posts
+  end
+
+  def get_service_posts
+    new_posts = get_new_posts
+    create_records_of_posts(new_posts)
   end
 
   def original_poster

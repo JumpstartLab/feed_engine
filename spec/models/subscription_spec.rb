@@ -31,6 +31,8 @@ describe Subscription do
 
   context "when getting new service posts" do
 
+    before(:each) { Subscription.any_instance.stub(:get_new_service_posts).and_return([older_post]) }
+
     let!(:consuming_user) { Fabricate(:user) }
     let!(:feeding_user) { Fabricate(:user) }
     let!(:old_post) { OpenStruct.new(created_at: Time.now) }
@@ -40,6 +42,7 @@ describe Subscription do
       :instagram_subscription => Fabricate(:subscription, provider: "instagram"),
       :refeed_subscription    => Fabricate(:subscription, provider: "refeed", uid: feeding_user.id, user_id: consuming_user.id)
     }}
+    let!(:older_post) { OpenStruct.new(created_at: Time.now) }
     let!(:new_enough_post) { OpenStruct.new(created_at: Time.now) }
 
     describe "#get_new_posts" do
