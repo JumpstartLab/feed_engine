@@ -9,8 +9,6 @@ module Hungrlr
   class InstagramProcessor
     attr_accessor :base_url, :bj_token, :api_service
 
-    TEST_ACCESS_TOKEN = "8323297.f59def8.2db06c3fdb7b4c659ae12a55ffe2c44d"
-
     def run
       instagram_accounts.each do |account|
         response = get_photos(account["instagram_id"], account["token"],
@@ -27,7 +25,7 @@ module Hungrlr
     end
 
     def get_photos(instagram_id, token, last_status_id)
-      url = "https://api.instagram.com/v1/users/#{instagram_id}/media/recent?access_token=#{TEST_ACCESS_TOKEN}&min_timestamp=#{last_status_id + 1}"
+      url = "https://api.instagram.com/v1/users/#{instagram_id}/media/recent?access_token=#{token}&min_timestamp=#{last_status_id + 1}"
       data = open(url)
       JSON.parse(data)["data"]
     end
@@ -36,7 +34,7 @@ module Hungrlr
       @api_service ||= begin
         bj_token = ENV["BJ_TOKEN"].present? ? ENV["BJ_TOKEN"] : "HUNGRLR"
         base_url = ENV["DOMAIN"].present? ? ENV["DOMAIN"] : "http://api.hungrlr.dev/v1"
-        
+
         InstagramApiService.new(base_url, bj_token)
       end
     end
