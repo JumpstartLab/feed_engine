@@ -9,6 +9,7 @@ h2
     = f.input :current_password, :placeholder => "enter current password to execute", :required => true
     = f.input :password, :autocomplete => "off", :placeholder => "new password", :required => false
     = f.input :password_confirmation, :placeholder => "new password confirmation", :required => false
+    h4 Check to make stream non-publicly viewable #{f.check_box :private}
     h3 = link_to "Change Avatar", "http://www.en.gravatar.com/", target: "_blank"
   .actions
     = f.button :submit, "Update", class: 'btn btn-large btn-success'
