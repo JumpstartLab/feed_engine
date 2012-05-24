@@ -1,7 +1,7 @@
 class Api::StreamItemsController < Api::BaseController
   before_filter :verify_auth_token_match, :only => :create
   def show
-    @user = User.where("display_name LIKE ?", params[:display_name]).first
+    @user = User.where("display_name ILIKE ?", params[:display_name]).first
     @stream_item = @user.stream_items.find(params[:id])
     @item = @stream_item.streamable
   end
@@ -17,7 +17,7 @@ class Api::StreamItemsController < Api::BaseController
   end
 
   def recent
-    @user = User.where("display_name LIKE ?", params[:display_name]).first
+    @user = User.where("display_name ILIKE ?", params[:display_name]).first
     @stream_items = @user.stream_items.includes(:user, :streamable).where(:refeed => false).where("id > ?", params[:id].to_i)
   end
 end

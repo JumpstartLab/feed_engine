@@ -15,7 +15,7 @@ private
   end
 
   def verify_auth_token_match
-    @user = User.where("display_name LIKE ?", params[:display_name]).first
+    @user = User.where("display_name ILIKE ?", params[:display_name]).first
     unless current_user == @user
       render :json => {errors: ["Token does not match specified feed"]},
                       :status => :unauthorized
