@@ -83,7 +83,7 @@ class Subscription < ActiveRecord::Base
       return_value = false
     else
       self.send(PROVIDER_TO_POST_TYPE[self.provider]).each do |post_type|
-        if post_type.created_at == post.created_at
+        if post_type.created_at.utc == post.created_at.utc
           return_value = false
         end
       end
