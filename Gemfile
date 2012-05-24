@@ -43,7 +43,8 @@ end
 gem 'jquery-rails'
 
 group :development, :test do
-  gem 'sqlite3'
+  #gem 'sqlite3'
+  gem 'pg'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'capybara'
