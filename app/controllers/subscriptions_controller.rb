@@ -9,7 +9,7 @@ class SubscriptionsController < ApplicationController
        head :status => :not_acceptable
      end
   end
-  
+
   def index
     @subscriptions = current_user.subscriptions if current_user
     if @subscriptions
@@ -20,9 +20,11 @@ class SubscriptionsController < ApplicationController
       head :status => :unauthorized
     end
   end
-  
+
   def destroy
-    sub = current_user.subscriptions.find_by_feed_id(params[:feed_id]) if current_user
+    if current_user
+      sub = current_user.subscriptions.find_by_feed_id(params[:feed_id])
+    end
     unless sub && sub.destroy
       head :status => :unauthorized
     else

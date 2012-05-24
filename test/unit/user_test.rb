@@ -6,7 +6,7 @@ describe User do
     user = User.create(:email => "lispy.woo@lsqain.in",
     :display_name => "LispyWoo",
     :password => password)
-    assert_equal user.valid?, true
+    assert_equal user.id.nil?, false
     assert_equal user.email, "lispy.woo@lsqain.in"
     assert_equal user.display_name, "LispyWoo"
   end
@@ -116,6 +116,50 @@ describe User do
       user2 = Fabricate(:user)
       2.times { user1.subscribe(user2.feed.name) }
       assert_equal 1, user1.subscriptions.count
+    end
+  end
+  
+  describe ".update_password" do
+    it "updates a user's password when given the old password along with new password + matching confirmation" do
+      params = {}
+      params[:current_password] = "asdf1234"
+      params[:new_password] = params[:password_confirmation] = "1234asdf"
+      user = Fabricate(:user, :password => params[:current_password])
+      
+      user.update_password(params)
+      assert_equal false, user.errors.any?
+    end
+  end
+  
+  describe ".twitter_id" do
+    it "returns the twitter uid for the user" do
+      user = Fabricate(:user)
+      auth = Fabricate(:twitter_auth, :user_id => user.id)
+      assert_equal auth.uid, user.twitter_id
+    end
+  end
+  
+  describe ".github_handle" do
+    it "returns the github handle for the user" do
+      user = Fabricate(:user)
+      auth = Fabricate(:github_auth, :user_id => user.id)
+      assert_equal auth.handle, user.github_handle
+    end
+  end
+  
+  describe ".instagram_id" do
+    it "returns the instagram uid for the user" do
+      user = Fabricate(:user)
+      auth = Fabricate(:instagram_auth, :user_id => user.id)
+      assert_equal auth.uid, user.instagram_id
+    end
+  end
+  
+  describe ".instagram_token" do
+    it "returns the instagram token for the user" do
+      user = Fabricate(:user)
+      auth = Fabricate(:instagram_auth, :user_id => user.id)
+      assert_equal auth.token, user.instagram_token
     end
   end
 end

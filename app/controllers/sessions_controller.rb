@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
     else
       render "login_failed",
       :status => :unauthorized,
-      text: "Login unsuccessful. Please check your username and password and try again.",
+      text: "Please check your username and password and try again.",
       :handlers => [:jbuilder]
     end
   end
