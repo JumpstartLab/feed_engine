@@ -13,14 +13,15 @@ module Feeder
 
     def start
       while true
-        refeed
+        refeed_authentications
+        refeed_relationships
         sleep TWO_MINUTES
       end
     end
 
     private
 
-    def refeed
+    def refeed_authentications
       users = client(MASTER_TOKEN).users
       users.each do |user|
         twitter   = user.auth.twitter
@@ -38,6 +39,17 @@ module Feeder
         if instagram
           refeed_instagram(user, instagram)
         end
+      end
+    end
+
+    def refeed_relationships
+      relationships = client(MASTER_TOKEN).relationships
+      relationships.each do |relationship|
+        followed = User.find_by_display_name(relationship.followed)
+        follower = User.find_by_display_name(relationship.follower)
+        since_id = relationship.since_id
+
+
       end
     end
 
