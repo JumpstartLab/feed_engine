@@ -25,11 +25,11 @@ class PagesController < ApplicationController
   end
 
   def friends
-    
+
   end
 
   def dashboard
-    
+
   end
 
 end

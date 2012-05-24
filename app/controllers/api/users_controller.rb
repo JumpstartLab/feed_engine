@@ -2,7 +2,7 @@ class Api::UsersController < ApplicationController
   before_filter :validate_api_token
 
   def index
-    
+
   end
 
 private
