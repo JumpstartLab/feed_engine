@@ -3,15 +3,17 @@ jQuery ->
     new PostsPager()
 
   imageUrlValidation = (value, element) ->
-    new RegExp("^https?://.+\.(png|jpe?g|gif|bmp)", "i").test(value)
+    @optional(element) || new RegExp("^https?://.+\.(png|jpe?g|gif|bmp)", "i").test(value)
 
   $.validator.addMethod("imageUrl", imageUrlValidation, "Please enter a valid image url")
 
   $("form[name=image-post]").validate(
     rules:
       "image_post[external_image_url]":
-        required: true
-        imageUrl: true
+        required: (element) ->
+          $("#image_post_image").val() == ""
+        imageUrl: (element) ->
+          $("#image_post_image").val() == ""
   )
   $("form[name=text-message]").validate(
     rules:
