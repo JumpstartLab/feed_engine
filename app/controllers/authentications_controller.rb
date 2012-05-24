@@ -6,10 +6,10 @@ class AuthenticationsController < ApplicationController
   def create
     auth = request.env["omniauth.auth"]
     current_user.authentications.find_or_create_by_provider_and_uid(
-                                        :provider => auth['provider'],
-                                        :uid => auth['uid'].to_s,
-                                        :handle => get_handle(auth),
-                                        :token => auth["credentials"]["token"])
+      provider: auth['provider'],
+      uid: auth['uid'].to_s,
+      handle: get_handle(auth),
+      token: auth["credentials"]["token"])
     render partial:"shared/fuck_this_shit"
   end
 

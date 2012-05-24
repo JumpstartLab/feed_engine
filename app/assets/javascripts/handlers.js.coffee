@@ -103,21 +103,49 @@ postFailed = (response, status) ->
 
 class FeedPager
   constructor:(feed=$('#all_posts')) ->
+    $.getJSON('/current_user', (response, status, jqXHR) ->
+      responseHandler(response))
     @feeduser = $.feedengine.subdomain
+    @currentuser = $.feedengine.current_user_name
     $.feedengine.current_feed = feed
     $.feedengine.current_pager = this
     @page=-1
     $(window).scroll(checkForBottom)
     @render()
+    @setSubscribeLink()
 
   render: =>
     @page++
     $(window).unbind('scroll', checkForBottom)
-    unless @feeduser
-      $.getJSON('/posts', page: @page, renderPosts)
-    else
+    if @currentuser
+      url = "posts/#{@currentuser}"
+      $.getJSON(url, page: @page, renderPosts)
+    else if @feeduser
       url = "posts/#{@feeduser.toString()}"
       $.getJSON(url, page: @page, renderPosts)
+    else
+      $.getJSON('/posts', page: @page, renderPosts)
+
+  setSubscribeLink: =>
+    $.getJSON('/current_user', (response, status, jqXHR) ->
+        json_string = JSON.stringify(response)
+        current_user_subdomain = JSON.parse(json_string).subdomain
+        current_subdomain = getSubDomain()
+        if current_subdomain && current_user_subdomain && current_subdomain != current_user_subdomain
+          $('a#sub_to_feed').show()
+        else
+          $('a#sub_to_feed').hide()
+    )
+
+getSubDomain = ->
+  host_parts = window.location.host.split('.')
+  unless host_parts[0] == 'simplefeed' || host_parts[0] == 'feedeng'
+    $.feedengine.subdomain = host_parts[0]
+  else
+      $.feedengine.subdomain = null
+
+responseHandler = (response) ->
+  $.feedengine.current_user_name = response.display_name
 
 checkForBottom = ->
   if nearBottom()

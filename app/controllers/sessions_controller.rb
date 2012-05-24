@@ -5,9 +5,8 @@ class SessionsController < ApplicationController
   def create
     post_id = session[:visitor_post]
     session[:visitor_post] = nil
-    user_info = params[:data] || params
-    @user = login(user_info[:email], user_info[:password])
-    if @user
+    user_info = params[:data]
+    if @user = login(user_info[:email], user_info[:password])
       if post_id
         Point.create(user_id: @user.id, post_id: post_id)
       end
