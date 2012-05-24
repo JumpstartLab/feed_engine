@@ -6,6 +6,9 @@
       a.repo-url href="{{repo_url}}" {{repo_name}}
     .post-actions
       li
+        a.btn href="/points/?post_id={{id}}&receiver_id=#{user.id}&giver_id=#{current_user.id if current_user}&page_before_sign_in=#{request.original_url}" data-method="post" rel="nofollow"
+          i.icon-heart Points!
+      li
         span.btn
          i.icon-share-alt | {{type}}
   img.post-type-icon src="/assets/github.png"

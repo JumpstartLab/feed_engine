@@ -1,7 +1,7 @@
 FeedEngine::Application.routes.draw do
   get "static_pages/show"
 
-  devise_for :users, :controllers => {:registrations => "registrations"}
+  devise_for :users, :controllers => {:registrations => "registrations", :sessions => "sessions"}
 
 
   # User subdomains
