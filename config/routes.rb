@@ -38,7 +38,6 @@ FeedEngine::Application.routes.draw do
     end
   end
 
-
   match "/auth/twitter/callback" => "authentications#twitter"
   match "/auth/github/callback" => "authentications#github"
   match "/auth/instagram/callback" => "authentications#instagram"
