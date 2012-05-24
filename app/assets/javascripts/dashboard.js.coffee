@@ -116,7 +116,7 @@ addPointsHandler = ->
           unless response["value"]
             changePoints(postid)
           else
-            visitorPointsHandler(postid)
+            setFlash "You must login or create an account to post"
       )
       return false
 
@@ -129,9 +129,6 @@ changePoints = (postid) ->
 
 responseHandler = (response) ->
   $.feedengine.current_user_name = response.display_name
-
-visitorPointsHandler = (postid) ->
-  setFlash "You must login or create an account to post"
 
 class FeedPager
   constructor:(feed=$('#all_posts')) ->
