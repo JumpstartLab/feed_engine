@@ -6,6 +6,7 @@ class Growl < ActiveRecord::Base
                   :user_id, :event_type, :regrowled_from_id
 
   validates_presence_of :type, :user_id, :user_id
+  validates_uniqueness_of :regrowled_from_id, :allow_nil => true, :scope => :user_id
 
   belongs_to :user
   has_one :meta_data, :autosave => true, dependent: :destroy
@@ -36,6 +37,10 @@ class Growl < ActiveRecord::Base
 
   def belongs_to?(user)
     user_id == user.id
+  end
+
+  def already_regrowled_by?(user)
+    user.growls.where(regrowled_from_id: id).present?
   end
 
   def original_poster?(user)

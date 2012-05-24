@@ -15,6 +15,11 @@ describe "Regrowl" do
     regrowl.build_regrowl_for(user1).should == nil
   end
 
+  it "Cannot regrowl any growls which you have already regrowled" do
+    user1.growls.find(1).build_regrowl_for(user2).save.should be_true
+    user1.growls.find(1).build_regrowl_for(user2).should == nil
+  end
+
   it "Regrowl gives credit to owner" do
     user1.growls.find(1).build_regrowl_for(user2).save
     regrowl = user2.growls.find_by_regrowled_from_id(1).build_regrowl_for(user3)
