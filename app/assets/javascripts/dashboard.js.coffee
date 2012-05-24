@@ -2,6 +2,33 @@ jQuery ->
   if $('#posts').length
     new PostsPager()
 
+  imageUrlValidation = (value, element) ->
+    new RegExp("^https?://.+\.(png|jpe?g|gif|bmp)", "i").test(value)
+
+  $.validator.addMethod("imageUrl", imageUrlValidation, "Please enter a valid image url")
+
+  $("form[name=image-post]").validate(
+    rules:
+      "image_post[external_image_url]":
+        required: true
+        imageUrl: true
+  )
+  $("form[name=text-message]").validate(
+    rules:
+      "text_post[title]":
+        required: true
+      "text_post[body]":
+        required: true
+  )
+  $("form[name=link-post]").validate(
+    rules:
+      "link_post[url]":
+        required: true
+        url: true
+      "link_post[description]":
+        required: true
+  )
+
 class PostsPager
   constructor: (@page = 1) ->
     $.getJSON($('#posts').data('json-url'), page: @page, @render)

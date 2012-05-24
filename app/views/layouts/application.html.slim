@@ -23,4 +23,5 @@ html
       - if Rails.env.development?
         div class="span12"
           = debug(params)
-      = javascript_include_tag "application"
+    = javascript_include_tag "application"
+    script src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"
