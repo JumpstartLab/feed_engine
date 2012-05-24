@@ -30,7 +30,7 @@ module UsersHelper
       method: "delete", class: "unlink_instagram"
     else
       link_to image_tag("/assets/instagram_link.gif"), 
-      "/auth/instagram", 
+      "/auth/instagram",
       method: "post", class: "link_instagram"
     end
   end
