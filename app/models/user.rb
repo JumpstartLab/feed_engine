@@ -111,6 +111,22 @@ class User < ActiveRecord::Base
     subscription(provider) ? true : false
   end
 
+  # def subscriptions
+  #   Subscription.where("user_id is ? and provider is not ?", self.id, "refeed")
+  # end
+
+  def current_subscriptions
+    Subscription.where(
+      :user_id => self.id,
+      :provider => ["github", "twitter", "instagram"])
+  end
+
+  def refeed_subscriptions
+    Subscription.where(
+      :user_id => self.id,
+      :provider => "refeed")
+  end
+
   def subscription(provider)
     subscriptions.select do |subscription|
       if subscription.user_id == self.id && subscription.provider == provider
