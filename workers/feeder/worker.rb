@@ -14,7 +14,7 @@ module Feeder
     def start
       while true
         refeed_authentications
-        refeed_relationships_posts
+        refeed_relationship_posts
         sleep TWO_MINUTES
       end
     end
@@ -86,7 +86,7 @@ module Feeder
 
     def refeed_instagram(user, auth)
       log_exceptions do
-        images = InstagramFetcher.fetch(auth.token, auth.since_id)
+        images = InstagramFetcher.fetch(auth.token, auth.user_id, auth.since_id, auth.created_at)
         images.each do |image|
           client(user.token).create_post(
             user.display_name,

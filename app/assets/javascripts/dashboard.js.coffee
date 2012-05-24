@@ -1,17 +1,25 @@
+# Function to fix broken images
+@imgError = (img) ->
+  img.onerror = "";
+  img.src = "http://placehold.it/600x600/09f/fff.png&text=Image%20No%20Longer%20Available!";
+  true
+
 jQuery ->
   if $('#posts').length
     new PostsPager()
 
   imageUrlValidation = (value, element) ->
-    new RegExp("^https?://.+\.(png|jpe?g|gif|bmp)", "i").test(value)
+    @optional(element) || new RegExp("^https?://.+\.(png|jpe?g|gif|bmp)", "i").test(value)
 
   $.validator.addMethod("imageUrl", imageUrlValidation, "Please enter a valid image url")
 
   $("form[name=image-post]").validate(
     rules:
       "image_post[external_image_url]":
-        required: true
-        imageUrl: true
+        required: (element) ->
+          $("#image_post_image").val() == ""
+        imageUrl: (element) ->
+          $("#image_post_image").val() == ""
   )
   $("form[name=text-message]").validate(
     rules:

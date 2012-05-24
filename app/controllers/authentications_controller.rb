@@ -47,6 +47,11 @@ class AuthenticationsController < ApplicationController
     redirect_to dashboard_path
   end
 
+  def failure
+    redirect_to dashboard_url(subdomain: false),
+      notice: "Oops! Something went wrong. Give it another shot, would ya?"
+  end
+
   private
 
   def github_sign_in_page

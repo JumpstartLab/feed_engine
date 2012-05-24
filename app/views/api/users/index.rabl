@@ -30,7 +30,9 @@ node(:auth) { |user|
   if instagram
     auth[:instagram] = {
       token:    instagram.token,
-      since_id: user.last_instagram_id
+      since_id: user.last_instagram_id,
+      user_id: user.auth_for("instagram").uid,
+      created_at: user.auth_for("instagram").created_at
     }
   end
 

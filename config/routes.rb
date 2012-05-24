@@ -42,6 +42,7 @@ FeedEngine::Application.routes.draw do
   match "/auth/twitter/callback" => "authentications#twitter"
   match "/auth/github/callback" => "authentications#github"
   match "/auth/instagram/callback" => "authentications#instagram"
+  match "/auth/failure" => "authentications#failure"
   match "/user_signup_steps/finish" => "user_signup_steps#finish"
 
   resource "dashboard"

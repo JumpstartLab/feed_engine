@@ -4,6 +4,7 @@
     .post-activity
       p {{github_type}} on the following repo:
       a.repo-url href="{{repo_url}}" {{repo_name}}
+      p.timestamp posted at {{created_at}}
     .post-actions
       li
         a.btn href="/refeeds?post_id={{id}}" data-method="post" rel="nofollow"
