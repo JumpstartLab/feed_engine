@@ -54,7 +54,7 @@
     <br/>
 
     <div class="linked-services">
-      <% if linked_services?(current_user) %>
+      <% if linked_services?(@feed_owner) %>
         <br/>
         <h3>Hooked to these services</h3>
         <% if twitter_connected?(@feed_owner) %>
