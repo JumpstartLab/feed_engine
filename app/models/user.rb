@@ -84,7 +84,8 @@ class User < ActiveRecord::Base
   end
 
   def send_welcome_email
-    Resque.enqueue(SignupMailer, self.id)
+    UserMailer.signup_notification(self.id).deliver
+    # Resque.enqueue(SignupMailer, self.id)
   end
 
   def disconnected_services
@@ -143,7 +144,8 @@ class User < ActiveRecord::Base
   end
 
   def send_password_reset
-    Resque.enqueue(PasswordMailer, self.id)
+    UserMailer.password_reset(self.id).deliver
+    # Resque.enqueue(PasswordMailer, self.id)
   end
 
   def num_subscriptions

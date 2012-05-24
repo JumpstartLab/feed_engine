@@ -37,6 +37,7 @@ gem 'faker'
 gem 'gravatar_image_tag'
 gem 'temple'
 gem 'super_hot_client', :git => 'git://github.com/athal7/super_hot_client.git'
+gem 'resque_mailer'
 
 group :production do
   gem 'pg'

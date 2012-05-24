@@ -1,5 +1,6 @@
 # This is where methods to email users are stored
 class UserMailer < ActionMailer::Base
+  include Resque::Mailer
   default from: "notifications@superhotfeedengine.com"
 
   def signup_notification(user_id)
