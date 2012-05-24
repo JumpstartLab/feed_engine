@@ -16,6 +16,8 @@
 #  index_relationships_on_follower_id_and_followed_id  (follower_id,followed_id) UNIQUE
 #
 
+
+
 class Relationship < ActiveRecord::Base
   attr_accessible :followed_id, :follower_id, :last_post_id
   belongs_to :follower, class_name: "User"
@@ -34,7 +36,7 @@ class Relationship < ActiveRecord::Base
       inner join relationships on follower.id = relationships.follower_id
                               and followed.id = relationships.followed_id
       inner join posts as original_post on original_post.user_id = followed.id
-      left  join posts as refeed_post   on original_post.id      = refeed_post.refeed_id
+      left join posts as refeed_post on original_post.id = refeed_post.refeed_id
       group by follower, followed, follower_token
     SQL
   end

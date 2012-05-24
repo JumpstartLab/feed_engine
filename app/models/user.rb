@@ -32,16 +32,23 @@ require 'digest/md5'
 
 class User < ActiveRecord::Base
 
-  has_many :text_posts,      through: :posts, source: :postable, source_type: 'TextPost'
-  has_many :image_posts,     through: :posts, source: :postable, source_type: 'ImagePost'
-  has_many :link_posts,      through: :posts, source: :postable, source_type: 'LinkPost'
-  has_many :twitter_posts,   through: :posts, source: :postable, source_type: 'TwitterPost'
-  has_many :github_posts,    through: :posts, source: :postable, source_type: 'GithubPost'
-  has_many :instagram_posts, through: :posts, source: :postable, source_type: 'InstagramPost'
+  has_many :text_posts,      through: :posts, source: :postable,
+                                              source_type: 'TextPost'
+  has_many :image_posts,     through: :posts, source: :postable,
+                                              source_type: 'ImagePost'
+  has_many :link_posts,      through: :posts, source: :postable,
+                                              source_type: 'LinkPost'
+  has_many :twitter_posts,   through: :posts, source: :postable,
+                                              source_type: 'TwitterPost'
+  has_many :github_posts,    through: :posts, source: :postable,
+                                              source_type: 'GithubPost'
+  has_many :instagram_posts, through: :posts, source: :postable,
+                                              source_type: 'InstagramPost'
 
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :followed_users, through: :relationships, source: :followed
-  has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationship", dependent: :destroy
+  has_many :reverse_relationships, foreign_key: "followed_id",
+              class_name: "Relationship", dependent: :destroy
   has_many :followers, through: :reverse_relationships, source: :follower
 
   has_many :posts, dependent: :destroy, :extend => PageExtension
@@ -67,7 +74,8 @@ class User < ActiveRecord::Base
   after_create :send_welcome_email
 
   def gravatar_url
-    @gravatar_url ||= "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email.downcase)}?d=mm&size=90"
+    @gravatar_url ||=
+    "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email.downcase)}?d=mm&size=90"
   end
 
   def send_welcome_email
@@ -105,7 +113,9 @@ class User < ActiveRecord::Base
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
-      where(conditions).where(["lower(display_name) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+      where(conditions).where(
+        ["lower(display_name) = :value OR lower(email) = :value",
+        { :value => login.downcase }]).first
     else
       where(conditions).first
     end
@@ -166,5 +176,4 @@ class User < ActiveRecord::Base
     end
     total
   end
-
 end

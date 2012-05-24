@@ -26,8 +26,10 @@ class Api::ItemsController < Api::BaseController
     page      = (params[:page] || 1).to_i
     next_page = [page+1, @posts.pages].min
 
-    next_page_url = api_items_url(user_display_name: current_user.display_name, page: next_page)
-    last_page_url = api_items_url(user_display_name: current_user.display_name, page: @posts.pages)
+    next_page_url = api_items_url(user_display_name: current_user.display_name,
+                                  page: next_page)
+    last_page_url = api_items_url(user_display_name: current_user.display_name,
+                                  page: @posts.pages)
 
     link_header =
       "<#{next_page_url}>; rel=\"next\", <#{last_page_url}>; rel=\"last\""

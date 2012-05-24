@@ -38,7 +38,8 @@ class Post < ActiveRecord::Base
       postable_copy.send(:write_attribute, :image, nil)
     end
 
-    user.posts.create({postable: postable_copy, refeed_id: original_post.id}, validate: false)
+    user.posts.create({postable: postable_copy, refeed_id: original_post.id},
+      validate: false)
   end
 
   def point_received_from(other_user)

@@ -21,7 +21,9 @@ class ImagePost < ActiveRecord::Base
     maximum: 2048,
     unless: "image.present?"
 
-  validates :external_image_url, url: { message:  "Photo url must begin with http or https", :unless => "image.present?" }
+  validates :external_image_url, url:
+    { message:  "Photo url must begin with http or https",
+      :unless => "image.present?" }
 
   validates_format_of :external_image_url,
     with: /\.(jpg|gif|bmp|png)$/,

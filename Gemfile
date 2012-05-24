@@ -65,6 +65,8 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'simplecov', require: false
   gem 'redis-store', '~>1.0.0'
+  gem 'reek', :git => "git://github.com/mvz/reek.git", :branch => "ripper_ruby_parser-2"
+  gem 'cane', :git => "git://github.com/square/cane.git"
   #gem 'rack-perftools_profiler', :require => 'rack/perftools_profiler'
 
   # Chainsaw logging
