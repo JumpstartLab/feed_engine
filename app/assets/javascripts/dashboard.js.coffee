@@ -101,7 +101,7 @@ addRefeedHandler = ->
       success: ->
         setFlash('Refed successfully!')
       error: ->
-        setError('Unsuccessful refeed.')
+        setError('You cannot refeed this post.')
       )
     $('.posted').append("")
   
