@@ -12,7 +12,7 @@ class Api::RefeedsController < Api::BaseController
         postable_copy.send(:write_attribute, :image, nil)
       end
 
-      current_user.posts.create(postable: postable_copy, refeed_id: original_post.id)
+      current_user.posts.create!(postable: postable_copy, refeed_id: original_post.id)
 
       head status: 201
     end
