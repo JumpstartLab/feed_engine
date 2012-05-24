@@ -9,6 +9,14 @@ GIT
       multi_json (~> 1.0.3)
 
 GIT
+  remote: git://github.com/athal7/super_hot_client.git
+  revision: 4c9f1795a52f3bd650a41c607cf8c717a1c6e2a0
+  specs:
+    super_hot_client (0.0.2)
+      faraday
+      httparty
+
+GIT
   remote: git://github.com/ctran/annotate_models.git
   revision: 18cd39ad01829deba5aa34634b8540d6675ab978
   specs:
@@ -366,6 +374,7 @@ DEPENDENCIES
   slim
   slim-rails
   sqlite3
+  super_hot_client!
   temple
   twitter
   twitter-bootstrap-rails
