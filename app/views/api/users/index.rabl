@@ -16,14 +16,14 @@ node(:auth) { |user|
   if twitter
     auth[:twitter] = {
       user_id: twitter.uid,
-      since_id: twitter.last_status_id,
+      since_id: user.last_twitter_id,
     }
   end
 
   if github
     auth[:github] = {
       username: github.username,
-      since_id: github.last_status_id,
+      since_id: github.last_github_id,
     }
   end
 
