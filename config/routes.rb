@@ -11,7 +11,8 @@ FeedEngine::Application.routes.draw do
 
   # Api subdomain
   scope module: "api", as: "api", constraints: Subdomains.api do
-    resources "users"
+    resources "users", only: [:index]
+    resources "relationships", only: [:index]
     resources "feeds" do
       collection do
         scope ":user_display_name" do
