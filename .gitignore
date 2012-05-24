@@ -26,3 +26,6 @@
 
 # Ignore POW env
 .powenv
+
+# Ignore SimpleCov artifacts
+/coverage

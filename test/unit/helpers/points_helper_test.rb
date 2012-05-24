@@ -1,4 +1,4 @@
-require 'test_helper'
+require 'minitest_helper'
 
 class PointsHelperTest < ActionView::TestCase
 end

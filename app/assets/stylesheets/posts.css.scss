@@ -5,9 +5,8 @@
   src: url('mercury-display-semibold.ttf');
 }
 @mixin borders{
-  border-style: solid;
-  border-width:.25em;
-  border-radius: 4px;
+  border-style: outset;
+  border-width: .35em;
   border-color: $aloe;
 }
 #all_posts {
