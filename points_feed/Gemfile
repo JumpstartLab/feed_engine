@@ -47,10 +47,6 @@ group :test, :development do
   gem 'nifty-generators'
 end
 
-group :production do
-  gem 'mysql'
-end
-
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'

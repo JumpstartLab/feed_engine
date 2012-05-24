@@ -13,13 +13,13 @@
         </ul>
           <% if current_user %>
             <ul class='nav pull-right' id="menu">
-              <form class="navbar-search pull-left" action="" style='margin-right: 20px; margin-top: 12px;'>
+              <form class="navbar-search pull-left" action="" style='margin-right: 10px; margin-top: 12px;'>
                 <input type="text" class="search-query span2 typeahead" placeholder="Search for Users">
               </form>
               <li>
                 <div style='margin-top: 10px; font-size: 18px;'>
                   <%= link_to "http://#{current_user.display_name}.pointsfeed.in" do %>
-                    <img src="<%= current_user.avatar %>" style='height: 20px; margin-right: 5px; margin-top: 0px;'></img>
+                    <img src="<%= current_user.avatar %>" style='height: 20px; margin-right: 1px; margin-top: 0px;'></img>
                     <%= current_user.display_name %>
                   <% end %>
                 </div>
