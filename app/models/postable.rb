@@ -1,6 +1,6 @@
 module Postable
   def self.included(base)
-    base.instance_eval do
+    base.instance_eval <<-EVL
       attr_accessible :poster_id
 
       attr_accessor :skip_callbacks
@@ -9,7 +9,7 @@ module Postable
       validates_presence_of :poster_id
       has_one :item, :as => :post, :dependent => :destroy
       belongs_to :user, :foreign_key => :poster_id
-    end
+    EVL
   end
 
   def type
