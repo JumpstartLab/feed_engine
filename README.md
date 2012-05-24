@@ -69,7 +69,7 @@ Please be at your appointed times early and take careful notice of who is review
 
 #### Peer Reviews
 
-Follow the protocol at http://tutorials.jumpstartlab.com/projects/feed_engine_peer_script.html
+Follow the protocol at http://tutorials.jumpstartlab.com/projects/feed_engine_peer_review_script.html
 
 #### Pro Reviews
 
