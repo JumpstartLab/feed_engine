@@ -63,7 +63,7 @@ class PostsController < ApplicationController
   end
 
   private
-  
+
   def verify_authentication
     head :status => :unauthorized unless current_user
   end

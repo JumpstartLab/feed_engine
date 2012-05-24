@@ -10,7 +10,7 @@ class PagesController < ApplicationController
   # def signin
   #   render "users/sessions/new", layout: false
   # end
-  # 
+  #
   # def signup
   #   render "users/new", layout: false
   # end
@@ -25,11 +25,11 @@ class PagesController < ApplicationController
   end
 
   # def friends
-  #   
+  #
   # end
-  # 
+  #
   # def dashboard
-  #   
+  #
   # end
 
 end
