@@ -28,7 +28,8 @@ class ApplicationController < ActionController::Base
   end
 
   def user
-    @user ||= User.where("lower(display_name) = lower(?)", params[:user_display_name] || request.subdomain).first
+    @user ||= User.where("lower(display_name) = lower(?)", 
+              params[:user_display_name] || request.subdomain).first
   end
 
 end
