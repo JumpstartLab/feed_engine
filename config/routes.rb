@@ -43,9 +43,8 @@ FeedEngine::Application.routes.draw do
   resources :images
   resources :links
 
-  resources :posts do
-    resources :points, only: [:create]
-  end
+  resources :points, only: [:create]
+  resources :posts
 
 
   root :to => 'pages#index'

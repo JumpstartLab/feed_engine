@@ -18,7 +18,7 @@ spotlightToBackstage = ->
                                                 
 getSubDomain = ->
   host_parts = window.location.host.split('.')
-  unless host_parts[0] == 'simplefeed' || host_parts[0] == 'feedeng'
+  unless host_parts[0] == 'lvh' || host_parts[0] == 'feedeng'
     $.feedengine.subdomain = host_parts[0]
   else
       $.feedengine.subdomain = null
@@ -107,11 +107,11 @@ addRefeedHandler = ->
   
 addPointsHandler = ->
   $(".addpoints").click ->
-    postlink = $(this).attr('href')
     postid = $(this).attr('id')
     $.ajax(
       type: 'POST'
-      url: postlink
+      url: 'points'
+      data: id:postid
       success:->
         changePoints(postid)
     )
