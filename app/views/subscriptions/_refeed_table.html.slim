@@ -1,0 +1,8 @@
+h3 Refeeds
+br
+table.table.table-striped
+  tbody
+    tr
+      th User
+      th Action
+    =render partial: "subscriptions/refeeded_subscription", collection: current_user.refeed_subscriptions
