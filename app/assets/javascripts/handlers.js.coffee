@@ -137,6 +137,16 @@ class FeedPager
           $('a#sub_to_feed').hide()
     )
 
+getSubDomain = ->
+  host_parts = window.location.host.split('.')
+  unless host_parts[0] == 'simplefeed' || host_parts[0] == 'feedeng'
+    $.feedengine.subdomain = host_parts[0]
+  else
+      $.feedengine.subdomain = null
+
+responseHandler = (response) ->
+  $.feedengine.current_user_name = response.display_name
+
 checkForBottom = ->
   if nearBottom()
     $.feedengine.current_pager.render()
