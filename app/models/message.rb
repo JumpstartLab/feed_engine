@@ -22,11 +22,11 @@ class Message < Growl
     end
   end
 
-  def send_twitter_update
-    return if comment.length > 180
-    client = user.twitter_client
-    client.update(comment) if client
-  end
+  # def send_twitter_update
+  #   return if comment.length > 180
+  #   client = user.twitter_client
+  #   client.update(comment) if client
+  # end
 end
 # == Schema Information
 #
