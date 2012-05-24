@@ -58,5 +58,7 @@
     <%= link_to "Cancel", root_path, :class => "signup-cancel-button btn" %>
     <% end %>
     </div>
+  <% else %> 
+    <%= render :partial => "users/spawn" %>
   <% end %>
 </div>
