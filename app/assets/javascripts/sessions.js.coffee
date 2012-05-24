@@ -16,10 +16,10 @@ setUsername = ->
       refreshAccountMenu email
   )
 
-refreshAccountMenu =(email = $.feedengine.current_user) ->
+refreshAccountMenu =(display_name = $.feedengine.current_user) ->
   accountMenu = $('#account')
   $('#backstage').append($('#account ul'))
-  if email
+  if display_name
     accountMenu.append($('#auth'))
   else
     accountMenu.append($('#unauth'))
@@ -73,7 +73,7 @@ signupResponse = (jqxhr, form) ->
 
 firstLogin = (email, password) ->
   setFlash('Signup successful! Welcome to FeedEngine')
-  $.feedengine.current_user = email
+  $.feedengine.current_user = {'email':email}
   jqxhr = $.post('/login', data: loginDataToJson(email, password) )
   jqxhr.success((data, status, jqxhr) ->
       refreshAccountMenu()
@@ -95,7 +95,7 @@ addSigninHandler = ->
 signinResponse = (jqxhr, form) ->  
   jqxhr.success( (response) ->
     form.clearForm()
-    $.feedengine.current_user = response.email
+    $.feedengine.current_user = {'email':response.email, 'display_name':response.display_name}
     refreshAccountMenu()
     $('#dashboard').click()
     setFlash("Login Successful"))

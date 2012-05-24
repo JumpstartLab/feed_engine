@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120522185728) do
+ActiveRecord::Schema.define(:version => 20120522204750) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(:version => 20120522185728) do
     t.string   "repo"
     t.string   "event_id"
     t.string   "action"
-    t.datetime "post_time"
+    t.datetime "event_time"
     t.integer  "user_id"
     t.text     "content"
     t.datetime "created_at", :null => false
@@ -115,7 +115,7 @@ ActiveRecord::Schema.define(:version => 20120522185728) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "handle"
-    t.datetime "post_time"
+    t.datetime "tweet_time"
   end
 
   create_table "users", :force => true do |t|

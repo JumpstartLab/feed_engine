@@ -1,3 +1,3 @@
 if @user
-  json.(@user, :email)
+  json.(@user, :email, :display_name, :subdomain)
 end

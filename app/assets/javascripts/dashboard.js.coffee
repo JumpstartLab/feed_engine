@@ -124,9 +124,16 @@ changePoints = (postid) ->
     $("#points_#{postid}").text("#{new_points}")
   )
 
+responseHandler = (response) ->
+  $.feedengine.current_user_name = response.display_name
+
 class FeedPager
   constructor:(feed=$('#all_posts')) ->
+    $.getJSON('/current_user', (response, status, jqXHR) ->
+      responseHandler(response))
     @feeduser = $.feedengine.subdomain
+    @currentuser = $.feedengine.current_user_name
+    alert @currentuser
     $.feedengine.current_feed = feed
     $.feedengine.current_pager = this
     @page=-1
@@ -137,11 +144,14 @@ class FeedPager
   render: =>
     @page++
     $(window).unbind('scroll', checkForBottom)
-    unless @feeduser
-      $.getJSON('/posts', page: @page, renderPosts)
-    else
+    if @currentuser
+      url = "posts/#{@currentuser}"
+      $.getJSON(url, page: @page, renderPosts)
+    else if @feeduser
       url = "posts/#{@feeduser.toString()}"
       $.getJSON(url, page: @page, renderPosts)
+    else
+      $.getJSON('/posts', page: @page, renderPosts)
 
   setSubscribeLink: =>
     $.getJSON('/current_user', (response, status, jqXHR) ->
