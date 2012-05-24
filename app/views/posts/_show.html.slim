@@ -1,44 +1,51 @@
-div class="fe-home-container #{post.user.display_name}_post" id="item_#{post.item.id}"
-  p.post-info
-    span.post-month
-      = (post.local_created_at).strftime("%B")
-      br/
+div class="post_container #{post.user.display_name}_post" id="item_#{post.item.id}"
+  span.post_badge
+    span.badge_image
+    span.badge.date
+      span.post-month
+        = (post.local_created_at).strftime("%B")
       span.post-day
         = (post.local_created_at).strftime("%d")
-      br/
       span.post-time
         = (post.local_created_at).strftime("%l:%M%P")
-    br/
-    p.post-body
+  article.post-body
+    span.post_content
       - if post.message?
-        = post.body
+        p.post_text.message_body
+          = post.body
       - if post.link?
-        h3
-          = link_to post.url, post.url
-        p
+        p.post_text.link_description
           = post.description
+        = link_to post.url, post.url
       - if post.image?
-        = image_tag post.url
-        p
+        p.post_text.image_description
           = post.description
+        span.image_container
+          = image_tag post.url
       - if post.tweet?
-        = post.body
+        p.post_text.tweet
+          = post.body
       - if post.github_event?
+        p.post_text.github_event
         | #{post.event_type} on #{post.repo}
       - if post.instapound?
-        = image_tag post.image_url
-        p
+        p.post_text.instapound
           = post.body
+        = image_tag post.image_url
+
+    span.post_links
+      span.poster_info
+        = "posted by "
+        = link_to post.user.display_name, root_url(:subdomain => post.user.subdomain)
+        - if post.tweet?
+          |  via Twitter
+        - if post.github_event?
+          |  via  Github
+      - if current_user && current_user != post.user
+        span#refeed = link_to("Refeed", refeed_path(post.item, :subdomain => false), :method => :put, :id => "refeed_item_#{post.item.id}") if post.item.refeedable_for?(current_user)
       - if post.user == current_user
-        p#points Points! (#{post.points})
+        span#points Points! (#{post.points})
       - elsif current_user
-        = link_to("Refeed", refeed_path(post.item, :subdomain => false), :method => :put, :id => "refeed_item_#{post.item.id}") if post.item.refeedable_for?(current_user)
-        p#points = link_to "Points! (#{post.points})", item_path(post.item, :subdomain => false, :points => true), :method => :put
+        span#points = link_to "Points! (#{post.points})", item_path(post.item, :subdomain => false, :points => true), :method => :put
       - else
-        p#points = link_to "Points! (#{post.points})", item_path(post.item, :subdomain => false, :points => true), :method => :put
-    p
-      = link_to post.user.display_name, root_url(:subdomain => post.user.subdomain)
-      - if post.tweet?
-        |  via Twitter
-      - if post.github_event?
-        |  via  Github
+        span#points = link_to "Points! (#{post.points})", item_path(post.item, :subdomain => false, :points => true), :method => :put
