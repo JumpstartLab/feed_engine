@@ -6,6 +6,7 @@ h2 Sign up
     = f.input :email, :required => true
     = f.input :password, :required => true
     = f.input :password_confirmation, :required => true
+    h4 Check to make stream non-publicly viewable #{f.check_box :private}
   .actions
     = f.button :submit, "Sign up"
 = render "links"

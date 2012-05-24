@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-                  :display_name, :full_name, :login
+                  :display_name, :full_name, :login, :private
   attr_accessor :login
 
   validates_presence_of :display_name, :case_sensitive => false
@@ -143,13 +143,22 @@ class User < ActiveRecord::Base
   end
 
   def last_github_id
-    last_post = github_posts.order("github_id DESC").first
-    last_post && last_post.github_id
+    unless
+      auth_for("github").last_status_id
+    else
+      auth_for("github").last_status_id
+      # last_post = github_posts.order("github_id DESC").first
+      # last_post && last_post.github_id  
+    end
   end
 
   def last_twitter_id
-    last_post = twitter_posts.order("twitter_id DESC").first
-    last_post && last_post.twitter_id
+    unless twitter_posts.any?
+      auth_for("twitter").last_status_id
+    else
+      last_post = twitter_posts.order("twitter_id DESC").first
+      last_post && last_post.twitter_id
+    end
   end
 
   def total_points

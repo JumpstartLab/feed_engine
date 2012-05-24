@@ -10,14 +10,14 @@ div class="container"
       div id="anchor"
         div class="minidash" id="minidash"
           table class="span2"
-            th 
+            th
               img src="#{current_user.gravatar_url}" width="50"
-            th 
-              h4 
+            th
+              h4
                 = link_to truncate(current_user.display_name, length: 20), root_url(subdomain: current_user.display_name)
 
           table id="stats-dash" class="span3"
-            th 
+            th
               p id="stats-header" Posts
             th
               p id="stats-header" Following
@@ -33,7 +33,7 @@ div class="container"
               td
                 p class="stats-numbers" = link_to current_user.followers.size, followers_user_path(current_user)
               td
-                p class="stats-numbers" XX
+                p class="stats-numbers" = current_user.total_points
 
           div.stream-link
             = link_to "View live stream", root_url(subdomain: current_user.display_name), class: "btn btn-primary"
@@ -62,3 +62,6 @@ div class="container"
 
     script type="text/html" id="twitter_post_template"
       = render '/twitter_posts/dashboard_post'
+
+    script type="text/html" id="instagram_post_template"
+      = render '/instagram_posts/dashboard_post'

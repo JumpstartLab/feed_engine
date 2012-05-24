@@ -1,6 +1,7 @@
 
 class TextPostsController < ApplicationController
   before_filter :lookup_text_post, except: [:create, :new]
+  before_filter :require_original_creator, only: [:edit, :update]
   respond_to :html, :json
 
   def create
