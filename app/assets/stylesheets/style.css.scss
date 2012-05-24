@@ -167,3 +167,63 @@ div.alert-box {
   color: #999;
   font-size: 12px;
 }
+#link-twitter{
+  background-image: url('/assets/twitter-icon.png');
+  display: block;
+  width: 200px;
+  height: 200px;
+}
+#link-twitter:hover{
+  background-image: url('/assets/twitter-green.png'); 
+  cursor: pointer !important;
+}
+#unlink-twitter{
+  background-image: url('/assets/twitter-dark.png');
+  display: block;
+  width: 200px;
+  height: 200px;
+}
+#unlink-twitter:hover{
+  background-image: url('/assets/twitter-red.png'); 
+  cursor: pointer !important;
+}
+#link-github{
+  background-image: url('/assets/github.png');
+  display: block;
+  width: 200px;
+  height: 200px;
+}
+#link-github:hover{
+  background-image: url('/assets/github-green.png'); 
+  cursor: pointer !important;
+}
+#unlink-github{
+  background-image: url('/assets/github-dark.png');
+  display: block;
+  width: 200px;
+  height: 200px;
+}
+#unlink-github:hover{
+  background-image: url('/assets/github-red.png'); 
+  cursor: pointer !important;
+}
+#link-instagram{
+  background-image: url('/assets/instagram.png');
+  display: block;
+  width: 200px;
+  height: 200px;
+}
+#link-instagram:hover{
+  background-image: url('/assets/instagram-green.png'); 
+  cursor: pointer !important;
+}
+#unlink-instagram{
+  background-image: url('/assets/instagram-dark.png');
+  display: block;
+  width: 200px;
+  height: 200px;
+}
+#unlink-instagram:hover{
+  background-image: url('/assets/instagram-red.png'); 
+  cursor: pointer !important;
+}
