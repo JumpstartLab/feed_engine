@@ -1,5 +1,6 @@
 jQuery ->
   $("#link_link").focusout( ->
+    $("#loading").show()
     $.post api_path + "meta_data", url: $("#link_link").val(), token: (authentication_token), dataType: 'json', ((data) ->
        # Setting up the form
        $("#link_title").val(data.title)
