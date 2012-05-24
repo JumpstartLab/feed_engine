@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  #before_filter :validate_subdomain!
+  before_filter :validate_subdomain!
 
   def validate_subdomain!
     @subdomain = request.subdomain(Rails.configuration.SUBDOMAIN_INDEX)
