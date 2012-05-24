@@ -32,6 +32,7 @@ gem 'newrelic_rpm'
 gem 'redis-store'
 gem 'fabrication'
 gem 'faker'
+gem 'gravatar_image_tag'
 
 group :production do
   gem 'pg'

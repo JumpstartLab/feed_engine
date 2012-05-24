@@ -1,6 +1,17 @@
+div.container,
+.navbar-fixed-top .container,
+.navbar-fixed-bottom .container {
+  width: 960px;
+}
+
+body {
+  padding-top: 60px;
+  background: url("flaming_lips.jpg") repeat top left;
+  background-attachment: fixed;
+  background-color: #F8F8F8 !important;
+}
 
 .post_container {
-  border: 1px solid #ccc;
   width: 600px;
   height: 155px;
   border-radius: 5px;
@@ -14,7 +25,7 @@
 }
 
 .post_container span.date {
-  margin-left: 7px;
+  margin-left: 10px;
   font-size: 13px;
 }
 .post_container span.date span {
@@ -30,7 +41,7 @@
 
 span.post_badge {
   width: 150px;
-  height: 155px;
+  height: 157px;
   margin-left:15px;
   display: block;
   float: left;
@@ -46,6 +57,10 @@ span.badge_image {
   height: 110px;
   margin: 15px 15px 0;
   border: 1px solid #ddd;
+}
+
+span.badge_image img {
+  margin:5px 10px;
 }
 
 .post_container article.post-body {
@@ -83,11 +98,13 @@ span#points {
 
 span.post_content span.image_container {
   width: 140px;
-  height: 110px;
-  display:block;
-  float:right;
-  border: 1px solid #777;
-  overflow:hidden;
+  height: 130px;
+  margin-right: -5px;
+  margin-top: -4px;
+  display: block;
+  float: right;
+  border: 1px solid #ddd;
+  overflow: hidden;
 }
 
 span.post_content span.image_container img {
@@ -95,5 +112,11 @@ span.post_content span.image_container img {
 }
 span.post_content p.image_description {
   width: 250px;
+  height: 90px;
+  overflow: hidden;
   float: left;
+}
+
+div.pagination ul {
+  background: #fff;
 }

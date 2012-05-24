@@ -1,6 +1,7 @@
 div class="post_container #{post.user.display_name}_post" id="item_#{post.item.id}"
   span.post_badge
     span.badge_image
+      = render :partial => 'posts/badge', :locals => { :post => post }
     span.badge.date
       span.post-month
         = (post.local_created_at).strftime("%B")
@@ -29,18 +30,12 @@ div class="post_container #{post.user.display_name}_post" id="item_#{post.item.i
         p.post_text.github_event
         | #{post.event_type} on #{post.repo}
       - if post.instapound?
-        p.post_text.instapound
+        p.post_text.instapound.image_description
           = post.body
-        = image_tag post.image_url
+        span.image_container
+          = image_tag post.image_url
 
     span.post_links
-      span.poster_info
-        = "posted by "
-        = link_to post.user.display_name, root_url(:subdomain => post.user.subdomain)
-        - if post.tweet?
-          |  via Twitter
-        - if post.github_event?
-          |  via  Github
       - if current_user && current_user != post.user
         span#refeed = link_to("Refeed", refeed_path(post.item, :subdomain => false), :method => :put, :id => "refeed_item_#{post.item.id}") if post.item.refeedable_for?(current_user)
       - if post.user == current_user
@@ -49,3 +44,10 @@ div class="post_container #{post.user.display_name}_post" id="item_#{post.item.i
         span#points = link_to "Points! (#{post.points})", item_path(post.item, :subdomain => false, :points => true), :method => :put
       - else
         span#points = link_to "Points! (#{post.points})", item_path(post.item, :subdomain => false, :points => true), :method => :put
+      span.poster_info
+        = "posted by "
+        = link_to post.user.display_name, root_url(:subdomain => post.user.subdomain)
+        - if post.tweet?
+          |  via Twitter
+        - if post.github_event?
+          |  via  Github

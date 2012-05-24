@@ -54,4 +54,10 @@ class ApplicationController < ActionController::Base
     session[:return_to] = request.referrer
   end
 
+  def instantiate_posts
+    @message = Message.new
+    @image = Image.new
+    @link = Link.new
+  end
+  helper_method :instantiate_posts
 end
