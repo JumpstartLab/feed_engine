@@ -1,8 +1,7 @@
 .container.top-bar.home-border.blue-border
   .attached
     .name
-      a href="/"
-        img(src="/assets/navbar_logo.png")
+      = link_to image_tag('/assets/navbar_logo.png'), home
 
     #user_search
       = render "layouts/search"
