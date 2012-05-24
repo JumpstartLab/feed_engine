@@ -25,7 +25,7 @@ class Subscription < ActiveRecord::Base
   attr_accessor :original_poster
 
   belongs_to :user
-  after_create :get_new_service_posts
+  # after_create :get_new_service_posts
 
   def self.create_with_omniauth(auth, user)
     create! do |subscription|
