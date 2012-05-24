@@ -111,7 +111,7 @@ class Subscription < ActiveRecord::Base
 
   def create_tweet(new_post)
     client = SuperHotClient::Client.new(:api_key => user.api_key)
-    client.create_feed_item(user.subdomain, 
+    client.create_feed_item(user.subdomain,
                             {
       type: "tweet",
       subscription_id: self.id,
@@ -133,7 +133,7 @@ class Subscription < ActiveRecord::Base
 
   def create_github_event(new_post)
     client = SuperHotClient::Client.new(:api_key => user.api_key)
-    client.create_feed_item(user.subdomain, 
+    client.create_feed_item(user.subdomain,
                             {
       type: "github_event",
       subscription_id: self.id,
@@ -146,7 +146,7 @@ class Subscription < ActiveRecord::Base
 
   def create_instapound(new_post)
     client = SuperHotClient::Client.new(:api_key => user.api_key)
-    client.create_feed_item(user.subdomain, 
+    client.create_feed_item(user.subdomain,
                             {
       type: "instapound",
       body: new_post.caption["text"],
