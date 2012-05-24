@@ -1,9 +1,9 @@
 GIT
   remote: git://github.com/cstrahan/feed_engine_api.git
-  revision: 284f3a9c4caca03f7e6f26cc31db015dd5b50445
-  tag: v0.0.8
+  revision: ede88bffe6c703f946300971a18b119196745a99
+  tag: v0.0.9
   specs:
-    feed_engine_api (0.0.8)
+    feed_engine_api (0.0.9)
       faraday
 
 GIT
