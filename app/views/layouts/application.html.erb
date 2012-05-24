@@ -32,6 +32,12 @@
             $("#alert-bar").slideDown().delay(5000).slideUp()
           }
         });
+        channel.bind('refeed', function(data) {
+          if (data.followee == user) {
+            $("#alert-bar").addClass('alert-success').text(data.new_follower + " just added you to their tacklebox!").hide()
+            $("#alert-bar").slideDown().delay(5000).slideUp()
+          }
+        });
       }
 </script>
     <!-- <link href="images/favicon.ico" rel="shortcut icon"> -->
