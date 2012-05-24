@@ -15,3 +15,21 @@
 #river-login-box {
   float: right;
 }
+
+#river-signup-box{ 
+  float: right;
+}
+
+#river-spawning-box{ 
+  float: right; 
+}
+
+.single-spawn{ 
+  float: left; 
+  padding: 5px 5px 5px 5px;
+  margin-bottom: 10px
+}
+
+#spawn-image img{ 
+  @include rounded-corners;
+}

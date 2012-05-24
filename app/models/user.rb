@@ -65,6 +65,10 @@ class User < ActiveRecord::Base
     Subscription.find_all_by_followed_user_id(self.id).count
   end
 
+  def self.new_spawns
+    User.last(6)
+  end 
+
   private
 
   def send_welcome_mail

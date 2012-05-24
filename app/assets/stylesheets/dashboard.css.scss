@@ -57,13 +57,15 @@
 
 .subscription {
   padding: 10px;
-  width: 72%;
+  width: 20%;
+  float: left; 
 }
 
-.subscription a.btn {
-  float: right;
-}
 
+#subscription-gravatar img{ 
+  @include rounded-corners;
+
+}
 .dashboard-btn {
 }
 
