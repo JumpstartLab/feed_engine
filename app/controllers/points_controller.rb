@@ -4,6 +4,7 @@ class PointsController < ApplicationController
       @point = Point.new(user: current_user, pointable_id: params[:item_id], pointable_type: params[:item_type])
       if @point.save
         session[:point_for] = nil
+        expire_fragment('stream_item')
         redirect_to request.referrer, :notice => "You made some points. Rock on!"
       else
         redirect_to request.referrer, :alert => "You've already pointed this item"
