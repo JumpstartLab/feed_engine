@@ -59,10 +59,6 @@ class User < ActiveRecord::Base
 
   SERVICES_LIST =  %w(twitter github instagram)
 
-  def send_welcome_email
-    UserMailer.signup_notification(self).deliver
-  end
-
   def local_created_at
     created_at.localtime
   end
