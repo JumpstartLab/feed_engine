@@ -29,9 +29,10 @@ gem 'fakeweb'
 gem 'unicorn'
 gem 'capistrano'
 gem 'resque'
-gem 'redis'
 gem 'newrelic_rpm'
-gem 'redis-store'
+gem 'redis'
+gem 'redis-store', "~> 1.1.0"
+gem 'redis-rails', "~> 3.2.1"
 gem 'fabrication'
 gem 'faker'
 gem 'temple'
