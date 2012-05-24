@@ -27,6 +27,7 @@ gem 'resque'
 gem 'tlsmail'
 gem 'hashie'
 gem 'resque-scheduler', :require => 'resque_scheduler'
+gem 'newrelic_rpm'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -44,7 +45,7 @@ group :development, :test do
   gem 'minitest-rails'
   gem 'capybara'
   gem 'turn'
-
+  gem 'simplecov'
   gem 'thin'
 end
 

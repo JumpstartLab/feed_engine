@@ -33,4 +33,23 @@ describe Feed do
       assert_equal user.feed.private?, false
     end
   end
+  
+  describe ".posts_after_time" do
+    it "returns all of the posts in a given feed after a given time" do
+      feed = Fabricate(:feed)
+      post1 = fabricate_post(feed)
+      post2 = fabricate_post(feed)
+      post1.update_attribute(:created_at, 1.hour.ago)
+      assert_equal [post2], feed.posts_after_time(30.minutes.ago)
+    end
+  end
+  
+  describe ".posts_after_id" do
+    it "returns all of the posts in a given feed after a given id" do
+      feed = Fabricate(:feed)
+      post1 = fabricate_post(feed)
+      post2 = fabricate_post(feed)
+      assert_equal [post2], feed.posts_after_id(post1.id)
+    end
+  end
 end

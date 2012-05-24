@@ -6,7 +6,8 @@ class User < ActiveRecord::Base
   after_create :generate_authentication_token
   after_create :send_welcome_email
 
-  attr_accessible :email, :password, :password_confirmation, :display_name, :subdomain
+  attr_accessible :email, :password, :password_confirmation,
+                  :display_name, :subdomain
   has_many :authentications
   has_many :tweets
   has_many :githubevents
@@ -14,23 +15,24 @@ class User < ActiveRecord::Base
   has_many :subscriptions
   has_many :points
   has_one :feed
-  
+
   validates :email, uniqueness: true, presence: true
-  validates :password, 
+  validates :password,
     presence: true,
-    confirmation: true, 
+    confirmation: true,
     length: {minimum: 6, :message => "must be at least 6 characters long"}
 
   DISPLAY_NAME_REGEX = /^[a-zA-Z0-9\-_]*$/
-  validates :display_name, 
-    format: { with: DISPLAY_NAME_REGEX, message: "must be only letters, numbers, or dashes" }, 
+  validates :display_name,
+    format: {with: DISPLAY_NAME_REGEX,
+             message: "only letters, numbers, or dashes" },
     uniqueness: true
 
   BAD_DISPLAY_NAMES = ['ftp', 'api', 'null', 'www']
   validate :display_name_is_not_bad
-  
+
   validates :subdomain, uniqueness: true
-  
+
   def display_name_is_not_bad
     if display_name.nil? || display_name.blank?
       errors.add(:display_name, "can not be blank")
@@ -40,7 +42,7 @@ class User < ActiveRecord::Base
       errors.add(:display_name, "can not start with a dash")
     end
   end
-    
+
   def send_welcome_email
     UserMailer.welcome_email(self).deliver
   end
@@ -51,7 +53,8 @@ class User < ActiveRecord::Base
 
   def subscribe(feed_name)
     sub_feed = Feed.find_by_name(feed_name)
-    unless (self.feed.id == sub_feed.id) || (self.subscriptions.find_by_feed_id(sub_feed.id))
+    find_sub_feed = self.subscriptions.find_by_feed_id(sub_feed.id)
+    unless (self.feed.id == sub_feed.id) || find_sub_feed
       self.subscriptions.create(:feed_id => sub_feed.id)
     end
   end
@@ -63,7 +66,7 @@ class User < ActiveRecord::Base
   FEED_TYPES.each do |type_name|
     has_many type_name.to_s.to_sym
   end
-  
+
   def reset_password
     self.update_attribute(:password,
       Digest::SHA512.hexdigest(
@@ -83,10 +86,12 @@ class User < ActiveRecord::Base
       self.send(association.to_s.to_sym).all
     end.flatten.uniq.compact.sort_by { |post| post.created_at }
   end
-  
+
   def generate_authentication_token
-    token = Digest::SHA256.hexdigest("#{SecureRandom.hex(15)}HuNgRyF33d#{Time.now}")
-    token = generate_authentication_token if User.exists?(authentication_token: token)
+    token = Digest::SHA256.hexdigest("#{SecureRandom.hex(15)}HuN3d#{Time.now}")
+    if User.exists?(authentication_token: token)
+      token = generate_authentication_token
+    end
     self.update_attribute(:authentication_token, token)
   end
 

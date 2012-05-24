@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :require_login, except: [:show, :new, :create, :reset_password]
-  
+
   def show
     @user = User.find_by_subdomain!(request.subdomain)
     @posts = @user.posts

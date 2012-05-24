@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   include PostsHelper
+  before_filter :verify_authentication, only: [:create, :refeed]
 
   def create
     klass_name = params[:type]
@@ -31,12 +32,12 @@ class PostsController < ApplicationController
 
   def ind
     user = User.find_by_subdomain(request.subdomain)
-    if (current_user && user && current_user == user) || (user.nil? &&  current_user)     
-      user = current_user     
+    if (current_user == user) || (user.nil? && current_user)
+      user = current_user
     end
-    params[:page] = "0" if params[:page] && params[:page] == "NaN" 
+    params[:page] = "0" if params[:page] && params[:page] == "NaN"
     temp_posts = user.feed.posts.reverse.page(params[:page].to_i || 0)
-    @posts = temp_posts.collect { |p| p.postable }
+    @posts = temp_posts.collect { |p| [p.postable, p.id] }
     render "posts/index"
   end
 
@@ -46,10 +47,12 @@ class PostsController < ApplicationController
 
   def refeed
     orig_post = Post.find(params[:id])
-    current_postables = current_user.feed.posts.collect { |p| p.postable }
-    unless orig_post.feed == current_user.feed || 
-      current_user.feed.posts.find_by_postable_id_and_postable_type(orig_post.postable_id, orig_post.postable.class.to_s)
-      cloned_post = current_user.feed.posts.create
+    current_user_posts = current_user.feed.posts
+    unless orig_post.feed == current_user.feed ||
+      current_user_posts.find_by_postable_id_and_postable_type(
+        orig_post.postable_id,
+        orig_post.postable.class.to_s)
+      cloned_post = current_user_posts.create
       cloned_post.postable = orig_post.postable
     end
     if cloned_post && cloned_post.save
@@ -58,5 +61,10 @@ class PostsController < ApplicationController
       head :status => :not_acceptable
     end
   end
+
+  private
   
+  def verify_authentication
+    head :status => :unauthorized unless current_user
+  end
 end

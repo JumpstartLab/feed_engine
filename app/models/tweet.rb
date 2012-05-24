@@ -10,8 +10,13 @@ class Tweet < ActiveRecord::Base
     params[:since_id] = user.tweets.last.source_id if user.tweets.any?
     sign_up_time = user.authentications.find_by_provider('twitter').created_at
     Twitter.user_timeline(params).reverse.each do |tweet|
-      if tweet.created_at > sign_up_time && Tweet.find_by_source_id(tweet.id.to_s).blank?
-        tweet = Tweet.create(content: tweet.text, source_id: tweet.id, handle: tweet.user.screen_name, post_time: tweet.created_at)
+      tweet_in_system = Tweet.find_by_source_id(tweet.id.to_s)
+      if tweet.created_at > sign_up_time && tweet_in_system.blank?
+        tweet = Tweet.create(
+              content: tweet.text,
+              source_id: tweet.id,
+              handle: tweet.user.screen_name,
+              post_time: tweet.created_at)
         tweet.link_to_poly_post(tweet, user.feed)
       end
     end
