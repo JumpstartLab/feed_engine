@@ -94,7 +94,8 @@ describe User do
           before(:each) do
             reset_host
             visit dashboard_path(user)
-            click_link_or_button "Subscriptions"
+            save_and_open_page
+            click_link_or_button "Refeeds"
           end
 
           it "has the feeds that the user is refeeding on the dashboard" do
