@@ -1,4 +1,4 @@
-
+<% cache item do %>
 <div class=" item-container-body" id="item_<%= item.id %>">
   <div class="item-header">
     <%= image_tag gravatar_url(item.author), :class => "item-user-image" %>
@@ -53,6 +53,5 @@
       <% end %>
     </span>
   </div>
-
-
 </div>
+<% end %>

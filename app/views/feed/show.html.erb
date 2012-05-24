@@ -1,12 +1,13 @@
 <div class="span6" >
 
 <div class="feed-list" id="stream-items">
-
+<% cache @stream_items do %>
   <% if @stream_items %>
     <% @stream_items.each do |stream_item| %>
       <%= render :partial => "item", :locals => { :item => stream_item } %>
     <% end %>
   <% end %>
+<% end %>
 </div>
 </div>
 
