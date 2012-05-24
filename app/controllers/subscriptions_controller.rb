@@ -31,10 +31,10 @@ class SubscriptionsController < ApplicationController
   def auth_create(auth_response)
     Subscription.create_with_omniauth(auth_response, current_user)
     notice = "Your account has been linked with #{auth_response["provider"]}"
-    if current_user.subscribed_to_all_services? || authorized_from_dashboard
+    if current_user.subscribed_to_all_services?
       redirect_to dashboard_path, notice: notice
     else
-      redirect_to new_subscription_path, notice: notice
+      redirect_to :back, notice: notice
     end
   end
 
