@@ -30,3 +30,8 @@
         li(style="display:inline;")
           | REGROWLED BY &nbsp;
           = link_to growl.user.display_name.upcase, "http://#{growl.user.display_name}.#{request.domain}"
+
+coffee:
+  $(".regrowl").click ->
+    $(this).hide()
+    $(this).parent().find(".regrowled").fadeIn()
