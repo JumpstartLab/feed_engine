@@ -1,7 +1,6 @@
 <div class="span6" >
 
 <div class="feed-list" id="stream-items">
-
   <% if @stream_items %>
     <% @stream_items.each do |stream_item| %>
       <%= render :partial => "item", :locals => { :item => stream_item } %>

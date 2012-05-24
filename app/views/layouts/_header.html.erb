@@ -13,7 +13,7 @@
 
       <div class="accounts-nav">
         <% if user_signed_in? %>
-          <span class="current-user">Logged in as: <strong><%= current_user.display_name %></strong></span>
+          <span data-display-name="<%= current_user.display_name %>" class="current-user">Logged in as: <strong><%= current_user.display_name %></strong></span>
           <ul class="clearfix nav global-nav">
             <li id="nav-stream" class="pull-left navigation-item">
             <a href="<%= root_url(:subdomain => current_user.display_name) %>"> <span class="raphael-icon">S</span>My Stream</a>
@@ -21,7 +21,7 @@
             <li id="nav-dashboard" class="pull-left navigation-item">
             <a href="<%= dashboard_url(:subdomain => false) %>"> <span class="raphael-icon">></span>Dashboard</a>
             </li>
-            <li class="pull-left navigation-item">
+            <li id="nav-logout" class="pull-left navigation-item">
             <a href="<%= destroy_user_session_path(:subdomain => false)%>" data-method="delete"> <span class="raphael-icon">Ï</span>Logout </a>
            </li>
           </ul>

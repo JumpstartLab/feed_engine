@@ -182,9 +182,15 @@ body {
   margin-bottom: 15px;
 }
 
-.accounts-nav ul li {
+li#nav-logout {
   a, a:visited {
-    color: #E0DCDB;
+    color: black;
+  }
+}
+
+.accounts-nav ul > li {
+  a, a:visited {
+    color: black;
   }
 }
 

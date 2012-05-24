@@ -43,13 +43,3 @@ jQuery ->
       error: (evt) ->
         $this.parent().append("You've already retrouted this.").addClass "label label-info"
 
-$(document).ready ->
-  $("form[data-remote]").each ->
-    $(this).append "<input type=\"hidden\" value=\"" + access_token + "\" name=\"access_token\" />"
-
-  $("form[data-remote]").each ->
-    $(this).bind "ajax:success", (e) ->
-      form_success $(this)
-
-    $(this).bind "ajax:error", (evt, xhr) ->
-      form_errors $(this), xhr

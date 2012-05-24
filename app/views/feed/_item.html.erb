@@ -1,8 +1,9 @@
-
 <div class=" item-container-body" id="item_<%= item.id %>">
   <div class="item-header">
+    <% cache ["header", item] do %>
     <%= image_tag gravatar_url(item.author), :class => "item-user-image" %>
     <span class="item-header-user"><%= link_to item.author.display_name, root_url(:subdomain => item.author.display_name) %></span>
+    <% end %>
     <span class="refeed-buttons">
       <% unless current_user == nil || !current_user.can_retrout?(item.streamable) %>
         <%= link_to("#", 'data-author' => item.author.display_name, 'data-type' => item.class.name, 'data-id' => item.to_param, :class => "refeed_ajax_link") do  %>
@@ -10,6 +11,7 @@
         <% end %>
       <% end %>
     </span>
+
     <span class="points-container">
       <% unless current_user && (item.author.display_name == current_user.display_name) %>     
         <%= link_to points_path(:item_type => item.streamable.class.name, :item_id => item.streamable_id), :method => :post, :id => "item_#{item.id}" do %>
@@ -22,6 +24,9 @@
       <% end %>
     </span>
   </div>
+
+
+  <% cache ["footer", item] do %>
   <br/>
   <% item_class = item.streamable.class.to_s.underscore %>
 
@@ -53,6 +58,5 @@
       <% end %>
     </span>
   </div>
-
-
+<% end %>
 </div>

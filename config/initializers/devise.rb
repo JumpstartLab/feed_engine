@@ -25,7 +25,7 @@ Devise.setup do |config|
     GITHUB_SECRET = ENV["GITHUB_SECRET"]
     INSTAGRAM_KEY = ENV["INSTAGRAM_KEY"]
     INSTAGRAM_SECRET = ENV["INSTAGRAM_SECRET"]
-    INSTAGRAM_REDIRECT_URI = "http://polutropos.com/users/auth/instagram/callback"
+    INSTAGRAM_REDIRECT_URI = "http://troutr.com/users/auth/instagram/callback"
   else
     TWITTER_KEY = ENV["TWITTER_DEV_KEY"]
     TWITTER_SECRET = ENV["TWITTER_DEV_SECRET"]
