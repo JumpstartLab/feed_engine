@@ -7,13 +7,13 @@
 - elsif post.type == 'Instapound'
   = image_tag 'instagram.png'
 - elsif post.type == 'GithubEvent'
-  - if post.event_type == 'ForkEvent'
+  - if post.event_type == 'Github fork!'
     = image_tag 'forktocat.png'
-  - elsif post.event_type == 'PushEvent'
+  - elsif post.event_type == 'Github push!'
     = image_tag 'socialite.png'
-  - elsif post.event_type == 'CreateEvent'
+  - elsif post.event_type == 'Github create!'
     = image_tag 'repo.png'
   - else
     = post.event_type
-- else
-  = post.type
+- elsif post.type == 'Tweet'
+  = image_tag 'twitter_icon.png'
