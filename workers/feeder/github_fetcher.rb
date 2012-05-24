@@ -1,3 +1,4 @@
+require 'octokit'
 module Feeder
   module GithubFetcher
     def self.fetch(username, last_id)
