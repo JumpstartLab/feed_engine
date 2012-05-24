@@ -37,7 +37,8 @@ class RefeedsController < ApplicationController
       postable_copy.send(:write_attribute, :image, nil)
     end
 
-    current_user.posts.create({postable: postable_copy, refeed_id: original_post.id}, validate: false)
+    current_user.posts.create({postable: postable_copy,
+        refeed_id: original_post.id}, validate: false)
   end
 
 end
