@@ -1,5 +1,6 @@
 class LinkPostsController < ApplicationController
   before_filter :lookup_link_post, except: [:create, :new]
+  before_filter :require_original_creator, only: [:edit, :update]
   def new
     @link_post = LinkPost.new
   end
