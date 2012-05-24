@@ -1,3 +1,9 @@
+$('#signin').hide();
+$("#target").click(function() {
+  $('#home_page_image').hide();
+  $('#signin').show();
+});
+
 jQuery("#slide_show > #slide:gt(0)").hide();
 
 setInterval(function() {
