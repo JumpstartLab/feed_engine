@@ -1,5 +1,7 @@
 class ImagePostsController < ApplicationController
   before_filter :lookup_image_post, except: [:new, :create]
+  before_filter :require_original_creator, only: [:edit, :update]
+
   def new
     @image_post = ImagePost.new
   end

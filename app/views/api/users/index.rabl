@@ -36,11 +36,3 @@ node(:auth) { |user|
 
   auth
 }
-
-node(:follows) { |user|
-  user.followed_users.map do |user|
-    {
-      display_name: user.display_name
-    }
-  end
-}
