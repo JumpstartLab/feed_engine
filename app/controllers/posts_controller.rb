@@ -18,7 +18,8 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all.collect {|post| [post.postable, post.id] }.reverse.page(params[:page].to_i || 0)
+    @posts = Post.all.collect {|post| [post.postable, post.id] }.reverse.page(
+      params[:page].to_i || 0)
   end
 
   def show

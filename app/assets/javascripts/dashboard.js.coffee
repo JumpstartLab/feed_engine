@@ -107,15 +107,18 @@ addRefeedHandler = ->
   
 addPointsHandler = ->
   $(".addpoints").click ->
-    postid = $(this).attr('id')
-    $.ajax(
-      type: 'POST'
-      url: 'points'
-      data: id:postid
-      success:->
-        changePoints(postid)
-    )
-    return false
+      postid = $(this).attr('id')
+      $.ajax(
+        type: 'POST'
+        url: 'points'
+        data: id:postid
+        success: (response) ->
+          unless response["value"]
+            changePoints(postid)
+          else
+            visitorPointsHandler(postid)
+      )
+      return false
 
 changePoints = (postid) ->
   json = $.getJSON("/pointscount/#{postid}")
@@ -126,6 +129,9 @@ changePoints = (postid) ->
 
 responseHandler = (response) ->
   $.feedengine.current_user_name = response.display_name
+
+visitorPointsHandler = (postid) ->
+  setFlash "You must login or create an account to post"
 
 class FeedPager
   constructor:(feed=$('#all_posts')) ->
@@ -171,11 +177,19 @@ checkForBottom = ->
 nearBottom = ->
   $(window).scrollTop() > $(document).height() - $(window).height() - 50
 
+changePoints = (postid) ->
+  json = $.getJSON("/pointscount/#{postid}")
+  json.success( (response) ->
+    new_points = response.points_count
+    $("#points_#{postid}").text("#{new_points}")
+  )
+
 renderPosts = (response, status, jqXHR) ->
     posts = response['posts']
     for post in posts
       type = post["type"]
       $.feedengine.current_feed.append Mustache.to_html($("##{type}_template").html(), post)
+      changePoints(post["id"])
     $(window).scroll(checkForBottom) if posts && posts.length > 0
     addPointsHandler()
     addRefeedHandler()

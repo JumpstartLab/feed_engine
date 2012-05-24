@@ -1,7 +1,13 @@
 class PointsController < ApplicationController
   def create
-    post = Post.find(params[:id])
-    post.points.create(user_id: current_user.id)
-    render :json => true
+    if current_user
+      post = Post.find(params[:id])
+      post.points.create(user_id: current_user.id)
+      render :json => true
+    else
+      post_id = params[:id]
+      session[:visitor_post] = post_id
+      render :json => {"value"=>"foo"}
+    end 
   end
 end

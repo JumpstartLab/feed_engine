@@ -8,6 +8,11 @@ class UsersController < ApplicationController
 
   def create
     @user = User.create(params[:user])
+    post_id = session[:visitor_post]
+    session[:visitor_post] = nil
+    if post_id
+      Point.create(user_id: @user.id, post_id: post_id)
+    end
     render_create
   end
 
