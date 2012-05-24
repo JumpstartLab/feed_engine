@@ -13,14 +13,16 @@ class Githubevent < ActiveRecord::Base
     sign_up_time = user.authentications.find_by_provider('github').created_at
     events.reverse.each do |event|
       if VALID_TYPES.include?(event.type)
-        unless existing_events.find_by_event_id(event.id) || Time.zone.parse(event.created_at) < sign_up_time
+        unless existing_events.find_by_event_id(event.id) ||
+            Time.zone.parse(event.created_at) < sign_up_time
           new_event = existing_events.create(action: event.type,
           event_id: event.id,
           handle: event.actor.login,
           post_time: event.created_at,
           repo: event.repo.name,
-          content: create_content(event.actor.login, event.type, event.repo.name))
-          
+          content: create_content(event.actor.login,
+                                  event.type, event.repo.name))
+
           new_event.link_to_poly_post(new_event, user.feed)
         end
       end

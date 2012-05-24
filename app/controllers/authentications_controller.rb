@@ -21,7 +21,8 @@ class AuthenticationsController < ApplicationController
   end
 
   def check
-    @authd =  !(current_user.authentications.find_by_provider(params[:provider]) == nil)
+    cur_auths = current_user.authentications
+    @authd =  !(cur_auths.find_by_provider(params[:provider]) == nil)
   end
 
   private

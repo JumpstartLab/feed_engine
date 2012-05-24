@@ -2,7 +2,7 @@ class Api::PostsController < ApiController
   include PostsHelper
 
   def index
-    feed_posts = Feed.find_by_name(params[:feed_name]).posts 
+    feed_posts = Feed.find_by_name(params[:feed_name]).posts
     @posts = feed_posts.collect { |p| p.postable }
   end
 
@@ -29,7 +29,9 @@ class Api::PostsController < ApiController
     orig_post = Post.find(params[:post_id])
     current_postables = current_user.feed.posts.collect { |p| p.postable }
     unless orig_post.feed == current_user.feed ||
-      current_user.feed.posts.find_by_postable_id_and_postable_type(orig_post.postable_id, orig_post.postable.class.to_s)
+      current_user.feed.posts.find_by_postable_id_and_postable_type(
+        orig_post.postable_id,
+        orig_post.postable.class.to_s)
       cloned_post = current_user.feed.posts.create
       cloned_post.postable = orig_post.postable
     end
