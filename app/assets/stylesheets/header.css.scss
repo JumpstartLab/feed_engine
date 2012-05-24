@@ -1,0 +1,19 @@
+body .navbar a.brand {
+  background: url('/assets/logo.png') no-repeat 0 0;
+  display: block;
+  width: 466px;
+  height: 10px;
+  margin: 4px 0 3px 0;
+  text-indent: -424242px;
+  overflow: hidden;
+}
+
+.navbar .container a.brand:hover {
+  background-position: 0 -30px;
+  background-color:none;
+}
+
+.navbar .nav.pull-right {
+  margin-left: 10px;
+  margin-right: -40px;
+}

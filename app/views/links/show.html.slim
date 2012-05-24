@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Description:
+  = @link.description
+p
+  strong Url:
+  = @link.url
+p
+  strong Poster:
+  = @link.poster_id
+
+= link_to 'Edit', edit_link_path(@link)
+'|
+= link_to 'Back', links_path
