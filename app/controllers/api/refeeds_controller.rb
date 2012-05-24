@@ -12,7 +12,6 @@ class Api::RefeedsController < Api::BaseController
       if request.xhr?
         Pusher["#{refeed.author.display_name}"].trigger('greet', {:author => refeed.author.display_name, :refeed => refeeder.display_name } )
       end
-      expire_fragment('stream_item')
       respond_with(refeed, :status => :created,
                            :location => api_item_path(refeeder, item))
     else
