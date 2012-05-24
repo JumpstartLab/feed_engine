@@ -2,7 +2,7 @@
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-      <h1><%= link_to "Troutr", root_url(:subdomain => false) %> </h1>
+      <h1><%= link_to "troutr", root_url(:subdomain => false) %> </h1>
 
       <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
       <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -15,10 +15,10 @@
         <% if user_signed_in? %>
           <span class="current-user">Logged in as: <strong><%= current_user.display_name %></strong></span>
           <ul class="clearfix nav global-nav">
-            <li class="pull-left navigation-item">
-            <a href="<%= root_url(:subdomain => current_user.display_name) %>"> <span class="raphael-icon">S</span>Stream</a>
+            <li id="nav-stream" class="pull-left navigation-item">
+            <a href="<%= root_url(:subdomain => current_user.display_name) %>"> <span class="raphael-icon">S</span>My Stream</a>
             </li>
-            <li class="pull-left navigation-item">
+            <li id="nav-dashboard" class="pull-left navigation-item">
             <a href="<%= dashboard_url(:subdomain => false) %>"> <span class="raphael-icon">></span>Dashboard</a>
             </li>
             <li class="pull-left navigation-item">
@@ -26,7 +26,7 @@
            </li>
           </ul>
         <% else %>
-          <ul class="clearfix nav global-nav ">
+          <ul class="clearfix nav global-nav not-logged-in">
             <% if request.fullpath != new_user_path %>
               <li class="navigation-item navigation-item-anon">
               <a href="<%= login_path(:subdomain => false) %>">

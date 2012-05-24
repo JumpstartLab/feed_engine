@@ -56,12 +56,15 @@
     <div class="linked-services">
       <% if linked_services?(current_user) %>
         <br/>
-        <h3>Linked Services</h3>
+        <h3>Hooked to these services</h3>
         <% if twitter_connected?(@feed_owner) %>
-          <span class="raphael-icon linked-twitter-logo">^</span>
+          <%= image_tag "/assets/twitter.png", :size => "64x64" %>
         <% end %>
         <% if github_connected?(@feed_owner) %>
-          <span class="raphael-icon linked-post-logo">U</span>
+          <%= image_tag "/assets/github.png", :size => "64x64" %>
+        <% end %>
+        <% if instagram_connected?(@feed_owner) %>
+          <%= image_tag "/assets/instagram.png", :size => "55x55" %>
         <% end %>
         <br/>
       <% end %>

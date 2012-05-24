@@ -30,6 +30,7 @@ gem 'pusher'
 gem 'omniauth-instagram'
 gem 'faraday', "~>0.7.6"
 gem 'newrelic_rpm'
+gem 'devise-async'
 
 # Gems used only for assets and not required
 # in production environments by default.
