@@ -34,7 +34,7 @@ class SubscriptionsController < ApplicationController
     if current_user.subscribed_to_all_services?
       redirect_to dashboard_path, notice: notice
     else
-      redirect_to :back, notice: notice
+      redirect_to dashboard_path, notice: notice
     end
   end
 
