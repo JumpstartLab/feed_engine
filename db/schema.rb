@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120524135512) do
+ActiveRecord::Schema.define(:version => 20120523214036) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -81,7 +81,6 @@ ActiveRecord::Schema.define(:version => 20120524135512) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.integer  "giver_id"
-    t.boolean  "added"
   end
 
   create_table "posts", :force => true do |t|
