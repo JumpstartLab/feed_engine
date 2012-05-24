@@ -1,5 +1,4 @@
-div class="container-fluid"
-  div class="row"
+div class="container"
     div class="span8 stream"
       = render 'content_creation_nav_bar'
       = render 'content_creation_forms'
@@ -10,23 +9,40 @@ div class="container-fluid"
     div class="span4 stream"
       div id="anchor"
         div class="minidash" id="minidash"
-          h2 Mini-Dash
-          h3 = link_to "View Live Stream!", root_url(subdomain: current_user.display_name), class: "btn btn-primary btn-large"
-          br
-          div id="sliding_toggle"
-            h3 = link_to "Link Yourself!", "#", id: "services_link", class: "btn btn-success btn-large"
-            br
-            div id='services_toggle'
-              = render 'services/form', id: "external_links"
-            h3 Total Posts: #{current_user.posts.count}
-            br
-            h3 Total Points Received: #{current_user.total_points}
-            br
-            h3 Followers
-            = link_to current_user.followers.size, followers_user_path(current_user)
-            br
-            h3 Following
-            = link_to current_user.followed_users.size, following_user_path(current_user)
+          table class="span2"
+            th 
+              img src="#{current_user.gravatar_url}" width="50"
+            th 
+              h4 
+                = link_to truncate(current_user.display_name, length: 20), root_url(subdomain: current_user.display_name)
+
+          table id="stats-dash" class="span3"
+            th 
+              p id="stats-header" Posts
+            th
+              p id="stats-header" Following
+            th
+              p id="stats-header" Followers
+            th
+              p id="stats-header" Points!
+            tr
+              td
+                p class="stats-numbers" = current_user.posts.count
+              td
+                p class="stats-numbers" = link_to current_user.followed_users.size, following_user_path(current_user)
+              td
+                p class="stats-numbers" = link_to current_user.followers.size, followers_user_path(current_user)
+              td
+                p class="stats-numbers" XX
+
+          div.stream-link
+            = link_to "View live stream", root_url(subdomain: current_user.display_name), class: "btn btn-primary"
+
+          div class="minidash" id="lower-dash"
+            h3 Linked Services
+            = twitter_button
+            = github_button
+            = instagram_button
 
         div id="totop"
           h3 Back to Top

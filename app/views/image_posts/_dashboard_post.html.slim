@@ -4,6 +4,7 @@
     .post-image
       img src="{{url}}"
       p.description {{description}}
+      p.timestamp posted at {{created_at}}
     .post-actions
       li
         a.btn href="/image_posts/{{image_post_id}}/edit"
@@ -11,6 +12,4 @@
       li
         a.btn href="/image_posts/{{image_post_id}}" data-confirm="Are You Sure" data-method="delete" rel="nofollow"
           i.icon-trash Remove
-      li
-         span.btn
-          i.icon-camera | {{type}}
+  img.post-type-icon src="/assets/image.gif"

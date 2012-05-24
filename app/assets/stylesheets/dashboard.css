@@ -1,11 +1,11 @@
 #totop {
-        width:275px;
+        width:320px;
         background:#eee;
         text-align:center;
         padding:5px;
         position:fixed;
         bottom:10px;
-        right:155px;
+        right:210px;
         cursor:pointer;
         display:none;
         color:#333;
@@ -17,16 +17,40 @@
 }
 
 #minidash {
-        width:275px;
+        width:320px;
+        height:170px;
         background:#eee;
-        height:675px;
-        padding:45px;
+        padding:20px;
         border-width:1px;
         border-style:solid;
         border-color:#ccc;
         border-radius:5px;
         margin-top:35px;
-        margin-left:122px;
+        margin-left:65px;
+}
+
+#lower-dash {
+        width:320px;
+        background:#eee;
+        padding:20px;
+        border-width:1px;
+        border-style:solid;
+        border-color:#ccc;
+        border-radius:5px;
+        margin-top:35px;
+        margin-left:-20px;
+}
+
+#stats-dash {
+       margin-left:5px; 
+}
+
+.stats-numbers {
+        margin-left:15px;
+}
+
+#stats-header {
+        font-size:15px;
 }
 
 #content_tabs {
