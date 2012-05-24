@@ -1,0 +1,54 @@
+.logged_in_sidebar .fe-container {
+  width: 270px;
+  margin-bottom: 20px;
+  background-color: #fff;
+}
+
+.logged_in_sidebar .fe-container img {
+  width: 30px;
+  height: 30px;
+}
+
+.logged_in_sidebar .fe-container textarea {
+  width: 255px;
+ }
+
+div#post_forms img {
+  margin-left: 10px;
+}
+
+div#post_forms input[type=text] {
+  width: 255px;
+}
+
+div#post_forms a.active span {
+  color: black;
+  text-decoration: underline;
+}
+
+div.full_dashboard div#posts {
+  background: white;
+}
+
+div#sidebar {
+  width: 230px;
+  background: #eee;
+}
+
+div.full_dashboard .white_box {
+  background: white;
+}
+
+div.full_dashboard div#services .fe-container {
+  width: 460px;
+}
+
+div.full_dashboard .fe-container {
+  border: none;
+}
+
+div.full_dashboard div#posts a span {
+  font-weight: bold;
+  font-size: 16px;
+  margin-right: 10px;
+}

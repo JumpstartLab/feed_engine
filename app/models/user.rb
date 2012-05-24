@@ -63,6 +63,10 @@ class User < ActiveRecord::Base
     UserMailer.signup_notification(self).deliver
   end
 
+  def local_created_at
+    created_at.localtime
+  end
+
   def posts
     items.map(&:post)
   end
