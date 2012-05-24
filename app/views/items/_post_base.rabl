@@ -5,6 +5,8 @@ node(:link)             { |post| item_url(post.user.display_name.downcase, post.
 node(:created_at)       { |post| post.created_at.strftime("%b %m - %l:%M%p")}
 node(:refeed)           { |post| post.refeed? }
 node(:total_points)     { |post| post.points.size }
+node(:point_given)      { |post| post.point_received_from(current_user)}
+node(:point_not_given)  { |post| !post.point_received_from(current_user)}
 node(:gravatar_url) do |post|
   if post.refeed?
     user = Post.find(post.refeed_id).user

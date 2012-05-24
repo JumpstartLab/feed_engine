@@ -40,4 +40,8 @@ class Post < ActiveRecord::Base
 
     user.posts.create({postable: postable_copy, refeed_id: original_post.id}, validate: false)
   end
+
+  def point_received_from(other_user)
+    self.points.map(&:giver_id).include?(other_user.id)
+  end
 end

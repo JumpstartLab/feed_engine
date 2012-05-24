@@ -28,7 +28,7 @@ class Authentication < ActiveRecord::Base
                            secret: omniauth["credentials"]["secret"],
                            uid: omniauth["uid"],
                            username: omniauth["info"]["nickname"],
-                           last_status_id: omniauth["extra"]["raw_info"]["status"]["id_str"],
+                           # last_status_id: omniauth["extra"]["raw_info"]["status"]["id_str"],
                            image: omniauth["info"]["image"]
       )
   end
@@ -39,7 +39,7 @@ class Authentication < ActiveRecord::Base
                            secret: omniauth["credentials"]["secret"],
                            uid: omniauth["uid"],
                            username: omniauth["info"]["nickname"],
-                           last_status_id: DateTime.now.to_s,
+                           # last_status_id: DateTime.now.to_s,
                            image: omniauth["extra"]["raw_info"]["avatar_url"]
       )
   end
@@ -50,7 +50,7 @@ class Authentication < ActiveRecord::Base
                            secret: omniauth["credentials"]["secret"],
                            uid: omniauth["uid"],
                            username: omniauth["info"]["nickname"],
-                           last_status_id: DateTime.now.to_s,
+                           # last_status_id: DateTime.now.to_s,
                            image: omniauth["info"]["image"]
       )
   end
