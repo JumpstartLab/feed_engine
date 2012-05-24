@@ -1,6 +1,6 @@
 .row
   .five.columns.content_bar
-    h2
+    h3
       | Edit Your Account
     = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
       - if f.error_notification
@@ -9,11 +9,11 @@
           a.close(href="") ×
       .current_information
         p
-          strong Display Name:
-          = current_user.display_name
+          h5
+            | Display Name: #{current_user.display_name}
           br
-          strong Email:
-          = current_user.email
+          h5 
+            | Email: #{current_user.email}
           br
       .inputs
         = f.input :password, :autocomplete => "off", :required => false

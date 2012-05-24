@@ -108,8 +108,10 @@ ul.contained.awesome-tabs-content > li {
 }
 .search_box {
   margin-top:7px;
-  width:300px !important;
+  width:250px !important;
+  border-radius: 8px !important;
 }
+
 .posted {
   line-height:29px;
 }
@@ -118,9 +120,6 @@ ul.contained.awesome-tabs-content > li {
 }
 .regrowled_icon {
   vertical-align: top;
-}
-.search_box {
-  border-radius: 8px !important;
 }
 
 div.alert-box {

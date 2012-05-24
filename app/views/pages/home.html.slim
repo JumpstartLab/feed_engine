@@ -1,14 +1,15 @@
 .row
   .four.columns.content_bar
     h1 Hungrlr
-    h5 An easy to use social network aggregator, to manage your Twitter, Facebook, GitHub, MySpace &amp; Instagram
+    h5 The dead-simple way to check your Twitter, Facebook, GitHub, &amp; Instagram activity with just one-click.
+      
     #login.row(style="display:none;")
       = render "shared/login"
       .user_helper.row= link_to "Whoops, I do need to signup", "#"
     #signup.row
       = render "shared/signup"
       .user_helper.row= link_to "Already have an account?", "#"
-  .six.columns.content_bar
+  .seven.columns.content_bar
     h3 Incoming Growls
     #growls
       = render @growls
