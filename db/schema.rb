@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120523195822) do
+ActiveRecord::Schema.define(:version => 20120525023245) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -95,6 +95,16 @@ ActiveRecord::Schema.define(:version => 20120523195822) do
 
   add_index "subscriptions", ["subscriber_id"], :name => "index_subscriptions_on_subscriber_id"
   add_index "subscriptions", ["user_id"], :name => "index_subscriptions_on_user_id"
+
+  create_table "topics", :force => true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "topics", ["name"], :name => "index_topics_on_name"
+  add_index "topics", ["user_id"], :name => "index_topics_on_user_id"
 
   create_table "twitter_accounts", :force => true do |t|
     t.integer  "authentication_id"

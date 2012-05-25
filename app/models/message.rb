@@ -14,11 +14,6 @@ class Message < Growl
     end
   end
 
-  def parse_hashtags
-    services = comment.scan(/\B#(\S+)/).uniq
-    services.collect { |service| service.first.downcase }
-  end
-
   def send_twitter_update
     return if comment.length > 180
     client = user.twitter_client

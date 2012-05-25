@@ -26,6 +26,8 @@ class User < ActiveRecord::Base
   has_many :instagram_photos
   has_many :github_events
 
+  has_many :topics
+  
   has_many :subscriptions
   has_many :subscribers, :through => :subscriptions # Who is following you
   has_many :inverse_subscriptions, :class_name => "Subscription",

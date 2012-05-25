@@ -19,6 +19,7 @@ class Growl < ActiveRecord::Base
   scope :by_type, lambda { |param| where{ type.like param } unless param.nil? }
 
   before_save :set_original_created_at
+  before_save :add_trend
 
   def self.since
     where{ created_at.gt Time.at(epoch) } unless epoch.nil?
@@ -70,10 +71,6 @@ class Growl < ActiveRecord::Base
     new_regrowl
   end
 
-  def original_growl?
-    regrowled_from_id.nil?
-  end
-
   def regrowled?
     regrowled_from_id.present?
   end
@@ -101,6 +98,21 @@ class Growl < ActiveRecord::Base
 
   def original_growl
     regrowled? ? Growl.find(regrowled_from_id) : self
+  end
+
+  def original_growl?
+    !regrowled?
+  end
+
+  def parse_hashtags
+    hashtags = comment.scan(/\B#(\S+)/).uniq
+    hashtags.collect { |service| service.first.downcase }
+  end
+
+  def add_trend
+    hashtags = parse_hashtags
+    hashtags.delete("twitter")
+    hashtags.each { |hashtag| Topic.create(name: hashtag, user: user) }
   end
 
   private
