@@ -24,16 +24,14 @@ module Hungrlr
     end
 
     def get_growls(user_slug, last_status_id)
-      url = "#{base_url}/feeds/#{user_slug}/growls.json"+
-            "?token=#{bj_token}&since=#{last_status_id + 1}"
+      url = "#{base_url}/feeds/#{user_slug}/growls.json?token=#{bj_token}&since=#{last_status_id + 1}"
       growls = Net::HTTP.get(URI(url))
       JSON.parse(growls)["growls"]
     end
 
     def create_regrowls_for(subscription, growls)
       growls.each do |growl|
-        url = "#{base_url}/feeds/#{user_slug(subscription)}/growls"
-              + "/#{growl["id"]}/refeed"
+        url = "#{base_url}/feeds/#{user_slug(subscription)}/growls/#{growl["id"]}/refeed"
         uri_path = URI(url)
         Net::HTTP.post_form(uri_path, token: subscriber_token(subscription),
                             subscription_id: id(subscription))
