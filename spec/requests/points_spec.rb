@@ -7,7 +7,7 @@ describe "Points" do
     context "User is logged in" do
       before(:each) do
         Capybara.app_host = "http://#{user.display_name}.hungrlr.dev"
-        login(user2)
+        login(user)
         visit root_path
       end
       it "adds a point when the user clicks it" do
