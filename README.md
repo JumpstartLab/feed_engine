@@ -1,5 +1,49 @@
 ## FeedEngine Review and Assements
 
+### Championship Round - Friday, May 25rd
+
+#### Schedule
+
+* 09:30 - 10:30 -- Contender Presentations (3 Teams)
+* 10:30 - 10:50 -- S&D Showcase (3 Teams)
+* 10:50 - 11:00 -- Feedback & Winner Announced
+
+#### Voting
+
+Please open the Google Form below to cast your votes:
+
+http://bit.ly/feed-engine
+
+#### Contender Presentations (20 min/group)
+
+* Team 5:
+  * Nisarg Shah, Melanie Gilman, Darrel Rivera, Mark Tabler
+  * Code: https://github.com/nisargshah100/feed_engine
+  * Production: http://pointsfeed.in/
+* Team 4:
+  * Chris Anderson, Mary Cutrali, Austen Ito, Horace Williams
+  * Code: https://github.com/chrismanderson/feed_engine/
+  * Production: http://troutr.com/
+* Team 6:
+  * Dan Kaufman, Mike Silvis, Jacqueline Chenault, Ed Weng
+  * Code: https://github.com/MikeSilvis/feed_engine
+  * Production: http://hungrlr.com/
+
+#### Surprise & Delight Showcase (5 min/group)
+
+* Team 1:
+  * Chris Maddox, Jan Koszewski, Conan Rimmer, Andy Glass
+  * Code: https://github.com/Andrewglass1/feed_engine
+  * Production: http://feedeng.in/
+* Team 2:
+  * Michael Verdi, Tom Kiefhaber, Charles Strahan, Mike Chlipala
+  * Code: https://github.com/cstrahan/feed_engine
+  * Production:  http://feedonkulous.com/
+* Team 3:
+  * Travis Valentine, Elise Worthy, Andrew Thal, Jonan Scheffler
+  * Code: https://github.com/eliseworthy/feed_engine
+  * Production: http://superhotfeedengine.com/
+
 ### First Round - Thursday, May 24nd
 
 #### Groups & URLS
@@ -70,45 +114,4 @@ Follow the protocol at http://tutorials.jumpstartlab.com/projects/feed_engine_pe
 #### Code Reviews
 
 Code reviews will utilize the rubric at http://tutorials.jumpstartlab.com/projects/feed_engine_code_review_rubric.html
-
-
-### Championship Round - Friday, May 25rd
-
-#### Schedule
-
-* 09:30 - 10:30 -- Contender Presentations (3 Teams)
-* 10:30 - 10:50 -- S&D Showcase (3 Teams)
-* 10:50 - 11:00 -- Feedback & Winner Announced
-
-#### Voting
-
-Please open the Google Form below to cast your votes:
-
-
-#### Contender Presentations (20 min/group)
-
-* Team A: 
-  * Code: 
-  * Production: 
-  * README: 
-* Team B: 
-  * Code: 
-  * Production: 
-  * README: 
-* Team C: 
-  * Code: 
-  * Production: 
-  * README: 
-
-#### Surprise & Delight Showcase (5 min/group)
-
-* Team D: 
-  * Code: 
-  * Production: 
-* Team E: 
-  * Code: 
-  * Production: 
-* Team F: 
-  * Code: 
-  * Production: 
 
