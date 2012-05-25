@@ -16,17 +16,17 @@ class Message < Growl
   def send_to_services
     services = parse_for_services
     services.each do |service|
-      case service
-        when 'twitter' then send_twitter_update
-      end
+      # case service
+        # when 'twitter' then send_twitter_update
+      # end
     end
   end
 
-  def send_twitter_update
-    return if comment.length > 180
-    client = user.twitter_client
-    client.update(comment) if client
-  end
+  # def send_twitter_update
+  #   return if comment.length > 180
+  #   client = user.twitter_client
+  #   client.update(comment) if client
+  # end
 end
 # == Schema Information
 #
