@@ -20,7 +20,7 @@ class Growl < ActiveRecord::Base
 
   before_save :set_original_created_at
 
-  def self.Since
+  def self.since
     where{ created_at.gt Time.at(epoch) } unless epoch.nil?
   end
 
@@ -80,8 +80,8 @@ class Growl < ActiveRecord::Base
 
   def regrowl_link(request)
     if regrowled?
-      "http://api.#{request.domain}/feeds/#{get_original_user.slug}/growls/"
-      + "#{original_growl.id}"
+      "http://api.#{request.domain}/feeds/#{get_original_user.slug}/growls/" + 
+        "#{original_growl.id}"
     else
       ""
     end

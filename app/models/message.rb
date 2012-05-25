@@ -5,6 +5,7 @@ class Message < Growl
   before_save :send_to_services
 
   def send_to_services
+    return unless original_growl?
     services = parse_hashtags
     services.each do |service|
       case service
