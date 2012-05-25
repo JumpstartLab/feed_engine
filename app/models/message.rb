@@ -25,7 +25,7 @@ class Message < Growl
   # def send_twitter_update
   #   return if comment.length > 180
   #   client = user.twitter_client
-  #   client.update(comment) if client
+  #   client.update(comment) if client && message.original_growl?
   # end
 end
 # == Schema Information

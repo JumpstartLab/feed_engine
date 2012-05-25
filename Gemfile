@@ -27,7 +27,7 @@ gem 'delayed_job'
 gem 'faraday'
 gem 'annotate'
 gem 'kaminari'
-
+gem 'twilio'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 group :development, :test do
