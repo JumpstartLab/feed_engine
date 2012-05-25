@@ -4,9 +4,9 @@ class Topic < ActiveRecord::Base
 
   scope :by_date, order("original_created_at DESC")
 
-  TEN_MINUTES = BigDecimal.new(600)
-  HALF_HOUR   = BigDecimal.new(1800)
-  ONE_HOUR    = BigDecimal.new(3600)
+  TEN_MINUTES = BigDecimal.new("600")
+  HALF_HOUR   = BigDecimal.new("1800")
+  ONE_HOUR    = BigDecimal.new("3600")
 
   def self.trending_topics
     trending_topics = { }
