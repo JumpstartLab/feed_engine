@@ -41,8 +41,8 @@ class Topic < ActiveRecord::Base
   end
 
   def self.acceleration(name, time)
-    starting_vel       = BigDecimal.new(velocity(name, time - TEN_MINUTES))
-    ending_vel         = BigDecimal.new(velocity(name, time))
+    starting_vel       = BigDecimal.new(velocity(name, time - TEN_MINUTES).to_s)
+    ending_vel         = BigDecimal.new(velocity(name, time).to_s)
     growls_per_hour_squared = (ending_vel - starting_vel) / (TEN_MINUTES / ONE_HOUR)
     [0, growls_per_hour_squared].max
   end
