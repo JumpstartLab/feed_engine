@@ -6,7 +6,8 @@ class Growl < ActiveRecord::Base
                   :user_id, :event_type, :regrowled_from_id
 
   validates_presence_of :type, :user_id, :user_id
-  validates_uniqueness_of :regrowled_from_id, :allow_nil => true, :scope => :user_id
+  validates_uniqueness_of :regrowled_from_id, :allow_nil => true,
+                          :scope => :user_id
 
   belongs_to :user
   has_one :meta_data, :autosave => true, dependent: :destroy
@@ -14,10 +15,15 @@ class Growl < ActiveRecord::Base
   include HasUploadedFile
 
   scope :by_date, order("original_created_at DESC")
+  scope :where_original, where(regrowled_from_id: nil)
   scope :by_type, lambda { |param| where{ type.like param } unless param.nil? }
-  scope :since, lambda { |epoch| where{ created_at.gt Time.at(epoch) } unless epoch.nil? }
 
   before_save :set_original_created_at
+  before_save :add_trend
+
+  def self.since
+    where{ created_at.gt Time.at(epoch) } unless epoch.nil?
+  end
 
   def self.by_type_and_date(type=nil)
     by_type(type).by_date.includes(:meta_data).includes(:user)
@@ -65,17 +71,14 @@ class Growl < ActiveRecord::Base
     new_regrowl
   end
 
-  def original_growl?
-    regrowled_from_id.nil?
-  end
-
   def regrowled?
     regrowled_from_id.present?
   end
 
   def regrowl_link(request)
     if regrowled?
-      "http://api.#{request.domain}/feeds/#{get_original_user.slug}/growls/#{original_growl.id}"
+      "http://api.#{request.domain}/feeds/#{get_original_user.slug}/growls/" + 
+        "#{original_growl.id}"
     else
       ""
     end
@@ -95,6 +98,21 @@ class Growl < ActiveRecord::Base
 
   def original_growl
     regrowled? ? Growl.find(regrowled_from_id) : self
+  end
+
+  def original_growl?
+    !regrowled?
+  end
+
+  def parse_hashtags
+    hashtags = comment.scan(/\B#(\S+)/).uniq
+    hashtags.collect { |service| service.first.downcase }
+  end
+
+  def add_trend
+    hashtags = parse_hashtags
+    hashtags.delete("twitter")
+    hashtags.each { |hashtag| Topic.create(name: hashtag, user: user) }
   end
 
   private

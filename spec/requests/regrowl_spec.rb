@@ -12,9 +12,6 @@ describe "Regrowl" do
       Capybara.app_host = "http://#{user.display_name}.hungrlr.dev"
       login(user2)
       visit root_path
-      click_on "REGROWL"
-      visit "http://#{user2.display_name}.hungrlr.dev"
-      page.should have_content user.display_name.capitalize
     end
   end
 end

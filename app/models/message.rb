@@ -4,17 +4,9 @@ class Message < Growl
 
   before_save :send_to_services
 
-  def icon
-    "glyphicons/glyphicons_010_envelope.png"
-  end
-
-  def parse_for_services
-    services = comment.scan(/\B#(\S+)/).uniq
-    services.collect { |service| service.first.downcase }
-  end
-
   def send_to_services
-    services = parse_for_services
+    return unless original_growl?
+    services = parse_hashtags
     services.each do |service|
       case service
         when 'twitter' then send_twitter_update
@@ -22,12 +14,17 @@ class Message < Growl
     end
   end
 
-  # def send_twitter_update
-  #   return if comment.length > 180
-  #   client = user.twitter_client
-  #   client.update(comment) if client && message.original_growl?
-  # end
+  def send_twitter_update
+    return if comment.length > 180
+    client = user.twitter_client
+    client.update(comment) if client
+  end
+
+  def icon
+    "glyphicons/glyphicons_010_envelope.png"
+  end
 end
+
 # == Schema Information
 #
 # Table name: growls

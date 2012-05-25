@@ -65,6 +65,7 @@ Hungrlr::Application.routes.draw do
   resource :search do
     get 'display_names'
   end
+  match "/trending_topics" => "topics#index"
 
   root :to => 'pages#home'
 end

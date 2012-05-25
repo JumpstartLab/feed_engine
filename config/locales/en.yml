@@ -2,7 +2,9 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  image_missing_link: "You must provide a link to an image."
+  image_uri: "URL must start with http and be a .jpg, .gif, or .png"
+  uri_length: "Given URL needs to be less then 2048 characters"
   datetime:
     distance_in_words:
       about_x_hours:

@@ -26,17 +26,17 @@ describe Message do
     end
   end
 
-  describe "#parse_for_services" do
+  describe "#parse_hashtags" do
     context "if the message has no services prefixed with hashtags" do
       it "should return an empty array" do
-        message.parse_for_services.should be_empty
+        message.parse_hashtags.should be_empty
       end
     end
 
     context "if the message has services prefixed with hashtags" do
       it "should return an array of array of services" do
         message.comment = "#facebook #TwiTTer"
-        services = message.parse_for_services
+        services = message.parse_hashtags
         services.should include "facebook"
         services.should include "twitter"
         services.size.should == 2
@@ -47,7 +47,7 @@ describe Message do
   describe "#send_to_services" do
     context "if the message has #twitter" do
       it "sends a tweet" do
-        message.should_receive(:parse_for_services).and_return(["twitter"])
+        message.should_receive(:parse_hashtags).and_return(["twitter"])
         message.should_receive(:send_twitter_update)
         message.send_to_services
       end

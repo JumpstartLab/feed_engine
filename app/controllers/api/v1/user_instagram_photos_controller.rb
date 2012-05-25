@@ -4,11 +4,11 @@ class Api::V1::UserInstagramPhotosController < Api::V1::ApiController
   def create
     photos = JSON.parse(params["photos"])
     photos.each do |photo|
-      puts photo
+      orig = photo["original_created_at"]
       @user.instagram_photos.create(link: photo["link"],
                                     comment: photo["comment"],
-                                    original_created_at: photo["original_created_at"])
-      @user.instagram_account.update_last_status_id_if_necessary(photo["original_created_at"])
+                              original_created_at: orig)
+      @user.instagram_account.update_last_status_id_if_necessary(orig)
     end
     render :json => true, :status => 201
   end

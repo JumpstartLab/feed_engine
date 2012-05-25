@@ -4,6 +4,9 @@ class GrowlsController < ApplicationController
   def index
     subdomain = request.subdomain
     @user = User.where{display_name.matches subdomain}.first
+
+    return redirect_to home_path, :notice => "That user was not found." unless @user
+
     @growls = @user.get_growls(params[:type]).page(params[:page])
   end
 

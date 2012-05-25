@@ -25,5 +25,4 @@ class ApplicationController < ActionController::Base
     growl.increment!(:points)
     session[:growl_needing_point] = nil
   end
-
 end
