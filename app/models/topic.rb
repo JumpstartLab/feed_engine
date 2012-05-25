@@ -4,9 +4,9 @@ class Topic < ActiveRecord::Base
 
   scope :by_date, order("original_created_at DESC")
 
-  TEN_MINUTES = BigDecimal.new(600)
-  HALF_HOUR   = BigDecimal.new(1800)
-  ONE_HOUR    = BigDecimal.new(3600)
+  TEN_MINUTES = BigDecimal.new("600")
+  HALF_HOUR   = BigDecimal.new("1800")
+  ONE_HOUR    = BigDecimal.new("3600")
 
   def self.trending_topics
     trending_topics = { }
@@ -41,8 +41,8 @@ class Topic < ActiveRecord::Base
   end
 
   def self.acceleration(name, time)
-    starting_vel       = BigDecimal.new(velocity(name, time - TEN_MINUTES))
-    ending_vel         = BigDecimal.new(velocity(name, time))
+    starting_vel       = BigDecimal.new(velocity(name, time - TEN_MINUTES).to_s)
+    ending_vel         = BigDecimal.new(velocity(name, time).to_s)
     growls_per_hour_squared = (ending_vel - starting_vel) / (TEN_MINUTES / ONE_HOUR)
     [0, growls_per_hour_squared].max
   end
