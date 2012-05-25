@@ -15,6 +15,7 @@ class Growl < ActiveRecord::Base
   include HasUploadedFile
 
   scope :by_date, order("original_created_at DESC")
+  scope :where_original, where(regrowled_from_id: nil)
   scope :by_type, lambda { |param| where{ type.like param } unless param.nil? }
 
   before_save :set_original_created_at
