@@ -11,7 +11,9 @@ class Topic < ActiveRecord::Base
   def self.trending_topics
     trending_topics = { }
     collect_topic_speeds.each do |topic|
-      trending_topics[ topic[:name] ] = topic[:acceleration] * 4 + topic[:velocity] * 2 + topic[:count]
+      puts topic.inspect
+      trending_topics[ topic[:name] ] =
+        topic[:acceleration] * 4 + topic[:velocity] * 2 + topic[:count]
     end
     trending_topics.sort{ |a, b| b[1]<=>a[1] }
   end
@@ -21,25 +23,27 @@ class Topic < ActiveRecord::Base
   end
 
   def self.collect_topic_speeds
-    hot_topics.collect do |name, number_of_tweets|
-      { name: name, count: number_of_tweets,
-        velocity: velocity(name, Time.now), acceleration: acceleration(name, Time.now).to_f.round(2) }
+    hot_topics.collect do |name, number_of_growls|
+      { name: name, count: number_of_growls,
+        velocity: velocity(name, Time.now),
+        acceleration: acceleration(name, Time.now) }
     end
   end
 
-  def self.count_tweets(name, time_start, time_end)
-    Topic.where(name: name).where{ (created_at.gt my{ time_start }) & (created_at.lt my{ time_end }) }.count  
+  def self.count_growls(name, time_start, time_end)
+    Topic.where(name: name).where{ (created_at.gt my{ time_start }) &
+                                   (created_at.lt my{ time_end }) }.count  
   end
 
   def self.velocity(name, time)
-    tweets_per_hour = count_tweets(name, time - ONE_HOUR, time)
-    [0, tweets_per_hour].max
+    growls_per_hour = count_growls(name, time - ONE_HOUR, time)
+    [0, growls_per_hour].max
   end
 
   def self.acceleration(name, time)
-    starting_velocity       = BigDecimal.new(velocity(name, time - TEN_MINUTES))
-    ending_velocity         = BigDecimal.new(velocity(name, time))
-    tweets_per_hour_squared = (ending_velocity - starting_velocity) / (TEN_MINUTES / ONE_HOUR)
-    [0, tweets_per_hour_squared].max
+    starting_vel       = BigDecimal.new(velocity(name, time - TEN_MINUTES))
+    ending_vel         = BigDecimal.new(velocity(name, time))
+    growls_per_hour_squared = (ending_vel - starting_vel) / (TEN_MINUTES / ONE_HOUR)
+    [0, growls_per_hour_squared].max
   end
 end
