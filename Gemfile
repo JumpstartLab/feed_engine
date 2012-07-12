@@ -25,7 +25,6 @@ gem 'factory_girl_rails', '~> 3.1.0'
 gem 'faker'
 gem 'delayed_job'
 gem 'faraday'
-gem 'annotate'
 gem 'kaminari'
 gem 'twilio'
 # Bundle edge Rails instead:
@@ -40,8 +39,6 @@ group :development, :test do
   gem 'launchy'
   gem 'debugger'
   gem 'awesome_print'
-  gem 'reek', :git => "git://github.com/mvz/reek.git", :branch => "ripper_ruby_parser-2"
-  gem 'tuxedo'
 end
 
 group :production do
