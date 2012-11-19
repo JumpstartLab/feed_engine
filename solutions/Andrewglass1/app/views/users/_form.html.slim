@@ -1,0 +1,30 @@
+.post-form
+  .errors
+      p Oops! Something went wrong.
+      ul.errors_list
+  = form_tag remote: true do |f|
+    = label_tag :email
+    br
+    = email_field_tag "user[email]"
+    br
+    br
+       
+    = label_tag :display_name
+    br
+    = text_field_tag  "user[display_name]"
+    br
+    br
+
+    = label_tag :password
+    br
+    = password_field_tag "user[password]"
+    br
+    br
+
+    = label_tag :password_confirmation
+    br
+    = password_field_tag "user[password_confirmation]"
+    br
+    br
+
+    a.button Submit

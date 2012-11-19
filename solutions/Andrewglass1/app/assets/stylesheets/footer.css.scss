@@ -1,0 +1,21 @@
+@import "partials/colors.css.scss";
+@import "partials/shapes.css.scss";
+
+.footer {
+  position: absolute;
+  width: 100%;
+  background-color: $white;
+  height: 3em;
+  .homies {
+    margin-bottom: 1em;
+    margin-top: 1em;
+    a {
+      text-decoration: none;
+      padding: 0em 11%;
+      vertical-align: middle;
+      color: $whale;
+      font-weight: bold;
+      font-size: 1em;
+    }
+  }
+}

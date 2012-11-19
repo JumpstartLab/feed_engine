@@ -1,0 +1,18 @@
+.post-form
+  .errors
+    p Oops! Something went wrong.
+    ul.errors_list
+  br
+  = form_for @new_link, url: "#", id: "link_form" do |f|
+    = hidden_field_tag :type, "link"
+    = f.label :content, "URL"
+    br
+    = f.text_field :content
+    br
+    br
+    = f.label :comment
+    br
+    = f.text_field :comment
+    br
+    br
+    a.button.post-button Create Post

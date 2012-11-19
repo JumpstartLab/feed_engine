@@ -1,0 +1,19 @@
+br
+#spotlight
+#backstage
+  #home-page
+      = render "pages/home", layout:false
+  #friends-page
+    p Friends
+  #signin-page
+    = render "users/sessions/new", layout:false
+  #signup-page
+    = render "users/new", layout:false
+  #dashboard-page
+    = render partial: "dashboard/show", layout:false
+  #services-page
+    = render "authentications/index", layout:false
+    = render "subscriptions/settings", layout:false
+  #settings-page
+    = render "users/settings", layout: false
+  = render partial: "authentications/integrations"

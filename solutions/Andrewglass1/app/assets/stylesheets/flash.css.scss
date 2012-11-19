@@ -1,0 +1,41 @@
+@import "./partials/colors.css.scss";
+
+#flash{
+  position: fixed;
+  padding: .7em;
+  background-color: $wasabi;
+  width: 87%;
+  border-radius:3px;
+  display:none;
+  #flash_message{
+    position: relative;
+    text-align: center;
+    margin: auto;
+    text-size: 2em;
+    text-weight: bold;
+    opacity: 1;
+  }
+  #dismiss {
+    float: right;
+  }
+}
+
+#error{
+  position: fixed;
+  padding: .7em;
+  background-color: $spice;
+  width: 87%;
+  border-radius:3px;
+  display:none;
+  #error_message{
+    position: relative;
+    text-align: center;
+    margin: auto;
+    text-size: 2em;
+    text-weight: bold;
+    opacity: 1;
+  }
+  #error_dismiss {
+    float: right;
+  }
+}

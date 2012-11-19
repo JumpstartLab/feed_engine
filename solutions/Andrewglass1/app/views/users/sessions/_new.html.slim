@@ -1,0 +1,13 @@
+.post-form
+  = form_tag('/login', id: "signin_form", remote: true) do
+    .box
+      = label_tag :email
+      br
+      = email_field_tag 'data[email]'
+      br
+      = label_tag :password
+      br
+      = password_field_tag 'data[password]'
+    br
+    a.button#signin-submit Signin
+    a.button#reset_password  Reset Password
