@@ -1,0 +1,16 @@
+{
+    "credentials": {
+        "expires": false, 
+        "token": "17216354.e8d1e46.269e7e21d652404f9607467db821d7d9"
+    }, 
+    "extra": {}, 
+    "info": {
+        "bio": "", 
+        "image": "http://images.instagram.com/profiles/anonymousUser.jpg", 
+        "name": "", 
+        "nickname": "edwardweng", 
+        "website": ""
+    }, 
+    "provider": "instagram", 
+    "uid": "17216354"
+}

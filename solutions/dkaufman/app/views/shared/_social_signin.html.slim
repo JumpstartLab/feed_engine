@@ -1,0 +1,13 @@
+.block-grid.two-up.social-icons
+  - unless current_user.twitter?
+    .four.columns= link_to "", user_omniauth_authorize_path(:twitter), id: "link-twitter"
+  - else
+    .four.columns= link_to "", authentication_path(current_user.twitter), method: :delete, id: "unlink-twitter"
+  - unless current_user.github?
+    .four.columns= link_to "", user_omniauth_authorize_path(:github), id: "link-github"
+  - else
+    .four.columns= link_to "", authentication_path(current_user.github), method: :delete, id: "unlink-github"
+  - unless current_user.instagram?
+    .four.columns= link_to "", user_omniauth_authorize_path(:instagram), id: "link-instagram"
+  - else
+    .four.columns= link_to "", authentication_path(current_user.instagram), method: :delete, id: "unlink-instagram"

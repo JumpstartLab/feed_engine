@@ -1,0 +1,78 @@
+
+Lines violated style requirements (22):
+
+  app/lib/instagram_api_service.rb:24  Line is >80 characters (84) 
+  app/lib/refeed_processor.rb:12       Line is >80 characters (90) 
+  app/lib/refeed_processor.rb:16       Line is >80 characters (92) 
+  app/lib/refeed_processor.rb:21       Line is >80 characters (125)
+  app/lib/refeed_processor.rb:27       Line is >80 characters (89) 
+  app/lib/refeed_processor.rb:48       Line is >80 characters (86) 
+  app/lib/tweet_api_service.rb:10      Line is >80 characters (87) 
+  app/models/authentication.rb:43      Line is >80 characters (81) 
+  app/models/growl.rb:9                Line is >80 characters (84) 
+  app/models/growl.rb:18               Line is >80 characters (90) 
+  app/models/growl.rb:78               Line is >80 characters (96) 
+  app/models/image_validations.rb:2    Line is >80 characters (102)
+  app/models/image_validations.rb:8    Line is >80 characters (87) 
+  app/models/image_validations.rb:9    Line is >80 characters (134)
+  app/models/image_validations.rb:10   Line is >80 characters (116)
+  app/models/link_validations.rb:5     Line is >80 characters (129)
+  app/models/tweet.rb:3                Line is >80 characters (110)
+  app/models/tweet.rb:22               Line is >80 characters (84) 
+  app/models/user.rb:31                Line is >80 characters (97) 
+  app/models/user.rb:32                Line is >80 characters (109)
+  app/models/video_validations.rb:3    Line is >80 characters (82) 
+  app/models/video_validations.rb:5    Line is >80 characters (141)
+
+Classes are not documented (49):
+
+  app/controllers/api/v1/api_controller.rb:1                    Api::V1::ApiController                
+  app/controllers/api/v1/feeds_controller.rb:1                  Api::V1::FeedsController              
+  app/controllers/api/v1/growls_controller.rb:1                 Api::V1::GrowlsController             
+  app/controllers/api/v1/meta_data_controller.rb:1              Api::V1::MetaDataController           
+  app/controllers/api/v1/subscriptions_controller.rb:1          Api::V1::SubscriptionsController      
+  app/controllers/api/v1/user_github_events_controller.rb:1     Api::V1::UserGithubEventsController   
+  app/controllers/api/v1/user_instagram_photos_controller.rb:1  Api::V1::UserInstagramPhotosController
+  app/controllers/api/v1/user_tweets_controller.rb:1            Api::V1::UserTweetsController         
+  app/controllers/api/v1/users_controller.rb:1                  Api::V1::UsersController              
+  app/controllers/application_controller.rb:1                   ApplicationController                 
+  app/controllers/authentications_controller.rb:1               AuthenticationsController             
+  app/controllers/dashboards_controller.rb:1                    DashboardsController                  
+  app/controllers/growls_controller.rb:1                        GrowlsController                      
+  app/controllers/pages_controller.rb:1                         PagesController                       
+  app/controllers/regrowled_controller.rb:1                     RegrowledController                   
+  app/controllers/searches_controller.rb:1                      SearchesController                    
+  app/controllers/subscriptions_controller.rb:1                 SubscriptionsController               
+  app/controllers/users/omniauth_callbacks_controller.rb:1      Users::OmniauthCallbacksController    
+  app/inputs/password_input.rb:1                                PasswordInput                         
+  app/inputs/string_input.rb:1                                  StringInput                           
+  app/inputs/text_input.rb:1                                    TextInput                             
+  app/jobs/pull_github_feed.rb:3                                PullGithubFeed                        
+  app/jobs/pull_instagram_feed.rb:3                             PullInstagramFeed                     
+  app/jobs/pull_twitter_feed.rb:3                               PullTwitterFeed                       
+  app/jobs/refeed.rb:3                                          Refeed                                
+  app/lib/github_api_service.rb:2                               GithubApiService                      
+  app/lib/github_processor.rb:9                                 GithubProcessor                       
+  app/lib/instagram_api_service.rb:2                            InstagramApiService                   
+  app/lib/instagram_processor.rb:9                              InstagramProcessor                    
+  app/lib/refeed_processor.rb:7                                 RefeedProcessor                       
+  app/lib/subdomain.rb:1                                        Subdomain                             
+  app/lib/tweet_api_service.rb:2                                TweetApiService                       
+  app/lib/tweet_processor.rb:8                                  TweetProcessor                        
+  app/mailers/user_mailer.rb:1                                  UserMailer                            
+  app/models/authentication.rb:1                                Authentication                        
+  app/models/github_account.rb:1                                GithubAccount                         
+  app/models/github_event.rb:1                                  GithubEvent                           
+  app/models/growl.rb:3                                         Growl                                 
+  app/models/image.rb:1                                         Image                                 
+  app/models/instagram_account.rb:1                             InstagramAccount                      
+  app/models/instagram_photo.rb:1                               InstagramPhoto                        
+  app/models/link.rb:1                                          Link                                  
+  app/models/message.rb:1                                       Message                               
+  app/models/meta_data.rb:1                                     MetaData                              
+  app/models/subscription.rb:1                                  Subscription                          
+  app/models/tweet.rb:1                                         Tweet                                 
+  app/models/twitter_account.rb:1                               TwitterAccount                        
+  app/models/user.rb:1                                          User                                  
+  app/models/video.rb:1                                         Video                                 
+

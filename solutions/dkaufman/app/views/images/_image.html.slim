@@ -1,0 +1,12 @@
+.growl-box
+  .row#image
+    = render :partial => "growls/left", :locals => { growl: image }
+    .eight.columns
+      .row
+        strong.speaker= "#{image.get_display_name} said:"
+        br
+        = image.comment
+        br
+        = image_tag image.photo(:medium), class: "growl_image"
+    = render :partial => "growls/right", :locals => { growl: image}
+  = render :partial => 'growls/footer', :locals => { growl: image}

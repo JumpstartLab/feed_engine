@@ -1,0 +1,28 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  image_missing_link: "You must provide a link to an image."
+  image_uri: "URL must start with http and be a .jpg, .gif, or .png"
+  uri_length: "Given URL needs to be less then 2048 characters"
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: 1H
+        other: '%{count}h'
+      half_a_minute: half a minute
+      less_than_x_minutes:
+        one: 1m
+        other: '%{count}m'
+      x_days:
+        one: 1d
+        other: '%{count}d'
+      x_minutes:
+        one: 1m
+        other: '%{count}m'
+      x_months:
+        one: 1m
+        other: '%{count}m'
+      x_seconds:
+        one: 1s
+        other: '%{count}s'

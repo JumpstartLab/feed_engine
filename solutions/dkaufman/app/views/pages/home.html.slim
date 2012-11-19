@@ -1,0 +1,27 @@
+.row
+  .four.columns.content_bar
+    h3 Welcome to Hungrlr.
+    h5 The dead-simple way to check your Twitter, Facebook, GitHub, &amp; Instagram activity with just one click.
+    br
+    #login.row(style="display:none;")
+      = render "shared/login"
+      .user_helper.row= link_to "I need to signup.", "#"
+    #signup.row
+      = render "shared/signup"
+      .user_helper.row= link_to "Already have an account?", "#"
+  .seven.columnr
+    = image_tag 'hungrlr_splash_trans.png'
+.row
+  br
+  h4(style="color:#aaa") Incoming Growls
+  #growls
+    = render @growls
+  #page
+    = paginate @growls
+
+coffee:
+  jQuery ->
+    $('.user_helper').click( ->
+      $("#login").toggle()
+      $("#signup").toggle()
+    )

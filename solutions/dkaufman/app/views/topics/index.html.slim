@@ -1,0 +1,11 @@
+.row
+  .four.columns.content_bar
+    h3 Trending Topics
+    table
+      thead
+        th Topic
+        th Score
+      - @topics.each do |name, score|
+        tr
+          td= name
+          td= score
