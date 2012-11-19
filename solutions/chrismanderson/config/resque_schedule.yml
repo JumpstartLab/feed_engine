@@ -1,0 +1,29 @@
+# tweet:
+#   every: '1m'
+#   class: SubscriptionJob
+#   queue: subscription
+#   description: "This will gather tweets every 5 min for the user"
+
+# gist:
+#   every: '1m'
+#   class: SubscriptionJob
+#   queue: subscription
+#   description: "This will gather new github events every 5 min for the user"
+
+# refeed:
+#   every: '30s'
+#   class: SubscriptionJob
+#   queue: subscription
+#   description: "This will gather new posts from feeds that a user follows every 5 min"
+
+# insta:
+#   every: "1m"
+#   class: SubscriptionJob
+#   queue: subscription
+#   description: "This will gather new instagram media every 5 min for the user"
+
+subscription: 
+  every: "2m"
+  class: SubscriptionJob 
+  queue: subscription
+  description: "This will run every 2 minutes for all subscriptions"

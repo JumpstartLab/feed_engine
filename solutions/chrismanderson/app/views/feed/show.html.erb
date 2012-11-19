@@ -1,0 +1,74 @@
+<div class="span6" >
+
+<div class="feed-list" id="stream-items">
+  <% if @stream_items %>
+    <% @stream_items.each do |stream_item| %>
+      <%= render :partial => "item", :locals => { :item => stream_item } %>
+    <% end %>
+  <% end %>
+</div>
+</div>
+
+  <div class="feed-meta-container offset1 span3">
+    <div class="row">
+      <h2 class="feed-title span2"><%= @feed_owner.display_name %></h2>
+    </div>
+    <% if current_user && (current_user != @feed_owner) %>
+      <%= image_tag "/assets/tackle-box.png" %>
+      <% if current_user.followed_users.include?(@feed_owner) %>
+        <%= link_to "Let troutr go", subscription_path(current_feed_subscription), 
+          :method => :delete, :class => "tacklebox-btn btn btn-primary btn-small" %>
+      <% else %>
+        <%= link_to "Tacklebox this troutr", subscriptions_path(:followed_user_id => @feed_owner.id), 
+          :method => :post, :class => "tacklebox-btn btn btn-primary btn-small" %>
+      <% end %>
+      <br />
+      <br />
+    <% end %>
+    <table>
+      <tr>
+        <td>
+          <div class="post-count-container">
+            <span class="post-count"><%= @feed_owner.stream_items.count %></span>
+            <br/>
+            <span class="post-count-label">posts</span>
+          </div>
+        </td>
+        <td>
+          <div class="following-count-container">
+            <span class="following-count"><%= @feed_owner.subscriptions.count %></span>
+            <br/>
+            <span class="following-count-label">tackleboxed</span>
+          </div>
+        </td>
+        <td>
+          <div class="follower-count-container">
+            <span class="follower-count"><%= @feed_owner.follower_count %></span>
+            <br/>
+            <span class="follower-count-label">tailing</span>
+          </div>
+        </td>
+      </tr>
+    </table>
+    <br/>
+
+    <div class="linked-services">
+      <% if linked_services?(@feed_owner) %>
+        <br/>
+        <h3>Hooked to these services</h3>
+        <% if twitter_connected?(@feed_owner) %>
+          <%= image_tag "/assets/twitter.png", :size => "64x64" %>
+        <% end %>
+        <% if github_connected?(@feed_owner) %>
+          <%= image_tag "/assets/github.png", :size => "64x64" %>
+        <% end %>
+        <% if instagram_connected?(@feed_owner) %>
+          <%= image_tag "/assets/instagram.png", :size => "55x55" %>
+        <% end %>
+        <br/>
+      <% end %>
+    </div>
+  </div>
+  <div class="span7" id="pagination-div">
+    <%= paginate @stream_items %>
+  </div>

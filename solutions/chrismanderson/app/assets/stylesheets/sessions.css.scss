@@ -1,0 +1,35 @@
+@import "variables";
+@import "containers";
+@import "buttons";
+
+.login-title {
+  font-size: 80px;
+  padding: 0 0 10px 0;
+}
+
+.login-fields {
+  @include text-field;
+}
+
+.submit-button {
+  margin: 10px 0 0 133px
+}
+
+#forgot-password {
+  font-size: 15px;
+  color: $trout-main-color;
+  padding: 0 0 0 45px;
+}
+
+.new_user  a{
+  color: $trout-main-color;
+}
+
+.new_user a:visited{
+  color: $trout-main-color;
+}
+
+.new_user a:hover {
+  background-color: transparent;
+  text-decoration: underline;
+}

@@ -1,0 +1,14 @@
+$("#alert-bar").stop();
+<% if errors.empty? %>
+  $("#alert-bar").addClass('alert-success').text("Post was successfully created.").hide()
+  $("#alert-bar").slideDown().delay(5000).slideUp()
+  $("#dashboard-posts").prepend("<%= escape_javascript(render(:partial => "feed/item", 
+                                                              :locals => {:item => stream_item})) %>");
+  $("#item_<%=stream_item.id %>").hide();
+  $("#item_<%=stream_item.id %>").fadeIn();
+  $(".form_field_error").remove();
+<% else %>
+  $("#item-input").replaceWith("<%= escape_javascript(render(:partial => "dashboard/item_input")) %>");
+<% end %>
+
+$('#<%= type %>-tab').tab('show');

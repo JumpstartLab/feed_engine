@@ -1,0 +1,241 @@
+@import "variables";
+@import "containers";
+@import "text";
+
+.feed_row {
+  padding: 0 20px 0 50px;
+}
+
+.item-header-user {
+  font-size: 20px;
+  font-family: $font;
+  font-weight: 500;
+  vertical-align: bottom;
+  color: $trout-secondary;
+  padding-left: 5px;
+}
+
+.item-user-image {
+  @include rounded-corners;
+  width: 48px;
+  height: 48px;
+}
+
+@mixin item-body {
+  font-size: 16px; 
+  font-weight: 200;
+  font-family: $font;
+  color: $font-color;
+}
+
+.text-item-body {
+  @include item-body;
+  @include word-wrap;
+}
+
+.body_image {
+  max-height: 150px;
+  max-width: 150px;
+}
+
+.item_owner {
+  padding: 0 0 0 22px;
+  font-size: 24px;
+}
+
+.item_link {
+  font-size: 16px;
+  word-wrap: break-word;
+}
+
+.item-time {
+  font-family: $font;
+  font-size: 14px;
+  font-weight: 500;
+  vertical-align: bottom;
+  color: $trout-secondary;
+}
+
+.item-container-body {
+  @include container;
+  width: 610px;
+  padding: 10px 15px 5px 15px;
+  -webkit-box-shadow: 1px 1px 3px 1px rgba(1, 1, 1, 0.5);
+  box-shadow: 1px 1px 3px 1px rgba(1, 1, 1, 0.5);
+}
+
+.points-container {
+  float: right;
+  color: $trout-main-color; 
+  a:hover {
+    text-decoration: none; 
+    color: $trout-hover-color; 
+  }
+}
+
+.entypo-icon {
+  font-size: 32px;
+}
+
+.points {
+  font-size: 16px;
+}
+
+.image-item {
+  max-height: 500px;
+  max-width: 500px;
+}
+
+/*Post logos*/
+@mixin item-logo {
+  font-size: 24px;
+  padding: 0 5px 0 0px;
+  color: $trout-main-color;
+}
+
+.refeed-buttons {
+  display: inline;
+}
+
+.refeed_ajax_link {
+  float: right;
+  line-height: 24px;
+}
+
+$post-font-size: 32px;
+.post-logo {
+  @include item-logo;
+  font-size: $post-font-size;
+}
+
+.twitter-logo {
+  @include item-logo;
+  color: $twitter-blue; 
+  font-size: $post-font-size;
+}
+
+.github-logo {
+  @include item-logo;
+  color: black;
+  font-size: $post-font-size;
+}
+
+.linked-post-logo {
+  font-size: 60px;
+}
+
+.linked-twitter-logo {
+  font-size: 60px;
+  color: $twitter-blue; 
+}
+
+.refeed {
+  @include item-logo;
+  padding: 5px 0 0 10px
+}
+
+.refeed-logo {
+  font-size: 20px;
+}
+
+.refeed-container {
+  color: black;
+}
+/*Stats*/
+.feed-meta-container {
+  @include container;
+  width: 350px;
+  padding: 10px;
+  margin: 20px 0 0 100px;
+  background-color: white;
+  -webkit-box-shadow: 1px 1px 1px 1px rgba(242, 242, 242, 1);
+  box-shadow: 1px 1px 1px 1px rgba(242, 242, 242, 1);
+}
+$stat-count-font-size: 18px;
+
+@mixin stat-container {
+  margin: 15px 5px 0 20px;
+  outline: 1px solid $trout-main-color;
+  outline-offset: 10px;
+}
+
+.post-count-container {
+  @include stat-container;
+}
+
+.post-count {
+  font-size: $stat-count-font-size;
+}
+
+.following-count-container {
+  @include stat-container;
+}
+
+.following-count {
+  font-size: $stat-count-font-size;
+}
+
+.follower-count-container {
+  @include stat-container;
+}
+
+.follower-count {
+  font-size: $stat-count-font-size;
+}
+
+.text-item-body > a {
+  font-weight: 500;
+}
+
+.text-item-body > a:visited {
+  font-weight: 500;
+}
+
+.text-item-body > a:hover {
+  font-weight: 500;
+}
+
+.feed-title {
+  @include troutr-title;
+  padding: 0 0 14px 10px;
+}
+.twitter {
+  @include word-wrap;
+  @include item-body;
+}
+
+.github-item-body {
+  @include item-body;
+}
+
+.feed-list {
+  margin-top: 20px;
+}
+
+#pagination-div {
+  padding: 0 0 20px 30px;
+}
+
+#dry-river {
+  padding-left: 20px;
+  font-family: $font;
+  color: $trout-main-color;
+}
+
+.tacklebox-btn {
+  vertical-align: bottom;
+}
+
+.feed-meta-container {
+  a, a:visited {
+    color: white;
+  }
+}
+
+.linked-services {
+  padding-left: 10px;
+}
+
+.item-footer {
+  padding-top: 50px;
+}

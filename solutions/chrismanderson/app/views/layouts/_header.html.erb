@@ -1,0 +1,47 @@
+<div id="alert-bar" style="display: none"></div>
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <h1><%= link_to "troutr", root_url(:subdomain => false) %> </h1>
+
+      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+
+      <div class="accounts-nav">
+        <% if user_signed_in? %>
+          <span data-display-name="<%= current_user.display_name %>" class="current-user">Logged in as: <strong><%= current_user.display_name %></strong></span>
+          <ul class="clearfix nav global-nav">
+            <li id="nav-stream" class="pull-left navigation-item">
+            <a href="<%= root_url(:subdomain => current_user.display_name) %>"> <span class="raphael-icon">S</span>My Stream</a>
+            </li>
+            <li id="nav-dashboard" class="pull-left navigation-item">
+            <a href="<%= dashboard_url(:subdomain => false) %>"> <span class="raphael-icon">></span>Dashboard</a>
+            </li>
+            <li id="nav-logout" class="pull-left navigation-item">
+            <a href="<%= destroy_user_session_path(:subdomain => false)%>" data-method="delete"> <span class="raphael-icon">Ï</span>Logout </a>
+           </li>
+          </ul>
+        <% else %>
+          <ul class="clearfix nav global-nav not-logged-in">
+            <% if request.fullpath != new_user_path %>
+              <li class="navigation-item navigation-item-anon">
+              <a href="<%= login_path(:subdomain => false) %>">
+                <span class="raphael-icon">L</span>Login
+              </a>
+              </li>
+              <li class="pull-left navigation-item">
+              <a href="<%= new_user_url(:subdomain => false) %>">
+                <span class="raphael-icon">]</span>Sign Up
+              </a>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div><!-- end nav-collapse -->
+    </div><!-- end .container -->
+  </div><!-- end .navbar-inner -->
+</div><!-- end .navbar navbar-fixed-top -->

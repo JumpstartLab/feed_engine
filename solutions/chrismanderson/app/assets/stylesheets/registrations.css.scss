@@ -1,0 +1,14 @@
+@import "containers";
+
+.signup-text-field {
+  @include text-field;
+  width: 350px;
+}
+
+.signup-text-field ~ .form_field_error { 
+  padding: 0 0 0 0px;
+}
+
+.river-signup-box-text-field{ 
+  width: 250px;
+}

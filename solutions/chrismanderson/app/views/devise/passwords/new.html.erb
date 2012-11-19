@@ -1,0 +1,15 @@
+<br/>
+<br/>
+<br/>
+<br/>
+<div class="span4 offset4 trout-container">
+<h1>Forgot your password?</h1>
+
+<br/>
+<br/>
+<%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
+  <%= f.input :email, :label => "Enter your email address below", :label_html => {:class => "password-email-label"}, 
+              :input_html => {:class => "dashboard-password-field"} %>
+
+  <%= f.submit "Submit", :class => "password-change-submit btn btn-primary btn-large"  %>
+<% end %>

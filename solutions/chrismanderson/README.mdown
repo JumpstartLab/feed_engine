@@ -1,0 +1,12 @@
+**FeedEngine**
+
+**Live Preview**
+[http://polutropos.com](http://polutropos.com)
+
+**Testing**
+
+We use capybara-webkit in our testing. To use, please 
+
+    brew install qt
+
+before running rspec.

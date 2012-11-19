@@ -1,0 +1,95 @@
+// Place all the styles related to the Dashboard controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "buttons";
+@import "containers";
+@import "variables";
+
+.dashboard-text-field {
+  @include text-field;
+  width: 515px;
+}
+
+.dashboard-password-field {
+  @include text-field;
+  width: 300px;
+}
+
+@mixin dashboard-text-area {
+  width: 515px;
+  height: 100px;
+  font-size: $input-font-size;
+}
+
+.text-item-text-area {
+  @include dashboard-text-area;
+}
+
+.link-item-text-area {
+  @include dashboard-text-area;
+}
+
+.dashboard-title {
+  font-family: $font;
+  padding: 0 0 0 30px;
+}
+
+.dashboard-posts-title {
+  font-family: $font;
+  padding-left: 65px;
+} 
+
+#dashboard-posts {
+  font-family: $font;
+  width: 550px;
+}
+
+.form_field_error { 
+  color: $error-color;
+  font-size: $error-font-size;
+  background-color: transparent;
+}
+
+.password-email-label ~ .form_field_error { 
+  padding: 0 0 0 0px;
+}
+
+.subscription {
+  padding: 10px;
+  width: 20%;
+  float: left; 
+}
+
+
+#subscription-gravatar img{ 
+  @include rounded-corners;
+
+}
+.dashboard-btn {
+}
+
+.authentication {
+  padding: 10px;
+  width: 72%;
+}
+
+.authentication a.btn {
+  float: right;
+}
+
+.dashboard-instagram {
+  padding: 0 0 0 5px;
+} 
+
+#text, #link, #image .input {
+  padding: 0 0 0 20px;
+}
+
+.image-item-submit {
+  margin-left: 20px;
+}
+
+.nav-tabs .raphael-icon {
+  font-size: 20px;
+}

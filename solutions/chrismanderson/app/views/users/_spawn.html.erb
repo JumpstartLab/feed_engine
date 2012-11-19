@@ -1,0 +1,12 @@
+<% if @new_spawns %>
+<div class="span3 trout-container" id="river-spawning-box">
+  <h1 class="spawning title">newly spawned</h1>
+    <% @new_spawns.each do |spawn| %>
+  <div class="single-spawn">
+    <div id="spawn-image">
+      <%= link_to (image_tag(gravatar_url(spawn))), root_url(:subdomain => spawn.display_name) %>
+    </div>
+  </div> 
+  <% end %> 
+</div> 
+<% end %>

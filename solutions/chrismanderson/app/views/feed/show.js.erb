@@ -1,0 +1,3 @@
+$('#stream-items').append('<%= j render :partial => 'item', :collection => @stream_items %>');
+$('#pagination-div').html('<%= j paginate(@stream_items) %>');
+

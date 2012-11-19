@@ -1,0 +1,19 @@
+<br/>
+<div class="span12 external-services-container">
+  <h1>Link Instagram Account</h1>
+  <br/>
+
+  <div>
+  <div class="span4">
+    <span class="instagram-image"><%= image_tag "/assets/instagram.png" %></span>
+    <br/>
+    <br/>
+    <span class="instagram-label">Instagram</span>
+    <span class="instagram-button"><%= link_to "Connect", "users/auth/instagram", :class => "btn btn-large" %></span>
+  </div>
+  </div>
+  <div class="span4 service-continue-container">
+    <%= link_to "Skip This Step", signup_instagram_skip_path, :class => "btn-primary btn-large service-btn" %>
+  </div>
+</div>
+
