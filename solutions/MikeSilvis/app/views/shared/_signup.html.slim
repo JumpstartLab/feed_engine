@@ -1,0 +1,13 @@
+= form_tag user_registration_path, class: "nice" do
+  fieldset
+    h4 New to Hungrlr?
+    .row
+      = text_field_tag 'user[display_name]', nil, class: "oversize input-text", placeholder: "Display Name"
+    .row
+      = text_field_tag 'user[email]', nil, class: "oversize input-text", placeholder: "Email"
+    .row
+      = password_field_tag 'user[password]', nil, class: "oversize input-text", placeholder: "Password"
+    .row
+      = password_field_tag 'user[password_confirmation]', nil, class: "oversize input-text", placeholder: "Password Confirmation"
+    .row
+      button(class="medium blue nice button radius") Sign up, it's free!

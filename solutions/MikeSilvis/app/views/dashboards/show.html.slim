@@ -1,0 +1,28 @@
+.row
+  .nine.columns.content_bar
+    .row
+      h2 Dashboard
+      dl.nice.contained.awesome-tabs
+        dd#message= link_to "+ Message", "#", class: ("active" if @type == 'Message' || @type.nil? )
+        dd#image= link_to "+ Image", "#", class: ("active" if @type == 'Image')
+        dd#link= link_to "+ Link", "#", class: ("active" if @type == 'Link')
+        dd#video= link_to "+ Video", "#", class: ("active" if @type == 'Video')
+        dd#service= link_to "Services", "#", class: ("active" if @type == 'Service')
+
+      ul.nice.awesome-tabs-content.contained
+
+        li#messageFormTab{ class=("active" if @type == 'Message' || @type.nil? ) }
+          = render :partial => "messages/form"
+        li#imageFormTab{ class=("active" if @type == 'Image') }
+          = render :partial => "/images/form"
+        li#linkFormTab{ class=("active" if @type == 'Link') }
+          = render :partial => "/links/form"
+        li#videoFormTab{ class=("active" if @type == 'Video') }
+          = render :partial => "/videos/form"
+        li#serviceFormTab{ class=("active" if @type == 'Service') }
+          = render :partial => "shared/social_signin"
+
+javascript:
+  api_domain = "#{api_domain.html_safe}"
+  api_path = "#{api_path.html_safe}"
+  authentication_token = "#{current_user.authentication_token}"

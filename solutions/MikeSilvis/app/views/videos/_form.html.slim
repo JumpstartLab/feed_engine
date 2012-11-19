@@ -1,0 +1,10 @@
+.row
+  = simple_form_for @growl, :url => growls_path, :html => { :id => 'video_form' } do |f|
+    = f.input :type, :as => :hidden, :input_html => { :value => "Video" }
+    = f.input :link, :maxlength => "2048", label: "&nbsp;", as: :string, input_html: { id: "video_link", placeholder: "Video URL"}
+    = f.input :comment, input_html: { id: "video_comment" }, label: "&nbsp;", placeholder: "Comment"
+    p
+      | You have&nbsp;
+      span#charsLeftVideo
+      |  chars left.
+    = f.button :submit, "Growl Video"

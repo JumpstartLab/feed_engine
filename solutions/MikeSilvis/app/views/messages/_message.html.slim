@@ -1,0 +1,10 @@
+.growl-box
+  .row#message
+    = render :partial => "growls/left", :locals => { growl: message }
+    .eight.columns
+      strong.speaker= "#{message.get_display_name} said:"
+      br
+      = link_to message.title, message.link
+      .row= message.comment
+    = render :partial => "growls/right", :locals => { growl: message}
+  = render :partial => 'growls/footer', :locals => { growl: message}
