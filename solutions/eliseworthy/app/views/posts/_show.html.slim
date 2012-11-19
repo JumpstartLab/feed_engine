@@ -1,0 +1,53 @@
+div class="post_container #{post.user.display_name}_post" id="item_#{post.item.id}"
+  span.post_badge
+    span.badge_image
+      = render :partial => 'posts/badge', :locals => { :post => post }
+    span.badge.date
+      span.post-month
+        = (post.local_created_at).strftime("%B")
+      span.post-day
+        = (post.local_created_at).strftime("%d")
+      span.post-time
+        = (post.local_created_at).strftime("%l:%M%P")
+  article.post-body
+    span.post_content
+      - if post.message?
+        p.post_text.message_body
+          = post.body
+      - if post.link?
+        p.post_text.link_description
+          = post.description
+        = link_to post.url, post.url
+      - if post.image?
+        p.post_text.image_description
+          = post.description
+        span.image_container
+          = image_tag post.url
+      - if post.tweet?
+        p.post_text.tweet
+          = post.body
+      - if post.github_event?
+        p.post_text.github_event
+        | #{post.event_type} on #{post.repo}
+      - if post.instapound?
+        p.post_text.instapound.image_description
+          = post.body
+        span.image_container
+          = image_tag post.image_url
+
+    span.post_links
+      - if current_user && current_user != post.user
+        span#refeed = link_to("Refeed", refeed_path(post.item, :subdomain => false), :method => :put, :id => "refeed_item_#{post.item.id}") if post.item.refeedable_for?(current_user)
+      - if post.user == current_user
+        span#points = "#{post.points} points!"
+      - elsif current_user
+        span#points = link_to "#{post.points} points!", item_path(post.item, :subdomain => false, :points => true), :method => :put
+      - else
+        span#points = link_to "#{post.points} points!", item_path(post.item, :subdomain => false, :points => true), :method => :put
+      span.poster_info
+        = "posted by "
+        = link_to post.user.display_name, root_url(:subdomain => post.user.subdomain)
+        - if post.tweet?
+          |  via Twitter
+        - if post.github_event?
+          |  via  Github

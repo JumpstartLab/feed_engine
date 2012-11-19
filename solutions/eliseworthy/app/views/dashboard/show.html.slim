@@ -1,0 +1,156 @@
+- content_for :head do
+  javascript:
+    $(function() {
+      $("#forms").html("#{j render :partial => "messages/form"}")
+      $('.actions').children('input:submit').addClass('btn btn-primary btn-large');
+    });
+    $("#add_message").live('click', function(){
+      $("#forms").html("#{j render :partial => "messages/form"}")
+      make_active(this);
+      $('.actions').children('input:submit').addClass('btn btn-primary btn-large');
+    })
+    $("#add_link").live('click', function(){
+      $("#forms").html("#{j render :partial => "links/form"}")
+      make_active(this);
+      $('.actions').children('input:submit').addClass('btn btn-primary btn-large');
+    })
+    $("#add_image").live('click', function(){
+      $("#forms").html("#{j render :partial => "images/form"}")
+      make_active(this);
+      $('.actions').children('input:submit').addClass('btn btn-primary btn-large');
+    })
+    $(function() {
+      $("#posts").show();
+      $("#privacy").hide();
+      $("#services").hide();
+      $("#subscriptions").hide();
+      $("#account").hide();
+      show_sidebar_for_error();
+    });
+    $(function(){
+      $('.alert').delay(1600).fadeOut(200);
+    });
+    function show_div_for_error() {
+      var error_class = $("#error_explanation h2").attr("class");
+      if (error_class != null) {
+        $("#add_" + error_class).click();
+      }
+      $('#error_explanation').delay(2000).fadeOut(1000)
+    }
+    function show_sidebar_for_error() {
+      var label_text = $("#.field_with_errors label").text();
+      if (label_text == "Password") {
+        $("#account_id").click();
+      }
+    }
+    $("#posts_id").live('click', function() {
+      $("#posts").show();
+      $("#account").hide();
+      $("#privacy").hide();
+      $("#services").hide();
+      $("#subscriptions").hide();
+    });
+    $("#privacy_id").live('click', function() {
+      $("#privacy").show();
+      $("#posts").hide();
+      $("#services").hide();
+      $("#subscriptions").hide();
+      $("#account").hide();
+    });
+    $("#services_id").live('click', function() {
+      $("#services").show();
+      $("#posts").hide();
+      $("#privacy").hide();
+      $("#subscriptions").hide();
+      $("#account").hide();
+    });
+    $("#subscriptions_id").live('click', function() {
+      $("#subscriptions").show();
+      $("#posts").hide();
+      $("#privacy").hide();
+      $("#services").hide();
+      $("#account").hide();
+    });
+    $("#account_id").live('click', function() {
+      $("#account").show();
+      $("#posts").hide();
+      $("#privacy").hide();
+      $("#services").hide();
+      $("#subscriptions").hide();
+    });
+    $(function(){
+      var sidebar=$('#sidebar');
+      sidebar.delegate('a', 'click',function(){
+        sidebar.find('.active').toggleClass('active inactive');
+        $(this).toggleClass('active inactive');
+      });
+    });
+    function make_active(post) {
+      var posts=$('#posts');
+      posts.find('.active').toggleClass('active inactive');
+      $(post).toggleClass('inactive active');
+    }
+    $(function(){
+      $('.actions').children('input:submit').addClass('btn btn-primary btn-large');
+    });
+br
+br
+.full_dashboard
+  div.span3
+    div#sidebar.fe-container
+      ul
+        li= link_to "Posts", "#", :id => "posts_id", :class => "active"
+        li= link_to "Privacy", "#", :id => "privacy_id", :class => "inactive"
+        li= link_to "Services", "#", :id => "services_id", :class => "inactive"
+        li= link_to "Refeeds", "#", :id => "subscriptions_id", :class => "inactive"
+        li= link_to "Account", "#", :id => "account_id", :class => "inactive"
+  div.span6
+    div#posts.fe-container
+      = link_to "#", :class => "active post_label", :id => "add_message" do
+        =content_tag(:span, "Text")
+        =image_tag("message_icon.png")
+      |&nbsp;&nbsp;&nbsp;&nbsp;
+      = link_to "#", :class => "inactive post_label", :id => "add_link" do
+        =content_tag(:span, "Link")
+        =image_tag("link_icon.png")
+      |&nbsp;&nbsp;&nbsp;&nbsp;
+      = link_to "#", :class => "inactive post_label", :id => "add_image" do
+        =content_tag(:span, "Image")
+        =image_tag("image_icon.png")
+      br
+      br
+      - [@image, @message, @link].each do |post|
+        - if post.errors.any?
+          #error_explanation
+            h2 class="#{post.class.to_s.downcase}" #{pluralize(post.errors.count, "error")} prohibited this #{post.class.to_s.downcase} from being saved:
+            ul
+              - post.errors.full_messages.each do |message|
+                li = message
+      div#forms
+        hr
+    div#privacy.fe-container.white_box
+      div
+        h2 Privacy
+        br
+        - if dashboard_posts_private?
+          = render :partial => "dashboard/posts_private"
+        - else
+          = link_to "Make my posts private", nil, :class => "btn btn-primary btn-large"
+    div#services.fe-container.white_box
+      - if current_user.current_subscriptions.any?
+        div.fe-container
+          =render partial: "subscriptions/subscriptions_table"
+      div.fe-container
+        =render partial: "subscriptions/disconnected_table"
+    div#subscriptions.fe-container.white_box
+      - if current_user.refeed_subscriptions.any?
+        div.fe-container
+          =render partial: "subscriptions/refeed_table"
+      - else
+        div.fe-container
+          =render partial: "subscriptions/no_refeed_table"
+    div#account.fe-container.white_box
+      div
+        h2 Account Settings
+        = render partial: "users/update_password"
+        = link_to "Disable Account", nil, :class => "btn btn-medium"

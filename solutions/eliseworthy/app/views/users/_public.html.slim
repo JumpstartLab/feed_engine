@@ -1,0 +1,14 @@
+.span6#posts
+  - @posts.each do |post|
+    - cache("post_#{post.item.id}") do
+      = render :partial => "posts/show", :locals => { :post => post }
+  = paginate @posts
+
+- if current_user
+  = render :partial => "dashboard/portable"
+- else
+  .span2.home_sidebar
+    .login
+      = render :partial => "sessions/form"
+    .signup
+      = render :partial => "users/form"

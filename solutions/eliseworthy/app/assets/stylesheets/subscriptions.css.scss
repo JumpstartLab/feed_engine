@@ -1,0 +1,23 @@
+// Place all the styles related to the subscriptions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+div#twitter,
+div#github,
+div#instagram {
+  padding:25px;
+  width:715px;
+}
+
+div#twitter img,
+div#github img,
+div#instagram img {
+  float:right;
+}
+
+div#twitter input,
+div#github input,
+div#instagram input {
+  margin-top:10px;
+  margin-right:20px;
+}
