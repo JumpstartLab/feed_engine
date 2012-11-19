@@ -1,0 +1,17 @@
+.row#link
+  = render :partial => "growls/header", :locals => { growl: video }
+.row
+  .ten.columns
+    .row
+      = video.comment
+    .row
+      .comments
+        -if video.title.present?
+          = link_to video.title, video.link
+          .row= video.description
+        -else
+          = link_to video.link
+          .row= video.description
+        br
+        iframe allowfullscreen="" frameborder="0" height="315" src=(video.link)width="560"
+= render partial: "growls/footer", locals: { growl: video}

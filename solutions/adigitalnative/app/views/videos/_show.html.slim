@@ -1,0 +1,11 @@
+.row
+  = video.comment
+.row
+  .comments
+    -if video.title.present?
+      = link_to video.title, video.link
+    -else
+      = link_to video.link
+      .row.comments= link.description
+    br
+    = image_tag video.photo(:thumb)

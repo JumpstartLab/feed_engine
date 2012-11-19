@@ -1,0 +1,11 @@
+.growl-box
+  .row#instagram
+    = render :partial => "growls/left", :locals => { growl: instagram_photo }
+    .eight.columns
+      .row
+        strong.speaker= "#{instagram_photo.get_display_name} said:"
+        br
+        .row= instagram_photo.comment
+        .row= image_tag instagram_photo.photo(:medium), class: "growl_image"
+    = render :partial => "growls/right", :locals => { growl: instagram_photo}
+  = render :partial => 'growls/footer', :locals => { growl: instagram_photo}
