@@ -1,0 +1,32 @@
+ .main-image{
+  position: fixed;
+  min-width: 1024px;
+  min-height: 800px;
+  top: 39px;
+  right: 0px;
+  left: 0px;
+  bottom: 0px;
+  overflow: hidden;
+  z-index: -4;
+}
+
+.root {
+  color: white;
+  position: absolute;
+}
+
+.login-right{
+  background: rgba(64, 64, 64, 0.5);
+  padding: 10px;
+  color: white;
+}
+
+.authorized{
+  position: fixed;
+  opacity: 0.2;
+}
+
+.linked-authorized{
+  opacity: 0.4;
+  position: relative;
+}

@@ -1,0 +1,17 @@
+<div class="main-image">
+  <img src="/assets/welcome.jpg">
+</div>
+
+<div class='black-transparent-box'>
+  <h3>As a member, you can connect one of your social media accounts to Feed Engine.</h3>
+  <hr />
+
+  <%= render :partial => "authentications" %>
+  <hr />
+
+  <% if current_user.authentications.count < 3 %>
+    <%= link_to "Skip This Step", skip_twitter_path %>
+  <% else %>
+    <meta http-equiv="REFRESH" content="5;url=/dashboard">
+  <% end %>
+</div>

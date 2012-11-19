@@ -1,0 +1,18 @@
+<% if current_user.authentications.where(:provider => "github").empty? %>
+  <a href="/auth/github"><%= image_tag('github_128.png') %></a>
+<% else %>
+  <%= image_tag('github_128.png', :class => 'authorized') %>
+  <%= image_tag('linked_128.png', :class => 'linked-authorized') %>
+<% end %>
+<% if current_user.authentications.where(:provider => "instagram").empty? %>
+  <a href="/auth/instagram"><%= image_tag('instagram_128.png') %></a>
+<% else %>
+  <%= image_tag('instagram_128.png', :class => 'authorized') %>
+  <%= image_tag('linked_128.png', :class => 'linked-authorized') %>
+<% end %>
+<% if current_user.authentications.where(:provider => "twitter").empty? %>
+  <a href="/auth/twitter"><%= image_tag('twitter_128.png') %></a>
+<% else %>
+  <%= image_tag('twitter_128.png', :class => 'authorized') %>
+  <%= image_tag('linked_128.png', :class => 'linked-authorized') %>
+<% end %>

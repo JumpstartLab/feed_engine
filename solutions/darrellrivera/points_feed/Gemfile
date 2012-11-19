@@ -1,0 +1,61 @@
+source 'https://rubygems.org'
+
+gem 'rails', '3.2.3'
+gem 'devise'
+
+gem "twitter-bootstrap-rails"
+gem 'simple_form'
+gem 'kaminari'
+gem 'lazy_susan'
+gem 'carrierwave'
+gem 'fog'
+gem 'draper'
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'omniauth-github'
+gem 'omniauth-instagram'
+gem 'resque'
+gem 'twitter'
+gem 'gravatar-ultimate'
+gem 'puma'
+gem "remotipart", "~> 1.0"
+gem 'whenever', :require => false
+gem 'octokit'
+gem 'multimap'
+gem 'rest-client'
+gem 'sanitize'
+gem 'newrelic_rpm'
+gem 'resque-scheduler', :require => 'resque_scheduler'
+
+# gem 'instagram',  :git => 'git://github.com/mrgilman/instagram-ruby-gem.git'
+gem 'faraday'
+gem 'hashie'
+
+group :test, :development do
+  gem 'sqlite3'
+  gem 'ruby_gntp'
+  gem "rspec-rails", "~> 2.0"
+  gem "capybara"
+  gem 'capybara-webkit'
+  gem 'guard'
+  gem 'fabrication'
+  gem 'faker'
+  gem 'launchy'
+  gem 'simplecov'
+  gem 'cane'
+  gem 'database_cleaner'
+  gem 'reek'
+  gem 'nifty-generators'
+end
+
+group :assets do
+  gem 'sass-rails',   '~> 3.2.3'
+  gem 'coffee-rails', '~> 3.2.1'
+  gem 'uglifier', '>= 1.0.3'
+  gem 'jquery-rails'
+  gem "asset_sync"
+end
+
+gem 'jquery-rails'
+
+gem "mocha", :group => :test
