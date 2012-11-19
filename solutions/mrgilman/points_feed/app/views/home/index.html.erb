@@ -1,0 +1,70 @@
+<div class="main-image">
+  <% if current_user %>
+    <%= image_tag('post.jpg') %>
+  <% else %>
+    <%= image_tag('welcome.jpg') %>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+  access_token = null;
+</script>
+
+<%= render 'posts/show_templates' %>
+
+<div class="root">
+  <div class="row">
+    <div class="span12">
+      <div class="row">
+        <div class='span8'>
+          <div class='grey-box'>
+            <h3>What's Being Posted Right Now!</h3>
+            <hr />
+            <div id='recent_posts'></div>
+            <div id='recent_loading_posts' class='hide'></div>
+
+            <a href='#' id='recent_load_more' class='btn offset1 span5'>Load More</a>
+            <br />
+          </div>
+        </div>
+
+        <div class='span4'>
+          <div class='black-transparent-box'>
+            <h3>Welcome to PointsFeed</h3>
+            <hr />
+            <p>
+              Have too many social media platforms? PointsFeed allows you to combine
+              your twitter, instagram, etc feeds into a single - easy to
+              navigate interface. Check it out!
+            </p>
+          </div>
+          <br>
+          <div class='black-transparent-box'>
+            <h3>Already a member?</h3>
+            <hr />
+            <form method='post' action='<%= new_user_session_path %>'>
+              <input type='text' placeholder='Email' name='user[email]' />
+              <input type='password' placeholder='Password' name='user[password]' />
+              <br>
+              <input type='submit' value='Sign In' class='btn btn-info' />
+            </form>
+          </div>
+          <br>
+          <div class='black-transparent-box'>
+            <h3>Not yet a member?</h3>
+            <hr />
+            <form method='post' action='<%= user_registration_path %>'>
+              <input type='text' placeholder='Display Name' name='user[display_name]' />
+              <input type='text' placeholder='Email' name='user[email]' />
+              <input type='password' placeholder='Password' name='user[password]' />
+              <input type='password' placeholder='Password Confirmation' name='user[password_confirmation]' />
+              <br>
+              <input type='submit' value='Create An Account' class='btn btn-warning' />
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

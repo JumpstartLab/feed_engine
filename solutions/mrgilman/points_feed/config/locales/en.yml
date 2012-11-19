@@ -1,0 +1,10 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  hello: "Hello world"
+  account_linked: "%{provider} account linked."
+  all_accounts_linked: "%{provider} account linked. All accounts have been linked. You will be redirected to your dashboard shortly."
+  invalid_image_file_or_uri: "Image must contain a link to an image of type png, jpg, jpeg, gif, or bmp."
+  invalid_uri: "Invalid URL; link must be in the format http://www.example.com/"
+  social_media_invitation: "You can sign up with your social media accounts by visiting the services section under dashboard"

@@ -1,0 +1,7 @@
+<%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+  <%= f.input :email, :placeholder => "E-mail Address", :label => false %>
+  <%= f.input :password, :placeholder => "Password", :label => false %>
+  <div class='form-actions'>
+    <%= f.button :submit, "Sign in", :class => 'btn btn-info' %>
+  </div>
+<% end %>

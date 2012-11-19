@@ -1,0 +1,104 @@
+<% unless current_user.blank? %>
+  <script type="text/javascript">
+    access_token = "<%= current_user.authentication_token %>";
+    display_name = "<%= current_user.display_name %>";
+  </script>
+<% end %>
+
+<%= render 'posts/show_templates' %>
+
+<div class="main-image">
+  <%= image_tag current_user.background_image %>
+</div>
+
+<div class="row">
+  <div class="span12">
+    <div class="row">
+      <div class="header span12">
+        <h1>Dashboard</h1>
+        <br>
+      </div>
+
+      <div class='span4'>
+        <ul id='nav_tabs' class="nav nav-pills nav-stacked well">
+          <li><a href="#posts_tab" data-toggle="tab">Post</a></li>
+          <li><a href="#refeeds_tab" data-toggle="tab">Refeeds</a></li>
+          <li><a href="#edit_account_tab" data-toggle="tab">Edit Account</a></li>
+          <li><a href="#authentications_tab" data-toggle="tab">Services</a></li>
+        </ul>
+      </div>
+      <div class="span8">
+        <div class="well black-transparent-box">
+          <div>
+            <img src="<%= current_user.avatar %>" style='float:left'></img>
+            <div style='float:left; margin-left: 15px; color: white'>
+              <h3><%= link_to current_user.display_name, "http://#{current_user.display_name}.pointsfeed.in" %></h3>
+            </div>
+          </div>
+          <div style='clear:both'></div>
+          <br />
+
+          <div class="tab-content">
+            <div class="tab-pane active" id="posts_tab">
+              <%= render 'posts/form' %>
+            </div>
+            <div class='tab-pane' id='refeeds_tab'>
+              <div class='grey-box'>
+                <h3>Your Feeds</h3>
+                <hr />
+                <div class="all-feeds clearfix" align="center">
+                  <% current_user.friends.each do |friend| %>
+                    <div class="feed">
+                      <img src = <%=friend.avatar%> class="feed-avatar" >
+                      <div class="feed-info">
+                        <h3><%= link_to friend.display_name, "http://#{friend.display_name}.pointsfeed.in", :class => "feed-name" %></h2>
+                        <%= link_to "Remove", friend_path(friend), :confirm => "Are you sure you want to remove this feed?", :method => :delete, :class=> "feed-delete"%>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <div class='tab-pane' id='edit_account_tab'>
+              <div class='grey-box'>
+                <h3>Edit Your Account</h3>
+                <p>Enter your password to make changes</p>
+                <hr />
+
+                <%= render 'devise/registrations/form', :resource => @current_user %>
+              </div>
+            </div>
+            <div class='tab-pane' id='authentications_tab'>
+              <div class='grey-box'>
+                <h3>Services</h3>
+                <hr />
+                <h4>Current Linked Accounts</h4><br>
+                <% if current_user.authentications.empty? %>
+                There are currently no linked accounts.<br>
+                <% else %>
+                  <table class="table">
+                    <tr>
+                      <th>Provider</th>
+                      <th>Action</th>
+                    </tr>
+                    <% current_user.authentications.each do |authentication| %>
+                      <tr>
+                        <td><%= authentication.provider.capitalize %></td>
+                        <td><%= link_to "Delete", authentication_path(authentication), :confirm => "Are you sure?", :method => :delete %></td>
+                      </tr>
+                    <% end %>
+                  </table>
+                <% end %>
+                <br>
+                <h4>Select Accounts Below to Connect</h4>
+                <%= render :partial => "twitters/authentications" %>
+              </div>
+            </div>
+          </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
