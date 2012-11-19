@@ -1,0 +1,17 @@
+<div class="home-image">
+  <img src="/assets/welcome.jpg">
+</div>
+
+<% if params[:award_points] %>
+  <% flash[:notice] = "You must sign in" %>
+<% end %>
+
+<div class="root">
+  <div class='row'>
+    <div class='span6 offset3 grey-box well'>
+      <h3>Sign In</h3>
+      <hr />
+      <%= render partial: "signin_form" %>
+      <%= link_to "Forgot Password", new_user_password_path %>
+    </div>
+</div>

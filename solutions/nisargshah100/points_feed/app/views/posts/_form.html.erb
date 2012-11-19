@@ -1,0 +1,19 @@
+<div class="posts">
+  <ul id='post_tabs' class="nav nav-tabs">
+    <li><a href="#text_post" data-toggle="tab">Text</a></li>
+    <li><a href="#link_post" data-toggle="tab">Link</a></li>
+    <li><a href="#image_post" data-toggle="tab">Image</a></li>
+  </ul>
+
+  <div class="tab-content" id="tab-background">
+    <div class="tab-pane active" id="text_post">
+      <%= render "posts/types/form_text_post", :post => @post %>
+    </div>
+    <div class="tab-pane active" id="link_post">
+      <%= render "posts/types/form_link_post", :post => @post %>
+    </div>
+    <div class="tab-pane active" id="image_post">
+      <%= render "posts/types/form_image_post", :post => @post %>
+    </div>
+  </div>
+</div>

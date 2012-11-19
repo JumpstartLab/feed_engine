@@ -1,0 +1,27 @@
+<table id="links">
+  <tr>
+    <th class="links"><%= link_to "Upload URL", "#upload-url", :id=>"upload-url" %></th>
+    <th><%= link_to "Upload File", "#upload-file", :id=>"upload-file" %></th>
+  </tr>
+</table>
+
+<div class="tab-pane active" id="image-file" style="display:none;">
+  <%= simple_form_for post, url: api_posts_path, method: :post, :remote => true do |f| %>
+    <%= f.input :comment, :as => :text, :input_html => { :rows => 3, :class => 'full_width' } %>
+    <%= f.input :file %>
+    <%= f.input :type, :as => :hidden, :input_html => { :value => "ImagePost" } %>
+    <%= f.submit "Post Image", :class => 'btn btn-primary' %>
+    <%= link_to "Back", "#image_post", :id => "back_image_post" %>
+    <input type='hidden' id='success_function' value='post_added' />
+  <% end %>
+</div>
+<div class="tab-pane" id="image-url" style="display:none;">
+  <%= simple_form_for post, url: api_posts_path, method: :post, :remote => true do |f| %>
+    <%= f.input :content, :label => "Image Url", :input_html => { :rows => 2, :class => 'full_width' } %>
+    <%= f.input :comment, :as => :text, :input_html => { :rows => 3, :class => 'full_width' } %>
+    <%= f.input :type, :as => :hidden, :input_html => { :value => "ImagePost" } %>
+    <%= f.submit "Post Image", :class => 'btn btn-primary' %>
+    <%= link_to "Back", "#image_post", :id => "back_image_post" %>
+    <input type='hidden' id='success_function' value='post_added' />
+  <% end %>
+</div>

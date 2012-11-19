@@ -1,0 +1,6 @@
+<%= simple_form_for post, url: api_posts_path, method: :post, :remote => true do |f| %>
+  <%= f.input :content, :as => :text, :input_html => { :rows => 3, :class => 'full_width' }, :label => "Message" %>
+  <%= f.input :type, :as => :hidden, :input_html => { :value => "TextPost" } %>
+  <%= f.submit "Post", :class => 'btn btn-primary' %>
+  <input type='hidden' id='success_function' value='post_added' />
+<% end %>
