@@ -1,0 +1,25 @@
+.post
+  img.post-avatar src="{{gravatar_url}}"
+  .well
+    .post-image
+      img src="{{url}}" onerror="imgError(this)"
+      p.description {{description}}
+    .post-actions
+      li
+        a.btn href="/refeeds?post_id={{id}}" data-method="post" rel="nofollow"
+          i.icon-retweet  Refeed
+        | {{#point_given}}
+        li
+          a class="btn btn-info" href="/points/?post_id={{id}}&receiver_id=#{user.id}&giver_id=#{current_user.id if current_user}&page_before_sign_in=#{request.original_url}" data-method="post" rel="nofollow"
+            i.icon-heart Points!
+        | {{/point_given}}
+        | {{#point_not_given}}
+        li
+          a.btn href="/points/?post_id={{id}}&receiver_id=#{user.id}&giver_id=#{current_user.id if current_user}&page_before_sign_in=#{request.original_url}" data-method="post" rel="nofollow"
+            i.icon-heart Points!
+        | {{/point_not_given}}
+      li
+        span.btn
+          p {{total_points}}
+      li
+        img.post-type-icon src="/assets/camera.gif"

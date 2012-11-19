@@ -1,0 +1,12 @@
+div class="alert alert-info"
+  h3 class="alert-heading" Hey there, #{current_user.display_name}! Thanks for signing up for Feedonkulous!
+  p Start importing your tweets!
+
+div class="container"
+  div class="span2 offset5"
+    table
+      tr
+        = twitter_button
+    br
+  div class="pull-right"
+    = link_to "Skip this step", next_wizard_path

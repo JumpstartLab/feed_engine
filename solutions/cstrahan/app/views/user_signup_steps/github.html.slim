@@ -1,0 +1,14 @@
+div class="alert alert-info"
+  h3 class="alert-heading" Do you have a Github account?
+  p Start importing Github events!
+
+div class="container"
+  div class="pull-left"
+    = link_to "Previous Step", previous_wizard_path
+  div class="span2 offset4"
+    table
+      tr
+        = github_button
+    br
+  div class="pull-right"
+    = link_to "Skip this step", next_wizard_path

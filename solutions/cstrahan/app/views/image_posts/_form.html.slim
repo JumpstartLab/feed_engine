@@ -1,0 +1,7 @@
+= simple_form_for @image_post, html: {name: "image-post", multipart: true} do |f|
+  = f.input :image
+  = f.label :external_image_url, "or, add an image through a url"
+  = f.input :external_image_url
+  = f.input :description, size: "60x5"
+  br
+  = f.submit 'Post Image', class: 'btn btn-primary'
